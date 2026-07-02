@@ -12,15 +12,15 @@ A mobile-first, high-contrast, kitchen-line-optimized productivity tool and reci
 
 ## How to Set Up Your Custom Subdomain
 
-To tie this app to a custom subdomain (e.g. `sausage.yellowrosebbq.com`):
+To tie this app to a custom subdomain (e.g. `sausage.allen.tools`):
 
 1. **Create/Edit the `CNAME` file**:
    Create a file named `CNAME` in the root of this repository and write your custom domain inside it (with no `http://` or `/`). E.g.
    ```text
-   sausage.yellowrosebbq.com
+   sausage.allen.tools
    ```
 2. **Configure DNS Records**:
-   In your domain registrar (where you manage `yellowrosebbq.com`):
+   In your domain registrar (where you manage `allen.tools`):
    - Add a new **CNAME** record:
      - **Host/Name**: `sausage` (or whatever subdomain you want)
      - **Target/Value**: `your-github-username.github.io`
