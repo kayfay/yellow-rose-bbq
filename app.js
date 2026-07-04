@@ -3,7 +3,7 @@ let state = {
   weight: 50.0,
   tasks: Array(15).fill(false), // 15 tasks (1-indexed mapping to 0-14 array indices)
   beefWeight: 50.0,
-  beefRatio: 0.7,
+  beefRatio: 0.75,
   lastUpdated: Date.now()
 };
 
@@ -96,7 +96,7 @@ function init() {
   });
 
   btnRatioPitmaster.addEventListener('click', () => {
-    state.beefRatio = 0.7;
+    state.beefRatio = 0.75;
     state.lastUpdated = Date.now();
     updateUI();
     saveState();
@@ -188,11 +188,11 @@ function updateUI() {
     beefCalcWeight.value = state.beefWeight;
   }
   
-  if (state.beefRatio === 0.7) {
+  if (state.beefRatio === 0.75) {
     btnRatioPitmaster.classList.add('active');
     btnRatioLeaner.classList.remove('active');
-    beefCalcLeanDesc.textContent = "70% of total batch weight";
-    beefCalcFatDesc.textContent = "30% of total batch weight";
+    beefCalcLeanDesc.textContent = "75% of total batch weight";
+    beefCalcFatDesc.textContent = "25% of total batch weight";
   } else {
     btnRatioPitmaster.classList.remove('active');
     btnRatioLeaner.classList.add('active');
