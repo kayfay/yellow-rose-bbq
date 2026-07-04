@@ -163,6 +163,55 @@
       </div>
     </section>
 
+    <!-- Section 2.5: Beef Sausage Mixture Calculator -->
+    <section class="calculator-card">
+      <h2 class="section-title">Beef Sausage Mixture Calculator</h2>
+      
+      <div class="calc-inputs-row">
+        <div class="calc-input-group">
+          <label for="beef-calc-weight">Target Batch Weight (lbs)</label>
+          <div class="calc-input-wrapper">
+            <input type="number" id="beef-calc-weight" min="1" max="500" value="50" step="1" class="calc-number-input">
+            <span class="calc-input-unit">lbs</span>
+          </div>
+        </div>
+        
+        <div class="calc-toggle-group">
+          <label>Blend Ratio Option</label>
+          <div class="toggle-buttons">
+            <button type="button" class="toggle-btn active" id="btn-ratio-pitmaster" data-ratio="0.7">
+              <span class="ratio-title">Pitmaster Standard</span>
+              <span class="ratio-sub">70% Lean / 30% Fat</span>
+            </button>
+            <button type="button" class="toggle-btn" id="btn-ratio-leaner" data-ratio="0.8">
+              <span class="ratio-title">Leaner Classic</span>
+              <span class="ratio-sub">80% Lean / 20% Fat</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="calc-results-grid">
+        <div class="result-card">
+          <span class="result-label">Lean Beef Required</span>
+          <div class="result-value-box">
+            <span id="beef-calc-lean" class="result-value">35.00</span>
+            <span class="result-unit">lbs</span>
+          </div>
+          <span class="result-desc" id="beef-calc-lean-desc">70% of total batch weight</span>
+        </div>
+        
+        <div class="result-card">
+          <span class="result-label">Beef Fat Trim Required</span>
+          <div class="result-value-box">
+            <span id="beef-calc-fat" class="result-value">15.00</span>
+            <span class="result-unit">lbs</span>
+          </div>
+          <span class="result-desc" id="beef-calc-fat-desc">30% of total batch weight</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Section 3: Link Estimator & Forecast -->
     <section class="estimator-section">
       <h2 class="section-title">Link Estimator & Production Forecast</h2>

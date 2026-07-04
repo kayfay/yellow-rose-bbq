@@ -2,6 +2,8 @@
 let state = {
   weight: 50.0,
   tasks: Array(15).fill(false), // 15 tasks (1-indexed mapping to 0-14 array indices)
+  beefWeight: 50.0,
+  beefRatio: 0.7,
   lastUpdated: Date.now()
 };
 
@@ -48,6 +50,15 @@ const btnShortcut = document.getElementById('btn-shortcut');
 // Task rows
 const taskRows = document.querySelectorAll('.task-row');
 
+// Beef Calculator elements
+const beefCalcWeight = document.getElementById('beef-calc-weight');
+const btnRatioPitmaster = document.getElementById('btn-ratio-pitmaster');
+const btnRatioLeaner = document.getElementById('btn-ratio-leaner');
+const beefCalcLean = document.getElementById('beef-calc-lean');
+const beefCalcFat = document.getElementById('beef-calc-fat');
+const beefCalcLeanDesc = document.getElementById('beef-calc-lean-desc');
+const beefCalcFatDesc = document.getElementById('beef-calc-fat-desc');
+
 // Initialize App
 function init() {
   sessionDisplay.textContent = `Session: ${sessionName.toUpperCase()}`;
@@ -67,6 +78,32 @@ function init() {
   // Slider change event
   weightSlider.addEventListener('input', (e) => {
     state.weight = parseFloat(e.target.value);
+    state.lastUpdated = Date.now();
+    updateUI();
+    saveState();
+  });
+
+  // Beef calculator input events
+  beefCalcWeight.addEventListener('input', (e) => {
+    let val = parseFloat(e.target.value);
+    if (isNaN(val) || val < 0) {
+      val = 0;
+    }
+    state.beefWeight = val;
+    state.lastUpdated = Date.now();
+    updateUI();
+    saveState();
+  });
+
+  btnRatioPitmaster.addEventListener('click', () => {
+    state.beefRatio = 0.7;
+    state.lastUpdated = Date.now();
+    updateUI();
+    saveState();
+  });
+
+  btnRatioLeaner.addEventListener('click', () => {
+    state.beefRatio = 0.8;
     state.lastUpdated = Date.now();
     updateUI();
     saveState();
@@ -146,6 +183,29 @@ function updateUI() {
   const remainderLinks = roundedLinks % 4;
   estFourLinkRuns.textContent = `${completeCycles} cycles + ${remainderLinks} left`;
 
+  // Update Beef Sausage Calculator values
+  if (beefCalcWeight && document.activeElement !== beefCalcWeight) {
+    beefCalcWeight.value = state.beefWeight;
+  }
+  
+  if (state.beefRatio === 0.7) {
+    btnRatioPitmaster.classList.add('active');
+    btnRatioLeaner.classList.remove('active');
+    beefCalcLeanDesc.textContent = "70% of total batch weight";
+    beefCalcFatDesc.textContent = "30% of total batch weight";
+  } else {
+    btnRatioPitmaster.classList.remove('active');
+    btnRatioLeaner.classList.add('active');
+    beefCalcLeanDesc.textContent = "80% of total batch weight";
+    beefCalcFatDesc.textContent = "20% of total batch weight";
+  }
+  
+  const leanAmount = state.beefWeight * state.beefRatio;
+  const fatAmount = state.beefWeight * (1 - state.beefRatio);
+  
+  beefCalcLean.textContent = leanAmount.toFixed(2);
+  beefCalcFat.textContent = fatAmount.toFixed(2);
+
   // Update Task Checkbox states
   taskRows.forEach(row => {
     const stepIndex = parseInt(row.getAttribute('data-step')) - 1;
@@ -191,6 +251,13 @@ function copyShareLink() {
     });
 }
 
+// State Sanitization / Migrations
+function sanitizeState(obj) {
+  if (obj.beefWeight === undefined) obj.beefWeight = 50.0;
+  if (obj.beefRatio === undefined) obj.beefRatio = 0.7;
+  return obj;
+}
+
 // Persistence: Local Storage
 function loadLocalState() {
   const local = localStorage.getItem(`sausage_run_${sessionName}`);
@@ -198,7 +265,7 @@ function loadLocalState() {
     try {
       const parsed = JSON.parse(local);
       if (parsed.weight && Array.isArray(parsed.tasks)) {
-        state = parsed;
+        state = sanitizeState(parsed);
       }
     } catch (e) {
       console.error("Error parsing local state", e);
@@ -263,7 +330,7 @@ function syncWithCloud() {
       if (remoteState && remoteState.lastUpdated) {
         // If remote state is newer or we don't have local differences, apply it
         if (remoteState.lastUpdated > (state.lastUpdated || 0)) {
-          state = remoteState;
+          state = sanitizeState(remoteState);
           updateUI();
           localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
         }
@@ -286,7 +353,7 @@ function pollCloudState() {
       if (remoteState && remoteState.lastUpdated) {
         // Only update if remote state has a newer timestamp
         if (remoteState.lastUpdated > state.lastUpdated) {
-          state = remoteState;
+          state = sanitizeState(remoteState);
           updateUI();
           localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
         }
