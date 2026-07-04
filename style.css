@@ -455,7 +455,7 @@ body {
 }
 
 .task-checkbox-col {
-  width: 64px;
+  width: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -465,10 +465,10 @@ body {
 }
 
 .task-checkbox {
-  width: 24px;
-  height: 24px;
+  width: 34px;
+  height: 34px;
   border: 2px solid #8b949e;
-  border-radius: 6px;
+  border-radius: 8px;
   display: block;
   position: relative;
   transition: all 0.2s ease;
@@ -518,12 +518,12 @@ body {
 .task-row.checked .task-checkbox::after {
   content: "";
   position: absolute;
-  left: 7px;
-  top: 3px;
-  width: 6px;
-  height: 11px;
+  left: 10px;
+  top: 4px;
+  width: 9px;
+  height: 16px;
   border: solid #0d1117;
-  border-width: 0 3px 3px 0;
+  border-width: 0 4px 4px 0;
   transform: rotate(45deg);
 }
 
@@ -821,6 +821,64 @@ body {
     grid-template-columns: 1fr 1fr; /* 2 columns on small screens */
   }
 
+  .ingredient-card {
+    padding: 16px 12px;
+  }
+
+  .ing-label {
+    font-size: 0.9rem;
+  }
+
+  .ing-value {
+    font-size: 2.1rem;
+  }
+
+  .ing-desc {
+    font-size: 0.85rem;
+  }
+
+  /* Extra large tap targets & font sizes for kitchen line elbow-tapping */
+  .task-row {
+    min-height: 90px;
+  }
+
+  .task-checkbox-col {
+    width: 88px;
+  }
+
+  .task-checkbox {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border-width: 2.5px;
+  }
+
+  .task-row.checked .task-checkbox::after {
+    left: 13px;
+    top: 4px;
+    width: 11px;
+    height: 20px;
+    border-width: 0 5px 5px 0;
+  }
+
+  .task-content {
+    padding: 14px 18px;
+  }
+
+  .step-num {
+    font-size: 0.85rem;
+  }
+
+  .task-content p {
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
   .toggle-buttons {
     height: auto;
     flex-direction: column;
@@ -828,20 +886,30 @@ body {
   }
 
   .toggle-btn {
-    padding: 10px 12px;
+    padding: 12px 12px;
     width: 100%;
+    height: 56px;
+  }
+
+  .ratio-title {
+    font-size: 1rem;
+  }
+
+  .ratio-sub {
+    font-size: 0.8rem;
   }
 
   .footer-buttons {
     grid-template-columns: 1fr; /* Stack buttons vertically for mobile */
-    gap: 8px;
+    gap: 10px;
   }
   
   .footer-btn {
-    height: 52px;
+    height: 60px; /* Keep buttons big on mobile */
+    font-size: 1.1rem;
   }
 
   body {
-    padding-bottom: 210px; /* Give more space for stacked footer buttons */
+    padding-bottom: 240px; /* Give more space for stacked footer buttons */
   }
 }
