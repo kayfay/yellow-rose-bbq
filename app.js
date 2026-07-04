@@ -35,9 +35,6 @@ const ingCuringSalt = document.getElementById('ing-curing-salt');
 // Estimator elements
 const estStuffedWeight = document.getElementById('est-stuffed-weight');
 const estLinksExpected = document.getElementById('est-links-expected');
-const estTwists = document.getElementById('est-twists');
-const estFourLinkRuns = document.getElementById('est-four-link-runs');
-
 // Controls
 const btnMinus5 = document.getElementById('btn-minus-5');
 const btnMinus1 = document.getElementById('btn-minus-1');
@@ -175,13 +172,7 @@ function updateUI() {
   const roundedLinks = Math.round(totalLinks);
   estLinksExpected.textContent = roundedLinks;
 
-  // Total Twists: Total Links * 5
-  estTwists.textContent = Math.round(totalLinks * 5);
 
-  // 4-Link Twisting Runs: Division of total links by 4
-  const completeCycles = Math.floor(roundedLinks / 4);
-  const remainderLinks = roundedLinks % 4;
-  estFourLinkRuns.textContent = `${completeCycles} cycles + ${remainderLinks} left`;
 
   // Update Beef Sausage Calculator values
   if (beefCalcWeight && document.activeElement !== beefCalcWeight) {
