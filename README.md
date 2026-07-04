@@ -24,6 +24,8 @@ To tie this app to a custom subdomain (e.g. `sausage.allen.tools`):
    - Add a new **CNAME** record:
      - **Host/Name**: `sausage` (or whatever subdomain you want)
      - **Target/Value**: `your-github-username.github.io`
+
+<!-- Triggering rebuild after DNS fix -->
 3. **Enable GitHub Pages**:
    - Go to your GitHub Repository Settings.
    - Go to the **Pages** section in the sidebar.
