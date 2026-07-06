@@ -150,7 +150,7 @@ function updateUI() {
   ingLeanMeat.textContent = (25.5 * scale).toFixed(2);
   ingTrimmings.textContent = (16.0 * scale).toFixed(2);
   ingHardFat.textContent = (8.5 * scale).toFixed(2);
-  ingJalapenos.textContent = (2.0 * scale).toFixed(2);
+  ingJalapenos.textContent = (3.0 * scale).toFixed(2);
   ingCheddar.textContent = (5.0 * scale).toFixed(2);
   ingPepper.textContent = (1.5 * scale).toFixed(2);
   ingMilk.textContent = (4.5 * scale).toFixed(2);
@@ -164,7 +164,7 @@ function updateUI() {
 
   // Link Estimations
   // Total Stuffed Weight: Sum of the meat batch (lean+trimmings+fat), cheese, and jalapeños
-  const totalStuffed = (25.5 + 16.0 + 8.5 + 2.0 + 5.0) * scale;
+  const totalStuffed = (25.5 + 16.0 + 8.5 + 3.0 + 5.0) * scale;
   estStuffedWeight.textContent = totalStuffed.toFixed(1);
   
   // Total Links: Stuffed Weight * 2.6
