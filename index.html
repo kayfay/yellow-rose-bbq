@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Yellow Rose BBQ - Sausage Prep Tool</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <!-- Include Outfit Font for premium modern look -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,13 @@
     <section class="recipe-selector-card">
       <h2 class="section-title">Sausage Formulations</h2>
       <div class="recipe-pills-container" id="recipe-pills">
-        <!-- Pills rendered by JS -->
+        <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon">🌶️</span> <span>Jalapeño Cheddar</span></button>
+        <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon">🌽</span> <span>The Elote (Street Corn)</span></button>
+        <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon">🥑</span> <span>The Salsa Verde</span></button>
+        <button type="button" class="recipe-pill" data-recipe="sweet-bacon"><span class="recipe-pill-icon">🥓</span> <span>Sweet Bacon & Cream Cheese</span></button>
+        <button type="button" class="recipe-pill" data-recipe="garlic-parmesan"><span class="recipe-pill-icon">🧄</span> <span>Garlic Parmesan</span></button>
+        <button type="button" class="recipe-pill" data-recipe="farmhouse-cabbage"><span class="recipe-pill-icon">🥬</span> <span>Farmhouse Cabbage & Bacon</span></button>
+        <button type="button" class="recipe-pill" data-recipe="garlic-birria"><span class="recipe-pill-icon">🌮</span> <span>Garlic Birria & Cheese</span></button>
       </div>
       <div class="recipe-active-info" id="recipe-active-info">
         <div class="recipe-info-header">
@@ -79,7 +85,16 @@
     <section class="ingredients-section">
       <h2 class="section-title">Scaled Ingredients</h2>
       <div class="ingredients-grid" id="ingredients-grid">
-        <!-- Rendered dynamically by JavaScript -->
+        <div class="ingredient-card"><span class="ing-label">Lean Beef Base</span><div class="ing-value-box"><span class="ing-value">25.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Beef Trimmings</span></div>
+        <div class="ingredient-card"><span class="ing-label">Pork Base</span><div class="ing-value-box"><span class="ing-value">16.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Pork Trimmings</span></div>
+        <div class="ingredient-card"><span class="ing-label">Hard Fat</span><div class="ing-value-box"><span class="ing-value">8.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Chilled Pork/Beef Fat</span></div>
+        <div class="ingredient-card"><span class="ing-label">Diced Jalapeños</span><div class="ing-value-box"><span class="ing-value">3.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Fully Drained & Diced</span></div>
+        <div class="ingredient-card"><span class="ing-label">Cheddar Cheese</span><div class="ing-value-box"><span class="ing-value">5.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">High-Temp Cubes</span></div>
+        <div class="ingredient-card"><span class="ing-label">Black Pepper</span><div class="ing-value-box"><span class="ing-value">1.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Coarse Grind</span></div>
+        <div class="ingredient-card"><span class="ing-label">Powdered Milk</span><div class="ing-value-box"><span class="ing-value">4.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Binder Agent</span></div>
+        <div class="ingredient-card"><span class="ing-label">Ice Cold Water</span><div class="ing-value-box"><span class="ing-value">10.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Split 2x 5.0 cups</span></div>
+        <div class="ingredient-card highlight-card"><span class="ing-label">Bulk Kosher Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">454</span><span class="ing-unit">g</span></div><span class="ing-desc">For Overnight Cure</span></div>
+        <div class="ingredient-card highlight-card"><span class="ing-label">Pink Curing Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">60</span><span class="ing-unit">g</span></div><span class="ing-desc">Cure #1 (Overnight)</span></div>
       </div>
     </section>
 
@@ -337,6 +352,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
