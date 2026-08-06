@@ -28,6 +28,24 @@
   </header>
 
   <main class="app-content">
+    <!-- Section 0: Recipe Selection -->
+    <section class="recipe-selector-card">
+      <h2 class="section-title">Sausage Formulations</h2>
+      <div class="recipe-pills-container" id="recipe-pills">
+        <!-- Pills rendered by JS -->
+      </div>
+      <div class="recipe-active-info" id="recipe-active-info">
+        <div class="recipe-info-header">
+          <span class="recipe-info-icon" id="recipe-info-icon">🌶️</span>
+          <div class="recipe-info-title-box">
+            <h3 id="recipe-info-title">Jalapeño Cheddar</h3>
+            <span class="recipe-menu-tag" id="recipe-menu-tag">📍 Menu Source: Pitmaster Original Signature</span>
+          </div>
+        </div>
+        <p class="recipe-info-desc" id="recipe-info-desc">Classic Texas smoked sausage loaded with high-temp cheddar cubes and fresh diced jalapeños.</p>
+      </div>
+    </section>
+
     <!-- Section 1: Main Weight Input and Scaling Control -->
     <section class="control-card">
       <div class="control-header">
@@ -60,106 +78,8 @@
     <!-- Section 2: Recipe Variable Ratios -->
     <section class="ingredients-section">
       <h2 class="section-title">Scaled Ingredients</h2>
-      <div class="ingredients-grid">
-        <!-- Lean Meat Base -->
-        <div class="ingredient-card">
-          <span class="ing-label">Lean Meat Base</span>
-          <div class="ing-value-box">
-            <span id="ing-lean-meat" class="ing-value">25.50</span>
-            <span class="ing-unit">lbs</span>
-          </div>
-          <span class="ing-desc">Beef</span>
-        </div>
-
-        <!-- Trimmings -->
-        <div class="ingredient-card">
-          <span class="ing-label">Trimmings</span>
-          <div class="ing-value-box">
-            <span id="ing-trimmings" class="ing-value">16.00</span>
-            <span class="ing-unit">lbs</span>
-          </div>
-          <span class="ing-desc">Pork Trimmings</span>
-        </div>
-
-        <!-- Hard Beef Fat -->
-        <div class="ingredient-card">
-          <span class="ing-label">Hard Beef Fat</span>
-          <div class="ing-value-box">
-            <span id="ing-hard-fat" class="ing-value">8.50</span>
-            <span class="ing-unit">lbs</span>
-          </div>
-          <span class="ing-desc">Chilled/Diced Fat</span>
-        </div>
-
-        <!-- Diced Jalapeños -->
-        <div class="ingredient-card">
-          <span class="ing-label">Jalapeños</span>
-          <div class="ing-value-box">
-            <span id="ing-jalapenos" class="ing-value">3.00</span>
-            <span class="ing-unit">cups</span>
-          </div>
-          <span class="ing-desc">Fully Drained/Diced</span>
-        </div>
-
-        <!-- High-Temp Cheddar -->
-        <div class="ingredient-card">
-          <span class="ing-label">Cheddar Cheese</span>
-          <div class="ing-value-box">
-            <span id="ing-cheddar" class="ing-value">5.00</span>
-            <span class="ing-unit">lbs</span>
-          </div>
-          <span class="ing-desc">High-Temp Cubes</span>
-        </div>
-
-        <!-- Coarse Black Pepper -->
-        <div class="ingredient-card">
-          <span class="ing-label">Black Pepper</span>
-          <div class="ing-value-box">
-            <span id="ing-pepper" class="ing-value">1.50</span>
-            <span class="ing-unit">cups</span>
-          </div>
-          <span class="ing-desc">Coarse Grind</span>
-        </div>
-
-        <!-- Powdered Milk Binder -->
-        <div class="ingredient-card">
-          <span class="ing-label">Powdered Milk</span>
-          <div class="ing-value-box">
-            <span id="ing-milk" class="ing-value">4.50</span>
-            <span class="ing-unit">cups</span>
-          </div>
-          <span class="ing-desc">Binder agent</span>
-        </div>
-
-        <!-- Ice Cold Water -->
-        <div class="ingredient-card">
-          <span class="ing-label">Ice Cold Water</span>
-          <div class="ing-value-box">
-            <span id="ing-water" class="ing-value">10.00</span>
-            <span class="ing-unit">cups</span>
-          </div>
-          <span class="ing-desc">Split into 2x <span id="ing-water-half">5.00</span> cups</span>
-        </div>
-
-        <!-- Bulk Kosher Salt -->
-        <div class="ingredient-card highlight-card">
-          <span class="ing-label">Bulk Kosher Salt (Day 1)</span>
-          <div class="ing-value-box">
-            <span id="ing-salt" class="ing-value">454</span>
-            <span class="ing-unit">g</span>
-          </div>
-          <span class="ing-desc">For Overnight Cure</span>
-        </div>
-
-        <!-- Pink Curing Salt -->
-        <div class="ingredient-card highlight-card">
-          <span class="ing-label">Pink Curing Salt (Day 1)</span>
-          <div class="ing-value-box">
-            <span id="ing-curing-salt" class="ing-value">60</span>
-            <span class="ing-unit">g</span>
-          </div>
-          <span class="ing-desc">Cure #1 (Overnight)</span>
-        </div>
+      <div class="ingredients-grid" id="ingredients-grid">
+        <!-- Rendered dynamically by JavaScript -->
       </div>
     </section>
 

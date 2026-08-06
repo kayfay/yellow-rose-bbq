@@ -143,12 +143,122 @@ body {
 }
 
 /* Card Styling */
-.control-card, .ingredients-section, .calculator-card, .estimator-section, .workflow-section {
+.recipe-selector-card, .control-card, .ingredients-section, .calculator-card, .estimator-section, .workflow-section {
   background-color: #161b22;
   border: 1px solid #21262d;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Recipe Selector Section */
+.recipe-pills-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d #161b22;
+}
+
+.recipe-pills-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.recipe-pills-container::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 3px;
+}
+
+.recipe-pills-container::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 3px;
+}
+
+.recipe-pill {
+  flex: 0 0 auto;
+  background-color: #21262d;
+  border: 1.5px solid #30363d;
+  border-radius: 30px;
+  padding: 10px 18px;
+  color: #c9d1d9;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.recipe-pill:hover {
+  border-color: #58a6ff;
+  background-color: #2b3540;
+}
+
+.recipe-pill.active {
+  background: linear-gradient(135deg, rgba(240, 128, 60, 0.2) 0%, rgba(240, 128, 60, 0.05) 100%);
+  border-color: #f0803c;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(240, 128, 60, 0.25);
+}
+
+.recipe-pill-icon {
+  font-size: 1.1rem;
+}
+
+.recipe-active-info {
+  background: rgba(13, 17, 23, 0.6);
+  border: 1px solid #30363d;
+  border-left: 4px solid #f0803c;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recipe-info-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recipe-info-icon {
+  font-size: 2rem;
+}
+
+.recipe-info-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recipe-info-title-box h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.recipe-menu-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f0803c;
+  background: rgba(240, 128, 60, 0.15);
+  padding: 2px 8px;
+  border-radius: 12px;
+  width: fit-content;
+  border: 1px solid rgba(240, 128, 60, 0.3);
+}
+
+.recipe-info-desc {
+  font-size: 0.9rem;
+  color: #8b949e;
+  line-height: 1.4;
 }
 
 /* Control Card & Slider */
