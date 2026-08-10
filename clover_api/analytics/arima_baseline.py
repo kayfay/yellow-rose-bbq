@@ -75,42 +75,34 @@ def build_arima_forecast(forecast_days: int = 14):
         brisket_lbs = (revenue * 0.35) / 32.0 / 0.55
         pork_lbs = (revenue * 0.25) / 24.0 / 0.50
         sausage_links = int((revenue * 0.20) / 8.0)
-        return round(brisket_lbs, 1), round(pork_lbs, 1), sausage_links
+        ribs_racks = int((revenue * 0.20) / 30.0)
+        return round(brisket_lbs, 1), round(pork_lbs, 1), sausage_links, ribs_racks
 
     future_dates = [d.strftime("%Y-%m-%d (%a)") for d in pred_future_mean.index]
     
     brisket_target = []
     pork_target = []
     sausage_target = []
+    ribs_target = []
     
     for rev in pred_future_mean:
-        b, p, s = calculate_meat_prep(rev)
+        b, p, s, r = calculate_meat_prep(rev)
         brisket_target.append(b)
         pork_target.append(p)
         sausage_target.append(s)
+        ribs_target.append(r)
 
     # 4. Generate Plotly JSON for Tab 1
     # We will plot Actual Revenue vs Baseline Predicted Revenue (Historical + Forecast)
     
-    dates_hist = [d.strftime("%Y-%m-%d (%a)") for d in df_daily.index]
-    actual_rev = df_daily['daily_revenue'].tolist()
-    fitted_rev = pred_in_sample_mean.tolist()
-    
     fig_data = [
         {
-            "x": dates_hist,
-            "y": actual_rev,
-            "name": "Actual Sales ($)",
-            "type": "bar",
-            "marker": {"color": "#c0392b", "opacity": 0.6}
-        },
-        {
-            "x": dates_hist + future_dates,
-            "y": fitted_rev + pred_future_mean.tolist(),
-            "name": "ARIMA Baseline Predict ($)",
+            "x": df_daily.index.strftime('%Y-%m-%d (%a)').tolist(),
+            "y": df_daily['daily_revenue'].tolist(),
+            "name": "Historical Daily Sales ($)",
             "type": "scatter",
             "mode": "lines",
-            "line": {"color": "#f1c40f", "width": 3, "dash": "dot"}
+            "line": {"color": "#3498db", "width": 2}
         },
         {
             "x": future_dates,
@@ -141,6 +133,7 @@ def build_arima_forecast(forecast_days: int = 14):
             "brisket_lbs": brisket_target,
             "pork_lbs": pork_target,
             "sausage_links": sausage_target,
+            "ribs_racks": ribs_target,
             "revenue": pred_future_mean.tolist()
         }
     }

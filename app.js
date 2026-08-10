@@ -768,18 +768,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
     const sausageElem = document.getElementById('kpi-sausage-links');
+    const ribsElem = document.getElementById('kpi-ribs-racks');
     const staffElem = document.getElementById('kpi-staff-count');
     const hoursElem = document.getElementById('kpi-staff-hours');
 
     if (brisketElem) brisketElem.textContent = metrics.brisket_lbs[idx] || 165;
     if (porkElem) porkElem.textContent = metrics.pork_lbs[idx] || 85;
     if (sausageElem) sausageElem.textContent = metrics.sausage_links[idx] || 148;
+    if (ribsElem) ribsElem.textContent = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
     
-    // Assuming $800 per pitmaster
+    // Fixed 3 Prep Cooks constraint (Owner + 2 Prep Masters)
     const rev = metrics.revenue[idx] || 4830;
-    const staffCount = Math.max(2, Math.floor(rev / 800));
-    if (staffElem) staffElem.textContent = staffCount;
-    if (hoursElem) hoursElem.textContent = (staffCount * 8.5).toFixed(1);
+    if (staffElem) staffElem.textContent = 3;
+    if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
     
     const revenueElem = document.getElementById('kpi-projected-revenue');
     if (revenueElem) revenueElem.textContent = '$' + Math.round(rev).toLocaleString();
