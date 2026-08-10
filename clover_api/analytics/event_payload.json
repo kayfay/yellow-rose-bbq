@@ -1,0 +1,62 @@
+{
+  "plotly_event_chart": {
+    "data": [
+      {
+        "x": [
+          "Normal Day",
+          "State/Federal Holiday",
+          "Jaguars Game Day"
+        ],
+        "y": [
+          4986.856153846154,
+          4487.5925,
+          17453.99653846154
+        ],
+        "type": "bar",
+        "marker": {
+          "color": [
+            "#7f8c8d",
+            "#e67e22",
+            "#006778"
+          ],
+          "opacity": 0.9
+        },
+        "text": [
+          "$4,987",
+          "$4,488",
+          "$17,454"
+        ],
+        "textposition": "auto"
+      }
+    ],
+    "layout": {
+      "title": "Revenue Multipliers: Local Events vs. Normal Operations",
+      "paper_bgcolor": "rgba(0,0,0,0)",
+      "plot_bgcolor": "rgba(20,20,30,0.6)",
+      "font": {
+        "color": "#f8fafc",
+        "family": "Outfit, sans-serif"
+      },
+      "xaxis": {
+        "gridcolor": "rgba(255,255,255,0.1)"
+      },
+      "yaxis": {
+        "title": "Average Daily Revenue ($)",
+        "gridcolor": "rgba(255,255,255,0.1)"
+      },
+      "margin": {
+        "l": 60,
+        "r": 50,
+        "t": 60,
+        "b": 60
+      }
+    }
+  },
+  "event_stats": {
+    "normal_avg_usd": 4986.86,
+    "jags_avg_usd": 17454.0,
+    "jags_multiplier": 3.5,
+    "holiday_avg_usd": 4487.59,
+    "holiday_multiplier": 0.9
+  }
+}

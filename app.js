@@ -602,4 +602,237 @@ function pollCloudState() {
 }
 
 // Run init
-window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', () => {
+  init();
+  initMultiTabNavigation();
+});
+
+// Multi-Tab & POS Analytics Forecasting Module Integration
+function initMultiTabNavigation() {
+  const tabBtns = document.querySelectorAll('.app-tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none';
+      });
+
+      btn.classList.add('active');
+      const activePane = document.getElementById(`tab-${targetTab}`);
+      if (activePane) {
+        activePane.style.display = 'block';
+        activePane.classList.add('active');
+      }
+
+      if (targetTab === 'forecasting-analytics') {
+        renderPlotlyForecastingChart();
+      }
+    });
+  });
+
+  // Date controls
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+    dateInput.addEventListener('change', () => renderPlotlyForecastingChart());
+  }
+
+  // Subtab switching
+  const btnSubtabArima = document.getElementById('btn-subtab-arima');
+  const btnSubtabWeather = document.getElementById('btn-subtab-weather');
+  const btnSubtabEvent = document.getElementById('btn-subtab-event');
+  
+  const viewArima = document.getElementById('subtab-view-arima');
+  const viewWeather = document.getElementById('subtab-view-weather');
+  const viewEvent = document.getElementById('subtab-view-event');
+
+  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent) {
+    btnSubtabArima.addEventListener('click', () => {
+      btnSubtabArima.classList.add('active');
+      btnSubtabWeather.classList.remove('active');
+      btnSubtabEvent.classList.remove('active');
+      if (viewArima) viewArima.style.display = 'block';
+      if (viewWeather) viewWeather.style.display = 'none';
+      if (viewEvent) viewEvent.style.display = 'none';
+      renderPlotlyForecastingChart();
+    });
+
+    btnSubtabWeather.addEventListener('click', () => {
+      btnSubtabWeather.classList.add('active');
+      btnSubtabArima.classList.remove('active');
+      btnSubtabEvent.classList.remove('active');
+      if (viewWeather) viewWeather.style.display = 'block';
+      if (viewArima) viewArima.style.display = 'none';
+      if (viewEvent) viewEvent.style.display = 'none';
+      renderPlotlyWeatherChart();
+    });
+
+    btnSubtabEvent.addEventListener('click', () => {
+      btnSubtabEvent.classList.add('active');
+      btnSubtabArima.classList.remove('active');
+      btnSubtabWeather.classList.remove('active');
+      if (viewEvent) viewEvent.style.display = 'block';
+      if (viewArima) viewArima.style.display = 'none';
+      if (viewWeather) viewWeather.style.display = 'none';
+      renderPlotlyEventChart();
+    });
+  }
+
+  // Presets
+  const btn14 = document.getElementById('btn-preset-14');
+  const btn7 = document.getElementById('btn-preset-7');
+  const btnSat = document.getElementById('btn-preset-saturday');
+
+  if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
+  if (btn7) btn7.addEventListener('click', () => updatePresetHorizon(7));
+  if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
+}
+
+async function renderPlotlyEventChart() {
+  const container = document.getElementById('plotly-event-impact-chart');
+  if (!container || typeof Plotly === 'undefined') return;
+
+  try {
+    const res = await fetch('clover_api/analytics/event_payload.json');
+    if (!res.ok) throw new Error('Failed to load event payload');
+    const payload = await res.json();
+
+    const layout = payload.plotly_event_chart.layout;
+    const traces = payload.plotly_event_chart.data;
+    Plotly.newPlot('plotly-event-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
+  } catch (err) {
+    console.warn('Could not load event chart payload', err);
+  }
+}
+
+async function renderPlotlyWeatherChart() {
+  const container = document.getElementById('plotly-weather-impact-chart');
+  if (!container || typeof Plotly === 'undefined') return;
+
+  try {
+    const res = await fetch('clover_api/analytics/weather_payload.json');
+    if (!res.ok) throw new Error('Failed to load weather payload');
+    const payload = await res.json();
+
+    const layout = payload.plotly_weather_chart.layout;
+    const traces = payload.plotly_weather_chart.data;
+    Plotly.newPlot('plotly-weather-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
+  } catch (err) {
+    console.warn('Could not load weather chart payload', err);
+  }
+}
+
+function updatePresetHorizon(days) {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`btn-preset-${days}`);
+  if (btn) btn.classList.add('active');
+  renderPlotlyForecastingChart(days);
+}
+
+function updatePresetThirdSaturday() {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-preset-saturday');
+  if (btn) btn.classList.add('active');
+  
+  // Calculate next 3rd Saturday
+  const d = new Date();
+  d.setDate(15);
+  while (d.getDay() !== 6) {
+    d.setDate(d.getDate() + 1);
+  }
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) dateInput.value = d.toISOString().split('T')[0];
+  renderPlotlyForecastingChart(14);
+}
+
+async function renderPlotlyForecastingChart(daysCount = 14) {
+  const chartContainer = document.getElementById('plotly-meat-sales-chart');
+  if (!chartContainer || typeof Plotly === 'undefined') return;
+
+  try {
+    const res = await fetch('clover_api/analytics/arima_payload.json');
+    if (!res.ok) throw new Error('Failed to load ARIMA payload');
+    const payload = await res.json();
+    
+    // Update KPI Summary Cards with peak Saturday projection from forecast metrics
+    const metrics = payload.forecast_metrics;
+    const peakSatIndex = metrics.future_dates.findIndex(d => d.includes('Sat'));
+    const idx = peakSatIndex !== -1 ? peakSatIndex : 0;
+    
+    const brisketElem = document.getElementById('kpi-brisket-lbs');
+    const porkElem = document.getElementById('kpi-pork-lbs');
+    const sausageElem = document.getElementById('kpi-sausage-links');
+    const staffElem = document.getElementById('kpi-staff-count');
+    const hoursElem = document.getElementById('kpi-staff-hours');
+
+    if (brisketElem) brisketElem.textContent = metrics.brisket_lbs[idx] || 165;
+    if (porkElem) porkElem.textContent = metrics.pork_lbs[idx] || 85;
+    if (sausageElem) sausageElem.textContent = metrics.sausage_links[idx] || 148;
+    
+    // Assuming $800 per pitmaster
+    const rev = metrics.revenue[idx] || 4830;
+    const staffCount = Math.max(2, Math.floor(rev / 800));
+    if (staffElem) staffElem.textContent = staffCount;
+    if (hoursElem) hoursElem.textContent = (staffCount * 8.5).toFixed(1);
+    
+    const revenueElem = document.getElementById('kpi-projected-revenue');
+    if (revenueElem) revenueElem.textContent = '$' + Math.round(rev).toLocaleString();
+
+    // Render Plotly chart using generated layout and traces
+    const layout = payload.plotly_baseline_chart.layout;
+    const traces = payload.plotly_baseline_chart.data;
+    Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
+
+  } catch (err) {
+    console.warn('Falling back to static forecast visualization', err);
+    // Fallback static chart (Original logic)
+    const startDateVal = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
+    const startDate = new Date(startDateVal);
+
+    const dates = [];
+    const brisketData = [];
+    const porkData = [];
+    const sausageData = [];
+
+    for (let i = 0; i < daysCount; i++) {
+      const d = new Date(startDate);
+      d.setDate(d.getDate() + i);
+      const dayStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' });
+      dates.push(dayStr);
+
+      const dow = d.getDay(); 
+      const multiplier = { 0: 1.4, 1: 0.8, 2: 0.8, 3: 0.9, 4: 1.1, 5: 1.6, 6: 2.2 }[dow];
+      
+      let rev = 1800.0 * multiplier;
+      if (dow === 6 && d.getDate() >= 15 && d.getDate() <= 21) rev *= 1.15;
+
+      brisketData.push(Math.round((rev * 0.35) / 32.0 / 0.55));
+      porkData.push(Math.round((rev * 0.25) / 24.0 / 0.50));
+      sausageData.push(Math.round((rev * 0.20) / 8.0));
+    }
+
+    const traces = [
+      { x: dates, y: brisketData, name: 'Raw Brisket Prep (lbs)', type: 'bar', marker: { color: '#c0392b' } },
+      { x: dates, y: porkData, name: 'Pork Shoulder Prep (lbs)', type: 'bar', marker: { color: '#e67e22' } },
+      { x: dates, y: sausageData, name: 'Sausage Links Needed', type: 'scatter', mode: 'lines+markers', yaxis: 'y2', line: { color: '#f1c40f', width: 3 }, marker: { size: 8 } }
+    ];
+
+    const layout = {
+      title: { text: `Projected Meat & Sausage Production (Static)`, font: { color: '#f0803c', size: 16 } },
+      paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(22,27,34,0.8)',
+      font: { color: '#c9d1d9', family: 'Outfit, sans-serif' },
+      xaxis: { gridcolor: 'rgba(255,255,255,0.08)' },
+      yaxis: { title: 'Raw Meat Weight (lbs)', gridcolor: 'rgba(255,255,255,0.08)' },
+      yaxis2: { title: 'Sausage Links', overlaying: 'y', side: 'right', showgrid: false, titlefont: { color: '#f1c40f' }, tickfont: { color: '#f1c40f' } },
+      legend: { orientation: 'h', y: -0.25 }, margin: { l: 50, r: 50, t: 60, b: 60 }
+    };
+    Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
+  }
+}
+

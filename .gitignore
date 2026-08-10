@@ -1,0 +1,25 @@
+# Environment & Credentials
+.env
+.env.*
+!.env.example
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Data & Databases
+*.db
+*.sqlite
+*.csv
+clover_api/data/*.db
+clover_api/data/*.sqlite
+clover_api/data/*.csv
+
+# Analytics Artifacts
+clover_api/analytics/*.png
+clover_api/analytics/*.html
+!clover_api/analytics/*.json

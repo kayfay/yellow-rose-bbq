@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Yellow Rose BBQ - Sausage Prep Tool</title>
-  <link rel="stylesheet" href="style.css?v=5">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <title>Yellow Rose BBQ - Operational Command Center</title>
+  <link rel="stylesheet" href="style.css?v=6">
   <!-- Include Outfit Font for premium modern look -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Plotly.js for interactive dynamic visualizations -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 </head>
 <body>
   <header class="app-header">
@@ -25,313 +28,392 @@
         <span id="session-display" class="session-label">Session: Default</span>
       </div>
     </div>
+
+    <!-- Multi-Tab Navigation Bar -->
+    <nav class="app-tab-navigation">
+      <div class="tab-nav-container">
+        <button type="button" class="app-tab-btn active" id="tab-btn-sausage" data-tab="sausage-tracker">
+          <span class="tab-btn-icon">🌭</span>
+          <span>Sausage Prep Tracker</span>
+        </button>
+        <button type="button" class="app-tab-btn" id="tab-btn-forecasting" data-tab="forecasting-analytics">
+          <span class="tab-btn-icon">📊</span>
+          <span>POS Analytics & Forecasting</span>
+        </button>
+      </div>
+    </nav>
   </header>
 
   <main class="app-content">
-    <!-- Section 0: Recipe Selection -->
-    <section class="recipe-selector-card">
-      <h2 class="section-title">Sausage Formulations</h2>
-      <div class="recipe-pills-container" id="recipe-pills">
-        <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon">🌶️</span> <span>Jalapeño Cheddar</span></button>
-        <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon">🌽</span> <span>The Elote (Street Corn)</span></button>
-        <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon">🥑</span> <span>The Salsa Verde</span></button>
-        <button type="button" class="recipe-pill" data-recipe="sweet-bacon"><span class="recipe-pill-icon">🥓</span> <span>Sweet Bacon & Cream Cheese</span></button>
-        <button type="button" class="recipe-pill" data-recipe="garlic-parmesan"><span class="recipe-pill-icon">🧄</span> <span>Garlic Parmesan</span></button>
-        <button type="button" class="recipe-pill" data-recipe="farmhouse-cabbage"><span class="recipe-pill-icon">🥬</span> <span>Farmhouse Cabbage & Bacon</span></button>
-        <button type="button" class="recipe-pill" data-recipe="garlic-birria"><span class="recipe-pill-icon">🌮</span> <span>Garlic Birria & Cheese</span></button>
-      </div>
-      <div class="recipe-active-info" id="recipe-active-info">
-        <div class="recipe-info-header">
-          <span class="recipe-info-icon" id="recipe-info-icon">🌶️</span>
-          <div class="recipe-info-title-box">
-            <h3 id="recipe-info-title">Jalapeño Cheddar</h3>
-            <span class="recipe-menu-tag" id="recipe-menu-tag">📍 Menu Source: Pitmaster Original Signature</span>
+    <!-- TAB 1: SAUSAGE TRACKER (Original Logic fully preserved) -->
+    <div id="tab-sausage-tracker" class="tab-pane active">
+      <!-- Section 0: Recipe Selection -->
+      <section class="recipe-selector-card">
+        <h2 class="section-title">Sausage Formulations</h2>
+        <div class="recipe-pills-container" id="recipe-pills">
+          <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon">🌶️</span> <span>Jalapeño Cheddar</span></button>
+          <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon">🌽</span> <span>The Elote (Street Corn)</span></button>
+          <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon">🥑</span> <span>The Salsa Verde</span></button>
+          <button type="button" class="recipe-pill" data-recipe="sweet-bacon"><span class="recipe-pill-icon">🥓</span> <span>Sweet Bacon & Cream Cheese</span></button>
+          <button type="button" class="recipe-pill" data-recipe="garlic-parmesan"><span class="recipe-pill-icon">🧄</span> <span>Garlic Parmesan</span></button>
+          <button type="button" class="recipe-pill" data-recipe="farmhouse-cabbage"><span class="recipe-pill-icon">🥬</span> <span>Farmhouse Cabbage & Bacon</span></button>
+          <button type="button" class="recipe-pill" data-recipe="garlic-birria"><span class="recipe-pill-icon">🌮</span> <span>Garlic Birria & Cheese</span></button>
+        </div>
+        <div class="recipe-active-info" id="recipe-active-info">
+          <div class="recipe-info-header">
+            <span class="recipe-info-icon" id="recipe-info-icon">🌶️</span>
+            <div class="recipe-info-title-box">
+              <h3 id="recipe-info-title">Jalapeño Cheddar</h3>
+              <span class="recipe-menu-tag" id="recipe-menu-tag">📍 Menu Source: Pitmaster Original Signature</span>
+            </div>
           </div>
+          <p class="recipe-info-desc" id="recipe-info-desc">Classic Texas smoked sausage loaded with high-temp cheddar cubes and fresh diced jalapeños.</p>
         </div>
-        <p class="recipe-info-desc" id="recipe-info-desc">Classic Texas smoked sausage loaded with high-temp cheddar cubes and fresh diced jalapeños.</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- Section 1: Main Weight Input and Scaling Control -->
-    <section class="control-card">
-      <div class="control-header">
-        <h2>Batch size (lbs)</h2>
-        <div class="weight-display-container">
-          <span id="weight-val" class="weight-display-number">50</span>
-          <span class="weight-display-unit">lbs</span>
-        </div>
-      </div>
-      
-      <div class="slider-row">
-        <button class="adjust-btn btn-lg" id="btn-minus-5" aria-label="Decrease by 5">-5</button>
-        <button class="adjust-btn btn-sm" id="btn-minus-1" aria-label="Decrease by 1">-1</button>
-        
-        <div class="slider-container">
-          <input type="range" id="weight-slider" min="5" max="150" value="50" step="0.5" class="custom-slider">
-          <div class="slider-track-ticks">
-            <span>5 lbs</span>
-            <span>50 lbs</span>
-            <span>100 lbs</span>
-            <span>150 lbs</span>
-          </div>
-        </div>
-
-        <button class="adjust-btn btn-sm" id="btn-plus-1" aria-label="Increase by 1">+1</button>
-        <button class="adjust-btn btn-lg" id="btn-plus-5" aria-label="Increase by 5">+5</button>
-      </div>
-    </section>
-
-    <!-- Section 2: Recipe Variable Ratios -->
-    <section class="ingredients-section">
-      <h2 class="section-title">Scaled Ingredients</h2>
-      <div class="ingredients-grid" id="ingredients-grid">
-        <div class="ingredient-card"><span class="ing-label">Lean Beef Base</span><div class="ing-value-box"><span class="ing-value">25.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Beef Trimmings</span></div>
-        <div class="ingredient-card"><span class="ing-label">Pork Base</span><div class="ing-value-box"><span class="ing-value">16.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Pork Trimmings</span></div>
-        <div class="ingredient-card"><span class="ing-label">Hard Fat</span><div class="ing-value-box"><span class="ing-value">8.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Chilled Pork/Beef Fat</span></div>
-        <div class="ingredient-card"><span class="ing-label">Diced Jalapeños</span><div class="ing-value-box"><span class="ing-value">3.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Fully Drained & Diced</span></div>
-        <div class="ingredient-card"><span class="ing-label">Cheddar Cheese</span><div class="ing-value-box"><span class="ing-value">5.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">High-Temp Cubes</span></div>
-        <div class="ingredient-card"><span class="ing-label">Black Pepper</span><div class="ing-value-box"><span class="ing-value">1.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Coarse Grind</span></div>
-        <div class="ingredient-card"><span class="ing-label">Powdered Milk</span><div class="ing-value-box"><span class="ing-value">4.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Binder Agent</span></div>
-        <div class="ingredient-card"><span class="ing-label">Ice Cold Water</span><div class="ing-value-box"><span class="ing-value">10.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Split 2x 5.0 cups</span></div>
-        <div class="ingredient-card highlight-card"><span class="ing-label">Bulk Kosher Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">454</span><span class="ing-unit">g</span></div><span class="ing-desc">For Overnight Cure</span></div>
-        <div class="ingredient-card highlight-card"><span class="ing-label">Pink Curing Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">60</span><span class="ing-unit">g</span></div><span class="ing-desc">Cure #1 (Overnight)</span></div>
-      </div>
-    </section>
-
-    <!-- Section 2.5: Beef Sausage Mixture Calculator -->
-    <section class="calculator-card">
-      <h2 class="section-title">Beef Sausage Mixture Calculator</h2>
-      
-      <div class="calc-inputs-row">
-        <div class="calc-input-group">
-          <label for="beef-calc-weight">Target Batch Weight (lbs)</label>
-          <div class="calc-input-wrapper">
-            <input type="number" id="beef-calc-weight" min="1" max="500" value="50" step="1" class="calc-number-input">
-            <span class="calc-input-unit">lbs</span>
+      <!-- Section 1: Main Weight Input and Scaling Control -->
+      <section class="control-card">
+        <div class="control-header">
+          <h2>Batch size (lbs)</h2>
+          <div class="weight-display-container">
+            <span id="weight-val" class="weight-display-number">50</span>
+            <span class="weight-display-unit">lbs</span>
           </div>
         </div>
         
-        <div class="calc-toggle-group">
-          <label>Blend Ratio Option</label>
-          <div class="toggle-buttons">
-            <button type="button" class="toggle-btn active" id="btn-ratio-pitmaster" data-ratio="0.75">
-              <span class="ratio-title">Pitmaster Standard</span>
-              <span class="ratio-sub">75% Lean / 25% Fat</span>
-            </button>
-            <button type="button" class="toggle-btn" id="btn-ratio-leaner" data-ratio="0.8">
-              <span class="ratio-title">Leaner Classic</span>
-              <span class="ratio-sub">80% Lean / 20% Fat</span>
-            </button>
+        <div class="slider-row">
+          <button class="adjust-btn btn-lg" id="btn-minus-5" aria-label="Decrease by 5">-5</button>
+          <button class="adjust-btn btn-sm" id="btn-minus-1" aria-label="Decrease by 1">-1</button>
+          
+          <div class="slider-container">
+            <input type="range" id="weight-slider" min="5" max="150" value="50" step="0.5" class="custom-slider">
+            <div class="slider-track-ticks">
+              <span>5 lbs</span>
+              <span>50 lbs</span>
+              <span>100 lbs</span>
+              <span>150 lbs</span>
+            </div>
           </div>
+
+          <button class="adjust-btn btn-sm" id="btn-plus-1" aria-label="Increase by 1">+1</button>
+          <button class="adjust-btn btn-lg" id="btn-plus-5" aria-label="Increase by 5">+5</button>
         </div>
-      </div>
-      
-      <div class="calc-results-grid">
-        <div class="result-card">
-          <span class="result-label">Lean Beef Required</span>
-          <div class="result-value-box">
-            <span id="beef-calc-lean" class="result-value">37.50</span>
-            <span class="result-unit">lbs</span>
+      </section>
+
+      <!-- Section 2: Recipe Variable Ratios -->
+      <section class="ingredients-section">
+        <h2 class="section-title">Scaled Ingredients</h2>
+        <div class="ingredients-grid" id="ingredients-grid">
+          <div class="ingredient-card"><span class="ing-label">Lean Beef Base</span><div class="ing-value-box"><span class="ing-value">25.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Beef Trimmings</span></div>
+          <div class="ingredient-card"><span class="ing-label">Pork Base</span><div class="ing-value-box"><span class="ing-value">16.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Pork Trimmings</span></div>
+          <div class="ingredient-card"><span class="ing-label">Hard Fat</span><div class="ing-value-box"><span class="ing-value">8.50</span><span class="ing-unit">lbs</span></div><span class="ing-desc">Chilled Pork/Beef Fat</span></div>
+          <div class="ingredient-card"><span class="ing-label">Diced Jalapeños</span><div class="ing-value-box"><span class="ing-value">3.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Fully Drained & Diced</span></div>
+          <div class="ingredient-card"><span class="ing-label">Cheddar Cheese</span><div class="ing-value-box"><span class="ing-value">5.00</span><span class="ing-unit">lbs</span></div><span class="ing-desc">High-Temp Cubes</span></div>
+          <div class="ingredient-card"><span class="ing-label">Black Pepper</span><div class="ing-value-box"><span class="ing-value">1.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Coarse Grind</span></div>
+          <div class="ingredient-card"><span class="ing-label">Powdered Milk</span><div class="ing-value-box"><span class="ing-value">4.50</span><span class="ing-unit">cups</span></div><span class="ing-desc">Binder Agent</span></div>
+          <div class="ingredient-card"><span class="ing-label">Ice Cold Water</span><div class="ing-value-box"><span class="ing-value">10.00</span><span class="ing-unit">cups</span></div><span class="ing-desc">Split 2x 5.0 cups</span></div>
+          <div class="ingredient-card highlight-card"><span class="ing-label">Bulk Kosher Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">454</span><span class="ing-unit">g</span></div><span class="ing-desc">For Overnight Cure</span></div>
+          <div class="ingredient-card highlight-card"><span class="ing-label">Pink Curing Salt (Day 1)</span><div class="ing-value-box"><span class="ing-value">60</span><span class="ing-unit">g</span></div><span class="ing-desc">Cure #1 (Overnight)</span></div>
+        </div>
+      </section>
+
+      <!-- Section 2.5: Beef Sausage Mixture Calculator -->
+      <section class="calculator-card">
+        <h2 class="section-title">Beef Sausage Mixture Calculator</h2>
+        
+        <div class="calc-inputs-row">
+          <div class="calc-input-group">
+            <label for="beef-calc-weight">Target Batch Weight (lbs)</label>
+            <div class="calc-input-wrapper">
+              <input type="number" id="beef-calc-weight" min="1" max="500" value="50" step="1" class="calc-number-input">
+              <span class="calc-input-unit">lbs</span>
+            </div>
           </div>
-          <span class="result-desc" id="beef-calc-lean-desc">75% of total batch weight</span>
+          
+          <div class="calc-toggle-group">
+            <label>Blend Ratio Option</label>
+            <div class="toggle-buttons">
+              <button type="button" class="toggle-btn active" id="btn-ratio-pitmaster" data-ratio="0.75">
+                <span class="ratio-title">Pitmaster Standard</span>
+                <span class="ratio-sub">75% Lean / 25% Fat</span>
+              </button>
+              <button type="button" class="toggle-btn" id="btn-ratio-leaner" data-ratio="0.8">
+                <span class="ratio-title">Leaner Classic</span>
+                <span class="ratio-sub">80% Lean / 20% Fat</span>
+              </button>
+            </div>
+          </div>
         </div>
         
-        <div class="result-card">
-          <span class="result-label">Beef Fat Trim Required</span>
-          <div class="result-value-box">
-            <span id="beef-calc-fat" class="result-value">12.50</span>
-            <span class="result-unit">lbs</span>
+        <div class="calc-results-grid">
+          <div class="result-card">
+            <span class="result-label">Lean Beef Required</span>
+            <div class="result-value-box">
+              <span id="beef-calc-lean" class="result-value">37.50</span>
+              <span class="result-unit">lbs</span>
+            </div>
+            <span class="result-desc" id="beef-calc-lean-desc">75% of total batch weight</span>
           </div>
-          <span class="result-desc" id="beef-calc-fat-desc">25% of total batch weight</span>
+          
+          <div class="result-card">
+            <span class="result-label">Beef Fat Trim Required</span>
+            <div class="result-value-box">
+              <span id="beef-calc-fat" class="result-value">12.50</span>
+              <span class="result-unit">lbs</span>
+            </div>
+            <span class="result-desc" id="beef-calc-fat-desc">25% of total batch weight</span>
+          </div>
         </div>
+      </section>
+
+      <!-- Section 3: Link Estimator & Forecast -->
+      <section class="estimator-section">
+        <h2 class="section-title">Link Estimator & Production Forecast</h2>
+        <div class="estimator-grid">
+          <div class="est-card">
+            <div class="est-metric">
+              <span id="est-stuffed-weight" class="est-number">57.0</span>
+              <span class="est-unit">lbs</span>
+            </div>
+            <span class="est-label">Total Stuffed Weight</span>
+          </div>
+
+          <div class="est-card">
+            <div class="est-metric">
+              <span id="est-links-expected" class="est-number">148</span>
+              <span class="est-unit">links</span>
+            </div>
+            <span class="est-label">Total Links Expected (~1/3 lb each)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Day Split Task Lists -->
+      <section class="workflow-section">
+        <div class="day-container">
+          <h3 class="day-title">Day 1: Grinding, Spicing & Curing</h3>
+          <div class="task-list" id="day1-list">
+            <div class="task-row" data-step="1">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 1</span><p>Ice down all grinder parts, meat tubs, and water vessels in a large tub for 30 minutes before cutting.</p></div>
+            </div>
+            <div class="task-row" data-step="2">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 2</span><p>Blend recipe weights of lean beef, pork, and hard fat cuts uniformly.</p></div>
+            </div>
+            <div class="task-row" data-step="3">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 3</span><p>Run a rapid coarse grind using a 3/8-inch plate directly into the iced bus tub.</p></div>
+            </div>
+            <div class="task-row" data-step="4">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 4</span><p>Evenly distribute Bulk Kosher Salt, Curing Salt, and dry spices across grind.</p></div>
+            </div>
+            <div class="task-row" data-step="5">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 5</span><p>Dry mix with hands for 2 minutes to completely integrate the cure into the meat.</p></div>
+            </div>
+            <div class="task-row" data-step="6">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 6</span><p>Cover tightly and store in walk-in for mandatory overnight cure window.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-container">
+          <h3 class="day-title">Day 2: Mixing, Stuffing & Linking</h3>
+          <div class="task-list" id="day2-list">
+            <div class="task-row" data-step="7">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 7</span><p>Submerge stuffer parts in ice bath for 30 minutes.</p></div>
+            </div>
+            <div class="task-row" data-step="8">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 8</span><p>Prep custom add-in ingredients per selected recipe.</p></div>
+            </div>
+            <div class="task-row" data-step="9">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 9</span><p>Whisk ice water binder mixture with powdered milk and pepper.</p></div>
+            </div>
+            <div class="task-row" data-step="10">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 10</span><p>Pour binder over cured meat and execute heavy manual mixing for 3 mins.</p></div>
+            </div>
+            <div class="task-row" data-step="11">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 11</span><p>Incorporate remaining ice water, cheese cubes, and add-ins.</p></div>
+            </div>
+            <div class="task-row" data-step="12">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 12</span><p>Knead aggressively for 3-5 minutes until meat paste turns sticky.</p></div>
+            </div>
+            <div class="task-row" data-step="13">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 13</span><p>Flush natural hog casings, slide onto horn, and pack cylinder tightly.</p></div>
+            </div>
+            <div class="task-row" data-step="14">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 14</span><p>Extrude onto wet table, pinch at 6-inch intervals, and twist links.</p></div>
+            </div>
+            <div class="task-row" data-step="15">
+              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
+              <div class="task-content"><span class="step-num">Step 15</span><p>Hang links on racks in walk-in for 2+ hours to form pellicle before smoking.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 2: INTERACTIVE FORECASTING DASHBOARD -->
+    <div id="tab-forecasting-analytics" class="tab-pane" style="display: none;">
+      <!-- Sub-Tab Navigation for Analytical Phases -->
+      <section class="control-card forecasting-header-card">
+        <div style="display: flex; gap: 10px; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+          <button type="button" class="preset-btn active" id="btn-subtab-arima">Tab 1: ARIMA Baseline</button>
+          <button type="button" class="preset-btn" id="btn-subtab-weather">Tab 2: Weather Impact Regression</button>
+          <button type="button" class="preset-btn" id="btn-subtab-event">Tab 3: Live Event Correlation</button>
+        </div>
+
+        <div class="forecasting-controls-row">
+          <div class="forecast-date-group">
+            <label for="forecast-start-date">📅 Target Forecast Date</label>
+            <input type="date" id="forecast-start-date" class="forecast-date-input">
+          </div>
+          <div class="forecast-preset-group">
+            <span class="preset-label">Quick Presets:</span>
+            <button type="button" class="preset-btn active" id="btn-preset-14">14-Day Horizon</button>
+            <button type="button" class="preset-btn" id="btn-preset-7">7-Day Run</button>
+            <button type="button" class="preset-btn" id="btn-preset-saturday">Next 3rd Saturday</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- KPI Summary Cards -->
+      <section class="estimator-section">
+        <h2 class="section-title">Projected Prep & Operational Metrics</h2>
+        <div class="estimator-grid forecasting-kpi-grid">
+          <div class="est-card kpi-card-gold">
+            <div class="est-metric">
+              <span id="kpi-projected-revenue" class="est-number">$4,830</span>
+            </div>
+            <span class="est-label">Projected Saturday Revenue</span>
+          </div>
+
+          <div class="est-card kpi-card-red">
+            <div class="est-metric">
+              <span id="kpi-brisket-lbs" class="est-number">165</span>
+              <span class="est-unit">lbs</span>
+            </div>
+            <span class="est-label">Raw Brisket Prep Target</span>
+          </div>
+
+          <div class="est-card kpi-card-orange">
+            <div class="est-metric">
+              <span id="kpi-pork-lbs" class="est-number">85</span>
+              <span class="est-unit">lbs</span>
+            </div>
+            <span class="est-label">Pork Shoulder Prep Target</span>
+          </div>
+
+          <div class="est-card kpi-card-blue">
+            <div class="est-metric">
+              <span id="kpi-sausage-links" class="est-number">148</span>
+              <span class="est-unit">links</span>
+            </div>
+            <span class="est-label">Sausage Links Required</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Staffing Recommendation Section -->
+      <section class="calculator-card staffing-card">
+        <h2 class="section-title">Recommended Pit Crew Staffing</h2>
+        <div class="calc-results-grid">
+          <div class="result-card">
+            <span class="result-label">Pit Crew On-Shift</span>
+            <div class="result-value-box">
+              <span id="kpi-staff-count" class="result-value">7</span>
+              <span class="result-unit">Staff</span>
+            </div>
+            <span class="result-desc">Based on $800 revenue / staff threshold</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Total Pitmaster Hours</span>
+            <div class="result-value-box">
+              <span id="kpi-staff-hours" class="result-value">59.5</span>
+              <span class="result-unit">hrs</span>
+            </div>
+            <span class="result-desc">Includes Overnight Smoke & Service Shifts</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 1 VIEW: ARIMA Baseline Model -->
+      <div id="subtab-view-arima">
+        <section class="control-card marketing-card" style="margin-top: 1rem; border-left: 4px solid #f1c40f; background-color: #fdfaf0;">
+          <h2 class="section-title" style="color: #d4ac0d;">🧠 Analytical Findings: Tab 1 ARIMA Baseline Model</h2>
+          <div style="font-family: 'Outfit', sans-serif; padding: 0.5rem; color: #333;">
+            <h3 style="margin-top: 0; font-size: 1.1rem;">Step-by-Step Reasoning: Weekly Cycle Baseline</h3>
+            <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
+              <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Univariate SARIMAX $(1,0,1) \times (1,1,1,7)$ model, we've identified the underlying weekly rhythm of Yellow Rose BBQ. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
+              <li><strong>Actionable Insight - Peak Staffing:</strong> The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, this demands 7 Pit Crew members to maintain the $800/staff service threshold. Shift scheduling must be locked in by Tuesday.</li>
+              <li><strong>Actionable Insight - Meat Procurement:</strong> The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing less than 165 lbs will mathematically guarantee a sell-out by 2:00 PM, while purchasing more without external demand triggers (like events) risks expensive food waste.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="chart-section">
+          <h2 class="section-title">Baseline Sales & Forecast Chart</h2>
+          <div class="chart-card">
+            <div id="plotly-meat-sales-chart" style="width:100%; height:450px;"></div>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <!-- Section 3: Link Estimator & Forecast -->
-    <section class="estimator-section">
-      <h2 class="section-title">Link Estimator & Production Forecast</h2>
-      <div class="estimator-grid">
-        <div class="est-card">
-          <div class="est-metric">
-            <span id="est-stuffed-weight" class="est-number">57.0</span>
-            <span class="est-unit">lbs</span>
+      <!-- TAB 2 VIEW: Weather Impact Integration -->
+      <div id="subtab-view-weather" style="display: none;">
+        <section class="control-card marketing-card" style="margin-top: 1rem; border-left: 4px solid #3498db; background-color: #f4f9fd;">
+          <h2 class="section-title" style="color: #2980b9;">🌧️ Analytical Findings: Tab 2 Weather Impact Regression</h2>
+          <div style="font-family: 'Outfit', sans-serif; padding: 0.5rem; color: #333;">
+            <h3 style="margin-top: 0; font-size: 1.1rem;">Step-by-Step Reasoning: Weather Exogenous Correlation</h3>
+            <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
+              <li><strong>Precipitation Impact ($+\$97.37/\text{mm}$):</strong> Blending Open-Meteo Jacksonville rainfall data with daily POS transactions reveals that moderate rain shifts ordering behavior to higher-ticket family bundles and third-party delivery.</li>
+              <li><strong>Extreme Heat ($>90^\circ\text{F}$):</strong> Foot traffic drops slightly during extreme heat waves, but patio misting and cold drink specials stabilize total tickets.</li>
+              <li><strong>Operational Choice - Weather Adjustments:</strong> On days when rainfall exceeds 10mm, reduce walk-in brisket prep by 15%, but increase third-party delivery packaging prep and feature online sausage bundles to capture stay-at-home demand.</li>
+            </ul>
           </div>
-          <span class="est-label">Total Stuffed Weight</span>
-        </div>
+        </section>
 
-        <div class="est-card">
-          <div class="est-metric">
-            <span id="est-links-expected" class="est-number">148</span>
-            <span class="est-unit">links</span>
+        <section class="chart-section">
+          <h2 class="section-title">Multivariate Weather vs. Sales Visualizer</h2>
+          <div class="chart-card">
+            <div id="plotly-weather-impact-chart" style="width:100%; height:450px;"></div>
           </div>
-          <span class="est-label">Total Links Expected (~1/3 lb each)</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Section 4: Day Split Task Lists -->
-    <section class="workflow-section">
-      <div class="day-container">
-        <h3 class="day-title">Day 1: Grinding, Spicing & Curing</h3>
-        <div class="task-list" id="day1-list">
-          <div class="task-row" data-step="1">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 1</span>
-              <p>Ice down all grinder parts, meat tubs, and water vessels in a large tub for 30 minutes before cutting.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="2">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 2</span>
-              <p>Blend recipe weights of lean beef, pork, and hard fat cuts uniformly.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="3">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 3</span>
-              <p>Run a rapid coarse grind using a 3/8-inch plate directly into the iced bus tub.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="4">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 4</span>
-              <p>Evenly distribute the Bulk Kosher Salt, Curing Salt, and the pitmaster's dry spice blend across the grind.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="5">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 5</span>
-              <p>Dry mix with hands for 2 minutes to completely integrate the cure into the meat.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="6">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 6</span>
-              <p>Cover tightly and store the bus tub in the cooler for its mandatory overnight cure window.</p>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
 
-      <div class="day-container">
-        <h3 class="day-title">Day 2: Mixing, Stuffing & Linking</h3>
-        <div class="task-list" id="day2-list">
-          <div class="task-row" data-step="7">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 7</span>
-              <p>Submerge water containers and sausage stuffer parts in a fresh ice bath for 30 minutes.</p>
-            </div>
+      <!-- TAB 3 VIEW: Live Event Correlation -->
+      <div id="subtab-view-event" style="display: none;">
+        <section class="control-card marketing-card" style="margin-top: 1rem; border-left: 4px solid #006778; background-color: #f0fbfa;">
+          <h2 class="section-title" style="color: #006778;">🏈 Analytical Findings: Tab 3 Live Event Correlation</h2>
+          <div style="font-family: 'Outfit', sans-serif; padding: 0.5rem; color: #333;">
+            <h3 style="margin-top: 0; font-size: 1.1rem;">Step-by-Step Reasoning: Jaguars Game Day Tailgating Spikes</h3>
+            <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
+              <li><strong>The 3.5x Multiplier:</strong> Analysis proves that Jacksonville Jaguars home games trigger a massive 3.5x multiplier on average daily revenue ($17.4k vs $4.9k). Standard holidays conversely show a slight dip (0.9x).</li>
+              <li><strong>Actionable Insight - Meat Procurement:</strong> A game day demands over 600 lbs of raw brisket and 300 lbs of pork. This requires sourcing from multiple vendors and staggering smoke times starting 36 hours prior to kickoff.</li>
+              <li><strong>Actionable Insight - Staffing & Logistics:</strong> To handle the $17.4k volume, you must scale from 7 up to 22 Pit Crew members. Additionally, because parking will be overwhelmed, convert 4 parking spaces into an express pickup lane exclusively for pre-ordered tailgating bundles.</li>
+            </ul>
           </div>
+        </section>
 
-          <div class="task-row" data-step="8">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 8</span>
-              <p>Thoroughly strain all brine juice out of the pickled/spiced jalapeños, then medium-dice.</p>
-            </div>
+        <section class="chart-section">
+          <h2 class="section-title">Event-Driven Revenue Multipliers</h2>
+          <div class="chart-card">
+            <div id="plotly-event-impact-chart" style="width:100%; height:450px;"></div>
           </div>
-
-          <div class="task-row" data-step="9">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 9</span>
-              <p>Whisk the first 5 cups of prepped ice water with the Powdered Milk and Coarse Black Pepper.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="10">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 10</span>
-              <p>Pour the pepper-milk mixture over the cured meat and execute heavy manual mixing for 3 minutes.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="11">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 11</span>
-              <p>Incorporate the remaining 5 cups of ice water, high-temp cheese cubes, and the completely dry jalapeño dice.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="12">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 12</span>
-              <p>Knead aggressively for 3-5 minutes until the meat paste turns sticky and holds its shape when inverted.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="13">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 13</span>
-              <p>Flush natural hog casings with cool water, slide onto the horn, and pack the cylinder tightly to clear air pockets.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="14">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 14</span>
-              <p>Extrude onto a wet table, pinch at 6-inch intervals, and twist 3-5 times—alternating the twist rotation directions.</p>
-            </div>
-          </div>
-
-          <div class="task-row" data-step="15">
-            <div class="task-checkbox-col">
-              <span class="task-checkbox"></span>
-            </div>
-            <div class="task-content">
-              <span class="step-num">Step 15</span>
-              <p>Hang the links on racks in the walk-in cooler for a minimum of 2 hours to dry the casings before smoking.</p>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <!-- Sticky Bottom Bar -->
@@ -352,6 +434,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
