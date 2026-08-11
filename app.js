@@ -637,6 +637,23 @@ function initMultiTabNavigation() {
 
   // Date controls & Historical Past Date Lookup
   const dateInput = document.getElementById('forecast-start-date');
+  const btnCal = document.getElementById('btn-open-calendar');
+
+  if (btnCal && dateInput) {
+    btnCal.addEventListener('click', () => {
+      try {
+        if (typeof dateInput.showPicker === 'function') {
+          dateInput.showPicker();
+        } else {
+          dateInput.focus();
+          dateInput.click();
+        }
+      } catch (e) {
+        dateInput.focus();
+      }
+    });
+  }
+
   if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.value = today;
@@ -804,12 +821,17 @@ function updatePresetHorizon(days) {
   const btn = document.getElementById(`btn-preset-${days}`);
   if (btn) btn.classList.add('active');
 
-  // Update date input to today if set to horizon
+  // For 14-day delivery view, jump to upcoming Saturday peak demand
+  const d = new Date();
+  while (d.getDay() !== 6) {
+    d.setDate(d.getDate() + 1);
+  }
+  const targetDateStr = d.toISOString().split('T')[0];
+
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.value = today;
-    handleDateSelectionLookup(today);
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
   }
   renderPlotlyForecastingChart(days);
 }
