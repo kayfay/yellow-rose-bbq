@@ -890,10 +890,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const sCasesElem = document.getElementById('kpi-sausage-cases');
     const rCasesElem = document.getElementById('kpi-ribs-cases');
 
-    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 30.0).toFixed(1)} Cases)`;
-    if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases)`;
-    if (sCasesElem) sCasesElem.textContent = `(~${(sVal / 50.0).toFixed(1)} Cases)`;
-    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 10.0).toFixed(1)} Cases)`;
+    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 30.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 15.0)} Packers)`;
+    if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
+    if (sCasesElem) sCasesElem.textContent = `(Made from Brisket/Pork Trim)`;
+    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 10.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
 
     if (staffElem) staffElem.textContent = 3;
     if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
