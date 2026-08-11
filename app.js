@@ -772,25 +772,46 @@ async function renderPlotlyWeatherChart() {
 }
 
 function updatePresetHorizon(days) {
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById(`btn-preset-${days}`);
   if (btn) btn.classList.add('active');
+
+  // Update date input to today if set to horizon
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+    handleDateSelectionLookup(today);
+  }
   renderPlotlyForecastingChart(days);
 }
 
 function updatePresetThirdSaturday() {
-  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById('btn-preset-saturday');
   if (btn) btn.classList.add('active');
   
-  // Calculate next 3rd Saturday
+  // Calculate next 3rd Saturday (15th-21st of current/next month)
   const d = new Date();
   d.setDate(15);
   while (d.getDay() !== 6) {
     d.setDate(d.getDate() + 1);
   }
+  // If next 3rd Saturday is already past this month, move to next month
+  if (d < new Date()) {
+    d.setMonth(d.getMonth() + 1);
+    d.setDate(15);
+    while (d.getDay() !== 6) {
+      d.setDate(d.getDate() + 1);
+    }
+  }
+
+  const targetDateStr = d.toISOString().split('T')[0];
   const dateInput = document.getElementById('forecast-start-date');
-  if (dateInput) dateInput.value = d.toISOString().split('T')[0];
+  if (dateInput) {
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
+  }
   renderPlotlyForecastingChart(14);
 }
 
@@ -803,10 +824,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (!res.ok) throw new Error('Failed to load ARIMA payload');
     const payload = await res.json();
     
-    // Update KPI Summary Cards with peak Saturday projection from forecast metrics
+    // Slicing metrics for horizon (7 vs 14 days)
     const metrics = payload.forecast_metrics;
-    const peakSatIndex = metrics.future_dates.findIndex(d => d.includes('Sat'));
-    const idx = peakSatIndex !== -1 ? peakSatIndex : 0;
+    const targetDateInput = document.getElementById('forecast-start-date')?.value;
+    
+    let idx = 0;
+    if (targetDateInput) {
+      const matchIdx = metrics.future_dates.findIndex(d => d.includes(targetDateInput));
+      if (matchIdx !== -1) idx = matchIdx;
+      else {
+        const peakSatIdx = metrics.future_dates.findIndex(d => d.includes('Sat'));
+        if (peakSatIdx !== -1) idx = peakSatIdx;
+      }
+    }
     
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
@@ -820,8 +850,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (sausageElem) sausageElem.textContent = metrics.sausage_links[idx] || 148;
     if (ribsElem) ribsElem.textContent = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
     
-    // Fixed 3 Prep Cooks constraint (Owner + 2 Prep Masters)
-    const rev = metrics.revenue[idx] || 4830;
     if (staffElem) staffElem.textContent = 3;
     if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
     
@@ -829,9 +857,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const revenueElem = document.getElementById('kpi-projected-revenue');
     if (revenueElem) revenueElem.textContent = dIdx.toFixed(1) + 'x';
 
-    // Render Plotly chart using generated layout and traces
-    const layout = payload.plotly_baseline_chart.layout;
-    const traces = payload.plotly_baseline_chart.data;
+    // Render Plotly chart with dynamic horizon slice
+    const layout = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.layout));
+    layout.title = `Baseline Demand Forecasting Model (${daysCount}-Day Horizon, 1.0 = Average)`;
+    
+    const traces = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.data));
+    if (traces.length > 1 && daysCount < 14) {
+      traces[1].x = traces[1].x.slice(0, daysCount);
+      traces[1].y = traces[1].y.slice(0, daysCount);
+    }
+
     Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
 
   } catch (err) {
