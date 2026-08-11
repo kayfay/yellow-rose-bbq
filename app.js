@@ -640,9 +640,11 @@ function initMultiTabNavigation() {
   if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.value = today;
-    dateInput.addEventListener('change', () => {
-      handleDateSelectionLookup(dateInput.value);
-      renderPlotlyForecastingChart();
+    ['change', 'input'].forEach(evtType => {
+      dateInput.addEventListener(evtType, () => {
+        handleDateSelectionLookup(dateInput.value);
+        renderPlotlyForecastingChart();
+      });
     });
   }
 
@@ -875,10 +877,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const staffElem = document.getElementById('kpi-staff-count');
     const hoursElem = document.getElementById('kpi-staff-hours');
 
-    const bVal = (metrics.brisket_lbs && metrics.brisket_lbs[idx]) ? metrics.brisket_lbs[idx] : 165;
-    const pVal = (metrics.pork_lbs && metrics.pork_lbs[idx]) ? metrics.pork_lbs[idx] : 85;
-    const sVal = (metrics.sausage_links && metrics.sausage_links[idx]) ? metrics.sausage_links[idx] : 148;
-    const rVal = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
+    const bVal = Math.round((metrics.brisket_lbs && metrics.brisket_lbs[idx]) ? metrics.brisket_lbs[idx] : 165);
+    const pVal = Math.round((metrics.pork_lbs && metrics.pork_lbs[idx]) ? metrics.pork_lbs[idx] : 85);
+    const sVal = Math.round((metrics.sausage_links && metrics.sausage_links[idx]) ? metrics.sausage_links[idx] : 148);
+    const rVal = Math.round((metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32);
 
     if (brisketElem) brisketElem.textContent = bVal;
     if (porkElem) porkElem.textContent = pVal;
