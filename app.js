@@ -665,48 +665,7 @@ function initMultiTabNavigation() {
     });
   }
 
-function handleDateSelectionLookup(selectedDateStr) {
-  const d = new Date(selectedDateStr + 'T00:00:00');
-  const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
 
-  const dateDispElem = document.getElementById('selected-date-display');
-  if (dateDispElem) dateDispElem.textContent = '📅 ' + dateFormatted;
-
-  const histCard = document.getElementById('historical-reference-card');
-  if (!histCard) return;
-
-  const todayStr = new Date().toISOString().split('T')[0];
-  const isPastOrToday = selectedDateStr <= todayStr;
-
-  if (isPastOrToday) {
-    histCard.style.display = 'block';
-    const dow = d.getDay(); // 0=Sun, 6=Sat
-
-    const dateLabel = document.getElementById('hist-date-label');
-    const demandVal = document.getElementById('hist-demand-val');
-    const weatherVal = document.getElementById('hist-weather-val');
-    const eventVal = document.getElementById('hist-event-val');
-
-    if (dateLabel) dateLabel.textContent = dateFormatted;
-
-    // Determine Day Demand & Event Status for historical reference
-    if (dow === 6) { // Saturday
-      if (demandVal) demandVal.textContent = '1.8x (Peak Saturday Surge)';
-      if (eventVal) eventVal.textContent = 'Jaguars Stadium Game Day';
-      if (weatherVal) weatherVal.textContent = '86°F | Clear & Sunny';
-    } else if (dow === 5) { // Friday
-      if (demandVal) demandVal.textContent = '1.4x (High Friday Run)';
-      if (eventVal) eventVal.textContent = 'Weekend Launch';
-      if (weatherVal) weatherVal.textContent = '82°F | Mild';
-    } else { // Weekday
-      if (demandVal) demandVal.textContent = '1.0x (Standard Baseline)';
-      if (eventVal) eventVal.textContent = 'Regular Operations';
-      if (weatherVal) weatherVal.textContent = '84°F | Normal';
-    }
-  } else {
-    histCard.style.display = 'none';
-  }
-}
 
   // Subtab switching
   const btnSubtabArima = document.getElementById('btn-subtab-arima');
@@ -1002,3 +961,46 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
   }
 }
 
+
+function handleDateSelectionLookup(selectedDateStr) {
+  const d = new Date(selectedDateStr + 'T00:00:00');
+  const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
+
+  const dateDispElem = document.getElementById('selected-date-display');
+  if (dateDispElem) dateDispElem.textContent = '📅 ' + dateFormatted;
+
+  const histCard = document.getElementById('historical-reference-card');
+  if (!histCard) return;
+
+  const todayStr = new Date().toISOString().split('T')[0];
+  const isPastOrToday = selectedDateStr <= todayStr;
+
+  if (isPastOrToday) {
+    histCard.style.display = 'block';
+    const dow = d.getDay(); // 0=Sun, 6=Sat
+
+    const dateLabel = document.getElementById('hist-date-label');
+    const demandVal = document.getElementById('hist-demand-val');
+    const weatherVal = document.getElementById('hist-weather-val');
+    const eventVal = document.getElementById('hist-event-val');
+
+    if (dateLabel) dateLabel.textContent = dateFormatted;
+
+    // Determine Day Demand & Event Status for historical reference
+    if (dow === 6) { // Saturday
+      if (demandVal) demandVal.textContent = '1.8x (Peak Saturday Surge)';
+      if (eventVal) eventVal.textContent = 'Jaguars Stadium Game Day';
+      if (weatherVal) weatherVal.textContent = '86°F | Clear & Sunny';
+    } else if (dow === 5) { // Friday
+      if (demandVal) demandVal.textContent = '1.4x (High Friday Run)';
+      if (eventVal) eventVal.textContent = 'Weekend Launch';
+      if (weatherVal) weatherVal.textContent = '82°F | Mild';
+    } else { // Weekday
+      if (demandVal) demandVal.textContent = '1.0x (Standard Baseline)';
+      if (eventVal) eventVal.textContent = 'Regular Operations';
+      if (weatherVal) weatherVal.textContent = '84°F | Normal';
+    }
+  } else {
+    histCard.style.display = 'none';
+  }
+}
