@@ -826,17 +826,20 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (!res.ok) throw new Error('Failed to load ARIMA payload');
     const payload = await res.json();
     
-    // Slicing metrics for horizon (7 vs 14 days)
-    const metrics = payload.forecast_metrics;
-    const targetDateInput = document.getElementById('forecast-start-date')?.value;
-    
+    // Calculate exact metrics for the selected target date
+    const targetDateInput = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
+    const targetDateObj = new Date(targetDateInput + 'T00:00:00');
+    const dayOfWeekStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'long' });
+    const shortDayStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'short' });
+
     let idx = 0;
-    if (targetDateInput) {
+    if (metrics && metrics.future_dates) {
       const matchIdx = metrics.future_dates.findIndex(d => d.includes(targetDateInput));
-      if (matchIdx !== -1) idx = matchIdx;
-      else {
-        const peakSatIdx = metrics.future_dates.findIndex(d => d.includes('Sat'));
-        if (peakSatIdx !== -1) idx = peakSatIdx;
+      if (matchIdx !== -1) {
+        idx = matchIdx;
+      } else {
+        const weekdayIdx = metrics.future_dates.findIndex(d => d.includes(`(${shortDayStr})`));
+        if (weekdayIdx !== -1) idx = weekdayIdx;
       }
     }
     
@@ -847,9 +850,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const staffElem = document.getElementById('kpi-staff-count');
     const hoursElem = document.getElementById('kpi-staff-hours');
 
-    const bVal = metrics.brisket_lbs[idx] || 165;
-    const pVal = metrics.pork_lbs[idx] || 85;
-    const sVal = metrics.sausage_links[idx] || 148;
+    const bVal = (metrics.brisket_lbs && metrics.brisket_lbs[idx]) ? metrics.brisket_lbs[idx] : 165;
+    const pVal = (metrics.pork_lbs && metrics.pork_lbs[idx]) ? metrics.pork_lbs[idx] : 85;
+    const sVal = (metrics.sausage_links && metrics.sausage_links[idx]) ? metrics.sausage_links[idx] : 148;
     const rVal = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
 
     if (brisketElem) brisketElem.textContent = bVal;
@@ -871,9 +874,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (staffElem) staffElem.textContent = 3;
     if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
     
+    // Format Demand Index as Percentage (+80% Demand) with dynamic weekday label
     const dIdx = (metrics.demand_index && metrics.demand_index[idx]) ? metrics.demand_index[idx] : 1.8;
+    const pctDiff = Math.round((dIdx - 1.0) * 100);
+    const pctDisplay = pctDiff > 0 ? `+${pctDiff}%` : (pctDiff < 0 ? `${pctDiff}%` : `Baseline`);
+
     const revenueElem = document.getElementById('kpi-projected-revenue');
-    if (revenueElem) revenueElem.textContent = dIdx.toFixed(1) + 'x';
+    const demandLabelElem = document.getElementById('kpi-demand-label');
+
+    if (revenueElem) revenueElem.textContent = pctDisplay;
+    if (demandLabelElem) demandLabelElem.textContent = `Projected ${dayOfWeekStr} Demand (vs. Baseline)`;
 
     // Wood Cordage Estimation (Post Oak Logs & Face Cords)
     const woodLogsElem = document.getElementById('kpi-wood-logs');
