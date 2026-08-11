@@ -647,6 +647,12 @@ function initMultiTabNavigation() {
   }
 
 function handleDateSelectionLookup(selectedDateStr) {
+  const d = new Date(selectedDateStr + 'T00:00:00');
+  const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
+
+  const dateDispElem = document.getElementById('selected-date-display');
+  if (dateDispElem) dateDispElem.textContent = '📅 ' + dateFormatted;
+
   const histCard = document.getElementById('historical-reference-card');
   if (!histCard) return;
 
@@ -655,9 +661,6 @@ function handleDateSelectionLookup(selectedDateStr) {
 
   if (isPastOrToday) {
     histCard.style.display = 'block';
-    
-    const d = new Date(selectedDateStr);
-    const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
     const dow = d.getDay(); // 0=Sun, 6=Sat
 
     const dateLabel = document.getElementById('hist-date-label');
@@ -728,15 +731,36 @@ function handleDateSelectionLookup(selectedDateStr) {
   }
 
   // Presets
-  const btn3 = document.getElementById('btn-preset-3');
+  const btnThu = document.getElementById('btn-preset-thu');
+  const btnSun = document.getElementById('btn-preset-sun');
+  const btnWed = document.getElementById('btn-preset-wed');
   const btn14 = document.getElementById('btn-preset-14');
-  const btn7 = document.getElementById('btn-preset-7');
   const btnSat = document.getElementById('btn-preset-saturday');
 
-  if (btn3) btn3.addEventListener('click', () => updatePresetHorizon(3));
+  if (btnThu) btnThu.addEventListener('click', () => updateDeliveryPreset(4, 'btn-preset-thu')); // Thursday
+  if (btnSun) btnSun.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sun')); // Sunday
+  if (btnWed) btnWed.addEventListener('click', () => updateDeliveryPreset(3, 'btn-preset-wed')); // Wednesday
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
-  if (btn7) btn7.addEventListener('click', () => updatePresetHorizon(7));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
+}
+
+function updateDeliveryPreset(targetDayNum, btnId) {
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.add('active');
+
+  const d = new Date();
+  while (d.getDay() !== targetDayNum) {
+    d.setDate(d.getDate() + 1);
+  }
+
+  const targetDateStr = d.toISOString().split('T')[0];
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
+  }
+  renderPlotlyForecastingChart(3);
 }
 
 async function renderPlotlyEventChart() {

@@ -283,17 +283,25 @@
           </ul>
         </div>
 
-        <div class="forecasting-controls-row">
-          <div class="forecast-date-group">
-            <label for="forecast-start-date">📅 Target Date Selector (Future or Past Lookup)</label>
-            <input type="date" id="forecast-start-date" class="forecast-date-input">
+        <div class="forecasting-controls-row" style="flex-wrap: wrap; gap: 1rem;">
+          <div class="forecast-date-group" style="flex: 1; min-width: 280px;">
+            <label for="forecast-start-date" style="display: block; margin-bottom: 0.4rem; font-weight: 600; color: #f8fafc;">
+              📅 Target Date Calendar Picker:
+            </label>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <input type="date" id="forecast-start-date" class="forecast-date-input" style="padding: 0.6rem 0.8rem; font-size: 0.95rem; border-radius: 6px; cursor: pointer; border: 1px solid #3498db; background: rgba(15,23,42,0.8); color: #fff;">
+              <span id="selected-date-display" style="font-size: 0.9rem; color: #f1c40f; font-weight: 600; font-family: 'Outfit', sans-serif;">📅 Aug 11, 2026</span>
+            </div>
           </div>
-          <div class="forecast-preset-group">
-            <span class="preset-label">Quick Presets:</span>
-            <button type="button" class="preset-btn active" id="btn-preset-3">3-Day Order Cycle</button>
-            <button type="button" class="preset-btn" id="btn-preset-7">7-Day Horizon</button>
-            <button type="button" class="preset-btn" id="btn-preset-14">14-Day Supply View</button>
-            <button type="button" class="preset-btn" id="btn-preset-saturday">Next 3rd Saturday</button>
+          <div class="forecast-preset-group" style="flex: 2; min-width: 320px;">
+            <span class="preset-label" style="display: block; margin-bottom: 0.4rem;">🚚 3-Day Delivery Window Presets:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <button type="button" class="preset-btn active" id="btn-preset-thu">🚚 Thu Delivery (Fri/Sat Pack)</button>
+              <button type="button" class="preset-btn" id="btn-preset-sun">🚚 Sun Delivery (Sun/Tue Pack)</button>
+              <button type="button" class="preset-btn" id="btn-preset-wed">🚚 Wed Delivery (Wed/Thu Pack)</button>
+              <button type="button" class="preset-btn" id="btn-preset-14">📅 14-Day Delivery View</button>
+              <button type="button" class="preset-btn" id="btn-preset-saturday">🏈 Next 3rd Saturday</button>
+            </div>
           </div>
         </div>
       </section>
@@ -319,15 +327,21 @@
         </div>
       </section>
 
-      <!-- Beginner-Friendly Meat Industry & Order Cycle Explainer -->
+      <!-- Beginner-Friendly Meat Industry & Delivery Window Explainer -->
       <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
         <details open>
           <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
-            🥩 3-Day Order Cycle & Meat Yield Guide (Plain-English Summary)
+            🚚 3-Day Delivery Schedule & Case Pack Guide (Plain-English)
           </summary>
           <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
             <ul style="padding-left: 1.2rem; margin: 0;">
-              <li><strong>3-Day Order Cycle (Next-Day Delivery):</strong> Raw briskets arrive fresh (never frozen). Order every 3 days based on projected 3-day case counts below so meat can be prepped and smoked immediately upon arrival.</li>
+              <li><strong>3 Weekly Supplier Deliveries (Thu / Sun / Wed):</strong>
+                <ul>
+                  <li><strong>Thursday Delivery (Placed Wed):</strong> Supplies <strong>Friday & Saturday</strong> peak weekend runs.</li>
+                  <li><strong>Sunday Delivery (Placed Sat):</strong> Supplies <strong>Sunday & Tuesday</strong> runs (closed Monday).</li>
+                  <li><strong>Wednesday Delivery (Placed Tue):</strong> Supplies <strong>Wednesday & Thursday</strong> mid-week runs.</li>
+                </ul>
+              </li>
               <li><strong>Case Pack Conversion Rules:</strong>
                 <ul>
                   <li><strong>Raw Brisket Case:</strong> ~30 lbs / 2 briskets per case (~15 lbs / packer).</li>
@@ -336,7 +350,6 @@
                   <li><strong>Sausage Case:</strong> 50 links per case (1/2 lb / link = 25 lbs / case).</li>
                 </ul>
               </li>
-              <li><strong>Shrinkage Yields:</strong> Brisket loses ~45% weight during 14h smoke (fat rendering/moisture loss). Prepping 165 lbs raw yields ~90 lbs carved brisket (~180 portions). Pork shoulder loses ~50% weight (85 lbs raw = ~42 lbs pulled pork).</li>
             </ul>
           </div>
         </details>
