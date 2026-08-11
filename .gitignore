@@ -11,6 +11,10 @@ __pycache__/
 env/
 venv/
 
+# Private Backend Code (Untracked from Public Web Repo)
+clover_api/*.py
+clover_api/**/*.py
+
 # Data & Databases
 *.db
 *.sqlite

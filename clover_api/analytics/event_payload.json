@@ -8,9 +8,9 @@
           "Jaguars Game Day"
         ],
         "y": [
-          4986.856153846154,
-          4487.5925,
-          17453.99653846154
+          1.0,
+          0.9,
+          3.5
         ],
         "type": "bar",
         "marker": {
@@ -22,15 +22,15 @@
           "opacity": 0.9
         },
         "text": [
-          "$4,987",
-          "$4,488",
-          "$17,454"
+          "1.0x",
+          "0.9x",
+          "3.5x"
         ],
         "textposition": "auto"
       }
     ],
     "layout": {
-      "title": "Revenue Multipliers: Local Events vs. Normal Operations",
+      "title": "Demand Surge Multipliers: Local Events vs. Normal Operations",
       "paper_bgcolor": "rgba(0,0,0,0)",
       "plot_bgcolor": "rgba(20,20,30,0.6)",
       "font": {
@@ -41,7 +41,7 @@
         "gridcolor": "rgba(255,255,255,0.1)"
       },
       "yaxis": {
-        "title": "Average Daily Revenue ($)",
+        "title": "Demand Multiplier (Relative to Normal Day)",
         "gridcolor": "rgba(255,255,255,0.1)"
       },
       "margin": {

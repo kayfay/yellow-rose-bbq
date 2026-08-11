@@ -782,8 +782,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (staffElem) staffElem.textContent = 3;
     if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
     
+    const dIdx = (metrics.demand_index && metrics.demand_index[idx]) ? metrics.demand_index[idx] : 1.8;
     const revenueElem = document.getElementById('kpi-projected-revenue');
-    if (revenueElem) revenueElem.textContent = '$' + Math.round(rev).toLocaleString();
+    if (revenueElem) revenueElem.textContent = dIdx.toFixed(1) + 'x';
 
     // Render Plotly chart using generated layout and traces
     const layout = payload.plotly_baseline_chart.layout;
