@@ -253,15 +253,6 @@ const btnShortcut = document.getElementById('btn-shortcut');
 // Task rows
 const taskRows = document.querySelectorAll('.task-row');
 
-// Beef Calculator elements
-const beefCalcWeight = document.getElementById('beef-calc-weight');
-const btnRatioPitmaster = document.getElementById('btn-ratio-pitmaster');
-const btnRatioLeaner = document.getElementById('btn-ratio-leaner');
-const beefCalcLean = document.getElementById('beef-calc-lean');
-const beefCalcFat = document.getElementById('beef-calc-fat');
-const beefCalcLeanDesc = document.getElementById('beef-calc-lean-desc');
-const beefCalcFatDesc = document.getElementById('beef-calc-fat-desc');
-
 // Initialize App
 function init() {
   sessionDisplay.textContent = `Session: ${sessionName.toUpperCase()}`;
@@ -284,32 +275,6 @@ function init() {
   // Slider change event
   weightSlider.addEventListener('input', (e) => {
     state.weight = parseFloat(e.target.value);
-    state.lastUpdated = Date.now();
-    updateUI();
-    saveState();
-  });
-
-  // Beef calculator input events
-  beefCalcWeight.addEventListener('input', (e) => {
-    let val = parseFloat(e.target.value);
-    if (isNaN(val) || val < 0) {
-      val = 0;
-    }
-    state.beefWeight = val;
-    state.lastUpdated = Date.now();
-    updateUI();
-    saveState();
-  });
-
-  btnRatioPitmaster.addEventListener('click', () => {
-    state.beefRatio = 0.75;
-    state.lastUpdated = Date.now();
-    updateUI();
-    saveState();
-  });
-
-  btnRatioLeaner.addEventListener('click', () => {
-    state.beefRatio = 0.8;
     state.lastUpdated = Date.now();
     updateUI();
     saveState();
