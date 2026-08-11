@@ -267,14 +267,17 @@
     <!-- TAB 2: INTERACTIVE FORECASTING DASHBOARD -->
     <div id="tab-forecasting-analytics" class="tab-pane" style="display: none;">
       <!-- Sub-Tab Navigation for Analytical Phases -->
-      <section class="control-card forecasting-header-card">
-        <div style="display: flex; gap: 10px; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+      <!-- Sub-Tab Navigation for Analytical Phases -->
+      <section class="control-card forecasting-header-card" style="margin-bottom: 1rem;">
+        <div style="display: flex; gap: 10px;">
           <button type="button" class="preset-btn active" id="btn-subtab-arima">Tab 1: ARIMA Baseline</button>
           <button type="button" class="preset-btn" id="btn-subtab-weather">Tab 2: Weather Impact Regression</button>
           <button type="button" class="preset-btn" id="btn-subtab-event">Tab 3: Live Event Correlation</button>
         </div>
+      </section>
 
       <div id="subtab-view-arima">
+        <section class="control-card forecasting-header-card">
 
         <!-- Target Date Purpose & Explanation Banner -->
         <div style="margin-bottom: 1rem; padding: 0.75rem 1rem; background: rgba(52, 152, 219, 0.12); border-left: 4px solid #3498db; border-radius: 6px; font-size: 0.9rem; color: #e2e8f0; font-family: 'Outfit', sans-serif;">
