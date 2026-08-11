@@ -966,8 +966,7 @@ function handleDateSelectionLookup(selectedDateStr) {
   const d = new Date(selectedDateStr + 'T00:00:00');
   const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
 
-  const dateDispElem = document.getElementById('selected-date-display');
-  if (dateDispElem) dateDispElem.textContent = '📅 ' + dateFormatted;
+
 
   const histCard = document.getElementById('historical-reference-card');
   if (!histCard) return;

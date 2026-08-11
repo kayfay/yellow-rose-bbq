@@ -291,11 +291,7 @@
               📅 Target Date Calendar Picker:
             </label>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <input type="date" id="forecast-start-date" class="forecast-date-input" style="padding: 0.6rem 0.8rem; font-size: 0.95rem; border-radius: 6px; cursor: pointer; border: 1px solid #3498db; background: rgba(15,23,42,0.8); color: #fff;">
-              <button type="button" id="btn-open-calendar" class="preset-btn" style="background: #3498db; color: #fff; font-weight: 600; padding: 0.55rem 0.85rem; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
-                📆 Open Calendar
-              </button>
-              <span id="selected-date-display" style="font-size: 0.9rem; color: #f1c40f; font-weight: 600; font-family: 'Outfit', sans-serif;">📅 Aug 11, 2026</span>
+              <input type="date" id="forecast-start-date" onclick="this.showPicker()" class="forecast-date-input" style="padding: 0.6rem 0.8rem; font-size: 0.95rem; border-radius: 6px; cursor: pointer; border: 1px solid #3498db; background: rgba(15,23,42,0.8); color: #f1c40f; font-weight: 600; font-family: 'Outfit', sans-serif;">
             </div>
           </div>
           <div class="forecast-preset-group" style="flex: 2; min-width: 320px;">
@@ -434,7 +430,7 @@
           <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
             <li><strong>Cook #1 (Overnight Prep): 5:00 PM – 2:00 AM</strong> &rarr; Trims, rubs, and loads the initial overnight burn.</li>
             <li><strong>Cook #2 (Morning Smoke): 2:00 AM – 2:00 PM (sometimes 12 PM)</strong> &rarr; Manages the long smoke, wraps briskets, pulls ready meat for lunch.</li>
-            <li><strong>Cook #3 / Owner (Close): 1:00 PM – 10:00 PM</strong> &rarr; Covers dinner rush, cleans, and preps for the next day's overnight cook.</li>
+            <li><strong>Cook #3 (Day/Mid): 8:00 AM – 7:00 PM</strong> &rarr; Covers lunch rush, dinner prep, and hands off to the evening shift.</li>
             <li><strong>Why do this?</strong> Keeps meat hot & juicy all day and doubles your smoker space so you don't run out!</li>
           </ul>
         </div>
