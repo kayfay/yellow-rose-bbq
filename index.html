@@ -473,12 +473,12 @@
             <span class="result-desc">Max Capacity (Owner + 2 Prep Cooks)</span>
           </div>
           <div class="result-card">
-            <span class="result-label">Total Shift Allocation</span>
+            <span class="result-label">Daily Shift Allocation</span>
             <div class="result-value-box">
               <span id="kpi-staff-hours" class="result-value">27.0</span>
               <span class="result-unit">hrs</span>
             </div>
-            <span class="result-desc">Spread across 3 Cooks (9 hrs/cook peak)</span>
+            <span class="result-desc">Total labor hours scheduled for this specific day</span>
           </div>
         </div>
 
@@ -535,7 +535,7 @@
             <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
               <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Univariate SARIMAX (1,0,1) × (1,1,1,7) model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
               <li><strong>Actionable Insight - Peak Staffing:</strong> The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</li>
-              <li><strong>Actionable Insight - Meat Procurement:</strong> The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing less than 165 lbs will mathematically guarantee a sell-out by 2:00 PM, while purchasing more without external demand triggers (like events) risks expensive food waste.</li>
+              <li><strong>Actionable Insight - Meat Procurement:</strong> The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</li>
             </ul>
           </div>
         </section>
