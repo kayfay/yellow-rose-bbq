@@ -276,10 +276,10 @@
 
         <!-- Target Date Purpose & Explanation Banner -->
         <div style="margin-bottom: 1rem; padding: 0.75rem 1rem; background: rgba(52, 152, 219, 0.12); border-left: 4px solid #3498db; border-radius: 6px; font-size: 0.9rem; color: #e2e8f0; font-family: 'Outfit', sans-serif;">
-          ℹ️ <strong>How the Target Forecast Date Works:</strong>
-          <ul style="margin: 0.4rem 0 0 1.2rem; padding: 0; line-height: 1.5;">
-            <li><strong>Future Dates:</strong> Predicts upcoming meat prep targets & shift allocations by applying 7-day seasonality, weather forecasts, and stadium event schedules.</li>
-            <li><strong>Past Dates (Historical Reference Lookup):</strong> Select any past date to pull verified historical POS demand, recorded weather, and event activity for audit & training reference.</li>
+          💡 <strong>TL;DR How to Use This Tool:</strong>
+          <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0; line-height: 1.5;">
+            <li><strong>Pick a Future Date:</strong> Shows how many <strong>lbs of meat, cases, and logs of wood</strong> to order for that day.</li>
+            <li><strong>Pick a Past Date:</strong> Shows what <strong>actually happened on that past day</strong> (sales, weather, game day).</li>
           </ul>
         </div>
 
@@ -309,7 +309,7 @@
       <!-- Historical Verification Reference Card (Dynamically populates for past dates) -->
       <section id="historical-reference-card" class="control-card" style="display: none; margin-bottom: 1rem; border-left: 4px solid #2ecc71; background: rgba(46, 204, 113, 0.08);">
         <h3 style="margin-top: 0; color: #2ecc71; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
-          📜 Historical Performance Lookup & Verification (<span id="hist-date-label">---</span>)
+          📜 Past Day Record Lookup (<span id="hist-date-label">---</span>)
         </h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9rem; color: #f8fafc; font-family: 'Outfit', sans-serif;">
           <div style="background: rgba(0,0,0,0.3); padding: 0.6rem 0.8rem; border-radius: 4px;">
@@ -331,26 +331,29 @@
       <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
         <details open>
           <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
-            🚚 3-Day Delivery Schedule & Case Pack Guide (Plain-English)
+            🚚 TL;DR Cheat Sheet: Meat Deliveries & Case Packs
           </summary>
           <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
-            <ul style="padding-left: 1.2rem; margin: 0;">
-              <li><strong>3 Weekly Supplier Deliveries (Thu / Sun / Wed):</strong>
-                <ul>
-                  <li><strong>Thursday Delivery (Placed Wed):</strong> Supplies <strong>Friday & Saturday</strong> peak weekend runs.</li>
-                  <li><strong>Sunday Delivery (Placed Sat):</strong> Supplies <strong>Sunday & Tuesday</strong> runs (closed Monday).</li>
-                  <li><strong>Wednesday Delivery (Placed Tue):</strong> Supplies <strong>Wednesday & Thursday</strong> mid-week runs.</li>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #f0803c;">
+                <strong style="color: #f1c40f;">🚚 3 Delivery Days:</strong>
+                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                  <li><strong>Thu Delivery:</strong> Buys meat for <strong>Fri & Sat</strong> (big weekend).</li>
+                  <li><strong>Sun Delivery:</strong> Buys meat for <strong>Sun & Tue</strong> (closed Mon).</li>
+                  <li><strong>Wed Delivery:</strong> Buys meat for <strong>Wed & Thu</strong> (mid-week).</li>
                 </ul>
-              </li>
-              <li><strong>Case Pack Conversion Rules:</strong>
-                <ul>
-                  <li><strong>Raw Brisket Case:</strong> ~30 lbs / 2 briskets per case (~15 lbs / packer).</li>
-                  <li><strong>Pork Shoulder Case:</strong> ~32 lbs / 4 butts per case (~8 lbs / butt).</li>
-                  <li><strong>Pork Spare Ribs Case:</strong> ~35 lbs / 10 racks per case (~3.5 lbs / rack).</li>
-                  <li><strong>Sausage Case:</strong> 50 links per case (1/2 lb / link = 25 lbs / case).</li>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
+                <strong style="color: #3498db;">📦 How Cases Work:</strong>
+                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                  <li><strong>1 Brisket Case:</strong> 2 briskets (30 lbs raw).</li>
+                  <li><strong>1 Pork Case:</strong> 4 pork butts (32 lbs raw).</li>
+                  <li><strong>1 Rib Case:</strong> 10 racks (35 lbs raw).</li>
+                  <li><strong>1 Sausage Case:</strong> 50 links (25 lbs raw).</li>
                 </ul>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </details>
       </section>
@@ -423,11 +426,11 @@
         </div>
 
         <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(0, 103, 120, 0.15); border-left: 4px solid #006778; border-radius: 6px; font-size: 0.88rem; color: #e2e8f0; font-family: 'Outfit', sans-serif; line-height: 1.6;">
-          🔥 <strong>Why Staggering Cook Shifts Works:</strong>
+          🔥 <strong>TL;DR Why We Stagger Cook Shifts:</strong>
           <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
-            <li><strong>Batch 1 (Overnight Pit Watch - Cook #1):</strong> Fires pit at 8:00 PM Friday. Smokes 10 briskets & 6 pork shoulders overnight (14-hr smoke). Meat enters hot resting cabinet (140°F) at 10:00 AM Saturday for 11:00 AM lunch service.</li>
-            <li><strong>Batch 2 (Morning Pit Watch - Cook #2):</strong> Fires second smoker batch at 4:00 AM Saturday. Smokes spare ribs (5 hrs) and second brisket run, ready for dinner rush at 5:00 PM.</li>
-            <li><strong>Result:</strong> Staggering pit shifts doubles your smoker capacity (allowing 300+ lbs of meat prep on 3-cook shifts) while ensuring every cut rests 4 hours for maximum juiciness!</li>
+            <li><strong>Batch 1 (Overnight Cook):</strong> Smokes meat overnight so it's juicy and ready for <strong>Lunch at 11 AM</strong>.</li>
+            <li><strong>Batch 2 (Morning Cook):</strong> Smokes ribs & extra briskets so they are fresh for <strong>Dinner at 5 PM</strong>.</li>
+            <li><strong>Why do this?</strong> Keeps meat hot & juicy all day and doubles your smoker space so you don't run out!</li>
           </ul>
         </div>
       </section>
