@@ -849,6 +849,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const res = await fetch('clover_api/analytics/arima_payload.json');
     if (!res.ok) throw new Error('Failed to load ARIMA payload');
     const payload = await res.json();
+    const metrics = payload.forecast_metrics;
     
     // Calculate exact metrics for the selected target date
     const targetDateInput = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
