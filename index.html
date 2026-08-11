@@ -435,9 +435,39 @@
         </div>
       </section>
 
-      <!-- Staffing Recommendation Section -->
-      <section class="calculator-card staffing-card">
-        <h2 class="section-title">Recommended Pit Crew Staffing (3-Cook Capacity)</h2>
+      <!-- Custom 50 lb Homemade Sausage Recipe Verification Card -->
+      <section class="control-card" style="margin-top: 1.5rem; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="margin-top: 0; color: #3498db; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
+          🌭 Homemade 50 lb Sausage Batch Recipe Verification
+        </h3>
+        <div style="font-size: 0.88rem; color: #cbd5e1; font-family: 'Outfit', sans-serif; line-height: 1.6;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 0.6rem;">
+            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
+              <strong style="color: #f1c40f;">🥩 Base Meat Block (50.0 lbs):</strong>
+              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                <li><strong>25.5 lbs</strong> Beef Trimmings (from Brisket trim)</li>
+                <li><strong>16.0 lbs</strong> Pork Base (from Pork Shoulder trim)</li>
+                <li><strong>8.5 lbs</strong> Pork/Beef Fat (70/30 Lean/Fat ratio)</li>
+              </ul>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #2ecc71;">
+              <strong style="color: #2ecc71;">🥛 Liquids, Binders & Inclusions:</strong>
+              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                <li><strong>10 Cups Extra Water</strong> (~5.0 lbs liquid binder)</li>
+                <li><strong>5 Cups Powdered Milk</strong> (~1.25 lbs dry binder)</li>
+                <li><strong>5.0 – 7.5 lbs Inclusions</strong> (Cheddar, Jalapeño, Bacon)</li>
+              </ul>
+            </div>
+          </div>
+          <p style="margin: 0; padding: 0.5rem 0.8rem; background: rgba(52, 152, 219, 0.15); border-radius: 4px; color: #e2e8f0; font-size: 0.85rem;">
+            ✅ <strong>Batch Yield Verification:</strong> 50 lbs base meat + liquids & binders = <strong>~62.5 lbs Total Stuffed Sausage Batch Weight</strong>. At ~0.38 lbs (6 oz) per stuffed link, 1 batch yields <strong>~150 to 160 links</strong>. Therefore, a 148 link target = <strong>Exactly 1 Full 50-lb Base Meat Batch</strong>!
+          </p>
+        </div>
+      </section>
+
+      <!-- Staffing & Optimal Shift Schedule Section (POS Time Series Optimized) -->
+      <section class="calculator-card staffing-card" style="margin-top: 1.5rem;">
+        <h2 class="section-title">🕒 Optimal 3-Cook Shift Schedule (POS Time Series Analysis)</h2>
         <div class="calc-results-grid">
           <div class="result-card">
             <span class="result-label">Active Prep Cooks</span>
@@ -456,8 +486,37 @@
             <span class="result-desc">Spread across 3 Cooks (9 hrs/cook peak)</span>
           </div>
         </div>
-        <div style="margin-top: 0.8rem; padding: 0.6rem 0.8rem; background: rgba(241, 196, 15, 0.15); border-left: 4px solid #f1c40f; border-radius: 6px; font-size: 0.88rem; color: #d4ac0d; font-family: 'Outfit', sans-serif;">
-          💡 <strong>3-Cook Capacity Optimization:</strong> To handle peak Saturday volume without extra hiring, stagger shifts: Owner manages overnight smoke (10:00 PM – 7:00 AM), Cook #1 takes morning trim & rub (5:00 AM – 1:30 PM), Cook #2 handles service slicing & replenishment (10:00 AM – 6:30 PM).
+
+        <!-- Detailed Shift Schedule Breakdown -->
+        <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; font-size: 0.88rem; font-family: 'Outfit', sans-serif;">
+          <div style="background: rgba(15, 23, 42, 0.8); padding: 0.8rem; border-radius: 6px; border-left: 4px solid #f1c40f;">
+            <strong style="color: #f1c40f;">🌙 Cook #1: Overnight Pitmaster</strong><br>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Shift: 8:00 PM (Night Before) – 5:00 AM</span>
+            <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.83rem; color: #cbd5e1;">
+              <li>Fires smoker at 8 PM for Batch 1 briskets & pork.</li>
+              <li>Monitors overnight pit temp (225°F–250°F).</li>
+              <li>Pulls & holds meat at 140°F for <strong>11 AM Lunch Rush</strong>.</li>
+            </ul>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.8); padding: 0.8rem; border-radius: 6px; border-left: 4px solid #3498db;">
+            <strong style="color: #3498db;">☀️ Cook #2: Daytime Prep Lead</strong><br>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Shift: 4:00 AM – 1:00 PM</span>
+            <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.83rem; color: #cbd5e1;">
+              <li>Fires Batch 2 smoker at 4:30 AM (ribs & sausage).</li>
+              <li>Preps fresh sides (elote, coleslaw, beans).</li>
+              <li>Trims raw briskets for tomorrow's smoke.</li>
+            </ul>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.8); padding: 0.8rem; border-radius: 6px; border-left: 4px solid #e67e22;">
+            <strong style="color: #e67e22;">🔥 Cook #3: Owner / Evening Pit Lead</strong><br>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Tue–Sat: 2:00 PM – 11:00 PM | Sun: 1:00 PM – 10:00 PM</span>
+            <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.83rem; color: #cbd5e1;">
+              <li>Manages dinner rush (4:00 PM – 8:30 PM).</li>
+              <li><strong>Stays 1 hour after shift (10–11 PM / Sun 9–10 PM)</strong> to rake pit coals & pack thick oak logs for overnight burn.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
