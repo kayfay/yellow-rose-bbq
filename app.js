@@ -15,6 +15,28 @@ const sessionName = urlParams.get('session') || 'default-run';
 
 // Recipe Formulations Data Definition (50 lb Batch Ratios)
 const RECIPES = {
+
+  'classic-beef': {
+    id: 'classic-beef',
+    name: 'Classic Texas Beef',
+    icon: '🥩',
+    menuSource: 'Pitmaster Original Signature',
+    description: '100% Beef Sausage made with our standard 75/25 lean-to-fat ratio. Simple, bold, and traditional.',
+    stuffedAddInLbs: 5.5,
+    ingredients: [
+      { id: 'lean-meat', label: 'Lean Beef Base', amount: 37.5, unit: 'lbs', desc: 'Beef Trimmings' },
+      { id: 'hard-fat', label: 'Hard Fat', amount: 12.5, unit: 'lbs', desc: 'Chilled Beef Fat' },
+      { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
+      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
+      { id: 'cure', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
+    ],
+    customSteps: {
+      8: "Mix lean beef and beef fat thoroughly with Day 1 cure.",
+      11: "Fold in powdered milk and ice water until sticky."
+    }
+  },
   'jalapeno-cheddar': {
     id: 'jalapeno-cheddar',
     name: 'Jalapeño Cheddar',
@@ -416,28 +438,36 @@ function updateUI() {
     }
   });
 
-  // Update Beef Sausage Calculator values
-  if (beefCalcWeight && document.activeElement !== beefCalcWeight) {
-    beefCalcWeight.value = state.beefWeight;
+
+
+  
+  // Dynamic Verification Block updates
+  const verifBaseWeight = document.getElementById('verif-base-weight');
+  if (verifBaseWeight) {
+    verifBaseWeight.textContent = state.weight.toFixed(1);
+    
+    // Switch between Beef and Standard Base in the Verification text
+    if (state.recipeId === 'classic-beef') {
+      document.getElementById('verif-meat-1').innerHTML = `<strong>${(37.5 * scale).toFixed(1)} lbs</strong> Lean Beef (75%)`;
+      document.getElementById('verif-meat-2').innerHTML = `<strong>${(12.5 * scale).toFixed(1)} lbs</strong> Beef Fat (25%)`;
+      document.getElementById('verif-meat-3').innerHTML = `<em>(No Pork)</em>`;
+    } else {
+      document.getElementById('verif-meat-1').innerHTML = `<strong>${(25.5 * scale).toFixed(1)} lbs</strong> Beef Trimmings`;
+      document.getElementById('verif-meat-2').innerHTML = `<strong>${(16.0 * scale).toFixed(1)} lbs</strong> Pork Base`;
+      document.getElementById('verif-meat-3').innerHTML = `<strong>${(8.5 * scale).toFixed(1)} lbs</strong> Pork/Beef Fat`;
+    }
+
+    document.getElementById('verif-salt').innerHTML = `<strong>${Math.round(454 * scale)} g</strong> Bulk Kosher Salt`;
+    document.getElementById('verif-cure').innerHTML = `<strong>${Math.round(60 * scale)} g</strong> Pink Curing Salt`;
+    document.getElementById('verif-pepper').innerHTML = `<strong>${(1.5 * scale).toFixed(1)} cups</strong> Coarse Black Pepper`;
+
+    document.getElementById('verif-water').innerHTML = `<strong>${(10.0 * scale).toFixed(1)} cups</strong> Ice Cold Water`;
+    document.getElementById('verif-milk').innerHTML = `<strong>${(4.5 * scale).toFixed(1)} cups</strong> Powdered Milk`;
+    
+    document.getElementById('verif-yield-base').textContent = state.weight.toFixed(1);
+    document.getElementById('verif-yield-total').textContent = ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1);
+    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 2.6);
   }
-  
-  if (state.beefRatio === 0.75) {
-    btnRatioPitmaster.classList.add('active');
-    btnRatioLeaner.classList.remove('active');
-    beefCalcLeanDesc.textContent = "75% of total batch weight";
-    beefCalcFatDesc.textContent = "25% of total batch weight";
-  } else {
-    btnRatioPitmaster.classList.remove('active');
-    btnRatioLeaner.classList.add('active');
-    beefCalcLeanDesc.textContent = "80% of total batch weight";
-    beefCalcFatDesc.textContent = "20% of total batch weight";
-  }
-  
-  const leanAmount = state.beefWeight * state.beefRatio;
-  const fatAmount = state.beefWeight * (1 - state.beefRatio);
-  
-  beefCalcLean.textContent = leanAmount.toFixed(2);
-  beefCalcFat.textContent = fatAmount.toFixed(2);
 
   // Update Task Checkbox states
   taskRows.forEach(row => {

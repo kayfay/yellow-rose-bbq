@@ -51,6 +51,7 @@
       <section class="recipe-selector-card">
         <h2 class="section-title">Sausage Formulations</h2>
         <div class="recipe-pills-container" id="recipe-pills">
+          <button type="button" class="recipe-pill" data-recipe="classic-beef"><span class="recipe-pill-icon">🥩</span> <span>Classic Texas Beef</span></button>
           <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon">🌶️</span> <span>Jalapeño Cheddar</span></button>
           <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon">🌽</span> <span>The Elote (Street Corn)</span></button>
           <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon">🥑</span> <span>The Salsa Verde</span></button>
@@ -117,52 +118,35 @@
         </div>
       </section>
 
-      <!-- Section 2.5: Beef Sausage Mixture Calculator -->
-      <section class="calculator-card">
-        <h2 class="section-title">Beef Sausage Mixture Calculator</h2>
-        
-        <div class="calc-inputs-row">
-          <div class="calc-input-group">
-            <label for="beef-calc-weight">Target Batch Weight (lbs)</label>
-            <div class="calc-input-wrapper">
-              <input type="number" id="beef-calc-weight" min="1" max="500" value="50" step="1" class="calc-number-input">
-              <span class="calc-input-unit">lbs</span>
+      
+
+      <!-- Custom 50 lb Homemade Sausage Recipe Verification Card -->
+      <section class="control-card" style="margin-top: 1.5rem; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="margin-top: 0; color: #3498db; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
+          🌭 Homemade <span id='verif-base-weight'>50.0</span> lb Sausage Batch Recipe Verification
+        </h3>
+        <div style="font-size: 0.88rem; color: #cbd5e1; font-family: 'Outfit', sans-serif; line-height: 1.6;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 0.6rem;">
+            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
+              <strong style="color: #f1c40f;">🥩 Base Meat Block:</strong>
+              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                <li id='verif-meat-1'><strong>25.5 lbs</strong> Beef Trimmings</li>
+                <li id='verif-meat-2'><strong>16.0 lbs</strong> Pork Base</li>
+                <li id='verif-meat-3'><strong>8.5 lbs</strong> Pork/Beef Fat</li>
+              </ul>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #2ecc71;">
+              <strong style="color: #2ecc71;">🥛 Liquids, Binders & Inclusions:</strong>
+              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                <li><strong>10 Cups Extra Water</strong> (~5.0 lbs liquid binder)</li>
+                <li><strong>5 Cups Powdered Milk</strong> (~1.25 lbs dry binder)</li>
+                <li><strong>5.0 – 7.5 lbs Inclusions</strong> (Cheddar, Jalapeño, Bacon)</li>
+              </ul>
             </div>
           </div>
-          
-          <div class="calc-toggle-group">
-            <label>Blend Ratio Option</label>
-            <div class="toggle-buttons">
-              <button type="button" class="toggle-btn active" id="btn-ratio-pitmaster" data-ratio="0.75">
-                <span class="ratio-title">Pitmaster Standard</span>
-                <span class="ratio-sub">75% Lean / 25% Fat</span>
-              </button>
-              <button type="button" class="toggle-btn" id="btn-ratio-leaner" data-ratio="0.8">
-                <span class="ratio-title">Leaner Classic</span>
-                <span class="ratio-sub">80% Lean / 20% Fat</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="calc-results-grid">
-          <div class="result-card">
-            <span class="result-label">Lean Beef Required</span>
-            <div class="result-value-box">
-              <span id="beef-calc-lean" class="result-value">37.50</span>
-              <span class="result-unit">lbs</span>
-            </div>
-            <span class="result-desc" id="beef-calc-lean-desc">75% of total batch weight</span>
-          </div>
-          
-          <div class="result-card">
-            <span class="result-label">Beef Fat Trim Required</span>
-            <div class="result-value-box">
-              <span id="beef-calc-fat" class="result-value">12.50</span>
-              <span class="result-unit">lbs</span>
-            </div>
-            <span class="result-desc" id="beef-calc-fat-desc">25% of total batch weight</span>
-          </div>
+          <p style="margin: 0; padding: 0.5rem 0.8rem; background: rgba(52, 152, 219, 0.15); border-radius: 4px; color: #e2e8f0; font-size: 0.85rem;">
+            ✅ <strong>Batch Yield Verification:</strong> <span id='verif-yield-base'>50.0</span> lbs base meat + liquids & binders = <strong>~<span id='verif-yield-total'>62.5</span> lbs Total Stuffed Sausage Batch Weight</strong>. At ~0.38 lbs (6 oz) per stuffed link, 1 batch yields <strong>~<span id='verif-yield-links'>155</span> links</strong>. 
+          </p>
         </div>
       </section>
 
@@ -430,35 +414,7 @@
         </div>
       </section>
 
-      <!-- Custom 50 lb Homemade Sausage Recipe Verification Card -->
-      <section class="control-card" style="margin-top: 1.5rem; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="margin-top: 0; color: #3498db; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
-          🌭 Homemade 50 lb Sausage Batch Recipe Verification
-        </h3>
-        <div style="font-size: 0.88rem; color: #cbd5e1; font-family: 'Outfit', sans-serif; line-height: 1.6;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 0.6rem;">
-            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
-              <strong style="color: #f1c40f;">🥩 Base Meat Block (50.0 lbs):</strong>
-              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
-                <li><strong>25.5 lbs</strong> Beef Trimmings (from Brisket trim)</li>
-                <li><strong>16.0 lbs</strong> Pork Base (from Pork Spare Rib trimmings)</li>
-                <li><strong>8.5 lbs</strong> Pork/Beef Fat (70/30 Lean/Fat ratio)</li>
-              </ul>
-            </div>
-            <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #2ecc71;">
-              <strong style="color: #2ecc71;">🥛 Liquids, Binders & Inclusions:</strong>
-              <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
-                <li><strong>10 Cups Extra Water</strong> (~5.0 lbs liquid binder)</li>
-                <li><strong>5 Cups Powdered Milk</strong> (~1.25 lbs dry binder)</li>
-                <li><strong>5.0 – 7.5 lbs Inclusions</strong> (Cheddar, Jalapeño, Bacon)</li>
-              </ul>
-            </div>
-          </div>
-          <p style="margin: 0; padding: 0.5rem 0.8rem; background: rgba(52, 152, 219, 0.15); border-radius: 4px; color: #e2e8f0; font-size: 0.85rem;">
-            ✅ <strong>Batch Yield Verification:</strong> 50 lbs base meat + liquids & binders = <strong>~62.5 lbs Total Stuffed Sausage Batch Weight</strong>. At ~0.38 lbs (6 oz) per stuffed link, 1 batch yields <strong>~150 to 160 links</strong>. Therefore, a 148 link target = <strong>Exactly 1 Full 50-lb Base Meat Batch</strong>!
-          </p>
-        </div>
-      </section>
+      
 
       <!-- Staffing & Optimal Shift Schedule Section (POS Time Series Optimized) -->
       <section class="calculator-card staffing-card" style="margin-top: 1.5rem;">
