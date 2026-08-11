@@ -274,9 +274,18 @@
           <button type="button" class="preset-btn" id="btn-subtab-event">Tab 3: Live Event Correlation</button>
         </div>
 
+        <!-- Target Date Purpose & Explanation Banner -->
+        <div style="margin-bottom: 1rem; padding: 0.75rem 1rem; background: rgba(52, 152, 219, 0.12); border-left: 4px solid #3498db; border-radius: 6px; font-size: 0.9rem; color: #e2e8f0; font-family: 'Outfit', sans-serif;">
+          ℹ️ <strong>How the Target Forecast Date Works:</strong>
+          <ul style="margin: 0.4rem 0 0 1.2rem; padding: 0; line-height: 1.5;">
+            <li><strong>Future Dates:</strong> Predicts upcoming meat prep targets & shift allocations by applying 7-day seasonality, weather forecasts, and stadium event schedules.</li>
+            <li><strong>Past Dates (Historical Reference Lookup):</strong> Select any past date to pull verified historical POS demand, recorded weather, and event activity for audit & training reference.</li>
+          </ul>
+        </div>
+
         <div class="forecasting-controls-row">
           <div class="forecast-date-group">
-            <label for="forecast-start-date">📅 Target Forecast Date</label>
+            <label for="forecast-start-date">📅 Target Date Selector (Future or Past Lookup)</label>
             <input type="date" id="forecast-start-date" class="forecast-date-input">
           </div>
           <div class="forecast-preset-group">
@@ -286,6 +295,45 @@
             <button type="button" class="preset-btn" id="btn-preset-saturday">Next 3rd Saturday</button>
           </div>
         </div>
+      </section>
+
+      <!-- Historical Verification Reference Card (Dynamically populates for past dates) -->
+      <section id="historical-reference-card" class="control-card" style="display: none; margin-bottom: 1rem; border-left: 4px solid #2ecc71; background: rgba(46, 204, 113, 0.08);">
+        <h3 style="margin-top: 0; color: #2ecc71; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
+          📜 Historical Performance Lookup & Verification (<span id="hist-date-label">---</span>)
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9rem; color: #f8fafc; font-family: 'Outfit', sans-serif;">
+          <div style="background: rgba(0,0,0,0.3); padding: 0.6rem 0.8rem; border-radius: 4px;">
+            <span style="color: #94a3b8; font-size: 0.8rem;">Recorded Sales Demand</span><br>
+            <strong id="hist-demand-val" style="font-size: 1.2rem; color: #f1c40f;">1.0x (Baseline)</strong>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 0.6rem 0.8rem; border-radius: 4px;">
+            <span style="color: #94a3b8; font-size: 0.8rem;">Recorded Weather</span><br>
+            <strong id="hist-weather-val" style="font-size: 1.0rem; color: #3498db;">88°F | Clear</strong>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 0.6rem 0.8rem; border-radius: 4px;">
+            <span style="color: #94a3b8; font-size: 0.8rem;">Event Status</span><br>
+            <strong id="hist-event-val" style="font-size: 1.0rem; color: #e67e22;">Normal Saturday</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Beginner-Friendly Meat Industry Explainer Accordion/Guide -->
+      <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
+        <details>
+          <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
+            🥩 How Meat Prep Metrics Are Calculated (Beginner-Friendly Guide)
+          </summary>
+          <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
+            <ul style="padding-left: 1.2rem; margin: 0;">
+              <li><strong>Demand Index (e.g. 1.8x):</strong> <code>1.0x</code> represents an average weekday. <code>1.8x</code> means projected customer demand is 80% higher than average (typical for Saturdays or game days).</li>
+              <li><strong>Raw Brisket (lbs) & Shrinkage (45% Loss):</strong> Raw brisket loses ~45% of its weight during the 14-hour smoke (fat rendering & moisture evaporation). Prepping 165 lbs raw yields ~90 lbs of trimmed, carved brisket (~180 individual servings).</li>
+              <li><strong>Pork Shoulder (lbs) & Yield (50% Loss):</strong> Bone-in pork shoulder shrinks ~50% during smoking and shredding. Prepping 85 lbs raw yields ~42 lbs of pulled pork.</li>
+              <li><strong>Pork Spare Ribs (racks):</strong> 1 full rack yields ~12 individual rib bones (~2-3 hearty servings). Prepping 32 racks yields ~384 individual ribs.</li>
+              <li><strong>Sausage Links (count):</strong> Custom Jalapeño Cheddar links weigh 1/2 lb each uncooked (8 links per 4 lbs).</li>
+            </ul>
+          </div>
+        </details>
       </section>
 
       <!-- KPI Summary Cards -->
