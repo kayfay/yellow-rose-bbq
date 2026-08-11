@@ -290,8 +290,9 @@
           </div>
           <div class="forecast-preset-group">
             <span class="preset-label">Quick Presets:</span>
-            <button type="button" class="preset-btn active" id="btn-preset-14">14-Day Horizon</button>
-            <button type="button" class="preset-btn" id="btn-preset-7">7-Day Run</button>
+            <button type="button" class="preset-btn active" id="btn-preset-3">3-Day Order Cycle</button>
+            <button type="button" class="preset-btn" id="btn-preset-7">7-Day Horizon</button>
+            <button type="button" class="preset-btn" id="btn-preset-14">14-Day Supply View</button>
             <button type="button" class="preset-btn" id="btn-preset-saturday">Next 3rd Saturday</button>
           </div>
         </div>
@@ -318,27 +319,32 @@
         </div>
       </section>
 
-      <!-- Beginner-Friendly Meat Industry Explainer Accordion/Guide -->
+      <!-- Beginner-Friendly Meat Industry & Order Cycle Explainer -->
       <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
-        <details>
+        <details open>
           <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
-            🥩 How Meat Prep Metrics Are Calculated (Beginner-Friendly Guide)
+            🥩 3-Day Order Cycle & Meat Yield Guide (Plain-English Summary)
           </summary>
           <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
             <ul style="padding-left: 1.2rem; margin: 0;">
-              <li><strong>Demand Index (e.g. 1.8x):</strong> <code>1.0x</code> represents an average weekday. <code>1.8x</code> means projected customer demand is 80% higher than average (typical for Saturdays or game days).</li>
-              <li><strong>Raw Brisket (lbs) & Shrinkage (45% Loss):</strong> Raw brisket loses ~45% of its weight during the 14-hour smoke (fat rendering & moisture evaporation). Prepping 165 lbs raw yields ~90 lbs of trimmed, carved brisket (~180 individual servings).</li>
-              <li><strong>Pork Shoulder (lbs) & Yield (50% Loss):</strong> Bone-in pork shoulder shrinks ~50% during smoking and shredding. Prepping 85 lbs raw yields ~42 lbs of pulled pork.</li>
-              <li><strong>Pork Spare Ribs (racks):</strong> 1 full rack yields ~12 individual rib bones (~2-3 hearty servings). Prepping 32 racks yields ~384 individual ribs.</li>
-              <li><strong>Sausage Links (count):</strong> Custom Jalapeño Cheddar links weigh 1/2 lb each uncooked (8 links per 4 lbs).</li>
+              <li><strong>3-Day Order Cycle (Next-Day Delivery):</strong> Raw briskets arrive fresh (never frozen). Order every 3 days based on projected 3-day case counts below so meat can be prepped and smoked immediately upon arrival.</li>
+              <li><strong>Case Pack Conversion Rules:</strong>
+                <ul>
+                  <li><strong>Raw Brisket Case:</strong> ~30 lbs / 2 briskets per case (~15 lbs / packer).</li>
+                  <li><strong>Pork Shoulder Case:</strong> ~32 lbs / 4 butts per case (~8 lbs / butt).</li>
+                  <li><strong>Pork Spare Ribs Case:</strong> ~35 lbs / 10 racks per case (~3.5 lbs / rack).</li>
+                  <li><strong>Sausage Case:</strong> 50 links per case (1/2 lb / link = 25 lbs / case).</li>
+                </ul>
+              </li>
+              <li><strong>Shrinkage Yields:</strong> Brisket loses ~45% weight during 14h smoke (fat rendering/moisture loss). Prepping 165 lbs raw yields ~90 lbs carved brisket (~180 portions). Pork shoulder loses ~50% weight (85 lbs raw = ~42 lbs pulled pork).</li>
             </ul>
           </div>
         </details>
       </section>
 
-      <!-- KPI Summary Cards -->
+      <!-- KPI Summary Cards with Case Counts -->
       <section class="estimator-section">
-        <h2 class="section-title">Projected Prep & Operational Metrics</h2>
+        <h2 class="section-title">Projected Prep Targets & Supplier Case Orders</h2>
         <div class="estimator-grid forecasting-kpi-grid">
           <div class="est-card kpi-card-gold">
             <div class="est-metric">
@@ -352,7 +358,7 @@
               <span id="kpi-brisket-lbs" class="est-number">165</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Raw Brisket Prep Target</span>
+            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases" style="font-weight: 600; color: #f0803c;">(~5.5 Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-orange">
@@ -360,7 +366,7 @@
               <span id="kpi-pork-lbs" class="est-number">85</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Pork Shoulder Prep Target</span>
+            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases" style="font-weight: 600; color: #f0803c;">(~2.7 Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-blue">
@@ -368,7 +374,7 @@
               <span id="kpi-sausage-links" class="est-number">148</span>
               <span class="est-unit">links</span>
             </div>
-            <span class="est-label">Sausage Links Required</span>
+            <span class="est-label">Sausage Links Required <br><span id="kpi-sausage-cases" style="font-weight: 600; color: #f0803c;">(~3.0 Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-purple" style="border-left: 4px solid #8e44ad;">
@@ -376,8 +382,40 @@
               <span id="kpi-ribs-racks" class="est-number">32</span>
               <span class="est-unit">racks</span>
             </div>
-            <span class="est-label">Pork Spare Ribs Target</span>
+            <span class="est-label">Pork Spare Ribs Target <br><span id="kpi-ribs-cases" style="font-weight: 600; color: #f0803c;">(~3.2 Cases)</span></span>
           </div>
+        </div>
+      </section>
+
+      <!-- Pitmaster Wood Cordage & Smoker Shift Staggering Section -->
+      <section class="calculator-card staffing-card" style="margin-top: 1.5rem;">
+        <h2 class="section-title">🪵 Pitmaster Wood Cordage & Smoker Shift Staggering</h2>
+        <div class="calc-results-grid">
+          <div class="result-card">
+            <span class="result-label">Post Oak Firewood Target</span>
+            <div class="result-value-box">
+              <span id="kpi-wood-logs" class="result-value">34</span>
+              <span class="result-unit">Split Logs</span>
+            </div>
+            <span id="kpi-wood-cords" class="result-desc">~1.7 Face Cords / 24-hr Active Smoke</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Active Smoker Capacity</span>
+            <div class="result-value-box">
+              <span id="kpi-smoker-runs" class="result-value">2</span>
+              <span class="result-unit">Staggered Batches</span>
+            </div>
+            <span class="result-desc">Doubles offset pit throughput without hiring</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(0, 103, 120, 0.15); border-left: 4px solid #006778; border-radius: 6px; font-size: 0.88rem; color: #e2e8f0; font-family: 'Outfit', sans-serif; line-height: 1.6;">
+          🔥 <strong>Why Staggering Cook Shifts Works:</strong>
+          <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
+            <li><strong>Batch 1 (Overnight Pit Watch - Cook #1):</strong> Fires pit at 8:00 PM Friday. Smokes 10 briskets & 6 pork shoulders overnight (14-hr smoke). Meat enters hot resting cabinet (140°F) at 10:00 AM Saturday for 11:00 AM lunch service.</li>
+            <li><strong>Batch 2 (Morning Pit Watch - Cook #2):</strong> Fires second smoker batch at 4:00 AM Saturday. Smokes spare ribs (5 hrs) and second brisket run, ready for dinner rush at 5:00 PM.</li>
+            <li><strong>Result:</strong> Staggering pit shifts doubles your smoker capacity (allowing 300+ lbs of meat prep on 3-cook shifts) while ensuring every cut rests 4 hours for maximum juiciness!</li>
+          </ul>
         </div>
       </section>
 

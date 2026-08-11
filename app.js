@@ -728,10 +728,12 @@ function handleDateSelectionLookup(selectedDateStr) {
   }
 
   // Presets
+  const btn3 = document.getElementById('btn-preset-3');
   const btn14 = document.getElementById('btn-preset-14');
   const btn7 = document.getElementById('btn-preset-7');
   const btnSat = document.getElementById('btn-preset-saturday');
 
+  if (btn3) btn3.addEventListener('click', () => updatePresetHorizon(3));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon(7));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
@@ -845,17 +847,42 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const staffElem = document.getElementById('kpi-staff-count');
     const hoursElem = document.getElementById('kpi-staff-hours');
 
-    if (brisketElem) brisketElem.textContent = metrics.brisket_lbs[idx] || 165;
-    if (porkElem) porkElem.textContent = metrics.pork_lbs[idx] || 85;
-    if (sausageElem) sausageElem.textContent = metrics.sausage_links[idx] || 148;
-    if (ribsElem) ribsElem.textContent = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
+    const bVal = metrics.brisket_lbs[idx] || 165;
+    const pVal = metrics.pork_lbs[idx] || 85;
+    const sVal = metrics.sausage_links[idx] || 148;
+    const rVal = (metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32;
+
+    if (brisketElem) brisketElem.textContent = bVal;
+    if (porkElem) porkElem.textContent = pVal;
+    if (sausageElem) sausageElem.textContent = sVal;
+    if (ribsElem) ribsElem.textContent = rVal;
     
+    // Case pack conversions (~30 lbs brisket/case, ~32 lbs pork/case, 50 links/case, 10 racks/case)
+    const bCasesElem = document.getElementById('kpi-brisket-cases');
+    const pCasesElem = document.getElementById('kpi-pork-cases');
+    const sCasesElem = document.getElementById('kpi-sausage-cases');
+    const rCasesElem = document.getElementById('kpi-ribs-cases');
+
+    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 30.0).toFixed(1)} Cases)`;
+    if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases)`;
+    if (sCasesElem) sCasesElem.textContent = `(~${(sVal / 50.0).toFixed(1)} Cases)`;
+    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 10.0).toFixed(1)} Cases)`;
+
     if (staffElem) staffElem.textContent = 3;
     if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
     
     const dIdx = (metrics.demand_index && metrics.demand_index[idx]) ? metrics.demand_index[idx] : 1.8;
     const revenueElem = document.getElementById('kpi-projected-revenue');
     if (revenueElem) revenueElem.textContent = dIdx.toFixed(1) + 'x';
+
+    // Wood Cordage Estimation (Post Oak Logs & Face Cords)
+    const woodLogsElem = document.getElementById('kpi-wood-logs');
+    const woodCordsElem = document.getElementById('kpi-wood-cords');
+    const splitLogs = Math.round(20 + (dIdx * 8));
+    const faceCords = (splitLogs * 0.05).toFixed(1);
+
+    if (woodLogsElem) woodLogsElem.textContent = splitLogs;
+    if (woodCordsElem) woodCordsElem.textContent = `~${faceCords} Face Cords / 24-hr Active Smoke`;
 
     // Render Plotly chart with dynamic horizon slice
     const layout = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.layout));
