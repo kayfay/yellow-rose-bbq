@@ -267,16 +267,7 @@
     <!-- TAB 2: INTERACTIVE FORECASTING DASHBOARD -->
     <div id="tab-forecasting-analytics" class="tab-pane" style="display: none;">
       <!-- Sub-Tab Navigation for Analytical Phases -->
-      <!-- Sub-Tab Navigation for Analytical Phases -->
-      <section class="control-card forecasting-header-card" style="margin-bottom: 1rem;">
-        <div style="display: flex; gap: 10px;">
-          <button type="button" class="preset-btn active" id="btn-subtab-arima">Tab 1: ARIMA Baseline</button>
-          <button type="button" class="preset-btn" id="btn-subtab-weather">Tab 2: Weather Impact Regression</button>
-          <button type="button" class="preset-btn" id="btn-subtab-event">Tab 3: Live Event Correlation</button>
-        </div>
-      </section>
-
-      <div id="subtab-view-arima">
+      <div id="forecasting-operational-tools">
         <section class="control-card forecasting-header-card">
 
         <!-- Target Date Purpose & Explanation Banner -->
@@ -524,6 +515,17 @@
         </div>
       </section>
 
+            <!-- Sub-Tab Navigation for Analytical Phases -->
+      <section class="control-card forecasting-header-card" style="margin-top: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; background: rgba(30, 41, 59, 0.9);">
+        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f8fafc; font-size: 1.2rem;">🔬 Model Insights & Data Correlations</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="preset-btn active" id="btn-subtab-arima">Baseline Sales Trends</button>
+          <button type="button" class="preset-btn" id="btn-subtab-weather">Weather Impact Regression</button>
+          <button type="button" class="preset-btn" id="btn-subtab-event">Live Event Correlation</button>
+        </div>
+      </section>
+
+      <div id="subtab-view-arima">
       <!-- TAB 1 VIEW: ARIMA Baseline Model -->
       
         <section class="control-card marketing-card" style="margin-top: 1rem; border-left: 4px solid #f1c40f; background-color: #fdfaf0;">
@@ -577,7 +579,7 @@
             <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
               <li><strong>The 3.5x Multiplier:</strong> Analysis proves that Jacksonville Jaguars home games trigger a massive 3.5x multiplier on average daily revenue ($17.4k vs $4.9k). Standard holidays conversely show a slight dip (0.9x).</li>
               <li><strong>Actionable Insight - Meat Procurement:</strong> A game day demands over 600 lbs of raw brisket and 300 lbs of pork. This requires sourcing from multiple vendors and staggering smoke times starting 36 hours prior to kickoff.</li>
-              <li><strong>Actionable Insight - Scalability & Logistics:</strong> Standard metrics suggest hiring 10+ people for a $17.4k volume spike, but our workflow avoids this overhead. To manage the massive demand on a skeleton crew of 3: <strong>1)</strong> Shift game-day menus strictly to high-margin, pre-order family bundles. <strong>2)</strong> Offload delivery logistics to third-party apps with a built-in premium surcharge. <strong>3)</strong> Convert 4 parking spaces to a drive-thru express lane for lightning-fast courier pickups.</li>
+              <li><strong>Actionable Insight - Scalability & Logistics:</strong> Standard metrics suggest hiring 10+ people for a $17.4k volume spike, but our workflow avoids this overhead. To manage the massive demand on a skeleton crew of 3 without paying exorbitant third-party delivery fees: <strong>1)</strong> Shift game-day menus strictly to high-margin, 48-hour pre-order family tailgating bundles. <strong>2)</strong> Eliminate delivery completely—tailgaters already drive to the stadium. <strong>3)</strong> Convert 4 parking spaces to a drive-thru express lane for lightning-fast, in-person bundle pickups to keep the line moving.</li>
             </ul>
           </div>
         </section>
