@@ -1,7 +1,7 @@
 # **Yellow Rose BBQ \- Custom Sausage Formulations (50 lb Batch)**
 
 Line Spacing: 1.15  
-The base meat and fat blend for each 50 lb batch is standardized to: **25.5 lbs Beef**, **16 lbs Pork**, and **8.5 lbs Pork/Beef Fat** (totaling 50 lbs of base block at \~70% lean to 30% fat ratio).
+The base meat and fat blend for each 50 lb batch is standardized to: **25.5 lbs Beef Trimmings** (from Brisket trim), **16 lbs Pork Base** (from Pork Spare Rib trimmings), and **8.5 lbs Pork/Beef Fat** (totaling 50 lbs of base block at ~70% lean to 30% fat ratio).
 
 | Recipe Name | Ingredients & Measurements (50 lb Batch) | Source of Ingredients (Yellow Rose BBQ Menu)   |
 | :---- | :---- | :---- |
