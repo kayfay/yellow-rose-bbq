@@ -281,10 +281,22 @@ function init() {
   });
 
   // Macro adjustments for slider
-  btnMinus5.addEventListener('click', () => adjustWeight(-5));
-  btnMinus1.addEventListener('click', () => adjustWeight(-1));
-  btnPlus1.addEventListener('click', () => adjustWeight(1));
-  btnPlus5.addEventListener('click', () => adjustWeight(5));
+  const handleMinus5 = (e) => { e.preventDefault(); adjustWeight(-5); };
+  const handleMinus1 = (e) => { e.preventDefault(); adjustWeight(-1); };
+  const handlePlus1 = (e) => { e.preventDefault(); adjustWeight(1); };
+  const handlePlus5 = (e) => { e.preventDefault(); adjustWeight(5); };
+
+  btnMinus5.addEventListener('click', handleMinus5);
+  btnMinus5.addEventListener('touchstart', handleMinus5, {passive: false});
+  
+  btnMinus1.addEventListener('click', handleMinus1);
+  btnMinus1.addEventListener('touchstart', handleMinus1, {passive: false});
+  
+  btnPlus1.addEventListener('click', handlePlus1);
+  btnPlus1.addEventListener('touchstart', handlePlus1, {passive: false});
+  
+  btnPlus5.addEventListener('click', handlePlus5);
+  btnPlus5.addEventListener('touchstart', handlePlus5, {passive: false});
 
   // Bottom action buttons
   btnReset.addEventListener('click', resetRun);
@@ -324,7 +336,7 @@ function renderRecipePills() {
 
 // Adjust weight via buttons
 function adjustWeight(amount) {
-  let target = state.weight + amount;
+  let target = parseFloat(state.weight) + amount;
   if (target < 5) target = 5;
   if (target > 150) target = 150;
   state.weight = target;
@@ -483,6 +495,8 @@ function copyShareLink() {
 function sanitizeState(obj) {
   if (!obj.recipeId || !RECIPES[obj.recipeId]) obj.recipeId = 'jalapeno-cheddar';
   if (obj.weight === undefined) obj.weight = 50.0;
+  obj.weight = parseFloat(obj.weight);
+  if (isNaN(obj.weight)) obj.weight = 50.0;
   if (obj.beefWeight === undefined) obj.beefWeight = 50.0;
   if (obj.beefRatio === undefined) obj.beefRatio = 0.75;
   if (!Array.isArray(obj.tasks) || obj.tasks.length !== 15) obj.tasks = Array(15).fill(false);
@@ -626,6 +640,9 @@ function initMultiTabNavigation() {
 
       if (targetTab === 'forecasting-analytics') {
         renderPlotlyForecastingChart();
+        document.querySelector('.app-footer').style.display = 'none';
+      } else {
+        document.querySelector('.app-footer').style.display = 'block';
       }
     });
   });
@@ -671,14 +688,19 @@ function initMultiTabNavigation() {
   const viewWeather = document.getElementById('subtab-view-weather');
   const viewEvent = document.getElementById('subtab-view-event');
 
-  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent) {
+  const btnSubtabShift = document.getElementById('btn-subtab-shift');
+  const viewShift = document.getElementById('subtab-view-shift');
+
+  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift) {
     btnSubtabArima.addEventListener('click', () => {
       btnSubtabArima.classList.add('active');
       btnSubtabWeather.classList.remove('active');
       btnSubtabEvent.classList.remove('active');
+      btnSubtabShift.classList.remove('active');
       if (viewArima) viewArima.style.display = 'block';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
+      if (viewShift) viewShift.style.display = 'none';
       renderPlotlyForecastingChart();
     });
 
@@ -686,9 +708,11 @@ function initMultiTabNavigation() {
       btnSubtabWeather.classList.add('active');
       btnSubtabArima.classList.remove('active');
       btnSubtabEvent.classList.remove('active');
+      btnSubtabShift.classList.remove('active');
       if (viewWeather) viewWeather.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
+      if (viewShift) viewShift.style.display = 'none';
       renderPlotlyWeatherChart();
     });
 
@@ -696,12 +720,42 @@ function initMultiTabNavigation() {
       btnSubtabEvent.classList.add('active');
       btnSubtabArima.classList.remove('active');
       btnSubtabWeather.classList.remove('active');
+      btnSubtabShift.classList.remove('active');
       if (viewEvent) viewEvent.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
+      if (viewShift) viewShift.style.display = 'none';
       renderPlotlyEventChart();
     });
+
+    btnSubtabShift.addEventListener('click', () => {
+      btnSubtabShift.classList.add('active');
+      btnSubtabArima.classList.remove('active');
+      btnSubtabWeather.classList.remove('active');
+      btnSubtabEvent.classList.remove('active');
+      if (viewShift) viewShift.style.display = 'block';
+      if (viewArima) viewArima.style.display = 'none';
+      if (viewWeather) viewWeather.style.display = 'none';
+      if (viewEvent) viewEvent.style.display = 'none';
+      const shiftSelector = document.getElementById('shift-selector');
+      renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
+    });
   }
+  
+  const categorySelector = document.getElementById('category-selector');
+  if (categorySelector) {
+    categorySelector.addEventListener('change', () => {
+      renderPlotlyForecastingChart();
+    });
+  }
+
+  const shiftSelector = document.getElementById('shift-selector');
+  if (shiftSelector) {
+    shiftSelector.addEventListener('change', () => {
+      renderPlotlyShiftHeatmap(shiftSelector.value);
+    });
+  }
+
 
   // Presets
   const btnThu = document.getElementById('btn-preset-thu');
@@ -746,6 +800,8 @@ async function renderPlotlyEventChart() {
     const payload = await res.json();
 
     const layout = payload.plotly_event_chart.layout;
+    layout.plot_bgcolor = 'rgba(0,0,0,0)';
+    layout.paper_bgcolor = 'rgba(0,0,0,0)';
     const traces = payload.plotly_event_chart.data;
     Plotly.newPlot('plotly-event-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
   } catch (err) {
@@ -763,6 +819,8 @@ async function renderPlotlyWeatherChart() {
     const payload = await res.json();
 
     const layout = payload.plotly_weather_chart.layout;
+    layout.plot_bgcolor = 'rgba(0,0,0,0)';
+    layout.paper_bgcolor = 'rgba(0,0,0,0)';
     const traces = payload.plotly_weather_chart.data;
     Plotly.newPlot('plotly-weather-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
   } catch (err) {
@@ -824,12 +882,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
   if (!chartContainer || typeof Plotly === 'undefined') return;
 
   try {
-    const res = await fetch('clover_api/analytics/arima_payload.json');
-    if (!res.ok) throw new Error('Failed to load ARIMA payload');
+    const res = await fetch('clover_api/analytics/category_payload.json');
+    if (!res.ok) throw new Error('Failed to load category payload');
     const payload = await res.json();
     const metrics = payload.forecast_metrics;
     
-    // Calculate exact metrics for the selected target date
     const targetDateInput = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
     const targetDateObj = new Date(targetDateInput + 'T00:00:00');
     const dayOfWeekStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'long' });
@@ -846,62 +903,84 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
     
+    const getCatVal = (catName) => {
+        if (metrics.categories && metrics.categories[catName] && metrics.categories[catName].forecast) {
+            return metrics.categories[catName].forecast[idx];
+        }
+        return 0;
+    };
+
+    const bVal = Math.round(getCatVal('brisket_lbs') || 165);
+    const pVal = Math.round(getCatVal('pork_lbs') || getCatVal('pulled_pork_lbs') || 85);
+    const sVal = Math.round(getCatVal('sausage_links') || 148);
+    const rVal = Math.round(getCatVal('pork_ribs_racks') || getCatVal('ribs_racks') || 32);
+    const drVal = Math.round(getCatVal('beef_dino_ribs') || 10);
+    const tVal = Math.round(getCatVal('turkey_lbs') || 25);
+    const rbVal = Math.round(getCatVal('rosebuds') || 30);
+    const tacoVal = Math.round(getCatVal('tacos') || 45);
+
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
     const sausageElem = document.getElementById('kpi-sausage-links');
-    const ribsElem = document.getElementById('kpi-ribs-racks');
-    const staffElem = document.getElementById('kpi-staff-count');
-    const hoursElem = document.getElementById('kpi-staff-hours');
-
-    const bVal = Math.round((metrics.brisket_lbs && metrics.brisket_lbs[idx]) ? metrics.brisket_lbs[idx] : 165);
-    const pVal = Math.round((metrics.pork_lbs && metrics.pork_lbs[idx]) ? metrics.pork_lbs[idx] : 85);
-    const sVal = Math.round((metrics.sausage_links && metrics.sausage_links[idx]) ? metrics.sausage_links[idx] : 148);
-    const rVal = Math.round((metrics.ribs_racks && metrics.ribs_racks[idx]) ? metrics.ribs_racks[idx] : 32);
+    const ribsElem = document.getElementById('kpi-pork-ribs-racks');
+    const dinoElem = document.getElementById('kpi-beef-dino-ribs');
+    const turkeyElem = document.getElementById('kpi-turkey-lbs');
+    const rosebudsElem = document.getElementById('kpi-rosebuds');
+    const tacosElem = document.getElementById('kpi-tacos');
 
     if (brisketElem) brisketElem.textContent = bVal;
     if (porkElem) porkElem.textContent = pVal;
     if (sausageElem) sausageElem.textContent = sVal;
     if (ribsElem) ribsElem.textContent = rVal;
+    if (dinoElem) dinoElem.textContent = drVal;
+    if (turkeyElem) turkeyElem.textContent = tVal;
+    if (rosebudsElem) rosebudsElem.textContent = rbVal;
+    if (tacosElem) tacosElem.textContent = tacoVal;
     
-    // Case pack conversions (~30 lbs brisket/case, ~32 lbs pork/case, 50 links/case, 10 racks/case)
     const bCasesElem = document.getElementById('kpi-brisket-cases');
     const pCasesElem = document.getElementById('kpi-pork-cases');
     const sCasesElem = document.getElementById('kpi-sausage-cases');
-    const rCasesElem = document.getElementById('kpi-ribs-cases');
+    const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
+    const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
 
     if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 30.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 15.0)} Packers)`;
     if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
     if (sCasesElem) sCasesElem.textContent = `(Made from Brisket/Rib Trim)`;
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 10.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
+    if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
-    if (staffElem) staffElem.textContent = 3;
-    if (hoursElem) hoursElem.textContent = (3 * 9.0).toFixed(1);
-    
-    // Format Demand Index as Percentage (+80% Demand) with dynamic weekday label
-    const dIdx = (metrics.demand_index && metrics.demand_index[idx]) ? metrics.demand_index[idx] : 1.8;
+    const dIdx = (metrics.demand_index && metrics.demand_index[idx]) ? metrics.demand_index[idx] : 1.0;
     const pctDiff = Math.round((dIdx - 1.0) * 100);
     const pctDisplay = pctDiff > 0 ? `+${pctDiff}%` : (pctDiff < 0 ? `${pctDiff}%` : `Baseline`);
 
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
-
     if (revenueElem) revenueElem.textContent = pctDisplay;
     if (demandLabelElem) demandLabelElem.textContent = `Projected ${dayOfWeekStr} Demand (vs. Baseline)`;
 
-    // Wood Cordage Estimation (Post Oak Logs & Face Cords)
-    const woodLogsElem = document.getElementById('kpi-wood-logs');
-    const woodCordsElem = document.getElementById('kpi-wood-cords');
-    const splitLogs = Math.round(20 + (dIdx * 8));
-    const faceCords = (splitLogs * 0.05).toFixed(1);
-
-    if (woodLogsElem) woodLogsElem.textContent = splitLogs;
-    if (woodCordsElem) woodCordsElem.textContent = `~${faceCords} Face Cords / 24-hr Active Smoke`;
-
-    // Render Plotly chart with dynamic horizon slice
     const layout = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.layout));
-    layout.title = `Baseline Demand Forecasting Model (${daysCount}-Day Horizon, 1.0 = Average)`;
+    layout.plot_bgcolor = 'rgba(0,0,0,0)';
+    layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.title = `Forecasted Output (${daysCount}-Day Horizon)`;
     
     const traces = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.data));
+    
+    // Check if category selector is in use
+    const catSelector = document.getElementById('category-selector');
+    const selectedCat = catSelector ? catSelector.value : null;
+
+    if (selectedCat && metrics.categories && metrics.categories[selectedCat]) {
+        // Replace trace 1 (Demand Index) with Category Forecast
+        const catForecast = metrics.categories[selectedCat].forecast;
+        traces[1].y = catForecast;
+        traces[1].name = `14-Day Forecast (${selectedCat})`;
+        layout.yaxis.title = `Amount (${selectedCat.includes('lbs') ? 'lbs' : 'units'})`;
+        layout.yaxis.tickformat = ".0f";
+        
+        // Hide historical demand index trace because it's a completely different scale
+        traces[0].visible = false;
+    }
+
     if (traces.length > 1 && daysCount < 14) {
       traces[1].x = traces[1].x.slice(0, daysCount);
       traces[1].y = traces[1].y.slice(0, daysCount);
@@ -911,51 +990,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
   } catch (err) {
     console.warn('Falling back to static forecast visualization', err);
-    // Fallback static chart (Original logic)
-    const startDateVal = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
-    const startDate = new Date(startDateVal);
-
-    const dates = [];
-    const brisketData = [];
-    const porkData = [];
-    const sausageData = [];
-
-    for (let i = 0; i < daysCount; i++) {
-      const d = new Date(startDate);
-      d.setDate(d.getDate() + i);
-      const dayStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' });
-      dates.push(dayStr);
-
-      const dow = d.getDay(); 
-      const multiplier = { 0: 1.4, 1: 0.8, 2: 0.8, 3: 0.9, 4: 1.1, 5: 1.6, 6: 2.2 }[dow];
-      
-      let rev = 1800.0 * multiplier;
-      if (dow === 6 && d.getDate() >= 15 && d.getDate() <= 21) rev *= 1.15;
-
-      brisketData.push(Math.round((rev * 0.35) / 32.0 / 0.55));
-      porkData.push(Math.round((rev * 0.25) / 24.0 / 0.50));
-      sausageData.push(Math.round((rev * 0.20) / 8.0));
-    }
-
-    const traces = [
-      { x: dates, y: brisketData, name: 'Raw Brisket Prep (lbs)', type: 'bar', marker: { color: '#c0392b' } },
-      { x: dates, y: porkData, name: 'Pork Shoulder Prep (lbs)', type: 'bar', marker: { color: '#e67e22' } },
-      { x: dates, y: sausageData, name: 'Sausage Links Needed', type: 'scatter', mode: 'lines+markers', yaxis: 'y2', line: { color: '#f1c40f', width: 3 }, marker: { size: 8 } }
-    ];
-
-    const layout = {
-      title: { text: `Projected Meat & Sausage Production (Static)`, font: { color: '#f0803c', size: 16 } },
-      paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(22,27,34,0.8)',
-      font: { color: '#c9d1d9', family: 'Outfit, sans-serif' },
-      xaxis: { gridcolor: 'rgba(255,255,255,0.08)' },
-      yaxis: { title: 'Raw Meat Weight (lbs)', gridcolor: 'rgba(255,255,255,0.08)' },
-      yaxis2: { title: 'Sausage Links', overlaying: 'y', side: 'right', showgrid: false, titlefont: { color: '#f1c40f' }, tickfont: { color: '#f1c40f' } },
-      legend: { orientation: 'h', y: -0.25 }, margin: { l: 50, r: 50, t: 60, b: 60 }
-    };
-    Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
   }
 }
-
 
 function handleDateSelectionLookup(selectedDateStr) {
   const d = new Date(selectedDateStr + 'T00:00:00');
@@ -996,5 +1032,42 @@ function handleDateSelectionLookup(selectedDateStr) {
     }
   } else {
     histCard.style.display = 'none';
+  }
+}
+
+async function renderPlotlyShiftHeatmap(shift = 'all') {
+  const container = document.getElementById('plotly-shift-heatmap');
+  if (!container || typeof Plotly === 'undefined') return;
+
+  try {
+    const res = await fetch('clover_api/analytics/shift_payload.json');
+    if (!res.ok) throw new Error('Failed to load shift payload');
+    const payload = await res.json();
+
+    const layout = payload.plotly_heatmap.layout;
+    layout.plot_bgcolor = 'rgba(0,0,0,0)';
+    layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    const traces = payload.plotly_heatmap.data;
+    if(traces && traces.length > 0) {
+      traces[0].colorscale = 'YlOrBr';
+    }
+    
+    // Zoom into hours based on shift
+    if (shift === 'prep') {
+        layout.xaxis.range = [3.5, 13.5]; // 4 AM to 1 PM
+    } else if (shift === 'lunch') {
+        layout.xaxis.range = [9.5, 16.5]; // 10 AM to 4 PM
+    } else if (shift === 'dinner') {
+        layout.xaxis.range = [15.5, 22.5]; // 4 PM to 10 PM
+    } else if (shift === 'custom') {
+        // Boss custom shift question
+        layout.xaxis.range = [0, 23];
+    } else {
+        layout.xaxis.autorange = true;
+    }
+
+    Plotly.newPlot('plotly-shift-heatmap', traces, layout, { responsive: true, displayModeBar: false });
+  } catch (err) {
+    console.warn('Could not load shift heatmap payload', err);
   }
 }

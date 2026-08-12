@@ -83,8 +83,8 @@
         </div>
         
         <div class="slider-row">
-          <button class="adjust-btn btn-lg" id="btn-minus-5" aria-label="Decrease by 5">-5</button>
-          <button class="adjust-btn btn-sm" id="btn-minus-1" aria-label="Decrease by 1">-1</button>
+          <button type="button" class="adjust-btn btn-lg" id="btn-minus-5" aria-label="Decrease by 5">-5</button>
+          <button type="button" class="adjust-btn btn-sm" id="btn-minus-1" aria-label="Decrease by 1">-1</button>
           
           <div class="slider-container">
             <input type="range" id="weight-slider" min="5" max="150" value="50" step="0.5" class="custom-slider">
@@ -96,8 +96,8 @@
             </div>
           </div>
 
-          <button class="adjust-btn btn-sm" id="btn-plus-1" aria-label="Increase by 1">+1</button>
-          <button class="adjust-btn btn-lg" id="btn-plus-5" aria-label="Increase by 5">+5</button>
+          <button type="button" class="adjust-btn btn-sm" id="btn-plus-1" aria-label="Increase by 1">+1</button>
+          <button type="button" class="adjust-btn btn-lg" id="btn-plus-5" aria-label="Increase by 5">+5</button>
         </div>
       </section>
 
@@ -258,8 +258,38 @@
 
     <!-- TAB 2: INTERACTIVE FORECASTING DASHBOARD -->
     <div id="tab-forecasting-analytics" class="tab-pane" style="display: none;">
+      
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <div id="forecasting-operational-tools">
+        <!-- Beginner-Friendly Meat Industry & Delivery Window Explainer -->
+      <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
+        <details open>
+          <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
+            🚚 TL;DR Cheat Sheet: Meat Deliveries & Case Packs
+          </summary>
+          <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #f0803c;">
+                <strong style="color: #f1c40f;">🚚 3 Delivery Days:</strong>
+                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                  <li><strong>Thu Delivery:</strong> Buys meat for <strong>Fri & Sat</strong> (big weekend).</li>
+                  <li><strong>Sun Delivery:</strong> Buys meat for <strong>Sun & Tue</strong> (closed Mon).</li>
+                  <li><strong>Wed Delivery:</strong> Buys meat for <strong>Wed & Thu</strong> (mid-week).</li>
+                </ul>
+              </div>
+
+              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
+                <strong style="color: #3498db;">📦 Cryovac & Case Pack Specs:</strong>
+                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                  <li><strong>Brisket:</strong> 1 brisket/cryovac &rarr; <strong>2 briskets/case</strong> (~30 lbs).</li>
+                  <li><strong>Pork Shoulder:</strong> 2 butts/cryovac &rarr; <strong>4 butts/case</strong> (~32 lbs).</li>
+                  <li><strong>Spare Ribs:</strong> 2 racks/cryovac &rarr; <strong>10 racks/case</strong> (~35 lbs).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
         <section class="control-card forecasting-header-card">
 
         <!-- Target Date Purpose & Explanation Banner -->
@@ -314,77 +344,80 @@
         </div>
       </section>
 
-      <!-- Beginner-Friendly Meat Industry & Delivery Window Explainer -->
-      <section class="control-card" style="margin-bottom: 1rem; background: rgba(22, 27, 34, 0.7); border: 1px solid rgba(255,255,255,0.1);">
-        <details open>
-          <summary style="cursor: pointer; font-weight: 600; color: #f0803c; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
-            🚚 TL;DR Cheat Sheet: Meat Deliveries & Case Packs
-          </summary>
-          <div style="margin-top: 0.8rem; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; font-family: 'Outfit', sans-serif;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #f0803c;">
-                <strong style="color: #f1c40f;">🚚 3 Delivery Days:</strong>
-                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
-                  <li><strong>Thu Delivery:</strong> Buys meat for <strong>Fri & Sat</strong> (big weekend).</li>
-                  <li><strong>Sun Delivery:</strong> Buys meat for <strong>Sun & Tue</strong> (closed Mon).</li>
-                  <li><strong>Wed Delivery:</strong> Buys meat for <strong>Wed & Thu</strong> (mid-week).</li>
-                </ul>
-              </div>
-
-              <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
-                <strong style="color: #3498db;">📦 Cryovac & Case Pack Specs:</strong>
-                <ul style="margin: 0.3rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
-                  <li><strong>Brisket:</strong> 1 brisket/cryovac &rarr; <strong>2 briskets/case</strong> (~30 lbs).</li>
-                  <li><strong>Pork Shoulder:</strong> 2 butts/cryovac &rarr; <strong>4 butts/case</strong> (~32 lbs).</li>
-                  <li><strong>Spare Ribs:</strong> 2 racks/cryovac &rarr; <strong>10 racks/case</strong> (~35 lbs).</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-      </section>
-
+      
       <!-- KPI Summary Cards with Case Counts -->
       <section class="estimator-section">
         <h2 class="section-title">Projected Prep Targets & Supplier Case Orders</h2>
-        <div class="estimator-grid forecasting-kpi-grid">
+        <div class="estimator-grid forecasting-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
           <div class="est-card kpi-card-gold">
             <div class="est-metric">
-              <span id="kpi-projected-revenue" class="est-number">+80%</span>
+              <span id="kpi-projected-revenue" class="est-number">1.0x</span>
             </div>
             <span id="kpi-demand-label" class="est-label">Projected Demand Above Baseline</span>
           </div>
 
           <div class="est-card kpi-card-red">
             <div class="est-metric">
-              <span id="kpi-brisket-lbs" class="est-number">165</span>
+              <span id="kpi-brisket-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases" style="font-weight: 600; color: #f0803c;">(~5.5 Cases)</span></span>
+            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases" style="font-weight: 600; color: #f0803c;">(-- Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-orange">
             <div class="est-metric">
-              <span id="kpi-pork-lbs" class="est-number">85</span>
+              <span id="kpi-pork-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases" style="font-weight: 600; color: #f0803c;">(~2.7 Cases)</span></span>
+            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases" style="font-weight: 600; color: #f0803c;">(-- Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-blue">
             <div class="est-metric">
-              <span id="kpi-sausage-links" class="est-number">148</span>
+              <span id="kpi-sausage-links" class="est-number">--</span>
               <span class="est-unit">links</span>
             </div>
-            <span class="est-label">Sausage Links Required <br><span id="kpi-sausage-cases" style="font-weight: 600; color: #f0803c;">(~3.0 Cases)</span></span>
+            <span class="est-label">Sausage Links Required <br><span id="kpi-sausage-cases" style="font-weight: 600; color: #f0803c;">(-- Cases)</span></span>
           </div>
 
           <div class="est-card kpi-card-purple" style="border-left: 4px solid #8e44ad;">
             <div class="est-metric">
-              <span id="kpi-ribs-racks" class="est-number">32</span>
+              <span id="kpi-pork-ribs-racks" class="est-number">--</span>
               <span class="est-unit">racks</span>
             </div>
-            <span class="est-label">Pork Spare Ribs Target <br><span id="kpi-ribs-cases" style="font-weight: 600; color: #f0803c;">(~3.2 Cases)</span></span>
+            <span class="est-label">Pork Spare Ribs <br><span id="kpi-pork-ribs-cases" style="font-weight: 600; color: #f0803c;">(-- Cases)</span></span>
+          </div>
+          
+          <div class="est-card" style="background: rgba(245, 158, 11, 0.15); border-left: 4px solid #d97706;">
+            <div class="est-metric">
+              <span id="kpi-beef-dino-ribs" class="est-number" style="color:#fbbf24;">--</span>
+              <span class="est-unit" style="color:#fbbf24;">ribs</span>
+            </div>
+            <span class="est-label">Beef Dino Ribs <br><span id="kpi-beef-dino-ribs-cases" style="font-weight: 600; color: #f0803c;">(-- Cases)</span></span>
+          </div>
+          
+          <div class="est-card" style="background: rgba(22, 160, 133, 0.15); border-left: 4px solid #16a085;">
+            <div class="est-metric">
+              <span id="kpi-turkey-lbs" class="est-number" style="color:#1abc9c;">--</span>
+              <span class="est-unit" style="color:#1abc9c;">lbs</span>
+            </div>
+            <span class="est-label">Smoked Turkey Target</span>
+          </div>
+
+          <div class="est-card" style="background: rgba(255, 105, 180, 0.15); border-left: 4px solid #ff69b4;">
+            <div class="est-metric">
+              <span id="kpi-rosebuds" class="est-number" style="color:#ffb6c1;">--</span>
+              <span class="est-unit" style="color:#ffb6c1;">units</span>
+            </div>
+            <span class="est-label">Rosebuds (Draws from Brisket)</span>
+          </div>
+          
+          <div class="est-card" style="background: rgba(46, 204, 113, 0.15); border-left: 4px solid #2ecc71;">
+            <div class="est-metric">
+              <span id="kpi-tacos" class="est-number" style="color:#58d68d;">--</span>
+              <span class="est-unit" style="color:#58d68d;">tacos</span>
+            </div>
+            <span class="est-label">Tacos (Draws from Smoked Inventory)</span>
           </div>
         </div>
       </section>
@@ -412,13 +445,19 @@
         </div>
 
         <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(0, 103, 120, 0.15); border-left: 4px solid #006778; border-radius: 6px; font-size: 0.88rem; color: #e2e8f0; font-family: 'Outfit', sans-serif; line-height: 1.6;">
-          🔥 <strong>TL;DR Why We Stagger Cook Shifts:</strong>
+          <details>
+            <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem; outline: none;">
+              🔥 TL;DR Why We Stagger Cook Shifts:
+            </summary>
+            <div style="margin-top: 0.8rem;">
           <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
             <li><strong>Cook #1 (Overnight Prep): 5:00 PM – 2:00 AM</strong> &rarr; Trims, rubs, and loads the initial overnight burn.</li>
             <li><strong>Cook #2 (Morning Smoke): 2:00 AM – 2:00 PM (sometimes 12 PM)</strong> &rarr; Manages the long smoke, wraps briskets, pulls ready meat for lunch.</li>
             <li><strong>Cook #3 (Day/Mid): 8:00 AM – 7:00 PM</strong> &rarr; Covers lunch rush, dinner prep, and hands off to the evening shift.</li>
             <li><strong>Why do this?</strong> Keeps meat hot & juicy all day and doubles your smoker space so you don't run out!</li>
           </ul>
+        </div>
+          </details>
         </div>
       </section>
 
@@ -447,7 +486,12 @@
         </div>
 
         <!-- Detailed Shift Schedule Breakdown -->
-        <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; font-size: 0.88rem; font-family: 'Outfit', sans-serif;">
+        <div style="margin-top: 1rem; background: rgba(22, 27, 34, 0.7); padding: 0.8rem 1rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
+          <details>
+            <summary style="cursor: pointer; font-weight: 600; color: #f8fafc; font-size: 1.05rem; font-family: 'Outfit', sans-serif;">
+              📋 View Detailed Cook Shifts Breakdown
+            </summary>
+            <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; font-size: 0.88rem; font-family: 'Outfit', sans-serif;">
           <div style="background: rgba(15, 23, 42, 0.8); padding: 0.8rem; border-radius: 6px; border-left: 4px solid #f1c40f;">
             <strong style="color: #f1c40f;">🌙 Cook #1: Overnight Pitmaster</strong><br>
             <span style="font-size: 0.8rem; color: #94a3b8;">Shift: 8:00 PM (Night Before) – 5:00 AM</span>
@@ -477,6 +521,8 @@
             </ul>
           </div>
         </div>
+          </details>
+        </div>
       </section>
 
             <!-- Sub-Tab Navigation for Analytical Phases -->
@@ -484,6 +530,7 @@
         <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f8fafc; font-size: 1.2rem;">🔬 Model Insights & Data Correlations</h3>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button type="button" class="preset-btn active" id="btn-subtab-arima">Baseline Sales Trends</button>
+          <button type="button" class="preset-btn" id="btn-subtab-shift">Hourly Demand Heatmap</button>
           <button type="button" class="preset-btn" id="btn-subtab-weather">Weather Impact Regression</button>
           <button type="button" class="preset-btn" id="btn-subtab-event">Live Event Correlation</button>
         </div>
@@ -505,7 +552,22 @@
         </section>
 
         <section class="chart-section">
-          <h2 class="section-title">Baseline Sales & Forecast Chart</h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h2 class="section-title" style="margin-bottom: 0;">Baseline Sales & Forecast Chart</h2>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="category-selector" style="color: #f8fafc;">Category:</label>
+              <select id="category-selector" style="padding: 5px; border-radius: 4px; background: rgba(15,23,42,0.8); color: #f8fafc; border: 1px solid #3498db;">
+                <option value="brisket_lbs">Brisket</option>
+                <option value="pork_ribs_racks">Pork Spare Ribs</option>
+                <option value="beef_dino_ribs">Beef Dino Ribs</option>
+                <option value="turkey_lbs">Turkey</option>
+                <option value="sausage_links">Sausage Links</option>
+                <option value="pulled_pork_lbs">Pulled Pork</option>
+                <option value="rosebuds">Rosebuds</option>
+                <option value="tacos">Tacos</option>
+              </select>
+            </div>
+          </div>
           <div class="chart-card">
             <div id="plotly-meat-sales-chart" style="width:100%; height:450px;"></div>
           </div>
@@ -553,6 +615,38 @@
           <h2 class="section-title">Event-Driven Revenue Multipliers</h2>
           <div class="chart-card">
             <div id="plotly-event-impact-chart" style="width:100%; height:450px;"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 4 VIEW: Hourly Shift Heatmap -->
+      <div id="subtab-view-shift" style="display: none;">
+        <section class="control-card marketing-card" style="margin-top: 1rem; border-left: 4px solid #9b59b6; background-color: #fdf5ff;">
+          <h2 class="section-title" style="color: #8e44ad;">⏱️ Analytical Findings: Shift Heatmap</h2>
+          <div style="font-family: 'Outfit', sans-serif; padding: 0.5rem; color: #333;">
+            <h3 style="margin-top: 0; font-size: 1.1rem;">Step-by-Step Reasoning: Hourly Demand Patterns</h3>
+            <ul style="line-height: 1.6; margin-bottom: 1.5rem;">
+              <li><strong>Peak Rush (3-6 PM):</strong> Over 43% of orders land in this 3-hour window. Essential to have all prep completed and stations fully staffed before 3:00 PM.</li>
+              <li><strong>Saturday Peak:</strong> Saturdays at 5 PM are consistently the busiest hour of the week. Ensure expedited workflow for line items like Rosebuds and Tacos.</li>
+              <li><strong>Actionable Insight:</strong> Use the shift drop-down below to visualize volume across specific team shifts. This validates our 3-cook staggered staffing model.</li>
+            </ul>
+          </div>
+        </section>
+        
+        <section class="chart-section">
+          <h2 class="section-title">Hourly Demand Heatmap (By Shift)</h2>
+          <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+            <label for="shift-selector" style="color: #f8fafc;">View Shift:</label>
+            <select id="shift-selector" style="padding: 5px; border-radius: 4px; background: rgba(15,23,42,0.8); color: #f8fafc; border: 1px solid #3498db;">
+              <option value="all">All Hours (24H)</option>
+              <option value="prep">Morning Prep (4AM - 1PM)</option>
+              <option value="lunch">Lunch & Transition (10AM - 4PM)</option>
+              <option value="dinner">Dinner Rush (4PM - 10PM)</option>
+              <option value="custom">Custom Cook Shifts</option>
+            </select>
+          </div>
+          <div class="chart-card">
+            <div id="plotly-shift-heatmap" style="width:100%; height:450px;"></div>
           </div>
         </section>
       </div>

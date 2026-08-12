@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #0d1117;
+  background-color: #0b0f19; background-image: radial-gradient(circle at top right, rgba(240, 128, 60, 0.05), transparent 40%);
   color: #c9d1d9;
   padding-bottom: 110px; /* Leave room for sticky footer */
   min-height: 100vh;
@@ -18,7 +18,7 @@ body {
 
 /* Header styles */
 .app-header {
-  background-color: #161b22;
+  background-color: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid #21262d;
   padding: 16px;
   position: sticky;
@@ -144,7 +144,7 @@ body {
 
 /* Card Styling */
 .recipe-selector-card, .control-card, .ingredients-section, .calculator-card, .estimator-section, .workflow-section {
-  background-color: #161b22;
+  background-color: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border: 1px solid #21262d;
   border-radius: 12px;
   padding: 20px;
@@ -463,13 +463,23 @@ body {
 }
 
 .est-card {
-  background-color: #21262d;
-  border: 1px solid #30363d;
-  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.est-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  border-color: rgba(240, 128, 60, 0.3);
 }
 
 .est-metric {
@@ -520,7 +530,7 @@ body {
 }
 
 .day-container {
-  background-color: #161b22;
+  background-color: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border: 1px solid #21262d;
   border-radius: 12px;
   padding: 16px;
@@ -653,7 +663,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #161b22;
+  background-color: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid #21262d;
   padding: 16px;
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
@@ -1147,13 +1157,15 @@ body {
 }
 
 .preset-btn.active, .preset-btn:hover {
-  background: #21262d;
-  color: #f0803c;
   border-color: #f0803c;
+  background-color: rgba(240, 128, 60, 0.1);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(240, 128, 60, 0.15);
 }
 
 .kpi-card-gold .est-number { color: #f1c40f; }
-.kpi-card-red .est-number { color: #e74c3c; }
+.kpi-card-red .est-number { color: #f97316; }
 .kpi-card-orange .est-number { color: #e67e22; }
 .kpi-card-blue .est-number { color: #3498db; }
 

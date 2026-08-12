@@ -1,0 +1,20 @@
+{
+  "name": "yellow-rose-bbq",
+  "version": "1.0.0",
+  "description": "A mobile-first, high-contrast, kitchen-line-optimized productivity tool and recipe calculator. Designed for elbow-tap interactions during production.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayfay/yellow-rose-bbq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kayfay/yellow-rose-bbq/issues"
+  },
+  "homepage": "https://github.com/kayfay/yellow-rose-bbq#readme"
+}
