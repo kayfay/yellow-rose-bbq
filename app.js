@@ -904,7 +904,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     }
     
     const getCatVal = (catName) => {
-        if (metrics.categories && metrics.categories[catName] && metrics.categories[catName].forecast) {
+        if (metrics && metrics.categories && metrics.categories[catName] && metrics.categories[catName].forecast) {
             return metrics.categories[catName].forecast[idx];
         }
         return 0;
