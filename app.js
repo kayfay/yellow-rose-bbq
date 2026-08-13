@@ -757,6 +757,43 @@ function initMultiTabNavigation() {
       renderPlotlyForecastingChart(currentDays);
     });
   }
+  
+  let lastRefreshTime = 0;
+  const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
+  if (btnRefreshAnalytics) {
+    // Set initial time
+    const timeElem = document.getElementById('last-updated-time');
+    if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+
+    btnRefreshAnalytics.addEventListener('click', () => {
+      const now = Date.now();
+      if (now - lastRefreshTime < 10000) {
+        // Rate limit: 10 seconds
+        const origText = btnRefreshAnalytics.innerHTML;
+        btnRefreshAnalytics.innerHTML = '<span class="btn-text">Please wait...</span>';
+        setTimeout(() => { btnRefreshAnalytics.innerHTML = origText; }, 2000);
+        return;
+      }
+      lastRefreshTime = now;
+      
+      const origText = btnRefreshAnalytics.innerHTML;
+      btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
+      
+      let currentDays = 14;
+      const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
+      if (activeBtn && activeBtn.id !== 'btn-preset-14' && activeBtn.id !== 'btn-preset-saturday') {
+        currentDays = 3;
+      }
+      
+      // Trigger all renders
+      renderPlotlyForecastingChart(currentDays).then(() => {
+        if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+        btnRefreshAnalytics.innerHTML = origText;
+      });
+      renderPlotlyEventChart();
+      renderPlotlyWeatherChart();
+    });
+  }
 
   const shiftSelector = document.getElementById('shift-selector');
   if (shiftSelector) {
@@ -922,8 +959,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
   try {
     const res = await fetch('clover_api/analytics/category_payload.json');
     if (!res.ok) {
-        renderPlotlyNoData('plotly-meat-sales-chart');
-        return;
+        throw new Error('Network response was not ok');
     }
     const payload = await res.json();
     const metrics = payload.forecast_metrics;
@@ -1035,6 +1071,17 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
   } catch (err) {
     console.warn('Falling back to static forecast visualization', err);
+    renderPlotlyNoData('plotly-meat-sales-chart');
+    const kpis = ['kpi-brisket-lbs', 'kpi-pork-lbs', 'kpi-sausage-links', 'kpi-pork-ribs-racks', 'kpi-beef-dino-ribs', 'kpi-turkey-lbs', 'kpi-rosebuds', 'kpi-tacos', 'kpi-projected-revenue'];
+    kpis.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = 'Reload';
+    });
+    const kpiCases = ['kpi-brisket-cases', 'kpi-pork-cases', 'kpi-sausage-cases', 'kpi-pork-ribs-cases', 'kpi-beef-dino-ribs-cases', 'kpi-demand-label'];
+    kpiCases.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = 'Data Unavailable';
+    });
   }
 }
 
