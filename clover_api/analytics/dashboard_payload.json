@@ -1,0 +1,307 @@
+{
+  "forecast": {
+    "generated_at": "2026-08-13T06:36:17.621494",
+    "days_count": 14,
+    "forecast_records": [
+      {
+        "date": "2026-08-13",
+        "day_name": "Thu",
+        "predicted_revenue": 1980.0,
+        "brisket_raw_lbs": 39.4,
+        "pork_shoulder_raw_lbs": 41.3,
+        "sausage_links": 49,
+        "recommended_staff": 3,
+        "pitmaster_hours": 25.5
+      },
+      {
+        "date": "2026-08-14",
+        "day_name": "Fri",
+        "predicted_revenue": 2880.0,
+        "brisket_raw_lbs": 57.3,
+        "pork_shoulder_raw_lbs": 60.0,
+        "sausage_links": 72,
+        "recommended_staff": 4,
+        "pitmaster_hours": 34.0
+      },
+      {
+        "date": "2026-08-15",
+        "day_name": "Sat",
+        "predicted_revenue": 4554.0,
+        "brisket_raw_lbs": 90.6,
+        "pork_shoulder_raw_lbs": 94.9,
+        "sausage_links": 113,
+        "recommended_staff": 6,
+        "pitmaster_hours": 51.0
+      },
+      {
+        "date": "2026-08-16",
+        "day_name": "Sun",
+        "predicted_revenue": 2520.0,
+        "brisket_raw_lbs": 50.1,
+        "pork_shoulder_raw_lbs": 52.5,
+        "sausage_links": 63,
+        "recommended_staff": 4,
+        "pitmaster_hours": 34.0
+      },
+      {
+        "date": "2026-08-17",
+        "day_name": "Mon",
+        "predicted_revenue": 1440.0,
+        "brisket_raw_lbs": 28.6,
+        "pork_shoulder_raw_lbs": 30.0,
+        "sausage_links": 36,
+        "recommended_staff": 2,
+        "pitmaster_hours": 17.0
+      },
+      {
+        "date": "2026-08-18",
+        "day_name": "Tue",
+        "predicted_revenue": 1440.0,
+        "brisket_raw_lbs": 28.6,
+        "pork_shoulder_raw_lbs": 30.0,
+        "sausage_links": 36,
+        "recommended_staff": 2,
+        "pitmaster_hours": 17.0
+      },
+      {
+        "date": "2026-08-19",
+        "day_name": "Wed",
+        "predicted_revenue": 1620.0,
+        "brisket_raw_lbs": 32.2,
+        "pork_shoulder_raw_lbs": 33.8,
+        "sausage_links": 40,
+        "recommended_staff": 3,
+        "pitmaster_hours": 25.5
+      },
+      {
+        "date": "2026-08-20",
+        "day_name": "Thu",
+        "predicted_revenue": 1980.0,
+        "brisket_raw_lbs": 39.4,
+        "pork_shoulder_raw_lbs": 41.3,
+        "sausage_links": 49,
+        "recommended_staff": 3,
+        "pitmaster_hours": 25.5
+      },
+      {
+        "date": "2026-08-21",
+        "day_name": "Fri",
+        "predicted_revenue": 2880.0,
+        "brisket_raw_lbs": 57.3,
+        "pork_shoulder_raw_lbs": 60.0,
+        "sausage_links": 72,
+        "recommended_staff": 4,
+        "pitmaster_hours": 34.0
+      },
+      {
+        "date": "2026-08-22",
+        "day_name": "Sat",
+        "predicted_revenue": 3960.0,
+        "brisket_raw_lbs": 78.8,
+        "pork_shoulder_raw_lbs": 82.5,
+        "sausage_links": 99,
+        "recommended_staff": 5,
+        "pitmaster_hours": 42.5
+      },
+      {
+        "date": "2026-08-23",
+        "day_name": "Sun",
+        "predicted_revenue": 2520.0,
+        "brisket_raw_lbs": 50.1,
+        "pork_shoulder_raw_lbs": 52.5,
+        "sausage_links": 63,
+        "recommended_staff": 4,
+        "pitmaster_hours": 34.0
+      },
+      {
+        "date": "2026-08-24",
+        "day_name": "Mon",
+        "predicted_revenue": 1440.0,
+        "brisket_raw_lbs": 28.6,
+        "pork_shoulder_raw_lbs": 30.0,
+        "sausage_links": 36,
+        "recommended_staff": 2,
+        "pitmaster_hours": 17.0
+      },
+      {
+        "date": "2026-08-25",
+        "day_name": "Tue",
+        "predicted_revenue": 1440.0,
+        "brisket_raw_lbs": 28.6,
+        "pork_shoulder_raw_lbs": 30.0,
+        "sausage_links": 36,
+        "recommended_staff": 2,
+        "pitmaster_hours": 17.0
+      },
+      {
+        "date": "2026-08-26",
+        "day_name": "Wed",
+        "predicted_revenue": 1620.0,
+        "brisket_raw_lbs": 32.2,
+        "pork_shoulder_raw_lbs": 33.8,
+        "sausage_links": 40,
+        "recommended_staff": 3,
+        "pitmaster_hours": 25.5
+      }
+    ]
+  },
+  "plotly_meat_chart": {
+    "data": [
+      {
+        "x": [
+          "2026-08-13 (Thu)",
+          "2026-08-14 (Fri)",
+          "2026-08-15 (Sat)",
+          "2026-08-16 (Sun)",
+          "2026-08-17 (Mon)",
+          "2026-08-18 (Tue)",
+          "2026-08-19 (Wed)",
+          "2026-08-20 (Thu)",
+          "2026-08-21 (Fri)",
+          "2026-08-22 (Sat)",
+          "2026-08-23 (Sun)",
+          "2026-08-24 (Mon)",
+          "2026-08-25 (Tue)",
+          "2026-08-26 (Wed)"
+        ],
+        "y": [
+          39.4,
+          57.3,
+          90.6,
+          50.1,
+          28.6,
+          28.6,
+          32.2,
+          39.4,
+          57.3,
+          78.8,
+          50.1,
+          28.6,
+          28.6,
+          32.2
+        ],
+        "name": "Raw Brisket Prep (lbs)",
+        "type": "bar",
+        "marker": {
+          "color": "#c0392b"
+        }
+      },
+      {
+        "x": [
+          "2026-08-13 (Thu)",
+          "2026-08-14 (Fri)",
+          "2026-08-15 (Sat)",
+          "2026-08-16 (Sun)",
+          "2026-08-17 (Mon)",
+          "2026-08-18 (Tue)",
+          "2026-08-19 (Wed)",
+          "2026-08-20 (Thu)",
+          "2026-08-21 (Fri)",
+          "2026-08-22 (Sat)",
+          "2026-08-23 (Sun)",
+          "2026-08-24 (Mon)",
+          "2026-08-25 (Tue)",
+          "2026-08-26 (Wed)"
+        ],
+        "y": [
+          41.3,
+          60.0,
+          94.9,
+          52.5,
+          30.0,
+          30.0,
+          33.8,
+          41.3,
+          60.0,
+          82.5,
+          52.5,
+          30.0,
+          30.0,
+          33.8
+        ],
+        "name": "Pork Shoulder (lbs)",
+        "type": "bar",
+        "marker": {
+          "color": "#e67e22"
+        }
+      },
+      {
+        "x": [
+          "2026-08-13 (Thu)",
+          "2026-08-14 (Fri)",
+          "2026-08-15 (Sat)",
+          "2026-08-16 (Sun)",
+          "2026-08-17 (Mon)",
+          "2026-08-18 (Tue)",
+          "2026-08-19 (Wed)",
+          "2026-08-20 (Thu)",
+          "2026-08-21 (Fri)",
+          "2026-08-22 (Sat)",
+          "2026-08-23 (Sun)",
+          "2026-08-24 (Mon)",
+          "2026-08-25 (Tue)",
+          "2026-08-26 (Wed)"
+        ],
+        "y": [
+          49,
+          72,
+          113,
+          63,
+          36,
+          36,
+          40,
+          49,
+          72,
+          99,
+          63,
+          36,
+          36,
+          40
+        ],
+        "name": "Sausage Links (units)",
+        "type": "scatter",
+        "mode": "lines+markers",
+        "yaxis": "y2",
+        "line": {
+          "color": "#f1c40f",
+          "width": 3
+        },
+        "marker": {
+          "size": 8
+        }
+      }
+    ],
+    "layout": {
+      "title": "14-Day Predicted Meat Production & Prep Requirements",
+      "paper_bgcolor": "rgba(0,0,0,0)",
+      "plot_bgcolor": "rgba(20,20,30,0.6)",
+      "font": {
+        "color": "#f8fafc",
+        "family": "Outfit, sans-serif"
+      },
+      "xaxis": {
+        "gridcolor": "rgba(255,255,255,0.1)"
+      },
+      "yaxis": {
+        "title": "Raw Meat Weight (lbs)",
+        "gridcolor": "rgba(255,255,255,0.1)"
+      },
+      "yaxis2": {
+        "title": "Sausage Links",
+        "overlaying": "y",
+        "side": "right",
+        "showgrid": false
+      },
+      "legend": {
+        "orientation": "h",
+        "y": -0.2
+      },
+      "margin": {
+        "l": 50,
+        "r": 50,
+        "t": 60,
+        "b": 60
+      }
+    }
+  }
+}
