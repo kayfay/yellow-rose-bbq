@@ -640,9 +640,13 @@ function initMultiTabNavigation() {
 
       if (targetTab === 'forecasting-analytics') {
         renderPlotlyForecastingChart();
-        document.querySelector('.app-footer').style.display = 'none';
+        document.body.classList.add('hide-footer');
+        const footer = document.querySelector('.app-footer');
+        if (footer) footer.style.display = 'none';
       } else {
-        document.querySelector('.app-footer').style.display = 'block';
+        document.body.classList.remove('hide-footer');
+        const footer = document.querySelector('.app-footer');
+        if (footer) footer.style.display = 'block';
       }
     });
   });
@@ -745,7 +749,12 @@ function initMultiTabNavigation() {
   const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
-      renderPlotlyForecastingChart();
+      let currentDays = 14;
+      const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
+      if (activeBtn && activeBtn.id !== 'btn-preset-14' && activeBtn.id !== 'btn-preset-saturday') {
+        currentDays = 3;
+      }
+      renderPlotlyForecastingChart(currentDays);
     });
   }
 
@@ -790,18 +799,41 @@ function updateDeliveryPreset(targetDayNum, btnId) {
   renderPlotlyForecastingChart(3);
 }
 
+function renderPlotlyNoData(containerId) {
+  if (typeof Plotly === 'undefined') return;
+  Plotly.newPlot(containerId, [], {
+    xaxis: { visible: false },
+    yaxis: { visible: false },
+    annotations: [{
+      text: 'Data Not Yet Available',
+      xref: 'paper', yref: 'paper',
+      showarrow: false,
+      font: { size: 16, color: '#999' }
+    }],
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Inter, sans-serif', color: '#94a3b8' }
+  }, { displayModeBar: false });
+}
+
 async function renderPlotlyEventChart() {
   const container = document.getElementById('plotly-event-impact-chart');
   if (!container || typeof Plotly === 'undefined') return;
 
   try {
     const res = await fetch('clover_api/analytics/event_payload.json');
-    if (!res.ok) throw new Error('Failed to load event payload');
+    if (!res.ok) {
+        renderPlotlyNoData('plotly-event-impact-chart');
+        return;
+    }
     const payload = await res.json();
 
     const layout = payload.plotly_event_chart.layout;
     layout.plot_bgcolor = 'rgba(0,0,0,0)';
     layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+    if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+    if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
     const traces = payload.plotly_event_chart.data;
     Plotly.newPlot('plotly-event-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
   } catch (err) {
@@ -815,12 +847,18 @@ async function renderPlotlyWeatherChart() {
 
   try {
     const res = await fetch('clover_api/analytics/weather_payload.json');
-    if (!res.ok) throw new Error('Failed to load weather payload');
+    if (!res.ok) {
+        renderPlotlyNoData('plotly-weather-impact-chart');
+        return;
+    }
     const payload = await res.json();
 
     const layout = payload.plotly_weather_chart.layout;
     layout.plot_bgcolor = 'rgba(0,0,0,0)';
     layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+    if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+    if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
     const traces = payload.plotly_weather_chart.data;
     Plotly.newPlot('plotly-weather-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
   } catch (err) {
@@ -883,7 +921,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
   try {
     const res = await fetch('clover_api/analytics/category_payload.json');
-    if (!res.ok) throw new Error('Failed to load category payload');
+    if (!res.ok) {
+        renderPlotlyNoData('plotly-meat-sales-chart');
+        return;
+    }
     const payload = await res.json();
     const metrics = payload.forecast_metrics;
     
@@ -910,8 +951,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         return 0;
     };
 
-    const bVal = Math.round(getCatVal('brisket_lbs') || 165);
-    const pVal = Math.round(getCatVal('pork_lbs') || getCatVal('pulled_pork_lbs') || 85);
+    // Brisket and Pork Shoulder shrink by ~50% during smoking, so multiply cooked POS sales by 2 for RAW targets
+    const bVal = Math.round((getCatVal('brisket_lbs') * 2) || 165);
+    const pVal = Math.round(((getCatVal('pork_lbs') || getCatVal('pulled_pork_lbs')) * 2) || 85);
     const sVal = Math.round(getCatVal('sausage_links') || 148);
     const rVal = Math.round(getCatVal('pork_ribs_racks') || getCatVal('ribs_racks') || 32);
     const drVal = Math.round(getCatVal('beef_dino_ribs') || 10);
@@ -961,6 +1003,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const layout = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.layout));
     layout.plot_bgcolor = 'rgba(0,0,0,0)';
     layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+    if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+    if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
     layout.title = `Forecasted Output (${daysCount}-Day Horizon)`;
     
     const traces = JSON.parse(JSON.stringify(payload.plotly_baseline_chart.data));
@@ -969,7 +1014,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : null;
 
-    if (selectedCat && metrics.categories && metrics.categories[selectedCat]) {
+    if (selectedCat && selectedCat !== 'baseline' && metrics.categories && metrics.categories[selectedCat]) {
         // Replace trace 1 (Demand Index) with Category Forecast
         const catForecast = metrics.categories[selectedCat].forecast;
         traces[1].y = catForecast;
@@ -1041,12 +1086,18 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
 
   try {
     const res = await fetch('clover_api/analytics/shift_payload.json');
-    if (!res.ok) throw new Error('Failed to load shift payload');
+    if (!res.ok) {
+        renderPlotlyNoData('plotly-shift-chart');
+        return;
+    }
     const payload = await res.json();
 
     const layout = payload.plotly_heatmap.layout;
     layout.plot_bgcolor = 'rgba(0,0,0,0)';
     layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+    if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+    if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
     const traces = payload.plotly_heatmap.data;
     if(traces && traces.length > 0) {
       traces[0].colorscale = 'YlOrBr';
