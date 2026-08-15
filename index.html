@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://kvdb.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
-  <link rel="stylesheet" href="style.css?v=20260813_01">
+  <link rel="stylesheet" href="style.css?v=20260815_01">
   <!-- Include Inter Font for enterprise dense aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,6 +98,17 @@
 
           <button type="button" class="adjust-btn btn-sm" id="btn-plus-1" aria-label="Increase by 1">+1</button>
           <button type="button" class="adjust-btn btn-lg" id="btn-plus-5" aria-label="Increase by 5">+5</button>
+        </div>
+
+        <!-- Glove-Friendly 1-Tap Quick Batch Presets -->
+        <div class="quick-batch-presets">
+          <span class="preset-hint">⚡ Quick Batch Presets:</span>
+          <div class="quick-presets-row">
+            <button type="button" class="quick-batch-btn" data-batch="25">25 lbs</button>
+            <button type="button" class="quick-batch-btn active" data-batch="50">50 lbs (Standard)</button>
+            <button type="button" class="quick-batch-btn" data-batch="75">75 lbs</button>
+            <button type="button" class="quick-batch-btn" data-batch="100">100 lbs (Double)</button>
+          </div>
         </div>
       </section>
 
@@ -546,7 +557,7 @@
             <ul>
               <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Univariate SARIMAX (1,0,1) × (1,1,1,7) model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
               <li><strong>Actionable Insight - Peak Staffing:</strong> The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</li>
-              <li><strong>Actionable Insight - Meat Procurement:</strong> The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</li>
+              <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</span></li>
             </ul>
           </div>
         </section>
@@ -565,7 +576,8 @@
                 <option value="sausage_links">Sausage Links</option>
                 <option value="pulled_pork_lbs">Pulled Pork</option>
                 <option value="rosebuds">Rosebuds</option>
-                <option value="tacos">Tacos</option>
+                <option value="tacos_brisket">Tacos (Brisket)</option>
+                <option value="tacos_pork">Tacos (Pork)</option>
               </select>
             </div>
           </div>
@@ -683,6 +695,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20260813_01" defer></script>
+  <script src="app.js?v=20260815_01" defer></script>
 </body>
 </html>
