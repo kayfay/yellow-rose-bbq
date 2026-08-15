@@ -297,6 +297,24 @@ function init() {
   
   btnPlus5.addEventListener('click', handlePlus5);
   btnPlus5.addEventListener('touchstart', handlePlus5, {passive: false});
+  // Quick batch size presets
+  const quickBatchBtns = document.querySelectorAll('.quick-batch-btn');
+  quickBatchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const bWeight = parseFloat(btn.getAttribute('data-batch'));
+      if (!isNaN(bWeight)) {
+        state.weight = bWeight;
+        state.lastUpdated = Date.now();
+        weightSlider.value = bWeight;
+        
+        quickBatchBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        updateUI();
+        saveState();
+      }
+    });
+  });
 
   // Bottom action buttons
   btnReset.addEventListener('click', resetRun);
