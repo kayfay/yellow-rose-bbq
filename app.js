@@ -1077,8 +1077,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const rVal = Math.round(matchedRecord.pork_ribs_racks);
     const drVal = Math.round(matchedRecord.beef_dino_ribs);
     const tVal = 25; // Smoked turkey baseline
-    const rbVal = Math.round(matchedRecord.rosebuds_sold);
-    const tacoVal = Math.round(matchedRecord.tacos_sold);
+    const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
+    const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
     const predRev = Math.round(matchedRecord.predicted_revenue);
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
@@ -1105,10 +1105,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
 
-    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 30.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 15.0)} Packers)`;
+    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
     if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
     if (sCasesElem) sCasesElem.textContent = `(Made from Brisket/Rib Trim)`;
-    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 10.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
+    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
     const baselineRev = 1800.0;
@@ -1126,8 +1126,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const brisketData = slicedRecords.map(r => r.brisket_raw_lbs);
     const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs);
     const sausageData = slicedRecords.map(r => r.sausage_links);
-    const tacosData = slicedRecords.map(r => r.tacos_sold);
-    const rosebudsData = slicedRecords.map(r => r.rosebuds_sold);
+    const tacosData = slicedRecords.map(r => r.tacos_sold || 0);
+    const rosebudsData = slicedRecords.map(r => r.rosebuds_sold || 0);
     const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks);
     const beefRibsData = slicedRecords.map(r => r.beef_dino_ribs);
 
