@@ -291,56 +291,25 @@ function init() {
   
   btnMinus1.addEventListener('click', handleMinus1);
   btnMinus1.addEventListener('touchstart', handleMinus1, {passive: false});
-  try {
-    // Default Date setup
-    if (dateInput) {
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.value = today;
-      
-      // Initial trigger for both sub-systems
-      handleDateSelectionLookup(today);
+  
+  btnPlus1.addEventListener('click', handlePlus1);
+  btnPlus1.addEventListener('touchstart', handlePlus1, {passive: false});
+  
+  btnPlus5.addEventListener('click', handlePlus5);
+  btnPlus5.addEventListener('touchstart', handlePlus5, {passive: false});
 
-      ['change', 'input'].forEach(evtType => {
-        dateInput.addEventListener(evtType, () => {
-          handleDateSelectionLookup(dateInput.value);
-          renderPlotlyForecastingChart();
-        });
-      });
-    }
+  // Bottom action buttons
+  btnReset.addEventListener('click', resetRun);
+  btnShortcut.addEventListener('click', triggerShortcut);
+  btnShare.addEventListener('click', copyShareLink);
 
-    // Quick batch size presets
-    const quickBatchBtns = document.querySelectorAll('.quick-batch-btn');
-    quickBatchBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const bWeight = parseFloat(btn.getAttribute('data-batch'));
-        if (!isNaN(bWeight)) {
-          state.weight = bWeight;
-          state.lastUpdated = Date.now();
-          weightSlider.value = bWeight;
-          updateUI();
-          saveState();
-        }
-      });
-    });
+  // Load state from local storage first (instant responsiveness)
+  loadLocalState();
+  updateUI();
 
-    // Bottom action buttons
-    btnReset.addEventListener('click', resetRun);
-    btnShortcut.addEventListener('click', triggerShortcut);
-    btnShare.addEventListener('click', copyShareLink);
-
-    // Load state from local storage first (instant responsiveness)
-    loadLocalState();
-    updateUI();
-
-    // Load and subscribe to cloud state
-    syncWithCloud();
-    setInterval(pollCloudState, 5000);
-  } catch(err) {
-    document.body.innerHTML = `<div style="color:red; background:white; padding:20px; border:2px solid red; z-index:9999; position:absolute; top:0; left:0; right:0;">
-      <h3>FATAL ERROR IN INIT</h3>
-      <pre style="white-space:pre-wrap;">${err.stack || err.message || String(err)}</pre>
-    </div>` + document.body.innerHTML;
-  }
+  // Load and subscribe to cloud state
+  syncWithCloud();
+  setInterval(pollCloudState, 5000);
 }
 
 // Render recipe selector pills
