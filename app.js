@@ -1089,15 +1089,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     }
 
     // Populate Key Meat & Revenue Targets with Exact Model Projections
-    const bVal = Math.round(matchedRecord.brisket_raw_lbs);
-    const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs);
-    const sVal = Math.round(matchedRecord.sausage_links);
-    const rVal = Math.round(matchedRecord.pork_ribs_racks);
-    const drVal = Math.round(matchedRecord.beef_dino_ribs);
+    const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
+    const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs || 0);
+    const sVal = Math.round(matchedRecord.sausage_links || 0);
+    const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
+    const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
     const tVal = 25; // Smoked turkey baseline
     const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
     const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
-    const predRev = Math.round(matchedRecord.predicted_revenue);
+    const predRev = Math.round(matchedRecord.predicted_revenue || 0);
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
@@ -1141,13 +1141,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // Build Plotly Interactive Chart
     const slicedRecords = records.slice(0, daysCount);
     const dates = slicedRecords.map(r => `${r.date} (${r.day_name})`);
-    const brisketData = slicedRecords.map(r => r.brisket_raw_lbs);
-    const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs);
-    const sausageData = slicedRecords.map(r => r.sausage_links);
+    const brisketData = slicedRecords.map(r => r.brisket_raw_lbs || 0);
+    const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0);
+    const sausageData = slicedRecords.map(r => r.sausage_links || 0);
     const tacosData = slicedRecords.map(r => r.tacos_sold || 0);
     const rosebudsData = slicedRecords.map(r => r.rosebuds_sold || 0);
-    const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks);
-    const beefRibsData = slicedRecords.map(r => r.beef_dino_ribs);
+    const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks || 0);
+    const beefRibsData = slicedRecords.map(r => r.beef_dino_ribs || 0);
 
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
