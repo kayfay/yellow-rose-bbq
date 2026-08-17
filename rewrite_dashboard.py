@@ -49,15 +49,25 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         date_str, day_name = future_dates[i].split(" (")
         day_name = day_name.replace(")", "")
         
-        brisket_raw_lbs = categories.get("brisket_lbs", {}).get("forecast", [0]*30)[i]
-        pork_lbs = categories.get("pulled_pork_lbs", {}).get("forecast", [0]*30)[i]
-        sausage_links = categories.get("sausage_links", {}).get("forecast", [0]*30)[i]
+        brisket_pure_raw_lbs = categories.get("brisket_lbs", {}).get("forecast", [0]*30)[i]
+        pork_pure_raw_lbs = categories.get("pulled_pork_lbs", {}).get("forecast", [0]*30)[i]
+        sausage_lbs = categories.get("sausage_links", {}).get("forecast", [0]*30)[i]
         tacos_brisket = categories.get("tacos_brisket", {}).get("forecast", [0]*30)[i]
         tacos_pork = categories.get("tacos_pork", {}).get("forecast", [0]*30)[i]
         tacos_sold = tacos_brisket + tacos_pork
         rosebuds_sold = categories.get("rosebuds", {}).get("forecast", [0]*30)[i]
         pork_ribs_racks = categories.get("pork_ribs_racks", {}).get("forecast", [0]*30)[i]
         beef_dino_ribs = categories.get("beef_dino_ribs", {}).get("forecast", [0]*30)[i]
+        
+        # Calculate raw meat needed for composed items (Yield Loss = 50%)
+        # 1 Taco = 0.25 lbs cooked meat = 0.5 lbs raw meat
+        # 1 Rosebud = 0.1 lbs cooked meat = 0.2 lbs raw meat
+        brisket_raw_tacos = tacos_brisket * 0.5
+        brisket_raw_rosebuds = rosebuds_sold * 0.2
+        pork_raw_tacos = tacos_pork * 0.5
+        
+        brisket_raw_lbs = brisket_pure_raw_lbs + brisket_raw_tacos + brisket_raw_rosebuds
+        pork_lbs = pork_pure_raw_lbs + pork_raw_tacos
         
         # We need to compute predicted_revenue and staffing. We can estimate revenue from the demand index.
         demand_index = arima_data["forecast_metrics"]["demand_index"]["future"][:days][i]
@@ -72,7 +82,7 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             "predicted_revenue": round(base_revenue, 2),
             "brisket_raw_lbs": round(brisket_raw_lbs, 1),
             "pork_shoulder_raw_lbs": round(pork_lbs, 1),
-            "sausage_links": round(sausage_links, 1),
+            "sausage_lbs": round(sausage_lbs, 1),
             "tacos_sold": int(tacos_sold),
             "rosebuds_sold": int(rosebuds_sold),
             "pork_ribs_racks": int(pork_ribs_racks),
@@ -84,8 +94,9 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
     # Generate dynamic insight string
     saturday_record = next((r for r in records if r["day_name"] == "Sat"), records[0])
     insight_string = (
-        f"The ARIMA model predicts {saturday_record['brisket_raw_lbs']} lbs of brisket demand for Saturday. "
-        f"Batch targets should be scaled based on this real historical data trend."
+        f"Because brisket loses 50% of its weight during the 14-hour smoke, and composed items like "
+        f"Tacos ({int(saturday_record['tacos_sold'])} projected) and Rosebuds ({int(saturday_record['rosebuds_sold'])} projected) "
+        f"pull directly from this yield, the {saturday_record['brisket_raw_lbs']} lbs of total raw brisket accounts for both pure meat sales and composed items."
     )
 
     return {
@@ -101,7 +112,7 @@ def build_plotly_meat_chart_json(forecast_data: Dict[str, Any]) -> str:
     dates = [r["date"] + f" ({r['day_name']})" for r in records]
     brisket = [r["brisket_raw_lbs"] for r in records]
     pork = [r["pork_shoulder_raw_lbs"] for r in records]
-    sausage = [r["sausage_links"] for r in records]
+    sausage = [r["sausage_lbs"] for r in records]
     tacos = [r["tacos_sold"] for r in records]
     rosebuds = [r["rosebuds_sold"] for r in records]
     pork_ribs = [r["pork_ribs_racks"] for r in records]

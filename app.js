@@ -1056,20 +1056,20 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     // Embedded default 14-day forecast data to ensure zero downtime or offline/CORS issues
     const defaultForecastRecords = [
-      { date: "2026-08-14", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_links: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_links: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 6, pitmaster_hours: 51.0 },
-      { date: "2026-08-16", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_links: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-17", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_links: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-18", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_links: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-19", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_links: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-20", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_links: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-21", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_links: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-22", day_name: "Sat", predicted_revenue: 3960.0, brisket_raw_lbs: 112.2, pork_shoulder_raw_lbs: 66.0, sausage_links: 74, tacos_sold: 99, rosebuds_sold: 39, pork_ribs_racks: 6, beef_dino_ribs: 5, recommended_staff: 5, pitmaster_hours: 42.5 },
-      { date: "2026-08-23", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_links: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-24", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_links: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-25", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_links: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-26", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_links: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-27", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_links: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 }
+      { date: "2026-08-14", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
+      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_lbs: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 6, pitmaster_hours: 51.0 },
+      { date: "2026-08-16", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
+      { date: "2026-08-17", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
+      { date: "2026-08-18", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
+      { date: "2026-08-19", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
+      { date: "2026-08-20", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
+      { date: "2026-08-21", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
+      { date: "2026-08-22", day_name: "Sat", predicted_revenue: 3960.0, brisket_raw_lbs: 112.2, pork_shoulder_raw_lbs: 66.0, sausage_lbs: 74, tacos_sold: 99, rosebuds_sold: 39, pork_ribs_racks: 6, beef_dino_ribs: 5, recommended_staff: 5, pitmaster_hours: 42.5 },
+      { date: "2026-08-23", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
+      { date: "2026-08-24", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
+      { date: "2026-08-25", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
+      { date: "2026-08-26", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
+      { date: "2026-08-27", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 }
     ];
 
     let dashPayload = null;
@@ -1106,7 +1106,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // Populate Key Meat & Revenue Targets with Exact Model Projections
     const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
     const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs || 0);
-    const sVal = Math.round(matchedRecord.sausage_links || 0);
+    const sVal = Math.round(matchedRecord.sausage_lbs || 0);
     const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
     const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
     const tVal = 25; // Smoked turkey baseline
@@ -1125,8 +1125,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     if (brisketElem) brisketElem.textContent = bVal;
     if (porkElem) porkElem.textContent = pVal;
-    const sausageBatches = Math.ceil(sVal / 150.0);
+    
+    // Sausage: sVal is in lbs. 1 Batch = 50 lbs. 3 links = 1 lb.
+    const sausageBatches = Math.ceil(sVal / 50.0);
+    const sausageLinks = sVal * 3;
     if (sausageElem) sausageElem.textContent = sausageBatches;
+    const sausageLinksSub = document.getElementById('kpi-sausage-links-sub');
+    if (sausageLinksSub) sausageLinksSub.textContent = `(${sausageLinks} links / ${sVal} lbs)`;
+    
     if (ribsElem) ribsElem.textContent = rVal;
     if (dinoElem) dinoElem.textContent = drVal;
     if (turkeyElem) turkeyElem.textContent = tVal;
@@ -1159,7 +1165,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const dates = slicedRecords.map(r => `${r.date} (${r.day_name})`);
     const brisketData = slicedRecords.map(r => r.brisket_raw_lbs || 0);
     const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0);
-    const sausageData = slicedRecords.map(r => r.sausage_links || 0);
+    const sausageData = slicedRecords.map(r => r.sausage_lbs || 0);
     const tacosData = slicedRecords.map(r => r.tacos_sold || 0);
     const rosebudsData = slicedRecords.map(r => r.rosebuds_sold || 0);
     const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks || 0);
@@ -1175,7 +1181,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       traces = [{ x: dates, y: brisketData, name: 'Raw Brisket Prep (lbs)', type: 'bar', marker: { color: '#c0392b' } }];
     } else if (selectedCat === 'pulled_pork_lbs') {
       traces = [{ x: dates, y: porkData, name: 'Pork Shoulder (lbs)', type: 'bar', marker: { color: '#e67e22' } }];
-    } else if (selectedCat === 'sausage_links') {
+    } else if (selectedCat === 'sausage_lbs') {
       traces = [{ x: dates, y: sausageData, name: 'Sausage Links', type: 'scatter', mode: 'lines+markers', line: { color: '#f1c40f', width: 3 }, marker: { size: 8 } }];
     } else if (selectedCat === 'pork_ribs_racks') {
       traces = [{ x: dates, y: porkRibsData, name: 'Pork Spare Ribs (Racks)', type: 'bar', marker: { color: '#d35400' } }];
