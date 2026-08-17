@@ -1197,8 +1197,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         titlefont: { color: '#f1c40f' },
         tickfont: { color: '#f1c40f' }
       },
-      legend: { orientation: 'h', y: -0.25, x: 0 },
-      margin: { l: 60, r: 60, t: 50, b: 90 }
+      legend: { orientation: 'h', y: -0.4, x: 0 },
+      margin: { l: 60, r: 60, t: 50, b: 120 }
     };
 
     Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
