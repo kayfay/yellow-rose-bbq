@@ -907,9 +907,14 @@ async function renderPlotlyEventChart() {
   };
 
   try {
-    const res = await fetch('clover_api/analytics/event_payload.json');
-    if (res.ok) {
-      const payload = await res.json();
+    let payload = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.event_payload) {
+      payload = window.BBQ_PAYLOADS.event_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/event_payload.json');
+      if (res.ok) payload = await res.json();
+    }
+    if (payload) {
       const layout = payload.plotly_event_chart.layout;
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
@@ -963,9 +968,14 @@ async function renderPlotlyWeatherChart() {
   };
 
   try {
-    const res = await fetch('clover_api/analytics/weather_payload.json');
-    if (res.ok) {
-      const payload = await res.json();
+    let payload = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.weather_payload) {
+      payload = window.BBQ_PAYLOADS.weather_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/weather_payload.json');
+      if (res.ok) payload = await res.json();
+    }
+    if (payload) {
       const layout = payload.plotly_weather_chart.layout;
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
@@ -1061,9 +1071,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let dashPayload = null;
     try {
-      const dashRes = await fetch('clover_api/analytics/dashboard_payload.json');
-      if (dashRes.ok) {
-        dashPayload = await dashRes.json();
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload) {
+        dashPayload = window.BBQ_PAYLOADS.dashboard_payload;
+      } else {
+        const dashRes = await fetch('clover_api/analytics/dashboard_payload.json');
+        if (dashRes.ok) dashPayload = await dashRes.json();
       }
     } catch (e) {
       console.log("Using embedded dashboard dataset fallback:", e);
@@ -1285,9 +1297,14 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
   };
 
   try {
-    const res = await fetch('clover_api/analytics/shift_payload.json');
-    if (res.ok) {
-      const payload = await res.json();
+    let payload = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.shift_payload) {
+      payload = window.BBQ_PAYLOADS.shift_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/shift_payload.json');
+      if (res.ok) payload = await res.json();
+    }
+    if (payload) {
       const layout = payload.plotly_heatmap.layout;
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
