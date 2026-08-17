@@ -670,6 +670,9 @@ function initMultiTabNavigation() {
 
       if (targetTab === 'forecasting-analytics') {
         renderPlotlyForecastingChart();
+        renderPlotlyEventChart();
+        renderPlotlyWeatherChart();
+        renderPlotlyShiftHeatmap();
         document.body.classList.add('hide-footer');
         const footer = document.querySelector('.app-footer');
         if (footer) footer.style.display = 'none';
