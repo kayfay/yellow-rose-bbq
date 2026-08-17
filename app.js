@@ -1101,7 +1101,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
-    const sausageElem = document.getElementById('kpi-sausage-links');
+    const sausageElem = document.getElementById('kpi-sausage-batches');
     const ribsElem = document.getElementById('kpi-pork-ribs-racks');
     const dinoElem = document.getElementById('kpi-beef-dino-ribs');
     const turkeyElem = document.getElementById('kpi-turkey-lbs');
@@ -1110,7 +1110,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     if (brisketElem) brisketElem.textContent = bVal;
     if (porkElem) porkElem.textContent = pVal;
-    if (sausageElem) sausageElem.textContent = sVal;
+    const sausageBatches = Math.ceil(sVal / 150.0);
+    if (sausageElem) sausageElem.textContent = sausageBatches;
     if (ribsElem) ribsElem.textContent = rVal;
     if (dinoElem) dinoElem.textContent = drVal;
     if (turkeyElem) turkeyElem.textContent = tVal;
@@ -1119,13 +1120,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const bCasesElem = document.getElementById('kpi-brisket-cases');
     const pCasesElem = document.getElementById('kpi-pork-cases');
-    const sCasesElem = document.getElementById('kpi-sausage-cases');
+    const sCasesElem = document.getElementById('kpi-sausage-links-sub');
     const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
 
     if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
     if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
-    if (sCasesElem) sCasesElem.textContent = `(Made from Brisket/Rib Trim)`;
+    if (sCasesElem) sCasesElem.textContent = `(~${Math.round(sVal)} links)`;
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
