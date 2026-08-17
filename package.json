@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kayfay/yellow-rose-bbq/issues"
   },
-  "homepage": "https://github.com/kayfay/yellow-rose-bbq#readme"
+  "homepage": "https://github.com/kayfay/yellow-rose-bbq#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
 }
