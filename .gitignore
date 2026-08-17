@@ -27,3 +27,9 @@ clover_api/data/*.csv
 clover_api/analytics/*.png
 clover_api/analytics/*.html
 !clover_api/analytics/*.json
+
+# Testing & Node
+node_modules/
+playwright-report/
+test-results/
+.pytest_cache/

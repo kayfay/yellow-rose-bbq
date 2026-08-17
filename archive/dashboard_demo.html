@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Telemetry Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Enterprise Dark Slate Palette */
+            --bg-base: #020617; 
+            --bg-panel: #0f172a; 
+            --bg-hover: #1e293b;
+            --border-color: #334155;
+            --border-light: #475569;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            
+            /* Data Accent Colors */
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --accent-green: #10b981;
+            --accent-green-dim: rgba(16, 185, 129, 0.15);
+            --accent-red: #ef4444;
+            --accent-red-dim: rgba(239, 68, 68, 0.15);
+            --accent-orange: #f59e0b;
+            --accent-orange-dim: rgba(245, 158, 11, 0.15);
+            
+            --font-main: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-size: 12px; /* High density baseline */
+            line-height: 1.4;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Density-Optimized Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color); 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary); 
+        }
+
+        /* --- Layout Structures --- */
+        .sidebar {
+            width: 48px;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            z-index: 50;
+            flex-shrink: 0;
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        
+        .nav-icon:hover, .nav-icon.active {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+            box-shadow: inset 2px 0 0 var(--accent-blue);
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0; /* Enables proper flex shrinking down to 320px */
+        }
+
+        .topbar {
+            height: 40px;
+            background-color: var(--bg-panel);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            flex-shrink: 0;
+        }
+
+        .topbar-left, .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand {
+            font-weight: 600; 
+            letter-spacing: -0.02em;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-box {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 4px 10px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 11px;
+            width: 240px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .search-box:focus {
+            border-color: var(--border-light);
+        }
+
+        .content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* --- Header & Controls --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 2px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: var(--font-main);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background-color: var(--bg-hover);
+            border-color: var(--border-light);
+        }
+        
+        .btn.primary {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+        
+        .btn.primary:hover {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        /* --- Grid Layouts & Panels --- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: 12px;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            line-height: 1;
+        }
+
+        .kpi-unit {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .trend {
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .trend.up { color: var(--accent-green); }
+        .trend.down { color: var(--accent-red); }
+
+        /* Pure CSS Flex Sparklines */
+        .sparkline {
+            height: 28px;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            margin-top: 4px;
+        }
+        .spark-bar {
+            flex: 1;
+            background-color: var(--bg-hover);
+            border-radius: 1px 1px 0 0;
+            transition: background-color 0.2s, height 0.5s ease;
+        }
+        .spark-bar:hover {
+            background-color: var(--text-tertiary);
+        }
+        .spark-bar.highlight {
+            background-color: var(--accent-blue);
+        }
+
+        /* --- Main Data Grid & Sidebars --- */
+        .data-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+            gap: 16px;
+        }
+
+        .table-panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            grid-column: span auto;
+        }
+
+        @media (min-width: 1024px) {
+            .table-panel {
+                grid-column: span 2; /* Force table to take 2/3 width on large screens */
+            }
+        }
+
+        .table-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-base);
+        }
+
+        .table-wrapper {
+            flex: 1;
+            overflow-x: auto; /* Ensures no page-level horizontal scroll */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 600px; /* Forces inner scroll if container is < 600px */
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-panel);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        
+        tr:hover td {
+            background-color: var(--bg-hover);
+        }
+
+        .cell-mono {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .cell-mono-bright {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-primary);
+        }
+
+        .cell-right {
+            text-align: right;
+        }
+
+        /* --- Micro-graphics --- */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-main);
+        }
+        .badge.success { background-color: var(--accent-green-dim); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge.warning { background-color: var(--accent-orange-dim); color: var(--accent-orange); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge.danger { background-color: var(--accent-red-dim); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge.info { background-color: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); }
+
+        /* Pure CSS Conic Gradient Progress Ring */
+        .progress-ring {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 600;
+            position: relative;
+        }
+        .progress-ring::before {
+            content: "";
+            position: absolute;
+            inset: 2.5px;
+            background-color: var(--bg-panel);
+            border-radius: 50%;
+        }
+        .progress-ring span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Inline SVG Mini Line Chart */
+        .mini-chart {
+            width: 70px;
+            height: 18px;
+            display: block;
+        }
+        .mini-chart polyline {
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- Secondary Side Panels --- */
+        .side-panels {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .list-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .node-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .node-name {
+            font-weight: 500;
+            font-size: 12px;
+        }
+        .node-ip {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        .health-bar-container {
+            width: 48px;
+            height: 4px;
+            background-color: var(--bg-base);
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .health-bar {
+            height: 100%;
+            border-radius: 1px;
+        }
+        
+        .log-entry {
+            display: flex;
+            gap: 12px;
+            padding: 6px 0;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            border-left: 2px solid transparent;
+        }
+        .log-entry:hover {
+            border-left-color: var(--border-light);
+            background-color: rgba(255,255,255,0.01);
+        }
+        .log-time {
+            color: var(--text-tertiary);
+            flex-shrink: 0;
+        }
+        .log-msg {
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Mobile Utility Adjustments */
+        @media (max-width: 480px) {
+            .search-box { width: 140px; }
+            .kpi-value { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ultra-narrow iconic sidebar -->
+    <nav class="sidebar">
+        <div class="nav-icon active" title="Dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </div>
+        <div class="nav-icon" title="Workloads">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+        </div>
+        <div class="nav-icon" title="Network Topology">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><circle cx="4" cy="4" r="2"></circle><circle cx="20" cy="4" r="2"></circle><circle cx="4" cy="20" r="2"></circle><circle cx="20" cy="20" r="2"></circle><line x1="5.5" y1="5.5" x2="10.5" y2="10.5"></line><line x1="18.5" y1="5.5" x2="13.5" y2="10.5"></line><line x1="5.5" y1="18.5" x2="10.5" y2="13.5"></line><line x1="18.5" y1="18.5" x2="13.5" y2="13.5"></line></svg>
+        </div>
+        <div class="nav-icon" title="System Logs" style="margin-top: auto;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        </div>
+        <div class="nav-icon" title="Settings" style="margin-bottom: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="brand">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <span>VORTEX<span style="color: var(--text-tertiary)">_MESH</span></span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <input type="text" class="search-box" placeholder="Search trace IDs, nodes, queries...">
+                <div class="badge success" style="font-size: 10px;">PROD-US-EAST</div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="page-header">
+                <div>
+                    <h1>Cluster Telemetry</h1>
+                    <div style="color: var(--text-secondary); font-size: 11px; margin-top: 4px;">
+                        T-Sync: <span class="cell-mono-bright" id="current-time">00:00:00 UTC</span> 
+                        <span style="margin: 0 6px; color: var(--border-color);">|</span>
+                        Active Sessions: <span class="cell-mono-bright">42,891</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                        Filter
+                    </button>
+                    <button class="btn primary">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Core Metrics Row -->
+            <div class="kpi-grid">
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>Ingestion Rate</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div class="kpi-value cell-mono-bright">142.8<span class="kpi-unit">GB/s</span></div>
+                        <div class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg> 12.5%</div>
+                    </div>
+                    <div class="sparkline" id="spark-ingest"></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>P99 Latency</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div class="kpi-value cell-mono-bright">42.1<span class="kpi-unit">ms</span></div>
+                        <div class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg> -4.2%</div>
+                    </div>
+                    <div class="sparkline" id="spark-latency"></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>Fault Rate (5xx)</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div class="kpi-value cell-mono-bright">0.08<span class="kpi-unit">%</span></div>
+                        <div class="trend up" style="color: var(--accent-red)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg> 0.02%</div>
+                    </div>
+                    <div class="sparkline" id="spark-error"></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>Provisioned Nodes</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect></svg>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div class="kpi-value cell-mono-bright">4,096<span class="kpi-unit">/8192</span></div>
+                        <div class="trend" style="color: var(--text-tertiary)">STABLE</div>
+                    </div>
+                    <div class="sparkline" id="spark-nodes"></div>
+                </div>
+            </div>
+
+            <!-- Lower Layout Grid -->
+            <div class="data-grid-container">
+                <!-- Dense Data Table -->
+                <div class="table-panel">
+                    <div class="table-header-row">
+                        <div style="font-weight: 600; font-size: 13px;">Pipeline Executions</div>
+                        <div style="display: flex; gap: 8px;">
+                            <span class="badge info">LIVE</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Trace ID</th>
+                                    <th>Target Zone</th>
+                                    <th>State</th>
+                                    <th class="cell-right">CPU Alloc</th>
+                                    <th class="cell-right">Mem Use</th>
+                                    <th>30m Volatility</th>
+                                    <th class="cell-right">Phase Sync</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Auxiliary Panels -->
+                <div class="side-panels">
+                    <div class="panel" style="flex: 1;">
+                        <div class="panel-header" style="margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                            <span>Zone Health Matrix</span>
+                        </div>
+                        <div id="node-health-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="panel" style="flex: 1;">
+                        <div class="panel-header" style="margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                            <span>Audit Stream</span>
+                        </div>
+                        <div id="log-list" style="overflow: hidden;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Client-Side Generation Script -->
+    <script>
+        // Utility functions
+        const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+        const randFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(2);
+        
+        // 1. Generate CSS Flex Bar Sparklines
+        const generateSparkline = (id, baseColor, highlightColor) => {
+            const container = document.getElementById(id);
+            container.innerHTML = '';
+            for(let i = 0; i < 24; i++) {
+                const height = rand(15, 100);
+                const bar = document.createElement('div');
+                bar.className = 'spark-bar';
+                bar.style.height = `${height}%`;
+                if(i === 23) {
+                    bar.style.backgroundColor = highlightColor;
+                }
+                container.appendChild(bar);
+            }
+        };
+
+        generateSparkline('spark-ingest', 'var(--bg-hover)', 'var(--accent-blue)');
+        generateSparkline('spark-latency', 'var(--bg-hover)', 'var(--accent-green)');
+        generateSparkline('spark-error', 'var(--bg-hover)', 'var(--accent-red)');
+        generateSparkline('spark-nodes', 'var(--bg-hover)', 'var(--text-tertiary)');
+
+        // 2. Generate Dense Enterprise Table Data
+        const statuses = [
+            { label: 'EXECUTING', class: 'success', color: 'var(--accent-green)' },
+            { label: 'QUEUED', class: 'info', color: 'var(--accent-blue)' },
+            { label: 'THROTTLED', class: 'warning', color: 'var(--accent-orange)' },
+            { label: 'ORPHANED', class: 'danger', color: 'var(--accent-red)' }
+        ];
+        const zones = ['us-east-1a', 'eu-central-1b', 'ap-south-1c', 'us-west-2a', 'sa-east-1c'];
+
+        const tableBody = document.getElementById('table-body');
+        
+        for(let i = 0; i < 18; i++) {
+            // Weighted random for realistic enterprise spread
+            const statusIdx = rand(0, 100) > 75 ? rand(1, 3) : 0; 
+            const status = statuses[statusIdx];
+            const cpu = randFloat(0.1, 16.0);
+            const mem = randFloat(128, 8192);
+            const progress = status.label === 'QUEUED' ? 0 : rand(12, 100);
+            
+            // Generate raw SVG polyline data for inline trend graphics
+            const trendPoints = Array.from({length: 8}, () => rand(10, 50));
+            const maxVal = Math.max(...trendPoints);
+            // X spans 0 to 70 (width), Y spans 18 down to 2 (height mapping)
+            const pts = trendPoints.map((val, idx) => `${idx * 10},${18 - (val/maxVal)*16}`).join(' ');
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="cell-mono">TRC-${rand(100000, 999999).toString(16).toUpperCase()}</td>
+                <td class="cell-mono-bright">${zones[rand(0, zones.length-1)]}</td>
+                <td><span class="badge ${status.class}">${status.label}</span></td>
+                <td class="cell-right cell-mono-bright">${cpu}vCPU</td>
+                <td class="cell-right cell-mono-bright">${mem}MB</td>
+                <td>
+                    <svg class="mini-chart">
+                        <polyline points="${pts}" stroke="${status.color}"></polyline>
+                    </svg>
+                </td>
+                <td class="cell-right">
+                    <div style="display: flex; justify-content: flex-end;">
+                        <!-- Pure CSS Conic Gradient for Progress -->
+                        <div class="progress-ring" style="background: conic-gradient(${status.color} ${progress}%, var(--border-color) 0);">
+                            <span class="cell-mono-bright">${progress}</span>
+                        </div>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        }
+
+        // 3. Generate Zone Health List
+        const nodeList = document.getElementById('node-health-list');
+        for(let i = 0; i < 5; i++) {
+            const health = rand(45, 100);
+            const hColor = health > 85 ? 'var(--accent-green)' : (health > 70 ? 'var(--accent-orange)' : 'var(--accent-red)');
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <div class="node-info">
+                    <div style="width: 8px; height: 8px; border-radius: 50%; background-color: ${hColor}; box-shadow: 0 0 4px ${hColor};"></div>
+                    <div>
+                        <div class="node-name">z-pool-${zones[i]}</div>
+                        <div class="node-ip">10.128.${rand(1,255)}.${rand(1,255)} /24</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="cell-mono-bright" style="font-size: 10px;">${health}%</span>
+                    <div class="health-bar-container">
+                        <div class="health-bar" style="width: ${health}%; background-color: ${hColor};"></div>
+                    </div>
+                </div>
+            `;
+            nodeList.appendChild(item);
+        }
+
+        // 4. Generate Enterprise Audit Stream
+        const logList = document.getElementById('log-list');
+        const msgs = [
+            "BGP route table sync completed",
+            "Auto-scaling group [asg-web] expanded",
+            "WARN: High IOPS detected on vol-0x9f",
+            "Database primary failover initiated",
+            "Redis cache miss threshold breached",
+            "SIGTERM sent to orphaned pod",
+            "Ingress TLS cert renewed automatically"
+        ];
+        
+        let now = new Date();
+        for(let i = 0; i < 6; i++) {
+            const logTime = new Date(now.getTime() - i * rand(1200, 45000));
+            const timeStr = logTime.toISOString().split('T')[1].substring(0, 11);
+            const msg = msgs[rand(0, msgs.length-1)];
+            const isErr = msg.includes("WARN") || msg.includes("breach") || msg.includes("failover");
+            const colorClass = isErr ? 'var(--accent-red)' : 'var(--text-secondary)';
+            
+            const item = document.createElement('div');
+            item.className = 'log-entry';
+            item.innerHTML = `
+                <span class="log-time">[${timeStr}]</span>
+                <span class="log-msg" style="color: ${colorClass}">${msg}</span>
+            `;
+            logList.appendChild(item);
+        }
+
+        // 5. Clock Sync
+        const timeEl = document.getElementById('current-time');
+        setInterval(() => {
+            const date = new Date();
+            timeEl.textContent = date.toISOString().split('T')[1].substring(0, 8) + ' UTC';
+        }, 1000);
+
+    </script>
+</body>
+</html>
