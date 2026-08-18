@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://kvdb.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://kvdb.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="stylesheet" href="style.css?v=20260817_01">
   <!-- Include Inter Font for enterprise dense aesthetic -->
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <!-- Plotly.js for interactive dynamic visualizations -->
-  <script src="plotly-2.35.2.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
   <header class="app-header">
@@ -33,11 +33,11 @@
     <nav class="app-tab-navigation">
       <div class="tab-nav-container">
         <button type="button" class="app-tab-btn active" id="tab-btn-sausage" data-tab="sausage-tracker">
-          <span class="tab-btn-icon">🌭</span>
+          <span class="tab-btn-icon"></span>
           <span>Sausage Prep Tracker</span>
         </button>
         <button type="button" class="app-tab-btn" id="tab-btn-forecasting" data-tab="forecasting-analytics">
-          <span class="tab-btn-icon">📊</span>
+          <span class="tab-btn-icon"></span>
           <span>POS Analytics & Forecasting</span>
         </button>
       </div>
@@ -51,18 +51,18 @@
       <section class="recipe-selector-card">
         <h2 class="section-title">Sausage Formulations</h2>
         <div class="recipe-pills-container" id="recipe-pills">
-          <button type="button" class="recipe-pill" data-recipe="classic-beef"><span class="recipe-pill-icon">🥩</span> <span>Classic Texas Beef</span></button>
-          <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon">🌶️</span> <span>Jalapeño Cheddar</span></button>
-          <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon">🌽</span> <span>The Elote (Street Corn)</span></button>
-          <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon">🥑</span> <span>The Salsa Verde</span></button>
-          <button type="button" class="recipe-pill" data-recipe="sweet-bacon"><span class="recipe-pill-icon">🥓</span> <span>Sweet Bacon & Cream Cheese</span></button>
-          <button type="button" class="recipe-pill" data-recipe="garlic-parmesan"><span class="recipe-pill-icon">🧄</span> <span>Garlic Parmesan</span></button>
-          <button type="button" class="recipe-pill" data-recipe="farmhouse-cabbage"><span class="recipe-pill-icon">🥬</span> <span>Farmhouse Cabbage & Bacon</span></button>
-          <button type="button" class="recipe-pill" data-recipe="garlic-birria"><span class="recipe-pill-icon">🌮</span> <span>Garlic Birria & Cheese</span></button>
+          <button type="button" class="recipe-pill" data-recipe="classic-beef"><span class="recipe-pill-icon"></span> <span>Classic Texas Beef</span></button>
+          <button type="button" class="recipe-pill active" data-recipe="jalapeno-cheddar"><span class="recipe-pill-icon"></span> <span>Jalapeño Cheddar</span></button>
+          <button type="button" class="recipe-pill" data-recipe="elote"><span class="recipe-pill-icon"></span> <span>The Elote (Street Corn)</span></button>
+          <button type="button" class="recipe-pill" data-recipe="salsa-verde"><span class="recipe-pill-icon"></span> <span>The Salsa Verde</span></button>
+          <button type="button" class="recipe-pill" data-recipe="sweet-bacon"><span class="recipe-pill-icon"></span> <span>Sweet Bacon & Cream Cheese</span></button>
+          <button type="button" class="recipe-pill" data-recipe="garlic-parmesan"><span class="recipe-pill-icon"></span> <span>Garlic Parmesan</span></button>
+          <button type="button" class="recipe-pill" data-recipe="farmhouse-cabbage"><span class="recipe-pill-icon"></span> <span>Farmhouse Cabbage & Bacon</span></button>
+          <button type="button" class="recipe-pill" data-recipe="garlic-birria"><span class="recipe-pill-icon"></span> <span>Garlic Birria & Cheese</span></button>
         </div>
         <div class="recipe-active-info" id="recipe-active-info">
           <div class="recipe-info-header">
-            <span class="recipe-info-icon" id="recipe-info-icon">🌶️</span>
+            <span class="recipe-info-icon" id="recipe-info-icon"></span>
             <div class="recipe-info-title-box">
               <h3 id="recipe-info-title">Jalapeño Cheddar</h3>
               <span class="recipe-menu-tag" id="recipe-menu-tag">📍 Menu Source: Pitmaster Original Signature</span>
@@ -595,7 +595,7 @@
             <h3>Step-by-Step Reasoning: Weather Exogenous Correlation</h3>
             <ul>
               <li><strong>Precipitation Impact (+$97.37/mm):</strong> Blending Open-Meteo Jacksonville rainfall data with daily POS transactions reveals that moderate rain shifts ordering behavior to higher-ticket family bundles for at-home dining.</li>
-              <li><strong>Extreme Heat (>90&deg;F):</strong> Foot traffic drops slightly during Florida heat waves. Customers want to get in and out quickly rather than dining on the patio.</li>
+              <li><strong>Extreme Heat (>90&deg;F):</strong> Outdoor patio dining drops significantly during Florida heat waves. Dine-in volume concentrates heavily at the indoor air-conditioned tables, and overflow customers shift toward quick takeout or curbside pickup rather than sitting outside.</li>
               <li><strong>Operational Choice - Weather Adjustments:</strong> Since we avoid margin-killing third-party delivery, leverage heavy rain days by promoting "Rainy Day Vacuum-Sealed Freezer Packs." On days when rainfall exceeds 10mm, reduce walk-in hot brisket prep by 15%, but immediately vacuum-seal the surplus and promote it on social media for customers to stock their freezers. During extreme heat, shift front-of-house staff to expedite curbside pickup to keep customers in their air-conditioned cars.</li>
             </ul>
           </div>
@@ -670,7 +670,7 @@
           <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">Last Updated: <span id="last-updated-time">--</span></span>
         </div>
         <button id="btn-refresh-analytics" class="app-tab-btn" style="margin: 0; display: flex; align-items: center; gap: 6px; padding: 0.4rem 0.8rem;">
-          <span class="btn-icon">↻</span>
+          <span class="btn-icon"></span>
           <span class="btn-text">Refresh Data</span>
         </button>
       </section>
@@ -681,21 +681,22 @@
   <footer class="app-footer">
     <div class="footer-buttons">
       <button id="btn-reset" class="footer-btn btn-danger">
-        <span class="btn-icon">↺</span>
+        <span class="btn-icon"></span>
         <span class="btn-text">Reset Run</span>
       </button>
       <button id="btn-share" class="footer-btn btn-secondary">
-        <span class="btn-icon">🔗</span>
+        <span class="btn-icon"></span>
         <span class="btn-text">Share Link</span>
       </button>
       <button id="btn-shortcut" class="footer-btn btn-primary">
-        <span class="btn-icon">⚡</span>
+        <span class="btn-icon"></span>
         <span class="btn-text">Pitmaster Speed Run</span>
       </button>
     </div>
   </footer>
 
   <script src="clover_api/analytics/payloads.js"></script>
-  <script src="app.js?v=20260817_03" defer></script>
+  <script src="d3_charts.js"></script>
+  <script src="app.js?v=20260817_04" defer></script>
 </body>
 </html>

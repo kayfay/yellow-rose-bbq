@@ -19,7 +19,7 @@ const RECIPES = {
   'classic-beef': {
     id: 'classic-beef',
     name: 'Classic Texas Beef',
-    icon: '🥩',
+    icon: '',
     menuSource: 'Pitmaster Original Signature',
     description: '100% Beef Sausage made with our standard 75/25 lean-to-fat ratio. Simple, bold, and traditional.',
     stuffedAddInLbs: 5.5,
@@ -40,7 +40,7 @@ const RECIPES = {
   'jalapeno-cheddar': {
     id: 'jalapeno-cheddar',
     name: 'Jalapeño Cheddar',
-    icon: '🌶️',
+    icon: '',
     menuSource: 'Pitmaster Original Signature',
     description: 'Classic Texas smoked sausage loaded with high-temp cheddar cubes and fresh diced jalapeños.',
     stuffedAddInLbs: 9.5,
@@ -65,7 +65,7 @@ const RECIPES = {
   'elote': {
     id: 'elote',
     name: 'The Elote (Street Corn)',
-    icon: '🌽',
+    icon: '',
     menuSource: 'Elote Side Dish & Caesar Salad Prep',
     description: 'Texas BBQ meets Mexican street corn: smoked corn pico, sharp parmesan cheese, fresh cilantro & diced onions.',
     stuffedAddInLbs: 10.5,
@@ -92,7 +92,7 @@ const RECIPES = {
   'salsa-verde': {
     id: 'salsa-verde',
     name: 'The Salsa Verde',
-    icon: '🥑',
+    icon: '',
     menuSource: 'Turkey Bacon Ranch Quesadilla & Quesa Tacos',
     description: 'Zesty sausage blended with house salsa verde liquid binder, melty cheese, cilantro & diced onions.',
     stuffedAddInLbs: 9.5,
@@ -118,7 +118,7 @@ const RECIPES = {
   'sweet-bacon': {
     id: 'sweet-bacon',
     name: 'Sweet Bacon & Cream Cheese',
-    icon: '🥓',
+    icon: '',
     menuSource: 'Rose Buds & Quesadillas Prep',
     description: 'Decadent smoked sausage packed with chilled cream cheese cubes, crispy bacon bits, honey & signature BBQ rub.',
     stuffedAddInLbs: 11.5,
@@ -144,7 +144,7 @@ const RECIPES = {
   'garlic-parmesan': {
     id: 'garlic-parmesan',
     name: 'Garlic Parmesan',
-    icon: '🧄',
+    icon: '',
     menuSource: 'Caesar Salad & Kitchen Garlic Prep',
     description: 'Savory & aromatic sausage featuring sautéed minced garlic, rich parmesan cheese & signature BBQ rub.',
     stuffedAddInLbs: 8.5,
@@ -169,7 +169,7 @@ const RECIPES = {
   'farmhouse-cabbage': {
     id: 'farmhouse-cabbage',
     name: 'Farmhouse Cabbage & Bacon',
-    icon: '🥬',
+    icon: '',
     menuSource: 'Sides Station Cabbage & Rose Buds Bacon',
     description: 'Hearty farmhouse-style blend with tender sautéed cabbage, smoky bacon bits & sautéed garlic.',
     stuffedAddInLbs: 13.0,
@@ -195,7 +195,7 @@ const RECIPES = {
   'garlic-birria': {
     id: 'garlic-birria',
     name: 'Garlic Birria & Cheese',
-    icon: '🌮',
+    icon: '',
     menuSource: 'Crispy Quesa Tacos (Birria, Melty Cheese, Onions)',
     description: 'Rich birria meat & reduced consommé, melted cheese, sautéed garlic & diced onions.',
     stuffedAddInLbs: 12.5,
@@ -666,6 +666,7 @@ function initMultiTabNavigation() {
       if (activePane) {
         activePane.style.display = 'block';
         activePane.classList.add('active');
+        window.scrollTo(0, 0);
       }
 
       if (targetTab === 'forecasting-analytics') {
@@ -870,25 +871,14 @@ function updateDeliveryPreset(targetDayNum, btnId) {
 }
 
 function renderPlotlyNoData(containerId) {
-  if (typeof Plotly === 'undefined') return;
-  Plotly.newPlot(containerId, [], {
-    xaxis: { visible: false },
-    yaxis: { visible: false },
-    annotations: [{
-      text: 'Data Not Yet Available',
-      xref: 'paper', yref: 'paper',
-      showarrow: false,
-      font: { size: 16, color: '#999' }
-    }],
-    plot_bgcolor: 'rgba(0,0,0,0)',
-    paper_bgcolor: 'rgba(0,0,0,0)',
-    font: { family: 'Inter, sans-serif', color: '#94a3b8' }
-  }, { displayModeBar: false });
+  if (typeof d3 === 'undefined') return;
+  const container = document.getElementById(containerId);
+  if (container) container.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Data Available</div>';
 }
 
 async function renderPlotlyEventChart() {
   const container = document.getElementById('plotly-event-impact-chart');
-  if (!container || typeof Plotly === 'undefined') return;
+  if (!container || typeof d3 === 'undefined') return;
 
   const defaultEventTraces = [{
     x: ["Normal Day", "State/Federal Holiday", "Jaguars Game Day"],
@@ -925,19 +915,23 @@ async function renderPlotlyEventChart() {
       if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_event_chart.data;
-      Plotly.newPlot('plotly-event-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
+      if (typeof d3 !== 'undefined') {
+        renderD3GenericChart('plotly-event-impact-chart', traces, layout.title);
+      }
       return;
     }
   } catch (err) {
     console.log('Using embedded event chart dataset');
   }
 
-  Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, { responsive: true, displayModeBar: false });
+  if (typeof d3 !== 'undefined') {
+    renderD3GenericChart('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout.title);
+  }
 }
 
 async function renderPlotlyWeatherChart() {
   const container = document.getElementById('plotly-weather-impact-chart');
-  if (!container || typeof Plotly === 'undefined') return;
+  if (!container || typeof d3 === 'undefined') return;
 
   const defaultWeatherTraces = [
     {
@@ -986,14 +980,18 @@ async function renderPlotlyWeatherChart() {
       if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_weather_chart.data;
-      Plotly.newPlot('plotly-weather-impact-chart', traces, layout, { responsive: true, displayModeBar: false });
+      if (typeof d3 !== 'undefined') {
+        renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
+      }
       return;
     }
   } catch (err) {
     console.log('Using embedded weather chart dataset');
   }
 
-  Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, { responsive: true, displayModeBar: false });
+  if (typeof d3 !== 'undefined') {
+    renderD3GenericChart('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout.title);
+  }
 }
 
 function updatePresetHorizon(days) {
@@ -1057,7 +1055,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // Embedded default 14-day forecast data to ensure zero downtime or offline/CORS issues
     const defaultForecastRecords = [
       { date: "2026-08-14", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_lbs: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 6, pitmaster_hours: 51.0 },
+      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_lbs: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 5, pitmaster_hours: 42.5 },
       { date: "2026-08-16", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
       { date: "2026-08-17", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
       { date: "2026-08-18", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
@@ -1094,9 +1092,17 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       matchedRecord = records.find(r => r.day_name === shortDayStr) || records[0];
     }
 
-    const insightStr = (dashPayload && dashPayload.forecast && dashPayload.forecast.insight_string)
+    const catSelector = document.getElementById('category-selector');
+    const selectedCat = catSelector ? catSelector.value : 'baseline';
+
+    let insightStr = (dashPayload && dashPayload.forecast && dashPayload.forecast.insight_string)
       ? dashPayload.forecast.insight_string
       : "The forecast dictates prepping ~128.9 lbs of raw brisket and ~75.9 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, and composed items like Tacos (113 projected) and Rosebuds (45 projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing. We also predict 7 racks of pork ribs and 6 beef dino ribs.";
+
+    if (selectedCat !== 'baseline' && catSelector) {
+      const selectedText = catSelector.options[catSelector.selectedIndex].text;
+      insightStr = `Isolated Analysis: The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
+    }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
     if (insightSpan) {
@@ -1171,59 +1177,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks || 0);
     const beefRibsData = slicedRecords.map(r => r.beef_dino_ribs || 0);
 
-    const catSelector = document.getElementById('category-selector');
-    const selectedCat = catSelector ? catSelector.value : 'baseline';
+    if (!chartContainer || typeof d3 === 'undefined') return;
 
-    if (!chartContainer || typeof Plotly === 'undefined') return;
+    // (catSelector already handled above)
 
-    let traces = [];
-    if (selectedCat === 'brisket_lbs') {
-      traces = [{ x: dates, y: brisketData, name: 'Raw Brisket Prep (lbs)', type: 'bar', marker: { color: '#c0392b' } }];
-    } else if (selectedCat === 'pulled_pork_lbs') {
-      traces = [{ x: dates, y: porkData, name: 'Pork Shoulder (lbs)', type: 'bar', marker: { color: '#e67e22' } }];
-    } else if (selectedCat === 'sausage_lbs') {
-      traces = [{ x: dates, y: sausageData, name: 'Sausage Links', type: 'scatter', mode: 'lines+markers', line: { color: '#f1c40f', width: 3 }, marker: { size: 8 } }];
-    } else if (selectedCat === 'pork_ribs_racks') {
-      traces = [{ x: dates, y: porkRibsData, name: 'Pork Spare Ribs (Racks)', type: 'bar', marker: { color: '#d35400' } }];
-    } else if (selectedCat === 'beef_dino_ribs') {
-      traces = [{ x: dates, y: beefRibsData, name: 'Beef Dino Ribs (Units)', type: 'bar', marker: { color: '#7f8c8d' } }];
-    } else if (selectedCat === 'rosebuds') {
-      traces = [{ x: dates, y: rosebudsData, name: 'Rosebuds Sold', type: 'scatter', mode: 'lines+markers', line: { color: '#8e44ad', width: 3 } }];
-    } else if (selectedCat === 'tacos_brisket' || selectedCat === 'tacos_pork') {
-      traces = [{ x: dates, y: tacosData, name: 'Tacos Sold', type: 'scatter', mode: 'lines+markers', line: { color: '#27ae60', width: 3 } }];
-    } else {
-      // Multi-series overview
-      traces = [
-        { x: dates, y: brisketData, name: 'Raw Brisket (lbs)', type: 'bar', marker: { color: '#c0392b' } },
-        { x: dates, y: porkData, name: 'Pork Shoulder (lbs)', type: 'bar', marker: { color: '#e67e22' } },
-        { x: dates, y: sausageData, name: 'Sausage Links', type: 'scatter', mode: 'lines+markers', yaxis: 'y2', line: { color: '#f1c40f', width: 3 }, marker: { size: 7 } },
-        { x: dates, y: tacosData, name: 'Tacos Sold', type: 'scatter', mode: 'lines', yaxis: 'y2', line: { color: '#27ae60', width: 2, dash: 'dot' } },
-        { x: dates, y: rosebudsData, name: 'Rosebuds Sold', type: 'scatter', mode: 'lines', yaxis: 'y2', line: { color: '#8e44ad', width: 2, dash: 'dot' } },
-        { x: dates, y: porkRibsData, name: 'Pork Ribs (Racks)', type: 'scatter', mode: 'lines+markers', yaxis: 'y2', line: { color: '#d35400', width: 2 } },
-        { x: dates, y: beefRibsData, name: 'Beef Dino Ribs', type: 'scatter', mode: 'lines+markers', yaxis: 'y2', line: { color: '#7f8c8d', width: 2 } }
-      ];
-    }
-
-    const layout = {
-      title: `Forecasted Prep & Production Output (${daysCount}-Day Horizon)`,
-      paper_bgcolor: 'rgba(0,0,0,0)',
-      plot_bgcolor: 'rgba(20,20,30,0.6)',
-      font: { family: 'Inter, system-ui, sans-serif', color: '#f8fafc', size: 11 },
-      xaxis: { gridcolor: 'rgba(255,255,255,0.1)', tickangle: 45 },
-      yaxis: { title: 'Raw Meat Weight (lbs)', gridcolor: 'rgba(255,255,255,0.1)' },
-      yaxis2: {
-        title: 'Composed Items / Units',
-        overlaying: 'y',
-        side: 'right',
-        showgrid: false,
-        titlefont: { color: '#f1c40f' },
-        tickfont: { color: '#f1c40f' }
-      },
-      legend: { orientation: 'h', y: -0.4, x: 0 },
-      margin: { l: 60, r: 60, t: 50, b: 120 }
-    };
-
-    Plotly.newPlot('plotly-meat-sales-chart', traces, layout, { responsive: true, displayModeBar: false });
+    // Use our custom D3 charting implementation
+    renderD3ForecastingChart('plotly-meat-sales-chart', slicedRecords, dashPayload ? dashPayload.anomalies : [], selectedCat);
   } catch (error) {
     console.error("Dashboard Rendering Error: ", error);
     const chartContainer = document.getElementById('plotly-meat-sales-chart');
@@ -1280,7 +1239,7 @@ function handleDateSelectionLookup(selectedDateStr) {
 
 async function renderPlotlyShiftHeatmap(shift = 'all') {
   const container = document.getElementById('plotly-shift-heatmap');
-  if (!container || typeof Plotly === 'undefined') return;
+  if (!container || typeof d3 === 'undefined') return;
 
   const hours = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -1331,7 +1290,9 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
       else if (shift === 'custom') layout.xaxis.range = [0, 23];
       else layout.xaxis.autorange = true;
 
-      Plotly.newPlot('plotly-shift-heatmap', traces, layout, { responsive: true, displayModeBar: false });
+      if (typeof d3 !== 'undefined') {
+        renderD3GenericChart('plotly-shift-heatmap', traces, layout.title, true);
+      }
       return;
     }
   } catch (err) {
@@ -1353,5 +1314,7 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
   else if (shift === 'custom') defaultShiftLayout.xaxis.range = [0, 23];
   else defaultShiftLayout.xaxis.autorange = true;
 
-  Plotly.newPlot('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout, { responsive: true, displayModeBar: false });
+  if (typeof d3 !== 'undefined') {
+    renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true);
+  }
 }

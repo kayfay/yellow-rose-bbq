@@ -73,7 +73,7 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         demand_index = arima_data["forecast_metrics"]["demand_index"]["future"][:days][i]
         base_revenue = 1800.0 * demand_index
         
-        staff_count = max(2, int(base_revenue // 800) + 1)
+        staff_count = min(5, max(2, int(base_revenue // 800) + 1))
         pit_hours = round(staff_count * 8.5, 1)
 
         records.append({

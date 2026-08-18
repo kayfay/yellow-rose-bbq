@@ -35,30 +35,30 @@
       {
         "date": "2026-08-14",
         "day_name": "Fri",
-        "predicted_revenue": 2376.0,
-        "brisket_raw_lbs": 188.7,
-        "pork_shoulder_raw_lbs": 41.7,
-        "tacos_sold": 51,
-        "rosebuds_sold": 29,
+        "predicted_revenue": 814.97,
+        "brisket_raw_lbs": 64.8,
+        "pork_shoulder_raw_lbs": 14.3,
+        "tacos_sold": 16,
+        "rosebuds_sold": 9,
         "pork_ribs_racks": 21,
         "beef_dino_ribs": 0,
         "recommended_staff": 3,
         "pitmaster_hours": 25.5,
-        "sausage_lbs": 280.9
+        "sausage_lbs": 96.3
       },
       {
         "date": "2026-08-15",
         "day_name": "Sat",
-        "predicted_revenue": 2718.0,
-        "brisket_raw_lbs": 210.3,
-        "pork_shoulder_raw_lbs": 55.8,
-        "tacos_sold": 62,
-        "rosebuds_sold": 34,
+        "predicted_revenue": 932.27,
+        "brisket_raw_lbs": 72.1,
+        "pork_shoulder_raw_lbs": 19.2,
+        "tacos_sold": 21,
+        "rosebuds_sold": 11,
         "pork_ribs_racks": 27,
         "beef_dino_ribs": 6,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
-        "sausage_lbs": 145.0
+        "sausage_lbs": 49.7
       },
       {
         "date": "2026-08-16",
@@ -77,9 +77,9 @@
       {
         "date": "2026-08-17",
         "day_name": "Mon",
-        "predicted_revenue": 72.0,
-        "brisket_raw_lbs": 0.8,
-        "pork_shoulder_raw_lbs": 1.5,
+        "predicted_revenue": 124.42,
+        "brisket_raw_lbs": 1.4,
+        "pork_shoulder_raw_lbs": 2.6,
         "tacos_sold": 0,
         "rosebuds_sold": 0,
         "pork_ribs_racks": 0,
@@ -91,16 +91,16 @@
       {
         "date": "2026-08-18",
         "day_name": "Tue",
-        "predicted_revenue": 1494.0,
-        "brisket_raw_lbs": 113.3,
-        "pork_shoulder_raw_lbs": 29.3,
-        "tacos_sold": 39,
-        "rosebuds_sold": 18,
+        "predicted_revenue": 2581.63,
+        "brisket_raw_lbs": 195.8,
+        "pork_shoulder_raw_lbs": 50.6,
+        "tacos_sold": 66,
+        "rosebuds_sold": 30,
         "pork_ribs_racks": 13,
         "beef_dino_ribs": 0,
         "recommended_staff": 2,
         "pitmaster_hours": 17.0,
-        "sausage_lbs": 48.4
+        "sausage_lbs": 83.6
       },
       {
         "date": "2026-08-19",
@@ -161,16 +161,16 @@
       {
         "date": "2026-08-23",
         "day_name": "Sun",
-        "predicted_revenue": 2574.0,
-        "brisket_raw_lbs": 189.0,
-        "pork_shoulder_raw_lbs": 42.0,
-        "tacos_sold": 54,
-        "rosebuds_sold": 33,
+        "predicted_revenue": 1317.89,
+        "brisket_raw_lbs": 96.8,
+        "pork_shoulder_raw_lbs": 21.5,
+        "tacos_sold": 27,
+        "rosebuds_sold": 16,
         "pork_ribs_racks": 22,
         "beef_dino_ribs": 4,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
-        "sausage_lbs": 222.1
+        "sausage_lbs": 113.8
       },
       {
         "date": "2026-08-24",
@@ -538,5 +538,17 @@
         "b": 110
       }
     }
-  }
+  },
+  "anomalies": [
+    {
+      "date": "2026-08-01",
+      "type": "Massive Spike (Event/Catering)",
+      "severity": "high"
+    },
+    {
+      "date": "2026-08-05",
+      "type": "Extreme Downtime (Weather/Outage)",
+      "severity": "high"
+    }
+  ]
 }
