@@ -29,7 +29,6 @@ const RECIPES = {
       { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'cure', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -53,7 +52,6 @@ const RECIPES = {
       { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -80,7 +78,6 @@ const RECIPES = {
       { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -106,7 +103,6 @@ const RECIPES = {
       { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups (Salsa adds liquid)' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -132,7 +128,6 @@ const RECIPES = {
       { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -157,7 +152,6 @@ const RECIPES = {
       { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -183,7 +177,6 @@ const RECIPES = {
       { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -209,7 +202,6 @@ const RECIPES = {
       { id: 'onion', label: 'Diced Onion', amount: 2.0, unit: 'cups', desc: 'Taco Prep Station' },
       { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups (Birria adds liquid)' },
-      { id: 'salt', label: 'Bulk Kosher Salt (Day 1)', amount: 454, unit: 'g', desc: 'For Overnight Cure', highlight: true, isGram: true },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -462,7 +454,6 @@ function updateUI() {
       document.getElementById('verif-meat-3').innerHTML = `<strong>${(8.5 * scale).toFixed(1)} lbs</strong> Pork/Beef Fat`;
     }
 
-    document.getElementById('verif-salt').innerHTML = `<strong>${Math.round(454 * scale)} g</strong> Bulk Kosher Salt`;
     document.getElementById('verif-cure').innerHTML = `<strong>${Math.round(60 * scale)} g</strong> Pink Curing Salt`;
     document.getElementById('verif-pepper').innerHTML = `<strong>${(1.5 * scale).toFixed(1)} cups</strong> Coarse Black Pepper`;
 
