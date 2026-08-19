@@ -526,6 +526,7 @@ function initMultiTabNavigation() {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
+      if (!targetTab) return;
 
       tabBtns.forEach(b => b.classList.remove('active'));
       tabPanes.forEach(pane => {
