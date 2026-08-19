@@ -435,6 +435,7 @@ function updateUI() {
   }
 
   // Update Task Checkbox states
+  const taskRows = document.querySelectorAll('.task-row');
   taskRows.forEach(row => {
     const stepIndex = parseInt(row.getAttribute('data-step')) - 1;
     if (state.tasks[stepIndex]) {
