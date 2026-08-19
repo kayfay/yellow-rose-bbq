@@ -468,6 +468,17 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
     });
 }
 
+function formatHourAMPM(hrStr, includeMinutes = false) {
+    const h = parseInt(hrStr, 10);
+    if (isNaN(h)) return hrStr;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 === 0 ? 12 : h % 12;
+    if (includeMinutes) {
+        return `${h12}:00 ${ampm}`;
+    }
+    return `${h12} ${ampm}`;
+}
+
 function renderD3Heatmap(containerId, trace, title, shift = 'all') {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -510,7 +521,7 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
         hourEnd = 22;
         shiftTitle = "Custom Cook & Service Shifts (2:00 AM – 10:00 PM)";
     } else {
-        shiftTitle = "Hourly Demand Heatmap (All 24 Hours)";
+        shiftTitle = "Hourly Demand Heatmap (All Hours: 12 AM – 11 PM)";
     }
 
     const selectedIndices = [];
@@ -535,11 +546,13 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
         
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(x).tickFormat(d => formatHourAMPM(d, false)))
         .selectAll("text")
         .style("fill", "#cbd5e1")
         .style("font-family", "Inter, sans-serif")
-        .style("font-size", "11px");
+        .style("font-size", "10px")
+        .attr("transform", "translate(-4, 4) rotate(-35)")
+        .style("text-anchor", "end");
 
     const y = d3.scaleBand()
         .range([ height, 0 ])
@@ -616,7 +629,7 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
             d3.select(this).style("stroke", "#38bdf8").style("stroke-width", 2);
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`
-                <strong style="color: #38bdf8">${d.y} at ${d.x}</strong><br/>
+                <strong style="color: #38bdf8">${d.y} at ${formatHourAMPM(d.x, true)}</strong><br/>
                 <span style="color: #94a3b8">Relative Rush Density:</span> <span style="font-weight: bold; font-size: 15px;">${d.z.toFixed(2)}x</span>
                 <hr style="border: 0; border-top: 1px solid #334155; margin: 8px 0;"/>
                 <div style="font-size: 11px; color: #cbd5e1;">Global Peak Density: <strong>${maxZ.toFixed(2)}x</strong></div>
