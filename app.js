@@ -9,7 +9,6 @@ let state = {
 };
 
 // Configuration
-const BUCKET_ID = 'mn4q9QfG4q25p2jPswkX9o';
 const urlParams = new URLSearchParams(window.location.search);
 const sessionName = urlParams.get('session') || 'default-run';
 
@@ -27,7 +26,7 @@ const RECIPES = {
       { id: 'lean-meat', label: 'Lean Beef Base', amount: 37.5, unit: 'lbs', desc: 'Beef Trimmings' },
       { id: 'hard-fat', label: 'Hard Fat', amount: 12.5, unit: 'lbs', desc: 'Chilled Beef Fat' },
       { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'cure', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -50,7 +49,7 @@ const RECIPES = {
       { id: 'jalapenos', label: 'Diced Jalapeños', amount: 3.0, unit: 'cups', desc: 'Fully Drained & Diced' },
       { id: 'cheddar', label: 'Cheddar Cheese', amount: 5.0, unit: 'lbs', desc: 'High-Temp Cubes' },
       { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -76,7 +75,7 @@ const RECIPES = {
       { id: 'cilantro', label: 'Chopped Cilantro', amount: 1.5, unit: 'cups', desc: 'Taco Station Chop' },
       { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
       { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -101,7 +100,7 @@ const RECIPES = {
       { id: 'melty-cheese', label: 'Melty Cheese', amount: 5.0, unit: 'lbs', desc: 'Quesa Blend Cubes' },
       { id: 'cilantro', label: 'Chopped Cilantro', amount: 1.5, unit: 'cups', desc: 'Fresh Taco Chop' },
       { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups (Salsa adds liquid)' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -126,7 +125,7 @@ const RECIPES = {
       { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Rose Buds Bacon' },
       { id: 'honey', label: 'Honey Drizzle', amount: 1.5, unit: 'cups', desc: 'Binder & Sweetness' },
       { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -150,7 +149,7 @@ const RECIPES = {
       { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 2.0, unit: 'lbs', desc: 'Cooled Sautéed Garlic' },
       { id: 'parmesan', label: 'Parmesan Cheese', amount: 5.0, unit: 'lbs', desc: 'Shredded/Grated' },
       { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -175,7 +174,7 @@ const RECIPES = {
       { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Bacon Bits' },
       { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 1.5, unit: 'lbs', desc: 'Chilled Garlic' },
       { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -200,7 +199,7 @@ const RECIPES = {
       { id: 'melty-cheese', label: 'Melty Cheese', amount: 5.0, unit: 'lbs', desc: 'Quesa Cheese Cubes' },
       { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 2.0, unit: 'lbs', desc: 'Chilled Garlic' },
       { id: 'onion', label: 'Diced Onion', amount: 2.0, unit: 'cups', desc: 'Taco Prep Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 4.5, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups (Birria adds liquid)' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
@@ -215,9 +214,6 @@ const RECIPES = {
 // DOM Elements
 const weightSlider = document.getElementById('weight-slider');
 const weightVal = document.getElementById('weight-val');
-const sessionDisplay = document.getElementById('session-display');
-const syncBadge = document.getElementById('sync-badge');
-const syncText = document.getElementById('sync-text');
 
 // Recipe Selector elements
 const recipePillsContainer = document.getElementById('recipe-pills');
@@ -238,31 +234,13 @@ const btnMinus5 = document.getElementById('btn-minus-5');
 const btnMinus1 = document.getElementById('btn-minus-1');
 const btnPlus1 = document.getElementById('btn-plus-1');
 const btnPlus5 = document.getElementById('btn-plus-5');
-const btnReset = document.getElementById('btn-reset');
-const btnShare = document.getElementById('btn-share');
-const btnShortcut = document.getElementById('btn-shortcut');
-
-// Task rows
-const taskRows = document.querySelectorAll('.task-row');
 
 // Initialize App
 function init() {
-  sessionDisplay.textContent = `Session: ${sessionName.toUpperCase()}`;
+  window.scrollTo(0, 0);
 
   // Render recipe pills
   renderRecipePills();
-
-  // Set up task row click events
-  taskRows.forEach(row => {
-    row.addEventListener('click', () => {
-      const stepIndex = parseInt(row.getAttribute('data-step')) - 1;
-      state.tasks[stepIndex] = !state.tasks[stepIndex];
-      state.lastUpdated = Date.now();
-      
-      updateUI();
-      saveState();
-    });
-  });
 
   // Slider change event
   weightSlider.addEventListener('input', (e) => {
@@ -308,18 +286,9 @@ function init() {
     });
   });
 
-  // Bottom action buttons
-  btnReset.addEventListener('click', resetRun);
-  btnShortcut.addEventListener('click', triggerShortcut);
-  btnShare.addEventListener('click', copyShareLink);
-
   // Load state from local storage first (instant responsiveness)
   loadLocalState();
   updateUI();
-
-  // Load and subscribe to cloud state
-  syncWithCloud();
-  setInterval(pollCloudState, 5000);
 }
 
 // Render recipe selector pills
@@ -421,19 +390,10 @@ function updateUI() {
   const totalStuffed = (50.0 + currentRecipe.stuffedAddInLbs) * scale;
   estStuffedWeight.textContent = totalStuffed.toFixed(1);
   
-  // Total Links: Stuffed Weight * 2.6 (~1/3 lb per link)
-  const totalLinks = totalStuffed * 2.6;
+  // Total Links: Stuffed Weight * 3.0 (~1/3 lb per link)
+  const totalLinks = totalStuffed * 3.0;
   const roundedLinks = Math.round(totalLinks);
   estLinksExpected.textContent = roundedLinks;
-
-  // Update Custom Task Step Descriptions for steps 8, 9, 11
-  taskRows.forEach(row => {
-    const stepNum = parseInt(row.getAttribute('data-step'));
-    const pTag = row.querySelector('.task-content p');
-    if (currentRecipe.customSteps && currentRecipe.customSteps[stepNum] && pTag) {
-      pTag.textContent = currentRecipe.customSteps[stepNum];
-    }
-  });
 
 
 
@@ -454,15 +414,24 @@ function updateUI() {
       document.getElementById('verif-meat-3').innerHTML = `<strong>${(8.5 * scale).toFixed(1)} lbs</strong> Pork/Beef Fat`;
     }
 
-    document.getElementById('verif-cure').innerHTML = `<strong>${Math.round(60 * scale)} g</strong> Pink Curing Salt`;
-    document.getElementById('verif-pepper').innerHTML = `<strong>${(1.5 * scale).toFixed(1)} cups</strong> Coarse Black Pepper`;
+    const getIngAmount = (id) => {
+        const ing = currentRecipe.ingredients.find(i => i.id === id || (id === 'curing-salt' && i.id === 'cure'));
+        return ing ? ing.amount * scale : 0;
+    };
 
-    document.getElementById('verif-water').innerHTML = `<strong>${(10.0 * scale).toFixed(1)} cups</strong> Ice Cold Water`;
-    document.getElementById('verif-milk').innerHTML = `<strong>${(4.5 * scale).toFixed(1)} cups</strong> Powdered Milk`;
+    const cureAmt = getIngAmount('curing-salt');
+    const pepperAmt = getIngAmount('pepper');
+    const waterAmt = getIngAmount('water');
+    const milkAmt = getIngAmount('milk');
+
+    document.getElementById('verif-cure').innerHTML = cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`;
+    document.getElementById('verif-pepper').innerHTML = pepperAmt > 0 ? `<strong>${pepperAmt.toFixed(1)} cups</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`;
+    document.getElementById('verif-water').innerHTML = waterAmt > 0 ? `<strong>${waterAmt.toFixed(1)} cups</strong> Ice Cold Water` : `<em>(No Water)</em>`;
+    document.getElementById('verif-milk').innerHTML = milkAmt > 0 ? `<strong>${milkAmt.toFixed(1)} cups</strong> Powdered Milk` : `<em>(No Milk)</em>`;
     
     document.getElementById('verif-yield-base').textContent = state.weight.toFixed(1);
     document.getElementById('verif-yield-total').textContent = ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1);
-    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 2.6);
+    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 3.0);
   }
 
   // Update Task Checkbox states
@@ -518,7 +487,6 @@ function sanitizeState(obj) {
   if (isNaN(obj.weight)) obj.weight = 50.0;
   if (obj.beefWeight === undefined) obj.beefWeight = 50.0;
   if (obj.beefRatio === undefined) obj.beefRatio = 0.75;
-  if (!Array.isArray(obj.tasks) || obj.tasks.length !== 15) obj.tasks = Array(15).fill(false);
   return obj;
 }
 
@@ -537,100 +505,13 @@ function loadLocalState() {
   }
 }
 
-let saveDebounceTimer;
 function saveState() {
-  // Save locally instantly
   localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
-
-  // Debounce saving to cloud to prevent rapid multiple updates
-  clearTimeout(saveDebounceTimer);
-  saveDebounceTimer = setTimeout(uploadStateToCloud, 600);
-}
-
-// Sync Status styling utility
-function setSyncStatus(status, text) {
-  syncBadge.className = `sync-badge ${status}`;
-  syncText.textContent = text;
-}
-
-// Cloud REST API URLs
-const cloudUrl = `https://kvdb.io/${BUCKET_ID}/sausage-state-${sessionName}`;
-
-// Cloud sync routines
-function uploadStateToCloud() {
-  setSyncStatus('syncing', 'Syncing...');
-  
-  fetch(cloudUrl, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(state)
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Network error');
-    setSyncStatus('live', 'Live');
-  })
-  .catch(err => {
-    console.warn('Sync failed, offline mode active:', err);
-    setSyncStatus('offline', 'Offline');
-  });
-}
-
-function syncWithCloud() {
-  setSyncStatus('syncing', 'Connecting...');
-  
-  fetch(cloudUrl)
-    .then(res => {
-      if (res.status === 404) {
-        // No remote data yet, push our current state
-        uploadStateToCloud();
-        return null;
-      }
-      if (!res.ok) throw new Error('Fetch failed');
-      return res.json();
-    })
-    .then(remoteState => {
-      if (remoteState && remoteState.lastUpdated) {
-        // If remote state is newer or we don't have local differences, apply it
-        if (remoteState.lastUpdated > (state.lastUpdated || 0)) {
-          state = sanitizeState(remoteState);
-          updateUI();
-          localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
-        }
-      }
-      setSyncStatus('live', 'Live');
-    })
-    .catch(err => {
-      console.warn('Could not contact sync backend, operating offline:', err);
-      setSyncStatus('offline', 'Offline');
-    });
-}
-
-function pollCloudState() {
-  fetch(cloudUrl)
-    .then(res => {
-      if (!res.ok) return null;
-      return res.json();
-    })
-    .then(remoteState => {
-      if (remoteState && remoteState.lastUpdated) {
-        // Only update if remote state has a newer timestamp
-        if (remoteState.lastUpdated > state.lastUpdated) {
-          state = sanitizeState(remoteState);
-          updateUI();
-          localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
-        }
-      }
-      setSyncStatus('live', 'Live');
-    })
-    .catch(() => {
-      setSyncStatus('offline', 'Offline');
-    });
 }
 
 // Run init
 window.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
   init();
   initMultiTabNavigation();
   // Pre-render forecasting data so it's instantly available
@@ -1086,9 +967,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
-    let insightStr = (dashPayload && dashPayload.forecast && dashPayload.forecast.insight_string)
-      ? dashPayload.forecast.insight_string
-      : "The forecast dictates prepping ~128.9 lbs of raw brisket and ~75.9 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, and composed items like Tacos (113 projected) and Rosebuds (45 projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing. We also predict 7 racks of pork ribs and 6 beef dino ribs.";
+    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${matchedRecord.brisket_raw_lbs.toFixed(1)} lbs of raw brisket and ~${matchedRecord.pork_shoulder_raw_lbs.toFixed(1)} lbs of pork shoulder. Because brisket loses 50% of its weight during the 14-hour smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing.`;
+    
+    let standardStaff = Math.ceil(matchedRecord.predicted_revenue / 800);
+    let staffingInsightStr = `The forecast expects ${matchedRecord.day_name} revenue to hit $${matchedRecord.predicted_revenue.toLocaleString()}. Standard restaurant metrics would demand ${standardStaff} Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just ${matchedRecord.recommended_staff} for the day.`;
 
     if (selectedCat !== 'baseline' && catSelector) {
       const selectedText = catSelector.options[catSelector.selectedIndex].text;
@@ -1099,6 +981,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (insightSpan) {
       insightSpan.textContent = insightStr;
     }
+    const staffInsightSpan = document.getElementById('dynamic-staffing-insight');
+    if (staffInsightSpan) {
+      staffInsightSpan.textContent = staffingInsightStr;
+    }
 
     // Populate Key Meat & Revenue Targets with Exact Model Projections
     const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
@@ -1106,7 +992,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const sVal = Math.round(matchedRecord.sausage_lbs || 0);
     const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
     const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
-    const tVal = 25; // Smoked turkey baseline
+    const tVal = Math.round((matchedRecord.predicted_revenue || 2000) * 0.008 + 10);
     const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
     const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
     const predRev = Math.round(matchedRecord.predicted_revenue || 0);
@@ -1123,8 +1009,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (brisketElem) brisketElem.textContent = bVal;
     if (porkElem) porkElem.textContent = pVal;
     
-    // Sausage: sVal is in lbs. 1 Batch = 50 lbs. 3 links = 1 lb.
-    const sausageBatches = Math.ceil(sVal / 50.0);
+    // Sausage: sVal is in lbs. 1 Batch yields ~60 lbs stuffed weight. 3 links = 1 lb.
+    const sausageBatches = Math.ceil(sVal / 60.0);
     const sausageLinks = sVal * 3;
     if (sausageElem) sausageElem.textContent = sausageBatches;
     const sausageLinksSub = document.getElementById('kpi-sausage-links-sub');
@@ -1138,15 +1024,18 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const bCasesElem = document.getElementById('kpi-brisket-cases');
     const pCasesElem = document.getElementById('kpi-pork-cases');
-    const sCasesElem = document.getElementById('kpi-sausage-links-sub');
     const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
 
     if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
     if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
-    if (sCasesElem) sCasesElem.textContent = `(~${Math.round(sVal)} links)`;
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
+
+    const staffCountElem = document.getElementById('kpi-staff-count');
+    const staffHoursElem = document.getElementById('kpi-staff-hours');
+    if (staffCountElem && matchedRecord.recommended_staff) staffCountElem.textContent = matchedRecord.recommended_staff;
+    if (staffHoursElem && matchedRecord.pitmaster_hours) staffHoursElem.textContent = matchedRecord.pitmaster_hours.toFixed(1);
 
     const baselineRev = 1800.0;
     const pctDiff = Math.round(((predRev - baselineRev) / baselineRev) * 100);

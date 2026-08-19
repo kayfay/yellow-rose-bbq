@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://kvdb.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="stylesheet" href="style.css?v=20260817_01">
   <!-- Include Inter Font for enterprise dense aesthetic -->
@@ -19,13 +19,6 @@
       <div class="brand">
         <span class="brand-logo">🔥</span>
         <h1>Sausage & BBQ Prep Command</h1>
-      </div>
-      <div class="sync-status-container">
-        <span id="sync-badge" class="sync-badge offline">
-          <span class="pulse-dot"></span>
-          <span id="sync-text">Connecting...</span>
-        </span>
-        <span id="session-display" class="session-label">Session: Default</span>
       </div>
     </div>
 
@@ -189,79 +182,6 @@
         </div>
       </section>
 
-      <!-- Section 4: Day Split Task Lists -->
-      <section class="workflow-section">
-        <div class="day-container">
-          <h3 class="day-title">Day 1: Grinding, Spicing & Curing</h3>
-          <div class="task-list" id="day1-list">
-            <div class="task-row" data-step="1">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 1</span><p>Ice down all grinder parts, meat tubs, and water vessels in a large tub for 30 minutes before cutting.</p></div>
-            </div>
-            <div class="task-row" data-step="2">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 2</span><p>Blend recipe weights of lean beef, pork, and hard fat cuts uniformly.</p></div>
-            </div>
-            <div class="task-row" data-step="3">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 3</span><p>Run a rapid coarse grind using a 3/8-inch plate directly into the iced bus tub.</p></div>
-            </div>
-            <div class="task-row" data-step="4">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 4</span><p>Evenly distribute Pink Curing Salt and dry spices across grind.</p></div>
-            </div>
-            <div class="task-row" data-step="5">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 5</span><p>Dry mix with hands for 2 minutes to completely integrate the cure into the meat.</p></div>
-            </div>
-            <div class="task-row" data-step="6">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 6</span><p>Cover tightly and store in walk-in for mandatory overnight cure window.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-container">
-          <h3 class="day-title">Day 2: Mixing, Stuffing & Linking</h3>
-          <div class="task-list" id="day2-list">
-            <div class="task-row" data-step="7">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 7</span><p>Submerge stuffer parts in ice bath for 30 minutes.</p></div>
-            </div>
-            <div class="task-row" data-step="8">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 8</span><p>Prep custom add-in ingredients per selected recipe.</p></div>
-            </div>
-            <div class="task-row" data-step="9">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 9</span><p>Whisk ice water binder mixture with powdered milk and pepper.</p></div>
-            </div>
-            <div class="task-row" data-step="10">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 10</span><p>Pour binder over cured meat and execute heavy manual mixing for 3 mins.</p></div>
-            </div>
-            <div class="task-row" data-step="11">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 11</span><p>Incorporate remaining ice water, cheese cubes, and add-ins.</p></div>
-            </div>
-            <div class="task-row" data-step="12">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 12</span><p>Knead aggressively for 3-5 minutes until meat paste turns sticky.</p></div>
-            </div>
-            <div class="task-row" data-step="13">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 13</span><p>Flush natural hog casings, slide onto horn, and pack cylinder tightly.</p></div>
-            </div>
-            <div class="task-row" data-step="14">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 14</span><p>Extrude onto wet table, pinch at 6-inch intervals, and twist links.</p></div>
-            </div>
-            <div class="task-row" data-step="15">
-              <div class="task-checkbox-col"><span class="task-checkbox"></span></div>
-              <div class="task-content"><span class="step-num">Step 15</span><p>Hang links on racks in walk-in for 2+ hours to form pellicle before smoking.</p></div>
-            </div>
-          </div>
-        </div>
       </section>
     </div>
 
@@ -474,7 +394,7 @@
 
       <!-- Staffing & Optimal Shift Schedule Section (POS Time Series Optimized) -->
       <section class="calculator-card staffing-card">
-        <h2 class="section-title">🕒 Optimal 3-Cook Shift Schedule (POS Time Series Analysis)</h2>
+        <h2 class="section-title">🕒 Optimal Shift Schedule (POS Time Series Analysis)</h2>
         <div class="calc-results-grid">
           <div class="result-card">
             <span class="result-label">Active Prep Cooks</span>
@@ -554,7 +474,7 @@
             <h3>Step-by-Step Reasoning: Weekly Cycle Baseline</h3>
             <ul>
               <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Univariate SARIMAX (1,0,1) × (1,1,1,7) model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
-              <li><strong>Actionable Insight - Peak Staffing:</strong> The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</li>
+              <li><strong>Actionable Insight - Peak Staffing:</strong> <span id="dynamic-staffing-insight">The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</span></li>
               <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</span></li>
             </ul>
           </div>
@@ -574,8 +494,7 @@
                 <option value="sausage_links">Sausage Links</option>
                 <option value="pulled_pork_lbs">Pulled Pork</option>
                 <option value="rosebuds">Rosebuds</option>
-                <option value="tacos_brisket">Tacos (Brisket)</option>
-                <option value="tacos_pork">Tacos (Pork)</option>
+                <option value="tacos_sold">Tacos</option>
               </select>
             </div>
           </div>
@@ -674,24 +593,6 @@
       </section>
     </div>
   </main>
-
-  <!-- Sticky Bottom Bar -->
-  <footer class="app-footer">
-    <div class="footer-buttons">
-      <button id="btn-reset" class="footer-btn btn-danger">
-        <span class="btn-icon"></span>
-        <span class="btn-text">Reset Run</span>
-      </button>
-      <button id="btn-share" class="footer-btn btn-secondary">
-        <span class="btn-icon"></span>
-        <span class="btn-text">Share Link</span>
-      </button>
-      <button id="btn-shortcut" class="footer-btn btn-primary">
-        <span class="btn-icon"></span>
-        <span class="btn-text">Pitmaster Speed Run</span>
-      </button>
-    </div>
-  </footer>
 
   <script src="clover_api/analytics/payloads.js"></script>
   <script src="d3_charts.js?v=20260818_03"></script>

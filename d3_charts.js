@@ -65,7 +65,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         if (selectedCat === 'beef_dino_ribs') keyToScale = 'beef_dino_ribs_lbs';
         if (selectedCat === 'sausage_links') keyToScale = 'sausage_lbs';
         if (selectedCat === 'pulled_pork_lbs') keyToScale = 'pork_shoulder_raw_lbs';
-        if (selectedCat === 'tacos_brisket' || selectedCat === 'tacos_pork') {
+        if (selectedCat === 'tacos_sold') {
             keyToScale = 'tacos_sold';
             yAxisTitle = "Units Sold";
         }
@@ -178,6 +178,39 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
             .attr("y", d => y(d[1]))
             .attr("height", d => Math.max(0, y(d[0]) - y(d[1])));
 
+        // Add Legend for Mobile & Web Views
+        const legendContainer = d3.select("#" + containerId).append("div")
+            .attr("class", "d3-legend")
+            .style("display", "flex")
+            .style("flex-wrap", "wrap")
+            .style("justify-content", "center")
+            .style("margin-top", "20px")
+            .style("gap", "12px")
+            .style("padding", "10px")
+            .style("background", "rgba(15, 23, 42, 0.4)")
+            .style("border-radius", "8px")
+            .style("border", "1px solid #334155");
+
+        stackKeys.forEach(key => {
+            const legendItem = legendContainer.append("div")
+                .style("display", "flex")
+                .style("align-items", "center")
+                .style("font-family", "Inter, sans-serif")
+                .style("font-size", "12px")
+                .style("color", "#cbd5e1");
+
+            legendItem.append("div")
+                .style("width", "14px")
+                .style("height", "14px")
+                .style("background-color", colorScale(key))
+                .style("border-radius", "3px")
+                .style("margin-right", "6px")
+                .style("border", "1px solid rgba(255,255,255,0.1)");
+
+            legendItem.append("span")
+                .text(prettyNames[key]);
+        });
+
     } else {
         // ISOLATED VIEW (Highly visual area chart for best data visualization practices)
         let key = selectedCat;
@@ -186,7 +219,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         if (selectedCat === 'beef_dino_ribs') key = 'beef_dino_ribs_lbs';
         if (selectedCat === 'sausage_links') key = 'sausage_lbs';
         if (selectedCat === 'pulled_pork_lbs') key = 'pork_shoulder_raw_lbs';
-        if (selectedCat === 'tacos_brisket' || selectedCat === 'tacos_pork') key = 'tacos_sold';
+        if (selectedCat === 'tacos_sold') key = 'tacos_sold';
         if (selectedCat === 'rosebuds') key = 'rosebuds_sold';
         
         const isUnits = (key === 'tacos_sold' || key === 'rosebuds_sold');
@@ -466,6 +499,42 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
                 .attr("stroke-dashoffset", 0);
         }
     });
+
+    if (traces.length > 1) {
+        const legendContainer = d3.select("#" + containerId).append("div")
+            .attr("class", "d3-legend")
+            .style("display", "flex")
+            .style("flex-wrap", "wrap")
+            .style("justify-content", "center")
+            .style("margin-top", "20px")
+            .style("gap", "12px")
+            .style("padding", "10px")
+            .style("background", "rgba(15, 23, 42, 0.4)")
+            .style("border-radius", "8px")
+            .style("border", "1px solid #334155");
+
+        traces.forEach((trace, i) => {
+            if (!trace.name) return;
+            const color = trace.marker?.color || trace.line?.color || d3.schemeCategory10[i % 10];
+            const legendItem = legendContainer.append("div")
+                .style("display", "flex")
+                .style("align-items", "center")
+                .style("font-family", "Inter, sans-serif")
+                .style("font-size", "12px")
+                .style("color", "#cbd5e1");
+
+            legendItem.append("div")
+                .style("width", "14px")
+                .style("height", "14px")
+                .style("background-color", color)
+                .style("border-radius", "3px")
+                .style("margin-right", "6px")
+                .style("border", "1px solid rgba(255,255,255,0.1)");
+
+            legendItem.append("span")
+                .text(trace.name);
+        });
+    }
 }
 
 function formatHourAMPM(hrStr, includeMinutes = false) {
@@ -643,4 +712,42 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
         })
         .transition().duration(600).delay((d,i) => i * 3)
         .style("opacity", 1);
+
+    // Add Heatmap Density Legend for Mobile
+    const legendContainer = d3.select("#" + containerId).append("div")
+        .attr("class", "d3-heatmap-legend")
+        .style("display", "flex")
+        .style("align-items", "center")
+        .style("justify-content", "center")
+        .style("margin-top", "20px")
+        .style("gap", "10px")
+        .style("padding", "10px")
+        .style("background", "rgba(15, 23, 42, 0.4)")
+        .style("border-radius", "8px")
+        .style("border", "1px solid #334155");
+
+    legendContainer.append("span")
+        .style("font-size", "12px")
+        .style("color", "#cbd5e1")
+        .style("font-family", "Inter, sans-serif")
+        .text("Low Demand");
+
+    const numStops = 10;
+    const gradientStops = [];
+    for (let i = 0; i <= numStops; i++) {
+        gradientStops.push(myColor(maxZ * (i / numStops)));
+    }
+
+    legendContainer.append("div")
+        .style("width", "150px")
+        .style("height", "14px")
+        .style("border-radius", "4px")
+        .style("background", `linear-gradient(to right, ${gradientStops.join(', ')})`)
+        .style("border", "1px solid rgba(255,255,255,0.1)");
+
+    legendContainer.append("span")
+        .style("font-size", "12px")
+        .style("color", "#cbd5e1")
+        .style("font-family", "Inter, sans-serif")
+        .text("High Demand (Peak)");
 }
