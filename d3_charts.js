@@ -16,8 +16,9 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     
     // Setup dimensions
     const margin = {top: 40, right: 60, bottom: 60, left: 60};
-    const width = container.clientWidth - margin.left - margin.right;
-    const height = 450 - margin.top - margin.bottom;
+    const containerRect = container.getBoundingClientRect();
+    const width = Math.max((containerRect.width || 800) - margin.left - margin.right, 300);
+    const height = Math.max((containerRect.height || 450) - margin.top - margin.bottom, 200);
 
     const svg = d3.select("#" + containerId)
         .append("svg")
@@ -374,8 +375,9 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
     }
     
     const margin = {top: 40, right: 30, bottom: 60, left: 60};
-    const width = container.clientWidth - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const containerRect = container.getBoundingClientRect();
+    const width = Math.max((containerRect.width || 800) - margin.left - margin.right, 300);
+    const height = Math.max((containerRect.height || 300) - margin.top - margin.bottom, 200);
 
     const svg = d3.select("#" + containerId)
         .append("svg")
@@ -554,8 +556,9 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
     container.innerHTML = '';
     
     const margin = {top: 40, right: 30, bottom: 60, left: 80};
-    const width = container.clientWidth - margin.left - margin.right;
-    const height = 320 - margin.top - margin.bottom;
+    const containerRect = container.getBoundingClientRect();
+    const width = Math.max((containerRect.width || 800) - margin.left - margin.right, 300);
+    const height = Math.max((containerRect.height || 320) - margin.top - margin.bottom, 200);
 
     const svg = d3.select("#" + containerId)
         .append("svg")
