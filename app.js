@@ -59,6 +59,28 @@ const RECIPES = {
       11: "Incorporate the remaining ice water, high-temp cheddar cheese cubes, and the completely dry jalapeño dice."
     }
   },
+  'mild-sausage': {
+    id: 'mild-sausage',
+    name: 'Mild Sausage',
+    icon: '',
+    menuSource: 'Pitmaster Original Signature',
+    description: 'Classic Texas smoked sausage. Same great flavor as the Jalapeño Cheddar, but without the heat and cheese.',
+    stuffedAddInLbs: 0.0,
+    ingredients: [
+      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
+      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
+      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
+      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
+      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
+      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
+    ],
+    customSteps: {
+      8: "Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.",
+      9: "Mix lean meat, pork, and fat with Day 1 cure.",
+      11: "Incorporate the remaining ice water until the mixture binds properly."
+    }
+  },
   'elote': {
     id: 'elote',
     name: 'The Elote (Street Corn)',
