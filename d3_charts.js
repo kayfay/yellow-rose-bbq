@@ -176,7 +176,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
             .on("mouseout", hideTooltip)
             .transition().duration(1000).delay((d,i) => i*30)
             .attr("y", d => y(d[1]))
-            .attr("height", d => y(d[0]) - y(d[1]));
+            .attr("height", d => Math.max(0, y(d[0]) - y(d[1])));
 
     } else {
         // ISOLATED VIEW (Highly visual area chart for best data visualization practices)
@@ -329,14 +329,14 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     }
 }
 
-function renderD3GenericChart(containerId, traces, title, isBar = false) {
+function renderD3GenericChart(containerId, traces, title, isBar = false, shift = 'all') {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
 
     // Handle Heatmap specifically
     if (traces && traces[0] && traces[0].type === 'heatmap') {
-        renderD3Heatmap(containerId, traces[0], title);
+        renderD3Heatmap(containerId, traces[0], title, shift);
         return;
     }
     
@@ -445,7 +445,7 @@ function renderD3GenericChart(containerId, traces, title, isBar = false) {
                 .on("mouseout", () => tooltip.transition().duration(500).style("opacity", 0))
                 .transition().duration(800)
                 .attr("y", d => y(d.y))
-                .attr("height", d => height - y(d.y));
+                .attr("height", d => Math.max(0, height - y(d.y)));
         } else {
             const line = d3.line()
                 .x(d => x(d.x))
@@ -468,14 +468,14 @@ function renderD3GenericChart(containerId, traces, title, isBar = false) {
     });
 }
 
-function renderD3Heatmap(containerId, trace, title) {
+function renderD3Heatmap(containerId, trace, title, shift = 'all') {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
     
-    const margin = {top: 40, right: 30, bottom: 60, left: 60};
+    const margin = {top: 40, right: 30, bottom: 60, left: 80};
     const width = container.clientWidth - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const height = 320 - margin.top - margin.bottom;
 
     const svg = d3.select("#" + containerId)
         .append("svg")
@@ -484,50 +484,112 @@ function renderD3Heatmap(containerId, trace, title) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    const hours = trace.x;
-    const days = trace.y;
-    const zData = trace.z;
+    const allHours = trace.x || [];
+    const days = trace.y || [];
+    const rawZ = trace.z || [];
+
+    // Filter hours and Z columns based on shift selection
+    let hourStart = 0;
+    let hourEnd = 23;
+    let shiftTitle = title || "Historical & Predicted Hourly Sales Demand Heatmap";
+    
+    if (shift === 'prep') {
+        hourStart = 4;
+        hourEnd = 13;
+        shiftTitle = "Morning Prep Window Heatmap (4:00 AM – 1:00 PM)";
+    } else if (shift === 'lunch') {
+        hourStart = 10;
+        hourEnd = 16;
+        shiftTitle = "Lunch & Transition Heatmap (10:00 AM – 4:00 PM)";
+    } else if (shift === 'dinner') {
+        hourStart = 16;
+        hourEnd = 22;
+        shiftTitle = "Dinner Rush Heatmap (4:00 PM – 10:00 PM)";
+    } else if (shift === 'custom') {
+        hourStart = 2;
+        hourEnd = 22;
+        shiftTitle = "Custom Cook & Service Shifts (2:00 AM – 10:00 PM)";
+    } else {
+        shiftTitle = "Hourly Demand Heatmap (All 24 Hours)";
+    }
+
+    const selectedIndices = [];
+    allHours.forEach((hrStr, idx) => {
+        const h = parseInt(hrStr, 10);
+        if (!isNaN(h)) {
+            if (h >= hourStart && h <= hourEnd) {
+                selectedIndices.push(idx);
+            }
+        } else {
+            selectedIndices.push(idx);
+        }
+    });
+
+    const hours = selectedIndices.length > 0 ? selectedIndices.map(i => allHours[i]) : allHours;
+    const zData = selectedIndices.length > 0 ? rawZ.map(row => selectedIndices.map(i => row[i])) : rawZ;
 
     const x = d3.scaleBand()
         .range([ 0, width ])
         .domain(hours)
-        .padding(0.01);
+        .padding(0.04);
         
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
         .selectAll("text")
-        .style("fill", "#cbd5e1");
+        .style("fill", "#cbd5e1")
+        .style("font-family", "Inter, sans-serif")
+        .style("font-size", "11px");
 
     const y = d3.scaleBand()
         .range([ height, 0 ])
         .domain(days)
-        .padding(0.01);
+        .padding(0.04);
         
     svg.append("g")
         .call(d3.axisLeft(y))
         .selectAll("text")
-        .style("fill", "#cbd5e1");
+        .style("fill", "#cbd5e1")
+        .style("font-family", "Inter, sans-serif")
+        .style("font-size", "12px");
 
     svg.append("text")
+        .attr("class", "heatmap-title")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")  
         .style("font-size", "14px") 
+        .style("font-weight", "600")
         .style("fill", "#f8fafc")
         .style("font-family", "Inter, sans-serif")
-        .text(title);
+        .text(shiftTitle);
 
-    // Build color scale
+    // Global max across all raw data for consistent relative intensity
     let allZ = [];
-    zData.forEach(row => allZ = allZ.concat(row));
-    const maxZ = d3.max(allZ) || 1;
+    rawZ.forEach(row => allZ = allZ.concat(row));
+    const maxZ = d3.max(allZ) || 4.5;
     
     const myColor = d3.scaleSequential()
         .interpolator(d3.interpolateYlOrBr)
         .domain([0, maxZ]);
 
     let tooltip = d3.select(".d3-tooltip");
+    if (tooltip.empty()) {
+        tooltip = d3.select("body").append("div")
+            .attr("class", "d3-tooltip")
+            .style("opacity", 0)
+            .style("position", "absolute")
+            .style("background", "rgba(15, 23, 42, 0.95)")
+            .style("color", "#fff")
+            .style("padding", "12px")
+            .style("border-radius", "8px")
+            .style("pointer-events", "none")
+            .style("font-size", "13px")
+            .style("font-family", "Inter, sans-serif")
+            .style("border", "1px solid #334155")
+            .style("box-shadow", "0 10px 15px -3px rgba(0, 0, 0, 0.5)")
+            .style("z-index", 1000);
+    }
 
     const flattened = [];
     zData.forEach((row, j) => {
@@ -535,7 +597,7 @@ function renderD3Heatmap(containerId, trace, title) {
             flattened.push({
                 x: hours[i],
                 y: days[j],
-                z: val
+                z: typeof val === 'number' ? val : (parseFloat(val) || 0)
             });
         });
     });
@@ -547,14 +609,17 @@ function renderD3Heatmap(containerId, trace, title) {
         .attr("y", d => y(d.y))
         .attr("width", x.bandwidth() )
         .attr("height", y.bandwidth() )
+        .attr("rx", 3)
         .style("fill", d => myColor(d.z))
         .style("opacity", 0)
         .on("mouseover", function(event, d) {
-            d3.select(this).style("stroke", "white").style("stroke-width", 1);
+            d3.select(this).style("stroke", "#38bdf8").style("stroke-width", 2);
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<b>${d.y} at ${d.x}:00</b><br/>Rush Density: ${d.z.toFixed(2)}
+            tooltip.html(`
+                <strong style="color: #38bdf8">${d.y} at ${d.x}</strong><br/>
+                <span style="color: #94a3b8">Relative Rush Density:</span> <span style="font-weight: bold; font-size: 15px;">${d.z.toFixed(2)}x</span>
                 <hr style="border: 0; border-top: 1px solid #334155; margin: 8px 0;"/>
-                <div style="font-size: 11px; color: #cbd5e1;">Global Max Density: ${maxZ.toFixed(2)}</div>
+                <div style="font-size: 11px; color: #cbd5e1;">Global Peak Density: <strong>${maxZ.toFixed(2)}x</strong></div>
             `)
                 .style("left", (event.pageX + 15) + "px")
                 .style("top", (event.pageY - 40) + "px");
@@ -563,6 +628,6 @@ function renderD3Heatmap(containerId, trace, title) {
             d3.select(this).style("stroke", "none");
             tooltip.transition().duration(500).style("opacity", 0);
         })
-        .transition().duration(1000).delay((d,i) => i * 5)
+        .transition().duration(600).delay((d,i) => i * 3)
         .style("opacity", 1);
 }

@@ -1237,9 +1237,14 @@ function handleDateSelectionLookup(selectedDateStr) {
   }
 }
 
-async function renderPlotlyShiftHeatmap(shift = 'all') {
+async function renderPlotlyShiftHeatmap(shift) {
   const container = document.getElementById('plotly-shift-heatmap');
   if (!container || typeof d3 === 'undefined') return;
+
+  if (!shift) {
+    const shiftSelector = document.getElementById('shift-selector');
+    shift = shiftSelector ? shiftSelector.value : 'all';
+  }
 
   const hours = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -1284,14 +1289,8 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
         traces[0].colorscale = 'YlOrBr';
       }
       
-      if (shift === 'prep') layout.xaxis.range = [3.5, 13.5];
-      else if (shift === 'lunch') layout.xaxis.range = [9.5, 16.5];
-      else if (shift === 'dinner') layout.xaxis.range = [15.5, 22.5];
-      else if (shift === 'custom') layout.xaxis.range = [0, 23];
-      else layout.xaxis.autorange = true;
-
       if (typeof d3 !== 'undefined') {
-        renderD3GenericChart('plotly-shift-heatmap', traces, layout.title, true);
+        renderD3GenericChart('plotly-shift-heatmap', traces, layout.title, true, shift);
       }
       return;
     }
@@ -1308,13 +1307,7 @@ async function renderPlotlyShiftHeatmap(shift = 'all') {
     colorbar: { title: "Relative Rush Density" }
   }];
 
-  if (shift === 'prep') defaultShiftLayout.xaxis.range = [3.5, 13.5];
-  else if (shift === 'lunch') defaultShiftLayout.xaxis.range = [9.5, 16.5];
-  else if (shift === 'dinner') defaultShiftLayout.xaxis.range = [15.5, 22.5];
-  else if (shift === 'custom') defaultShiftLayout.xaxis.range = [0, 23];
-  else defaultShiftLayout.xaxis.autorange = true;
-
   if (typeof d3 !== 'undefined') {
-    renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true);
+    renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true, shift);
   }
 }
