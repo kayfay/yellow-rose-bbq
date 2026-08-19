@@ -395,20 +395,27 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
         .range([0, width])
         .padding(0.5);
 
-    // Merge all Y values to find max
-    let allY = [];
-    traces.forEach(t => allY = allY.concat(t.y));
-    const maxY = d3.max(allY) || 100;
-
-    const y = d3.scaleLinear()
-        .domain([0, maxY * 1.1])
-        .range([height, 0]);
-
-    svg.append("g")
-        .attr("class", "grid")
-        .style("stroke-dasharray", "3,3")
-        .style("stroke-opacity", 0.1)
-        .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
+    // Create independent Y scales for each trace to prevent squishing multivariate data
+    const yScales = [];
+    traces.forEach((trace, i) => {
+        const tMax = d3.max(trace.y) || 10;
+        const scale = d3.scaleLinear().domain([0, tMax * 1.1]).range([height, 0]);
+        yScales.push(scale);
+        
+        // Draw Y axis for each trace (left for first, right for others)
+        if (i === 0) {
+            svg.append("g")
+                .attr("class", "grid")
+                .style("stroke-dasharray", "3,3")
+                .style("stroke-opacity", 0.1)
+                .call(d3.axisLeft(scale).tickSize(-width).tickFormat(""));
+            svg.append("g").call(d3.axisLeft(scale)).selectAll("text").style("fill", "#cbd5e1");
+        } else if (i === 1) {
+            svg.append("g").attr("transform", `translate(${width},0)`).call(d3.axisRight(scale)).selectAll("text").style("fill", "#3498db");
+        } else if (i === 2) {
+            svg.append("g").attr("transform", `translate(-30,0)`).call(d3.axisLeft(scale)).selectAll("text").style("fill", "#e67e22");
+        }
+    });
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
@@ -416,11 +423,6 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
         .selectAll("text")
         .attr("transform", "translate(-10,10)rotate(-45)")
         .style("text-anchor", "end")
-        .style("fill", "#cbd5e1");
-
-    svg.append("g")
-        .call(d3.axisLeft(y))
-        .selectAll("text")
         .style("fill", "#cbd5e1");
 
     svg.append("text")
@@ -445,6 +447,7 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
     
     traces.forEach((trace, i) => {
         const color = trace.marker?.color || trace.line?.color || d3.schemeCategory10[i % 10];
+        const traceY = yScales[i];
         
         if (trace.type === 'bar' || isBar) {
             const yVals = trace.y;
@@ -453,15 +456,21 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
             const mean = (d3.mean(yVals) || 0).toFixed(1);
 
             const xBand = d3.scaleBand().domain(dates).range([0, width]).padding(0.2);
+            
+            // Adjust bandwidth for grouped bars if multiple bar traces exist
+            const barTracesCount = traces.filter(t => t.type === 'bar' || isBar).length;
+            const subBandwidth = xBand.bandwidth() / (barTracesCount || 1);
+            const barIndex = traces.slice(0, i).filter(t => t.type === 'bar' || isBar).length;
+
             svg.append("g")
                 .selectAll("rect")
-                .data(trace.x.map((d, j) => ({x: d, y: trace.y[j]})))
+                .data(trace.x.map((d, j) => ({x: d, y: trace.y[j], idx: j})))
                 .join("rect")
-                .attr("x", d => xBand(d.x))
+                .attr("x", d => xBand(d.x) + (barIndex * subBandwidth))
                 .attr("y", height)
-                .attr("width", xBand.bandwidth())
+                .attr("width", subBandwidth)
                 .attr("height", 0)
-                .attr("fill", color)
+                .attr("fill", d => Array.isArray(color) ? color[d.idx % color.length] : color)
                 .attr("rx", 2)
                 .on("mouseover", function(event, d) {
                     tooltip.transition().duration(200).style("opacity", 1);
@@ -479,12 +488,12 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
                 })
                 .on("mouseout", () => tooltip.transition().duration(500).style("opacity", 0))
                 .transition().duration(800)
-                .attr("y", d => y(d.y))
-                .attr("height", d => Math.max(0, height - y(d.y)));
+                .attr("y", d => traceY(d.y))
+                .attr("height", d => Math.max(0, height - traceY(d.y)));
         } else {
             const line = d3.line()
                 .x(d => x(d.x))
-                .y(d => y(d.y))
+                .y(d => traceY(d.y))
                 .curve(d3.curveMonotoneX);
 
             const path = svg.append("path")
