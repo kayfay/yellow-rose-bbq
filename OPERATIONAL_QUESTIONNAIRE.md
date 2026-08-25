@@ -23,12 +23,10 @@ This document captures operational preferences, pitmaster shift schedules, menu 
 
 ## 2. Pitmaster & Prep Cook Shift Schedules
 
-- [ ] **Exact Shift Start Times**: We currently constrain prep to **3 Prep Cooks** (including the Owner). What are the exact arrival times for your team?
-  - **Cook #1 (Early Pit Watch / Fire Manager)**: Arrival time (e.g. 2:00 AM)?
-  - **Cook #2 (Morning Trim & Rub Prep)**: Arrival time (e.g. 6:00 AM)?
-  - **Cook #3 (Owner / Mid-Day & Service)**: Arrival time?
-
-- [ ] **Overnight Smoke Duties**: Which pitmaster manages the overnight brisket and pork shoulder smoke watch?
+- [x] **Fixed 3-Person Team** (No dynamic staff adjustments needed; team is static):
+  - **Pit Worker #1 (Early Morning / Smoke Watch)**: Arrives ~2:00 AM – 3:00 AM (manages long overnight smoke, wraps briskets/pork, pulls hot meat for 11 AM lunch rush).
+  - **Pit Worker #2 (Morning Trim & Fresh Prep)**: Arrives ~6:00 AM – 7:00 AM (fires Batch 2 ribs & sausage, fresh sides prep, trims tomorrow's meat).
+  - **Owner / Pitmaster (Afternoon & Service)**: Arrives ~1:00 PM (manages lunch-to-dinner transition, service rush, 9 PM station breakdown/close, evening pit coals).
 
 ---
 

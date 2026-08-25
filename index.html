@@ -389,85 +389,20 @@
         <div>
           <details>
             <summary>
-              🔥 Quick Insights: Why We Stagger Cook Shifts:
+              🔥 Pit Schedule & Shift Overview (Fixed 3-Person Team):
             </summary>
             <div>
           <ul>
-            <li><strong>Cook #1 (Overnight Prep): 5:00 PM – 2:00 AM</strong> &rarr; Trims, rubs, and loads the initial overnight burn.</li>
-            <li><strong>Cook #2 (Morning Smoke): 2:00 AM – 2:00 PM (sometimes 12 PM)</strong> &rarr; Manages the long smoke, wraps briskets, pulls ready meat for lunch.</li>
-            <li><strong>Cook #3 (Day/Mid): 8:00 AM – 7:00 PM</strong> &rarr; Covers lunch rush, dinner prep, and hands off to the evening shift.</li>
-            <li><strong>Why do this?</strong> Keeps meat hot & juicy all day and doubles your smoker space so you don't run out!</li>
+            <li><strong>Pit Worker #1 (Early Morning Smoke Watch):</strong> Arrives ~2:00 AM – 3:00 AM &rarr; Manages long overnight smoke, wraps briskets & pork, and pulls hot meat for the 11 AM lunch rush.</li>
+            <li><strong>Pit Worker #2 (Morning Trim & Fresh Prep):</strong> Arrives ~6:00 AM – 7:00 AM &rarr; Fires Batch 2 (ribs & sausage), preps fresh sides, and trims raw briskets for tomorrow's smoke.</li>
+            <li><strong>Owner / Pitmaster (Afternoon, Service & Close):</strong> Arrives ~1:00 PM &rarr; Manages lunch-to-dinner transition, service rush, 9:00 PM breakdown, and raking coals for overnight burn.</li>
           </ul>
         </div>
           </details>
         </div>
       </section>
 
-      
-
-      <!-- Staffing & Optimal Shift Schedule Section (POS Time Series Optimized) -->
-      <section class="calculator-card staffing-card">
-        <h2 class="section-title">🕒 Optimal Shift Schedule (POS Time Series Analysis)</h2>
-        <div class="calc-results-grid">
-          <div class="result-card">
-            <span class="result-label">Active Prep Cooks</span>
-            <div class="result-value-box">
-              <span id="kpi-staff-count" class="result-value">3</span>
-              <span class="result-unit">Cooks</span>
-            </div>
-            <span class="result-desc">Max Capacity (Owner + 2 Prep Cooks)</span>
-          </div>
-          <div class="result-card">
-            <span class="result-label">Daily Shift Allocation</span>
-            <div class="result-value-box">
-              <span id="kpi-staff-hours" class="result-value">27.0</span>
-              <span class="result-unit">hrs</span>
-            </div>
-            <span class="result-desc">Total labor hours scheduled for this specific day</span>
-          </div>
-        </div>
-
-        <!-- Detailed Shift Schedule Breakdown -->
-        <div>
-          <details>
-            <summary>
-              📋 View Detailed Cook Shifts Breakdown
-            </summary>
-            <div>
-          <div>
-            <strong>🌙 Cook #1: Overnight Pitmaster</strong><br>
-            <span>Shift: 8:00 PM (Night Before) – 5:00 AM</span>
-            <ul>
-              <li>Fires smoker at 8 PM for Batch 1 briskets & pork.</li>
-              <li>Monitors overnight pit temp (225°F–250°F).</li>
-              <li>Pulls & holds meat at 140°F for <strong>11 AM Lunch Rush</strong>.</li>
-            </ul>
-          </div>
-
-          <div>
-            <strong>☀️ Cook #2: Daytime Prep Lead</strong><br>
-            <span>Shift: 4:00 AM – 1:00 PM</span>
-            <ul>
-              <li>Fires Batch 2 smoker at 4:30 AM (ribs & sausage).</li>
-              <li>Preps fresh sides (elote, coleslaw, beans).</li>
-              <li>Trims raw briskets for tomorrow's smoke.</li>
-            </ul>
-          </div>
-
-          <div>
-            <strong>🔥 Cook #3: Owner / Evening Pit Lead</strong><br>
-            <span>Tue–Sat: 2:00 PM – 11:00 PM | Sun: 1:00 PM – 10:00 PM</span>
-            <ul>
-              <li>Manages dinner rush (4:00 PM – 8:30 PM).</li>
-              <li><strong>Stays 1 hour after shift (10–11 PM / Sun 9–10 PM)</strong> to rake pit coals & pack thick oak logs for overnight burn.</li>
-            </ul>
-          </div>
-        </div>
-          </details>
-        </div>
-      </section>
-
-            <!-- Sub-Tab Navigation for Analytical Phases -->
+      <!-- Sub-Tab Navigation for Analytical Phases -->
       <section class="control-card forecasting-header-card">
         <h3>🔬 Model Insights & Data Correlations</h3>
         <div>
@@ -487,7 +422,6 @@
             <h3>Step-by-Step Reasoning: Weekly Cycle Baseline</h3>
             <ul>
               <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Standard Forecasting Model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
-              <li><strong>Actionable Insight - Peak Staffing:</strong> <span id="dynamic-staffing-insight">The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</span></li>
               <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 60% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</span></li>
             </ul>
           </div>

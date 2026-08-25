@@ -1026,10 +1026,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       insightStr += ` Note: The physical storefront is closed on Mondays, so any projected revenue and prep targets are driven entirely by scheduled online orders and catering pickups.`;
     }
     
-    let standardStaff = Math.ceil(matchedRecord.predicted_revenue / 800);
-    let staffingInsightStr = `The forecast expects ${matchedRecord.day_name} revenue to hit $${matchedRecord.predicted_revenue.toLocaleString()}. Standard restaurant metrics would demand ${standardStaff} Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just ${matchedRecord.recommended_staff} for the day.`;
-
-
     if (selectedCat !== 'baseline' && catSelector) {
       const selectedText = catSelector.options[catSelector.selectedIndex].text;
       insightStr = `Isolated Analysis: The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
@@ -1038,10 +1034,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const insightSpan = document.getElementById('dynamic-insight-string');
     if (insightSpan) {
       insightSpan.textContent = insightStr;
-    }
-    const staffInsightSpan = document.getElementById('dynamic-staffing-insight');
-    if (staffInsightSpan) {
-      staffInsightSpan.textContent = staffingInsightStr;
     }
 
     // Populate Key Meat & Revenue Targets with Exact Model Projections
@@ -1093,11 +1085,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
-
-    const staffCountElem = document.getElementById('kpi-staff-count');
-    const staffHoursElem = document.getElementById('kpi-staff-hours');
-    if (staffCountElem && matchedRecord.recommended_staff) staffCountElem.textContent = matchedRecord.recommended_staff;
-    if (staffHoursElem && matchedRecord.pitmaster_hours) staffHoursElem.textContent = matchedRecord.pitmaster_hours.toFixed(1);
 
     const baselineRev = records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length;
     const incrementalRev = predRev - baselineRev;
