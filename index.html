@@ -7,11 +7,12 @@
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="stylesheet" href="style.css?v=20260817_01">
   <!-- Include Inter Font for enterprise dense aesthetic -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="fonts.css" rel="stylesheet">
   <!-- Plotly.js for interactive dynamic visualizations -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="plotly-2.35.2.min.js"></script>
+  <script src="d3.v7.min.js"></script>
 </head>
 <body>
   <header class="app-header">
@@ -130,6 +131,7 @@
           🌭 Homemade <span id='verif-base-weight'>50.0</span> lb Sausage Batch Recipe Verification
         </h3>
         <div style="font-size: 0.88rem; color: #cbd5e1; font-family: 'Outfit', sans-serif; line-height: 1.6;">
+
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 0.6rem;">
             <div style="background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 6px; border-left: 3px solid #3498db;">
               <strong style="color: #f1c40f;">🥩 Base Meat Block:</strong>
@@ -193,17 +195,29 @@
       <section class="control-card">
         <details open>
           <summary>
-            🚚 TL;DR Cheat Sheet: Meat Deliveries & Case Packs
+            🚚 Daily Smoker Cheat Sheet: Meat Deliveries & Case Packs
           </summary>
           <div>
             <div>
               <div>
                 <strong>🚚 3 Delivery Days:</strong>
-                <ul>
-                  <li><strong>Thu Delivery:</strong> Buys meat for <strong>Fri & Sat</strong> (big weekend).</li>
-                  <li><strong>Sun Delivery:</strong> Buys meat for <strong>Sun & Tue</strong> (closed Mon).</li>
-                  <li><strong>Wed Delivery:</strong> Buys meat for <strong>Wed & Thu</strong> (mid-week).</li>
-                </ul>
+                <div style="font-size: 13px; color: #94a3b8; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px;">
+                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                        <strong style="color: #38bdf8;">Saturday Order</strong><br>
+                        Delivered Sunday<br>
+                        <em>(Next-Day Turnaround)</em>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                        <strong style="color: #38bdf8;">Monday Order</strong><br>
+                        Delivered Tuesday<br>
+                        <em>(Next-Day Turnaround)</em>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                        <strong style="color: #38bdf8;">Thursday Order</strong><br>
+                        Delivered Friday<br>
+                        <em>(Next-Day Turnaround)</em>
+                    </div>
+                </div>
               </div>
 
               <div>
@@ -241,10 +255,10 @@
           <div class="forecast-preset-group">
             <span class="preset-label">🚚 3-Day Delivery Window Presets:</span>
             <div>
-              <button type="button" class="preset-btn active" id="btn-preset-thu">🚚 Thu Delivery (Fri/Sat Pack)</button>
-              <button type="button" class="preset-btn" id="btn-preset-sun">🚚 Sun Delivery (Sun/Tue Pack)</button>
-              <button type="button" class="preset-btn" id="btn-preset-wed">🚚 Wed Delivery (Wed/Thu Pack)</button>
-              <button type="button" class="preset-btn" id="btn-preset-14">📅 14-Day Delivery View</button>
+              <button type="button" class="preset-btn active" id="btn-preset-sat-order">🚚 Sat Order (Sun Delivery)</button>
+              <button type="button" class="preset-btn" id="btn-preset-mon-order">🚚 Mon Order (Tue Delivery)</button>
+              <button type="button" class="preset-btn" id="btn-preset-thu-order">🚚 Thu Order (Fri Delivery)</button>
+              <button type="button" class="preset-btn" id="btn-preset-14" title="Projects rolling supply requirements and order placement deadlines for the next 2 weeks to prevent raw inventory shortages.">📅 14-Day Delivery View</button>
               <button type="button" class="preset-btn" id="btn-preset-saturday">🏈 Next 3rd Saturday</button>
             </div>
           </div>
@@ -289,7 +303,7 @@
               <span id="kpi-brisket-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases">(-- Cases)</span></span>
+            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases">(-- Cases)</span><br><span id="kpi-brisket-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
           </div>
 
           <div class="est-card kpi-card-orange">
@@ -297,7 +311,7 @@
               <span id="kpi-pork-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases">(-- Cases)</span></span>
+            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases">(-- Cases)</span><br><span id="kpi-pork-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
           </div>
 
           <div class="est-card kpi-card-blue">
@@ -375,7 +389,7 @@
         <div>
           <details>
             <summary>
-              🔥 TL;DR Why We Stagger Cook Shifts:
+              🔥 Quick Insights: Why We Stagger Cook Shifts:
             </summary>
             <div>
           <ul>
@@ -468,13 +482,13 @@
       <!-- TAB 1 VIEW: ARIMA Baseline Model -->
       
         <section class="control-card marketing-card">
-          <h2 class="section-title">🧠 Analytical Findings: Tab 1 ARIMA Baseline Model</h2>
+          <h2 class="section-title">🧠 Baseline Smoker Demand & Sales Pace</h2>
           <div>
             <h3>Step-by-Step Reasoning: Weekly Cycle Baseline</h3>
             <ul>
-              <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Univariate SARIMAX (1,0,1) × (1,1,1,7) model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
+              <li><strong>The Baseline Trend:</strong> By analyzing historical sales data through our Standard Forecasting Model, we've identified the underlying weekly rhythm of our pit operations. The data proves a massive, statistically significant surge occurring every Friday and Saturday.</li>
               <li><strong>Actionable Insight - Peak Staffing:</strong> <span id="dynamic-staffing-insight">The forecast expects Saturday revenue to hit our weekly maximum. At a baseline of roughly $4,830 per peak Saturday, standard metrics demand 7 Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just 3.</span></li>
-              <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 45% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</span></li>
+              <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs of raw brisket and ~85 lbs of pork shoulder for Saturday. Because brisket loses 60% of its weight during the 14-hour smoke, purchasing exactly the projected 165 lbs mathematically ensures we hit our target sell-out time right at closing (8:00 PM - 9:00 PM). Purchasing less risks a premature afternoon sell-out, while purchasing more without external demand triggers risks expensive food waste.</span></li>
             </ul>
           </div>
         </section>
@@ -485,7 +499,7 @@
             <div>
               <label for="category-selector">Category:</label>
               <select id="category-selector">
-                <option value="baseline">Baseline Demand Index</option>
+                <option value="baseline">Core Category Sales Multiplier</option>
                 <option value="brisket_lbs">Brisket</option>
                 <option value="pork_ribs_racks">Pork Spare Ribs</option>
                 <option value="beef_dino_ribs">Beef Dino Ribs</option>
@@ -506,9 +520,9 @@
       <!-- TAB 2 VIEW: Weather Impact Integration -->
       <div id="subtab-view-weather">
         <section class="control-card marketing-card">
-          <h2 class="section-title">🌧️ Analytical Findings: Tab 2 Weather Impact Regression</h2>
+          <h2 class="section-title">🌧️ Weather Impact on Sales</h2>
           <div>
-            <h3>Step-by-Step Reasoning: Weather Exogenous Correlation</h3>
+            <h3>Step-by-Step Reasoning: How Weather Affects Sales</h3>
             <ul>
               <li><strong>Precipitation Impact (+$97.37/mm):</strong> Blending Open-Meteo Jacksonville rainfall data with daily POS transactions reveals that moderate rain shifts ordering behavior to higher-ticket family bundles for at-home dining.</li>
               <li><strong>Extreme Heat (>90&deg;F):</strong> Outdoor patio dining drops significantly during Florida heat waves. Dine-in volume concentrates heavily at the indoor air-conditioned tables, and overflow customers shift toward quick takeout or curbside pickup rather than sitting outside.</li>
@@ -518,7 +532,7 @@
         </section>
 
         <section class="chart-section">
-          <h2 class="section-title">Multivariate Weather vs. Sales Visualizer</h2>
+          <h2 class="section-title">Weather vs. Sales Chart</h2>
           <div class="chart-card">
             <div id="plotly-weather-impact-chart"></div>
           </div>
@@ -528,7 +542,7 @@
       <!-- TAB 3 VIEW: Live Event Correlation -->
       <div id="subtab-view-event">
         <section class="control-card marketing-card">
-          <h2 class="section-title">🏈 Analytical Findings: Tab 3 Live Event Correlation</h2>
+          <h2 class="section-title">🏈 Game Day & Event Sales Surges</h2>
           <div>
             <h3>Step-by-Step Reasoning: Jaguars Game Day Tailgating Spikes</h3>
             <ul>
@@ -551,12 +565,12 @@
       <!-- TAB 4 VIEW: Hourly Shift Heatmap -->
       <div id="subtab-view-shift">
         <section class="control-card marketing-card">
-          <h2 class="section-title">⏱️ Analytical Findings: Shift Heatmap</h2>
+          <h2 class="section-title">⏱️ Hourly Rush Patterns</h2>
           <div>
             <h3>Step-by-Step Reasoning: Hourly Demand Patterns</h3>
             <ul>
-              <li><strong>Peak Rush (3-6 PM):</strong> Over 43% of orders land in this 3-hour window. Essential to have all prep completed and stations fully staffed before 3:00 PM.</li>
-              <li><strong>Saturday Peak:</strong> Saturdays at 5 PM are consistently the busiest hour of the week. Ensure expedited workflow for line items like Rosebuds and Tacos.</li>
+              <li><strong>Daily Peak Rush (3-6 PM):</strong> Over 43% of orders land in this 3-hour window consistently *every operating day*, not just weekends. Essential to have all prep completed and stations fully staffed before 3:00 PM.</li>
+              <li><strong>Thursday Late-Night Surge:</strong> Thursday features a massive secondary surge late at night (9-11 PM accounting for 32.6% of daily orders). Ensure overnight prep and catering stations are properly manned.</li>
               <li><strong>Actionable Insight:</strong> Use the shift drop-down below to visualize volume across specific team shifts. This validates our 3-cook staggered staffing model.</li>
             </ul>
           </div>
@@ -571,7 +585,6 @@
               <option value="prep">Morning Prep (4 AM – 1 PM)</option>
               <option value="lunch">Lunch & Transition (10 AM – 4 PM)</option>
               <option value="dinner">Dinner Rush (4 PM – 10 PM)</option>
-              <option value="custom">Custom Cook Shifts (2 AM – 10 PM)</option>
             </select>
           </div>
           <div class="chart-card">

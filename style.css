@@ -3,7 +3,7 @@
    Palette: Bloomberg / Salesforce Slate Dark Mode
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('fonts.css');
 
 :root {
   /* Ultra-dense slate palette */

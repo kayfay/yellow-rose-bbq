@@ -31,7 +31,7 @@ test.describe('Dashboard Verification', () => {
     
     const brisketText = await page.locator('#kpi-brisket-lbs').textContent();
     const porkText = await page.locator('#kpi-pork-lbs').textContent();
-    const sausageText = await page.locator('#kpi-sausage-links').textContent();
+    const sausageText = await page.locator('#kpi-sausage-batches').textContent();
     
     const brisketVal = Number(brisketText.replace(/,/g, ''));
     const porkVal = Number(porkText.replace(/,/g, ''));
@@ -59,8 +59,8 @@ test.describe('Dashboard Verification', () => {
     await expect(dropdown).toBeVisible();
     
     await dropdown.selectOption('pulled_pork_lbs');
-    // We assume the chart updates, we can check for Plotly DOM structures
-    await expect(page.locator('.js-plotly-plot').first()).toBeVisible({ timeout: 15000 });
+    // We assume the chart updates, we can check for D3 DOM structures
+    await expect(page.locator('#plotly-meat-sales-chart svg').first()).toBeVisible({ timeout: 15000 });
   });
 
 });

@@ -390,17 +390,28 @@ function updateUI() {
     card.className = `ingredient-card ${ing.highlight ? 'highlight-card' : ''}`;
     
     let displayVal;
+    let displayUnit = ing.unit;
+    let rawAmount = ing.amount * scale;
+
     if (ing.isGram) {
-      displayVal = Math.round(ing.amount * scale);
+      displayVal = Math.round(rawAmount);
     } else {
-      displayVal = (ing.amount * scale).toFixed(2);
+      if (ing.unit === 'lbs' && rawAmount < 1.0 && rawAmount > 0) {
+        displayVal = (rawAmount * 16).toFixed(1);
+        displayUnit = 'oz';
+      } else if (ing.unit === 'cups' && rawAmount < 1.0 && rawAmount > 0) {
+        displayVal = (rawAmount * 16).toFixed(1);
+        displayUnit = 'tbsp';
+      } else {
+        displayVal = rawAmount.toFixed(2);
+      }
     }
 
     card.innerHTML = `
       <span class="ing-label">${ing.label}</span>
       <div class="ing-value-box">
         <span class="ing-value">${displayVal}</span>
-        <span class="ing-unit">${ing.unit}</span>
+        <span class="ing-unit">${displayUnit}</span>
       </div>
       <span class="ing-desc">${ing.desc}</span>
     `;
@@ -425,15 +436,20 @@ function updateUI() {
   if (verifBaseWeight) {
     verifBaseWeight.textContent = state.weight.toFixed(1);
     
+    const formatMeat = (lbs) => {
+      if (lbs < 1.0 && lbs > 0) return `${(lbs * 16).toFixed(1)} oz`;
+      return `${lbs.toFixed(1)} lbs`;
+    };
+
     // Switch between Beef and Standard Base in the Verification text
     if (state.recipeId === 'classic-beef') {
-      document.getElementById('verif-meat-1').innerHTML = `<strong>${(37.5 * scale).toFixed(1)} lbs</strong> Lean Beef (75%)`;
-      document.getElementById('verif-meat-2').innerHTML = `<strong>${(12.5 * scale).toFixed(1)} lbs</strong> Beef Fat (25%)`;
+      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(37.5 * scale)}</strong> Lean Beef (75%)`;
+      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(12.5 * scale)}</strong> Beef Fat (25%)`;
       document.getElementById('verif-meat-3').innerHTML = `<em>(No Pork)</em>`;
     } else {
-      document.getElementById('verif-meat-1').innerHTML = `<strong>${(25.5 * scale).toFixed(1)} lbs</strong> Beef Trimmings`;
-      document.getElementById('verif-meat-2').innerHTML = `<strong>${(16.0 * scale).toFixed(1)} lbs</strong> Pork Base`;
-      document.getElementById('verif-meat-3').innerHTML = `<strong>${(8.5 * scale).toFixed(1)} lbs</strong> Pork/Beef Fat`;
+      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(25.5 * scale)}</strong> Beef Trimmings`;
+      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(16.0 * scale)}</strong> Pork Base`;
+      document.getElementById('verif-meat-3').innerHTML = `<strong>${formatMeat(8.5 * scale)}</strong> Pork/Beef Fat`;
     }
 
     const getIngAmount = (id) => {
@@ -446,14 +462,19 @@ function updateUI() {
     const waterAmt = getIngAmount('water');
     const milkAmt = getIngAmount('milk');
 
+    const formatVerif = (amt, unit) => {
+      if (unit === 'cups' && amt < 1.0 && amt > 0) return `${(amt * 16).toFixed(1)} tbsp`;
+      return `${amt.toFixed(1)} ${unit}`;
+    };
+
     document.getElementById('verif-cure').innerHTML = cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`;
-    document.getElementById('verif-pepper').innerHTML = pepperAmt > 0 ? `<strong>${pepperAmt.toFixed(1)} cups</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`;
-    document.getElementById('verif-water').innerHTML = waterAmt > 0 ? `<strong>${waterAmt.toFixed(1)} cups</strong> Ice Cold Water` : `<em>(No Water)</em>`;
-    document.getElementById('verif-milk').innerHTML = milkAmt > 0 ? `<strong>${milkAmt.toFixed(1)} cups</strong> Powdered Milk` : `<em>(No Milk)</em>`;
+    document.getElementById('verif-pepper').innerHTML = pepperAmt > 0 ? `<strong>${formatVerif(pepperAmt, 'cups')}</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`;
+    document.getElementById('verif-water').innerHTML = waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : `<em>(No Water)</em>`;
+    document.getElementById('verif-milk').innerHTML = milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : `<em>(No Milk)</em>`;
     
     document.getElementById('verif-yield-base').textContent = state.weight.toFixed(1);
     document.getElementById('verif-yield-total').textContent = ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1);
-    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 3.0);
+    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) / 0.375);
   }
 
   // Update Task Checkbox states
@@ -734,15 +755,15 @@ function initMultiTabNavigation() {
 
 
   // Presets
-  const btnThu = document.getElementById('btn-preset-thu');
-  const btnSun = document.getElementById('btn-preset-sun');
-  const btnWed = document.getElementById('btn-preset-wed');
+  const btnSatOrder = document.getElementById('btn-preset-sat-order');
+  const btnMonOrder = document.getElementById('btn-preset-mon-order');
+  const btnThuOrder = document.getElementById('btn-preset-thu-order');
   const btn14 = document.getElementById('btn-preset-14');
   const btnSat = document.getElementById('btn-preset-saturday');
 
-  if (btnThu) btnThu.addEventListener('click', () => updateDeliveryPreset(4, 'btn-preset-thu')); // Thursday
-  if (btnSun) btnSun.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sun')); // Sunday
-  if (btnWed) btnWed.addEventListener('click', () => updateDeliveryPreset(3, 'btn-preset-wed')); // Wednesday
+  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sat-order')); // Delivered Sunday
+  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(2, 'btn-preset-mon-order')); // Delivered Tuesday
+  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(5, 'btn-preset-thu-order')); // Delivered Friday
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
 }
@@ -991,10 +1012,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
-    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${matchedRecord.brisket_raw_lbs.toFixed(1)} lbs of raw brisket and ~${matchedRecord.pork_shoulder_raw_lbs.toFixed(1)} lbs of pork shoulder. Because brisket loses 50% of its weight during the 14-hour smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing.`;
+    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${matchedRecord.brisket_raw_lbs.toFixed(1)} lbs of raw brisket and ~${matchedRecord.pork_shoulder_raw_lbs.toFixed(1)} lbs of pork shoulder. Because brisket loses 60% of its weight during the 14-hour smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing.`;
+    
+    if (matchedRecord.day_name === 'Mon') {
+      insightStr += ` Note: The physical storefront is closed on Mondays, so any projected revenue and prep targets are driven entirely by scheduled online orders and catering pickups.`;
+    }
     
     let standardStaff = Math.ceil(matchedRecord.predicted_revenue / 800);
     let staffingInsightStr = `The forecast expects ${matchedRecord.day_name} revenue to hit $${matchedRecord.predicted_revenue.toLocaleString()}. Standard restaurant metrics would demand ${standardStaff} Pit Crew members to maintain the $800/staff service threshold. However, our optimized workflow and staggered shifts allow us to effectively run on a high-efficiency skeleton crew of just ${matchedRecord.recommended_staff} for the day.`;
+
 
     if (selectedCat !== 'baseline' && catSelector) {
       const selectedText = catSelector.options[catSelector.selectedIndex].text;
@@ -1048,11 +1074,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const bCasesElem = document.getElementById('kpi-brisket-cases');
     const pCasesElem = document.getElementById('kpi-pork-cases');
+    const bCookedElem = document.getElementById('kpi-brisket-cooked');
+    const pCookedElem = document.getElementById('kpi-pork-cooked');
     const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
 
     if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
     if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
+    if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
+    if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
@@ -1061,14 +1091,22 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (staffCountElem && matchedRecord.recommended_staff) staffCountElem.textContent = matchedRecord.recommended_staff;
     if (staffHoursElem && matchedRecord.pitmaster_hours) staffHoursElem.textContent = matchedRecord.pitmaster_hours.toFixed(1);
 
-    const baselineRev = 1800.0;
-    const pctDiff = Math.round(((predRev - baselineRev) / baselineRev) * 100);
-    const pctDisplay = pctDiff > 0 ? `+${pctDiff}% ($${predRev.toLocaleString()})` : `${pctDiff}% ($${predRev.toLocaleString()})`;
+    const baselineRev = records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length;
+    const incrementalRev = predRev - baselineRev;
+    const pctDiff = Math.round((incrementalRev / baselineRev) * 100);
+    const sign = pctDiff > 0 ? '+' : '';
+    const pctDisplay = `${sign}${pctDiff}% (Total: $${predRev.toLocaleString()})`;
 
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
     if (revenueElem) revenueElem.textContent = pctDisplay;
-    if (demandLabelElem) demandLabelElem.textContent = `Projected ${matchedRecord.day_name} Demand (vs. Baseline)`;
+    if (demandLabelElem) {
+      if (pctDiff > 0) {
+        demandLabelElem.textContent = `Projected Sales Surge of ${pctDiff}% ($${Math.round(incrementalRev).toLocaleString()} in incremental revenue) above standard baseline pace.`;
+      } else {
+        demandLabelElem.textContent = `Projected Sales Drop of ${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()} in incremental revenue) below standard baseline pace.`;
+      }
+    }
 
     // Build Plotly Interactive Chart
     const slicedRecords = records.slice(0, daysCount);
