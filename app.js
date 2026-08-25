@@ -1093,20 +1093,47 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
-    const baselineRev = records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length;
+    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length);
+    const avgBrisketRaw = Math.round(records.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / records.length);
+    const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
+    const avgPorkRaw = Math.round(records.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / records.length);
+    const avgPorkCooked = Math.round(avgPorkRaw * 0.4);
+
+    const weekdays = records.filter(r => ['Tue', 'Wed', 'Thu'].includes(r.day_name));
+    const weekends = records.filter(r => ['Fri', 'Sat', 'Sun'].includes(r.day_name));
+    const weekdayAvgRev = weekdays.length ? Math.round(weekdays.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / weekdays.length) : 1600;
+    const weekendAvgRev = weekends.length ? Math.round(weekends.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / weekends.length) : 3300;
+
     const incrementalRev = predRev - baselineRev;
     const pctDiff = Math.round((incrementalRev / baselineRev) * 100);
     const sign = pctDiff > 0 ? '+' : '';
     const pctDisplay = `${sign}${pctDiff}% (Total: $${predRev.toLocaleString()})`;
+
+    // Update dynamic baseline trend card
+    const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
+    if (baselineTrendElem) {
+      let comparisonNote = '';
+      if (pctDiff > 0) {
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the daily average baseline (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
+      } else if (pctDiff < 0) {
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the daily average baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for mid-week operations.`;
+      } else {
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> directly matches the 14-day daily baseline average.`;
+      }
+
+      baselineTrendElem.innerHTML = `Our model establishes a 14-day rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> (~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. ${comparisonNote}`;
+    }
 
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
     if (revenueElem) revenueElem.textContent = pctDisplay;
     if (demandLabelElem) {
       if (pctDiff > 0) {
-        demandLabelElem.textContent = `Projected Sales Surge of ${pctDiff}% ($${Math.round(incrementalRev).toLocaleString()} in incremental revenue) above standard baseline pace.`;
+        demandLabelElem.textContent = `Projected Sales Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day average baseline pace.`;
+      } else if (pctDiff < 0) {
+        demandLabelElem.textContent = `Projected Sales Drop of -${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}) below the $${baselineRev.toLocaleString()}/day average baseline pace.`;
       } else {
-        demandLabelElem.textContent = `Projected Sales Drop of ${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()} in incremental revenue) below standard baseline pace.`;
+        demandLabelElem.textContent = `Projected Sales right on pace with the $${baselineRev.toLocaleString()}/day average baseline.`;
       }
     }
 
