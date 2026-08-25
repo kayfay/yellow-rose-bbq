@@ -544,3 +544,324 @@ section[style], div[style], h3[style], p[style], details div[style] {
 .btn-primary:hover { background: #1d4ed8; }
 .btn-danger { color: var(--accent-red); border-color: rgba(239, 68, 68, 0.4); }
 .btn-danger:hover { background: rgba(239, 68, 68, 0.15); }
+
+/* --- Interactive Month-View Live Events & Multiplier Calendar --- */
+.live-calendar-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 1.5rem;
+}
+
+.calendar-top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-month-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-nav-btn {
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+}
+
+.calendar-month-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 160px;
+  text-align: center;
+}
+
+.calendar-filter-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cal-filter-btn {
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cal-filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.cal-filter-btn.active {
+  background: var(--accent-blue-dim);
+  border-color: var(--accent-blue);
+  color: #38bdf8;
+}
+
+.calendar-grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+}
+
+.cal-weekday-header {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 0;
+}
+
+.cal-day-cell {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  min-height: 86px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.cal-day-cell:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+  transform: translateY(-1px);
+  z-index: 2;
+}
+
+.cal-day-cell.other-month {
+  opacity: 0.35;
+  background: rgba(2, 6, 23, 0.4);
+}
+
+.cal-day-cell.is-today {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.cal-day-cell.is-selected {
+  border-color: #f1c40f;
+  background: rgba(241, 196, 15, 0.1);
+  box-shadow: 0 0 0 1px #f1c40f;
+}
+
+.cal-day-cell.has-stadium {
+  border-left: 3px solid #006778;
+}
+
+.cal-day-cell.has-flga {
+  border-left: 3px solid #e74c3c;
+  background: rgba(231, 76, 60, 0.08);
+}
+
+.cal-day-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal-day-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cal-day-base-mult {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.cal-event-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cal-event-pill.pill-jaguars {
+  background: rgba(0, 103, 120, 0.4);
+  border: 1px solid #006778;
+  color: #7dd3fc;
+}
+
+.cal-event-pill.pill-flga {
+  background: rgba(231, 76, 60, 0.4);
+  border: 1px solid #e74c3c;
+  color: #fca5a5;
+}
+
+.cal-event-pill.pill-concert {
+  background: rgba(139, 92, 246, 0.3);
+  border: 1px solid #8b5cf6;
+  color: #c4b5fd;
+}
+
+.cal-event-pill.pill-baseball {
+  background: rgba(245, 158, 11, 0.3);
+  border: 1px solid #f59e0b;
+  color: #fcd34d;
+}
+
+.cal-event-pill.pill-holiday {
+  background: rgba(239, 68, 68, 0.3);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+.cal-delivery-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cal-order-tag {
+  font-size: 9px;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-top: auto;
+}
+
+.cal-multiplier-badge {
+  font-size: 9px;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+/* Selected Date Detail Drawer */
+.calendar-selected-detail {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(2, 6, 23, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cal-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 600px;
+}
+
+.cal-detail-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cal-detail-mult-tag {
+  background: #f1c40f;
+  color: #0f172a;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.cal-detail-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.cal-apply-btn {
+  background: #2563eb;
+  border: 1px solid #3b82f6;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.cal-apply-btn:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .calendar-grid-container {
+    gap: 3px;
+  }
+  .cal-day-cell {
+    min-height: 64px;
+    padding: 4px;
+  }
+  .cal-event-pill {
+    font-size: 8px;
+    padding: 1px 3px;
+  }
+  .cal-delivery-tag, .cal-order-tag {
+    font-size: 8px;
+  }
+}

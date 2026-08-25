@@ -494,6 +494,47 @@
             <div id="plotly-event-impact-chart"></div>
           </div>
         </section>
+
+        <!-- Interactive Month-View Live Events & Multiplier Calendar -->
+        <section class="live-calendar-card">
+          <div class="calendar-top-controls">
+            <div class="calendar-month-nav">
+              <button type="button" id="cal-btn-prev" class="calendar-nav-btn" aria-label="Previous Month">◀ Prev</button>
+              <h3 id="cal-month-title" class="calendar-month-title">August 2026</h3>
+              <button type="button" id="cal-btn-next" class="calendar-nav-btn" aria-label="Next Month">Next ▶</button>
+              <button type="button" id="cal-btn-today" class="calendar-nav-btn" style="font-size: 11px; padding: 4px 8px; color: #38bdf8;">Today</button>
+            </div>
+            
+            <div class="calendar-filter-bar">
+              <button type="button" class="cal-filter-btn active" data-filter="all">All Events</button>
+              <button type="button" class="cal-filter-btn" data-filter="jaguars">🏈 Stadium (3.5x–5.0x)</button>
+              <button type="button" class="cal-filter-btn" data-filter="concert">🎸 Concerts (1.5x)</button>
+              <button type="button" class="cal-filter-btn" data-filter="baseball">⚾ Baseball (1.2x)</button>
+              <button type="button" class="cal-filter-btn" data-filter="delivery">🚚 Deliveries</button>
+              <button type="button" class="cal-filter-btn" data-filter="holiday">🇺🇸 Holidays</button>
+            </div>
+          </div>
+
+          <!-- 7-Column Month Grid -->
+          <div class="calendar-grid-container" id="live-events-calendar-grid">
+            <!-- Dynamically populated via renderMonthEventsCalendar -->
+          </div>
+
+          <!-- Dynamic Selected Date Detail Drawer -->
+          <div id="calendar-selected-drawer" class="calendar-selected-detail" style="display: none;">
+            <div class="cal-detail-info">
+              <div class="cal-detail-title">
+                <span id="drawer-date-str">Saturday, Aug 22, 2026</span>
+                <span id="drawer-mult-badge" class="cal-detail-mult-tag">3.5x Demand</span>
+              </div>
+              <p id="drawer-event-title" style="font-weight: 600; color: #f8fafc; font-size: 13px;"></p>
+              <p id="drawer-event-note" class="cal-detail-note"></p>
+            </div>
+            <button type="button" id="drawer-apply-btn" class="cal-apply-btn">
+              <span>⚡ Apply Date & Sync Meat Prep</span>
+            </button>
+          </div>
+        </section>
       </div>
 
       <!-- TAB 4 VIEW: Hourly Shift Heatmap -->

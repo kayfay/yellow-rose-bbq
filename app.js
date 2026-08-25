@@ -558,6 +558,7 @@ window.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
   init();
   initMultiTabNavigation();
+  initEventsCalendar();
   // Pre-render forecasting data so it's instantly available
   renderPlotlyForecastingChart(14);
 });
@@ -681,6 +682,7 @@ function initMultiTabNavigation() {
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
       renderPlotlyEventChart();
+      refreshEventsCalendar();
     });
 
     btnSubtabShift.addEventListener('click', () => {
@@ -852,6 +854,119 @@ async function renderPlotlyEventChart() {
   if (typeof d3 !== 'undefined') {
     renderD3GenericChart('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout.title);
   }
+  refreshEventsCalendar();
+}
+
+// Live Events & Multiplier Calendar State Management
+let currentCalYear = 2026;
+let currentCalMonth = 7; // August (0-indexed)
+let currentCalFilter = 'all';
+let selectedCalDate = '2026-08-22';
+let calInitialized = false;
+
+function refreshEventsCalendar() {
+  if (typeof renderMonthEventsCalendar === 'function') {
+    renderMonthEventsCalendar(
+      'live-events-calendar-grid',
+      currentCalYear,
+      currentCalMonth,
+      currentCalFilter,
+      (dateStr, evt) => {
+        selectedCalDate = dateStr;
+        showCalendarDateDrawer(dateStr, evt);
+      },
+      selectedCalDate
+    );
+  }
+}
+
+function showCalendarDateDrawer(dateStr, evt) {
+  const drawer = document.getElementById('calendar-selected-drawer');
+  if (!drawer) return;
+  drawer.style.display = 'flex';
+
+  const dateObj = new Date(dateStr + 'T00:00:00');
+  const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+
+  const dateSpan = document.getElementById('drawer-date-str');
+  const badgeSpan = document.getElementById('drawer-mult-badge');
+  const titleP = document.getElementById('drawer-event-title');
+  const noteP = document.getElementById('drawer-event-note');
+
+  if (dateSpan) dateSpan.textContent = formattedDate;
+  if (badgeSpan) badgeSpan.textContent = `${evt.multiplier || 1.0}x Demand Multiplier`;
+  if (titleP) titleP.textContent = `${evt.icon || '🔥'} ${evt.title}`;
+  if (noteP) noteP.textContent = evt.note || "Standard operational pace.";
+
+  const applyBtn = document.getElementById('drawer-apply-btn');
+  if (applyBtn) {
+    applyBtn.onclick = () => {
+      const dateInput = document.getElementById('forecast-start-date');
+      if (dateInput) {
+        dateInput.value = dateStr;
+      }
+      handleDateSelectionLookup(dateStr);
+      renderPlotlyForecastingChart(14);
+
+      // Scroll to KPI targets smoothly
+      const targetCard = document.querySelector('.forecasting-kpi-grid');
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+  }
+}
+
+function initEventsCalendar() {
+  if (calInitialized) return;
+  calInitialized = true;
+
+  const btnPrev = document.getElementById('cal-btn-prev');
+  const btnNext = document.getElementById('cal-btn-next');
+  const btnToday = document.getElementById('cal-btn-today');
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      currentCalMonth--;
+      if (currentCalMonth < 0) {
+        currentCalMonth = 11;
+        currentCalYear--;
+      }
+      refreshEventsCalendar();
+    });
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      currentCalMonth++;
+      if (currentCalMonth > 11) {
+        currentCalMonth = 0;
+        currentCalYear++;
+      }
+      refreshEventsCalendar();
+    });
+  }
+
+  if (btnToday) {
+    btnToday.addEventListener('click', () => {
+      const now = new Date();
+      currentCalYear = now.getFullYear();
+      currentCalMonth = now.getMonth();
+      refreshEventsCalendar();
+    });
+  }
+
+  const filterBtns = document.querySelectorAll('.cal-filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCalFilter = btn.getAttribute('data-filter') || 'all';
+      refreshEventsCalendar();
+    });
+  });
+
+  refreshEventsCalendar();
 }
 
 async function renderPlotlyWeatherChart() {

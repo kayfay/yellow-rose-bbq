@@ -763,3 +763,193 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
         .style("font-family", "Inter, sans-serif")
         .text("High Demand (Peak)");
 }
+
+/**
+ * Interactive Month-View Live Events & Multiplier Calendar Renderer
+ */
+function renderMonthEventsCalendar(containerId, year, month, activeFilter = 'all', onSelectDate = null, selectedDateStr = null) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    // Update Title if element exists
+    const titleElem = document.getElementById('cal-month-title');
+    if (titleElem) {
+        titleElem.textContent = `${monthNames[month]} ${year}`;
+    }
+
+    // Retrieve calendar events from global payloads
+    const allEvents = (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.calendar_events) ? window.BBQ_PAYLOADS.calendar_events : [];
+    
+    // Create header row
+    weekdays.forEach(day => {
+        const header = document.createElement('div');
+        header.className = 'cal-weekday-header';
+        header.textContent = day;
+        container.appendChild(header);
+    });
+
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+    
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    // Helper for weekday baseline multiplier
+    function getBaselineMultiplier(dow) {
+        if (dow === 6) return '1.8x'; // Sat
+        if (dow === 5) return '1.4x'; // Fri
+        if (dow === 0) return '1.2x'; // Sun
+        if (dow === 1) return '0.0x'; // Mon (Closed)
+        return '1.0x'; // Tue-Thu
+    }
+
+    // Total cells (6 rows * 7 columns = 42 cells or 5 rows * 7 columns = 35 cells)
+    const totalCells = (firstDayIndex + daysInMonth > 35) ? 42 : 35;
+
+    for (let i = 0; i < totalCells; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+        
+        let cellDateYear = year;
+        let cellDateMonth = month;
+        let dayNum = 0;
+        let isOtherMonth = false;
+
+        if (i < firstDayIndex) {
+            // Previous Month Days
+            dayNum = daysInPrevMonth - firstDayIndex + i + 1;
+            cellDateMonth = month - 1;
+            if (cellDateMonth < 0) {
+                cellDateMonth = 11;
+                cellDateYear = year - 1;
+            }
+            isOtherMonth = true;
+            cell.classList.add('other-month');
+        } else if (i >= firstDayIndex + daysInMonth) {
+            // Next Month Days
+            dayNum = i - (firstDayIndex + daysInMonth) + 1;
+            cellDateMonth = month + 1;
+            if (cellDateMonth > 11) {
+                cellDateMonth = 0;
+                cellDateYear = year + 1;
+            }
+            isOtherMonth = true;
+            cell.classList.add('other-month');
+        } else {
+            // Current Month Days
+            dayNum = i - firstDayIndex + 1;
+        }
+
+        const dateStr = `${cellDateYear}-${String(cellDateMonth + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+        const dayOfWeek = (i % 7);
+
+        if (dateStr === todayStr) {
+            cell.classList.add('is-today');
+        }
+        if (selectedDateStr && dateStr === selectedDateStr) {
+            cell.classList.add('is-selected');
+        }
+
+        // Day Header (Number + Base Mult)
+        const headerRow = document.createElement('div');
+        headerRow.className = 'cal-day-header-row';
+
+        const numSpan = document.createElement('span');
+        numSpan.className = 'cal-day-num';
+        numSpan.textContent = dayNum;
+        headerRow.appendChild(numSpan);
+
+        const baseSpan = document.createElement('span');
+        baseSpan.className = 'cal-day-base-mult';
+        baseSpan.textContent = getBaselineMultiplier(dayOfWeek);
+        headerRow.appendChild(baseSpan);
+
+        cell.appendChild(headerRow);
+
+        // Find Events for this day
+        const dayEvents = allEvents.filter(e => e.date === dateStr);
+        let matchingEvent = null;
+
+        dayEvents.forEach(evt => {
+            if (activeFilter !== 'all' && evt.category !== activeFilter) {
+                return;
+            }
+            matchingEvent = evt;
+
+            const pill = document.createElement('div');
+            pill.className = `cal-event-pill pill-${evt.category}`;
+            if (evt.title.includes("Florida vs. Georgia")) {
+                pill.className = `cal-event-pill pill-flga`;
+                cell.classList.add('has-flga');
+            } else if (evt.category === 'jaguars') {
+                cell.classList.add('has-stadium');
+            }
+
+            pill.innerHTML = `
+                <span>${evt.icon || '🔥'} ${evt.title}</span>
+                <span class="cal-multiplier-badge">${evt.multiplier}x</span>
+            `;
+            cell.appendChild(pill);
+        });
+
+        // Supplier Delivery Tags (Sat/Sun, Mon/Tue, Thu/Fri)
+        if (activeFilter === 'all' || activeFilter === 'delivery') {
+            if (dayOfWeek === 6) { // Sat
+                const orderTag = document.createElement('div');
+                orderTag.className = 'cal-order-tag';
+                orderTag.textContent = '📦 Order Cutoff';
+                cell.appendChild(orderTag);
+            } else if (dayOfWeek === 0) { // Sun
+                const delTag = document.createElement('div');
+                delTag.className = 'cal-delivery-tag';
+                delTag.textContent = '🚚 Sun Delivery';
+                cell.appendChild(delTag);
+            } else if (dayOfWeek === 1) { // Mon
+                const orderTag = document.createElement('div');
+                orderTag.className = 'cal-order-tag';
+                orderTag.textContent = '📦 Order Cutoff';
+                cell.appendChild(orderTag);
+            } else if (dayOfWeek === 2) { // Tue
+                const delTag = document.createElement('div');
+                delTag.className = 'cal-delivery-tag';
+                delTag.textContent = '🚚 Tue Delivery';
+                cell.appendChild(delTag);
+            } else if (dayOfWeek === 4) { // Thu
+                const orderTag = document.createElement('div');
+                orderTag.className = 'cal-order-tag';
+                orderTag.textContent = '📦 Order Cutoff';
+                cell.appendChild(orderTag);
+            } else if (dayOfWeek === 5) { // Fri
+                const delTag = document.createElement('div');
+                delTag.className = 'cal-delivery-tag';
+                delTag.textContent = '🚚 Fri Delivery';
+                cell.appendChild(delTag);
+            }
+        }
+
+        // Cell Click Handler
+        cell.addEventListener('click', () => {
+            document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('is-selected'));
+            cell.classList.add('is-selected');
+
+            if (onSelectDate) {
+                onSelectDate(dateStr, matchingEvent || {
+                    date: dateStr,
+                    title: `Normal Operations (${weekdays[dayOfWeek]})`,
+                    multiplier: parseFloat(getBaselineMultiplier(dayOfWeek)) || 1.0,
+                    note: dayOfWeek === 1 ? "Storefront closed. Catering pickups only." : "Standard baseline customer demand."
+                });
+            }
+        });
+
+        container.appendChild(cell);
+    }
+}
