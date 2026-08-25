@@ -702,8 +702,12 @@ function initMultiTabNavigation() {
     categorySelector.addEventListener('change', () => {
       let currentDays = 14;
       const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
-      if (activeBtn && activeBtn.id !== 'btn-preset-14' && activeBtn.id !== 'btn-preset-saturday') {
-        currentDays = 3;
+      if (activeBtn) {
+        if (activeBtn.id === 'btn-preset-sat-order' || activeBtn.id === 'btn-preset-thu-order') {
+          currentDays = 2;
+        } else if (activeBtn.id === 'btn-preset-mon-order') {
+          currentDays = 3;
+        }
       }
       renderPlotlyForecastingChart(currentDays);
     });
@@ -732,8 +736,12 @@ function initMultiTabNavigation() {
       
       let currentDays = 14;
       const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
-      if (activeBtn && activeBtn.id !== 'btn-preset-14' && activeBtn.id !== 'btn-preset-saturday') {
-        currentDays = 3;
+      if (activeBtn) {
+        if (activeBtn.id === 'btn-preset-sat-order' || activeBtn.id === 'btn-preset-thu-order') {
+          currentDays = 2;
+        } else if (activeBtn.id === 'btn-preset-mon-order') {
+          currentDays = 3;
+        }
       }
       
       // Trigger all renders
@@ -761,14 +769,14 @@ function initMultiTabNavigation() {
   const btn14 = document.getElementById('btn-preset-14');
   const btnSat = document.getElementById('btn-preset-saturday');
 
-  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sat-order')); // Delivered Sunday
-  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(2, 'btn-preset-mon-order')); // Delivered Tuesday
-  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(5, 'btn-preset-thu-order')); // Delivered Friday
+  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sat-order', 2)); // Delivered Sunday (covers Sun, Mon)
+  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(2, 'btn-preset-mon-order', 3)); // Delivered Tuesday (covers Tue, Wed, Thu)
+  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(5, 'btn-preset-thu-order', 2)); // Delivered Friday (covers Fri, Sat)
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
 }
 
-function updateDeliveryPreset(targetDayNum, btnId) {
+function updateDeliveryPreset(targetDayNum, btnId, windowDays = 3) {
   document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById(btnId);
   if (btn) btn.classList.add('active');
@@ -784,7 +792,7 @@ function updateDeliveryPreset(targetDayNum, btnId) {
     dateInput.value = targetDateStr;
     handleDateSelectionLookup(targetDateStr);
   }
-  renderPlotlyForecastingChart(3);
+  renderPlotlyForecastingChart(windowDays);
 }
 
 function renderPlotlyNoData(containerId) {
@@ -1108,8 +1116,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
-    // Build Plotly Interactive Chart
-    const slicedRecords = records.slice(0, daysCount);
+    const startIndex = records.findIndex(r => r.date === targetDateInput);
+    const validStartIndex = startIndex >= 0 ? startIndex : 0;
+    const slicedRecords = records.slice(validStartIndex, validStartIndex + daysCount);
     const dates = slicedRecords.map(r => `${r.date} (${r.day_name})`);
     const brisketData = slicedRecords.map(r => r.brisket_raw_lbs || 0);
     const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0);
