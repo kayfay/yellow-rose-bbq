@@ -1020,7 +1020,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
-    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${matchedRecord.brisket_raw_lbs.toFixed(1)} lbs of raw brisket and ~${matchedRecord.pork_shoulder_raw_lbs.toFixed(1)} lbs of pork shoulder. Because brisket loses 60% of its weight during the 14-hour smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, purchasing exactly the projected amount mathematically ensures we hit our target sell-out time right at closing.`;
+    const bRaw = matchedRecord.brisket_raw_lbs || 0;
+    const bCooked = Math.round(bRaw * 0.4);
+    const pRaw = matchedRecord.pork_shoulder_raw_lbs || 0;
+    const pCooked = Math.round(pRaw * 0.4);
+    const totalRaw = Math.round(bRaw + pRaw);
+    const totalCooked = bCooked + pCooked;
+
+    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
     
     if (matchedRecord.day_name === 'Mon') {
       insightStr += ` Note: The physical storefront is closed on Mondays, so any projected revenue and prep targets are driven entirely by scheduled online orders and catering pickups.`;

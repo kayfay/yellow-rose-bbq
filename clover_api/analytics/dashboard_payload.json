@@ -2,7 +2,7 @@
   "forecast": {
     "generated_at": "2026-08-19T18:02:49.840404",
     "days_count": 14,
-    "insight_string": "Because brisket loses 50% of its weight during the 14-hour smoke, and composed items like Tacos (63 projected) and Rosebuds (34 projected) pull directly from this yield, the 211.3 lbs of total raw brisket accounts for both pure meat sales and composed items.",
+    "insight_string": "The forecast dictates prepping ~211.3 lbs raw brisket (~84.5 lbs cooked yield) and ~60.0 lbs raw pork shoulder (~24.0 lbs cooked yield) [~271.3 lbs total raw / ~108.5 lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (63 projected) and Rosebuds (34 projected) pull directly from this yield, prepping these exact amounts accounts for both pure meat sales and composed items.",
     "forecast_records": [
       {
         "date": "2026-08-12",
