@@ -1134,7 +1134,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       ? dashPayload.forecast.forecast_records 
       : defaultForecastRecords;
       
-    if (histPayload && histPayload.historical_records) {
+      if (histPayload && histPayload.historical_records) {
       // Sort and merge historical records with forecast records
       records = [...histPayload.historical_records, ...records];
       records.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -1147,6 +1147,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (!matchedRecord) {
       matchedRecord = records.find(r => r.day_name === shortDayStr) || records[0];
     }
+
+    const startIndex = records.findIndex(r => r.date === targetDateInput);
+    const validStartIndex = startIndex >= 0 ? startIndex : 0;
+    const slicedRecords = records.slice(validStartIndex, validStartIndex + daysCount);
 
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
@@ -1276,9 +1280,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
-    const startIndex = records.findIndex(r => r.date === targetDateInput);
-    const validStartIndex = startIndex >= 0 ? startIndex : 0;
-    const slicedRecords = records.slice(validStartIndex, validStartIndex + daysCount);
+
     const dates = slicedRecords.map(r => `${r.date} (${r.day_name})`);
     const brisketData = slicedRecords.map(r => r.brisket_raw_lbs || 0);
     const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0);

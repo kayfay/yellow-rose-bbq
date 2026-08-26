@@ -19,5 +19,9 @@
   "homepage": "https://github.com/kayfay/yellow-rose-bbq#readme",
   "devDependencies": {
     "@playwright/test": "^1.62.1"
+  },
+  "dependencies": {
+    "jsdom": "^30.0.1",
+    "puppeteer": "^25.8.0"
   }
 }
