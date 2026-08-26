@@ -1122,9 +1122,25 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       console.log("Using embedded dashboard dataset fallback:", e);
     }
 
-    const records = (dashPayload && dashPayload.forecast && dashPayload.forecast.forecast_records) 
+    let histPayload = null;
+    try {
+      const histRes = await fetch('clover_api/analytics/historical_payload.json');
+      if (histRes.ok) histPayload = await histRes.json();
+    } catch (e) {
+      console.log("No historical payload found.");
+    }
+
+    let records = (dashPayload && dashPayload.forecast && dashPayload.forecast.forecast_records) 
       ? dashPayload.forecast.forecast_records 
       : defaultForecastRecords;
+      
+    if (histPayload && histPayload.historical_records) {
+      // Sort and merge historical records with forecast records
+      records = [...histPayload.historical_records, ...records];
+      records.sort((a, b) => new Date(a.date) - new Date(b.date));
+      // Remove duplicates by date if any overlap exists
+      records = Array.from(new Map(records.map(item => [item.date, item])).values());
+    }
 
     // Match the active selected date
     let matchedRecord = records.find(r => r.date === targetDateInput);
@@ -1142,7 +1158,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const totalRaw = Math.round(bRaw + pRaw);
     const totalCooked = bCooked + pCooked;
 
-    let insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+    let insightStr = '';
+    if (matchedRecord.is_historical) {
+      insightStr = `Historical Record for ${matchedRecord.day_name} (${matchedRecord.date}): The pit moved ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Actual verified line items sold included ${matchedRecord.tacos_sold} Tacos and ${matchedRecord.rosebuds_sold} Rosebuds, driving $${matchedRecord.actual_revenue.toLocaleString()} in gross revenue.`;
+    } else {
+      insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+    }
     
     if (matchedRecord.day_name === 'Mon') {
       insightStr += ` Note: The physical storefront is closed on Mondays, so any projected revenue and prep targets are driven entirely by scheduled online orders and catering pickups.`;
@@ -1158,16 +1179,17 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       insightSpan.textContent = insightStr;
     }
 
-    // Populate Key Meat & Revenue Targets with Exact Model Projections
-    const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
-    const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs || 0);
-    const sVal = Math.round(matchedRecord.sausage_lbs || 0);
-    const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
-    const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
-    const tVal = Math.round((matchedRecord.predicted_revenue || 2000) * 0.008 + 10);
-    const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
-    const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
-    const predRev = Math.round(matchedRecord.predicted_revenue || 0);
+    // Populate Key Meat & Revenue Targets with Exact Model Projections aggregated over the delivery window
+    const bVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.brisket_raw_lbs || 0), 0));
+    const pVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.pork_shoulder_raw_lbs || 0), 0));
+    const sVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.sausage_lbs || 0), 0));
+    const rVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.pork_ribs_racks || 0), 0));
+    const drVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.beef_dino_ribs || 0), 0));
+    const tVal = Math.round(slicedRecords.reduce((sum, r) => sum + ((r.predicted_revenue || 2000) * 0.008 + 10), 0));
+    const rbVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.rosebuds_sold || 0), 0));
+    const tacoVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.tacos_sold || 0), 0));
+    const predRev = Math.round(slicedRecords.reduce((sum, r) => sum + (r.predicted_revenue || 0), 0));
+
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
@@ -1208,7 +1230,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
-    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length);
+    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length) * slicedRecords.length;
     const avgBrisketRaw = Math.round(records.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / records.length);
     const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
     const avgPorkRaw = Math.round(records.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / records.length);
@@ -1228,12 +1250,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
     if (baselineTrendElem) {
       let comparisonNote = '';
+      const revLabel = matchedRecord.is_historical ? 'actual' : 'projected';
       if (pctDiff > 0) {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the daily average baseline (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the daily average baseline (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
       } else if (pctDiff < 0) {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the daily average baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for mid-week operations.`;
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the daily average baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for mid-week operations.`;
       } else {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), projected revenue of <strong>$${predRev.toLocaleString()}</strong> directly matches the 14-day daily baseline average.`;
+        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> directly matches the 14-day daily baseline average.`;
       }
 
       baselineTrendElem.innerHTML = `Our model establishes a 14-day rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> (~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. ${comparisonNote}`;
@@ -1243,12 +1266,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const demandLabelElem = document.getElementById('kpi-demand-label');
     if (revenueElem) revenueElem.textContent = pctDisplay;
     if (demandLabelElem) {
+      const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : 'Projected Sales';
       if (pctDiff > 0) {
-        demandLabelElem.textContent = `Projected Sales Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day average baseline pace.`;
+        demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day average baseline pace.`;
       } else if (pctDiff < 0) {
-        demandLabelElem.textContent = `Projected Sales Drop of -${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}) below the $${baselineRev.toLocaleString()}/day average baseline pace.`;
+        demandLabelElem.textContent = `${surgeLabel} Drop of -${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}) below the $${baselineRev.toLocaleString()}/day average baseline pace.`;
       } else {
-        demandLabelElem.textContent = `Projected Sales right on pace with the $${baselineRev.toLocaleString()}/day average baseline.`;
+        demandLabelElem.textContent = `${surgeLabel} right on pace with the $${baselineRev.toLocaleString()}/day average baseline.`;
       }
     }
 
