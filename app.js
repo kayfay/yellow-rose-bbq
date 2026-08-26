@@ -1183,16 +1183,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       insightSpan.textContent = insightStr;
     }
 
-    // Populate Key Meat & Revenue Targets with Exact Model Projections aggregated over the delivery window
-    const bVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.brisket_raw_lbs || 0), 0));
-    const pVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.pork_shoulder_raw_lbs || 0), 0));
-    const sVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.sausage_lbs || 0), 0));
-    const rVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.pork_ribs_racks || 0), 0));
-    const drVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.beef_dino_ribs || 0), 0));
-    const tVal = Math.round(slicedRecords.reduce((sum, r) => sum + ((r.predicted_revenue || 2000) * 0.008 + 10), 0));
-    const rbVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.rosebuds_sold || 0), 0));
-    const tacoVal = Math.round(slicedRecords.reduce((sum, r) => sum + (r.tacos_sold || 0), 0));
-    const predRev = Math.round(slicedRecords.reduce((sum, r) => sum + (r.predicted_revenue || 0), 0));
+    // Populate Key Meat & Revenue Targets with Exact Model Projections for the selected day
+    const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
+    const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs || 0);
+    const sVal = Math.round(matchedRecord.sausage_lbs || 0);
+    const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
+    const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
+    const tVal = Math.round((matchedRecord.predicted_revenue || 2000) * 0.008 + 10);
+    const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
+    const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
+    const predRev = Math.round(matchedRecord.predicted_revenue || 0);
 
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
@@ -1234,7 +1234,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
     if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
-    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length) * slicedRecords.length;
+    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length);
     const avgBrisketRaw = Math.round(records.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / records.length);
     const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
     const avgPorkRaw = Math.round(records.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / records.length);
