@@ -646,17 +646,22 @@ function initMultiTabNavigation() {
 
   const btnSubtabShift = document.getElementById('btn-subtab-shift');
   const viewShift = document.getElementById('subtab-view-shift');
+  
+  const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
+  const viewAdvanced = document.getElementById('subtab-view-advanced');
 
-  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift) {
+  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift && btnSubtabAdvanced) {
     btnSubtabArima.addEventListener('click', () => {
       btnSubtabArima.classList.add('active');
       btnSubtabWeather.classList.remove('active');
       btnSubtabEvent.classList.remove('active');
       btnSubtabShift.classList.remove('active');
+      btnSubtabAdvanced.classList.remove('active');
       if (viewArima) viewArima.style.display = 'block';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
+      if (viewAdvanced) viewAdvanced.style.display = 'none';
       renderPlotlyForecastingChart();
     });
 
@@ -665,10 +670,12 @@ function initMultiTabNavigation() {
       btnSubtabArima.classList.remove('active');
       btnSubtabEvent.classList.remove('active');
       btnSubtabShift.classList.remove('active');
+      btnSubtabAdvanced.classList.remove('active');
       if (viewWeather) viewWeather.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
+      if (viewAdvanced) viewAdvanced.style.display = 'none';
       renderPlotlyWeatherChart();
     });
 
@@ -676,11 +683,14 @@ function initMultiTabNavigation() {
       btnSubtabEvent.classList.add('active');
       btnSubtabArima.classList.remove('active');
       btnSubtabWeather.classList.remove('active');
+      btnSubtabAdvanced.classList.remove('active');
       btnSubtabShift.classList.remove('active');
+      btnSubtabAdvanced.classList.remove('active');
       if (viewEvent) viewEvent.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
+      if (viewAdvanced) viewAdvanced.style.display = 'none';
       renderPlotlyEventChart();
       refreshEventsCalendar();
     });
@@ -690,28 +700,36 @@ function initMultiTabNavigation() {
       btnSubtabArima.classList.remove('active');
       btnSubtabWeather.classList.remove('active');
       btnSubtabEvent.classList.remove('active');
+      btnSubtabAdvanced.classList.remove('active');
       if (viewShift) viewShift.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
+      if (viewAdvanced) viewAdvanced.style.display = 'none';
       const shiftSelector = document.getElementById('shift-selector');
       renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
+    });
+    
+    btnSubtabAdvanced.addEventListener('click', () => {
+      btnSubtabAdvanced.classList.add('active');
+      btnSubtabArima.classList.remove('active');
+      btnSubtabWeather.classList.remove('active');
+      btnSubtabEvent.classList.remove('active');
+      btnSubtabShift.classList.remove('active');
+      if (viewAdvanced) viewAdvanced.style.display = 'block';
+      if (viewArima) viewArima.style.display = 'none';
+      if (viewWeather) viewWeather.style.display = 'none';
+      if (viewEvent) viewEvent.style.display = 'none';
+      if (viewShift) viewShift.style.display = 'none';
+      renderAdvancedAnalytics();
     });
   }
   
   const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
-      let currentDays = 14;
-      const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
-      if (activeBtn) {
-        if (activeBtn.id === 'btn-preset-sat-order' || activeBtn.id === 'btn-preset-thu-order') {
-          currentDays = 2;
-        } else if (activeBtn.id === 'btn-preset-mon-order') {
-          currentDays = 3;
-        }
-      }
-      renderPlotlyForecastingChart(currentDays);
+      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+      renderPlotlyForecastingChart(14);
     });
   }
   
@@ -1424,3 +1442,57 @@ async function renderPlotlyShiftHeatmap(shift) {
     renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true, shift);
   }
 }
+
+window.renderAdvancedAnalytics = function() {
+  const payload = window.BBQ_PAYLOADS.advanced_payload;
+  if (!payload) return;
+
+  // 1. Market Basket
+  const basketList = document.getElementById('market-basket-list');
+  if (basketList) {
+    basketList.innerHTML = payload.market_basket.map(item => `<li><strong>${item.pair}</strong>: Bought together ${item.count} times (${item.confidence}% confidence)</li>`).join('');
+  }
+
+  // 2. Interaction Modeling
+  const interList = document.getElementById('interaction-list');
+  if (interList) {
+    interList.innerHTML = `
+      <li><strong>Normal Day Avg:</strong> $${payload.interaction_modeling.normal.toFixed(2)}</li>
+      <li><strong>Jaguars Game (Ideal Weather):</strong> $${payload.interaction_modeling.game_only.toFixed(2)}</li>
+      <li><strong>Heavy Rain (No Event):</strong> $${payload.interaction_modeling.rain_only.toFixed(2)}</li>
+      <li><strong>Jaguars Game + Heavy Rain:</strong> $${payload.interaction_modeling.game_and_rain.toFixed(2)}</li>
+    `;
+  }
+
+  // 3. Order Type
+  const orderTypeList = document.getElementById('order-type-list');
+  if (orderTypeList) {
+    orderTypeList.innerHTML = `<ul>` + payload.order_type_segmentation.map(ot => 
+      `<li><strong>${ot.order_type}:</strong> ${ot.order_count} orders, $${ot.avg_ticket.toFixed(2)} avg ticket</li>`
+    ).join('') + `</ul>`;
+  }
+
+  // 5. Cannibalization
+  const cannList = document.getElementById('cannibalization-list');
+  if (cannList) {
+    cannList.innerHTML = `
+      <li><strong>Avg Pork Ribs without Dino Ribs:</strong> ${payload.cannibalization.pork_ribs_avg_without_dino}</li>
+      <li><strong>Avg Pork Ribs with Dino Ribs:</strong> ${payload.cannibalization.pork_ribs_avg_with_dino}</li>
+      <li><strong>Impact on Pork Ribs:</strong> ${payload.cannibalization.impact_pct}%</li>
+    `;
+  }
+
+  // 6. Payday
+  const paydayList = document.getElementById('payday-list');
+  if (paydayList) {
+    paydayList.innerHTML = `
+      <li><strong>Normal Avg Ticket:</strong> $${payload.payday_effect.normal_avg_ticket.toFixed(2)}</li>
+      <li><strong>Payday Avg Ticket:</strong> $${payload.payday_effect.payday_avg_ticket.toFixed(2)}</li>
+    `;
+  }
+
+  // 4. Sell-Out Chart
+  if (document.getElementById('plotly-sellout-chart')) {
+    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout, {responsive: true, displayModeBar: false});
+  }
+};
