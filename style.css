@@ -120,12 +120,13 @@ body {
 
 /* --- Tabs --- */
 .app-tab-navigation { border-top: 1px solid var(--border-color); margin-top: 6px; padding-top: 6px; }
-.tab-nav-container { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+.tab-nav-container { display: flex; gap: 10px; flex-wrap: wrap; }
 .app-tab-btn {
   background: var(--bg-base); border: 1.5px solid var(--border-color); color: var(--text-secondary);
   padding: 10px 18px; font-size: 13px; font-weight: 600; font-family: var(--font-main);
-  min-height: 48px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px;
+  min-height: 48px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;
   white-space: nowrap; transition: all 0.15s ease; user-select: none;
+  flex: 1 1 140px;
 }
 .app-tab-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--border-light); }
 .app-tab-btn:active { transform: scale(0.97); }
@@ -185,13 +186,11 @@ body {
 .recipe-pills-container {
   display: flex;
   gap: 10px;
-  overflow-x: auto;
+  flex-wrap: wrap;
   padding: 4px 2px 8px 2px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
 }
 .recipe-pill {
-  flex: 0 0 auto;
+  flex: 1 1 140px;
   background: #1e293b;
   border: 2px solid var(--border-color);
   border-radius: 8px;
@@ -476,6 +475,7 @@ details summary { cursor: pointer; font-size: 12px; font-weight: 700; color: var
 }
 .forecast-preset-group { display: flex; flex-direction: column; gap: 6px; }
 .preset-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.preset-btn-wrapper { display: flex; flex-wrap: wrap; gap: 8px; }
 .preset-btn {
   background: var(--bg-base); border: 1.5px solid var(--border-color); color: var(--text-secondary);
   padding: 8px 12px; min-height: 42px; font-size: 12px; font-weight: 600; font-family: var(--font-main);
