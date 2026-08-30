@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="stylesheet" href="style.css?v=20260817_01">
   <!-- Include Inter Font for enterprise dense aesthetic -->
@@ -239,8 +239,8 @@
           <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; max-width: 700px;">
             <strong style="color: var(--text-primary);">How to use the Date Picker:</strong> Select any <strong>past date</strong> to pull verified POS sales records and actual performance metrics, or pick any <strong>future date</strong> to generate SARIMA model prep forecasts for your smoker. 
           </div>
-          <div style="font-size: 10px; color: #34d399; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); white-space: nowrap;">
-            Data Last Pulled: August 11, 2026
+          <div id="data-last-pulled" style="font-size: 10px; color: #34d399; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); white-space: nowrap;">
+            Data Last Pulled: ...
           </div>
         </div>
 
@@ -250,7 +250,9 @@
               📅 Target Date Calendar Picker:
             </label>
             <div>
-              <input type="date" id="forecast-start-date" onclick="this.showPicker()" class="forecast-date-input">
+              <input type="date" id="forecast-start-date" class="forecast-date-input">
+              <span style="color: #64748b;">to</span>
+              <input type="date" id="forecast-end-date" class="forecast-date-input">
             </div>
           </div>
           <div class="forecast-preset-group">
@@ -467,7 +469,7 @@
           <div class="calendar-top-controls">
             <div class="calendar-month-nav">
               <button type="button" id="cal-btn-prev" class="calendar-nav-btn" aria-label="Previous Month">◀ Prev</button>
-              <h3 id="cal-month-title" class="calendar-month-title">August 2026</h3>
+              <h3 id="cal-month-title" class="calendar-month-title"></h3>
               <button type="button" id="cal-btn-next" class="calendar-nav-btn" aria-label="Next Month">Next ▶</button>
               <button type="button" id="cal-btn-today" class="calendar-nav-btn" style="font-size: 11px; padding: 4px 8px; color: #38bdf8;">Today</button>
             </div>
@@ -491,7 +493,7 @@
           <div id="calendar-selected-drawer" class="calendar-selected-detail" style="display: none;">
             <div class="cal-detail-info">
               <div class="cal-detail-title">
-                <span id="drawer-date-str">Saturday, Aug 22, 2026</span>
+                <span id="drawer-date-str"></span>
                 <span id="drawer-mult-badge" class="cal-detail-mult-tag">3.5x Demand</span>
               </div>
               <p id="drawer-event-title" style="font-weight: 600; color: #f8fafc; font-size: 13px;"></p>

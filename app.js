@@ -650,6 +650,11 @@ function initMultiTabNavigation() {
   const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
   const viewAdvanced = document.getElementById('subtab-view-advanced');
 
+  const dateStart = document.getElementById('forecast-start-date');
+  const dateEnd = document.getElementById('forecast-end-date');
+  if (dateStart) dateStart.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
+  if (dateEnd) dateEnd.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
+
   if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift && btnSubtabAdvanced) {
     btnSubtabArima.addEventListener('click', () => {
       btnSubtabArima.classList.add('active');
@@ -685,7 +690,6 @@ function initMultiTabNavigation() {
       btnSubtabWeather.classList.remove('active');
       btnSubtabAdvanced.classList.remove('active');
       btnSubtabShift.classList.remove('active');
-      btnSubtabAdvanced.classList.remove('active');
       if (viewEvent) viewEvent.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
@@ -876,10 +880,11 @@ async function renderPlotlyEventChart() {
 }
 
 // Live Events & Multiplier Calendar State Management
-let currentCalYear = 2026;
-let currentCalMonth = 7; // August (0-indexed)
+const _now = new Date();
+let currentCalYear = _now.getFullYear();
+let currentCalMonth = _now.getMonth();
 let currentCalFilter = 'all';
-let selectedCalDate = '2026-08-22';
+let selectedCalDate = _now.toISOString().split('T')[0];
 let calInitialized = false;
 
 function refreshEventsCalendar() {
@@ -1139,6 +1144,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     } catch (e) {
       console.log("Using embedded dashboard dataset fallback:", e);
     }
+    
+    if (dashPayload && dashPayload.forecast && dashPayload.forecast.generated_at) {
+      const generatedAt = new Date(dashPayload.forecast.generated_at);
+      const dateStr = generatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      const lastPulledElem = document.getElementById('data-last-pulled');
+      if (lastPulledElem) {
+        lastPulledElem.textContent = `Data Last Pulled: ${dateStr}`;
+      }
+    }
 
     let histPayload = null;
     try {
@@ -1163,12 +1177,124 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // Match the active selected date
     let matchedRecord = records.find(r => r.date === targetDateInput);
     if (!matchedRecord) {
-      matchedRecord = records.find(r => r.day_name === shortDayStr) || records[0];
+      // Calculate an average for that day of the week based on history.
+      const histDays = records.filter(r => r.day_name === shortDayStr && r.is_historical);
+      
+      if (histDays.length > 0) {
+        // Filter out outliers using IQR on predicted_revenue
+        const revs = histDays.map(r => r.predicted_revenue || 0).sort((a, b) => a - b);
+        const q1 = revs[Math.floor((revs.length / 4))];
+        const q3 = revs[Math.ceil((revs.length * (3 / 4))) - 1];
+        const iqr = q3 - q1;
+        const lowerBound = q1 - 1.5 * iqr;
+        const upperBound = q3 + 1.5 * iqr;
+        
+        const validDays = histDays.filter(r => (r.predicted_revenue || 0) >= lowerBound && (r.predicted_revenue || 0) <= upperBound);
+        const daysToAverage = validDays.length > 0 ? validDays : histDays;
+        
+        // Calculate averages
+        matchedRecord = {
+          date: targetDateInput,
+          day_name: shortDayStr,
+          is_historical: false,
+          is_fallback_average: true,
+          predicted_revenue: daysToAverage.reduce((sum, r) => sum + (r.predicted_revenue || 0), 0) / daysToAverage.length,
+          brisket_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.brisket_raw_lbs || 0), 0) / daysToAverage.length,
+          pork_shoulder_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.pork_shoulder_raw_lbs || 0), 0) / daysToAverage.length,
+          sausage_lbs: daysToAverage.reduce((sum, r) => sum + (r.sausage_lbs || 0), 0) / daysToAverage.length,
+          tacos_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.tacos_sold || 0), 0) / daysToAverage.length),
+          rosebuds_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.rosebuds_sold || 0), 0) / daysToAverage.length),
+          pork_ribs_racks: daysToAverage.reduce((sum, r) => sum + (r.pork_ribs_racks || 0), 0) / daysToAverage.length,
+          beef_dino_ribs: daysToAverage.reduce((sum, r) => sum + (r.beef_dino_ribs || 0), 0) / daysToAverage.length,
+          actual_revenue: daysToAverage.reduce((sum, r) => sum + (r.actual_revenue || 0), 0) / daysToAverage.length
+        };
+
+        // Factor in live events
+        const JAGS_HOME_GAMES = ["2026-09-13", "2026-09-27", "2026-10-18", "2026-11-01", "2026-11-22", "2026-12-06", "2026-12-20"];
+        const HARDCODED_HOLIDAYS = ["2026-01-01", "2026-05-25", "2026-07-04", "2026-09-07", "2026-11-26", "2026-12-25", "2027-01-01", "2027-05-31", "2027-07-04", "2027-09-06", "2027-11-25", "2027-12-25"];
+        
+        let eventMultiplier = 1.0;
+        let eventStr = '';
+        if (JAGS_HOME_GAMES.includes(targetDateInput)) {
+           eventMultiplier = 3.5; 
+           eventStr = 'Jaguars Game';
+        } else if (HARDCODED_HOLIDAYS.includes(targetDateInput)) {
+           eventMultiplier = 0.7;
+           eventStr = 'Holiday';
+        }
+
+        // Factor in weather
+        let weatherMultiplier = 1.0;
+        let weatherStr = '';
+        try {
+           const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=30.3322&longitude=-81.6557&daily=temperature_2m_max,precipitation_sum&timezone=America/New_York&start_date=${targetDateInput}&end_date=${targetDateInput}`);
+           if (weatherRes.ok) {
+             const weatherData = await weatherRes.json();
+             if (weatherData.daily && weatherData.daily.precipitation_sum && weatherData.daily.precipitation_sum[0] > 10.0) {
+                 weatherMultiplier = 1.21;
+                 weatherStr = 'Heavy Rain';
+             } else if (weatherData.daily && weatherData.daily.temperature_2m_max && weatherData.daily.temperature_2m_max[0] > 90.0) {
+                 weatherMultiplier = 0.942;
+                 weatherStr = 'Extreme Heat';
+             }
+           }
+        } catch (e) {
+           console.log("Could not fetch weather for fallback average");
+        }
+
+        const totalMultiplier = eventMultiplier * weatherMultiplier;
+        if (totalMultiplier !== 1.0) {
+            matchedRecord.predicted_revenue *= totalMultiplier;
+            matchedRecord.brisket_raw_lbs *= totalMultiplier;
+            matchedRecord.pork_shoulder_raw_lbs *= totalMultiplier;
+            matchedRecord.sausage_lbs *= totalMultiplier;
+            matchedRecord.tacos_sold = Math.round(matchedRecord.tacos_sold * totalMultiplier);
+            matchedRecord.rosebuds_sold = Math.round(matchedRecord.rosebuds_sold * totalMultiplier);
+            matchedRecord.pork_ribs_racks *= totalMultiplier;
+            matchedRecord.beef_dino_ribs *= totalMultiplier;
+            matchedRecord.insightSuffix = ` (Adjusted x${totalMultiplier.toFixed(2)} for ${eventStr}${eventStr && weatherStr ? ' and ' : ''}${weatherStr})`;
+        }
+      } else {
+        matchedRecord = records.find(r => r.day_name === shortDayStr) || records[0];
+      }
     }
 
     const startIndex = records.findIndex(r => r.date === targetDateInput);
-    const validStartIndex = startIndex >= 0 ? startIndex : 0;
-    const slicedRecords = records.slice(validStartIndex, validStartIndex + daysCount);
+    let slicedRecords = [];
+    if (startIndex >= 0 && startIndex + daysCount <= records.length) {
+      slicedRecords = records.slice(startIndex, startIndex + daysCount);
+    } else {
+      let currDate = new Date(targetDateInput + 'T00:00:00');
+      for (let i = 0; i < daysCount; i++) {
+        let dStr = currDate.toISOString().split('T')[0];
+        let r = records.find(x => x.date === dStr);
+        if (i === 0 && matchedRecord && matchedRecord.date === dStr) {
+           r = matchedRecord;
+        } else if (!r) {
+           let sDay = currDate.toLocaleDateString('en-US', { weekday: 'short' });
+           let histDays = records.filter(x => x.day_name === sDay && x.is_historical);
+           if (histDays.length > 0) {
+             let dAvg = histDays;
+             r = {
+               date: dStr,
+               day_name: sDay,
+               predicted_revenue: dAvg.reduce((sum, x) => sum + (x.predicted_revenue || 0), 0) / dAvg.length,
+               brisket_raw_lbs: dAvg.reduce((sum, x) => sum + (x.brisket_raw_lbs || 0), 0) / dAvg.length,
+               pork_shoulder_raw_lbs: dAvg.reduce((sum, x) => sum + (x.pork_shoulder_raw_lbs || 0), 0) / dAvg.length,
+               sausage_lbs: dAvg.reduce((sum, x) => sum + (x.sausage_lbs || 0), 0) / dAvg.length,
+               tacos_sold: Math.round(dAvg.reduce((sum, x) => sum + (x.tacos_sold || 0), 0) / dAvg.length),
+               rosebuds_sold: Math.round(dAvg.reduce((sum, x) => sum + (x.rosebuds_sold || 0), 0) / dAvg.length),
+               pork_ribs_racks: dAvg.reduce((sum, x) => sum + (x.pork_ribs_racks || 0), 0) / dAvg.length,
+               beef_dino_ribs: dAvg.reduce((sum, x) => sum + (x.beef_dino_ribs || 0), 0) / dAvg.length
+             };
+           } else {
+             r = {...(records.find(x => x.day_name === sDay) || records[0]), date: dStr};
+           }
+        }
+        slicedRecords.push(r);
+        currDate.setDate(currDate.getDate() + 1);
+      }
+    }
 
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
@@ -1183,6 +1309,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     let insightStr = '';
     if (matchedRecord.is_historical) {
       insightStr = `Historical Record for ${matchedRecord.day_name} (${matchedRecord.date}): The pit moved ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Actual verified line items sold included ${matchedRecord.tacos_sold} Tacos and ${matchedRecord.rosebuds_sold} Rosebuds, driving $${matchedRecord.actual_revenue.toLocaleString()} in gross revenue.`;
+    } else if (matchedRecord.is_fallback_average) {
+      insightStr = `Historical Average for ${matchedRecord.day_name} (${matchedRecord.date}): Prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected).`;
+      if (matchedRecord.insightSuffix) insightStr += matchedRecord.insightSuffix;
     } else {
       insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
     }
@@ -1446,11 +1575,25 @@ async function renderPlotlyShiftHeatmap(shift) {
 window.renderAdvancedAnalytics = function() {
   const payload = window.BBQ_PAYLOADS.advanced_payload;
   if (!payload) return;
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>'"]/g, 
+      tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag)
+    );
+  }
 
   // 1. Market Basket
-  const basketList = document.getElementById('market-basket-list');
-  if (basketList) {
-    basketList.innerHTML = payload.market_basket.map(item => `<li><strong>${item.pair}</strong>: Bought together ${item.count} times (${item.confidence}% confidence)</li>`).join('');
+  if (payload.market_basket) {
+    const basketList = document.getElementById('market-basket-list');
+    if (basketList) {
+      basketList.innerHTML = payload.market_basket.map(item => `<li><strong>${escapeHTML(item.pair)}</strong>: Bought together ${item.count} times (${item.confidence}% confidence)</li>`).join('');
+    }
   }
 
   // 2. Interaction Modeling
@@ -1464,11 +1607,11 @@ window.renderAdvancedAnalytics = function() {
     `;
   }
 
-  // 3. Order Type
+  // 3. Order Type Segmentation
   const orderTypeList = document.getElementById('order-type-list');
-  if (orderTypeList) {
+  if (orderTypeList && payload.order_type_segmentation) {
     orderTypeList.innerHTML = `<ul>` + payload.order_type_segmentation.map(ot => 
-      `<li><strong>${ot.order_type}:</strong> ${ot.order_count} orders, $${ot.avg_ticket.toFixed(2)} avg ticket</li>`
+      `<li><strong>${escapeHTML(ot.order_type)}</strong>: ${ot.order_count} orders, generating $${ot.total_revenue.toLocaleString()} (avg $${ot.avg_ticket.toFixed(2)}/ticket)</li>`
     ).join('') + `</ul>`;
   }
 

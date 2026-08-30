@@ -1,13 +1,13 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-29T22:01:27.986068",
+      "generated_at": "2026-08-30T08:18:20.371981",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~265.9 lbs raw brisket (~106.4 lbs cooked yield) and ~43.7 lbs raw pork shoulder (~17.5 lbs cooked yield) [~309.6 lbs total raw / ~123.9 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (63 projected) and Rosebuds (42 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
         {
-          "date": "2026-08-29",
-          "day_name": "Sat",
+          "date": "2026-08-30",
+          "day_name": "Sun",
           "predicted_revenue": 4062.9,
           "brisket_raw_lbs": 154.9,
           "pork_shoulder_raw_lbs": 20.3,
@@ -20,8 +20,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-30",
-          "day_name": "Sun",
+          "date": "2026-08-31",
+          "day_name": "Mon",
           "predicted_revenue": 4367.62,
           "brisket_raw_lbs": 162.7,
           "pork_shoulder_raw_lbs": 30.8,
@@ -34,8 +34,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-31",
-          "day_name": "Mon",
+          "date": "2026-09-01",
+          "day_name": "Tue",
           "predicted_revenue": 6703.79,
           "brisket_raw_lbs": 239.7,
           "pork_shoulder_raw_lbs": 29.3,
@@ -48,8 +48,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-01",
-          "day_name": "Tue",
+          "date": "2026-09-02",
+          "day_name": "Wed",
           "predicted_revenue": 7668.73,
           "brisket_raw_lbs": 265.9,
           "pork_shoulder_raw_lbs": 43.7,
@@ -62,8 +62,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-02",
-          "day_name": "Wed",
+          "date": "2026-09-03",
+          "day_name": "Thu",
           "predicted_revenue": 7262.44,
           "brisket_raw_lbs": 238.1,
           "pork_shoulder_raw_lbs": 31.7,
@@ -76,8 +76,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-03",
-          "day_name": "Thu",
+          "date": "2026-09-04",
+          "day_name": "Fri",
           "predicted_revenue": 203.15,
           "brisket_raw_lbs": 0.3,
           "pork_shoulder_raw_lbs": 0.4,
@@ -90,8 +90,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 17.0
         },
         {
-          "date": "2026-09-04",
-          "day_name": "Fri",
+          "date": "2026-09-05",
+          "day_name": "Sat",
           "predicted_revenue": 4215.26,
           "brisket_raw_lbs": 141.3,
           "pork_shoulder_raw_lbs": 19.1,
@@ -104,8 +104,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-05",
-          "day_name": "Sat",
+          "date": "2026-09-06",
+          "day_name": "Sun",
           "predicted_revenue": 4418.41,
           "brisket_raw_lbs": 152.5,
           "pork_shoulder_raw_lbs": 19.6,
@@ -118,8 +118,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-06",
-          "day_name": "Sun",
+          "date": "2026-09-07",
+          "day_name": "Mon",
           "predicted_revenue": 4469.19,
           "brisket_raw_lbs": 160.2,
           "pork_shoulder_raw_lbs": 30.1,
@@ -132,8 +132,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-07",
-          "day_name": "Mon",
+          "date": "2026-09-08",
+          "day_name": "Tue",
           "predicted_revenue": 6856.15,
           "brisket_raw_lbs": 237.2,
           "pork_shoulder_raw_lbs": 28.6,
@@ -146,8 +146,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-08",
-          "day_name": "Tue",
+          "date": "2026-09-09",
+          "day_name": "Wed",
           "predicted_revenue": 7973.45,
           "brisket_raw_lbs": 263.8,
           "pork_shoulder_raw_lbs": 43.1,
@@ -160,8 +160,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-09",
-          "day_name": "Wed",
+          "date": "2026-09-10",
+          "day_name": "Thu",
           "predicted_revenue": 7262.44,
           "brisket_raw_lbs": 235.5,
           "pork_shoulder_raw_lbs": 31.0,
@@ -174,8 +174,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-10",
-          "day_name": "Thu",
+          "date": "2026-09-11",
+          "day_name": "Fri",
           "predicted_revenue": 253.93,
           "brisket_raw_lbs": 0.2,
           "pork_shoulder_raw_lbs": 0.5,
@@ -188,8 +188,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 17.0
         },
         {
-          "date": "2026-09-11",
-          "day_name": "Fri",
+          "date": "2026-09-12",
+          "day_name": "Sat",
           "predicted_revenue": 4062.9,
           "brisket_raw_lbs": 138.8,
           "pork_shoulder_raw_lbs": 18.4,
