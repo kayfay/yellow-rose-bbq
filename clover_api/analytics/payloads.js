@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-30T08:18:20.371981",
+      "generated_at": "2026-08-30T09:52:14.333831",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~265.9 lbs raw brisket (~106.4 lbs cooked yield) and ~43.7 lbs raw pork shoulder (~17.5 lbs cooked yield) [~309.6 lbs total raw / ~123.9 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (63 projected) and Rosebuds (42 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -1878,5 +1878,263 @@ window.BBQ_PAYLOADS = {
       "payday_avg_ticket": 46.73,
       "normal_avg_ticket": 45.64
     }
-  }
+  },
+  "calendar_events": [
+    {
+      "date": "2026-08-14",
+      "title": "Jumbo Shrimp Baseball",
+      "category": "baseball",
+      "multiplier": 1.2,
+      "icon": "\u26be",
+      "note": "Summer evening home stand. Expect steady family traffic and higher side dish orders (elote, slaw)."
+    },
+    {
+      "date": "2026-08-15",
+      "title": "Daily's Place Concert",
+      "category": "concert",
+      "multiplier": 1.5,
+      "icon": "\ud83c\udfb8",
+      "note": "Evening concert rush concentrated between 5:00 PM \u2013 7:00 PM. Hold brisket hot in warmers for fast service."
+    },
+    {
+      "date": "2026-08-16",
+      "title": "Jumbo Shrimp Baseball",
+      "category": "baseball",
+      "multiplier": 1.2,
+      "icon": "\u26be",
+      "note": "Sunday afternoon ballpark crowd. Early lunch demand bump."
+    },
+    {
+      "date": "2026-08-21",
+      "title": "Jumbo Shrimp Baseball",
+      "category": "baseball",
+      "multiplier": 1.2,
+      "icon": "\u26be",
+      "note": "Friday evening fireworks night. Strong dinner rush 5:30 PM \u2013 7:30 PM."
+    },
+    {
+      "date": "2026-08-22",
+      "title": "Jaguars vs. Dolphins (Preseason)",
+      "category": "jaguars",
+      "multiplier": 2.5,
+      "icon": "\ud83c\udfc8",
+      "note": "EverBank Stadium preseason opener. Pre-order tailgating packages & express pickup."
+    },
+    {
+      "date": "2026-08-23",
+      "title": "Jumbo Shrimp Baseball",
+      "category": "baseball",
+      "multiplier": 1.2,
+      "icon": "\u26be",
+      "note": "Sunday family day. Steady takeout volume."
+    },
+    {
+      "date": "2026-08-29",
+      "title": "Daily's Place Country Fest",
+      "category": "concert",
+      "multiplier": 1.5,
+      "icon": "\ud83c\udfb8",
+      "note": "Country music concert crowd. High demand for ribs and pulled pork."
+    },
+    {
+      "date": "2026-09-04",
+      "title": "Jumbo Shrimp Final Stand",
+      "category": "baseball",
+      "multiplier": 1.2,
+      "icon": "\u26be",
+      "note": "Holiday weekend series opener. High walk-in dinner demand."
+    },
+    {
+      "date": "2026-09-05",
+      "title": "Daily's Place Labor Day Rock Fest",
+      "category": "concert",
+      "multiplier": 1.8,
+      "icon": "\ud83c\udfb8",
+      "note": "Holiday weekend concert. Compressed dinner rush. Prep extra sausage batches."
+    },
+    {
+      "date": "2026-09-06",
+      "title": "Labor Day Weekend Surge",
+      "category": "holiday",
+      "multiplier": 1.8,
+      "icon": "\ud83c\uddfa\ud83c\uddf8",
+      "note": "Labor Day cookout catering. High demand for whole briskets and rack packs."
+    },
+    {
+      "date": "2026-09-07",
+      "title": "Labor Day (Holiday)",
+      "category": "holiday",
+      "multiplier": 1.6,
+      "icon": "\ud83c\uddfa\ud83c\uddf8",
+      "note": "Holiday Monday operations / scheduled catering pickups."
+    },
+    {
+      "date": "2026-09-13",
+      "title": "Jaguars vs. Colts (NFL Home Opener)",
+      "category": "jaguars",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udfc8",
+      "note": "Regular season home opener! Massive 3.5x demand surge. Switch to 48-hr tailgate bundles and express parking lot lane."
+    },
+    {
+      "date": "2026-09-19",
+      "title": "Daily's Place Fall Concert Series",
+      "category": "concert",
+      "multiplier": 1.5,
+      "icon": "\ud83c\udfb8",
+      "note": "Pre-concert dinner crowd (5:00 PM \u2013 7:00 PM). Expedite front line quickly."
+    },
+    {
+      "date": "2026-09-27",
+      "title": "Jaguars vs. Texans (AFC South Rivalry)",
+      "category": "jaguars",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udfc8",
+      "note": "Major divisional rival home game. Double pit capacity with 2 staggered burns."
+    },
+    {
+      "date": "2026-10-03",
+      "title": "Daily's Place Acoustic Showcase",
+      "category": "concert",
+      "multiplier": 1.4,
+      "icon": "\ud83c\udfb8",
+      "note": "Evening concert crowd. Steady dinner rush."
+    },
+    {
+      "date": "2026-10-11",
+      "title": "Jaguars vs. Chiefs (Blockbuster Game)",
+      "category": "jaguars",
+      "multiplier": 3.8,
+      "icon": "\ud83c\udfc8",
+      "note": "National prime matchup! Extremely high tailgating volume. Order maximum raw cases by Thursday deadline."
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Daily's Place Autumn Jam",
+      "category": "concert",
+      "multiplier": 1.5,
+      "icon": "\ud83c\udfb8",
+      "note": "Evening concert dinner rush."
+    },
+    {
+      "date": "2026-10-25",
+      "title": "Jaguars vs. Titans (AFC South Rivalry)",
+      "category": "jaguars",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udfc8",
+      "note": "Divisional rivalry game. High catering and tailgate pack demand."
+    },
+    {
+      "date": "2026-10-29",
+      "title": "FL-GA RV City Opens",
+      "category": "jaguars",
+      "multiplier": 2.5,
+      "icon": "\ud83c\udfc8",
+      "note": "RV City opens at stadium days in advance. Fans start tailgating early. Launch 'RV Reheat Packs'."
+    },
+    {
+      "date": "2026-10-30",
+      "title": "FL-GA Fan Fest Friday",
+      "category": "jaguars",
+      "multiplier": 3.8,
+      "icon": "\ud83c\udfc8",
+      "note": "Massive Friday tailgate volume. Staggered smoker burns around the clock."
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Florida vs. Georgia Classic",
+      "category": "jaguars",
+      "multiplier": 5.0,
+      "icon": "\ud83c\udfc8",
+      "note": "WORLD'S LARGEST OUTDOOR COCKTAIL PARTY (5.0x MULTIPLIER). Maximum pit production. Staggered burns starting Tuesday."
+    },
+    {
+      "date": "2026-11-07",
+      "title": "Daily's Place Veterans Tribute Concert",
+      "category": "concert",
+      "multiplier": 1.6,
+      "icon": "\ud83c\udfb8",
+      "note": "Weekend concert crowd. High ribs and sausage demand."
+    },
+    {
+      "date": "2026-11-11",
+      "title": "Veterans Day",
+      "category": "holiday",
+      "multiplier": 1.3,
+      "icon": "\ud83c\uddfa\ud83c\uddf8",
+      "note": "Mid-week holiday bump."
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Jaguars vs. Ravens",
+      "category": "jaguars",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udfc8",
+      "note": "EverBank Stadium home game. Tailgating rush 9 AM \u2013 1 PM."
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Thanksgiving Eve Catering Surge",
+      "category": "holiday",
+      "multiplier": 4.2,
+      "icon": "\ud83e\udd83",
+      "note": "Largest whole brisket & turkey takeout day of the year. Dedicated pickup station for pre-orders."
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Thanksgiving Day",
+      "category": "holiday",
+      "multiplier": 2.0,
+      "icon": "\ud83e\udd83",
+      "note": "Pre-ordered holiday morning pickups only (closed for regular dine-in)."
+    },
+    {
+      "date": "2026-11-29",
+      "title": "Jaguars vs. Chargers",
+      "category": "jaguars",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udfc8",
+      "note": "Post-Thanksgiving home game. Strong tailgating volume."
+    },
+    {
+      "date": "2026-12-13",
+      "title": "Jaguars vs. Jets",
+      "category": "jaguars",
+      "multiplier": 3.2,
+      "icon": "\ud83c\udfc8",
+      "note": "December home stand. Hot BBQ bundles in high demand."
+    },
+    {
+      "date": "2026-12-24",
+      "title": "Christmas Eve Feast Orders",
+      "category": "holiday",
+      "multiplier": 3.5,
+      "icon": "\ud83c\udf84",
+      "note": "High-volume holiday vacuum packs & whole smoked meats."
+    },
+    {
+      "date": "2026-12-25",
+      "title": "Christmas Day (Closed)",
+      "category": "holiday",
+      "multiplier": 0.0,
+      "icon": "\ud83c\udf84",
+      "note": "Pit & restaurant closed for the holiday."
+    },
+    {
+      "date": "2026-12-27",
+      "title": "Jaguars vs. Titans (Playoff Decider)",
+      "category": "jaguars",
+      "multiplier": 3.6,
+      "icon": "\ud83c\udfc8",
+      "note": "Final regular season home game. High stadium rush."
+    },
+    {
+      "date": "2026-12-31",
+      "title": "New Year's Eve Smoke & Party Packs",
+      "category": "holiday",
+      "multiplier": 2.8,
+      "icon": "\ud83c\udf89",
+      "note": "Evening party platters and whole brisket pickups."
+    }
+  ]
 };

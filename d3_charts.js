@@ -22,8 +22,9 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
 
     const svg = d3.select("#" + containerId)
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .style("width", "100%")
+        .style("height", "auto")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -381,8 +382,9 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
 
     const svg = d3.select("#" + containerId)
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .style("width", "100%")
+        .style("height", "auto")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -571,8 +573,9 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
 
     const svg = d3.select("#" + containerId)
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .style("width", "100%")
+        .style("height", "auto")
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
