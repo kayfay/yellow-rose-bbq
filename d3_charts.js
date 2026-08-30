@@ -551,7 +551,7 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
 function formatHourAMPM(hrStr, includeMinutes = false) {
     const h = parseInt(hrStr, 10);
     if (isNaN(h)) return hrStr;
-    const ampm = h >= 12 ? 'PM' : 'AM';
+    const ampm = (h % 24) >= 12 ? 'pm' : 'am';
     const h12 = h % 12 === 0 ? 12 : h % 12;
     if (includeMinutes) {
         return `${h12}:00 ${ampm}`;

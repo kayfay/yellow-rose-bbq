@@ -1,13 +1,13 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-26T21:51:07.847676",
+      "generated_at": "2026-08-29T22:01:27.986068",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~265.9 lbs raw brisket (~106.4 lbs cooked yield) and ~43.7 lbs raw pork shoulder (~17.5 lbs cooked yield) [~309.6 lbs total raw / ~123.9 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (63 projected) and Rosebuds (42 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
         {
-          "date": "2026-08-26",
-          "day_name": "Wed",
+          "date": "2026-08-29",
+          "day_name": "Sat",
           "predicted_revenue": 4062.9,
           "brisket_raw_lbs": 154.9,
           "pork_shoulder_raw_lbs": 20.3,
@@ -20,8 +20,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-27",
-          "day_name": "Thu",
+          "date": "2026-08-30",
+          "day_name": "Sun",
           "predicted_revenue": 4367.62,
           "brisket_raw_lbs": 162.7,
           "pork_shoulder_raw_lbs": 30.8,
@@ -34,8 +34,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-28",
-          "day_name": "Fri",
+          "date": "2026-08-31",
+          "day_name": "Mon",
           "predicted_revenue": 6703.79,
           "brisket_raw_lbs": 239.7,
           "pork_shoulder_raw_lbs": 29.3,
@@ -48,8 +48,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-29",
-          "day_name": "Sat",
+          "date": "2026-09-01",
+          "day_name": "Tue",
           "predicted_revenue": 7668.73,
           "brisket_raw_lbs": 265.9,
           "pork_shoulder_raw_lbs": 43.7,
@@ -62,8 +62,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-30",
-          "day_name": "Sun",
+          "date": "2026-09-02",
+          "day_name": "Wed",
           "predicted_revenue": 7262.44,
           "brisket_raw_lbs": 238.1,
           "pork_shoulder_raw_lbs": 31.7,
@@ -76,8 +76,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-08-31",
-          "day_name": "Mon",
+          "date": "2026-09-03",
+          "day_name": "Thu",
           "predicted_revenue": 203.15,
           "brisket_raw_lbs": 0.3,
           "pork_shoulder_raw_lbs": 0.4,
@@ -90,8 +90,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 17.0
         },
         {
-          "date": "2026-09-01",
-          "day_name": "Tue",
+          "date": "2026-09-04",
+          "day_name": "Fri",
           "predicted_revenue": 4215.26,
           "brisket_raw_lbs": 141.3,
           "pork_shoulder_raw_lbs": 19.1,
@@ -104,8 +104,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-02",
-          "day_name": "Wed",
+          "date": "2026-09-05",
+          "day_name": "Sat",
           "predicted_revenue": 4418.41,
           "brisket_raw_lbs": 152.5,
           "pork_shoulder_raw_lbs": 19.6,
@@ -118,8 +118,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-03",
-          "day_name": "Thu",
+          "date": "2026-09-06",
+          "day_name": "Sun",
           "predicted_revenue": 4469.19,
           "brisket_raw_lbs": 160.2,
           "pork_shoulder_raw_lbs": 30.1,
@@ -132,8 +132,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-04",
-          "day_name": "Fri",
+          "date": "2026-09-07",
+          "day_name": "Mon",
           "predicted_revenue": 6856.15,
           "brisket_raw_lbs": 237.2,
           "pork_shoulder_raw_lbs": 28.6,
@@ -146,8 +146,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-05",
-          "day_name": "Sat",
+          "date": "2026-09-08",
+          "day_name": "Tue",
           "predicted_revenue": 7973.45,
           "brisket_raw_lbs": 263.8,
           "pork_shoulder_raw_lbs": 43.1,
@@ -160,8 +160,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-06",
-          "day_name": "Sun",
+          "date": "2026-09-09",
+          "day_name": "Wed",
           "predicted_revenue": 7262.44,
           "brisket_raw_lbs": 235.5,
           "pork_shoulder_raw_lbs": 31.0,
@@ -174,8 +174,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 42.5
         },
         {
-          "date": "2026-09-07",
-          "day_name": "Mon",
+          "date": "2026-09-10",
+          "day_name": "Thu",
           "predicted_revenue": 253.93,
           "brisket_raw_lbs": 0.2,
           "pork_shoulder_raw_lbs": 0.5,
@@ -188,8 +188,8 @@ window.BBQ_PAYLOADS = {
           "pitmaster_hours": 17.0
         },
         {
-          "date": "2026-09-08",
-          "day_name": "Tue",
+          "date": "2026-09-11",
+          "day_name": "Fri",
           "predicted_revenue": 4062.9,
           "brisket_raw_lbs": 138.8,
           "pork_shoulder_raw_lbs": 18.4,
@@ -552,13 +552,13 @@ window.BBQ_PAYLOADS = {
           ],
           "y": [
             1.0,
-            0.88,
-            0.7
+            1.04,
+            1.21
           ],
           "text": [
-            "$4,945 Avg",
-            "$4,352 Avg",
-            "$3,461 Avg"
+            "$4,828 Avg",
+            "$5,028 Avg",
+            "$5,841 Avg"
           ],
           "textposition": "auto",
           "name": "Relative Demand Index",
@@ -598,13 +598,13 @@ window.BBQ_PAYLOADS = {
       }
     },
     "weather_stats": {
-      "normal_avg_usd": 4944.89,
-      "rain_avg_usd": 3461.42,
-      "rain_drop_pct": -30.0,
-      "heat_avg_usd": 4351.51,
-      "heat_drop_pct": -12.0,
-      "rain_coef": -15.5,
-      "temp_coef": -8.2
+      "normal_avg_usd": 4827.75,
+      "rain_avg_usd": 5841.05,
+      "rain_drop_pct": 21.0,
+      "heat_avg_usd": 5027.52,
+      "heat_drop_pct": 5.8,
+      "rain_coef": 1.7,
+      "temp_coef": 6.63
     }
   },
   "event_payload": {
@@ -618,7 +618,7 @@ window.BBQ_PAYLOADS = {
           ],
           "y": [
             1.0,
-            0.33,
+            0.66,
             3.5
           ],
           "type": "bar",
@@ -632,7 +632,7 @@ window.BBQ_PAYLOADS = {
           },
           "text": [
             "1.0x",
-            "0.3x",
+            "0.7x",
             "3.5x"
           ],
           "textposition": "auto"
@@ -662,11 +662,11 @@ window.BBQ_PAYLOADS = {
       }
     },
     "event_stats": {
-      "normal_avg_usd": 5026.98,
-      "jags_avg_usd": 17594.44,
+      "normal_avg_usd": 4951.72,
+      "jags_avg_usd": 17331.02,
       "jags_multiplier": 3.5,
-      "holiday_avg_usd": 1661.26,
-      "holiday_multiplier": 0.3
+      "holiday_avg_usd": 3264.29,
+      "holiday_multiplier": 0.7
     }
   },
   "shift_payload": {
@@ -1456,109 +1456,109 @@ window.BBQ_PAYLOADS = {
     "market_basket": [
       {
         "pair": "2 meat plate + BBQ plate",
-        "count": 392,
-        "confidence": 21.7
+        "count": 389,
+        "confidence": 22.6
       },
       {
         "pair": "2 meat plate + Rosebud",
-        "count": 322,
-        "confidence": 23.3
+        "count": 307,
+        "confidence": 23.4
       },
       {
         "pair": "BBQ plate + Rosebud",
-        "count": 259,
-        "confidence": 18.7
+        "count": 241,
+        "confidence": 18.4
       },
       {
         "pair": "Crispy Quesa Taco Brisket + Rosebud",
-        "count": 177,
-        "confidence": 21.6
+        "count": 171,
+        "confidence": 21.2
       },
       {
         "pair": "Moist Sandwich + Seasoned French Fries",
-        "count": 152,
-        "confidence": 24.8
+        "count": 128,
+        "confidence": 19.9
       },
       {
         "pair": "Pulled pork sandwich + Seasoned French Fries",
-        "count": 151,
-        "confidence": 36.7
+        "count": 121,
+        "confidence": 29.4
       },
       {
-        "pair": "Mac & Cheese + Seasoned French Fries",
-        "count": 138,
-        "confidence": 18.7
+        "pair": "BBQ plate + Taco Plate W/2 Sides",
+        "count": 119,
+        "confidence": 16.5
       },
       {
         "pair": "2 meat plate + Crispy Quesa Taco Brisket",
-        "count": 137,
-        "confidence": 16.7
+        "count": 118,
+        "confidence": 14.7
       },
       {
-        "pair": "BBQ plate + Seasoned French Fries",
-        "count": 125,
-        "confidence": 14.8
+        "pair": "Brisket + Mac & Cheese",
+        "count": 118,
+        "confidence": 20.8
       },
       {
-        "pair": "2 meat plate + Cornbread",
-        "count": 123,
-        "confidence": 26.8
+        "pair": "Mac & Cheese + Seasoned French Fries",
+        "count": 117,
+        "confidence": 17.2
       }
     ],
     "interaction_modeling": {
-      "normal": 4944.89,
-      "game_only": 17307.12,
-      "rain_only": 3461.42,
-      "game_and_rain": 13845.7
+      "normal": 4827.75,
+      "game_only": 16897.12,
+      "rain_only": 5841.05,
+      "game_and_rain": 13517.69
     },
     "order_type_segmentation": [
       {
         "order_type": "Dine In",
-        "order_count": 5704,
-        "total_revenue": 254360.49,
-        "avg_ticket": 44.593353786816266
+        "order_count": 5486,
+        "total_revenue": 240234.76,
+        "avg_ticket": 43.790514035727305
       },
       {
         "order_type": "In-store Pickup",
-        "order_count": 461,
-        "total_revenue": 28874.1,
-        "avg_ticket": 62.63362255965293
+        "order_count": 460,
+        "total_revenue": 29290.13,
+        "avg_ticket": 63.674195652173914
       },
       {
         "order_type": "To-Go",
-        "order_count": 2747,
-        "total_revenue": 138267.01,
-        "avg_ticket": 50.33382235165636
+        "order_count": 2632,
+        "total_revenue": 134178.58,
+        "avg_ticket": 50.97970364741641
       }
     ],
     "sell_out_prediction_chart": {
       "data": [
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             9.0,
-            10.0,
-            76.0,
-            122.0,
-            161.0,
-            194.0,
-            216.0,
-            248.0,
-            281.0
+            11.0,
+            73.0,
+            118.0,
+            150.0,
+            177.0,
+            201.0,
+            230.0,
+            269.0
           ],
           "name": "1/2 Rack Pork Spare Ribs",
           "type": "scatter",
@@ -1566,30 +1566,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
-            18.0,
-            35.5,
-            135.32999999999998,
-            204.79999999999998,
-            318.88,
-            397.36,
-            553.85,
-            621.76,
-            670.14
+            19.0,
+            42.0,
+            134.68,
+            205.31,
+            338.89,
+            421.52,
+            540.76,
+            603.92,
+            652.5
           ],
           "name": "Brisket",
           "type": "scatter",
@@ -1597,30 +1597,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             0.0,
-            26.0,
-            289.0,
-            552.0,
-            778.0,
-            974.0,
-            1063.0,
+            28.0,
+            325.0,
+            582.0,
+            804.0,
+            979.0,
+            1061.0,
             1196.0,
-            1380.0
+            1367.0
           ],
           "name": "Crispy Quesa Taco Brisket",
           "type": "scatter",
@@ -1628,30 +1628,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
-            8.0,
-            9.0,
-            30.0,
-            57.0,
-            78.0,
-            87.0,
-            99.0,
-            112.0,
-            127.0
+            20.0,
+            21.0,
+            43.0,
+            69.0,
+            110.0,
+            118.0,
+            128.0,
+            141.0,
+            151.0
           ],
           "name": "Crispy Quesa Taco Pork",
           "type": "scatter",
@@ -1659,30 +1659,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             0.0,
-            4.0,
-            29.0,
-            40.0,
-            51.0,
-            84.0,
-            102.0,
-            113.0,
-            129.0
+            3.0,
+            30.0,
+            43.0,
+            54.0,
+            89.0,
+            106.0,
+            117.0,
+            130.0
           ],
           "name": "Full Rack Pork Spare Ribs",
           "type": "scatter",
@@ -1690,30 +1690,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
-            14.0,
-            31.25,
-            93.72999999999999,
-            116.47999999999999,
-            187.73,
-            236.23,
-            292.73,
-            320.98,
-            334.23
+            13.0,
+            36.25,
+            89.58,
+            115.33,
+            192.66,
+            228.66,
+            294.40999999999997,
+            314.40999999999997,
+            334.65999999999997
           ],
           "name": "Pulled Pork",
           "type": "scatter",
@@ -1721,30 +1721,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             0.0,
             0.0,
-            70.0,
-            156.0,
-            230.0,
-            274.0,
-            294.0,
-            316.0,
-            369.0
+            65.0,
+            162.0,
+            236.0,
+            269.0,
+            288.0,
+            312.0,
+            362.0
           ],
           "name": "Pulled pork sandwich",
           "type": "scatter",
@@ -1752,30 +1752,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             0.0,
-            6.0,
-            23.0,
-            41.0,
-            65.0,
+            4.0,
+            27.0,
+            52.0,
             77.0,
-            85.0,
-            104.0,
-            123.0
+            89.0,
+            101.0,
+            116.0,
+            131.0
           ],
           "name": "Quesadilla Brisket",
           "type": "scatter",
@@ -1783,30 +1783,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             0.0,
             0.0,
             0.0,
-            3.0,
-            36.0,
-            72.0,
-            106.0,
-            133.0,
-            159.0,
-            175.0,
-            206.0
+            0.0,
+            35.0,
+            86.0,
+            125.0,
+            146.0,
+            172.0,
+            184.0,
+            208.0
           ],
           "name": "Single Bone Pork Rib",
           "type": "scatter",
@@ -1814,30 +1814,30 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "11:00 AM",
-            "12:00 PM",
-            "1:00 PM",
-            "2:00 PM",
-            "3:00 PM",
-            "4:00 PM",
-            "5:00 PM",
-            "6:00 PM",
-            "7:00 PM",
-            "8:00 PM",
-            "9:00 PM"
+            "11:00 am",
+            "12:00 pm",
+            "1:00 pm",
+            "2:00 pm",
+            "3:00 pm",
+            "4:00 pm",
+            "5:00 pm",
+            "6:00 pm",
+            "7:00 pm",
+            "8:00 pm",
+            "9:00 pm"
           ],
           "y": [
             4.0,
             4.0,
             16.0,
             18.0,
-            69.0,
-            115.0,
-            140.0,
-            152.0,
-            165.0,
-            194.0,
-            211.0
+            67.0,
+            110.0,
+            134.0,
+            144.0,
+            161.0,
+            187.0,
+            209.0
           ],
           "name": "Crispy Quesa Brisket Taco",
           "type": "scatter",
@@ -1870,13 +1870,13 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 6.2,
-      "pork_ribs_avg_with_dino": 3.9,
-      "impact_pct": -36.9
+      "pork_ribs_avg_without_dino": 6.4,
+      "pork_ribs_avg_with_dino": 3.4,
+      "impact_pct": -47.7
     },
     "payday_effect": {
-      "payday_avg_ticket": 44.92,
-      "normal_avg_ticket": 45.91
+      "payday_avg_ticket": 46.73,
+      "normal_avg_ticket": 45.64
     }
   }
 };

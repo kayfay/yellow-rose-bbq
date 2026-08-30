@@ -9,7 +9,7 @@
         ],
         "y": [
           1.0,
-          0.33,
+          0.66,
           3.5
         ],
         "type": "bar",
@@ -23,7 +23,7 @@
         },
         "text": [
           "1.0x",
-          "0.3x",
+          "0.7x",
           "3.5x"
         ],
         "textposition": "auto"
@@ -53,10 +53,10 @@
     }
   },
   "event_stats": {
-    "normal_avg_usd": 5026.98,
-    "jags_avg_usd": 17594.44,
+    "normal_avg_usd": 4951.72,
+    "jags_avg_usd": 17331.02,
     "jags_multiplier": 3.5,
-    "holiday_avg_usd": 1661.26,
-    "holiday_multiplier": 0.3
+    "holiday_avg_usd": 3264.29,
+    "holiday_multiplier": 0.7
   }
 }

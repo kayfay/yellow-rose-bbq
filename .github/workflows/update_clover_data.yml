@@ -1,0 +1,67 @@
+name: Update Clover Data
+
+on:
+  schedule:
+    # Run every day at 3:00 AM EST (8:00 AM UTC)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual trigger from the GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install polars pandas plotly statsmodels requests python-dotenv xgboost scikit-learn holidays openmeteo-requests requests-cache retry-requests
+
+      - name: Run Clover Ingestion & Analytics Pipeline
+        env:
+          CLOVER_BASE_URL: https://api.clover.com
+          CLOVER_MERCHANT_ID: ${{ secrets.CLOVER_MERCHANT_ID }}
+          CLOVER_API_KEY: ${{ secrets.CLOVER_API_KEY }}
+        run: |
+          echo "Ingesting POS transactions..."
+          python clover_api/ingest.py
+          
+          echo "Updating POS menu catalog..."
+          python clover_api/ingest_itemized.py
+          
+          echo "Fetching external weather and holiday features..."
+          python clover_api/analytics/ml_features.py
+          
+          echo "Running analytics engine..."
+          python generate_historical_payload.py
+          python clover_api/analytics/weather_impact.py
+          python clover_api/analytics/event_impact.py
+          python clover_api/analytics/dashboard.py
+          python clover_api/analytics/advanced_analytics.py
+          
+          echo "Building javascript payloads..."
+          python clover_api/analytics/build_payloads.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add clover_api/data/clover_sales.db clover_api/analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
+          
+          # Only commit if there are changes
+          if git diff-index --quiet HEAD --; then
+            echo "No new data to commit."
+          else
+            git commit -m "chore(data): auto-update clover api analytics data"
+            git push
+          fi

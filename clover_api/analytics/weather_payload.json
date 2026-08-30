@@ -9,13 +9,13 @@
         ],
         "y": [
           1.0,
-          0.88,
-          0.7
+          1.04,
+          1.21
         ],
         "text": [
-          "$4,945 Avg",
-          "$4,352 Avg",
-          "$3,461 Avg"
+          "$4,828 Avg",
+          "$5,028 Avg",
+          "$5,841 Avg"
         ],
         "textposition": "auto",
         "name": "Relative Demand Index",
@@ -55,12 +55,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4944.89,
-    "rain_avg_usd": 3461.42,
-    "rain_drop_pct": -30.0,
-    "heat_avg_usd": 4351.51,
-    "heat_drop_pct": -12.0,
-    "rain_coef": -15.5,
-    "temp_coef": -8.2
+    "normal_avg_usd": 4827.75,
+    "rain_avg_usd": 5841.05,
+    "rain_drop_pct": 21.0,
+    "heat_avg_usd": 5027.52,
+    "heat_drop_pct": 5.8,
+    "rain_coef": 1.7,
+    "temp_coef": 6.63
   }
 }
