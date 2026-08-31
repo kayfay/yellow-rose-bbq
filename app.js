@@ -729,7 +729,16 @@ function initMultiTabNavigation() {
     });
   }
   
-  const categorySelector = document.getElementById('category-selector');
+  
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.addEventListener('change', (e) => {
+      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+      handleDateSelectionLookup(e.target.value);
+      renderPlotlyForecastingChart(14);
+    });
+  }
+\n  const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
       document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
@@ -1466,7 +1475,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Outfit, sans-serif" } }
       };
 
-      if (selectedCat === 'brisket') {
+      if (selectedCat === 'brisket' || selectedCat === 'brisket_lbs') {
         layout.title = "Pit Production Targets: Brisket (Raw vs Cooked Yield)";
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
@@ -1478,7 +1487,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
-      } else if (selectedCat === 'pork') {
+      } else if (selectedCat === 'pork' || selectedCat === 'pork_lbs') {
         layout.title = "Pit Production Targets: Pork Shoulder (Raw vs Cooked Yield)";
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0),
