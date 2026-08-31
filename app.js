@@ -1178,15 +1178,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         plot_bgcolor: "rgba(20,20,30,0.6)",
         font: { color: "#f8fafc", family: "Outfit, sans-serif" },
         xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: -45, automargin: true },
-        yaxis: { title: "Raw Meat Weight (lbs)", gridcolor: "rgba(255,255,255,0.1)", rangemode: "tozero", range: [0, maxVal] },
+        yaxis: { title: "Target Volume", gridcolor: "rgba(255,255,255,0.1)", rangemode: "tozero" },
         margin: { l: 60, r: 40, t: 80, b: 80 },
         legend: { orientation: "h", y: -0.4, x: 0 },
         hovermode: "x unified",
         hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Outfit, sans-serif" } }
       };
 
-      if (selectedCat === 'brisket' || selectedCat === 'brisket_lbs') {
+      if (selectedCat === 'brisket_lbs') {
         layout.title = "Pit Production Targets: Brisket (Raw vs Cooked Yield)";
+        layout.yaxis.title = "Raw Meat Weight (lbs)";
+        let bMax = 0;
+        slicedRecords.forEach(r => bMax = Math.max(bMax, r.brisket_raw_lbs || 0));
+        layout.yaxis.range = [0, bMax * 1.15];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
           type: 'bar', name: 'Raw Brisket', marker: { color: '#e74c3c' },
@@ -1197,8 +1201,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
-      } else if (selectedCat === 'pork' || selectedCat === 'pork_lbs') {
+      } else if (selectedCat === 'pulled_pork_lbs') {
         layout.title = "Pit Production Targets: Pork Shoulder (Raw vs Cooked Yield)";
+        layout.yaxis.title = "Raw Meat Weight (lbs)";
+        let pMax = 0;
+        slicedRecords.forEach(r => pMax = Math.max(pMax, r.pork_shoulder_raw_lbs || 0));
+        layout.yaxis.range = [0, pMax * 1.15];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0),
           type: 'bar', name: 'Raw Pork', marker: { color: '#3498db' },
@@ -1209,8 +1217,68 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
+      } else if (selectedCat === 'pork_ribs_racks') {
+        layout.title = "Pit Production Targets: Pork Spare Ribs";
+        layout.yaxis.title = "Volume (Racks)";
+        let ribMax = 0;
+        slicedRecords.forEach(r => ribMax = Math.max(ribMax, r.pork_ribs_racks || 0));
+        layout.yaxis.range = [0, ribMax * 1.15];
+        traces.push({
+          x: dates, y: slicedRecords.map(r => r.pork_ribs_racks || 0),
+          type: 'bar', name: 'Pork Ribs (Racks)', marker: { color: '#9b59b6' },
+          hovertemplate: "%{y:.1f} Racks<extra></extra>"
+        });
+      } else if (selectedCat === 'beef_dino_ribs') {
+        layout.title = "Pit Production Targets: Beef Dino Ribs";
+        layout.yaxis.title = "Volume (Racks)";
+        let dinoMax = 0;
+        slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, r.beef_dino_ribs || 0));
+        layout.yaxis.range = [0, dinoMax * 1.15];
+        traces.push({
+          x: dates, y: slicedRecords.map(r => r.beef_dino_ribs || 0),
+          type: 'bar', name: 'Beef Dino Ribs (Racks)', marker: { color: '#8e44ad' },
+          hovertemplate: "%{y:.1f} Racks<extra></extra>"
+        });
+      } else if (selectedCat === 'turkey_lbs') {
+        layout.title = "Pit Production Targets: Smoked Turkey Breast";
+        layout.yaxis.title = "Raw Meat Weight (lbs)";
+        let turkeyMax = 0;
+        slicedRecords.forEach(r => turkeyMax = Math.max(turkeyMax, r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0));
+        layout.yaxis.range = [0, turkeyMax * 1.15];
+        traces.push({
+          x: dates, y: slicedRecords.map(r => r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0),
+          type: 'bar', name: 'Smoked Turkey (lbs)', marker: { color: '#e67e22' },
+          hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
+        });
+      } else if (selectedCat === 'sausage_links') {
+        layout.title = "Pit Production Targets: Sausage Links";
+        layout.yaxis.title = "Total Links";
+        let sausageMax = 0;
+        slicedRecords.forEach(r => sausageMax = Math.max(sausageMax, (r.sausage_lbs || 0) * 3));
+        layout.yaxis.range = [0, sausageMax * 1.15];
+        traces.push({
+          x: dates, y: slicedRecords.map(r => (r.sausage_lbs || 0) * 3),
+          type: 'bar', name: 'Sausage Links', marker: { color: '#f39c12' },
+          hovertemplate: "%{y:.0f} Links<extra></extra>"
+        });
+      } else if (selectedCat === 'rosebuds' || selectedCat === 'tacos_sold') {
+        const isTaco = selectedCat === 'tacos_sold';
+        layout.title = isTaco ? "Composed Item Demand: Tacos" : "Composed Item Demand: Rosebuds";
+        layout.yaxis.title = "Total Units";
+        let itemMax = 0;
+        slicedRecords.forEach(r => itemMax = Math.max(itemMax, r[selectedCat] || 0));
+        layout.yaxis.range = [0, itemMax * 1.15];
+        traces.push({
+          x: dates, y: slicedRecords.map(r => r[selectedCat] || 0),
+          type: 'bar', name: isTaco ? 'Tacos' : 'Rosebuds', marker: { color: '#2ecc71' },
+          hovertemplate: "%{y:.0f} Units<extra></extra>"
+        });
       } else {
         layout.title = "Pit Production Targets: Total Core Meats (Raw lbs)";
+        layout.yaxis.title = "Raw Meat Weight (lbs)";
+        let tMax = 0;
+        slicedRecords.forEach(r => tMax = Math.max(tMax, r.brisket_raw_lbs || 0, r.pork_shoulder_raw_lbs || 0, r.sausage_lbs || 0, r.pork_ribs_racks || 0));
+        layout.yaxis.range = [0, tMax * 1.15];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
           type: 'scatter', mode: 'lines+markers', name: 'Brisket', line: { color: '#e74c3c', width: 3 }, marker: { size: 8 },
