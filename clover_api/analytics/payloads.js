@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-31T11:52:15.090332",
+      "generated_at": "2026-08-31T13:35:32.531619",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~244.7 lbs raw brisket (~97.9 lbs cooked yield) and ~46.0 lbs raw pork shoulder (~18.4 lbs cooked yield) [~290.7 lbs total raw / ~116.3 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (64 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -546,35 +546,303 @@ window.BBQ_PAYLOADS = {
       "data": [
         {
           "x": [
-            "Ideal Weather",
-            "Extreme Heat (>95\u00b0F)",
-            "Heavy Rain"
+            88.34,
+            89.6,
+            86.9,
+            87.44,
+            88.16,
+            88.16,
+            88.16,
+            88.52,
+            89.78
           ],
           "y": [
-            1.0,
-            1.04,
-            1.21
+            4078.87,
+            6039.65,
+            6251.17,
+            6599.45,
+            4112.0,
+            4112.04,
+            2861.94,
+            4576.48,
+            2607.41
           ],
           "text": [
-            "$4,828 Avg",
-            "$5,028 Avg",
-            "$5,841 Avg"
+            "2026-07-30 00:00:00<br>Temp: 88.34\u00b0F<br>Precip: 1.4mm<br>Rev: $4078.87",
+            "2026-07-31 00:00:00<br>Temp: 89.6\u00b0F<br>Precip: 1.1mm<br>Rev: $6039.65",
+            "2026-08-01 00:00:00<br>Temp: 86.9\u00b0F<br>Precip: 0.0mm<br>Rev: $6251.17",
+            "2026-08-02 00:00:00<br>Temp: 87.44\u00b0F<br>Precip: 0.8mm<br>Rev: $6599.45",
+            "2026-08-04 00:00:00<br>Temp: 88.16\u00b0F<br>Precip: 0.0mm<br>Rev: $4112.00",
+            "2026-08-05 00:00:00<br>Temp: 88.16\u00b0F<br>Precip: 0.0mm<br>Rev: $4112.04",
+            "2026-08-25 00:00:00<br>Temp: 88.16\u00b0F<br>Precip: 0.0mm<br>Rev: $2861.94",
+            "2026-08-28 00:00:00<br>Temp: 88.52\u00b0F<br>Precip: 0.0mm<br>Rev: $4576.48",
+            "2026-08-29 00:00:00<br>Temp: 89.78\u00b0F<br>Precip: 0.0mm<br>Rev: $2607.41"
           ],
-          "textposition": "auto",
-          "name": "Relative Demand Index",
-          "type": "bar",
+          "mode": "markers",
+          "name": "Ideal Weather",
           "marker": {
-            "color": [
-              "#27ae60",
-              "#e67e22",
-              "#3498db"
+            "size": [
+              10.8,
+              10.2,
+              8,
+              9.6,
+              8,
+              8,
+              8,
+              8,
+              8
             ],
-            "opacity": 0.9
+            "color": "#27ae60",
+            "opacity": 0.8,
+            "line": {
+              "width": 1,
+              "color": "white"
+            }
+          }
+        },
+        {
+          "x": [
+            86.18,
+            97.16,
+            100.22,
+            97.88000000000001,
+            89.6,
+            93.91999999999999,
+            92.84,
+            89.6
+          ],
+          "y": [
+            6228.28,
+            8632.06,
+            4281.5199999999995,
+            7141.92,
+            7897.93,
+            4370.9,
+            3165.83,
+            5009.98
+          ],
+          "text": [
+            "2026-06-19 00:00:00<br>Temp: 86.18\u00b0F<br>Precip: 19.8mm<br>Rev: $6228.28",
+            "2026-06-20 00:00:00<br>Temp: 97.16\u00b0F<br>Precip: 15.7mm<br>Rev: $8632.06",
+            "2026-06-23 00:00:00<br>Temp: 100.22\u00b0F<br>Precip: 10.8mm<br>Rev: $4281.52",
+            "2026-07-11 00:00:00<br>Temp: 97.88000000000001\u00b0F<br>Precip: 26.7mm<br>Rev: $7141.92",
+            "2026-08-08 00:00:00<br>Temp: 89.6\u00b0F<br>Precip: 11.2mm<br>Rev: $7897.93",
+            "2026-08-12 00:00:00<br>Temp: 93.91999999999999\u00b0F<br>Precip: 67.3mm<br>Rev: $4370.90",
+            "2026-08-13 00:00:00<br>Temp: 92.84\u00b0F<br>Precip: 44.7mm<br>Rev: $3165.83",
+            "2026-08-27 00:00:00<br>Temp: 89.6\u00b0F<br>Precip: 28.1mm<br>Rev: $5009.98"
+          ],
+          "mode": "markers",
+          "name": "Heavy Rain",
+          "marker": {
+            "size": [
+              30,
+              30,
+              29.6,
+              30,
+              30,
+              30,
+              30,
+              30
+            ],
+            "color": "#3498db",
+            "opacity": 0.9,
+            "line": {
+              "width": 1,
+              "color": "white"
+            }
+          }
+        },
+        {
+          "x": [
+            91.94,
+            96.44,
+            98.24,
+            97.7,
+            98.96000000000001,
+            102.38000000000001,
+            95.53999999999999,
+            92.3,
+            94.28,
+            98.24,
+            93.91999999999999,
+            91.03999999999999,
+            94.46000000000001,
+            93.56,
+            91.03999999999999,
+            93.56,
+            93.38000000000001,
+            93.38000000000001,
+            93.91999999999999,
+            93.02,
+            95.0,
+            95.53999999999999,
+            93.91999999999999,
+            94.82,
+            92.48,
+            95.18,
+            96.98,
+            96.61999999999999,
+            91.4,
+            91.03999999999999,
+            92.11999999999999,
+            96.61999999999999,
+            91.94,
+            91.03999999999999,
+            96.26,
+            96.8,
+            96.26,
+            95.18,
+            90.14,
+            91.03999999999999,
+            91.94,
+            91.58000000000001
+          ],
+          "y": [
+            7839.13,
+            5982.47,
+            4457.56,
+            6420.1,
+            7458.38,
+            6646.09,
+            4295.31,
+            4711.15,
+            4686.2,
+            8399.58,
+            3264.29,
+            5902.48,
+            4836.48,
+            6194.4,
+            3686.71,
+            4222.13,
+            3776.39,
+            4953.51,
+            9516.95,
+            5402.68,
+            4249.75,
+            93.57000000000001,
+            5048.85,
+            6282.51,
+            6762.599999999999,
+            7469.42,
+            3384.79,
+            4886.43,
+            3575.35,
+            5723.16,
+            5708.12,
+            3467.3,
+            6036.86,
+            8276.06,
+            4931.26,
+            3615.92,
+            2823.19,
+            4124.63,
+            5948.64,
+            7577.28,
+            6630.04,
+            4388.4
+          ],
+          "text": [
+            "2026-06-21 00:00:00<br>Temp: 91.94\u00b0F<br>Precip: 1.3mm<br>Rev: $7839.13",
+            "2026-06-24 00:00:00<br>Temp: 96.44\u00b0F<br>Precip: 0.2mm<br>Rev: $5982.47",
+            "2026-06-25 00:00:00<br>Temp: 98.24\u00b0F<br>Precip: 9.4mm<br>Rev: $4457.56",
+            "2026-06-26 00:00:00<br>Temp: 97.7\u00b0F<br>Precip: 1.6mm<br>Rev: $6420.10",
+            "2026-06-27 00:00:00<br>Temp: 98.96000000000001\u00b0F<br>Precip: 2.3mm<br>Rev: $7458.38",
+            "2026-06-28 00:00:00<br>Temp: 102.38000000000001\u00b0F<br>Precip: 0.0mm<br>Rev: $6646.09",
+            "2026-06-30 00:00:00<br>Temp: 95.53999999999999\u00b0F<br>Precip: 1.2mm<br>Rev: $4295.31",
+            "2026-07-01 00:00:00<br>Temp: 92.3\u00b0F<br>Precip: 2.9mm<br>Rev: $4711.15",
+            "2026-07-02 00:00:00<br>Temp: 94.28\u00b0F<br>Precip: 0.0mm<br>Rev: $4686.20",
+            "2026-07-03 00:00:00<br>Temp: 98.24\u00b0F<br>Precip: 0.9mm<br>Rev: $8399.58",
+            "2026-07-04 00:00:00<br>Temp: 93.91999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $3264.29",
+            "2026-07-05 00:00:00<br>Temp: 91.03999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $5902.48",
+            "2026-07-10 00:00:00<br>Temp: 94.46000000000001\u00b0F<br>Precip: 0.0mm<br>Rev: $4836.48",
+            "2026-07-12 00:00:00<br>Temp: 93.56\u00b0F<br>Precip: 0.0mm<br>Rev: $6194.40",
+            "2026-07-14 00:00:00<br>Temp: 91.03999999999999\u00b0F<br>Precip: 1.4mm<br>Rev: $3686.71",
+            "2026-07-15 00:00:00<br>Temp: 93.56\u00b0F<br>Precip: 2.2mm<br>Rev: $4222.13",
+            "2026-07-16 00:00:00<br>Temp: 93.38000000000001\u00b0F<br>Precip: 2.2mm<br>Rev: $3776.39",
+            "2026-07-17 00:00:00<br>Temp: 93.38000000000001\u00b0F<br>Precip: 0.0mm<br>Rev: $4953.51",
+            "2026-07-18 00:00:00<br>Temp: 93.91999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $9516.95",
+            "2026-07-19 00:00:00<br>Temp: 93.02\u00b0F<br>Precip: 0.7mm<br>Rev: $5402.68",
+            "2026-07-21 00:00:00<br>Temp: 95.0\u00b0F<br>Precip: 0.0mm<br>Rev: $4249.75",
+            "2026-07-22 00:00:00<br>Temp: 95.53999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $93.57",
+            "2026-07-23 00:00:00<br>Temp: 93.91999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $5048.85",
+            "2026-07-24 00:00:00<br>Temp: 94.82\u00b0F<br>Precip: 0.0mm<br>Rev: $6282.51",
+            "2026-07-25 00:00:00<br>Temp: 92.48\u00b0F<br>Precip: 0.7mm<br>Rev: $6762.60",
+            "2026-07-26 00:00:00<br>Temp: 95.18\u00b0F<br>Precip: 0.0mm<br>Rev: $7469.42",
+            "2026-07-28 00:00:00<br>Temp: 96.98\u00b0F<br>Precip: 0.0mm<br>Rev: $3384.79",
+            "2026-07-29 00:00:00<br>Temp: 96.61999999999999\u00b0F<br>Precip: 3.3mm<br>Rev: $4886.43",
+            "2026-08-06 00:00:00<br>Temp: 91.4\u00b0F<br>Precip: 0.0mm<br>Rev: $3575.35",
+            "2026-08-07 00:00:00<br>Temp: 91.03999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $5723.16",
+            "2026-08-09 00:00:00<br>Temp: 92.11999999999999\u00b0F<br>Precip: 0.4mm<br>Rev: $5708.12",
+            "2026-08-11 00:00:00<br>Temp: 96.61999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $3467.30",
+            "2026-08-14 00:00:00<br>Temp: 91.94\u00b0F<br>Precip: 0.0mm<br>Rev: $6036.86",
+            "2026-08-15 00:00:00<br>Temp: 91.03999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $8276.06",
+            "2026-08-16 00:00:00<br>Temp: 96.26\u00b0F<br>Precip: 0.0mm<br>Rev: $4931.26",
+            "2026-08-18 00:00:00<br>Temp: 96.8\u00b0F<br>Precip: 0.8mm<br>Rev: $3615.92",
+            "2026-08-19 00:00:00<br>Temp: 96.26\u00b0F<br>Precip: 0.0mm<br>Rev: $2823.19",
+            "2026-08-20 00:00:00<br>Temp: 95.18\u00b0F<br>Precip: 0.0mm<br>Rev: $4124.63",
+            "2026-08-21 00:00:00<br>Temp: 90.14\u00b0F<br>Precip: 0.0mm<br>Rev: $5948.64",
+            "2026-08-22 00:00:00<br>Temp: 91.03999999999999\u00b0F<br>Precip: 0.0mm<br>Rev: $7577.28",
+            "2026-08-23 00:00:00<br>Temp: 91.94\u00b0F<br>Precip: 0.0mm<br>Rev: $6630.04",
+            "2026-08-26 00:00:00<br>Temp: 91.58000000000001\u00b0F<br>Precip: 0.4mm<br>Rev: $4388.40"
+          ],
+          "mode": "markers",
+          "name": "Extreme Heat (>90\u00b0F)",
+          "marker": {
+            "size": [
+              10.6,
+              8.4,
+              20,
+              11.2,
+              12.6,
+              8,
+              10.4,
+              13.8,
+              8,
+              9.8,
+              8,
+              8,
+              8,
+              8,
+              10.8,
+              12.4,
+              12.4,
+              8,
+              8,
+              9.4,
+              8,
+              8,
+              8,
+              8,
+              9.4,
+              8,
+              8,
+              14.6,
+              8,
+              8,
+              8.8,
+              8,
+              8,
+              8,
+              8,
+              9.6,
+              8,
+              8,
+              8,
+              8,
+              8,
+              8.8
+            ],
+            "color": "#e67e22",
+            "opacity": 0.8,
+            "line": {
+              "width": 1,
+              "color": "white"
+            }
           }
         }
       ],
       "layout": {
-        "title": "Impact of Weather on Sales Demand",
+        "title": "Daily Sales vs Temperature (Marker Size = Rainfall)",
         "paper_bgcolor": "rgba(0,0,0,0)",
         "plot_bgcolor": "rgba(20,20,30,0.6)",
         "font": {
@@ -582,29 +850,40 @@ window.BBQ_PAYLOADS = {
           "family": "Outfit, sans-serif"
         },
         "xaxis": {
-          "gridcolor": "rgba(255,255,255,0.1)"
+          "title": "Maximum Temperature (\u00b0F)",
+          "gridcolor": "rgba(255,255,255,0.1)",
+          "zeroline": false
         },
         "yaxis": {
-          "title": "Relative Demand Index (1.0 = Ideal)",
-          "gridcolor": "rgba(255,255,255,0.1)"
+          "title": "Daily Gross Revenue ($)",
+          "gridcolor": "rgba(255,255,255,0.1)",
+          "zeroline": false,
+          "rangemode": "tozero"
         },
-        "showlegend": false,
+        "showlegend": true,
+        "legend": {
+          "orientation": "h",
+          "y": -0.2,
+          "x": 0.5,
+          "xanchor": "center"
+        },
         "margin": {
           "l": 60,
-          "r": 60,
+          "r": 20,
           "t": 60,
           "b": 60
-        }
+        },
+        "hovermode": "closest"
       }
     },
     "weather_stats": {
-      "normal_avg_usd": 4827.75,
+      "normal_avg_usd": 5181.77,
       "rain_avg_usd": 5841.05,
-      "rain_drop_pct": 21.0,
-      "heat_avg_usd": 5027.52,
-      "heat_drop_pct": 5.8,
-      "rain_coef": 1.7,
-      "temp_coef": 6.63
+      "rain_drop_pct": 12.7,
+      "heat_avg_usd": 5328.76,
+      "heat_drop_pct": 4.2,
+      "rain_coef": -3.91,
+      "temp_coef": 14.34
     }
   },
   "event_payload": {
