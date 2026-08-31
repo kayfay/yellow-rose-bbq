@@ -516,7 +516,7 @@ function copyShareLink() {
   
   navigator.clipboard.writeText(currentUrl.toString())
     .then(() => {
-      alert(`Live session link copied to clipboard!\nShare this with anyone to let them track progress.`);
+      alert(`Live session link copied to clipboard!Share this with anyone to let them track progress.`);
     })
     .catch(err => {
       console.error('Could not copy text: ', err);
@@ -730,15 +730,29 @@ function initMultiTabNavigation() {
   }
   
   
-  const dateInput = document.getElementById('forecast-start-date');
-  if (dateInput) {
-    dateInput.addEventListener('change', (e) => {
+  
+  const dateInputStart = document.getElementById('forecast-start-date');
+  if (dateInputStart) {
+    const endDateInput = document.getElementById('forecast-end-date');
+    if (endDateInput) {
+      endDateInput.addEventListener('change', (e) => {
+        document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+        const start = document.getElementById('forecast-start-date').value;
+        const end = e.target.value;
+        if (start && end) {
+          const diffTime = Math.abs(new Date(end) - new Date(start));
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // inclusive
+          renderPlotlyForecastingChart(diffDays > 0 ? diffDays : 1);
+        }
+      });
+    }
+    dateInputStart.addEventListener('change', (e) => {
       document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
       handleDateSelectionLookup(e.target.value);
       renderPlotlyForecastingChart(14);
     });
   }
-\n  const categorySelector = document.getElementById('category-selector');
+  const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
       document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
@@ -802,9 +816,9 @@ function initMultiTabNavigation() {
   const btn14 = document.getElementById('btn-preset-14');
   const btnSat = document.getElementById('btn-preset-saturday');
 
-  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(0, 'btn-preset-sat-order', 2)); // Delivered Sunday (covers Sun, Mon)
-  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(2, 'btn-preset-mon-order', 3)); // Delivered Tuesday (covers Tue, Wed, Thu)
-  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(5, 'btn-preset-thu-order', 2)); // Delivered Friday (covers Fri, Sat)
+  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(6, 'btn-preset-sat-order', 2)); // Delivered Sunday (covers Sun, Mon)
+  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(1, 'btn-preset-mon-order', 3)); // Delivered Tuesday (covers Tue, Wed, Thu)
+  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(4, 'btn-preset-thu-order', 2)); // Delivered Friday (covers Fri, Sat)
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
 }
@@ -1310,30 +1324,25 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
-    const bRaw = matchedRecord.brisket_raw_lbs || 0;
+    
+    // Aggregate over the entire selected date range (slicedRecords)
+    const sumAgg = (key) => slicedRecords.reduce((sum, r) => sum + (r[key] || 0), 0);
+    
+    const bRaw = sumAgg('brisket_raw_lbs');
+    const pRaw = sumAgg('pork_shoulder_raw_lbs');
     const bCooked = Math.round(bRaw * 0.4);
-    const pRaw = matchedRecord.pork_shoulder_raw_lbs || 0;
     const pCooked = Math.round(pRaw * 0.4);
     const totalRaw = Math.round(bRaw + pRaw);
     const totalCooked = bCooked + pCooked;
+    const totalTacos = Math.round(sumAgg('tacos_sold'));
+    const totalRosebuds = Math.round(sumAgg('rosebuds_sold'));
+    const totalRev = Math.round(sumAgg('predicted_revenue'));
 
-    let insightStr = '';
-    if (matchedRecord.is_historical) {
-      insightStr = `Historical Record for ${matchedRecord.day_name} (${matchedRecord.date}): The pit moved ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Actual verified line items sold included ${matchedRecord.tacos_sold} Tacos and ${matchedRecord.rosebuds_sold} Rosebuds, driving $${matchedRecord.actual_revenue.toLocaleString()} in gross revenue.`;
-    } else if (matchedRecord.is_fallback_average) {
-      insightStr = `Historical Average for ${matchedRecord.day_name} (${matchedRecord.date}): Prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected).`;
-      if (matchedRecord.insightSuffix) insightStr += matchedRecord.insightSuffix;
-    } else {
-      insightStr = `The forecast for ${matchedRecord.day_name} (${matchedRecord.date}) dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked meat]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${matchedRecord.tacos_sold} projected) and Rosebuds (${matchedRecord.rosebuds_sold} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
-    }
-    
-    if (matchedRecord.day_name === 'Mon') {
-      insightStr += ` Note: The physical storefront is closed on Mondays, so any projected revenue and prep targets are driven entirely by scheduled online orders and catering pickups.`;
-    }
-    
+    let insightStr = `Selected Range Forecast (${slicedRecords[0].date} to ${slicedRecords[slicedRecords.length-1].date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+
     if (selectedCat !== 'baseline' && catSelector) {
       const selectedText = catSelector.options[catSelector.selectedIndex].text;
-      insightStr = `Isolated Analysis: The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
+      insightStr = `Isolated Analysis (${slicedRecords[0].date} to ${slicedRecords[slicedRecords.length-1].date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
     }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
@@ -1341,16 +1350,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       insightSpan.textContent = insightStr;
     }
 
-    // Populate Key Meat & Revenue Targets with Exact Model Projections for the selected day
-    const bVal = Math.round(matchedRecord.brisket_raw_lbs || 0);
-    const pVal = Math.round(matchedRecord.pork_shoulder_raw_lbs || 0);
-    const sVal = Math.round(matchedRecord.sausage_lbs || 0);
-    const rVal = Math.round(matchedRecord.pork_ribs_racks || 0);
-    const drVal = Math.round(matchedRecord.beef_dino_ribs || 0);
-    const tVal = matchedRecord.predicted_revenue ? Math.round(matchedRecord.predicted_revenue * 0.008 + 10) : 0;
-    const rbVal = Math.round(matchedRecord.rosebuds_sold || 0);
-    const tacoVal = Math.round(matchedRecord.tacos_sold || 0);
-    const predRev = Math.round(matchedRecord.predicted_revenue || 0);
+    const bVal = Math.round(bRaw);
+    const pVal = Math.round(pRaw);
+    const sVal = Math.round(sumAgg('sausage_lbs'));
+    const rVal = Math.round(sumAgg('pork_ribs_racks'));
+    const drVal = Math.round(sumAgg('beef_dino_ribs'));
+    const tVal = totalRev ? Math.round(totalRev * 0.008 + 10) : 0;
+    const rbVal = totalRosebuds;
+    const tacoVal = totalTacos;
+    const predRev = totalRev;
+
 
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
@@ -1453,6 +1462,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // (catSelector already handled above)
 
     if (typeof Plotly !== 'undefined') {
+      
+      // Sync end date picker
+      const endDatePicker = document.getElementById('forecast-end-date');
+      if (endDatePicker && slicedRecords.length > 0) {
+        endDatePicker.value = slicedRecords[slicedRecords.length - 1].date;
+      }
       const dates = slicedRecords.map(r => r.day_name + ', ' + r.date.substring(5).replace('-', '/'));
       
       let maxVal = 0;
