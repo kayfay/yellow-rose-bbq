@@ -70,8 +70,17 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         demand_index = arima_data["forecast_metrics"]["demand_index"][:days][i]
         base_revenue = 5078.63 * demand_index
         
-        staff_count = min(5, max(2, int(base_revenue // 1000) + 1)) # Adjusted threshold for higher baseline
-        pit_hours = round(staff_count * 8.5, 1)
+        if demand_index == 0:
+            brisket_raw_lbs = 0
+            pork_lbs = 0
+            sausage_lbs = 0
+            tacos_sold = 0
+            rosebuds_sold = 0
+            pork_ribs_racks = 0
+            beef_dino_ribs = 0
+            
+        staff_count = min(5, max(2, int(base_revenue // 1000) + 1)) if demand_index > 0 else 0
+        pit_hours = round(staff_count * 8.5, 1) if demand_index > 0 else 0
 
         records.append({
             "date": date_str,
