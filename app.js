@@ -812,337 +812,19 @@ function initMultiTabNavigation() {
   // Presets
   
   const btnToday = document.getElementById('btn-preset-today');
-  if (btnToday) btnToday.addEventListener('click', () => {
-    document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-    btnToday.classList.add('active');
-    const todayStr = new Date().toISOString().split('T')[0];
-    const dateInput = document.getElementById('forecast-start-date');
-    const endDateInput = document.getElementById('forecast-end-date');
-    if (dateInput) dateInput.value = todayStr;
-    if (endDateInput) endDateInput.value = todayStr;
-    handleDateSelectionLookup(todayStr);
-    renderPlotlyForecastingChart(1);
-  });
-  const btnSatOrder = document.getElementById('btn-preset-sat-order');
-  const btnMonOrder = document.getElementById('btn-preset-mon-order');
-  const btnThuOrder = document.getElementById('btn-preset-thu-order');
+  const btnTomorrow = document.getElementById('btn-preset-tomorrow');
+  const btn7 = document.getElementById('btn-preset-7');
   const btn14 = document.getElementById('btn-preset-14');
   const btnSat = document.getElementById('btn-preset-saturday');
 
-  if (btnSatOrder) btnSatOrder.addEventListener('click', () => updateDeliveryPreset(6, 'btn-preset-sat-order', 2)); // Delivered Sunday (covers Sun, Mon)
-  if (btnMonOrder) btnMonOrder.addEventListener('click', () => updateDeliveryPreset(1, 'btn-preset-mon-order', 3)); // Delivered Tuesday (covers Tue, Wed, Thu)
-  if (btnThuOrder) btnThuOrder.addEventListener('click', () => updateDeliveryPreset(4, 'btn-preset-thu-order', 2)); // Delivered Friday (covers Fri, Sat)
-  if (btn14) btn14.addEventListener('click', () => updatePresetHorizon(14));
+  if (btnToday) btnToday.addEventListener('click', () => updatePresetHorizon('btn-preset-today', 1, 0));
+  if (btnTomorrow) btnTomorrow.addEventListener('click', () => updatePresetHorizon('btn-preset-tomorrow', 1, 1));
+  if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
+  if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
 }
 
-function updateDeliveryPreset(targetDayNum, btnId, windowDays = 3) {
-  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(btnId);
-  if (btn) btn.classList.add('active');
 
-  const d = new Date();
-  while (d.getDay() !== targetDayNum) {
-    d.setDate(d.getDate() + 1);
-  }
-
-  const targetDateStr = d.toISOString().split('T')[0];
-  const dateInput = document.getElementById('forecast-start-date');
-  if (dateInput) {
-    dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
-  }
-  renderPlotlyForecastingChart(windowDays);
-}
-
-function renderPlotlyNoData(containerId) {
-  if (typeof d3 === 'undefined') return;
-  const container = document.getElementById(containerId);
-  if (container) container.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Data Available</div>';
-}
-
-async function renderPlotlyEventChart() {
-  const container = document.getElementById('plotly-event-impact-chart');
-  if (!container || typeof d3 === 'undefined') return;
-
-  const defaultEventTraces = [{
-    x: ["Normal Day", "State/Federal Holiday", "Jaguars Game Day"],
-    y: [1.0, 0.9, 3.5],
-    type: "bar",
-    marker: { color: ["#7f8c8d", "#e67e22", "#006778"], opacity: 0.9 },
-    text: ["1.0x", "0.9x", "3.5x"],
-    textposition: "auto"
-  }];
-
-  const defaultEventLayout = {
-    title: "Demand Surge Multipliers: Local Events vs. Normal Operations",
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(20,20,30,0.6)",
-    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
-    xaxis: { gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis: { title: "Demand Multiplier (vs. Normal Day)", gridcolor: "rgba(255,255,255,0.1)" },
-    margin: { l: 60, r: 50, t: 50, b: 50 }
-  };
-
-  try {
-    let payload = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.event_payload) {
-      payload = window.BBQ_PAYLOADS.event_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/event_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-    if (payload) {
-      const layout = payload.plotly_event_chart.layout;
-      layout.plot_bgcolor = 'rgba(0,0,0,0)';
-      layout.paper_bgcolor = 'rgba(0,0,0,0)';
-      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
-      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
-      const traces = payload.plotly_event_chart.data;
-      if (typeof d3 !== 'undefined') {
-        renderD3GenericChart('plotly-event-impact-chart', traces, layout.title);
-      }
-      return;
-    }
-  } catch (err) {
-    console.log('Using embedded event chart dataset');
-  }
-
-  if (typeof d3 !== 'undefined') {
-    renderD3GenericChart('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout.title);
-  }
-  refreshEventsCalendar();
-}
-
-// Live Events & Multiplier Calendar State Management
-const _now = new Date();
-let currentCalYear = _now.getFullYear();
-let currentCalMonth = _now.getMonth();
-let currentCalFilter = 'all';
-let selectedCalDate = _now.toISOString().split('T')[0];
-let calInitialized = false;
-
-function refreshEventsCalendar() {
-  if (typeof renderMonthEventsCalendar === 'function') {
-    renderMonthEventsCalendar(
-      'live-events-calendar-grid',
-      currentCalYear,
-      currentCalMonth,
-      currentCalFilter,
-      (dateStr, evt) => {
-        selectedCalDate = dateStr;
-        showCalendarDateDrawer(dateStr, evt);
-      },
-      selectedCalDate
-    );
-  }
-}
-
-function showCalendarDateDrawer(dateStr, evt) {
-  const drawer = document.getElementById('calendar-selected-drawer');
-  if (!drawer) return;
-  drawer.style.display = 'flex';
-
-  const dateObj = new Date(dateStr + 'T00:00:00');
-  const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
-
-  const dateSpan = document.getElementById('drawer-date-str');
-  const badgeSpan = document.getElementById('drawer-mult-badge');
-  const titleP = document.getElementById('drawer-event-title');
-  const noteP = document.getElementById('drawer-event-note');
-
-  if (dateSpan) dateSpan.textContent = formattedDate;
-  if (badgeSpan) badgeSpan.textContent = `${evt.multiplier || 1.0}x Demand Multiplier`;
-  if (titleP) titleP.textContent = `${evt.icon || '🔥'} ${evt.title}`;
-  if (noteP) noteP.textContent = evt.note || "Standard operational pace.";
-
-  const applyBtn = document.getElementById('drawer-apply-btn');
-  if (applyBtn) {
-    applyBtn.onclick = () => {
-      const dateInput = document.getElementById('forecast-start-date');
-      if (dateInput) {
-        dateInput.value = dateStr;
-      }
-      handleDateSelectionLookup(dateStr);
-      renderPlotlyForecastingChart(14);
-
-      // Scroll to KPI targets smoothly
-      const targetCard = document.querySelector('.forecasting-kpi-grid');
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    };
-  }
-}
-
-function initEventsCalendar() {
-  if (calInitialized) return;
-  calInitialized = true;
-
-  const btnPrev = document.getElementById('cal-btn-prev');
-  const btnNext = document.getElementById('cal-btn-next');
-  const btnToday = document.getElementById('cal-btn-today');
-
-  if (btnPrev) {
-    btnPrev.addEventListener('click', () => {
-      currentCalMonth--;
-      if (currentCalMonth < 0) {
-        currentCalMonth = 11;
-        currentCalYear--;
-      }
-      refreshEventsCalendar();
-    });
-  }
-
-  if (btnNext) {
-    btnNext.addEventListener('click', () => {
-      currentCalMonth++;
-      if (currentCalMonth > 11) {
-        currentCalMonth = 0;
-        currentCalYear++;
-      }
-      refreshEventsCalendar();
-    });
-  }
-
-  if (btnToday) {
-    btnToday.addEventListener('click', () => {
-      const now = new Date();
-      currentCalYear = now.getFullYear();
-      currentCalMonth = now.getMonth();
-      refreshEventsCalendar();
-    });
-  }
-
-  const filterBtns = document.querySelectorAll('.cal-filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCalFilter = btn.getAttribute('data-filter') || 'all';
-      refreshEventsCalendar();
-    });
-  });
-
-  refreshEventsCalendar();
-}
-
-async function renderPlotlyWeatherChart() {
-  const container = document.getElementById('plotly-weather-impact-chart');
-  if (!container || typeof d3 === 'undefined') return;
-
-  const defaultWeatherTraces = [
-    {
-      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
-      y: [86, 88, 91, 89, 87, 85, 88],
-      name: "Max Temp (°F)",
-      type: "scatter",
-      mode: "lines+markers",
-      line: { color: "#e67e22", width: 3 }
-    },
-    {
-      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
-      y: [0, 12.5, 0, 4.2, 0, 0, 8.0],
-      name: "Precipitation (mm)",
-      type: "bar",
-      yaxis: "y2",
-      marker: { color: "#3498db" }
-    }
-  ];
-
-  const defaultWeatherLayout = {
-    title: "Weather Exogenous Factors (Temperature & Precipitation)",
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(20,20,30,0.6)",
-    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
-    xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: 45 },
-    yaxis: { title: "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis2: { title: "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
-    legend: { orientation: "h", y: -0.25, x: 0 },
-    margin: { l: 60, r: 60, t: 50, b: 80 }
-  };
-
-  try {
-    let payload = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.weather_payload) {
-      payload = window.BBQ_PAYLOADS.weather_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/weather_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-    if (payload) {
-      const layout = payload.plotly_weather_chart.layout;
-      layout.plot_bgcolor = 'rgba(0,0,0,0)';
-      layout.paper_bgcolor = 'rgba(0,0,0,0)';
-      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
-      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
-      const traces = payload.plotly_weather_chart.data;
-      if (typeof Plotly !== 'undefined') {
-        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
-      } else if (typeof d3 !== 'undefined') {
-        renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
-      }
-      return;
-    }
-  } catch (err) {
-    console.log('Using embedded weather chart dataset');
-  }
-
-  if (typeof d3 !== 'undefined') {
-    renderD3GenericChart('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout.title);
-  }
-}
-
-function updatePresetHorizon(days) {
-  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(`btn-preset-${days}`);
-  if (btn) btn.classList.add('active');
-
-  // For 14-day delivery view, jump to upcoming Saturday peak demand
-  const d = new Date();
-  while (d.getDay() !== 6) {
-    d.setDate(d.getDate() + 1);
-  }
-  const targetDateStr = d.toISOString().split('T')[0];
-
-  const dateInput = document.getElementById('forecast-start-date');
-  if (dateInput) {
-    dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
-  }
-  renderPlotlyForecastingChart(days);
-}
-
-function updatePresetThirdSaturday() {
-  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('btn-preset-saturday');
-  if (btn) btn.classList.add('active');
-  
-  // Calculate next 3rd Saturday (15th-21st of current/next month)
-  const d = new Date();
-  d.setDate(15);
-  while (d.getDay() !== 6) {
-    d.setDate(d.getDate() + 1);
-  }
-  // If next 3rd Saturday is already past this month, move to next month
-  if (d < new Date()) {
-    d.setMonth(d.getMonth() + 1);
-    d.setDate(15);
-    while (d.getDay() !== 6) {
-      d.setDate(d.getDate() + 1);
-    }
-  }
-
-  const targetDateStr = d.toISOString().split('T')[0];
-  const dateInput = document.getElementById('forecast-start-date');
-  if (dateInput) {
-    dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
-  }
-  renderPlotlyForecastingChart(14);
-}
 
 async function renderPlotlyForecastingChart(daysCount = 14) {
   try {
@@ -1338,24 +1020,24 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
     
-    // Aggregate over the entire selected date range (slicedRecords)
-    const sumAgg = (key) => slicedRecords.reduce((sum, r) => sum + (r[key] || 0), 0);
-    
-    const bRaw = sumAgg('brisket_raw_lbs');
-    const pRaw = sumAgg('pork_shoulder_raw_lbs');
+// Revert KPI Cards to strictly represent the Target (Start) Date.
+    // Date ranges (aggregates) obscure daily operational prep requirements.
+    const targetRecord = slicedRecords[0];
+    const bRaw = targetRecord.brisket_raw_lbs || 0;
+    const pRaw = targetRecord.pork_shoulder_raw_lbs || 0;
     const bCooked = Math.round(bRaw * 0.4);
     const pCooked = Math.round(pRaw * 0.4);
     const totalRaw = Math.round(bRaw + pRaw);
     const totalCooked = bCooked + pCooked;
-    const totalTacos = Math.round(sumAgg('tacos_sold'));
-    const totalRosebuds = Math.round(sumAgg('rosebuds_sold'));
-    const totalRev = Math.round(sumAgg('predicted_revenue'));
+    const totalTacos = Math.round(targetRecord.tacos_sold || 0);
+    const totalRosebuds = Math.round(targetRecord.rosebuds_sold || 0);
+    const totalRev = Math.round(targetRecord.predicted_revenue || 0);
 
-    let insightStr = `Selected Range Forecast (${slicedRecords[0].date} to ${slicedRecords[slicedRecords.length-1].date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+    let insightStr = `Target Day Forecast (${targetRecord.date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
 
     if (selectedCat !== 'baseline' && catSelector) {
       const selectedText = catSelector.options[catSelector.selectedIndex].text;
-      insightStr = `Isolated Analysis (${slicedRecords[0].date} to ${slicedRecords[slicedRecords.length-1].date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
+      insightStr = `Isolated Analysis (${targetRecord.date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
     }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
@@ -1365,9 +1047,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const bVal = Math.round(bRaw);
     const pVal = Math.round(pRaw);
-    const sVal = Math.round(sumAgg('sausage_lbs'));
-    const rVal = Math.round(sumAgg('pork_ribs_racks'));
-    const drVal = Math.round(sumAgg('beef_dino_ribs'));
+    const sVal = Math.round(targetRecord.sausage_lbs || 0);
+    const rVal = Math.round(targetRecord.pork_ribs_racks || 0);
+    const drVal = Math.round(targetRecord.beef_dino_ribs || 0);
     const tVal = totalRev ? Math.round(totalRev * 0.008 + 10) : 0;
     const rbVal = totalRosebuds;
     const tacoVal = totalTacos;
