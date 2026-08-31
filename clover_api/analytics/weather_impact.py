@@ -111,20 +111,30 @@ def run_weather_impact_analysis():
     # Create traces for Normal, Heat, and Rain
     traces = []
     
+    def generate_tooltip(row, condition):
+        base = f"<b>{row['date']}</b><br>Revenue: ${row['daily_revenue']:,.2f}<br>Weather: {row['temp_max_f']}°F, {row['precip_mm']}mm rain"
+        if condition == 'rain':
+            return base + "<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+        elif condition == 'heat':
+            return base + "<br><br><i>Insight: Extreme heat (>90°F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
+        else:
+            return base + "<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+    
     # Trace 1: Normal Days
     df_normal = df_chart[(df_chart['is_heavy_rain'] == 0) & (df_chart['is_extreme_heat'] == 0)]
     if not df_normal.empty:
         traces.append({
             "x": df_normal['temp_max_f'].tolist(),
             "y": df_normal['daily_revenue'].tolist(),
-            "text": df_normal.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "text": df_normal.apply(lambda row: generate_tooltip(row, 'normal'), axis=1).tolist(),
+            "hoverinfo": "text",
             "mode": "markers",
-            "name": "Ideal Weather",
+            "name": "Ideal Patio Weather (Normal)",
             "marker": {
-                "size": [max(8, min(p * 2 + 8, 20)) for p in df_normal['precip_mm']],
+                "size": [max(10, min(p * 2 + 10, 20)) for p in df_normal['precip_mm']],
                 "color": "#27ae60",
                 "opacity": 0.8,
-                "line": {"width": 1, "color": "white"}
+                "line": {"width": 1.5, "color": "white"}
             }
         })
         
@@ -134,14 +144,15 @@ def run_weather_impact_analysis():
         traces.append({
             "x": df_rain['temp_max_f'].tolist(),
             "y": df_rain['daily_revenue'].tolist(),
-            "text": df_rain.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "text": df_rain.apply(lambda row: generate_tooltip(row, 'rain'), axis=1).tolist(),
+            "hoverinfo": "text",
             "mode": "markers",
-            "name": "Heavy Rain",
+            "name": "Heavy Rain (High To-Go Volume)",
             "marker": {
-                "size": [max(12, min(p * 2 + 8, 30)) for p in df_rain['precip_mm']],
+                "size": [max(14, min(p * 2 + 10, 35)) for p in df_rain['precip_mm']],
                 "color": "#3498db",
                 "opacity": 0.9,
-                "line": {"width": 1, "color": "white"}
+                "line": {"width": 1.5, "color": "white"}
             }
         })
         
@@ -151,30 +162,66 @@ def run_weather_impact_analysis():
         traces.append({
             "x": df_heat['temp_max_f'].tolist(),
             "y": df_heat['daily_revenue'].tolist(),
-            "text": df_heat.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "text": df_heat.apply(lambda row: generate_tooltip(row, 'heat'), axis=1).tolist(),
+            "hoverinfo": "text",
             "mode": "markers",
-            "name": "Extreme Heat (>90°F)",
+            "name": "Extreme Heat (High Curbside Volume)",
             "marker": {
-                "size": [max(8, min(p * 2 + 8, 20)) for p in df_heat['precip_mm']],
+                "size": [max(10, min(p * 2 + 10, 20)) for p in df_heat['precip_mm']],
                 "color": "#e67e22",
                 "opacity": 0.8,
-                "line": {"width": 1, "color": "white"}
+                "line": {"width": 1.5, "color": "white"}
             }
         })
 
     fig_data = traces
 
     fig_layout = {
-        "title": "Daily Sales vs Temperature (Marker Size = Rainfall)",
+        "title": "Weather vs. Sales: Actionable Operations Insight",
         "paper_bgcolor": "rgba(0,0,0,0)",
         "plot_bgcolor": "rgba(20,20,30,0.6)",
         "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-        "xaxis": {"title": "Maximum Temperature (°F)", "gridcolor": "rgba(255,255,255,0.1)", "zeroline": False},
-        "yaxis": {"title": "Daily Gross Revenue ($)", "gridcolor": "rgba(255,255,255,0.1)", "zeroline": False, "rangemode": "tozero"},
+        "xaxis": {
+            "title": "Daily High Temperature (°F) — Determines Patio Seating & Walk-In Traffic",
+            "gridcolor": "rgba(255,255,255,0.1)", 
+            "zeroline": False
+        },
+        "yaxis": {
+            "title": "Gross Daily Sales ($) — Target > $5,100 Baseline",
+            "gridcolor": "rgba(255,255,255,0.1)", 
+            "zeroline": False, 
+            "rangemode": "tozero"
+        },
         "showlegend": True,
-        "legend": {"orientation": "h", "y": -0.2, "x": 0.5, "xanchor": "center"},
-        "margin": {"l": 60, "r": 20, "t": 60, "b": 60},
-        "hovermode": "closest"
+        "legend": {"orientation": "h", "y": -0.25, "x": 0.5, "xanchor": "center"},
+        "margin": {"l": 60, "r": 20, "t": 60, "b": 80},
+        "hovermode": "closest",
+        "shapes": [
+            {
+                "type": "line",
+                "xref": "paper",
+                "x0": 0,
+                "x1": 1,
+                "y0": normal_avg,
+                "y1": normal_avg,
+                "line": {
+                    "color": "#94a3b8",
+                    "width": 2,
+                    "dash": "dash"
+                }
+            }
+        ],
+        "annotations": [
+            {
+                "xref": "paper",
+                "x": 0.02,
+                "y": normal_avg + 300,
+                "text": f"Baseline Target (${normal_avg:,.0f})",
+                "showarrow": False,
+                "font": {"color": "#94a3b8", "size": 12},
+                "xanchor": "left"
+            }
+        ]
     }
 
     payload = {
