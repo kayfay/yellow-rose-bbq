@@ -810,6 +810,19 @@ function initMultiTabNavigation() {
 
 
   // Presets
+  
+  const btnToday = document.getElementById('btn-preset-today');
+  if (btnToday) btnToday.addEventListener('click', () => {
+    document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+    btnToday.classList.add('active');
+    const todayStr = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('forecast-start-date');
+    const endDateInput = document.getElementById('forecast-end-date');
+    if (dateInput) dateInput.value = todayStr;
+    if (endDateInput) endDateInput.value = todayStr;
+    handleDateSelectionLookup(todayStr);
+    renderPlotlyForecastingChart(1);
+  });
   const btnSatOrder = document.getElementById('btn-preset-sat-order');
   const btnMonOrder = document.getElementById('btn-preset-mon-order');
   const btnThuOrder = document.getElementById('btn-preset-thu-order');
