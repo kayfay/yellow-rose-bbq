@@ -1043,7 +1043,9 @@ async function renderPlotlyWeatherChart() {
       if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_weather_chart.data;
-      if (typeof d3 !== 'undefined') {
+      if (typeof Plotly !== 'undefined') {
+        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
+      } else if (typeof d3 !== 'undefined') {
         renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
       }
       return;

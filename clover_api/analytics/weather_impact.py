@@ -99,29 +99,77 @@ def run_weather_impact_analysis():
     print(f"[WEATHER ANALYTICS] Rain Impact Coefficient: ${rain_coef:.2f} / mm")
     print(f"[WEATHER ANALYTICS] Temp Impact Coefficient: ${temp_coef:.2f} / °F")
 
-    # Build Sanitized Plotly Multi-Axis Chart (Demand Index vs Rainfall & Temperature)
-    # Replaced complex time series with a digestible categorical bar chart
-    fig_data = [
-        {
-            "x": ["Ideal Weather", "Extreme Heat (>95°F)", "Heavy Rain"],
-            "y": [1.0, round(heat_avg / normal_avg, 2) if normal_avg > 0 else 0.88, round(rain_avg / normal_avg, 2) if normal_avg > 0 else 0.70],
-            "text": [f"${normal_avg:,.0f} Avg", f"${heat_avg:,.0f} Avg", f"${rain_avg:,.0f} Avg"],
-            "textposition": "auto",
-            "name": "Relative Demand Index",
-            "type": "bar",
-            "marker": {"color": ["#27ae60", "#e67e22", "#3498db"], "opacity": 0.9}
-        }
-    ]
+    
+    # Filter out Jaguars game days for a cleaner weather correlation
+    df_chart = df_merged[df_merged['is_jaguars_game'] == 0].copy() if 'is_jaguars_game' in df_merged.columns else df_merged.copy()
+
+    # Create traces for Normal, Heat, and Rain
+    traces = []
+    
+    # Trace 1: Normal Days
+    df_normal = df_chart[(df_chart['is_heavy_rain'] == 0) & (df_chart['is_extreme_heat'] == 0)]
+    if not df_normal.empty:
+        traces.append({
+            "x": df_normal['temp_max_f'].tolist(),
+            "y": df_normal['daily_revenue'].tolist(),
+            "text": df_normal.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "mode": "markers",
+            "name": "Ideal Weather",
+            "marker": {
+                "size": [max(8, min(p * 2 + 8, 20)) for p in df_normal['precip_mm']],
+                "color": "#27ae60",
+                "opacity": 0.8,
+                "line": {"width": 1, "color": "white"}
+            }
+        })
+        
+    # Trace 2: Heavy Rain
+    df_rain = df_chart[df_chart['is_heavy_rain'] == 1]
+    if not df_rain.empty:
+        traces.append({
+            "x": df_rain['temp_max_f'].tolist(),
+            "y": df_rain['daily_revenue'].tolist(),
+            "text": df_rain.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "mode": "markers",
+            "name": "Heavy Rain",
+            "marker": {
+                "size": [max(12, min(p * 2 + 8, 30)) for p in df_rain['precip_mm']],
+                "color": "#3498db",
+                "opacity": 0.9,
+                "line": {"width": 1, "color": "white"}
+            }
+        })
+        
+    # Trace 3: Extreme Heat
+    df_heat = df_chart[(df_chart['is_extreme_heat'] == 1) & (df_chart['is_heavy_rain'] == 0)]
+    if not df_heat.empty:
+        traces.append({
+            "x": df_heat['temp_max_f'].tolist(),
+            "y": df_heat['daily_revenue'].tolist(),
+            "text": df_heat.apply(lambda row: f"{row['date']}<br>Temp: {row['temp_max_f']}°F<br>Precip: {row['precip_mm']}mm<br>Rev: ${row['daily_revenue']:.2f}", axis=1).tolist(),
+            "mode": "markers",
+            "name": "Extreme Heat (>90°F)",
+            "marker": {
+                "size": [max(8, min(p * 2 + 8, 20)) for p in df_heat['precip_mm']],
+                "color": "#e67e22",
+                "opacity": 0.8,
+                "line": {"width": 1, "color": "white"}
+            }
+        })
+
+    fig_data = traces
 
     fig_layout = {
-        "title": "Impact of Weather on Sales Demand",
+        "title": "Daily Sales vs Temperature (Marker Size = Rainfall)",
         "paper_bgcolor": "rgba(0,0,0,0)",
         "plot_bgcolor": "rgba(20,20,30,0.6)",
         "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-        "xaxis": {"gridcolor": "rgba(255,255,255,0.1)"},
-        "yaxis": {"title": "Relative Demand Index (1.0 = Ideal)", "gridcolor": "rgba(255,255,255,0.1)"},
-        "showlegend": False,
-        "margin": {"l": 60, "r": 60, "t": 60, "b": 60}
+        "xaxis": {"title": "Maximum Temperature (°F)", "gridcolor": "rgba(255,255,255,0.1)", "zeroline": False},
+        "yaxis": {"title": "Daily Gross Revenue ($)", "gridcolor": "rgba(255,255,255,0.1)", "zeroline": False, "rangemode": "tozero"},
+        "showlegend": True,
+        "legend": {"orientation": "h", "y": -0.2, "x": 0.5, "xanchor": "center"},
+        "margin": {"l": 60, "r": 20, "t": 60, "b": 60},
+        "hovermode": "closest"
     }
 
     payload = {
