@@ -195,7 +195,9 @@ def run_all():
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(20,20,30,0.6)",
                 "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-                "margin": {"l": 60, "r": 30, "t": 60, "b": 60},
+                "margin": {"l": 60, "r": 30, "t": 80, "b": 60},
+                "hovermode": "x unified",
+                "hoverlabel": {"bgcolor": "rgba(15, 23, 42, 0.95)", "font": {"family": "Outfit, sans-serif"}},
                 "shapes": [
                     {
                         "type": "line",

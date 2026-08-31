@@ -78,7 +78,7 @@ def build_shift_forecast():
                 "y": days,
                 "z": z_data,
                 "text": text_data,
-                "hoverinfo": "text",
+                "hovertemplate": "%{text}<extra></extra>",
                 "type": "heatmap",
                 "colorscale": "Hot",
                 "reversescale": False
@@ -90,7 +90,8 @@ def build_shift_forecast():
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",
                 "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-                "margin": {"l": 100, "r": 30, "t": 60, "b": 60}
+                "margin": {"l": 100, "r": 30, "t": 80, "b": 60},
+                "hoverlabel": {"bgcolor": "rgba(15, 23, 42, 0.95)", "font": {"family": "Outfit, sans-serif"}}
             }
         }
     }

@@ -1444,61 +1444,73 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     // (catSelector already handled above)
 
     if (typeof Plotly !== 'undefined') {
-      const dates = slicedRecords.map(r => r.date);
+      const dates = slicedRecords.map(r => r.day_name + ', ' + r.date.substring(5).replace('-', '/'));
+      
+      let maxVal = 0;
+      slicedRecords.forEach(r => {
+          maxVal = Math.max(maxVal, r.brisket_raw_lbs || 0, r.pork_shoulder_raw_lbs || 0, r.sausage_lbs || 0, r.pork_ribs_racks || 0);
+      });
+      maxVal = maxVal * 1.15; // Give 15% headroom to prevent clipping
+
       let traces = [];
       let layout = {
         title: "Pit Production Targets: Raw vs. Cooked Yield Projections",
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(20,20,30,0.6)",
         font: { color: "#f8fafc", family: "Outfit, sans-serif" },
-        xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: 45 },
-        yaxis: { title: "Raw Meat Weight (lbs)", gridcolor: "rgba(255,255,255,0.1)", rangemode: "tozero" },
-        margin: { l: 60, r: 40, t: 60, b: 80 },
-        legend: { orientation: "h", y: -0.3, x: 0 },
-        hovermode: "x unified"
+        xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: -45, automargin: true },
+        yaxis: { title: "Raw Meat Weight (lbs)", gridcolor: "rgba(255,255,255,0.1)", rangemode: "tozero", range: [0, maxVal] },
+        margin: { l: 60, r: 40, t: 80, b: 80 },
+        legend: { orientation: "h", y: -0.4, x: 0 },
+        hovermode: "x unified",
+        hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Outfit, sans-serif" } }
       };
 
       if (selectedCat === 'brisket') {
         layout.title = "Pit Production Targets: Brisket (Raw vs Cooked Yield)";
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
-          type: 'bar', name: 'Raw Brisket (lbs)', marker: { color: '#e74c3c' },
+          type: 'bar', name: 'Raw Brisket', marker: { color: '#e74c3c' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
           x: dates, y: slicedRecords.map(r => (r.brisket_raw_lbs || 0) * 0.4),
-          type: 'line', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 },
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'pork') {
         layout.title = "Pit Production Targets: Pork Shoulder (Raw vs Cooked Yield)";
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0),
-          type: 'bar', name: 'Raw Pork (lbs)', marker: { color: '#3498db' },
+          type: 'bar', name: 'Raw Pork', marker: { color: '#3498db' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
           x: dates, y: slicedRecords.map(r => (r.pork_shoulder_raw_lbs || 0) * 0.4),
-          type: 'line', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 },
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else {
-        layout.title = "Pit Production Targets: Total Meat (Raw lbs)";
+        layout.title = "Pit Production Targets: Total Core Meats (Raw lbs)";
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
-          type: 'scatter', mode: 'lines+markers', name: 'Brisket', line: { color: '#e74c3c', width: 2 }
+          type: 'scatter', mode: 'lines+markers', name: 'Brisket', line: { color: '#e74c3c', width: 3 }, marker: { size: 8 },
+          hovertemplate: "%{y:.1f} lbs<extra></extra>"
         });
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0),
-          type: 'scatter', mode: 'lines+markers', name: 'Pork Shoulder', line: { color: '#3498db', width: 2 }
+          type: 'scatter', mode: 'lines+markers', name: 'Pork Shoulder', line: { color: '#3498db', width: 3 }, marker: { size: 8 },
+          hovertemplate: "%{y:.1f} lbs<extra></extra>"
         });
         traces.push({
           x: dates, y: slicedRecords.map(r => r.sausage_lbs || 0),
-          type: 'scatter', mode: 'lines+markers', name: 'Sausage', line: { color: '#f1c40f', width: 2 }
+          type: 'scatter', mode: 'lines+markers', name: 'Sausage', line: { color: '#f1c40f', width: 3 }, marker: { size: 8 },
+          hovertemplate: "%{y:.1f} lbs<extra></extra>"
         });
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_ribs_racks || 0),
-          type: 'scatter', mode: 'lines+markers', name: 'Pork Ribs (racks)', line: { color: '#9b59b6', width: 2, dash: 'dash' }
+          type: 'scatter', mode: 'lines+markers', name: 'Pork Ribs (racks)', line: { color: '#9b59b6', width: 3, dash: 'dot' }, marker: { size: 8 },
+          hovertemplate: "%{y:.1f} racks<extra></extra>"
         });
       }
       

@@ -127,7 +127,7 @@ def run_weather_impact_analysis():
             "x": df_normal['temp_max_f'].tolist(),
             "y": df_normal['daily_revenue'].tolist(),
             "text": df_normal.apply(lambda row: generate_tooltip(row, 'normal'), axis=1).tolist(),
-            "hoverinfo": "text",
+            "hovertemplate": "%{text}<extra></extra>",
             "mode": "markers",
             "name": "Ideal Patio Weather (Normal)",
             "marker": {
@@ -145,7 +145,7 @@ def run_weather_impact_analysis():
             "x": df_rain['temp_max_f'].tolist(),
             "y": df_rain['daily_revenue'].tolist(),
             "text": df_rain.apply(lambda row: generate_tooltip(row, 'rain'), axis=1).tolist(),
-            "hoverinfo": "text",
+            "hovertemplate": "%{text}<extra></extra>",
             "mode": "markers",
             "name": "Heavy Rain (High To-Go Volume)",
             "marker": {
@@ -163,7 +163,7 @@ def run_weather_impact_analysis():
             "x": df_heat['temp_max_f'].tolist(),
             "y": df_heat['daily_revenue'].tolist(),
             "text": df_heat.apply(lambda row: generate_tooltip(row, 'heat'), axis=1).tolist(),
-            "hoverinfo": "text",
+            "hovertemplate": "%{text}<extra></extra>",
             "mode": "markers",
             "name": "Extreme Heat (High Curbside Volume)",
             "marker": {
@@ -196,6 +196,7 @@ def run_weather_impact_analysis():
         "legend": {"orientation": "h", "y": -0.25, "x": 0.5, "xanchor": "center"},
         "margin": {"l": 60, "r": 20, "t": 60, "b": 80},
         "hovermode": "closest",
+        "hoverlabel": {"bgcolor": "rgba(15, 23, 42, 0.95)", "font": {"family": "Outfit, sans-serif"}},
         "shapes": [
             {
                 "type": "line",

@@ -410,8 +410,15 @@
       "margin": {
         "l": 60,
         "r": 30,
-        "t": 60,
+        "t": 80,
         "b": 60
+      },
+      "hovermode": "x unified",
+      "hoverlabel": {
+        "bgcolor": "rgba(15, 23, 42, 0.95)",
+        "font": {
+          "family": "Outfit, sans-serif"
+        }
       },
       "shapes": [
         {
@@ -445,9 +452,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 6.4,
-    "pork_ribs_avg_with_dino": 3.4,
-    "impact_pct": -46.2
+    "pork_ribs_avg_without_dino": 5.8,
+    "pork_ribs_avg_with_dino": 4.5,
+    "impact_pct": -23.4
   },
   "payday_effect": {
     "payday_avg_ticket": 46.73,

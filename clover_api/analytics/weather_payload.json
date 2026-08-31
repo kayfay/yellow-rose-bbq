@@ -35,7 +35,7 @@
           "<b>2026-08-28 00:00:00</b><br>Revenue: $4,576.48<br>Weather: 88.52\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>2026-08-29 00:00:00</b><br>Revenue: $2,607.41<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
-        "hoverinfo": "text",
+        "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
         "name": "Ideal Patio Weather (Normal)",
         "marker": {
@@ -89,7 +89,7 @@
           "<b>2026-08-13 00:00:00</b><br>Revenue: $3,165.83<br>Weather: 92.84\u00b0F, 44.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>2026-08-27 00:00:00</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         ],
-        "hoverinfo": "text",
+        "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
         "name": "Heavy Rain (High To-Go Volume)",
         "marker": {
@@ -244,7 +244,7 @@
           "<b>2026-08-23 00:00:00</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>2026-08-26 00:00:00</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
         ],
-        "hoverinfo": "text",
+        "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
         "name": "Extreme Heat (High Curbside Volume)",
         "marker": {
@@ -334,6 +334,12 @@
         "b": 80
       },
       "hovermode": "closest",
+      "hoverlabel": {
+        "bgcolor": "rgba(15, 23, 42, 0.95)",
+        "font": {
+          "family": "Outfit, sans-serif"
+        }
+      },
       "shapes": [
         {
           "type": "line",

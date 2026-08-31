@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-31T15:28:52.262363",
+      "generated_at": "2026-08-31T19:08:52.566602",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~244.7 lbs raw brisket (~97.9 lbs cooked yield) and ~46.0 lbs raw pork shoulder (~18.4 lbs cooked yield) [~290.7 lbs total raw / ~116.3 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (64 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -578,7 +578,7 @@ window.BBQ_PAYLOADS = {
             "<b>2026-08-28 00:00:00</b><br>Revenue: $4,576.48<br>Weather: 88.52\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>2026-08-29 00:00:00</b><br>Revenue: $2,607.41<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
-          "hoverinfo": "text",
+          "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Ideal Patio Weather (Normal)",
           "marker": {
@@ -632,7 +632,7 @@ window.BBQ_PAYLOADS = {
             "<b>2026-08-13 00:00:00</b><br>Revenue: $3,165.83<br>Weather: 92.84\u00b0F, 44.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>2026-08-27 00:00:00</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
           ],
-          "hoverinfo": "text",
+          "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Heavy Rain (High To-Go Volume)",
           "marker": {
@@ -787,7 +787,7 @@ window.BBQ_PAYLOADS = {
             "<b>2026-08-23 00:00:00</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>2026-08-26 00:00:00</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
           ],
-          "hoverinfo": "text",
+          "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Extreme Heat (High Curbside Volume)",
           "marker": {
@@ -877,6 +877,12 @@ window.BBQ_PAYLOADS = {
           "b": 80
         },
         "hovermode": "closest",
+        "hoverlabel": {
+          "bgcolor": "rgba(15, 23, 42, 0.95)",
+          "font": {
+            "family": "Outfit, sans-serif"
+          }
+        },
         "shapes": [
           {
             "type": "line",
@@ -952,7 +958,7 @@ window.BBQ_PAYLOADS = {
             "Major Holiday<br>Action: Pre-smoke starting Tuesday. Scale family-style sides.",
             "Jaguars Home Game<br>Action: Massive Surge. Activate Drive-Thru Express Lane."
           ],
-          "hoverinfo": "text+y"
+          "hovertemplate": "<b>%{y:.2f}x Multiplier</b><br>%{hovertext}<extra></extra>"
         }
       ],
       "layout": {
@@ -974,8 +980,14 @@ window.BBQ_PAYLOADS = {
         "margin": {
           "l": 60,
           "r": 50,
-          "t": 60,
+          "t": 80,
           "b": 80
+        },
+        "hoverlabel": {
+          "bgcolor": "rgba(15, 23, 42, 0.95)",
+          "font": {
+            "family": "Outfit, sans-serif"
+          }
         },
         "shapes": [
           {
@@ -1409,7 +1421,7 @@ window.BBQ_PAYLOADS = {
               "Sunday 23:00<br>0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ]
           ],
-          "hoverinfo": "text",
+          "hovertemplate": "%{text}<extra></extra>",
           "type": "heatmap",
           "colorscale": "Hot",
           "reversescale": false
@@ -1435,8 +1447,14 @@ window.BBQ_PAYLOADS = {
         "margin": {
           "l": 100,
           "r": 30,
-          "t": 60,
+          "t": 80,
           "b": 60
+        },
+        "hoverlabel": {
+          "bgcolor": "rgba(15, 23, 42, 0.95)",
+          "font": {
+            "family": "Outfit, sans-serif"
+          }
         }
       }
     }
@@ -2390,8 +2408,15 @@ window.BBQ_PAYLOADS = {
         "margin": {
           "l": 60,
           "r": 30,
-          "t": 60,
+          "t": 80,
           "b": 60
+        },
+        "hovermode": "x unified",
+        "hoverlabel": {
+          "bgcolor": "rgba(15, 23, 42, 0.95)",
+          "font": {
+            "family": "Outfit, sans-serif"
+          }
         },
         "shapes": [
           {
@@ -2425,9 +2450,9 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 6.4,
-      "pork_ribs_avg_with_dino": 3.4,
-      "impact_pct": -46.2
+      "pork_ribs_avg_without_dino": 5.8,
+      "pork_ribs_avg_with_dino": 4.5,
+      "impact_pct": -23.4
     },
     "payday_effect": {
       "payday_avg_ticket": 46.73,

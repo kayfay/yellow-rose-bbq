@@ -405,7 +405,7 @@
             "Sunday 23:00<br>0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
           ]
         ],
-        "hoverinfo": "text",
+        "hovertemplate": "%{text}<extra></extra>",
         "type": "heatmap",
         "colorscale": "Hot",
         "reversescale": false
@@ -431,8 +431,14 @@
       "margin": {
         "l": 100,
         "r": 30,
-        "t": 60,
+        "t": 80,
         "b": 60
+      },
+      "hoverlabel": {
+        "bgcolor": "rgba(15, 23, 42, 0.95)",
+        "font": {
+          "family": "Outfit, sans-serif"
+        }
       }
     }
   }

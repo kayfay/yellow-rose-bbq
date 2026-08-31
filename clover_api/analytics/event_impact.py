@@ -96,7 +96,7 @@ def run_event_impact_analysis():
             "text": [f"{m:.1f}x" for m in multipliers],
             "textposition": "auto",
             "hovertext": tooltips,
-            "hoverinfo": "text+y"
+            "hovertemplate": "<b>%{y:.2f}x Multiplier</b><br>%{hovertext}<extra></extra>"
         }
     ]
 
@@ -113,7 +113,8 @@ def run_event_impact_analysis():
             "title": "Surge Multiplier vs. Baseline (x) — Scale Prep Volume Accordingly",
             "gridcolor": "rgba(255,255,255,0.1)"
         },
-        "margin": {"l": 60, "r": 50, "t": 60, "b": 80},
+        "margin": {"l": 60, "r": 50, "t": 80, "b": 80},
+        "hoverlabel": {"bgcolor": "rgba(15, 23, 42, 0.95)", "font": {"family": "Outfit, sans-serif"}},
         "shapes": [
             {
                 "type": "line",
