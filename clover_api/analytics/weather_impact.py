@@ -70,6 +70,10 @@ def run_weather_impact_analysis():
 
     # Convert merged to pandas for regression analysis
     df_merged = pl_merged.to_pandas()
+    
+    # Filter out Mondays (closed days) so $0 revenue doesn't dilute the averages
+    df_merged['date'] = pd.to_datetime(df_merged['date'])
+    df_merged = df_merged[df_merged['date'].dt.dayofweek != 0] # Wait, pandas dayofweek: 0=Monday
 
     # Drop NaNs for regression calculation
     clean_rain = df_merged[['precip_mm', 'daily_revenue']].dropna()
