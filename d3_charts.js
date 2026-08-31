@@ -6,7 +6,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     // Inject and format all records to uniform pounds
     records.forEach(r => {
         // Generate realistic turkey lbs based on revenue (approx 15-35 lbs)
-        r.turkey_lbs = Math.round((r.predicted_revenue || 2000) * 0.008 + 10);
+        r.turkey_lbs = r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
         r.pork_ribs_lbs = (r.pork_ribs_racks || 0) * 3;
         r.beef_dino_ribs_lbs = (r.beef_dino_ribs || 0) * 4;
         r.brisket_raw_lbs = r.brisket_raw_lbs || 0;
