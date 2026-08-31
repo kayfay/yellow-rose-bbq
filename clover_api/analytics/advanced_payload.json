@@ -391,14 +391,14 @@
       }
     ],
     "layout": {
-      "title": "Cumulative Sales by Hour (Sell-out Trajectory)",
+      "title": "Sell-Out Trajectory: When to Stop Slicing & Start Vacuum Sealing",
       "xaxis": {
-        "title": "Hour of Day",
+        "title": "Hour of Day \u2014 Monitor closely after 6:00 PM to prevent waste",
         "gridcolor": "rgba(255,255,255,0.1)",
         "tickangle": -45
       },
       "yaxis": {
-        "title": "Cumulative Items Sold",
+        "title": "Cumulative Items Sold \u2014 Track against daily prep totals",
         "gridcolor": "rgba(255,255,255,0.1)"
       },
       "paper_bgcolor": "rgba(0,0,0,0)",
@@ -412,13 +412,42 @@
         "r": 30,
         "t": 60,
         "b": 60
-      }
+      },
+      "shapes": [
+        {
+          "type": "line",
+          "x0": 21,
+          "x1": 21,
+          "y0": 0,
+          "y1": 1,
+          "yref": "paper",
+          "line": {
+            "color": "#e74c3c",
+            "width": 2,
+            "dash": "dash"
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "x": 21,
+          "y": 1.05,
+          "yref": "paper",
+          "text": "Target Sell-Out (9:00 PM)",
+          "showarrow": false,
+          "font": {
+            "color": "#e74c3c",
+            "size": 12
+          },
+          "xanchor": "center"
+        }
+      ]
     }
   },
   "cannibalization": {
     "pork_ribs_avg_without_dino": 6.4,
     "pork_ribs_avg_with_dino": 3.4,
-    "impact_pct": -47.7
+    "impact_pct": -46.2
   },
   "payday_effect": {
     "payday_avg_ticket": 46.73,

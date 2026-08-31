@@ -78,6 +78,12 @@ def run_event_impact_analysis():
     categories = ["Normal Day", "State/Federal Holiday", "Jaguars Game Day"]
     multipliers = [1.0, round(holiday_multiplier, 2), round(jags_multiplier, 2)]
 
+    tooltips = [
+        "Normal Day<br>Action: Standard Prep",
+        "Major Holiday<br>Action: Pre-smoke starting Tuesday. Scale family-style sides.",
+        "Jaguars Home Game<br>Action: Massive Surge. Activate Drive-Thru Express Lane."
+    ]
+
     fig_data = [
         {
             "x": categories,
@@ -88,18 +94,41 @@ def run_event_impact_analysis():
                 "opacity": 0.9
             },
             "text": [f"{m:.1f}x" for m in multipliers],
-            "textposition": "auto"
+            "textposition": "auto",
+            "hovertext": tooltips,
+            "hoverinfo": "text+y"
         }
     ]
 
     fig_layout = {
-        "title": "Demand Surge Multipliers: Local Events vs. Normal Operations",
+        "title": "Event Action Plan: Expected Revenue Surges",
         "paper_bgcolor": "rgba(0,0,0,0)",
         "plot_bgcolor": "rgba(20,20,30,0.6)",
         "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-        "xaxis": {"gridcolor": "rgba(255,255,255,0.1)"},
-        "yaxis": {"title": "Demand Multiplier (Relative to Normal Day)", "gridcolor": "rgba(255,255,255,0.1)"},
-        "margin": {"l": 60, "r": 50, "t": 60, "b": 60}
+        "xaxis": {
+            "title": "Event Type — Determines Special Menu & Drive-Thru Operations",
+            "gridcolor": "rgba(255,255,255,0.1)"
+        },
+        "yaxis": {
+            "title": "Surge Multiplier vs. Baseline (x) — Scale Prep Volume Accordingly",
+            "gridcolor": "rgba(255,255,255,0.1)"
+        },
+        "margin": {"l": 60, "r": 50, "t": 60, "b": 80},
+        "shapes": [
+            {
+                "type": "line",
+                "xref": "paper",
+                "x0": 0,
+                "x1": 1,
+                "y0": 1.0,
+                "y1": 1.0,
+                "line": {
+                    "color": "#94a3b8",
+                    "width": 2,
+                    "dash": "dash"
+                }
+            }
+        ]
     }
 
     payload = {

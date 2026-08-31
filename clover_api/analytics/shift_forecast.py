@@ -50,15 +50,26 @@ def build_shift_forecast():
     hours = list(range(24))
     
     z_data = []
+    text_data = []
     for day in days:
         day_data = []
+        text_row = []
         for hour in hours:
             val = heatmap_data[(heatmap_data['day_of_week'] == day) & (heatmap_data['hour'] == hour)]
+            orders = 0
             if len(val) > 0:
-                day_data.append(val['avg_orders'].values[0])
+                orders = val['avg_orders'].values[0]
+            day_data.append(orders)
+            
+            # Actionable insights based on volume
+            if orders < 3:
+                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>")
+            elif orders < 8:
+                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>")
             else:
-                day_data.append(0)
+                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>")
         z_data.append(day_data)
+        text_data.append(text_row)
         
     payload = {
         "plotly_heatmap": {
@@ -66,18 +77,20 @@ def build_shift_forecast():
                 "x": [f"{h:02d}:00" for h in hours],
                 "y": days,
                 "z": z_data,
+                "text": text_data,
+                "hoverinfo": "text",
                 "type": "heatmap",
-                "colorscale": "YlOrRd",
+                "colorscale": "Hot",
                 "reversescale": False
             }],
             "layout": {
-                "title": "Average Hourly Orders (Demand Heatmap)",
+                "title": "Labor Optimization: Hourly Foot Traffic by Shift",
                 "xaxis": {"title": "Hour of Day (Central Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
-                "yaxis": {"title": "", "gridcolor": "rgba(255,255,255,0.1)"},
+                "yaxis": {"title": "Day of Week — Identifies Required Staffing Levels", "gridcolor": "rgba(255,255,255,0.1)"},
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",
                 "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-                "margin": {"l": 80, "r": 30, "t": 60, "b": 60}
+                "margin": {"l": 100, "r": 30, "t": 60, "b": 60}
             }
         }
     }

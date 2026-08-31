@@ -189,13 +189,39 @@ def run_all():
         "sell_out_prediction_chart": {
             "data": traces,
             "layout": {
-                "title": "Cumulative Sales by Hour (Sell-out Trajectory)",
-                "xaxis": {"title": "Hour of Day", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
-                "yaxis": {"title": "Cumulative Items Sold", "gridcolor": "rgba(255,255,255,0.1)"},
+                "title": "Sell-Out Trajectory: When to Stop Slicing & Start Vacuum Sealing",
+                "xaxis": {"title": "Hour of Day — Monitor closely after 6:00 PM to prevent waste", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
+                "yaxis": {"title": "Cumulative Items Sold — Track against daily prep totals", "gridcolor": "rgba(255,255,255,0.1)"},
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(20,20,30,0.6)",
                 "font": {"color": "#f8fafc", "family": "Outfit, sans-serif"},
-                "margin": {"l": 60, "r": 30, "t": 60, "b": 60}
+                "margin": {"l": 60, "r": 30, "t": 60, "b": 60},
+                "shapes": [
+                    {
+                        "type": "line",
+                        "x0": 21,
+                        "x1": 21,
+                        "y0": 0,
+                        "y1": 1,
+                        "yref": "paper",
+                        "line": {
+                            "color": "#e74c3c",
+                            "width": 2,
+                            "dash": "dash"
+                        }
+                    }
+                ],
+                "annotations": [
+                    {
+                        "x": 21,
+                        "y": 1.05,
+                        "yref": "paper",
+                        "text": "Target Sell-Out (9:00 PM)",
+                        "showarrow": False,
+                        "font": {"color": "#e74c3c", "size": 12},
+                        "xanchor": "center"
+                    }
+                ]
             }
         },
         "cannibalization": cannibalization_data,
