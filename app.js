@@ -1395,7 +1395,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const incrementalRev = predRev - baselineRev;
     const pctDiff = Math.round((incrementalRev / baselineRev) * 100);
     const sign = pctDiff > 0 ? '+' : '';
-    const pctDisplay = `${sign}${pctDiff}% (Total: $${predRev.toLocaleString()})`;
+    const pctDisplay = predRev === 0 ? `Closed` : (pctDiff > 0 ? `+${pctDiff}%` : `${pctDiff}%`);
 
     // Update dynamic baseline trend card
     const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
