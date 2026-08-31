@@ -102,6 +102,7 @@ def run_weather_impact_analysis():
     
     # Filter out Jaguars game days for a cleaner weather correlation
     df_chart = df_merged[df_merged['is_jaguars_game'] == 0].copy() if 'is_jaguars_game' in df_merged.columns else df_merged.copy()
+    df_chart = df_chart.dropna(subset=['temp_max_f', 'precip_mm'])
 
     # Create traces for Normal, Heat, and Rain
     traces = []

@@ -3,21 +3,6 @@
     "data": [
       {
         "x": [
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
-          NaN,
           89.6,
           88.34,
           89.6,
@@ -30,21 +15,6 @@
           89.78
         ],
         "y": [
-          4337.94,
-          2790.41,
-          4574.51,
-          6113.23,
-          6934.92,
-          5561.26,
-          3516.65,
-          5542.57,
-          3894.63,
-          5968.24,
-          7430.97,
-          6804.38,
-          -51.71,
-          4303.01,
-          4796.87,
           202.05,
           4078.87,
           6039.65,
@@ -57,21 +27,6 @@
           2607.41
         ],
         "text": [
-          "2026-06-02<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $4337.94",
-          "2026-06-03<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $2790.41",
-          "2026-06-04<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $4574.51",
-          "2026-06-05<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $6113.23",
-          "2026-06-06<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $6934.92",
-          "2026-06-07<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $5561.26",
-          "2026-06-09<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $3516.65",
-          "2026-06-10<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $5542.57",
-          "2026-06-11<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $3894.63",
-          "2026-06-12<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $5968.24",
-          "2026-06-13<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $7430.97",
-          "2026-06-14<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $6804.38",
-          "2026-06-15<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $-51.71",
-          "2026-06-16<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $4303.01",
-          "2026-06-17<br>Temp: nan\u00b0F<br>Precip: nanmm<br>Rev: $4796.87",
           "2026-07-13<br>Temp: 89.6\u00b0F<br>Precip: 6.8mm<br>Rev: $202.05",
           "2026-07-30<br>Temp: 88.34\u00b0F<br>Precip: 1.4mm<br>Rev: $4078.87",
           "2026-07-31<br>Temp: 89.6\u00b0F<br>Precip: 1.1mm<br>Rev: $6039.65",
@@ -87,21 +42,6 @@
         "name": "Ideal Weather",
         "marker": {
           "size": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
             20,
             10.8,
             10.2,
@@ -175,7 +115,6 @@
       },
       {
         "x": [
-          96.61999999999999,
           91.94,
           96.44,
           98.24,
@@ -223,7 +162,6 @@
           91.58000000000001
         ],
         "y": [
-          4531.96,
           7839.13,
           5982.47,
           4457.56,
@@ -271,7 +209,6 @@
           4388.4
         ],
         "text": [
-          "2026-06-18<br>Temp: 96.61999999999999\u00b0F<br>Precip: nanmm<br>Rev: $4531.96",
           "2026-06-21<br>Temp: 91.94\u00b0F<br>Precip: 1.3mm<br>Rev: $7839.13",
           "2026-06-24<br>Temp: 96.44\u00b0F<br>Precip: 0.2mm<br>Rev: $5982.47",
           "2026-06-25<br>Temp: 98.24\u00b0F<br>Precip: 9.4mm<br>Rev: $4457.56",
@@ -322,7 +259,6 @@
         "name": "Extreme Heat (>90\u00b0F)",
         "marker": {
           "size": [
-            8,
             10.6,
             8.4,
             20,
