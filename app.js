@@ -853,7 +853,7 @@ async function renderPlotlyEventChart() {
     if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.event_payload) {
       payload = window.BBQ_PAYLOADS.event_payload;
     } else {
-      const res = await fetch('clover_api/analytics/event_payload.json');
+      const res = await fetch('clover_api/analytics/event_payload.json?v=' + Date.now());
       if (res.ok) payload = await res.json();
     }
     if (payload) {
@@ -1032,7 +1032,7 @@ async function renderPlotlyWeatherChart() {
     if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.weather_payload) {
       payload = window.BBQ_PAYLOADS.weather_payload;
     } else {
-      const res = await fetch('clover_api/analytics/weather_payload.json');
+      const res = await fetch('clover_api/analytics/weather_payload.json?v=' + Date.now());
       if (res.ok) payload = await res.json();
     }
     if (payload) {
@@ -1138,7 +1138,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload) {
         dashPayload = window.BBQ_PAYLOADS.dashboard_payload;
       } else {
-        const dashRes = await fetch('clover_api/analytics/dashboard_payload.json');
+        const dashRes = await fetch('clover_api/analytics/dashboard_payload.json?v=' + Date.now());
         if (dashRes.ok) dashPayload = await dashRes.json();
       }
     } catch (e) {
@@ -1156,7 +1156,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let histPayload = null;
     try {
-      const histRes = await fetch('clover_api/analytics/historical_payload.json');
+      const histRes = await fetch('clover_api/analytics/historical_payload.json?v=' + Date.now());
       if (histRes.ok) histPayload = await histRes.json();
     } catch (e) {
       console.log("No historical payload found.");
@@ -1534,7 +1534,7 @@ async function renderPlotlyShiftHeatmap(shift) {
     if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.shift_payload) {
       payload = window.BBQ_PAYLOADS.shift_payload;
     } else {
-      const res = await fetch('clover_api/analytics/shift_payload.json');
+      const res = await fetch('clover_api/analytics/shift_payload.json?v=' + Date.now());
       if (res.ok) payload = await res.json();
     }
     if (payload) {

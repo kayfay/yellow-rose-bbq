@@ -46,6 +46,7 @@ jobs:
           python generate_historical_payload.py
           python clover_api/analytics/weather_impact.py
           python clover_api/analytics/event_impact.py
+          python clover_api/analytics/arima_baseline.py
           python clover_api/analytics/dashboard.py
           python clover_api/analytics/advanced_analytics.py
           

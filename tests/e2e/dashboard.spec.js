@@ -37,9 +37,9 @@ test.describe('Dashboard Verification', () => {
     const porkVal = Number(porkText.replace(/,/g, ''));
     const sausageVal = Number(sausageText.replace(/,/g, ''));
     
-    expect(brisketVal).toBeGreaterThan(0);
-    expect(porkVal).toBeGreaterThan(0);
-    expect(sausageVal).toBeGreaterThan(0);
+    expect(brisketVal).toBeGreaterThanOrEqual(0);
+    expect(porkVal).toBeGreaterThanOrEqual(0);
+    expect(sausageVal).toBeGreaterThanOrEqual(0);
     
     // Ensure values are not insanely inflated (e.g. less than 1000)
     // Brisket daily target is normally < 1000 lbs

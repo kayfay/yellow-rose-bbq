@@ -11,9 +11,7 @@ __pycache__/
 env/
 venv/
 
-# Private Backend Code (Untracked from Public Web Repo)
-clover_api/*.py
-clover_api/**/*.py
+# Private Backend Code (Allowed)
 
 # Data & Databases
 *.db

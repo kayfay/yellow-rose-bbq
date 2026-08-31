@@ -8,7 +8,7 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://127.0.0.1:8011',
+    baseURL: 'http://127.0.0.1:8013',
     trace: 'on-first-retry',
   },
   projects: [
