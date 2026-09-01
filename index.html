@@ -275,23 +275,25 @@
 
       <!-- Historical Verification Reference Card (Dynamically populates for past dates) -->
       <section id="historical-reference-card" class="control-card">
-        <h3>
-          📜 Past Day Record Lookup (<span id="hist-date-label">---</span>)
-        </h3>
-        <div>
-          <div>
-            <span>Recorded Sales Demand</span><br>
-            <strong id="hist-demand-val">1.0x (Baseline)</strong>
+        <details>
+          <summary style="cursor: pointer; font-size: 1.1em; font-weight: 600; color: #f8fafc;">
+            📜 Past Day Record Lookup (<span id="hist-date-label">---</span>)
+          </summary>
+          <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: rgba(15, 23, 42, 0.4); padding: 15px; border-radius: 8px;">
+            <div>
+              <span style="color: #94a3b8; font-size: 0.9em;">Recorded Sales Demand</span><br>
+              <strong id="hist-demand-val" style="font-size: 1.2em; color: #38bdf8;">1.0x (Baseline)</strong>
+            </div>
+            <div>
+              <span style="color: #94a3b8; font-size: 0.9em;">Recorded Weather</span><br>
+              <strong id="hist-weather-val" style="font-size: 1.2em; color: #38bdf8;">88°F | Clear</strong>
+            </div>
+            <div>
+              <span style="color: #94a3b8; font-size: 0.9em;">Event Status</span><br>
+              <strong id="hist-event-val" style="font-size: 1.2em; color: #38bdf8;">Normal Saturday</strong>
+            </div>
           </div>
-          <div>
-            <span>Recorded Weather</span><br>
-            <strong id="hist-weather-val">88°F | Clear</strong>
-          </div>
-          <div>
-            <span>Event Status</span><br>
-            <strong id="hist-event-val">Normal Saturday</strong>
-          </div>
-        </div>
+        </details>
       </section>
 
       

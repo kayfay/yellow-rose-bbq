@@ -1,3 +1,15 @@
+
+function getActiveDaysCount() {
+  const start = document.getElementById('forecast-start-date')?.value;
+  const end = document.getElementById('forecast-end-date')?.value;
+  if (start && end) {
+    const diffTime = Math.abs(new Date(end) - new Date(start));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    return diffDays > 0 ? diffDays : 1;
+  }
+  return 1;
+}
+
 // State management
 let state = {
   recipeId: 'jalapeno-cheddar',
@@ -560,7 +572,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initMultiTabNavigation();
   initEventsCalendar();
   // Pre-render forecasting data so it's instantly available
-  renderPlotlyForecastingChart(14);
+  renderPlotlyForecastingChart(getActiveDaysCount());
 });
 
 // Multi-Tab & POS Analytics Forecasting Module Integration
@@ -588,7 +600,7 @@ function initMultiTabNavigation() {
       }
 
       if (targetTab === 'forecasting-analytics') {
-        renderPlotlyForecastingChart();
+        renderPlotlyForecastingChart(getActiveDaysCount());
         renderPlotlyEventChart();
         renderPlotlyWeatherChart();
         renderPlotlyShiftHeatmap();
@@ -623,12 +635,31 @@ function initMultiTabNavigation() {
   }
 
   if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
+    // Correct timezone-aware today string
+    const d = new Date();
+    const tzOffset = d.getTimezoneOffset() * 60000;
+    const today = (new Date(d - tzOffset)).toISOString().split('T')[0];
+    
+    // Set default end date to 14 days out
+    const endD = new Date(d);
+    endD.setDate(endD.getDate() + 13);
+    const endStr = (new Date(endD - tzOffset)).toISOString().split('T')[0];
+    
     dateInput.value = today;
+    const endDateInput = document.getElementById('forecast-end-date');
+    if (endDateInput) endDateInput.value = endStr;
+    
+    // Default Active Preset
+    const btn14 = document.getElementById('btn-preset-14');
+    if (btn14) {
+      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+      btn14.classList.add('active');
+    }
+
     ['change', 'input'].forEach(evtType => {
       dateInput.addEventListener(evtType, () => {
         handleDateSelectionLookup(dateInput.value);
-        renderPlotlyForecastingChart();
+        renderPlotlyForecastingChart(getActiveDaysCount());
       });
     });
   }
@@ -667,7 +698,7 @@ function initMultiTabNavigation() {
       if (viewEvent) viewEvent.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
       if (viewAdvanced) viewAdvanced.style.display = 'none';
-      renderPlotlyForecastingChart();
+      renderPlotlyForecastingChart(getActiveDaysCount());
     });
 
     btnSubtabWeather.addEventListener('click', () => {
@@ -749,14 +780,14 @@ function initMultiTabNavigation() {
     dateInputStart.addEventListener('change', (e) => {
       document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
       handleDateSelectionLookup(e.target.value);
-      renderPlotlyForecastingChart(14);
+      renderPlotlyForecastingChart(getActiveDaysCount());
     });
   }
   const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
       document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-      renderPlotlyForecastingChart(14);
+      renderPlotlyForecastingChart(getActiveDaysCount());
     });
   }
   
@@ -822,6 +853,36 @@ function initMultiTabNavigation() {
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
   if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
+function updatePresetHorizon(btnId, days, startOffset = 0) {
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.add('active');
+
+  const d = new Date();
+  if (startOffset > 0) {
+    d.setDate(d.getDate() + startOffset);
+  }
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  const targetDateStr = (new Date(d - tzOffset)).toISOString().split('T')[0];
+
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
+  }
+  
+  // Also calculate and set the end date for the UI
+  const endD = new Date(d);
+  endD.setDate(endD.getDate() + days - 1);
+  const endTargetDateStr = (new Date(endD - tzOffset)).toISOString().split('T')[0];
+  const endDateInput = document.getElementById('forecast-end-date');
+  if (endDateInput) {
+    endDateInput.value = endTargetDateStr;
+  }
+  
+  renderPlotlyForecastingChart(days);
+}
+
 }
 
 
@@ -1327,7 +1388,7 @@ function handleDateSelectionLookup(selectedDateStr) {
   if (!histCard) return;
 
   const todayStr = new Date().toISOString().split('T')[0];
-  const isPastOrToday = selectedDateStr <= todayStr;
+  const isPastOrToday = selectedDateStr < todayStr;
 
   if (isPastOrToday) {
     histCard.style.display = 'block';
