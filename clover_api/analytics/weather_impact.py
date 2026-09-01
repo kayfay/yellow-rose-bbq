@@ -112,7 +112,10 @@ def run_weather_impact_analysis():
     traces = []
     
     def generate_tooltip(row, condition):
-        base = f"<b>{row['date']}</b><br>Revenue: ${row['daily_revenue']:,.2f}<br>Weather: {row['temp_max_f']}°F, {row['precip_mm']}mm rain"
+        import pandas as pd
+        d_obj = pd.to_datetime(row['date'])
+        date_str = d_obj.strftime('%A, %Y-%m-%d')
+        base = f"<b>{date_str}</b><br>Revenue: ${row['daily_revenue']:,.2f}<br>Weather: {row['temp_max_f']}°F, {row['precip_mm']}mm rain"
         if condition == 'rain':
             return base + "<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         elif condition == 'heat':
