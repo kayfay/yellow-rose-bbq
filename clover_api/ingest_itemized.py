@@ -8,7 +8,7 @@ import sqlite3
 import requests
 import pandas as pd
 from pathlib import Path
-from clover_api.secure_config import get_secure_credentials, get_headers, DB_PATH, BASE_DIR
+from secure_config import get_secure_credentials, get_headers, DB_PATH, BASE_DIR
 
 def fetch_pos_items():
     creds = get_secure_credentials()

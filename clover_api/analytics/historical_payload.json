@@ -15,30 +15,16 @@
       "is_historical": true
     },
     {
-      "date": "2026-06-02",
-      "day_name": "Tue",
-      "actual_revenue": 4337.94,
-      "predicted_revenue": 4337.94,
-      "brisket_raw_lbs": 74.5,
-      "pork_shoulder_raw_lbs": 37.2,
-      "sausage_lbs": 43.4,
-      "tacos_sold": 36,
-      "rosebuds_sold": 19,
-      "pork_ribs_racks": 4.4,
-      "beef_dino_ribs": 0,
-      "is_historical": true
-    },
-    {
       "date": "2026-06-03",
       "day_name": "Wed",
-      "actual_revenue": 2834.49,
-      "predicted_revenue": 2834.49,
-      "brisket_raw_lbs": 60.0,
-      "pork_shoulder_raw_lbs": 32.6,
-      "sausage_lbs": 28.3,
-      "tacos_sold": 19,
-      "rosebuds_sold": 16,
-      "pork_ribs_racks": 3.4,
+      "actual_revenue": 626.23,
+      "predicted_revenue": 626.23,
+      "brisket_raw_lbs": 40.0,
+      "pork_shoulder_raw_lbs": 24.0,
+      "sausage_lbs": 20.0,
+      "tacos_sold": 6,
+      "rosebuds_sold": 4,
+      "pork_ribs_racks": 0.1,
       "beef_dino_ribs": 0,
       "is_historical": true
     },
@@ -1146,6 +1132,34 @@
       "rosebuds_sold": 5,
       "pork_ribs_racks": 4,
       "beef_dino_ribs": 2,
+      "is_historical": true
+    },
+    {
+      "date": "2026-08-30",
+      "day_name": "Sun",
+      "actual_revenue": 8115.97,
+      "predicted_revenue": 8115.97,
+      "brisket_raw_lbs": 90.7,
+      "pork_shoulder_raw_lbs": 38.6,
+      "sausage_lbs": 81.2,
+      "tacos_sold": 45,
+      "rosebuds_sold": 28,
+      "pork_ribs_racks": 7.4,
+      "beef_dino_ribs": 1,
+      "is_historical": true
+    },
+    {
+      "date": "2026-08-31",
+      "day_name": "Mon",
+      "actual_revenue": 230.88,
+      "predicted_revenue": 230.88,
+      "brisket_raw_lbs": 40.0,
+      "pork_shoulder_raw_lbs": 24.0,
+      "sausage_lbs": 20.0,
+      "tacos_sold": 0,
+      "rosebuds_sold": 0,
+      "pork_ribs_racks": 0,
+      "beef_dino_ribs": 0,
       "is_historical": true
     }
   ]
