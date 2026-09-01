@@ -1338,7 +1338,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           type: 'bar', name: 'Sausage Links', marker: { color: '#f39c12' },
           hovertemplate: "%{y:.0f} Links<extra></extra>"
         });
-      } else if (selectedCat === 'rosebuds' || selectedCat === 'tacos_sold') {
+      } else if (selectedCat === 'rosebuds_sold' || selectedCat === 'tacos_sold') {
         const isTaco = selectedCat === 'tacos_sold';
         layout.title = isTaco ? "Composed Item Demand: Tacos" : "Composed Item Demand: Rosebuds";
         layout.yaxis.title = "Total Units";
