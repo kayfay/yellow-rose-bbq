@@ -201,8 +201,8 @@ def run_all():
                 "shapes": [
                     {
                         "type": "line",
-                        "x0": 21,
-                        "x1": 21,
+                        "x0": "9:00 pm",
+                        "x1": "9:00 pm",
                         "y0": 0,
                         "y1": 1,
                         "yref": "paper",
@@ -215,7 +215,7 @@ def run_all():
                 ],
                 "annotations": [
                     {
-                        "x": 21,
+                        "x": "9:00 pm",
                         "y": 1.05,
                         "yref": "paper",
                         "text": "Target Sell-Out (9:00 PM)",

@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-08-31T20:49:17.999006",
+      "generated_at": "2026-08-31T21:09:01.379305",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~244.7 lbs raw brisket (~97.9 lbs cooked yield) and ~46.0 lbs raw pork shoulder (~18.4 lbs cooked yield) [~290.7 lbs total raw / ~116.3 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (64 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -2421,8 +2421,8 @@ window.BBQ_PAYLOADS = {
         "shapes": [
           {
             "type": "line",
-            "x0": 21,
-            "x1": 21,
+            "x0": "9:00 pm",
+            "x1": "9:00 pm",
             "y0": 0,
             "y1": 1,
             "yref": "paper",
@@ -2435,7 +2435,7 @@ window.BBQ_PAYLOADS = {
         ],
         "annotations": [
           {
-            "x": 21,
+            "x": "9:00 pm",
             "y": 1.05,
             "yref": "paper",
             "text": "Target Sell-Out (9:00 PM)",
