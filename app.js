@@ -1438,7 +1438,7 @@ function handleDateSelectionLookup(selectedDateStr) {
 
 async function renderPlotlyShiftHeatmap(shift) {
   const container = document.getElementById('plotly-shift-heatmap');
-  if (!container || typeof d3 === 'undefined') return;
+  if (!container) return;
 
   if (!shift) {
     const shiftSelector = document.getElementById('shift-selector');
@@ -1578,3 +1578,245 @@ window.renderAdvancedAnalytics = function() {
     Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout, {responsive: true, displayModeBar: false});
   }
 };
+
+
+function renderPlotlyNoData(containerId) {
+  if (typeof d3 === 'undefined') return;
+  const container = document.getElementById(containerId);
+  if (container) container.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Data Available</div>';
+}
+
+async function renderPlotlyEventChart() {
+  const container = document.getElementById('plotly-event-impact-chart');
+  if (!container) return;
+
+  const defaultEventTraces = [{
+    x: ["Normal Day", "State/Federal Holiday", "Jaguars Game Day"],
+    y: [1.0, 0.9, 3.5],
+    type: "bar",
+    marker: { color: ["#7f8c8d", "#e67e22", "#006778"], opacity: 0.9 },
+    text: ["1.0x", "0.9x", "3.5x"],
+    textposition: "auto"
+  }];
+
+  const defaultEventLayout = {
+    title: "Demand Surge Multipliers: Local Events vs. Normal Operations",
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(20,20,30,0.6)",
+    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
+    xaxis: { gridcolor: "rgba(255,255,255,0.1)" },
+    yaxis: { title: "Demand Multiplier (vs. Normal Day)", gridcolor: "rgba(255,255,255,0.1)" },
+    margin: { l: 60, r: 50, t: 50, b: 50 }
+  };
+
+  try {
+    let payload = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.event_payload) {
+      payload = window.BBQ_PAYLOADS.event_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/event_payload.json?v=' + Date.now());
+      if (res.ok) payload = await res.json();
+    }
+    if (payload) {
+      const layout = payload.plotly_event_chart.layout;
+      layout.plot_bgcolor = 'rgba(0,0,0,0)';
+      layout.paper_bgcolor = 'rgba(0,0,0,0)';
+      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
+      const traces = payload.plotly_event_chart.data;
+      if (typeof Plotly !== 'undefined') {
+        Plotly.newPlot('plotly-event-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
+      }
+      return;
+    }
+  } catch (err) {
+    console.log('Using embedded event chart dataset');
+  }
+
+  if (typeof Plotly !== 'undefined') {
+    Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, {responsive: true, displayModeBar: false});
+  }
+  refreshEventsCalendar();
+}
+
+// Live Events & Multiplier Calendar State Management
+const _now = new Date();
+let currentCalYear = _now.getFullYear();
+let currentCalMonth = _now.getMonth();
+let currentCalFilter = 'all';
+let selectedCalDate = _now.toISOString().split('T')[0];
+let calInitialized = false;
+
+function refreshEventsCalendar() {
+  if (typeof renderMonthEventsCalendar === 'function') {
+    renderMonthEventsCalendar(
+      'live-events-calendar-grid',
+      currentCalYear,
+      currentCalMonth,
+      currentCalFilter,
+      (dateStr, evt) => {
+        selectedCalDate = dateStr;
+        showCalendarDateDrawer(dateStr, evt);
+      },
+      selectedCalDate
+    );
+  }
+}
+
+function showCalendarDateDrawer(dateStr, evt) {
+  const drawer = document.getElementById('calendar-selected-drawer');
+  if (!drawer) return;
+  drawer.style.display = 'flex';
+
+  const dateObj = new Date(dateStr + 'T00:00:00');
+  const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+
+  const dateSpan = document.getElementById('drawer-date-str');
+  const badgeSpan = document.getElementById('drawer-mult-badge');
+  const titleP = document.getElementById('drawer-event-title');
+  const noteP = document.getElementById('drawer-event-note');
+
+  if (dateSpan) dateSpan.textContent = formattedDate;
+  if (badgeSpan) badgeSpan.textContent = `${evt.multiplier || 1.0}x Demand Multiplier`;
+  if (titleP) titleP.textContent = `${evt.icon || '🔥'} ${evt.title}`;
+  if (noteP) noteP.textContent = evt.note || "Standard operational pace.";
+
+  const applyBtn = document.getElementById('drawer-apply-btn');
+  if (applyBtn) {
+    applyBtn.onclick = () => {
+      const dateInput = document.getElementById('forecast-start-date');
+      if (dateInput) {
+        dateInput.value = dateStr;
+      }
+      handleDateSelectionLookup(dateStr);
+      renderPlotlyForecastingChart(14);
+
+      // Scroll to KPI targets smoothly
+      const targetCard = document.querySelector('.forecasting-kpi-grid');
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+  }
+}
+
+function initEventsCalendar() {
+  if (calInitialized) return;
+  calInitialized = true;
+
+  const btnPrev = document.getElementById('cal-btn-prev');
+  const btnNext = document.getElementById('cal-btn-next');
+  const btnToday = document.getElementById('cal-btn-today');
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      currentCalMonth--;
+      if (currentCalMonth < 0) {
+        currentCalMonth = 11;
+        currentCalYear--;
+      }
+      refreshEventsCalendar();
+    });
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      currentCalMonth++;
+      if (currentCalMonth > 11) {
+        currentCalMonth = 0;
+        currentCalYear++;
+      }
+      refreshEventsCalendar();
+    });
+  }
+
+  if (btnToday) {
+    btnToday.addEventListener('click', () => {
+      const now = new Date();
+      currentCalYear = now.getFullYear();
+      currentCalMonth = now.getMonth();
+      refreshEventsCalendar();
+    });
+  }
+
+  const filterBtns = document.querySelectorAll('.cal-filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCalFilter = btn.getAttribute('data-filter') || 'all';
+      refreshEventsCalendar();
+    });
+  });
+
+  refreshEventsCalendar();
+}
+
+async function renderPlotlyWeatherChart() {
+  const container = document.getElementById('plotly-weather-impact-chart');
+  if (!container) return;
+
+  const defaultWeatherTraces = [
+    {
+      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
+      y: [86, 88, 91, 89, 87, 85, 88],
+      name: "Max Temp (°F)",
+      type: "scatter",
+      mode: "lines+markers",
+      line: { color: "#e67e22", width: 3 }
+    },
+    {
+      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
+      y: [0, 12.5, 0, 4.2, 0, 0, 8.0],
+      name: "Precipitation (mm)",
+      type: "bar",
+      yaxis: "y2",
+      marker: { color: "#3498db" }
+    }
+  ];
+
+  const defaultWeatherLayout = {
+    title: "Weather Exogenous Factors (Temperature & Precipitation)",
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(20,20,30,0.6)",
+    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
+    xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: 45 },
+    yaxis: { title: "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
+    yaxis2: { title: "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
+    legend: { orientation: "h", y: -0.25, x: 0 },
+    margin: { l: 60, r: 60, t: 50, b: 80 }
+  };
+
+  try {
+    let payload = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.weather_payload) {
+      payload = window.BBQ_PAYLOADS.weather_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/weather_payload.json?v=' + Date.now());
+      if (res.ok) payload = await res.json();
+    }
+    if (payload) {
+      const layout = payload.plotly_weather_chart.layout;
+      layout.plot_bgcolor = 'rgba(0,0,0,0)';
+      layout.paper_bgcolor = 'rgba(0,0,0,0)';
+      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
+      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
+      const traces = payload.plotly_weather_chart.data;
+      if (typeof Plotly !== 'undefined') {
+        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
+      } else if (typeof d3 !== 'undefined') {
+        renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
+      }
+      return;
+    }
+  } catch (err) {
+    console.log('Using embedded weather chart dataset');
+  }
+
+  if (typeof Plotly !== 'undefined') {
+    Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, {responsive: true, displayModeBar: false});
+  }
+}
+
