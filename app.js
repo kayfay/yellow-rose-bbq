@@ -1279,37 +1279,53 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'pork_ribs_racks') {
-        layout.title = "Pit Production Targets: Pork Spare Ribs";
-        layout.yaxis.title = "Volume (Racks)";
+        layout.title = "Pit Production Targets: Pork Spare Ribs (Raw vs Cooked)";
+        layout.yaxis.title = "Meat Weight (lbs)";
         let ribMax = 0;
-        slicedRecords.forEach(r => ribMax = Math.max(ribMax, r.pork_ribs_racks || 0));
+        slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * 3));
         layout.yaxis.range = [0, ribMax * 1.15];
         traces.push({
-          x: dates, y: slicedRecords.map(r => r.pork_ribs_racks || 0),
-          type: 'bar', name: 'Pork Ribs (Racks)', marker: { color: '#9b59b6' },
-          hovertemplate: "%{y:.1f} Racks<extra></extra>"
+          x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * 3),
+          type: 'bar', name: 'Raw Weight (3 lbs/rack)', marker: { color: '#9b59b6' },
+          hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
+        });
+        traces.push({
+          x: dates, y: slicedRecords.map(r => ((r.pork_ribs_racks || 0) * 3) * 0.5),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (50%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'beef_dino_ribs') {
-        layout.title = "Pit Production Targets: Beef Dino Ribs";
-        layout.yaxis.title = "Volume (Racks)";
+        layout.title = "Pit Production Targets: Beef Dino Ribs (Raw vs Cooked)";
+        layout.yaxis.title = "Meat Weight (lbs)";
         let dinoMax = 0;
-        slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, r.beef_dino_ribs || 0));
+        slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, (r.beef_dino_ribs || 0) * 4));
         layout.yaxis.range = [0, dinoMax * 1.15];
         traces.push({
-          x: dates, y: slicedRecords.map(r => r.beef_dino_ribs || 0),
-          type: 'bar', name: 'Beef Dino Ribs (Racks)', marker: { color: '#8e44ad' },
-          hovertemplate: "%{y:.1f} Racks<extra></extra>"
+          x: dates, y: slicedRecords.map(r => (r.beef_dino_ribs || 0) * 4),
+          type: 'bar', name: 'Raw Weight (4 lbs/rack)', marker: { color: '#8e44ad' },
+          hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
+        });
+        traces.push({
+          x: dates, y: slicedRecords.map(r => ((r.beef_dino_ribs || 0) * 4) * 0.5),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (50%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'turkey_lbs') {
-        layout.title = "Pit Production Targets: Smoked Turkey Breast";
-        layout.yaxis.title = "Raw Meat Weight (lbs)";
+        layout.title = "Pit Production Targets: Smoked Turkey Breast (Raw vs Cooked)";
+        layout.yaxis.title = "Meat Weight (lbs)";
         let turkeyMax = 0;
         slicedRecords.forEach(r => turkeyMax = Math.max(turkeyMax, r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0));
         layout.yaxis.range = [0, turkeyMax * 1.15];
+        const getTurkeyRaw = (r) => r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
         traces.push({
-          x: dates, y: slicedRecords.map(r => r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0),
-          type: 'bar', name: 'Smoked Turkey (lbs)', marker: { color: '#e67e22' },
+          x: dates, y: slicedRecords.map(r => getTurkeyRaw(r)),
+          type: 'bar', name: 'Raw Turkey', marker: { color: '#e67e22' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
+        });
+        traces.push({
+          x: dates, y: slicedRecords.map(r => getTurkeyRaw(r) * 0.6),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (60%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'sausage_links') {
         layout.title = "Pit Production Targets: Sausage Links";
