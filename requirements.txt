@@ -1,0 +1,13 @@
+polars
+pandas
+plotly
+statsmodels
+requests
+python-dotenv
+xgboost
+scikit-learn
+holidays
+openmeteo-requests
+requests-cache
+retry-requests
+pyarrow
