@@ -162,7 +162,7 @@ def parse_line_items(raw_orders: List[Dict[str, Any]]) -> pd.DataFrame:
                 "hour": hour,
                 "order_type": order_type,
                 "discount_name": discount_name,
-                "discount_amount": discount_amount,
+                # "discount_amount": discount_amount, # Removed to prevent cartesian duplication
                 "modifications": mod_str
             })
 

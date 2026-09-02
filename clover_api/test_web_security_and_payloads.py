@@ -20,8 +20,15 @@ BASE_URL = f"http://127.0.0.1:{PORT}"
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
 class QuietHandler(SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        super().end_headers()
+        
     def log_message(self, format, *args):
-        pass  # Suppress HTTP server output logs during test run
+        pass
 
 def start_server():
     import os

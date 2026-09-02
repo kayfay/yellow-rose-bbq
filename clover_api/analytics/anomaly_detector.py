@@ -23,7 +23,7 @@ def detect_anomalies(contamination: float = 0.05):
     conn = sqlite3.connect(DB_PATH)
     try:
         # Load daily sales
-        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE state='LOCKED' OR state is null", conn)
+        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
         if df_orders.empty:
             print("[WARN] No order data found in database.")
             return None

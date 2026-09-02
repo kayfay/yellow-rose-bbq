@@ -20,7 +20,7 @@ def run_event_impact_analysis():
     conn = sqlite3.connect(DB_PATH)
     try:
         # Load orders and aggregate by date
-        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE state='locked' OR state is null", conn)
+        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
         df_orders['date'] = pd.to_datetime(df_orders['created_time']).dt.strftime('%Y-%m-%d')
         
         # Load weather/event flags

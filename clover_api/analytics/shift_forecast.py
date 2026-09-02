@@ -19,7 +19,7 @@ def build_shift_forecast():
 
     conn = sqlite3.connect(DB_PATH)
     try:
-        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE state='locked' OR state is null", conn)
+        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
     except Exception as e:
         print(f"[WARN] DB Read failed: {e}")
         df_orders = pd.DataFrame()

@@ -26,7 +26,7 @@ def build_arima_forecast(forecast_days: int = 14):
     # 1. Load Data
     conn = sqlite3.connect(DB_PATH)
     try:
-        df_orders = pl.read_database("SELECT created_time, total_usd FROM orders WHERE state='locked' OR state is null", conn)
+        df_orders = pl.read_database("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
     except Exception as e:
         print(f"[WARN] DB Read failed: {e}")
         df_orders = pl.DataFrame()

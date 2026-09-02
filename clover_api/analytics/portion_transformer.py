@@ -72,7 +72,12 @@ def load_transactions(db_path: str = "clover_api/data/clover_sales.db") -> pl.Da
     """Loads raw transactional data from SQLite."""
     import sqlite3
     conn = sqlite3.connect(db_path)
-    query = "SELECT order_id, created_time, item_name, quantity, modifications FROM order_line_items"
+    query = """
+        SELECT l.order_id, l.created_time, l.item_name, l.quantity, l.modifications 
+        FROM order_line_items l
+        LEFT JOIN orders o ON l.order_id = o.order_id
+        WHERE lower(o.state)='locked' OR o.state IS NULL
+    """
     
     # Read directly into Polars via Pandas (since Polars read_database needs an engine)
     import pandas as pd

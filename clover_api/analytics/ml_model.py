@@ -25,7 +25,7 @@ def build_training_dataset() -> pl.DataFrame:
     conn = sqlite3.connect(DB_PATH)
     try:
         # Load orders and resample to daily revenue (using Pandas for the SQL read, then convert to Polars)
-        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE state='LOCKED' OR state is null", conn)
+        df_orders = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
         df_orders['date'] = pd.to_datetime(df_orders['created_time']).dt.strftime('%Y-%m-%d')
         df_daily_sales = df_orders.groupby('date')['total_usd'].sum().reset_index()
         

@@ -20,7 +20,7 @@ def load_sales_data(db_path: Path = DB_PATH) -> pd.DataFrame:
         return generate_synthetic_bbq_sales()
 
     conn = sqlite3.connect(db_path)
-    df = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE state='LOCKED' OR state is null", conn)
+    df = pd.read_sql_query("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
     conn.close()
 
     df['created_time'] = pd.to_datetime(df['created_time'])

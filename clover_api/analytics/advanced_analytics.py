@@ -49,7 +49,7 @@ def run_all():
             top_pairs.append({"pair": f"{item_a} + {item_b}", "count": int(count), "confidence": float(round(max(conf_a, conf_b) * 100, 1))})
 
     # 2. Multi-Variate Event/Weather Interaction
-    query_orders = "SELECT date(created_time) as date, SUM(total_usd) as daily_revenue FROM orders WHERE state='locked' OR state is null GROUP BY date(created_time)"
+    query_orders = "SELECT date(created_time) as date, SUM(total_usd) as daily_revenue FROM orders WHERE lower(state)='locked' OR state is null GROUP BY date(created_time)"
     df_orders = pd.read_sql_query(query_orders, conn)
     query_weather = "SELECT * FROM weather_events"
     df_weather = pd.read_sql_query(query_weather, conn)
@@ -80,7 +80,7 @@ def run_all():
     query_type = """
         SELECT 
             CASE 
-                WHEN l.order_type LIKE '%To-Go%' THEN 'To-Go'
+                WHEN l.order_type LIKE ? THEN 'To-Go'
                 ELSE TRIM(l.order_type)
             END as order_type,
             COUNT(DISTINCT o.order_id) as order_count, 
@@ -92,11 +92,11 @@ def run_all():
             GROUP BY order_id
         ) l ON o.order_id = l.order_id
         GROUP BY CASE 
-            WHEN l.order_type LIKE '%To-Go%' THEN 'To-Go'
+            WHEN l.order_type LIKE ? THEN 'To-Go'
             ELSE TRIM(l.order_type)
         END
     """
-    df_type = pd.read_sql_query(query_type, conn)
+    df_type = pd.read_sql_query(query_type, conn, params=('%To-Go%', '%To-Go%'))
     # Filter out empty or None
     df_type = df_type[df_type['order_type'].notna() & (df_type['order_type'] != '')]
     if len(df_type) > 0:
@@ -110,8 +110,8 @@ def run_all():
         ]
 
     # 4. Sell-Out Prediction (Cumulative by hour)
-    query_hour = "SELECT hour, item_name, SUM(quantity) as qty FROM order_line_items WHERE item_name LIKE '%Brisket%' OR item_name LIKE '%Ribs%' OR item_name LIKE '%Pork%' GROUP BY hour, item_name"
-    df_hour = pd.read_sql_query(query_hour, conn)
+    query_hour = "SELECT hour, item_name, SUM(quantity) as qty FROM order_line_items WHERE item_name LIKE ? OR item_name LIKE ? OR item_name LIKE ? GROUP BY hour, item_name"
+    df_hour = pd.read_sql_query(query_hour, conn, params=('%Brisket%', '%Ribs%', '%Pork%'))
     df_hour['hour'] = pd.to_numeric(df_hour['hour'], errors='coerce')
     df_hour = df_hour.dropna(subset=['hour']).sort_values('hour')
     
@@ -140,12 +140,12 @@ def run_all():
     # 5. Cannibalization (Dino Ribs vs Pork Ribs)
     query_cann = """
     SELECT date(created_time) as date, 
-           SUM(CASE WHEN item_name LIKE '%Dino Ribs%' THEN quantity ELSE 0 END) as dino_qty,
-           SUM(CASE WHEN item_name LIKE '%Pork Spare Ribs%' THEN quantity ELSE 0 END) as pork_qty
+           SUM(CASE WHEN item_name LIKE ? THEN quantity ELSE 0 END) as dino_qty,
+           SUM(CASE WHEN item_name LIKE ? THEN quantity ELSE 0 END) as pork_qty
     FROM order_line_items
     GROUP BY date(created_time)
     """
-    df_cann = pd.read_sql_query(query_cann, conn)
+    df_cann = pd.read_sql_query(query_cann, conn, params=('%Dino Ribs%', '%Pork Spare Ribs%'))
     
     # Check if there are days with dino ribs
     if df_cann['dino_qty'].sum() == 0:
@@ -169,7 +169,7 @@ def run_all():
     }
 
     # 6. Discount & Payday
-    query_orders2 = "SELECT date(created_time) as date, total_usd FROM orders WHERE state='locked' OR state is null"
+    query_orders2 = "SELECT date(created_time) as date, total_usd FROM orders WHERE lower(state)='locked' OR state is null"
     df_orders2 = pd.read_sql_query(query_orders2, conn)
     df_pd = pd.merge(df_orders2, df_weather, on='date', how='inner')
     payday_stats = df_pd.groupby('is_payday')['total_usd'].mean().to_dict()
