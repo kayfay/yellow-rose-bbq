@@ -18,7 +18,6 @@ def build_payloads():
                     if filename == "dashboard_payload":
                         today = datetime.now()
                         if "forecast" in data:
-                            data["forecast"]["generated_at"] = today.isoformat()
                             if "forecast_records" in data["forecast"]:
                                 day_map = {}
                                 for r in data["forecast"]["forecast_records"]:
