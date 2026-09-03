@@ -57,7 +57,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add clover_api/data/clover_sales.db clover_api/analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
+          git add clover_api/analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
           
           # Only commit if there are changes
           if git diff-index --quiet HEAD --; then
