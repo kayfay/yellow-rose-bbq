@@ -11,6 +11,7 @@ This document is automatically generated from live POS API metadata.
 | **5pc BBQ Wing** |  |
 | **5pc Buffalo Wing** |  |
 | **5pc Smoked Wings** |  |
+| **904 Sandwich** |  |
 | **BBQ plate** |  |
 | **Bbq Plate W/2Sides** |  |
 | **Bbq Sandwich (Brisket)** |  |
@@ -20,6 +21,7 @@ This document is automatically generated from live POS API metadata.
 | **Burnt Ends** |  |
 | **Chopped lean sandwich** |  |
 | **Chopped moist Sandwich** |  |
+| **Crispy Quesa Taco Barbacoa** |  |
 | **Crispy Quesa Taco Brisket** |  |
 | **Crispy Quesa Taco Pork** |  |
 | **Crispy Quesa Taco Turkey** |  |
@@ -35,6 +37,7 @@ This document is automatically generated from live POS API metadata.
 | **Lean sandwich** |  |
 | **Moist Sandwich** |  |
 | **Pitmaster Platter &3 Sm Sides** |  |
+| **Pork Belly Ends** | Pound |
 | **Pork Belly** |  |
 | **Pulled Pork** | Pound |
 | **Pulled pork sandwich** |  |
@@ -44,6 +47,7 @@ This document is automatically generated from live POS API metadata.
 | **Sausage Sandwich** |  |
 | **Sausage** | Pound |
 | **Single Bone Pork Rib** |  |
+| **Street Taco Barbacoa** |  |
 | **Taco Plate W/2 Sides** |  |
 | **Turkey Bacon Ranch** |  |
 | **Turkey sandwich** |  |

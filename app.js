@@ -794,9 +794,15 @@ function initMultiTabNavigation() {
   let lastRefreshTime = 0;
   const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
   if (btnRefreshAnalytics) {
-    // Set initial time
+    // Set initial time from payloads
     const timeElem = document.getElementById('last-updated-time');
-    if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+    if (timeElem) {
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+      } else {
+        timeElem.textContent = new Date().toLocaleTimeString();
+      }
+    }
 
     btnRefreshAnalytics.addEventListener('click', () => {
       const now = Date.now();
@@ -824,7 +830,13 @@ function initMultiTabNavigation() {
       
       // Trigger all renders
       renderPlotlyForecastingChart(currentDays).then(() => {
-        if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+        if (timeElem) {
+          if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+            timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+          } else {
+            timeElem.textContent = new Date().toLocaleTimeString();
+          }
+        }
         btnRefreshAnalytics.innerHTML = origText;
       });
       renderPlotlyEventChart();
