@@ -16,7 +16,7 @@ let state = {
   weight: 50.0,
   tasks: Array(15).fill(false), // 15 tasks (1-indexed mapping to 0-14 array indices)
   beefWeight: 50.0,
-  beefRatio: 0.75,
+  beefRatio: 0.70,
   lastUpdated: Date.now()
 };
 
@@ -32,11 +32,11 @@ const RECIPES = {
     name: 'Classic Texas Beef',
     icon: '',
     menuSource: 'Pitmaster Original Signature',
-    description: '100% Beef Sausage made with our standard 75/25 lean-to-fat ratio. Simple, bold, and traditional.',
+    description: '100% Beef Sausage made with our standard 70/30 lean-to-fat ratio. Simple, bold, and traditional.',
     stuffedAddInLbs: 5.5,
     ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 37.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 12.5, unit: 'lbs', desc: 'Chilled Beef Fat' },
+      { id: 'lean-meat', label: 'Lean Beef Base', amount: 35.0, unit: 'lbs', desc: 'Beef Trimmings' },
+      { id: 'hard-fat', label: 'Hard Fat', amount: 15.0, unit: 'lbs', desc: 'Chilled Beef Fat' },
       { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups' },
@@ -455,8 +455,8 @@ function updateUI() {
 
     // Switch between Beef and Standard Base in the Verification text
     if (state.recipeId === 'classic-beef') {
-      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(37.5 * scale)}</strong> Lean Beef (75%)`;
-      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(12.5 * scale)}</strong> Beef Fat (25%)`;
+      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(35.0 * scale)}</strong> Lean Beef (70%)`;
+      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(15.0 * scale)}</strong> Beef Fat (30%)`;
       document.getElementById('verif-meat-3').innerHTML = `<em>(No Pork)</em>`;
     } else {
       document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(25.5 * scale)}</strong> Beef Trimmings`;
@@ -542,7 +542,7 @@ function sanitizeState(obj) {
   obj.weight = parseFloat(obj.weight);
   if (isNaN(obj.weight)) obj.weight = 50.0;
   if (obj.beefWeight === undefined) obj.beefWeight = 50.0;
-  if (obj.beefRatio === undefined) obj.beefRatio = 0.75;
+  if (obj.beefRatio === undefined) obj.beefRatio = 0.70;
   return obj;
 }
 
