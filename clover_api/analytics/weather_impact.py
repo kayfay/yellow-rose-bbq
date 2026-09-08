@@ -183,34 +183,43 @@ def run_weather_impact_analysis():
             }
         })
 
-    # Trace 4: Recent Data Overlay (Last 30 Days)
-    if not df_recent.empty:
-        traces.append({
-            "x": df_recent['temp_max_f'].tolist(),
-            "y": df_recent['daily_revenue'].tolist(),
-            "text": df_recent['date'].dt.strftime('%Y-%m-%d').tolist(),
-            "hovertemplate": "Recent Date: %{text}<extra></extra>",
-            "mode": "markers+text",
-            "name": "Recent Patterns (Last 30 Days)",
-            "textposition": "top center",
-            "textfont": {"color": "#cbd5e1", "size": 10},
-            "marker": {
-                "size": 16,
-                "color": "rgba(0,0,0,0)",
-                "line": {"width": 2, "color": "#fbbf24"},
-                "symbol": "circle-open"
-            }
-        })
+    # Trace 4: Timeline Heatmap (Recency layer)
+    # Convert dates to numeric for the colorscale
+    numeric_dates = df_chart['datetime'].astype(int) // 10**9
+    
+    traces.append({
+        "x": df_chart['temp_max_f'].tolist(),
+        "y": df_chart['daily_revenue'].tolist(),
+        "text": df_chart['date'].dt.strftime('%b %d, %Y').tolist(),
+        "hovertemplate": "Date: %{text}<br>Revenue: $%{y:,.2f}<br>Temp: %{x}°F<extra></extra>",
+        "mode": "markers",
+        "name": "Timeline Heatmap (Toggle)",
+        "visible": "legendonly",
+        "marker": {
+            "size": 12,
+            "color": numeric_dates.tolist(),
+            "colorscale": "Plasma",
+            "showscale": True,
+            "colorbar": {
+                "title": "Date Temperature",
+                "len": 0.5,
+                "yanchor": "middle",
+                "y": 0.5
+            },
+            "line": {"width": 1, "color": "rgba(255,255,255,0.1)"}
+        }
+    })
 
     fig_data = traces
 
-    # Find most recent large sales day (highest revenue in the last 30 days, or overall if empty)
-    if not df_recent.empty:
-        max_recent_idx = df_recent['daily_revenue'].idxmax()
-        max_recent_row = df_recent.loc[max_recent_idx]
+    # Find the top 3 most recent large sales days (within the last 60 days)
+    recent_60_days = df_chart['datetime'].max() - pd.Timedelta(days=60)
+    df_recent_60 = df_chart[df_chart['datetime'] >= recent_60_days]
+    
+    if not df_recent_60.empty:
+        top_3_recent = df_recent_60.nlargest(3, 'daily_revenue')
     else:
-        max_recent_idx = df_chart['daily_revenue'].idxmax()
-        max_recent_row = df_chart.loc[max_recent_idx]
+        top_3_recent = df_chart.nlargest(3, 'daily_revenue')
 
     fig_layout = {
         "title": "Weather vs. Sales: Actionable Operations Insight",
@@ -257,20 +266,31 @@ def run_weather_impact_analysis():
                 "showarrow": False,
                 "font": {"color": "#94a3b8", "size": 12},
                 "xanchor": "left"
-            },
-            {
-                "x": max_recent_row['temp_max_f'],
-                "y": max_recent_row['daily_revenue'],
-                "text": f"🔥 Most Recent Large Sales Day<br>{max_recent_row['date'].strftime('%Y-%m-%d')} (${max_recent_row['daily_revenue']:,.0f})",
-                "showarrow": True,
-                "arrowhead": 2,
-                "ax": 0,
-                "ay": -40,
-                "font": {"color": "#fbbf24", "size": 13},
-                "arrowcolor": "#fbbf24"
             }
         ]
     }
+
+    rank_colors = ["#facc15", "#e2e8f0", "#cd7f32"]
+    rank_names = ["1st", "2nd", "3rd"]
+    
+    for i, (_, row) in enumerate(top_3_recent.iterrows()):
+        if i >= len(rank_colors):
+            break
+        fig_layout["annotations"].append({
+            "x": row['temp_max_f'],
+            "y": row['daily_revenue'],
+            "text": f"{rank_names[i]} Highest Recent<br>{row['date'].strftime('%b %d')} (${row['daily_revenue']:,.0f})",
+            "showarrow": True,
+            "arrowhead": 2,
+            "ax": 0,
+            "ay": -45 - (i * 12),
+            "font": {"color": rank_colors[i], "size": 11, "family": "Inter, sans-serif"},
+            "arrowcolor": rank_colors[i],
+            "bgcolor": "rgba(15, 23, 42, 0.85)",
+            "bordercolor": rank_colors[i],
+            "borderwidth": 1,
+            "borderpad": 4
+        })
 
     payload = {
         "plotly_weather_chart": {"data": fig_data, "layout": fig_layout},
