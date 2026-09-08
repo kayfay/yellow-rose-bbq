@@ -117,6 +117,41 @@ def run_weather_impact_analysis():
     # Create traces for Normal, Heat, and Rain
     traces = []
     
+    # Trace 0: Timeline Heatmap (Halo layer)
+    numeric_dates = df_chart['datetime'].astype(int) // 10**9
+    
+    def get_halo_size(row):
+        p = row['precip_mm']
+        if row['is_heavy_rain'] == 1:
+            return max(14, min(p * 2 + 10, 35)) + 12
+        else:
+            return max(10, min(p * 2 + 10, 20)) + 12
+            
+    halo_sizes = df_chart.apply(get_halo_size, axis=1).tolist()
+    
+    traces.append({
+        "x": df_chart['temp_max_f'].tolist(),
+        "y": df_chart['daily_revenue'].tolist(),
+        "mode": "markers",
+        "name": "Date Temperature (Halo)",
+        "hoverinfo": "skip",
+        "marker": {
+            "size": halo_sizes,
+            "color": numeric_dates.tolist(),
+            "colorscale": "Plasma",
+            "opacity": 0.35,
+            "showscale": True,
+            "colorbar": {
+                "title": "Date Temp",
+                "len": 0.5,
+                "yanchor": "middle",
+                "y": 0.5,
+                "x": 1.05
+            },
+            "line": {"width": 0}
+        }
+    })
+
     def generate_tooltip(row, condition):
         import pandas as pd
         d_obj = pd.to_datetime(row['date'])
@@ -183,32 +218,7 @@ def run_weather_impact_analysis():
             }
         })
 
-    # Trace 4: Timeline Heatmap (Recency layer)
-    # Convert dates to numeric for the colorscale
-    numeric_dates = df_chart['datetime'].astype(int) // 10**9
-    
-    traces.append({
-        "x": df_chart['temp_max_f'].tolist(),
-        "y": df_chart['daily_revenue'].tolist(),
-        "text": df_chart['date'].dt.strftime('%b %d, %Y').tolist(),
-        "hovertemplate": "Date: %{text}<br>Revenue: $%{y:,.2f}<br>Temp: %{x}°F<extra></extra>",
-        "mode": "markers",
-        "name": "Timeline Heatmap (Toggle)",
-        "visible": "legendonly",
-        "marker": {
-            "size": 12,
-            "color": numeric_dates.tolist(),
-            "colorscale": "Plasma",
-            "showscale": True,
-            "colorbar": {
-                "title": "Date Temperature",
-                "len": 0.5,
-                "yanchor": "middle",
-                "y": 0.5
-            },
-            "line": {"width": 1, "color": "rgba(255,255,255,0.1)"}
-        }
-    })
+
 
     fig_data = traces
 
