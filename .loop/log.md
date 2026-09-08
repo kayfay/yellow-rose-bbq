@@ -1,18 +1,9 @@
-# Audit Log
-- Initialized Loop Engineering state architecture (.loop/).
-- Phase 1 & 2 Completed: Verified repository state and created `.loop` tracker.
-- Phase 3 Completed: Diagnostic Audit of Codebase. Found critical bugs:
-  - `portion_transformer.py` misses order state validation (includes cancelled items).
-  - `ingest.py` replicates order-level discounts to every line item (cartesian duplication).
-  - `ml_model.py`, `anomaly_detector.py`, `time_series.py` use uppercase `'LOCKED'` for state matching, but SQLite is case-sensitive and Clover uses `'locked'`.
-  - `dashboard.py` hardcodes $5078.63 for dynamic baseline revenue instead of calculating from SQLite.
-- Phase 4 Completed: Security Audit.
-  - SQL queries in pandas read_sql_query are unparameterized strings.
-  - Missing anti-caching and CORS headers in local HTTP servers.
-- Phase 5 Completed: Runtime Verification Engine script created (`scripts/site_health_audit.py`) and executed successfully.
-- **Applied Diagnostic Fixes (Phase 3 & 4)**:
-  - Repaired null-handling & boundary checks across 8 analytics models by replacing `state='LOCKED'` with `lower(state)='locked'`, rescuing the lost datasets.
-  - Re-architected `portion_transformer.py` to enforce `LEFT JOIN orders` preventing cancelled/voided metrics from artificially inflating raw meat demand.
-  - Sanitized `ingest.py` cartesian order-level discount bug to prevent inflated sum duplications.
-  - Dynamically linked `dashboard.py` baseline revenue calculations directly to live SQLite time-series averages, removing the hardcoded `$5078.63`.
-  - Audited `app.js` and `index.html` to confirm no leaked secrets, injected parameterization into pandas `read_sql_query` logic to eliminate raw-string SQL injection surfaces, and enforced strict Cache-Control across local dev servers.
+# Loop Audit Log
+- **Phase 1: Context Discovery & Repository Audit**
+  - Found `.github/workflows/update_clover_data.yml`.
+  - Found `clover_api/ingest.py` and `clover_api/secure_config.py`.
+  - Identified that `secure_config.py` fetches `CLOVER_API_KEY` and `CLOVER_MERCHANT_ID` but fails natively instead of gracefully inside `ingest.py`.
+  - Workflow maps secrets but the token variable name used by prompt vs codebase differs (`CLOVER_API_KEY` vs `CLOVER_API_TOKEN`).
+- **Phase 2: State Setup**
+  - Initialized `.loop/prd.json`, `.loop/patterns.md`, and `.loop/log.md`.
+- **Phase 3: Targeted Resolution Pipeline**\n  - Updated `clover_api/secure_config.py` to intercept empty tokens and output GitHub Actions specific annotations (`::error::...`).\n  - Changed `CLOVER_BASE_URL` in `.github/workflows/update_clover_data.yml` to point to `https://api.clover.com` for production environment.\n  - Created `scripts/verify_workflow_credentials.py` to check credential mapping.

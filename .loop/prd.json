@@ -1,29 +1,19 @@
 {
   "tasks": [
     {
-      "id": "phase1",
-      "description": "Context Discovery & Repository Audit",
-      "passes": true
+      "id": 1,
+      "description": "Audit clover_api/ingest.py for dynamic credential ingestion.",
+      "status": "completed"
     },
     {
-      "id": "phase2",
-      "description": "Loop Harness & State Setup",
-      "passes": true
+      "id": 2,
+      "description": "Map repository secrets inside the active GitHub Actions workflow file.",
+      "status": "completed"
     },
     {
-      "id": "phase3",
-      "description": "Comprehensive Code Audit & Bug Hunt",
-      "passes": true
-    },
-    {
-      "id": "phase4",
-      "description": "Security Vulnerability Scan & Hardening",
-      "passes": true
-    },
-    {
-      "id": "phase5",
-      "description": "Runtime Site Verification Engine",
-      "passes": true
+      "id": 3,
+      "description": "Write a local credential health-checker script.",
+      "status": "completed"
     }
   ]
 }

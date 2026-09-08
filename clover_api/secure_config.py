@@ -34,8 +34,11 @@ def get_secure_credentials():
     if missing:
         error_msg = (
             f"[SECURITY ERROR] Missing required Clover API credential(s): {', '.join(missing)}. "
-            f"Please configure {ENV_PATH} with your Merchant ID and API Key."
+            f"Please configure your environment with your Merchant ID and API Key."
         )
+        if os.getenv("GITHUB_ACTIONS"):
+            print(f"::error title=Missing Clover Credentials::The workflow is missing {', '.join(missing)}. Please add them to GitHub Settings > Secrets and variables > Actions.", file=sys.stderr)
+        
         sys.stderr.write(error_msg + "\n")
         raise RuntimeError(error_msg)
 
