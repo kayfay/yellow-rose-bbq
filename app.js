@@ -419,13 +419,19 @@ function updateUI() {
       }
     }
 
+    let dynamicDesc = ing.desc;
+    if (ing.id === 'water' && rawAmount > 0) {
+      const halfRaw = rawAmount / 2;
+      dynamicDesc = ing.desc.replace(/Split 2x [0-9.]+ cups/, `Split 2x ${halfRaw.toFixed(1)} cups`);
+    }
+
     card.innerHTML = `
       <span class="ing-label">${ing.label}</span>
       <div class="ing-value-box">
         <span class="ing-value">${displayVal}</span>
         <span class="ing-unit">${displayUnit}</span>
       </div>
-      <span class="ing-desc">${ing.desc}</span>
+      <span class="ing-desc">${dynamicDesc}</span>
     `;
     ingredientsGrid.appendChild(card);
   });
