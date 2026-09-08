@@ -1823,9 +1823,12 @@ async function renderPlotlyWeatherChart() {
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_weather_chart.data;
       traces.forEach(trace => {
+        if (trace.name && trace.name.includes('Recent Patterns')) return;
+        
         if (trace.text && Array.isArray(trace.text)) {
           trace.hovertext = trace.text; // Keep rich HTML for hover
           trace.text = trace.text.map(t => {
+            if (typeof t === 'string' && !t.includes('<b>')) return t;
             const m = t.match(/<b>(.*?)<\/b>/);
             if (m) {
               const dateParts = m[1].split(', ');
@@ -1833,7 +1836,9 @@ async function renderPlotlyWeatherChart() {
             }
             return '';
           });
-          trace.mode = (trace.mode || 'markers') + '+text';
+          if (!trace.mode || !trace.mode.includes('text')) {
+             trace.mode = (trace.mode || 'markers') + '+text';
+          }
           trace.textposition = 'top center';
           trace.textfont = { color: 'rgba(255, 255, 255, 0.6)', size: 9 };
         }
