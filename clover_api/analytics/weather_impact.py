@@ -108,6 +108,12 @@ def run_weather_impact_analysis():
     df_chart = df_merged[df_merged['is_jaguars_game'] == 0].copy() if 'is_jaguars_game' in df_merged.columns else df_merged.copy()
     df_chart = df_chart.dropna(subset=['temp_max_f', 'precip_mm'])
 
+    df_chart['datetime'] = pd.to_datetime(df_chart['date'])
+    df_chart = df_chart.sort_values('datetime')
+    max_date = df_chart['datetime'].max()
+    recent_cutoff = max_date - pd.Timedelta(days=30)
+    df_recent = df_chart[df_chart['datetime'] >= recent_cutoff]
+
     # Create traces for Normal, Heat, and Rain
     traces = []
     
@@ -177,7 +183,34 @@ def run_weather_impact_analysis():
             }
         })
 
+    # Trace 4: Recent Data Overlay (Last 30 Days)
+    if not df_recent.empty:
+        traces.append({
+            "x": df_recent['temp_max_f'].tolist(),
+            "y": df_recent['daily_revenue'].tolist(),
+            "text": df_recent['date'].dt.strftime('%Y-%m-%d').tolist(),
+            "hovertemplate": "Recent Date: %{text}<extra></extra>",
+            "mode": "markers+text",
+            "name": "Recent Patterns (Last 30 Days)",
+            "textposition": "top center",
+            "textfont": {"color": "#cbd5e1", "size": 10},
+            "marker": {
+                "size": 16,
+                "color": "rgba(0,0,0,0)",
+                "line": {"width": 2, "color": "#fbbf24"},
+                "symbol": "circle-open"
+            }
+        })
+
     fig_data = traces
+
+    # Find most recent large sales day (highest revenue in the last 30 days, or overall if empty)
+    if not df_recent.empty:
+        max_recent_idx = df_recent['daily_revenue'].idxmax()
+        max_recent_row = df_recent.loc[max_recent_idx]
+    else:
+        max_recent_idx = df_chart['daily_revenue'].idxmax()
+        max_recent_row = df_chart.loc[max_recent_idx]
 
     fig_layout = {
         "title": "Weather vs. Sales: Actionable Operations Insight",
@@ -224,6 +257,17 @@ def run_weather_impact_analysis():
                 "showarrow": False,
                 "font": {"color": "#94a3b8", "size": 12},
                 "xanchor": "left"
+            },
+            {
+                "x": max_recent_row['temp_max_f'],
+                "y": max_recent_row['daily_revenue'],
+                "text": f"🔥 Most Recent Large Sales Day<br>{max_recent_row['date'].strftime('%Y-%m-%d')} (${max_recent_row['daily_revenue']:,.0f})",
+                "showarrow": True,
+                "arrowhead": 2,
+                "ax": 0,
+                "ay": -40,
+                "font": {"color": "#fbbf24", "size": 13},
+                "arrowcolor": "#fbbf24"
             }
         ]
     }
