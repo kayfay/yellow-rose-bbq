@@ -114,55 +114,38 @@ def run_weather_impact_analysis():
     recent_cutoff = max_date - pd.Timedelta(days=30)
     df_recent = df_chart[df_chart['datetime'] >= recent_cutoff]
 
+    # Find the top 3 most recent large sales days (within the last 60 days)
+    if 'datetime' not in df_chart.columns:
+        df_chart['datetime'] = pd.to_datetime(df_chart['date'])
+    recent_60_days = df_chart['datetime'].max() - pd.Timedelta(days=60)
+    df_recent_60 = df_chart[df_chart['datetime'] >= recent_60_days]
+    
+    if not df_recent_60.empty:
+        top_3_recent = df_recent_60.nlargest(3, 'daily_revenue')
+    else:
+        top_3_recent = df_chart.nlargest(3, 'daily_revenue')
+    top_3_dates = top_3_recent['date'].tolist()
+
     # Create traces for Normal, Heat, and Rain
     traces = []
     
-    # Trace 0: Timeline Heatmap (Halo layer)
-    numeric_dates = df_chart['datetime'].astype(int) // 10**9
-    
-    def get_halo_size(row):
-        p = row['precip_mm']
-        if row['is_heavy_rain'] == 1:
-            return max(14, min(p * 2 + 10, 35)) + 12
-        else:
-            return max(10, min(p * 2 + 10, 20)) + 12
-            
-    halo_sizes = df_chart.apply(get_halo_size, axis=1).tolist()
-    
-    traces.append({
-        "x": df_chart['temp_max_f'].tolist(),
-        "y": df_chart['daily_revenue'].tolist(),
-        "mode": "markers",
-        "name": "Date Temperature (Halo)",
-        "hoverinfo": "skip",
-        "marker": {
-            "size": halo_sizes,
-            "color": numeric_dates.tolist(),
-            "colorscale": "Plasma",
-            "opacity": 0.35,
-            "showscale": True,
-            "colorbar": {
-                "title": "Date Temp",
-                "len": 0.5,
-                "yanchor": "middle",
-                "y": 0.5,
-                "x": 1.05
-            },
-            "line": {"width": 0}
-        }
-    })
-
     def generate_tooltip(row, condition):
         import pandas as pd
         d_obj = pd.to_datetime(row['date'])
         date_str = d_obj.strftime('%A, %Y-%m-%d')
+        
+        rank_str = ""
+        if row['date'] in top_3_dates:
+            rank = top_3_dates.index(row['date']) + 1
+            rank_str = f"<br><br><b>🏆 #{rank} Highest Recent Sales Day</b>"
+
         base = f"<b>{date_str}</b><br>Revenue: ${row['daily_revenue']:,.2f}<br>Weather: {row['temp_max_f']}°F, {row['precip_mm']}mm rain"
         if condition == 'rain':
-            return base + "<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+            return base + rank_str + "<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         elif condition == 'heat':
-            return base + "<br><br><i>Insight: Extreme heat (>90°F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
+            return base + rank_str + "<br><br><i>Insight: Extreme heat (>90°F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
         else:
-            return base + "<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            return base + rank_str + "<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
     
     # Trace 1: Normal Days
     df_normal = df_chart[(df_chart['is_heavy_rain'] == 0) & (df_chart['is_extreme_heat'] == 0)]
@@ -178,7 +161,10 @@ def run_weather_impact_analysis():
                 "size": [max(10, min(p * 2 + 10, 20)) for p in df_normal['precip_mm']],
                 "color": "#27ae60",
                 "opacity": 0.8,
-                "line": {"width": 1.5, "color": "white"}
+                "line": {
+                    "width": [4 if d in top_3_dates else 1.5 for d in df_normal['date']],
+                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_normal['date']]
+                }
             }
         })
         
@@ -196,7 +182,10 @@ def run_weather_impact_analysis():
                 "size": [max(14, min(p * 2 + 10, 35)) for p in df_rain['precip_mm']],
                 "color": "#3498db",
                 "opacity": 0.9,
-                "line": {"width": 1.5, "color": "white"}
+                "line": {
+                    "width": [4 if d in top_3_dates else 1.5 for d in df_rain['date']],
+                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_rain['date']]
+                }
             }
         })
         
@@ -214,22 +203,14 @@ def run_weather_impact_analysis():
                 "size": [max(10, min(p * 2 + 10, 20)) for p in df_heat['precip_mm']],
                 "color": "#e67e22",
                 "opacity": 0.8,
-                "line": {"width": 1.5, "color": "white"}
+                "line": {
+                    "width": [4 if d in top_3_dates else 1.5 for d in df_heat['date']],
+                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_heat['date']]
+                }
             }
         })
 
-
-
     fig_data = traces
-
-    # Find the top 3 most recent large sales days (within the last 60 days)
-    recent_60_days = df_chart['datetime'].max() - pd.Timedelta(days=60)
-    df_recent_60 = df_chart[df_chart['datetime'] >= recent_60_days]
-    
-    if not df_recent_60.empty:
-        top_3_recent = df_recent_60.nlargest(3, 'daily_revenue')
-    else:
-        top_3_recent = df_chart.nlargest(3, 'daily_revenue')
 
     fig_layout = {
         "title": "Weather vs. Sales: Actionable Operations Insight",
@@ -279,28 +260,6 @@ def run_weather_impact_analysis():
             }
         ]
     }
-
-    rank_colors = ["#facc15", "#e2e8f0", "#cd7f32"]
-    rank_names = ["1st", "2nd", "3rd"]
-    
-    for i, (_, row) in enumerate(top_3_recent.iterrows()):
-        if i >= len(rank_colors):
-            break
-        fig_layout["annotations"].append({
-            "x": row['temp_max_f'],
-            "y": row['daily_revenue'],
-            "text": f"{rank_names[i]} Highest Recent<br>{row['date'].strftime('%b %d')} (${row['daily_revenue']:,.0f})",
-            "showarrow": True,
-            "arrowhead": 2,
-            "ax": 0,
-            "ay": -45 - (i * 12),
-            "font": {"color": rank_colors[i], "size": 11, "family": "Inter, sans-serif"},
-            "arrowcolor": rank_colors[i],
-            "bgcolor": "rgba(15, 23, 42, 0.85)",
-            "bordercolor": rank_colors[i],
-            "borderwidth": 1,
-            "borderpad": 4
-        })
 
     payload = {
         "plotly_weather_chart": {"data": fig_data, "layout": fig_layout},
