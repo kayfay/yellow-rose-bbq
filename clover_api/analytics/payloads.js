@@ -684,7 +684,7 @@ window.BBQ_PAYLOADS = {
                 1.5
               ],
               "color": [
-                "#0f172a",
+                "#39ff14",
                 "white",
                 "white",
                 "white"
@@ -878,7 +878,7 @@ window.BBQ_PAYLOADS = {
                 "white",
                 "white",
                 "white",
-                "#0f172a",
+                "#39ff14",
                 "white",
                 "white",
                 "white",
@@ -893,7 +893,7 @@ window.BBQ_PAYLOADS = {
                 "white",
                 "white",
                 "white",
-                "#0f172a",
+                "#39ff14",
                 "white",
                 "white",
                 "white",
@@ -906,6 +906,25 @@ window.BBQ_PAYLOADS = {
               ]
             }
           }
+        },
+        {
+          "x": [
+            null
+          ],
+          "y": [
+            null
+          ],
+          "mode": "markers",
+          "name": "Top 3 Recent Sales (Neon Halo)",
+          "marker": {
+            "size": 12,
+            "color": "rgba(0,0,0,0)",
+            "line": {
+              "width": 4,
+              "color": "#39ff14"
+            }
+          },
+          "showlegend": true
         }
       ],
       "layout": {

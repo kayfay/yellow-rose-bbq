@@ -163,7 +163,7 @@ def run_weather_impact_analysis():
                 "opacity": 0.8,
                 "line": {
                     "width": [4 if d in top_3_dates else 1.5 for d in df_normal['date']],
-                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_normal['date']]
+                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_normal['date']]
                 }
             }
         })
@@ -184,7 +184,7 @@ def run_weather_impact_analysis():
                 "opacity": 0.9,
                 "line": {
                     "width": [4 if d in top_3_dates else 1.5 for d in df_rain['date']],
-                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_rain['date']]
+                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_rain['date']]
                 }
             }
         })
@@ -205,10 +205,24 @@ def run_weather_impact_analysis():
                 "opacity": 0.8,
                 "line": {
                     "width": [4 if d in top_3_dates else 1.5 for d in df_heat['date']],
-                    "color": ["#0f172a" if d in top_3_dates else "white" for d in df_heat['date']]
+                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_heat['date']]
                 }
             }
         })
+
+    # Dummy trace for legend entry
+    traces.append({
+        "x": [None],
+        "y": [None],
+        "mode": "markers",
+        "name": "Top 3 Recent Sales (Neon Halo)",
+        "marker": {
+            "size": 12,
+            "color": "rgba(0,0,0,0)",
+            "line": {"width": 4, "color": "#39ff14"}
+        },
+        "showlegend": True
+    })
 
     fig_data = traces
 
