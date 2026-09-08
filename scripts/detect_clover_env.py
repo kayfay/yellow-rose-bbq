@@ -11,6 +11,16 @@ def detect_environment():
         print("::error::Missing CLOVER_API_KEY or CLOVER_MERCHANT_ID in environment.")
         sys.exit(1)
 
+    print(f"Diagnostics: CLOVER_MERCHANT_ID length is {len(merchant_id)}")
+    print(f"Diagnostics: CLOVER_API_KEY length is {len(api_key)}")
+    
+    if api_key.startswith('"') or api_key.endswith('"'):
+        print("::warning::CLOVER_API_KEY contains quotes! This will likely cause a 401 error. Remove quotes from your GitHub Secret.")
+    if api_key.strip() != api_key:
+        print("::warning::CLOVER_API_KEY contains leading/trailing whitespace! This will likely cause a 401 error.")
+    if merchant_id.strip() != merchant_id:
+        print("::warning::CLOVER_MERCHANT_ID contains leading/trailing whitespace!")
+
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Accept": "application/json"
