@@ -27,9 +27,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install polars pandas plotly statsmodels requests python-dotenv xgboost scikit-learn holidays openmeteo-requests requests-cache retry-requests pyarrow
 
+      - name: Auto-Detect Clover Environment
+        env:
+          CLOVER_MERCHANT_ID: ${{ secrets.CLOVER_MERCHANT_ID }}
+          CLOVER_API_KEY: ${{ secrets.CLOVER_API_KEY }}
+        run: python scripts/detect_clover_env.py
+
       - name: Run Clover Ingestion & Analytics Pipeline
         env:
-          CLOVER_BASE_URL: https://api.clover.com
           CLOVER_MERCHANT_ID: ${{ secrets.CLOVER_MERCHANT_ID }}
           CLOVER_API_KEY: ${{ secrets.CLOVER_API_KEY }}
         run: |

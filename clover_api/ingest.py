@@ -35,6 +35,18 @@ def fetch_clover_endpoint(endpoint: str, params: Optional[Dict[str, Any]] = None
             print(f"[RATE LIMIT] 429 encountered. Sleeping for {retry_after:.2f}s...")
             time.sleep(retry_after)
             retries += 1
+        elif response.status_code == 401:
+            error_msg = (
+                f"\n[HTTP 401 UNAUTHORIZED] Clover API rejected the request.\n"
+                f"Attempted URL: {url}\n"
+                f"This usually means:\n"
+                f"1. Your GitHub Secret for CLOVER_API_KEY is incorrect or has trailing spaces.\n"
+                f"2. You are using a Sandbox API Key but hitting the Production URL (https://api.clover.com).\n"
+                f"3. You are using a Production API Key but hitting the Sandbox URL.\n"
+                f"Please verify your token matches the environment!\n"
+            )
+            print(f"::error title=Unauthorized 401::{error_msg}")
+            raise RuntimeError(error_msg)
         else:
             response.raise_for_status()
 
