@@ -125,6 +125,7 @@ def run_weather_impact_analysis():
     else:
         top_3_recent = df_chart.nlargest(3, 'daily_revenue')
     top_3_dates = top_3_recent['date'].tolist()
+    most_recent_date = df_chart['date'].max()
 
     # Create traces for Normal, Heat, and Rain
     traces = []
@@ -135,9 +136,11 @@ def run_weather_impact_analysis():
         date_str = d_obj.strftime('%A, %Y-%m-%d')
         
         rank_str = ""
+        if row['date'] == most_recent_date:
+            rank_str += f"<br><br><b>🌟 YESTERDAY'S SALES</b>"
         if row['date'] in top_3_dates:
             rank = top_3_dates.index(row['date']) + 1
-            rank_str = f"<br><br><b>🏆 #{rank} Highest Recent Sales Day</b>"
+            rank_str += f"<br><br><b>🏆 #{rank} Highest Recent Sales Day</b>"
 
         base = f"<b>{date_str}</b><br>Revenue: ${row['daily_revenue']:,.2f}<br>Weather: {row['temp_max_f']}°F, {row['precip_mm']}mm rain"
         if condition == 'rain':
@@ -162,8 +165,8 @@ def run_weather_impact_analysis():
                 "color": "#27ae60",
                 "opacity": 0.8,
                 "line": {
-                    "width": [4 if d in top_3_dates else 1.5 for d in df_normal['date']],
-                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_normal['date']]
+                    "width": [5 if d == most_recent_date else (4 if d in top_3_dates else 1.5) for d in df_normal['date']],
+                    "color": ["#ff10f0" if d == most_recent_date else ("#39ff14" if d in top_3_dates else "white") for d in df_normal['date']]
                 }
             }
         })
@@ -183,8 +186,8 @@ def run_weather_impact_analysis():
                 "color": "#3498db",
                 "opacity": 0.9,
                 "line": {
-                    "width": [4 if d in top_3_dates else 1.5 for d in df_rain['date']],
-                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_rain['date']]
+                    "width": [5 if d == most_recent_date else (4 if d in top_3_dates else 1.5) for d in df_rain['date']],
+                    "color": ["#ff10f0" if d == most_recent_date else ("#39ff14" if d in top_3_dates else "white") for d in df_rain['date']]
                 }
             }
         })
@@ -204,22 +207,36 @@ def run_weather_impact_analysis():
                 "color": "#e67e22",
                 "opacity": 0.8,
                 "line": {
-                    "width": [4 if d in top_3_dates else 1.5 for d in df_heat['date']],
-                    "color": ["#39ff14" if d in top_3_dates else "white" for d in df_heat['date']]
+                    "width": [5 if d == most_recent_date else (4 if d in top_3_dates else 1.5) for d in df_heat['date']],
+                    "color": ["#ff10f0" if d == most_recent_date else ("#39ff14" if d in top_3_dates else "white") for d in df_heat['date']]
                 }
             }
         })
 
-    # Dummy trace for legend entry
+    # Dummy trace for legend entry - Top 3
     traces.append({
         "x": [None],
         "y": [None],
         "mode": "markers",
-        "name": "Top 3 Recent Sales (Neon Halo)",
+        "name": "Top 3 Recent Sales (Neon Green Halo)",
         "marker": {
             "size": 12,
             "color": "rgba(0,0,0,0)",
             "line": {"width": 4, "color": "#39ff14"}
+        },
+        "showlegend": True
+    })
+    
+    # Dummy trace for legend entry - Yesterday
+    traces.append({
+        "x": [None],
+        "y": [None],
+        "mode": "markers",
+        "name": "Yesterday's Sales (Neon Pink Halo)",
+        "marker": {
+            "size": 12,
+            "color": "rgba(0,0,0,0)",
+            "line": {"width": 5, "color": "#ff10f0"}
         },
         "showlegend": True
     })

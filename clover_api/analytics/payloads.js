@@ -588,7 +588,7 @@ window.BBQ_PAYLOADS = {
             "<b>Sunday, 2026-08-30</b><br>Revenue: $4,947.45<br>Weather: 89.96000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Wednesday, 2026-09-02</b><br>Revenue: $2,970.98<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-09-03</b><br>Revenue: $3,610.01<br>Weather: 87.08000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-09-05</b><br>Revenue: $4,092.29<br>Weather: 89.96000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            "<b>Saturday, 2026-09-05</b><br>Revenue: $4,092.29<br>Weather: 89.96000000000001\u00b0F, 0.4mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
@@ -625,7 +625,7 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
-                1.5
+                5
               ],
               "color": [
                 "white",
@@ -640,7 +640,7 @@ window.BBQ_PAYLOADS = {
                 "white",
                 "white",
                 "white",
-                "white"
+                "#ff10f0"
               ]
             }
           }
@@ -915,13 +915,32 @@ window.BBQ_PAYLOADS = {
             null
           ],
           "mode": "markers",
-          "name": "Top 3 Recent Sales (Neon Halo)",
+          "name": "Top 3 Recent Sales (Neon Green Halo)",
           "marker": {
             "size": 12,
             "color": "rgba(0,0,0,0)",
             "line": {
               "width": 4,
               "color": "#39ff14"
+            }
+          },
+          "showlegend": true
+        },
+        {
+          "x": [
+            null
+          ],
+          "y": [
+            null
+          ],
+          "mode": "markers",
+          "name": "Yesterday's Sales (Neon Pink Halo)",
+          "marker": {
+            "size": 12,
+            "color": "rgba(0,0,0,0)",
+            "line": {
+              "width": 5,
+              "color": "#ff10f0"
             }
           },
           "showlegend": true
