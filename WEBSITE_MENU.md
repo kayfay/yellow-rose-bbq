@@ -128,6 +128,7 @@ This document is automatically generated from live POS API metadata.
 | **King Of The Hill** |  |
 | **Local IPA** |  |
 | **Miller Lite** |  |
+| **Pimento Cheese W/ Crackers** |  |
 | **Ranch side** |  |
 | **Rosebud** |  |
 | **Sauteed Cabbage Catering Tray** |  |
