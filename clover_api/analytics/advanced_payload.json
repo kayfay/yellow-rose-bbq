@@ -2,79 +2,79 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 369,
-      "confidence": 22.3
+      "count": 373,
+      "confidence": 22.2
     },
     {
       "pair": "2 meat plate + Rosebud",
       "count": 288,
-      "confidence": 22.7
+      "confidence": 22.5
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 232,
-      "confidence": 18.3
+      "count": 233,
+      "confidence": 18.2
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
       "count": 168,
-      "confidence": 22.5
+      "confidence": 22.3
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
       "count": 116,
-      "confidence": 17.0
+      "confidence": 16.8
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
       "count": 111,
-      "confidence": 16.2
+      "confidence": 16.1
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
+      "count": 110,
+      "confidence": 18.6
+    },
+    {
+      "pair": "Brisket + Turkey",
+      "count": 108,
+      "confidence": 46.8
+    },
+    {
+      "pair": "2 meat plate + Cornbread",
       "count": 107,
-      "confidence": 18.4
+      "confidence": 28.8
     },
     {
       "pair": "2 meat plate + Crispy Quesa Taco Brisket",
       "count": 106,
-      "confidence": 14.2
-    },
-    {
-      "pair": "Brisket + Turkey",
-      "count": 106,
-      "confidence": 46.5
-    },
-    {
-      "pair": "2 meat plate + Cornbread",
-      "count": 106,
-      "confidence": 28.6
+      "confidence": 14.1
     }
   ],
   "interaction_modeling": {
-    "normal": 4733.02,
-    "game_only": 51.08,
+    "normal": 4712.76,
+    "game_only": 4829.12,
     "rain_only": 5358.79,
-    "game_and_rain": 13252.45
+    "game_and_rain": 13195.74
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5255,
-      "total_revenue": 231387.74,
-      "avg_ticket": 44.031920076117984
+      "order_count": 5313,
+      "total_revenue": 234619.96,
+      "avg_ticket": 44.15960097873141
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 424,
-      "total_revenue": 26718.5,
-      "avg_ticket": 63.01533018867924
+      "order_count": 428,
+      "total_revenue": 26987.26,
+      "avg_ticket": 63.05434579439252
     },
     {
       "order_type": "To-Go",
-      "order_count": 2566,
-      "total_revenue": 141840.48,
-      "avg_ticket": 55.276882307092755
+      "order_count": 2602,
+      "total_revenue": 146445.62,
+      "avg_ticket": 56.281944657955414
     }
   ],
   "sell_out_prediction_chart": {
@@ -100,11 +100,11 @@
           7.0,
           66.0,
           109.0,
-          139.0,
-          167.0,
-          189.0,
-          219.0,
-          254.0
+          141.0,
+          170.0,
+          192.0,
+          222.0,
+          258.0
         ],
         "name": "1/2 Rack Pork Spare Ribs",
         "type": "scatter",
@@ -128,14 +128,14 @@
           0.0,
           0.0,
           16.0,
-          41.0,
-          129.05,
-          195.35000000000002,
-          333.93000000000006,
-          422.46000000000004,
-          587.45,
-          644.2800000000001,
-          694.6800000000001
+          68.0,
+          157.55,
+          223.85000000000002,
+          362.43000000000006,
+          451.21000000000004,
+          616.2,
+          673.5300000000001,
+          725.4300000000001
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -161,12 +161,12 @@
           0.0,
           36.0,
           298.0,
-          566.0,
-          770.0,
-          914.0,
-          988.0,
-          1109.0,
-          1256.0
+          567.0,
+          776.0,
+          923.0,
+          998.0,
+          1119.0,
+          1268.0
         ],
         "name": "Crispy Quesa Taco Brisket",
         "type": "scatter",
@@ -197,7 +197,7 @@
           111.0,
           119.0,
           136.0,
-          148.0
+          149.0
         ],
         "name": "Crispy Quesa Taco Pork",
         "type": "scatter",
@@ -252,14 +252,14 @@
           0.0,
           0.0,
           13.0,
-          36.25,
-          91.58,
-          114.58,
-          190.16,
-          244.49,
-          323.74,
-          346.24,
-          364.07
+          39.25,
+          94.58,
+          117.58,
+          193.16,
+          247.49,
+          326.74,
+          349.24,
+          368.07
         ],
         "name": "Pulled Pork",
         "type": "scatter",
@@ -285,12 +285,12 @@
           0.0,
           0.0,
           63.0,
-          158.0,
-          229.0,
-          260.0,
-          277.0,
-          299.0,
-          348.0
+          159.0,
+          231.0,
+          262.0,
+          279.0,
+          301.0,
+          350.0
         ],
         "name": "Pulled pork sandwich",
         "type": "scatter",
@@ -320,8 +320,8 @@
           71.0,
           85.0,
           98.0,
-          114.0,
-          126.0
+          116.0,
+          128.0
         ],
         "name": "Quesadilla Brisket",
         "type": "scatter",
@@ -348,11 +348,11 @@
           0.0,
           33.0,
           82.0,
-          123.0,
-          143.0,
-          173.0,
-          181.0,
-          203.0
+          125.0,
+          145.0,
+          175.0,
+          183.0,
+          205.0
         ],
         "name": "Single Bone Pork Rib",
         "type": "scatter",
@@ -378,12 +378,12 @@
           16.0,
           18.0,
           64.0,
-          100.0,
-          123.0,
-          133.0,
-          150.0,
-          161.0,
-          178.0
+          103.0,
+          126.0,
+          136.0,
+          153.0,
+          164.0,
+          181.0
         ],
         "name": "Crispy Quesa Brisket Taco",
         "type": "scatter",
@@ -452,12 +452,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 6.0,
-    "pork_ribs_avg_with_dino": 3.3,
-    "impact_pct": -45.6
+    "pork_ribs_avg_without_dino": 5.7,
+    "pork_ribs_avg_with_dino": 3.7,
+    "impact_pct": -34.9
   },
   "payday_effect": {
     "payday_avg_ticket": 47.24,
-    "normal_avg_ticket": 46.05
+    "normal_avg_ticket": 46.53
   }
 }
