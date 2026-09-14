@@ -1,11 +1,22 @@
+function parseValidDate(val) {
+  if (!val || typeof val !== 'string') return null;
+  const trimmed = val.trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return null;
+  const d = new Date(trimmed + 'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
 
 function getActiveDaysCount() {
   const start = document.getElementById('forecast-start-date')?.value;
   const end = document.getElementById('forecast-end-date')?.value;
   if (start && end) {
-    const diffTime = Math.abs(new Date(end) - new Date(start));
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    return diffDays > 0 ? diffDays : 1;
+    const dStart = parseValidDate(start);
+    const dEnd = parseValidDate(end);
+    if (dStart && dEnd) {
+      const diffTime = dEnd.getTime() - dStart.getTime();
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1;
+      return diffDays > 0 ? diffDays : 1;
+    }
   }
   return 1;
 }
@@ -576,6 +587,7 @@ window.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
   init();
   initMultiTabNavigation();
+  initForecastingControls();
   initEventsCalendar();
   // Pre-render forecasting data so it's instantly available
   renderPlotlyForecastingChart(getActiveDaysCount());
@@ -620,9 +632,11 @@ function initMultiTabNavigation() {
       }
     });
   });
+}
 
-  // Date controls & Historical Past Date Lookup
+function initForecastingControls() {
   const dateInput = document.getElementById('forecast-start-date');
+  const endDateInput = document.getElementById('forecast-end-date');
   const btnCal = document.getElementById('btn-open-calendar');
 
   if (btnCal && dateInput) {
@@ -640,66 +654,60 @@ function initMultiTabNavigation() {
     });
   }
 
-  if (dateInput) {
-    // Correct timezone-aware today string
-    const d = new Date();
-    const tzOffset = d.getTimezoneOffset() * 60000;
-    const today = (new Date(d - tzOffset)).toISOString().split('T')[0];
-    
-    // Set default end date to 14 days out
-    const endD = new Date(d);
-    endD.setDate(endD.getDate() + 13);
-    const endStr = (new Date(endD - tzOffset)).toISOString().split('T')[0];
-    
-    // Leave date inputs blank by default
-    dateInput.value = "";
-    const endDateInput = document.getElementById('forecast-end-date');
-    if (endDateInput) endDateInput.value = "";
-    
-    // Default Active Preset
-    const btn14 = document.getElementById('btn-preset-14');
-    if (btn14) {
-      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-      btn14.classList.add('active');
-    }
+  // Set default timezone-aware today string
+  const d = new Date();
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  const today = (new Date(d.getTime() - tzOffset)).toISOString().split('T')[0];
 
-    ['change', 'input'].forEach(evtType => {
-      dateInput.addEventListener(evtType, () => {
-        handleDateSelectionLookup(dateInput.value);
-        renderPlotlyForecastingChart(getActiveDaysCount());
-      });
+  if (dateInput && !dateInput.value) {
+    dateInput.value = today;
+  }
+  if (endDateInput && !endDateInput.value) {
+    endDateInput.value = today;
+  }
+
+  if (dateInput) {
+    dateInput.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
+    dateInput.addEventListener('change', (e) => {
+      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+      const startVal = e.target.value;
+      if (endDateInput && (!endDateInput.value || endDateInput.value < startVal)) {
+        endDateInput.value = startVal;
+      }
+      handleDateSelectionLookup(startVal);
+      renderPlotlyForecastingChart(getActiveDaysCount());
     });
   }
 
-
+  if (endDateInput) {
+    endDateInput.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
+    endDateInput.addEventListener('change', (e) => {
+      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+      const endVal = e.target.value;
+      if (dateInput && dateInput.value && endVal < dateInput.value) {
+        endDateInput.value = dateInput.value;
+      }
+      renderPlotlyForecastingChart(getActiveDaysCount());
+    });
+  }
 
   // Subtab switching
   const btnSubtabArima = document.getElementById('btn-subtab-arima');
   const btnSubtabWeather = document.getElementById('btn-subtab-weather');
   const btnSubtabEvent = document.getElementById('btn-subtab-event');
-  
+  const btnSubtabShift = document.getElementById('btn-subtab-shift');
+  const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
+
   const viewArima = document.getElementById('subtab-view-arima');
   const viewWeather = document.getElementById('subtab-view-weather');
   const viewEvent = document.getElementById('subtab-view-event');
-
-  const btnSubtabShift = document.getElementById('btn-subtab-shift');
   const viewShift = document.getElementById('subtab-view-shift');
-  
-  const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
   const viewAdvanced = document.getElementById('subtab-view-advanced');
-
-  const dateStart = document.getElementById('forecast-start-date');
-  const dateEnd = document.getElementById('forecast-end-date');
-  if (dateStart) dateStart.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
-  if (dateEnd) dateEnd.addEventListener('click', function() { if (this.showPicker) this.showPicker(); });
 
   if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift && btnSubtabAdvanced) {
     btnSubtabArima.addEventListener('click', () => {
+      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
       btnSubtabArima.classList.add('active');
-      btnSubtabWeather.classList.remove('active');
-      btnSubtabEvent.classList.remove('active');
-      btnSubtabShift.classList.remove('active');
-      btnSubtabAdvanced.classList.remove('active');
       if (viewArima) viewArima.style.display = 'block';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
@@ -709,11 +717,8 @@ function initMultiTabNavigation() {
     });
 
     btnSubtabWeather.addEventListener('click', () => {
+      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
       btnSubtabWeather.classList.add('active');
-      btnSubtabArima.classList.remove('active');
-      btnSubtabEvent.classList.remove('active');
-      btnSubtabShift.classList.remove('active');
-      btnSubtabAdvanced.classList.remove('active');
       if (viewWeather) viewWeather.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
@@ -723,26 +728,20 @@ function initMultiTabNavigation() {
     });
 
     btnSubtabEvent.addEventListener('click', () => {
+      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
       btnSubtabEvent.classList.add('active');
-      btnSubtabArima.classList.remove('active');
-      btnSubtabWeather.classList.remove('active');
-      btnSubtabAdvanced.classList.remove('active');
-      btnSubtabShift.classList.remove('active');
       if (viewEvent) viewEvent.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
       if (viewAdvanced) viewAdvanced.style.display = 'none';
       renderPlotlyEventChart();
-      refreshEventsCalendar();
+      if (typeof refreshEventsCalendar === 'function') refreshEventsCalendar();
     });
 
     btnSubtabShift.addEventListener('click', () => {
+      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
       btnSubtabShift.classList.add('active');
-      btnSubtabArima.classList.remove('active');
-      btnSubtabWeather.classList.remove('active');
-      btnSubtabEvent.classList.remove('active');
-      btnSubtabAdvanced.classList.remove('active');
       if (viewShift) viewShift.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
@@ -751,103 +750,23 @@ function initMultiTabNavigation() {
       const shiftSelector = document.getElementById('shift-selector');
       renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
     });
-    
+
     btnSubtabAdvanced.addEventListener('click', () => {
+      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
       btnSubtabAdvanced.classList.add('active');
-      btnSubtabArima.classList.remove('active');
-      btnSubtabWeather.classList.remove('active');
-      btnSubtabEvent.classList.remove('active');
-      btnSubtabShift.classList.remove('active');
       if (viewAdvanced) viewAdvanced.style.display = 'block';
       if (viewArima) viewArima.style.display = 'none';
       if (viewWeather) viewWeather.style.display = 'none';
       if (viewEvent) viewEvent.style.display = 'none';
       if (viewShift) viewShift.style.display = 'none';
-      renderAdvancedAnalytics();
+      if (typeof renderAdvancedAnalytics === 'function') renderAdvancedAnalytics();
     });
   }
-  
-  
-  
-  const dateInputStart = document.getElementById('forecast-start-date');
-  if (dateInputStart) {
-    const endDateInput = document.getElementById('forecast-end-date');
-    if (endDateInput) {
-      endDateInput.addEventListener('change', (e) => {
-        document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-        const start = document.getElementById('forecast-start-date').value;
-        const end = e.target.value;
-        if (start && end) {
-          const diffTime = Math.abs(new Date(end) - new Date(start));
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // inclusive
-          renderPlotlyForecastingChart(diffDays > 0 ? diffDays : 1);
-        }
-      });
-    }
-    dateInputStart.addEventListener('change', (e) => {
-      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
-      handleDateSelectionLookup(e.target.value);
-      renderPlotlyForecastingChart(getActiveDaysCount());
-    });
-  }
+
   const categorySelector = document.getElementById('category-selector');
   if (categorySelector) {
     categorySelector.addEventListener('change', () => {
-      document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
       renderPlotlyForecastingChart(getActiveDaysCount());
-    });
-  }
-  
-  let lastRefreshTime = 0;
-  const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
-  if (btnRefreshAnalytics) {
-    // Set initial time from payloads
-    const timeElem = document.getElementById('last-updated-time');
-    if (timeElem) {
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
-      } else {
-        timeElem.textContent = new Date().toLocaleTimeString();
-      }
-    }
-
-    btnRefreshAnalytics.addEventListener('click', () => {
-      const now = Date.now();
-      if (now - lastRefreshTime < 10000) {
-        // Rate limit: 10 seconds
-        const origText = btnRefreshAnalytics.innerHTML;
-        btnRefreshAnalytics.innerHTML = '<span class="btn-text">Please wait...</span>';
-        setTimeout(() => { btnRefreshAnalytics.innerHTML = origText; }, 2000);
-        return;
-      }
-      lastRefreshTime = now;
-      
-      const origText = btnRefreshAnalytics.innerHTML;
-      btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
-      
-      let currentDays = 14;
-      const activeBtn = document.querySelector('.forecast-preset-group .preset-btn.active');
-      if (activeBtn) {
-        if (activeBtn.id === 'btn-preset-sat-order' || activeBtn.id === 'btn-preset-thu-order') {
-          currentDays = 2;
-        } else if (activeBtn.id === 'btn-preset-mon-order') {
-          currentDays = 3;
-        }
-      }
-      
-      // Trigger all renders
-      renderPlotlyForecastingChart(currentDays).then(() => {
-        if (timeElem) {
-          if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-            timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
-          } else {
-            timeElem.textContent = new Date().toLocaleTimeString();
-          }
-        }
-        btnRefreshAnalytics.innerHTML = origText;
-      });
-      renderPlotlyEventChart();
-      renderPlotlyWeatherChart();
     });
   }
 
@@ -858,50 +777,178 @@ function initMultiTabNavigation() {
     });
   }
 
+  const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
+  if (btnRefreshAnalytics) {
+    const timeElem = document.getElementById('last-updated-time');
+    if (timeElem) {
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+      } else {
+        timeElem.textContent = new Date().toLocaleTimeString();
+      }
+    }
 
-  // Presets
-  
+    let lastRefreshTime = 0;
+    btnRefreshAnalytics.addEventListener('click', () => {
+      const now = Date.now();
+      if (now - lastRefreshTime < 5000) {
+        return;
+      }
+      lastRefreshTime = now;
+      const origText = btnRefreshAnalytics.innerHTML;
+      btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
+      
+      renderPlotlyForecastingChart(getActiveDaysCount()).then(() => {
+        if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+        btnRefreshAnalytics.innerHTML = origText;
+      });
+      renderPlotlyEventChart();
+      renderPlotlyWeatherChart();
+    });
+  }
+
+  // Operational Horizon Presets
   const btnToday = document.getElementById('btn-preset-today');
   const btnTomorrow = document.getElementById('btn-preset-tomorrow');
+  const btnWeekend = document.getElementById('btn-preset-weekend');
+  const btnThursday = document.getElementById('btn-preset-thursday');
+  const btnFriday = document.getElementById('btn-preset-friday');
+  const btnSaturday = document.getElementById('btn-preset-saturday');
   const btn7 = document.getElementById('btn-preset-7');
   const btn14 = document.getElementById('btn-preset-14');
-  const btnSat = document.getElementById('btn-preset-saturday');
 
   if (btnToday) btnToday.addEventListener('click', () => updatePresetHorizon('btn-preset-today', 1, 0));
   if (btnTomorrow) btnTomorrow.addEventListener('click', () => updatePresetHorizon('btn-preset-tomorrow', 1, 1));
+  if (btnWeekend) btnWeekend.addEventListener('click', () => updatePresetWeekend());
+  if (btnThursday) btnThursday.addEventListener('click', () => updatePresetDay(4, 'btn-preset-thursday'));
+  if (btnFriday) btnFriday.addEventListener('click', () => updatePresetDay(5, 'btn-preset-friday'));
+  if (btnSaturday) btnSaturday.addEventListener('click', () => updatePresetDay(6, 'btn-preset-saturday'));
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
-  if (btnSat) btnSat.addEventListener('click', () => updatePresetThirdSaturday());
+}
+
 function updatePresetHorizon(btnId, days, startOffset = 0) {
   document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById(btnId);
   if (btn) btn.classList.add('active');
 
   const d = new Date();
-  if (startOffset > 0) {
+  if (startOffset !== 0) {
     d.setDate(d.getDate() + startOffset);
   }
   const tzOffset = d.getTimezoneOffset() * 60000;
-  const targetDateStr = (new Date(d - tzOffset)).toISOString().split('T')[0];
+  const targetDateStr = (new Date(d.getTime() - tzOffset)).toISOString().split('T')[0];
 
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
     dateInput.value = targetDateStr;
     handleDateSelectionLookup(targetDateStr);
   }
-  
-  // Also calculate and set the end date for the UI
+
   const endD = new Date(d);
   endD.setDate(endD.getDate() + days - 1);
-  const endTargetDateStr = (new Date(endD - tzOffset)).toISOString().split('T')[0];
+  const endTargetDateStr = (new Date(endD.getTime() - tzOffset)).toISOString().split('T')[0];
   const endDateInput = document.getElementById('forecast-end-date');
   if (endDateInput) {
     endDateInput.value = endTargetDateStr;
   }
-  
+
   renderPlotlyForecastingChart(days);
 }
 
+function updatePresetWeekend() {
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-preset-weekend');
+  if (btn) btn.classList.add('active');
+
+  const d = new Date();
+  const day = d.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+  let daysUntilFriday = (5 - day + 7) % 7;
+  if (day === 5) daysUntilFriday = 0;
+  else if (day === 6) daysUntilFriday = -1;
+  else if (day === 0) daysUntilFriday = -2;
+
+  const friDate = new Date();
+  friDate.setDate(friDate.getDate() + daysUntilFriday);
+  const sunDate = new Date(friDate);
+  sunDate.setDate(friDate.getDate() + 2);
+
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  const friStr = (new Date(friDate.getTime() - tzOffset)).toISOString().split('T')[0];
+  const sunStr = (new Date(sunDate.getTime() - tzOffset)).toISOString().split('T')[0];
+
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.value = friStr;
+    handleDateSelectionLookup(friStr);
+  }
+  const endDateInput = document.getElementById('forecast-end-date');
+  if (endDateInput) {
+    endDateInput.value = sunStr;
+  }
+
+  renderPlotlyForecastingChart(3);
+}
+
+function updatePresetDay(targetDayOfWeek, btnId) {
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.add('active');
+
+  const d = new Date();
+  const currentDay = d.getDay();
+  let daysAhead = (targetDayOfWeek - currentDay + 7) % 7;
+  if (daysAhead === 0) daysAhead = 0;
+
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + daysAhead);
+
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  const targetDateStr = (new Date(targetDate.getTime() - tzOffset)).toISOString().split('T')[0];
+
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
+  }
+  const endDateInput = document.getElementById('forecast-end-date');
+  if (endDateInput) {
+    endDateInput.value = targetDateStr;
+  }
+
+  renderPlotlyForecastingChart(1);
+}
+
+function updatePresetThirdSaturday() {
+  document.querySelectorAll('.forecast-preset-group .preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-preset-saturday');
+  if (btn) btn.classList.add('active');
+
+  const d = new Date();
+  d.setDate(15);
+  while (d.getDay() !== 6) {
+    d.setDate(d.getDate() + 1);
+  }
+  if (d < new Date()) {
+    d.setMonth(d.getMonth() + 1);
+    d.setDate(15);
+    while (d.getDay() !== 6) {
+      d.setDate(d.getDate() + 1);
+    }
+  }
+
+  const tzOffset = d.getTimezoneOffset() * 60000;
+  const targetDateStr = (new Date(d.getTime() - tzOffset)).toISOString().split('T')[0];
+  const dateInput = document.getElementById('forecast-start-date');
+  if (dateInput) {
+    dateInput.value = targetDateStr;
+    handleDateSelectionLookup(targetDateStr);
+  }
+  const endDateInput = document.getElementById('forecast-end-date');
+  if (endDateInput) {
+    endDateInput.value = targetDateStr;
+  }
+  renderPlotlyForecastingChart(1);
 }
 
 
@@ -910,28 +957,56 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
   try {
     const chartContainer = document.getElementById('plotly-meat-sales-chart');
     
-    const targetDateInput = document.getElementById('forecast-start-date')?.value || new Date().toISOString().split('T')[0];
-    const targetDateObj = new Date(targetDateInput + 'T00:00:00');
+    const rawStartDate = document.getElementById('forecast-start-date')?.value;
+    const parsedStartDate = parseValidDate(rawStartDate);
+    const dNow = new Date();
+    const tzOffset = dNow.getTimezoneOffset() * 60000;
+    const todayStr = (new Date(dNow.getTime() - tzOffset)).toISOString().split('T')[0];
+    
+    const targetDateInput = parsedStartDate ? rawStartDate.trim() : todayStr;
+    const targetDateObj = parseValidDate(targetDateInput) || new Date();
     const dayOfWeekStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'long' });
     const shortDayStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'short' });
 
+    daysCount = Math.max(1, parseInt(daysCount) || 1);
+
     // Embedded default 14-day forecast data to ensure zero downtime or offline/CORS issues
     const defaultForecastRecords = [
-      { date: "2026-08-14", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_lbs: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 5, pitmaster_hours: 42.5 },
-      { date: "2026-08-16", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-17", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-18", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-19", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-20", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-21", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-22", day_name: "Sat", predicted_revenue: 3960.0, brisket_raw_lbs: 112.2, pork_shoulder_raw_lbs: 66.0, sausage_lbs: 74, tacos_sold: 99, rosebuds_sold: 39, pork_ribs_racks: 6, beef_dino_ribs: 5, recommended_staff: 5, pitmaster_hours: 42.5 },
-      { date: "2026-08-23", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0 },
-      { date: "2026-08-24", day_name: "Mon", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-25", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0 },
-      { date: "2026-08-26", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 },
-      { date: "2026-08-27", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5 }
+      { date: "2026-08-14", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0, is_closed: false },
+      { date: "2026-08-15", day_name: "Sat", predicted_revenue: 4554.0, brisket_raw_lbs: 128.9, pork_shoulder_raw_lbs: 75.9, sausage_lbs: 85, tacos_sold: 113, rosebuds_sold: 45, pork_ribs_racks: 7, beef_dino_ribs: 6, recommended_staff: 5, pitmaster_hours: 42.5, is_closed: false },
+      { date: "2026-08-16", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0, is_closed: false },
+      { date: "2026-08-17", day_name: "Mon", predicted_revenue: 0.0, brisket_raw_lbs: 0.0, pork_shoulder_raw_lbs: 0.0, sausage_lbs: 0, tacos_sold: 0, rosebuds_sold: 0, pork_ribs_racks: 0, beef_dino_ribs: 0, recommended_staff: 0, pitmaster_hours: 0.0, is_closed: true },
+      { date: "2026-08-18", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0, is_closed: false },
+      { date: "2026-08-19", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5, is_closed: false },
+      { date: "2026-08-20", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5, is_closed: false },
+      { date: "2026-08-21", day_name: "Fri", predicted_revenue: 2880.0, brisket_raw_lbs: 81.5, pork_shoulder_raw_lbs: 48.0, sausage_lbs: 54, tacos_sold: 72, rosebuds_sold: 28, pork_ribs_racks: 4, beef_dino_ribs: 4, recommended_staff: 4, pitmaster_hours: 34.0, is_closed: false },
+      { date: "2026-08-22", day_name: "Sat", predicted_revenue: 3960.0, brisket_raw_lbs: 112.2, pork_shoulder_raw_lbs: 66.0, sausage_lbs: 74, tacos_sold: 99, rosebuds_sold: 39, pork_ribs_racks: 6, beef_dino_ribs: 5, recommended_staff: 5, pitmaster_hours: 42.5, is_closed: false },
+      { date: "2026-08-23", day_name: "Sun", predicted_revenue: 2520.0, brisket_raw_lbs: 71.5, pork_shoulder_raw_lbs: 42.0, sausage_lbs: 47, tacos_sold: 63, rosebuds_sold: 25, pork_ribs_racks: 4, beef_dino_ribs: 3, recommended_staff: 4, pitmaster_hours: 34.0, is_closed: false },
+      { date: "2026-08-24", day_name: "Mon", predicted_revenue: 0.0, brisket_raw_lbs: 0.0, pork_shoulder_raw_lbs: 0.0, sausage_lbs: 0, tacos_sold: 0, rosebuds_sold: 0, pork_ribs_racks: 0, beef_dino_ribs: 0, recommended_staff: 0, pitmaster_hours: 0.0, is_closed: true },
+      { date: "2026-08-25", day_name: "Tue", predicted_revenue: 1440.0, brisket_raw_lbs: 40.7, pork_shoulder_raw_lbs: 24.0, sausage_lbs: 27, tacos_sold: 36, rosebuds_sold: 14, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 2, pitmaster_hours: 17.0, is_closed: false },
+      { date: "2026-08-26", day_name: "Wed", predicted_revenue: 1620.0, brisket_raw_lbs: 45.8, pork_shoulder_raw_lbs: 27.0, sausage_lbs: 30, tacos_sold: 40, rosebuds_sold: 16, pork_ribs_racks: 2, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5, is_closed: false },
+      { date: "2026-08-27", day_name: "Thu", predicted_revenue: 1980.0, brisket_raw_lbs: 55.8, pork_shoulder_raw_lbs: 33.0, sausage_lbs: 37, tacos_sold: 49, rosebuds_sold: 19, pork_ribs_racks: 3, beef_dino_ribs: 2, recommended_staff: 3, pitmaster_hours: 25.5, is_closed: false }
     ];
+
+    const safeDefaultRecord = (dStr, sDay) => {
+      const isMon = sDay === 'Mon';
+      return {
+        date: dStr,
+        day_name: sDay,
+        predicted_revenue: isMon ? 0.0 : 2700.0,
+        brisket_raw_lbs: isMon ? 0.0 : 80.0,
+        pork_shoulder_raw_lbs: isMon ? 0.0 : 50.0,
+        sausage_lbs: isMon ? 0.0 : 50.0,
+        tacos_sold: isMon ? 0 : 60,
+        rosebuds_sold: isMon ? 0 : 25,
+        pork_ribs_racks: isMon ? 0 : 4,
+        beef_dino_ribs: isMon ? 0 : 3,
+        recommended_staff: isMon ? 0 : 4,
+        pitmaster_hours: isMon ? 0.0 : 34.0,
+        is_historical: false,
+        is_closed: isMon
+      };
+    };
 
     let dashPayload = null;
     try {
@@ -946,27 +1021,33 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     }
     
     if (dashPayload && dashPayload.forecast && dashPayload.forecast.generated_at) {
-      const generatedAt = new Date(dashPayload.forecast.generated_at);
-      const dateStr = generatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-      const lastPulledElem = document.getElementById('data-last-pulled');
-      if (lastPulledElem) {
-        lastPulledElem.textContent = `Data Last Pulled: ${dateStr}`;
+      const parsedGen = new Date(dashPayload.forecast.generated_at);
+      if (!isNaN(parsedGen.getTime())) {
+        const dateStr = parsedGen.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const lastPulledElem = document.getElementById('data-last-pulled');
+        if (lastPulledElem) {
+          lastPulledElem.textContent = `Data Last Pulled: ${dateStr}`;
+        }
       }
     }
 
     let histPayload = null;
     try {
-      const histRes = await fetch('clover_api/analytics/historical_payload.json?v=' + Date.now());
-      if (histRes.ok) histPayload = await histRes.json();
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.historical_payload) {
+        histPayload = window.BBQ_PAYLOADS.historical_payload;
+      } else {
+        const histRes = await fetch('clover_api/analytics/historical_payload.json?v=' + Date.now());
+        if (histRes.ok) histPayload = await histRes.json();
+      }
     } catch (e) {
       console.log("No historical payload found.");
     }
 
-    let records = (dashPayload && dashPayload.forecast && dashPayload.forecast.forecast_records) 
-      ? dashPayload.forecast.forecast_records 
+    let records = (dashPayload && dashPayload.forecast && Array.isArray(dashPayload.forecast.forecast_records) && dashPayload.forecast.forecast_records.length > 0)
+      ? dashPayload.forecast.forecast_records
       : defaultForecastRecords;
       
-      if (histPayload && histPayload.historical_records) {
+    if (histPayload && Array.isArray(histPayload.historical_records) && histPayload.historical_records.length > 0) {
       // Sort and merge historical records with forecast records
       records = [...histPayload.historical_records, ...records];
       records.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -974,17 +1055,55 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       records = Array.from(new Map(records.map(item => [item.date, item])).values());
     }
 
+    // Helper for special holiday open operations
+    const isHolidayOpen = (dateStr) => {
+      const events = (window.BBQ_PAYLOADS?.calendar_events?.events || []);
+      const evt = events.find(e => e.date === dateStr);
+      return Boolean(evt && evt.category === 'holiday' && evt.multiplier > 0 && !evt.title.toLowerCase().includes('closed'));
+    };
+
+    // Sanitize records: Guarantee closed non-operating Mondays (and Christmas) have 0 revenue and 0 prep targets
+    records = records.map(r => {
+      const d = parseValidDate(r.date);
+      const isMon = r.day_name === 'Mon' || (d && d.getDay() === 1);
+      const isClosedHoliday = r.date && r.date.endsWith('-12-25');
+      if ((isMon && !isHolidayOpen(r.date)) || isClosedHoliday) {
+        return {
+          ...r,
+          predicted_revenue: 0.0,
+          actual_revenue: (r.actual_revenue !== undefined && r.actual_revenue > 0) ? r.actual_revenue : 0.0,
+          brisket_raw_lbs: 0.0,
+          pork_shoulder_raw_lbs: 0.0,
+          sausage_lbs: 0.0,
+          tacos_sold: 0,
+          rosebuds_sold: 0,
+          pork_ribs_racks: 0,
+          beef_dino_ribs: 0,
+          recommended_staff: 0,
+          pitmaster_hours: 0.0,
+          is_closed: true
+        };
+      }
+      return r;
+    });
+
     // Match the active selected date
     let matchedRecord = records.find(r => r.date === targetDateInput);
+    const isTargetMonday = (shortDayStr === 'Mon' || targetDateObj.getDay() === 1);
+    const isTargetClosedHoliday = targetDateInput.endsWith('-12-25');
+
     if (!matchedRecord) {
-      // Calculate an average for that day of the week based on history.
-      const histDays = records.filter(r => r.day_name === shortDayStr && r.is_historical);
+      if ((isTargetMonday && !isHolidayOpen(targetDateInput)) || isTargetClosedHoliday) {
+        matchedRecord = safeDefaultRecord(targetDateInput, 'Mon');
+      } else {
+        // Calculate an average for that day of the week based on history.
+        const histDays = records.filter(r => r.day_name === shortDayStr && r.is_historical && !r.is_closed);
       
       if (histDays.length > 0) {
         // Filter out outliers using IQR on predicted_revenue
         const revs = histDays.map(r => r.predicted_revenue || 0).sort((a, b) => a - b);
         const q1 = revs[Math.floor((revs.length / 4))];
-        const q3 = revs[Math.ceil((revs.length * (3 / 4))) - 1];
+        const q3 = revs[Math.ceil((revs.length * (3 / 4))) - 1] || revs[revs.length - 1];
         const iqr = q3 - q1;
         const lowerBound = q1 - 1.5 * iqr;
         const upperBound = q3 + 1.5 * iqr;
@@ -1039,7 +1158,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
              }
            }
         } catch (e) {
-           console.log("Could not fetch weather for fallback average");
+           // Graceful fallback on network failure
         }
 
         const totalMultiplier = eventMultiplier * weatherMultiplier;
@@ -1055,70 +1174,96 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
             matchedRecord.insightSuffix = ` (Adjusted x${totalMultiplier.toFixed(2)} for ${eventStr}${eventStr && weatherStr ? ' and ' : ''}${weatherStr})`;
         }
       } else {
-        matchedRecord = records.find(r => r.day_name === shortDayStr) || records[0];
+        const found = records.find(r => r.day_name === shortDayStr);
+        matchedRecord = found ? { ...found, date: targetDateInput } : (records[0] ? { ...records[0], date: targetDateInput } : safeDefaultRecord(targetDateInput, shortDayStr));
       }
     }
+  }
+  if (!matchedRecord) {
+    matchedRecord = safeDefaultRecord(targetDateInput, shortDayStr);
+  }
 
     const startIndex = records.findIndex(r => r.date === targetDateInput);
     let slicedRecords = [];
     if (startIndex >= 0) {
-      slicedRecords = records.slice(startIndex, startIndex + daysCount);
-      // Pad with averages if we run out of days
+      slicedRecords = records.slice(startIndex, startIndex + daysCount).map(r => ({ ...r }));
+      // Pad with safe averages if we run out of days
       while (slicedRecords.length < daysCount) {
-        let lastDate = new Date(slicedRecords[slicedRecords.length - 1].date + 'T00:00:00');
-        lastDate.setDate(lastDate.getDate() + 1);
-        let sDay = lastDate.toLocaleDateString('en-US', {weekday: 'short'});
-        let dStr = lastDate.toISOString().split('T')[0];
-        slicedRecords.push({...records.find(x => x.day_name === sDay), date: dStr});
+        const lastRec = slicedRecords[slicedRecords.length - 1];
+        const lastDate = parseValidDate(lastRec.date) || new Date();
+        const nextDate = new Date(lastDate);
+        nextDate.setDate(nextDate.getDate() + 1);
+        const sDay = nextDate.toLocaleDateString('en-US', { weekday: 'short' });
+        const dStr = (new Date(nextDate.getTime() - nextDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+        const found = records.find(x => x.day_name === sDay);
+        const paddedRec = found ? { ...found, date: dStr, day_name: sDay } : safeDefaultRecord(dStr, sDay);
+        slicedRecords.push(paddedRec);
       }
     } else {
-      let currDate = new Date(targetDateInput + 'T00:00:00');
+      const currDate = parseValidDate(targetDateInput) || new Date();
       for (let i = 0; i < daysCount; i++) {
-        let dStr = currDate.toISOString().split('T')[0];
+        const stepDate = new Date(currDate);
+        stepDate.setDate(stepDate.getDate() + i);
+        const dStr = (new Date(stepDate.getTime() - stepDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
         let r = records.find(x => x.date === dStr);
         if (i === 0 && matchedRecord && matchedRecord.date === dStr) {
            r = matchedRecord;
         } else if (!r) {
-           let sDay = currDate.toLocaleDateString('en-US', { weekday: 'short' });
-           let histDays = records.filter(x => x.day_name === sDay && x.is_historical);
+           const sDay = stepDate.toLocaleDateString('en-US', { weekday: 'short' });
+           const histDays = records.filter(x => x.day_name === sDay && x.is_historical);
            if (histDays.length > 0) {
-             let dAvg = histDays;
              r = {
                date: dStr,
                day_name: sDay,
-               predicted_revenue: dAvg.reduce((sum, x) => sum + (x.predicted_revenue || 0), 0) / dAvg.length,
-               brisket_raw_lbs: dAvg.reduce((sum, x) => sum + (x.brisket_raw_lbs || 0), 0) / dAvg.length,
-               pork_shoulder_raw_lbs: dAvg.reduce((sum, x) => sum + (x.pork_shoulder_raw_lbs || 0), 0) / dAvg.length,
-               sausage_lbs: dAvg.reduce((sum, x) => sum + (x.sausage_lbs || 0), 0) / dAvg.length,
-               tacos_sold: Math.round(dAvg.reduce((sum, x) => sum + (x.tacos_sold || 0), 0) / dAvg.length),
-               rosebuds_sold: Math.round(dAvg.reduce((sum, x) => sum + (x.rosebuds_sold || 0), 0) / dAvg.length),
-               pork_ribs_racks: dAvg.reduce((sum, x) => sum + (x.pork_ribs_racks || 0), 0) / dAvg.length,
-               beef_dino_ribs: dAvg.reduce((sum, x) => sum + (x.beef_dino_ribs || 0), 0) / dAvg.length
+               predicted_revenue: histDays.reduce((sum, x) => sum + (x.predicted_revenue || 0), 0) / histDays.length,
+               brisket_raw_lbs: histDays.reduce((sum, x) => sum + (x.brisket_raw_lbs || 0), 0) / histDays.length,
+               pork_shoulder_raw_lbs: histDays.reduce((sum, x) => sum + (x.pork_shoulder_raw_lbs || 0), 0) / histDays.length,
+               sausage_lbs: histDays.reduce((sum, x) => sum + (x.sausage_lbs || 0), 0) / histDays.length,
+               tacos_sold: Math.round(histDays.reduce((sum, x) => sum + (x.tacos_sold || 0), 0) / histDays.length),
+               rosebuds_sold: Math.round(histDays.reduce((sum, x) => sum + (x.rosebuds_sold || 0), 0) / histDays.length),
+               pork_ribs_racks: histDays.reduce((sum, x) => sum + (x.pork_ribs_racks || 0), 0) / histDays.length,
+               beef_dino_ribs: histDays.reduce((sum, x) => sum + (x.beef_dino_ribs || 0), 0) / histDays.length,
+               is_historical: false
              };
            } else {
-             r = {...(records.find(x => x.day_name === sDay) || records[0]), date: dStr};
+             const found = records.find(x => x.day_name === sDay);
+             r = found ? { ...found, date: dStr, day_name: sDay } : safeDefaultRecord(dStr, sDay);
            }
         }
-        slicedRecords.push(r);
-        currDate.setDate(currDate.getDate() + 1);
+        slicedRecords.push(r ? { ...r } : safeDefaultRecord(dStr, 'Day'));
       }
+    }
+    if (!slicedRecords || slicedRecords.length === 0) {
+      slicedRecords = [matchedRecord];
     }
 
     const catSelector = document.getElementById('category-selector');
     const selectedCat = catSelector ? catSelector.value : 'baseline';
 
+    // KPI Cards Logic - Sum if multi-day range provided, otherwise single target date
+    const startDateVal = document.getElementById('forecast-start-date')?.value || targetDateInput;
+    const endDateVal = document.getElementById('forecast-end-date')?.value || targetDateInput;
+    const isRangeSelected = Boolean(startDateVal && endDateVal && (startDateVal !== endDateVal) && daysCount > 1);
     
-// KPI Cards Logic - Sum if date range provided, otherwise just the target date
-    const startDateVal = document.getElementById('forecast-start-date')?.value;
-    const endDateVal = document.getElementById('forecast-end-date')?.value;
-    const isRangeSelected = startDateVal && endDateVal && (startDateVal !== endDateVal);
-    
+    // Check if the current single target date is a closed day (e.g. Monday or Christmas)
+    const isTargetClosed = Boolean(
+      !isRangeSelected && (
+        matchedRecord?.is_closed ||
+        (matchedRecord?.day_name === 'Mon' && !isHolidayOpen(matchedRecord.date)) ||
+        (targetDateObj.getDay() === 1 && !isHolidayOpen(targetDateInput)) ||
+        targetDateInput.endsWith('-12-25') ||
+        (matchedRecord?.predicted_revenue !== undefined && matchedRecord.predicted_revenue <= 0 && !matchedRecord.is_historical)
+      )
+    );
+
     let bRaw = 0, pRaw = 0, sVal = 0, rVal = 0, drVal = 0, totalTacos = 0, totalRosebuds = 0, totalRev = 0, tVal = 0;
     
-    if (isRangeSelected) {
+    if (isTargetClosed) {
+      bRaw = 0; pRaw = 0; sVal = 0; rVal = 0; drVal = 0; totalTacos = 0; totalRosebuds = 0; totalRev = 0; tVal = 0;
+    } else if (isRangeSelected) {
       slicedRecords.forEach(r => {
-        bRaw += r.brisket_raw_lbs || 0;
-        pRaw += r.pork_shoulder_raw_lbs || 0;
+        bRaw += (r.brisket_raw_lbs || 0);
+        pRaw += (r.pork_shoulder_raw_lbs || 0);
         sVal += Math.round(r.sausage_lbs || 0);
         rVal += Math.round(r.pork_ribs_racks || 0);
         drVal += Math.round(r.beef_dino_ribs || 0);
@@ -1128,7 +1273,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         tVal += (r.predicted_revenue ? Math.round((r.predicted_revenue || 0) * 0.008 + 10) : 0);
       });
     } else {
-      const targetRecord = slicedRecords[0];
+      const targetRecord = slicedRecords[0] || matchedRecord;
       bRaw = targetRecord.brisket_raw_lbs || 0;
       pRaw = targetRecord.pork_shoulder_raw_lbs || 0;
       sVal = Math.round(targetRecord.sausage_lbs || 0);
@@ -1145,11 +1290,37 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const totalRaw = Math.round(bRaw + pRaw);
     const totalCooked = bCooked + pCooked;
 
-    let insightStr = `Target Forecast (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+    // Operating baseline calculation (Tue-Sun operating days only)
+    const openRecords = records.filter(r => !r.is_closed && r.day_name !== 'Mon');
+    const baselineRev = openRecords.length ? Math.max(1, Math.round(openRecords.reduce((acc, curr) => acc + (curr.predicted_revenue || 0), 0) / openRecords.length)) : 2700;
+    const avgBrisketRaw = Math.round(openRecords.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / (openRecords.length || 1));
+    const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
+    const avgPorkRaw = Math.round(openRecords.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / (openRecords.length || 1));
+    const avgPorkCooked = Math.round(avgPorkRaw * 0.4);
 
-    if (selectedCat !== 'baseline' && catSelector) {
-      const selectedText = catSelector.options[catSelector.selectedIndex].text;
-      insightStr = `Isolated Analysis (${isRangeSelected ? 'Range' : slicedRecords[0].date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
+    const weekdays = records.filter(r => ['Tue', 'Wed', 'Thu'].includes(r.day_name));
+    const weekends = records.filter(r => ['Fri', 'Sat', 'Sun'].includes(r.day_name));
+    const weekdayAvgRev = weekdays.length ? Math.round(weekdays.reduce((acc, curr) => acc + (curr.predicted_revenue || 0), 0) / weekdays.length) : 1600;
+    const weekendAvgRev = weekends.length ? Math.round(weekends.reduce((acc, curr) => acc + (curr.predicted_revenue || 0), 0) / weekends.length) : 3300;
+
+    const activeOpenDays = isRangeSelected ? (slicedRecords.filter(r => !r.is_closed && r.day_name !== 'Mon').length || 1) : 1;
+    const baselineDenominator = isRangeSelected ? baselineRev * activeOpenDays : baselineRev;
+    const incrementalRev = totalRev - baselineDenominator;
+    const pctDiff = baselineDenominator > 0 ? Math.round((incrementalRev / baselineDenominator) * 100) : 0;
+    const pctDisplay = isTargetClosed ? 'Closed' : (totalRev === 0 ? 'Closed' : (pctDiff > 0 ? `+${pctDiff}%` : `${pctDiff}%`));
+
+    let insightStr = '';
+    if (isTargetClosed) {
+      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Yellow Rose BBQ is closed on Mondays for pit maintenance, smoker seasoning, and equipment sanitization. No production smoking run is scheduled for today. Regular smokehouse operations resume Tuesday at 11:00 AM.`;
+    } else if (isRangeSelected) {
+      insightStr = `Cumulative Prep Horizon (${startDateVal} to ${endDateVal}, ${slicedRecords.length} days [${activeOpenDays} operating days]): Target ordering dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull from this inventory. Prepping these quantities mathematically covers peak customer surges across the entire operating window without premature 86'ing or food waste.`;
+    } else {
+      insightStr = `Single-Day Target Forecast (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+    }
+
+    if (selectedCat !== 'baseline' && catSelector && !isTargetClosed) {
+      const selectedText = catSelector.options[catSelector.selectedIndex]?.text || selectedCat;
+      insightStr = `Isolated Analysis (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
     }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
@@ -1161,9 +1332,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const pVal = Math.round(pRaw);
     const rbVal = totalRosebuds;
     const tacoVal = totalTacos;
-    const predRev = totalRev;
-
-
 
     const brisketElem = document.getElementById('kpi-brisket-lbs');
     const porkElem = document.getElementById('kpi-pork-lbs');
@@ -1174,21 +1342,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const rosebudsElem = document.getElementById('kpi-rosebuds');
     const tacosElem = document.getElementById('kpi-tacos');
 
-    if (brisketElem) brisketElem.textContent = bVal;
-    if (porkElem) porkElem.textContent = pVal;
-    
     // Sausage: sVal is in lbs. 1 Batch yields ~60 lbs stuffed weight. 3 links = 1 lb.
-    const sausageBatches = Math.ceil(sVal / 60.0);
+    const sausageBatches = Math.ceil(sVal / 60.0) || 0;
     const sausageLinks = sVal * 3;
-    if (sausageElem) sausageElem.textContent = sausageBatches;
-    const sausageLinksSub = document.getElementById('kpi-sausage-links-sub');
-    if (sausageLinksSub) sausageLinksSub.textContent = `(${sausageLinks} links / ${sVal} lbs)`;
-    
-    if (ribsElem) ribsElem.textContent = rVal;
-    if (dinoElem) dinoElem.textContent = drVal;
-    if (turkeyElem) turkeyElem.textContent = tVal;
-    if (rosebudsElem) rosebudsElem.textContent = rbVal;
-    if (tacosElem) tacosElem.textContent = tacoVal;
 
     const bCasesElem = document.getElementById('kpi-brisket-cases');
     const pCasesElem = document.getElementById('kpi-pork-cases');
@@ -1196,82 +1352,84 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const pCookedElem = document.getElementById('kpi-pork-cooked');
     const rCasesElem = document.getElementById('kpi-pork-ribs-cases');
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
+    const sausageLinksSub = document.getElementById('kpi-sausage-links-sub');
 
-    if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
-    if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
-    if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
-    if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
-    if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
-    if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
+    if (isTargetClosed) {
+      if (brisketElem) brisketElem.textContent = '0';
+      if (porkElem) porkElem.textContent = '0';
+      if (sausageElem) sausageElem.textContent = '0';
+      if (sausageLinksSub) sausageLinksSub.textContent = '(Closed / 0 lbs)';
+      if (ribsElem) ribsElem.textContent = '0';
+      if (dinoElem) dinoElem.textContent = '0';
+      if (turkeyElem) turkeyElem.textContent = '0';
+      if (rosebudsElem) rosebudsElem.textContent = '0';
+      if (tacosElem) tacosElem.textContent = '0';
 
-    const baselineRev = Math.round(records.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / records.length);
-    const avgBrisketRaw = Math.round(records.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / records.length);
-    const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
-    const avgPorkRaw = Math.round(records.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / records.length);
-    const avgPorkCooked = Math.round(avgPorkRaw * 0.4);
+      if (bCasesElem) bCasesElem.textContent = '(Closed / 0 Cases)';
+      if (pCasesElem) pCasesElem.textContent = '(Closed / 0 Cases)';
+      if (bCookedElem) bCookedElem.textContent = '(0 lbs cooked)';
+      if (pCookedElem) pCookedElem.textContent = '(0 lbs cooked)';
+      if (rCasesElem) rCasesElem.textContent = '(Closed / 0 Cases)';
+      if (drCasesElem) drCasesElem.textContent = '(Closed / 0 Cases)';
+    } else {
+      if (brisketElem) brisketElem.textContent = bVal;
+      if (porkElem) porkElem.textContent = pVal;
+      if (sausageElem) sausageElem.textContent = sausageBatches;
+      if (sausageLinksSub) sausageLinksSub.textContent = `(${sausageLinks} links / ${sVal} lbs)`;
+      if (ribsElem) ribsElem.textContent = rVal;
+      if (dinoElem) dinoElem.textContent = drVal;
+      if (turkeyElem) turkeyElem.textContent = tVal;
+      if (rosebudsElem) rosebudsElem.textContent = rbVal;
+      if (tacosElem) tacosElem.textContent = tacoVal;
 
-    const weekdays = records.filter(r => ['Tue', 'Wed', 'Thu'].includes(r.day_name));
-    const weekends = records.filter(r => ['Fri', 'Sat', 'Sun'].includes(r.day_name));
-    const weekdayAvgRev = weekdays.length ? Math.round(weekdays.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / weekdays.length) : 1600;
-    const weekendAvgRev = weekends.length ? Math.round(weekends.reduce((acc, curr) => acc + curr.predicted_revenue, 0) / weekends.length) : 3300;
-
-    const incrementalRev = predRev - baselineRev;
-    const pctDiff = Math.round((incrementalRev / baselineRev) * 100);
-    const sign = pctDiff > 0 ? '+' : '';
-    const pctDisplay = predRev === 0 ? `Closed` : (pctDiff > 0 ? `+${pctDiff}%` : `${pctDiff}%`);
+      if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
+      if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
+      if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
+      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
+      if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
+      if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
+    }
 
     // Update dynamic baseline trend card
     const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
     if (baselineTrendElem) {
       let comparisonNote = '';
       const revLabel = matchedRecord.is_historical ? 'actual' : 'projected';
-      if (pctDiff > 0) {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the daily average baseline (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
+      if (isTargetClosed) {
+        comparisonNote = `For your selected horizon (<strong>${matchedRecord.day_name || shortDayStr}, ${matchedRecord.date || targetDateInput}</strong>), the smokehouse is <strong>Closed</strong> (standard weekly non-operating day). Operating revenue and meat prep targets are set to 0.`;
+      } else if (pctDiff > 0) {
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the operating baseline pace (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
       } else if (pctDiff < 0) {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the daily average baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for mid-week operations.`;
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the operating baseline pace (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for midweek prep windows.`;
       } else {
-        comparisonNote = `For your selected date (<strong>${matchedRecord.day_name}, ${matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${predRev.toLocaleString()}</strong> directly matches the 14-day daily baseline average.`;
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> matches standard operational baseline expectations.`;
       }
 
-      baselineTrendElem.innerHTML = `Our model establishes a 14-day rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> (~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. ${comparisonNote}`;
+      baselineTrendElem.innerHTML = `Our model establishes a rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> across active operating days (Tue–Sun; ~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Note: Mondays are standard non-operating days reserved for pit cleaning and wood replenishment. ${comparisonNote}`;
     }
 
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
     if (revenueElem) revenueElem.textContent = pctDisplay;
     if (demandLabelElem) {
-      const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : 'Projected Sales';
-      if (pctDiff > 0) {
-        demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day average baseline pace.`;
-      } else if (pctDiff < 0) {
-        demandLabelElem.textContent = `${surgeLabel} Drop of -${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}) below the $${baselineRev.toLocaleString()}/day average baseline pace.`;
+      if (isTargetClosed) {
+        demandLabelElem.textContent = `Smokehouse & Restaurant Closed Today (${matchedRecord.day_name || shortDayStr} Pit Maintenance & Prep). Zero service demand.`;
       } else {
-        demandLabelElem.textContent = `${surgeLabel} right on pace with the $${baselineRev.toLocaleString()}/day average baseline.`;
+        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : 'Projected Sales';
+        if (pctDiff > 0) {
+          demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day operating baseline pace.`;
+        } else if (pctDiff < 0) {
+          demandLabelElem.textContent = `${surgeLabel} Drop of -${Math.abs(pctDiff)}% (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}) below the $${baselineRev.toLocaleString()}/day operating baseline pace.`;
+        } else {
+          demandLabelElem.textContent = `${surgeLabel} right on pace with the $${baselineRev.toLocaleString()}/day operating baseline.`;
+        }
       }
     }
 
-
-    const dates = slicedRecords.map(r => `${r.date} (${r.day_name})`);
-    const brisketData = slicedRecords.map(r => r.brisket_raw_lbs || 0);
-    const porkData = slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0);
-    const sausageData = slicedRecords.map(r => r.sausage_lbs || 0);
-    const tacosData = slicedRecords.map(r => r.tacos_sold || 0);
-    const rosebudsData = slicedRecords.map(r => r.rosebuds_sold || 0);
-    const porkRibsData = slicedRecords.map(r => r.pork_ribs_racks || 0);
-    const beefRibsData = slicedRecords.map(r => r.beef_dino_ribs || 0);
-
-    if (!chartContainer || typeof d3 === 'undefined') return;
-
-    // (catSelector already handled above)
+    if (!chartContainer) return;
 
     if (typeof Plotly !== 'undefined') {
-      
-      // Sync end date picker
-      const endDatePicker = document.getElementById('forecast-end-date');
-      if (endDatePicker && slicedRecords.length > 0) {
-        endDatePicker.value = slicedRecords[slicedRecords.length - 1].date;
-      }
-      const dates = slicedRecords.map(r => r.day_name + ', ' + r.date.substring(5).replace('-', '/'));
+      const dates = slicedRecords.map(r => r.day_name + ', ' + (r.date.length >= 10 ? r.date.substring(5).replace('-', '/') : r.date));
       
       let maxVal = 0;
       slicedRecords.forEach(r => {
@@ -1298,7 +1456,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Raw Meat Weight (lbs)";
         let bMax = 0;
         slicedRecords.forEach(r => bMax = Math.max(bMax, r.brisket_raw_lbs || 0));
-        layout.yaxis.range = [0, bMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, bMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
           type: 'bar', name: 'Raw Brisket', marker: { color: '#e74c3c' },
@@ -1314,7 +1472,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Raw Meat Weight (lbs)";
         let pMax = 0;
         slicedRecords.forEach(r => pMax = Math.max(pMax, r.pork_shoulder_raw_lbs || 0));
-        layout.yaxis.range = [0, pMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, pMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.pork_shoulder_raw_lbs || 0),
           type: 'bar', name: 'Raw Pork', marker: { color: '#3498db' },
@@ -1330,7 +1488,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Meat Weight (lbs)";
         let ribMax = 0;
         slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * 3));
-        layout.yaxis.range = [0, ribMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, ribMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * 3),
           type: 'bar', name: 'Raw Weight (3 lbs/rack)', marker: { color: '#9b59b6' },
@@ -1346,7 +1504,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Meat Weight (lbs)";
         let dinoMax = 0;
         slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, (r.beef_dino_ribs || 0) * 4));
-        layout.yaxis.range = [0, dinoMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, dinoMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => (r.beef_dino_ribs || 0) * 4),
           type: 'bar', name: 'Raw Weight (4 lbs/rack)', marker: { color: '#8e44ad' },
@@ -1362,7 +1520,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Meat Weight (lbs)";
         let turkeyMax = 0;
         slicedRecords.forEach(r => turkeyMax = Math.max(turkeyMax, r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0));
-        layout.yaxis.range = [0, turkeyMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, turkeyMax * 1.15)];
         const getTurkeyRaw = (r) => r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
         traces.push({
           x: dates, y: slicedRecords.map(r => getTurkeyRaw(r)),
@@ -1379,7 +1537,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Total Links";
         let sausageMax = 0;
         slicedRecords.forEach(r => sausageMax = Math.max(sausageMax, (r.sausage_lbs || 0) * 3));
-        layout.yaxis.range = [0, sausageMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, sausageMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => (r.sausage_lbs || 0) * 3),
           type: 'bar', name: 'Sausage Links', marker: { color: '#f39c12' },
@@ -1391,7 +1549,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Total Units";
         let itemMax = 0;
         slicedRecords.forEach(r => itemMax = Math.max(itemMax, r[selectedCat] || 0));
-        layout.yaxis.range = [0, itemMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, itemMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => r[selectedCat] || 0),
           type: 'bar', name: isTaco ? 'Tacos' : 'Rosebuds', marker: { color: '#2ecc71' },
@@ -1402,7 +1560,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.yaxis.title = "Raw Meat Weight (lbs)";
         let tMax = 0;
         slicedRecords.forEach(r => tMax = Math.max(tMax, r.brisket_raw_lbs || 0, r.pork_shoulder_raw_lbs || 0, r.sausage_lbs || 0, r.pork_ribs_racks || 0));
-        layout.yaxis.range = [0, tMax * 1.15];
+        layout.yaxis.range = [0, Math.max(10, tMax * 1.15)];
         traces.push({
           x: dates, y: slicedRecords.map(r => r.brisket_raw_lbs || 0),
           type: 'scatter', mode: 'lines+markers', name: 'Brisket', line: { color: '#e74c3c', width: 3 }, marker: { size: 8 },
@@ -1425,35 +1583,31 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         });
       }
       
-      Plotly.newPlot('plotly-meat-sales-chart', traces, layout, {responsive: true, displayModeBar: false});
-    } else {
+      // In-place chart update without destroying container DOM structure
+      Plotly.react(chartContainer, traces, layout, {responsive: true, displayModeBar: false});
+    } else if (typeof renderD3ForecastingChart === 'function') {
       renderD3ForecastingChart('plotly-meat-sales-chart', slicedRecords, dashPayload ? dashPayload.anomalies : [], selectedCat);
     }
   } catch (error) {
     console.error("Dashboard Rendering Error: ", error);
-    const chartContainer = document.getElementById('plotly-meat-sales-chart');
-    if (chartContainer) {
-      chartContainer.innerHTML = `<div style="color:red; background:white; padding:20px; border:2px solid red;">
-        <h3>FATAL ERROR IN RENDER</h3>
-        <pre style="white-space:pre-wrap;">${error.stack || error.message || String(error)}</pre>
-      </div>`;
-    }
   }
 }
 
 function handleDateSelectionLookup(selectedDateStr) {
-  const d = new Date(selectedDateStr + 'T00:00:00');
+  if (!selectedDateStr || typeof selectedDateStr !== 'string') return;
+  const d = parseValidDate(selectedDateStr);
+  if (!d) return;
   const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
-
-
 
   const histCard = document.getElementById('historical-reference-card');
   if (!histCard) return;
 
-  const todayStr = new Date().toISOString().split('T')[0];
-  const isPastOrToday = selectedDateStr < todayStr;
+  const dNow = new Date();
+  const tzOffset = dNow.getTimezoneOffset() * 60000;
+  const todayStr = (new Date(dNow.getTime() - tzOffset)).toISOString().split('T')[0];
+  const isPast = selectedDateStr < todayStr;
 
-  if (isPastOrToday) {
+  if (isPast) {
     histCard.style.display = 'block';
     const dow = d.getDay(); // 0=Sun, 6=Sat
 

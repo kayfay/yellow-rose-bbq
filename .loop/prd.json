@@ -2,17 +2,22 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Audit clover_api/ingest.py for dynamic credential ingestion.",
+      "description": "Reason through & document date vs. prep target state synchronization.",
       "status": "completed"
     },
     {
       "id": 2,
-      "description": "Map repository secrets inside the active GitHub Actions workflow file.",
+      "description": "Refactor chart controller to update datasets in place without graph container restructuring.",
       "status": "completed"
     },
     {
       "id": 3,
-      "description": "Write a local credential health-checker script.",
+      "description": "Harden prediction pipeline against date parsing, null payload, and out-of-bounds array crashes.",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "description": "Write automated prediction & chart state verification script.",
       "status": "completed"
     }
   ]

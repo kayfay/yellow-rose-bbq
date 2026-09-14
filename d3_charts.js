@@ -1,10 +1,11 @@
 function renderD3ForecastingChart(containerId, records, anomalies = [], selectedCat = 'baseline') {
     const container = document.getElementById(containerId);
     if (!container) return;
-    container.innerHTML = '';
+    if (!Array.isArray(records) || records.length === 0) return;
     
     // Inject and format all records to uniform pounds
     records.forEach(r => {
+        if (!r) return;
         // Generate realistic turkey lbs based on revenue (approx 15-35 lbs)
         r.turkey_lbs = r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
         r.pork_ribs_lbs = (r.pork_ribs_racks || 0) * 3;
@@ -20,13 +21,23 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     const width = Math.max((containerRect.width || 800) - margin.left - margin.right, 300);
     const height = Math.max((containerRect.height || 450) - margin.top - margin.bottom, 200);
 
-    const svg = d3.select("#" + containerId)
-        .append("svg")
-        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-        .style("width", "100%")
-        .style("height", "auto")
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+    let svgSelect = d3.select("#" + containerId).select("svg.d3-forecasting-svg");
+    let svg;
+    if (svgSelect.empty()) {
+        container.innerHTML = '';
+        svg = d3.select("#" + containerId)
+            .append("svg")
+            .attr("class", "d3-forecasting-svg")
+            .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+            .style("width", "100%")
+            .style("height", "auto")
+            .append("g")
+            .attr("class", "d3-chart-root")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+    } else {
+        svg = svgSelect.select("g.d3-chart-root");
+        svg.selectAll("*").remove();
+    }
 
     // X Axis - Dates
     const dates = records.map(r => `${r.date} (${r.day_name})`);

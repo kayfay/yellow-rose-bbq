@@ -338,37 +338,39 @@
           <div class="forecast-preset-group">
             <span class="preset-label">⏱️ Operational Horizons:</span>
             <div class="preset-btn-wrapper">
-              <button type="button" class="preset-btn active" id="btn-preset-today">🎯 Today's Operations</button>
-              <button type="button" class="preset-btn" id="btn-preset-tomorrow">🔮 Tomorrow's Prep</button>
-              <button type="button" class="preset-btn" id="btn-preset-7">📅 7-Day Trend</button>
-              <button type="button" class="preset-btn" id="btn-preset-14">📈 14-Day Outlook</button>
-              <button type="button" class="preset-btn" id="btn-preset-saturday">🏈 Next 3rd Saturday</button>
+              <button type="button" class="preset-btn active" id="btn-preset-today">🎯 Today</button>
+              <button type="button" class="preset-btn" id="btn-preset-tomorrow">🔮 Tomorrow</button>
+              <button type="button" class="preset-btn" id="btn-preset-weekend">🍻 Weekend (Fri–Sun)</button>
+              <button type="button" class="preset-btn" id="btn-preset-thursday">📅 Thursday</button>
+              <button type="button" class="preset-btn" id="btn-preset-friday">🔥 Friday</button>
+              <button type="button" class="preset-btn" id="btn-preset-saturday">🏈 Saturday</button>
+              <button type="button" class="preset-btn" id="btn-preset-7">📈 7-Day Trend</button>
+              <button type="button" class="preset-btn" id="btn-preset-14">📊 14-Day Outlook</button>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Historical Verification Reference Card (Dynamically populates for past dates) -->
-      <section id="historical-reference-card" class="control-card" style="display: none;">
-        <details>
-          <summary style="cursor: pointer; font-size: 1.1em; font-weight: 600; color: #f8fafc;">
-            📜 Past Day Record Lookup (<span id="hist-date-label">---</span>)
-          </summary>
-          <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; background: rgba(15, 23, 42, 0.4); padding: 15px; border-radius: 8px;">
+        <!-- Historical Verification Reference Card (Integrated into control card without layout reflow) -->
+        <div id="historical-reference-card" style="display: none; margin-top: 14px; padding: 12px 16px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.95rem; font-weight: 600; color: #38bdf8;">📜 Past Day Record Lookup (<span id="hist-date-label">---</span>)</span>
+            <span style="font-size: 0.75rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2);">Verified POS Record</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
             <div>
-              <span style="color: #94a3b8; font-size: 0.9em;">Recorded Sales Demand</span><br>
-              <strong id="hist-demand-val" style="font-size: 1.2em; color: #38bdf8;">1.0x (Baseline)</strong>
+              <span style="color: #94a3b8; font-size: 0.8rem;">Recorded Sales Demand</span><br>
+              <strong id="hist-demand-val" style="font-size: 1.1rem; color: #38bdf8;">1.0x (Baseline)</strong>
             </div>
             <div>
-              <span style="color: #94a3b8; font-size: 0.9em;">Recorded Weather</span><br>
-              <strong id="hist-weather-val" style="font-size: 1.2em; color: #38bdf8;">88°F | Clear</strong>
+              <span style="color: #94a3b8; font-size: 0.8rem;">Recorded Weather</span><br>
+              <strong id="hist-weather-val" style="font-size: 1.1rem; color: #38bdf8;">88°F | Clear</strong>
             </div>
             <div>
-              <span style="color: #94a3b8; font-size: 0.9em;">Event Status</span><br>
-              <strong id="hist-event-val" style="font-size: 1.2em; color: #38bdf8;">Normal Saturday</strong>
+              <span style="color: #94a3b8; font-size: 0.8rem;">Event Status</span><br>
+              <strong id="hist-event-val" style="font-size: 1.1rem; color: #38bdf8;">Normal Saturday</strong>
             </div>
           </div>
-        </details>
+        </div>
       </section>
 
       

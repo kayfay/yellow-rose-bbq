@@ -63,4 +63,104 @@ test.describe('Dashboard Verification', () => {
     await expect(page.locator('#plotly-meat-sales-chart svg').first()).toBeVisible({ timeout: 15000 });
   });
 
+  test('Operational Horizon Presets: Weekend vs Single Day Targets', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#tab-btn-forecasting');
+    await expect(page.locator('#kpi-brisket-lbs')).not.toHaveText('--', { timeout: 10000 });
+
+    // Click Weekend (Fri-Sun)
+    await page.click('#btn-preset-weekend');
+    await page.waitForTimeout(500);
+
+    const startVal = await page.locator('#forecast-start-date').inputValue();
+    const endVal = await page.locator('#forecast-end-date').inputValue();
+    expect(startVal).not.toBe(endVal);
+
+    const weekendBrisket = Number((await page.locator('#kpi-brisket-lbs').textContent()).replace(/,/g, ''));
+    expect(weekendBrisket).toBeGreaterThan(50);
+
+    // Click Thursday single day
+    await page.click('#btn-preset-thursday');
+    await page.waitForTimeout(500);
+
+    const thuStart = await page.locator('#forecast-start-date').inputValue();
+    const thuEnd = await page.locator('#forecast-end-date').inputValue();
+    expect(thuStart).toBe(thuEnd);
+
+    const thuBrisket = Number((await page.locator('#kpi-brisket-lbs').textContent()).replace(/,/g, ''));
+    expect(thuBrisket).toBeGreaterThan(0);
+    expect(thuBrisket).toBeLessThanOrEqual(weekendBrisket);
+  });
+
+  test('In-Place Chart Updates: Chart remains intact across date filters without crash', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', err => errors.push(err.message));
+
+    await page.goto('/');
+    await page.click('#tab-btn-forecasting');
+
+    await expect(page.locator('#plotly-meat-sales-chart')).toBeVisible();
+
+    // Toggle between Friday and Saturday
+    await page.click('#btn-preset-friday');
+    await page.waitForTimeout(300);
+    await page.click('#btn-preset-saturday');
+    await page.waitForTimeout(300);
+    await page.click('#btn-preset-7');
+    await page.waitForTimeout(300);
+
+    // Chart SVG must still be present and visible
+    await expect(page.locator('#plotly-meat-sales-chart svg').first()).toBeVisible();
+    expect(errors.filter(e => e.includes('RangeError') || e.includes('Invalid time value'))).toHaveLength(0);
+  });
+
+  test('Defensive Date Selection: Historical Date and Empty Input Handling', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', err => errors.push(err.message));
+
+    await page.goto('/');
+    await page.click('#tab-btn-forecasting');
+
+    // Input historical date 2026-06-11
+    await page.fill('#forecast-start-date', '2026-06-11');
+    await page.fill('#forecast-end-date', '2026-06-11');
+    await page.dispatchEvent('#forecast-start-date', 'change');
+    await page.waitForTimeout(500);
+
+    // Historical reference drawer should become visible
+    await expect(page.locator('#historical-reference-card')).toBeVisible();
+    await expect(page.locator('#hist-demand-val')).toBeVisible();
+
+    // Input empty string - should gracefully fallback without throwing RangeError
+    await page.fill('#forecast-start-date', '');
+    await page.dispatchEvent('#forecast-start-date', 'change');
+    await page.waitForTimeout(300);
+
+    expect(errors.filter(e => e.includes('RangeError') || e.includes('Invalid time value'))).toHaveLength(0);
+  });
+
+  test('Closed Day Handling: Monday displays Closed status and 0 prep targets', async ({ page }) => {
+    await page.goto('/');
+    await page.click('#tab-btn-forecasting');
+
+    // Input Monday 2026-09-14
+    await page.fill('#forecast-start-date', '2026-09-14');
+    await page.fill('#forecast-end-date', '2026-09-14');
+    await page.dispatchEvent('#forecast-start-date', 'change');
+    await page.waitForTimeout(500);
+
+    // Verify revenue KPI reads "Closed" (NOT "-95%")
+    const revText = await page.locator('#kpi-projected-revenue').textContent();
+    expect(revText.trim()).toBe('Closed');
+
+    // Verify raw meat prep targets are 0 on closed days
+    const brisketVal = await page.locator('#kpi-brisket-lbs').textContent();
+    expect(brisketVal.trim()).toBe('0');
+
+    // Verify demand label explains the closure
+    const demandText = await page.locator('#kpi-demand-label').textContent();
+    expect(demandText.toLowerCase()).toContain('closed');
+  });
+
 });
+
