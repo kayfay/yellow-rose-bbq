@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Yellow Rose BBQ &bull; Midweek Revenue Growth Playbook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0b0f19;
+      color: #f8fafc;
+    }
+    .serif-title {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .glass-card {
+      background: rgba(22, 30, 49, 0.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .stat-badge {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    /* Custom checkbox checkmark styling */
+    input[type="checkbox"]:checked + label span {
+      background-color: #f59e0b;
+      border-color: #f59e0b;
+    }
+    input[type="checkbox"]:checked + label .check-text {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-amber-500 selection:text-slate-950 pb-16">
+
+  <!-- Sticky Top Quick Bar -->
+  <header class="sticky top-0 z-50 glass-card px-4 py-3 border-b border-slate-800/90 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+      <span class="text-xs font-black uppercase tracking-wider text-amber-400">Yellow Rose BBQ</span>
+    </div>
+    <div class="text-[11px] font-semibold text-slate-400 bg-slate-900/90 px-2.5 py-1 rounded-full border border-slate-800">
+      Mandarin &bull; Executive Brief
+    </div>
+  </header>
+
+  <!-- Main Continuous Content -->
+  <main class="max-w-md mx-auto px-4 pt-6 space-y-6">
+
+    <!-- HERO HEADER -->
+    <section class="text-left pt-2 pb-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/70 border border-amber-500/30 text-amber-400 text-xs font-bold tracking-wide uppercase mb-3">
+        <span>&#9679;</span> Clover POS Intelligence
+      </div>
+      <h1 class="serif-title text-3xl font-extrabold text-white leading-tight">
+        Predicting Slow Days &amp; <span class="text-amber-400">Driving Midweek Sales</span>
+      </h1>
+      <p class="text-xs text-slate-300 mt-2.5 leading-relaxed">
+        A practical, 1-page action plan to forecast low-volume periods early and unlock <strong>+$1,500 to +$2,000/week</strong> in revenue on Tuesdays and Wednesdays.
+      </p>
+    </section>
+
+    <!-- 30-SECOND EXECUTIVE SUMMARY -->
+    <section class="glass-card p-4 rounded-2xl border-l-4 border-amber-500 space-y-2">
+      <div class="text-[10px] font-bold tracking-wider uppercase text-amber-400">Executive TL;DR</div>
+      <div class="text-sm font-bold text-white leading-snug">
+        Tuesday and Wednesday currently generate only 13.5% of weekly sales ($6,719 combined vs $16,835 on Saturday alone).
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Tuesday’s average ticket ($47.79) is actually higher than Friday’s ($40.35). Customers spend well when they visit; <strong>the core issue is foot traffic frequency and lack of a weeknight dinner hook.</strong>
+      </p>
+    </section>
+
+    <!-- SECTION 1: THE DATA REALITY -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400">1. Current Revenue Distribution</h2>
+        <span class="text-[10px] text-slate-500">1,000 Orders Sample</span>
+      </div>
+
+      <!-- Quick Comparison Cards -->
+      <div class="space-y-2">
+        <div class="glass-card p-3.5 rounded-xl flex items-center justify-between border-l-4 border-emerald-500">
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium">Saturday (Peak Day)</div>
+            <div class="text-lg font-extrabold text-white">$16,835 <span class="text-xs text-slate-400 font-normal">&bull; 277 orders</span></div>
+          </div>
+          <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded text-xs font-bold">33.7%</span>
+        </div>
+
+        <div class="glass-card p-3.5 rounded-xl flex items-center justify-between border-l-4 border-slate-600">
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium">Friday &amp; Sunday</div>
+            <div class="text-lg font-extrabold text-white">$20,819 <span class="text-xs text-slate-400 font-normal">&bull; 431 orders</span></div>
+          </div>
+          <span class="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs font-bold">41.7%</span>
+        </div>
+
+        <div class="glass-card p-3.5 rounded-xl flex items-center justify-between border-l-4 border-red-500">
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium">Tuesday &amp; Wednesday (Lags)</div>
+            <div class="text-lg font-extrabold text-red-400">$6,719 <span class="text-xs text-slate-400 font-normal">&bull; 153 orders</span></div>
+          </div>
+          <span class="px-2 py-0.5 bg-red-950 text-red-300 rounded text-xs font-bold">13.5%</span>
+        </div>
+      </div>
+
+      <div class="p-3 bg-slate-900/80 rounded-xl text-xs text-slate-300 border border-slate-800 leading-relaxed">
+        <strong class="text-white">Takeaway:</strong> Weekend dining is solid. Lifting Tuesday &amp; Wednesday by just +25% adds <strong>~$1,700/week</strong> directly to gross margin with minimal added kitchen overhead.
+      </div>
+    </section>
+
+    <!-- SECTION 2: EARLY-WARNING SYSTEM -->
+    <section class="space-y-3 pt-2">
+      <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400">2. How to Predict a Slow Day</h2>
+      <p class="text-xs text-slate-300">Three leading indicators to forecast daily volume and adjust prep before dinner:</p>
+
+      <div class="space-y-2.5">
+        <!-- Metric 1 -->
+        <div class="glass-card p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[11px] font-bold">1</span>
+            <div class="text-xs font-bold text-white">The 1:00 PM EST Lunch Velocity Gauge</div>
+          </div>
+          <p class="text-xs text-slate-300 pl-7 leading-relaxed">
+            Order volume between <strong>11:00 AM &ndash; 1:00 PM EST</strong> strongly predicts dinner rush scale. If orders at 1:00 PM are down >25% vs your 4-week average:
+          </p>
+          <div class="mt-2 ml-7 p-2 bg-slate-900/90 rounded text-[11px] text-amber-300 font-medium">
+            &rarr; Action: Throttle brisket/rib slicing by 1:30 PM EST to prevent dry carryover waste.
+          </div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="glass-card p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[11px] font-bold">2</span>
+            <div class="text-xs font-bold text-white">The Post-Monday "Closed" Lag</div>
+          </div>
+          <p class="text-xs text-slate-300 pl-7 leading-relaxed">
+            Because Yellow Rose is closed Mondays, local Mandarin residents often assume you are closed Tuesday. 
+          </p>
+          <div class="mt-2 ml-7 p-2 bg-slate-900/90 rounded text-[11px] text-amber-300 font-medium">
+            &rarr; Action: Set a recurring 10:00 AM Tuesday Instagram/Google alert: <em>"Smokers are rolling for lunch!"</em>
+          </div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="glass-card p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[11px] font-bold">3</span>
+            <div class="text-xs font-bold text-white">Payday Dip Cycles (1st &amp; 15th)</div>
+          </div>
+          <p class="text-xs text-slate-300 pl-7 leading-relaxed">
+            Midweek dips are steepest during off-pay weeks (2nd and 4th weeks of the month). Families look for value bundles during these periods.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 4 ACTIONABLE REVENUE STRATEGIES -->
+    <section class="space-y-3 pt-2">
+      <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400">3. Four Tactics to Increase Sales</h2>
+
+      <!-- Tactic 1 -->
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-emerald-400">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Tactic 1 &bull; Basket Size</span>
+          <span class="text-xs font-extrabold text-white">$59.99 &ndash; $64.00</span>
+        </div>
+        <h3 class="text-sm font-bold text-white mb-1.5">The Midweek "Family Feast" Pack</h3>
+        <p class="text-xs text-slate-300 leading-relaxed mb-3">
+          On slow days, raising ticket size beats hunting for foot traffic. Offer a zero-decision weeknight takeout bundle for local families:
+        </p>
+        <ul class="text-xs text-slate-200 space-y-1 bg-slate-900/80 p-3 rounded-xl mb-3 leading-relaxed">
+          <li>&bull; <strong>1.5 lbs Smoked Meat:</strong> Brisket + Pulled Pork</li>
+          <li>&bull; <strong>2 Pints Signature Sides:</strong> Mac &amp; Cheese + Pit Beans</li>
+          <li>&bull; <strong>4 Texas Toast</strong> + House Sauce Pint</li>
+          <li>&bull; <strong>Prep:</strong> Packed in &lt;3 minutes</li>
+        </ul>
+        <div class="p-2.5 bg-emerald-950/50 border border-emerald-500/20 rounded-xl text-xs text-emerald-300 font-semibold">
+          &#10003; Impact: Just 12 packs sold on Wednesday = +$750 gross (+25.1% sales lift from 12 cars).
+        </div>
+      </div>
+
+      <!-- Tactic 2 -->
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-amber-500">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-1">Tactic 2 &bull; Midweek Anchors</div>
+        <h3 class="text-sm font-bold text-white mb-2">Dedicated Themed Days</h3>
+        <div class="space-y-2 text-xs">
+          <div class="p-3 bg-slate-900/80 rounded-xl">
+            <div class="flex justify-between font-bold text-white">
+              <span>"Texican Taco Tuesday"</span>
+              <span class="text-amber-400">$14.99</span>
+            </div>
+            <p class="text-slate-300 mt-1 leading-relaxed">
+              3 Brisket Tacos + Chips &amp; Queso. Uses brisket burnt ends &amp; flat trimmings. Zero food waste, fast assembly.
+            </p>
+          </div>
+
+          <div class="p-3 bg-slate-900/80 rounded-xl">
+            <div class="flex justify-between font-bold text-white">
+              <span>"Smoked Wing Wednesday"</span>
+              <span class="text-amber-400">$15.99</span>
+            </div>
+            <p class="text-slate-300 mt-1 leading-relaxed">
+              10 Smoked Wings + Choice of 2 House Sauces. High margin, drives craft beer sales, quick table turns.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tactic 3 -->
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-amber-500">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-1">Tactic 3 &bull; Menu Engineering</div>
+        <h3 class="text-sm font-bold text-white mb-1.5">Side &amp; Beverage Attachment Optimization</h3>
+        <p class="text-xs text-slate-300 leading-relaxed mb-3">
+          Wednesday’s average order value is <strong>$39.88</strong> (lowest of the week). Raising it to <strong>$46.00</strong> drives +$450/day without a single extra customer:
+        </p>
+        <div class="space-y-2 text-xs text-slate-200">
+          <div class="p-2.5 bg-slate-900/80 rounded-lg">
+            <strong>Clover POS Cashier Prompt:</strong> Mandatory popup modifier on sandwich orders: <em>"Add signature side &amp; sweet tea combo for $4.99?"</em>
+          </div>
+          <div class="p-2.5 bg-slate-900/80 rounded-lg">
+            <strong>Counter Register Impulses:</strong> Place grab-and-go mason jar Banana Puddings directly next to the card terminal ($5.50 add-on).
+          </div>
+        </div>
+      </div>
+
+      <!-- Tactic 4 -->
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-amber-500">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400 mb-1">Tactic 4 &bull; Off-Peak Hours</div>
+        <h3 class="text-sm font-bold text-white mb-1.5">The 2:00 PM &ndash; 4:30 PM EST "Lull Breaker"</h3>
+        <p class="text-xs text-slate-300 leading-relaxed mb-3">
+          Clover timestamps show orders drop heavily between 2:00 PM and 3:30 PM, right before a major spike at 4:00 PM EST (156 orders in sample).
+        </p>
+        <div class="p-3 bg-slate-900/80 rounded-xl text-xs space-y-1.5">
+          <div class="flex justify-between items-center text-slate-300">
+            <span>Special:</span>
+            <span class="font-bold text-amber-400">"Early Smoker" Pre-Orders (15% off online)</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-300">
+            <span>Pickup Window:</span>
+            <span class="font-bold text-white">2:00 PM &ndash; 4:30 PM EST</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-300">
+            <span>Target Market:</span>
+            <span class="text-slate-400">Mandarin WFH &amp; early commuters</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: 4-WEEK CHECKLIST -->
+    <section class="space-y-3 pt-2">
+      <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400">4. Interactive 4-Week Action Checklist</h2>
+      <p class="text-xs text-slate-300">Tap items as they are completed:</p>
+
+      <div class="glass-card p-4 rounded-2xl space-y-3">
+        
+        <!-- Item 1 -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="task1" class="hidden peer">
+          <label for="task1" class="flex items-start gap-3 cursor-pointer select-none">
+            <span class="w-4 h-4 rounded border border-slate-600 flex items-center justify-center mt-0.5 transition peer-checked:bg-amber-500 peer-checked:border-amber-500">
+              <svg class="w-3 h-3 text-slate-950 hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div class="text-xs check-text">
+              <strong class="text-white">Week 1 &bull; Clover POS Setup:</strong> Program the $4.99 Side + Drink combo prompt and add mason jar Banana Pudding button.
+            </div>
+          </label>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="task2" class="hidden peer">
+          <label for="task2" class="flex items-start gap-3 cursor-pointer select-none">
+            <span class="w-4 h-4 rounded border border-slate-600 flex items-center justify-center mt-0.5 transition peer-checked:bg-amber-500 peer-checked:border-amber-500">
+              <svg class="w-3 h-3 text-slate-950 hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div class="text-xs check-text">
+              <strong class="text-white">Week 2 &bull; Family Pack Launch:</strong> Put the $64 Midweek Family Feast live on Clover online ordering &amp; counter menu.
+            </div>
+          </label>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="task3" class="hidden peer">
+          <label for="task3" class="flex items-start gap-3 cursor-pointer select-none">
+            <span class="w-4 h-4 rounded border border-slate-600 flex items-center justify-center mt-0.5 transition peer-checked:bg-amber-500 peer-checked:border-amber-500">
+              <svg class="w-3 h-3 text-slate-950 hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div class="text-xs check-text">
+              <strong class="text-white">Week 3 &bull; Themed Days Push:</strong> Announce Texican Taco Tuesday ($14.99) &amp; Wing Wednesday ($15.99) via Instagram &amp; Google Posts.
+            </div>
+          </label>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="task4" class="hidden peer">
+          <label for="task4" class="flex items-start gap-3 cursor-pointer select-none">
+            <span class="w-4 h-4 rounded border border-slate-600 flex items-center justify-center mt-0.5 transition peer-checked:bg-amber-500 peer-checked:border-amber-500">
+              <svg class="w-3 h-3 text-slate-950 hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div class="text-xs check-text">
+              <strong class="text-white">Week 4 &bull; AI Agent Audit:</strong> Run the Python analyst script to calculate actual revenue lift on Tuesdays and Wednesdays.
+            </div>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: TARGET GOALS -->
+    <section class="p-5 stat-badge rounded-2xl text-center space-y-2">
+      <div class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Expected Midweek Financial Outcome</div>
+      <div class="text-2xl font-black text-white">+$1,500 to +$2,000 / week</div>
+      <p class="text-xs text-slate-300 max-w-xs mx-auto">
+        Wednesday target: <strong>$4,000+</strong> (up from $2,991)<br/>
+        Tuesday target: <strong>100+ orders</strong> (up from 78)
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-4 text-center text-xs text-slate-500 border-t border-slate-800 space-y-1">
+      <div>Yellow Rose BBQ &bull; 9965 San Jose Blvd, Mandarin, FL</div>
+      <div class="text-[11px] text-slate-600">Generated by Senior AI Data Analyst &bull; Clover POS Engine</div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Enable simple checkbox persistence in localStorage so the owner's progress is saved on their phone
+    document.querySelectorAll('input[type="checkbox"]').forEach(box => {
+      const saved = localStorage.getItem('yr_task_' + box.id);
+      if (saved === 'true') box.checked = true;
+      box.addEventListener('change', () => {
+        localStorage.setItem('yr_task_' + box.id, box.checked);
+      });
+    });
+  </script>
+</body>
+</html>
