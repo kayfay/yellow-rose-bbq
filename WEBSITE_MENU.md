@@ -118,6 +118,7 @@ This document is automatically generated from live POS API metadata.
 | **Bowl Chili** |  |
 | **Burger** |  |
 | **Charro Bean Catering Tray** |  |
+| **Cheese Grits** |  |
 | **Coors Banquet** |  |
 | **Delivery Fee** |  |
 | **Dos Equis** |  |
