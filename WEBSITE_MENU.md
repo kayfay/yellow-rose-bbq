@@ -62,6 +62,7 @@ This document is automatically generated from live POS API metadata.
 | **Banana Pudding Large** |  |
 | **Banana Pudding** |  |
 | **Beans Charro** |  |
+| **Caesar Salad Catering Tray** |  |
 | **Cheese Fries** |  |
 | **Chili Cheese Fries** |  |
 | **Churros (2)** |  |
