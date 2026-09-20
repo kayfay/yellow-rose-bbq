@@ -118,6 +118,7 @@ This document is automatically generated from live POS API metadata.
 | **8 ounce spicy BBQ sauce** |  |
 | **Bowl Chili** |  |
 | **Burger** |  |
+| **Canned water** |  |
 | **Charro Bean Catering Tray** |  |
 | **Cheese Grits** |  |
 | **Coors Banquet** |  |
