@@ -99,7 +99,7 @@ for d in dates:
         "rosebuds_sold": rosebuds_sold,
         "pork_ribs_racks": round(pork_ribs_racks, 1),
         "beef_dino_ribs": round(beef_dino_ribs, 1),
-        "is_historical": True
+        "is_historical": True, "data_type": "ACTUAL"
     })
 
 with open('clover_api/analytics/historical_payload.json', 'w') as f:

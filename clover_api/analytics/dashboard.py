@@ -143,7 +143,7 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             "pork_ribs_racks": int(pork_ribs_racks),
             "beef_dino_ribs": int(beef_dino_ribs),
             "recommended_staff": staff_count,
-            "pitmaster_hours": pit_hours
+            "pitmaster_hours": pit_hours, "data_type": "PREDICTED"
         })
 
     # Generate dynamic insight string

@@ -2,23 +2,23 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Reason through & document date vs. prep target state synchronization.",
-      "status": "completed"
+      "description": "Audit sync logic and add unique constraints / UPSERT logic for idempotent hourly ingestion.",
+      "status": "pending"
     },
     {
       "id": 2,
-      "description": "Refactor chart controller to update datasets in place without graph container restructuring.",
-      "status": "completed"
+      "description": "Build non-blocking hourly background scheduler daemon with failure logging.",
+      "status": "pending"
     },
     {
       "id": 3,
-      "description": "Harden prediction pipeline against date parsing, null payload, and out-of-bounds array crashes.",
-      "status": "completed"
+      "description": "Update UI/API status endpoints to report last_synced_at timestamp and next scheduled sync.",
+      "status": "pending"
     },
     {
       "id": 4,
-      "description": "Write automated prediction & chart state verification script.",
-      "status": "completed"
+      "description": "Write automated Maker-Checker verification script scripts/verify_hourly_sync.py.",
+      "status": "pending"
     }
   ]
 }
