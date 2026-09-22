@@ -520,8 +520,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 5006.26044117647,
-          "y1": 5006.26044117647,
+          "y0": 4950.479264705881,
+          "y1": 4950.479264705881,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -533,8 +533,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 5306.26044117647,
-          "text": "Baseline Target ($5,006)",
+          "y": 5250.479264705881,
+          "text": "Baseline Target ($4,950)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -546,11 +546,11 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 5006.26,
+    "normal_avg_usd": 4950.48,
     "rain_avg_usd": 5377.4,
-    "rain_drop_pct": 7.4,
+    "rain_drop_pct": 8.6,
     "heat_avg_usd": 5067.66,
-    "heat_drop_pct": 1.3,
+    "heat_drop_pct": 3.6,
     "rain_coef": -4.34,
     "temp_coef": 22.37
   }
