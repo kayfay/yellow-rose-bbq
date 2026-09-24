@@ -11,7 +11,6 @@ This document is automatically generated from live POS API metadata.
 | **5pc BBQ Wing** |  |
 | **5pc Buffalo Wing** |  |
 | **5pc Smoked Wings** |  |
-| **904 Sandwich** |  |
 | **BBQ plate** |  |
 | **Bbq Plate W/2Sides** |  |
 | **Bbq Sandwich (Brisket)** |  |
@@ -49,7 +48,6 @@ This document is automatically generated from live POS API metadata.
 | **Single Bone Pork Rib** |  |
 | **Street Taco Barbacoa** |  |
 | **Taco Plate W/2 Sides** |  |
-| **Turkey Bacon Ranch** |  |
 | **Turkey sandwich** |  |
 | **Turkey** | Pound |
 | **Two Step Sandwich** |  |
@@ -128,15 +126,19 @@ This document is automatically generated from live POS API metadata.
 | **Gift Card** |  |
 | **Gift card** |  |
 | **Gift card** |  |
+| **Hat** |  |
+| **Horchata** |  |
 | **King Of The Hill** |  |
 | **Local IPA** |  |
 | **Miller Lite** |  |
+| **Patch** |  |
 | **Pimento Cheese W/ Crackers** |  |
 | **Ranch side** |  |
 | **Rosebud** |  |
 | **Sauteed Cabbage Catering Tray** |  |
 | **Sauteed Cabbage** |  |
 | **Seasoned French Fry Catering Tray** |  |
+| **Sticker** |  |
 | **Stuffing** |  |
 | **TX Cheese** |  |
-| **Toasted bun** |  |
+| **Toasted Bun** |  |
