@@ -253,6 +253,41 @@ const RECIPES = {
       9: "Whisk the chilled birria consommé into the first half of ice water with Powdered Milk, garlic, and diced onions.",
       11: "Incorporate the remaining ice water, birria meat, and melty cheese cubes evenly."
     }
+  },
+  'mexican-chorizo': {
+    id: 'mexican-chorizo',
+    name: 'Mexican Chorizo',
+    icon: '',
+    menuSource: 'Custom Formulations',
+    description: 'Authentic Mexican Chorizo with dried chiles, robust spices, and a touch of lavender.',
+    stuffedAddInLbs: 10.0,
+    ingredients: [
+      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
+      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork & Pork Fat' },
+      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Hard Beef Fat' },
+      { id: 'ancho-powder', label: 'Ancho Chile Powder', amount: 4.75, unit: 'cups', gramEq: 567, desc: '' },
+      { id: 'guajillo-powder', label: 'Guajillo Chile Powder', amount: 2.375, unit: 'cups', gramEq: 283.5, desc: '' },
+      { id: 'salt', label: 'Kosher Salt', amount: 1.875, unit: 'cups', gramEq: 408.2, desc: "Morton's" },
+      { id: 'paprika', label: 'Smoked Paprika', amount: 2.0, unit: 'cups', gramEq: 226.8, desc: '' },
+      { id: 'garlic', label: 'Granulated Garlic', amount: 1.125, unit: 'cups', gramEq: 181.4, desc: '' },
+      { id: 'oregano', label: 'Mexican Oregano', amount: 1.625, unit: 'cups', gramEq: 90.7, desc: 'Rubbed' },
+      { id: 'cumin', label: 'Ground Cumin', amount: 0.9375, unit: 'cups', gramEq: 79.4, desc: '' },
+      { id: 'pepper', label: 'Black Pepper', amount: 0.875, unit: 'cups', gramEq: 79.4, desc: '16-Mesh Coarse' },
+      { id: 'lavender', label: 'Dried Lavender', amount: 1.0, unit: 'cups', gramEq: 68.0, desc: 'Whole' },
+      { id: 'coriander', label: 'Whole Coriander', amount: 0.5625, unit: 'cups', gramEq: 45.4, desc: 'Whole Seeds' },
+      { id: 'cayenne', label: 'Cayenne Pepper', amount: 0.3125, unit: 'cups', gramEq: 34.0, desc: '' },
+      { id: 'cinnamon', label: 'Ceylon Cinnamon', amount: 0.125, unit: 'cups', gramEq: 11.3, desc: 'Ground Canela' },
+      { id: 'cloves', label: 'Ground Cloves', amount: 0.125, unit: 'cups', gramEq: 11.3, desc: '' },
+      { id: 'vinegar', label: 'Apple Cider Vinegar', amount: 2.5, unit: 'cups', desc: 'Acidic Binder' },
+      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Non-Fat Dry Milk Powder' },
+      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
+      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Prague Powder #1', highlight: true, isGram: true }
+    ],
+    customSteps: {
+      8: "Whisk the first half of prepped ice water with the Apple Cider Vinegar and spices to form a slurry.",
+      9: "Mix the Day 1 slurry into the meat block and cure overnight.",
+      11: "Whisk Non-Fat Dry Milk Powder into the remaining ice water (Day 2) and incorporate into the emulsion."
+    }
   }
 };
 
@@ -371,6 +406,39 @@ function adjustWeight(amount) {
 }
 
 // Update DOM elements based on state
+
+function formatCups(rawCups) {
+  if (rawCups === 0) return { val: '0', unit: 'cups' };
+  
+  let cups = Math.floor(rawCups);
+  let remainderCups = rawCups - cups;
+  
+  let totalTbsp = remainderCups * 16;
+  let tbsp = Math.floor(totalTbsp);
+  let remainderTbsp = totalTbsp - tbsp;
+  
+  let tsp = Math.round(remainderTbsp * 3);
+  
+  if (tsp >= 3) {
+    tbsp += Math.floor(tsp / 3);
+    tsp = tsp % 3;
+  }
+  if (tbsp >= 16) {
+    cups += Math.floor(tbsp / 16);
+    tbsp = tbsp % 16;
+  }
+
+  let parts = [];
+  if (cups > 0) parts.push(`${cups} cup${cups > 1 ? 's' : ''}`);
+  if (tbsp > 0) parts.push(`${tbsp} tbsp`);
+  if (tsp > 0) parts.push(`${tsp} tsp`);
+  
+  let resultStr = parts.join(' + ');
+  if (resultStr === '') resultStr = '0';
+  
+  return { val: resultStr, unit: '' };
+}
+
 function updateUI() {
   const currentRecipe = RECIPES[state.recipeId] || RECIPES['jalapeno-cheddar'];
 
@@ -420,11 +488,17 @@ function updateUI() {
       displayVal = Math.round(rawAmount);
     } else {
       if (ing.unit === 'lbs' && rawAmount < 1.0 && rawAmount > 0) {
-        displayVal = (rawAmount * 16).toFixed(1);
+        let oz = rawAmount * 16;
+        if (Math.abs(Math.round(oz) - oz) < 0.01) {
+            displayVal = Math.round(oz);
+        } else {
+            displayVal = oz.toFixed(1);
+        }
         displayUnit = 'oz';
-      } else if (ing.unit === 'cups' && rawAmount < 1.0 && rawAmount > 0) {
-        displayVal = (rawAmount * 16).toFixed(1);
-        displayUnit = 'tbsp';
+      } else if (ing.unit === 'cups' && rawAmount > 0) {
+        let formatted = formatCups(rawAmount);
+        displayVal = formatted.val;
+        displayUnit = formatted.unit;
       } else {
         displayVal = rawAmount.toFixed(2);
       }
@@ -434,6 +508,14 @@ function updateUI() {
     if (ing.id === 'water' && rawAmount > 0) {
       const halfRaw = rawAmount / 2;
       dynamicDesc = ing.desc.replace(/Split 2x [0-9.]+ cups/, `Split 2x ${halfRaw.toFixed(1)} cups`);
+    }
+
+    if (ing.gramEq) {
+      if (dynamicDesc) {
+        dynamicDesc += ` — ${Math.round(ing.gramEq * scale)}g`;
+      } else {
+        dynamicDesc = `${Math.round(ing.gramEq * scale)}g`;
+      }
     }
 
     card.innerHTML = `
@@ -777,16 +859,30 @@ function initForecastingControls() {
     });
   }
 
+  function updateSyncStatusTime() {
+    const timeElem = document.getElementById('last-updated-time');
+    if (!timeElem) return;
+    
+    fetch('clover_api/analytics/sync_status.json?v=' + Date.now())
+      .then(res => res.json())
+      .then(data => {
+        if (data.last_synced_at) {
+          timeElem.textContent = new Date(data.last_synced_at).toLocaleString();
+        }
+      })
+      .catch(err => {
+        // Fallback to forecast generated time or current time
+        if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+          timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+        } else {
+          timeElem.textContent = new Date().toLocaleTimeString();
+        }
+      });
+  }
+
   const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
   if (btnRefreshAnalytics) {
-    const timeElem = document.getElementById('last-updated-time');
-    if (timeElem) {
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
-      } else {
-        timeElem.textContent = new Date().toLocaleTimeString();
-      }
-    }
+    updateSyncStatusTime();
 
     let lastRefreshTime = 0;
     btnRefreshAnalytics.addEventListener('click', () => {
@@ -799,7 +895,7 @@ function initForecastingControls() {
       btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
       
       renderPlotlyForecastingChart(getActiveDaysCount()).then(() => {
-        if (timeElem) timeElem.textContent = new Date().toLocaleTimeString();
+        updateSyncStatusTime();
         btnRefreshAnalytics.innerHTML = origText;
       });
       renderPlotlyEventChart();

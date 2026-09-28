@@ -1,0 +1,34 @@
+{
+  "id": "mexican-chorizo",
+  "name": "Mexican Chorizo",
+  "menuSource": "Custom Formulations",
+  "description": "Authentic Mexican Chorizo with dried chiles, robust spices, and a touch of lavender.",
+  "stuffedAddInLbs": 10.0,
+  "ingredients": [
+    { "id": "lean-meat", "label": "Lean Beef Base", "amount": 25.5, "unit": "lbs", "desc": "Beef Trimmings" },
+    { "id": "trimmings", "label": "Pork Base", "amount": 16.0, "unit": "lbs", "desc": "Pork & Pork Fat" },
+    { "id": "hard-fat", "label": "Hard Fat", "amount": 8.5, "unit": "lbs", "desc": "Hard Beef Fat" },
+    { "id": "ancho-powder", "label": "Ancho Chile Powder", "amount": 4.75, "unit": "cups", "gramEq": 567, "desc": "" },
+    { "id": "guajillo-powder", "label": "Guajillo Chile Powder", "amount": 2.375, "unit": "cups", "gramEq": 283.5, "desc": "" },
+    { "id": "salt", "label": "Kosher Salt", "amount": 1.875, "unit": "cups", "gramEq": 408.2, "desc": "Morton's" },
+    { "id": "paprika", "label": "Smoked Paprika", "amount": 2.0, "unit": "cups", "gramEq": 226.8, "desc": "" },
+    { "id": "garlic", "label": "Granulated Garlic", "amount": 1.125, "unit": "cups", "gramEq": 181.4, "desc": "" },
+    { "id": "oregano", "label": "Mexican Oregano", "amount": 1.625, "unit": "cups", "gramEq": 90.7, "desc": "Rubbed" },
+    { "id": "cumin", "label": "Ground Cumin", "amount": 0.9375, "unit": "cups", "gramEq": 79.4, "desc": "" },
+    { "id": "pepper", "label": "Black Pepper", "amount": 0.875, "unit": "cups", "gramEq": 79.4, "desc": "16-Mesh Coarse" },
+    { "id": "lavender", "label": "Dried Lavender", "amount": 1.0, "unit": "cups", "gramEq": 68.0, "desc": "Whole" },
+    { "id": "coriander", "label": "Whole Coriander", "amount": 0.5625, "unit": "cups", "gramEq": 45.4, "desc": "Whole Seeds" },
+    { "id": "cayenne", "label": "Cayenne Pepper", "amount": 0.3125, "unit": "cups", "gramEq": 34.0, "desc": "" },
+    { "id": "cinnamon", "label": "Ceylon Cinnamon", "amount": 0.125, "unit": "cups", "gramEq": 11.3, "desc": "Ground Canela" },
+    { "id": "cloves", "label": "Ground Cloves", "amount": 0.125, "unit": "cups", "gramEq": 11.3, "desc": "" },
+    { "id": "vinegar", "label": "Apple Cider Vinegar", "amount": 2.5, "unit": "cups", "desc": "Acidic Binder" },
+    { "id": "milk", "label": "Powdered Milk", "amount": 3.0, "unit": "cups", "desc": "Non-Fat Dry Milk Powder" },
+    { "id": "water", "label": "Ice Cold Water", "amount": 10.0, "unit": "cups", "desc": "Split 2x 5.0 cups for before and after curing" },
+    { "id": "curing-salt", "label": "Pink Curing Salt (Day 1)", "amount": 60, "unit": "g", "desc": "Prague Powder #1", "highlight": true, "isGram": true }
+  ],
+  "customSteps": {
+    "8": "Whisk the first half of prepped ice water with the Apple Cider Vinegar and spices to form a slurry.",
+    "9": "Mix the Day 1 slurry into the meat block and cure overnight.",
+    "11": "Whisk Non-Fat Dry Milk Powder into the remaining ice water (Day 2) and incorporate into the emulsion."
+  }
+}
