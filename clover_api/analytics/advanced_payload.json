@@ -43,7 +43,7 @@
     {
       "pair": "2 meat plate + Crispy Quesa Taco Brisket",
       "count": 96,
-      "confidence": 13.8
+      "confidence": 13.9
     },
     {
       "pair": "Brisket + Mac & Cheese",
@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4232.38,
+    "normal": 4306.3,
     "game_only": 3983.78,
-    "rain_only": 5459.09,
-    "game_and_rain": 11850.67
+    "rain_only": 5274.03,
+    "game_and_rain": 12057.65
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4990,
-      "total_revenue": 214441.88,
-      "avg_ticket": 42.974324649298595
+      "order_count": 4988,
+      "total_revenue": 214412.85,
+      "avg_ticket": 42.985735765838015
     },
     {
       "order_type": "In-store Pickup",
@@ -159,14 +159,14 @@
           0.0,
           0.0,
           0.0,
-          31.0,
-          274.0,
-          519.0,
-          715.0,
-          857.0,
-          929.0,
-          1018.0,
-          1157.0
+          29.0,
+          272.0,
+          517.0,
+          713.0,
+          855.0,
+          927.0,
+          1016.0,
+          1155.0
         ],
         "name": "Crispy Quesa Taco Brisket",
         "type": "scatter",
@@ -452,12 +452,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 3.2,
-    "impact_pct": -39.2
+    "pork_ribs_avg_without_dino": 5.7,
+    "pork_ribs_avg_with_dino": 2.9,
+    "impact_pct": -50.3
   },
   "payday_effect": {
     "payday_avg_ticket": 46.72,
-    "normal_avg_ticket": 46.22
+    "normal_avg_ticket": 46.23
   }
 }
