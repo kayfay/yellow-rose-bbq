@@ -758,6 +758,7 @@ function initForecastingControls() {
       }
       handleDateSelectionLookup(startVal);
       renderPlotlyForecastingChart(getActiveDaysCount());
+      renderPlotlyPredictiveChart();
     });
   }
 
@@ -770,6 +771,7 @@ function initForecastingControls() {
         endDateInput.value = dateInput.value;
       }
       renderPlotlyForecastingChart(getActiveDaysCount());
+      renderPlotlyPredictiveChart();
     });
   }
 
@@ -859,6 +861,15 @@ function initForecastingControls() {
   function updateSyncStatusTime() {
     const timeElem = document.getElementById('last-updated-time');
     if (!timeElem) return;
+    
+    if (typeof fetch !== 'function') {
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+      } else {
+        timeElem.textContent = new Date().toLocaleTimeString();
+      }
+      return;
+    }
     
     fetch('clover_api/analytics/sync_status.json?v=' + Date.now())
       .catch(() => fetch('analytics/sync_status.json?v=' + Date.now()))
@@ -952,6 +963,7 @@ function updatePresetHorizon(btnId, days, startOffset = 0) {
   }
 
   renderPlotlyForecastingChart(days);
+  renderPlotlyPredictiveChart();
 }
 
 function updatePresetWeekend() {
@@ -986,6 +998,7 @@ function updatePresetWeekend() {
   }
 
   renderPlotlyForecastingChart(3);
+  renderPlotlyPredictiveChart();
 }
 
 function updatePresetDay(targetDayOfWeek, btnId) {
@@ -1015,6 +1028,7 @@ function updatePresetDay(targetDayOfWeek, btnId) {
   }
 
   renderPlotlyForecastingChart(1);
+  renderPlotlyPredictiveChart();
 }
 
 function updatePresetThirdSaturday() {
@@ -1047,6 +1061,7 @@ function updatePresetThirdSaturday() {
     endDateInput.value = targetDateStr;
   }
   renderPlotlyForecastingChart(1);
+  renderPlotlyPredictiveChart();
 }
 
 
@@ -1749,6 +1764,10 @@ function handleDateSelectionLookup(selectedDateStr) {
   } else {
     histCard.style.display = 'none';
   }
+
+  if (typeof renderPlotlyPredictiveChart === 'function') {
+    renderPlotlyPredictiveChart();
+  }
 }
 
 async function renderPlotlyShiftHeatmap(shift) {
@@ -2154,27 +2173,126 @@ async function renderPlotlyPredictiveChart() {
 
   if (!payload || !payload.hourly_forecast) return;
 
+  // Inspect currently active start date and end date
+  const startDateInput = document.getElementById('forecast-start-date');
+  const endDateInput = document.getElementById('forecast-end-date');
+  const startDateVal = startDateInput ? startDateInput.value : '';
+  const endDateVal = endDateInput ? endDateInput.value : '';
+
+  let activeForecast = payload.hourly_forecast;
+  let activeDirectives = payload.operational_directives;
+  let activeKpis = payload.summary_kpis;
+  let chartTitle = '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate';
+
+  if (payload.day_profiles && startDateVal) {
+    const parts = startDateVal.split('-').map(Number);
+    const startObj = new Date(parts[0], parts[1] - 1, parts[2]);
+    const dayName = startObj.toLocaleDateString('en-US', { weekday: 'long' });
+    const shortDay = startObj.toLocaleDateString('en-US', { weekday: 'short' });
+
+    let daysCount = 1;
+    if (endDateVal && endDateVal !== startDateVal) {
+      const endParts = endDateVal.split('-').map(Number);
+      const endObj = new Date(endParts[0], endParts[1] - 1, endParts[2]);
+      daysCount = Math.max(1, Math.round((endObj - startObj) / 86400000) + 1);
+    }
+
+    if (daysCount === 1) {
+      const profile = payload.day_profiles[dayName] || payload.day_profiles[shortDay] || payload.day_profiles[dayName.toLowerCase()];
+      if (profile) {
+        activeForecast = profile.hourly_forecast;
+        activeDirectives = profile.operational_directives;
+        activeKpis = {
+          current_sales_velocity: profile.current_sales_velocity,
+          pacing_status: profile.pacing_status,
+          estimated_food_cost_pct: profile.estimated_food_cost_pct,
+          projected_24h_revenue_usd: profile.projected_revenue_usd,
+          peak_rush_window: profile.peak_rush_window,
+          total_brisket_draw_lbs: profile.total_brisket_draw_lbs,
+          total_pork_draw_lbs: profile.total_pork_draw_lbs
+        };
+        chartTitle = `${dayName} Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal})`;
+      }
+    } else {
+      // Multi-day range (e.g. 3-day weekend or custom range, capped at 7 days for readable chart)
+      const rangeHours = [];
+      let totalRev = 0;
+      let totalCogs = 0;
+      let totalBrisket = 0;
+      let totalPork = 0;
+      let maxOrders = 0;
+      let peakHourStr = '';
+
+      const renderDays = Math.min(daysCount, 7);
+      for (let i = 0; i < renderDays; i++) {
+        const curDate = new Date(startObj);
+        curDate.setDate(curDate.getDate() + i);
+        const curDayName = curDate.toLocaleDateString('en-US', { weekday: 'long' });
+        const curShortDay = curDate.toLocaleDateString('en-US', { weekday: 'short' });
+        const profile = payload.day_profiles[curDayName] || payload.day_profiles[curShortDay];
+        if (profile && profile.hourly_forecast) {
+          profile.hourly_forecast.forEach(r => {
+            if (r.predicted_orders > maxOrders) {
+              maxOrders = r.predicted_orders;
+              peakHourStr = `${r.hour_display} (${curShortDay})`;
+            }
+            totalRev += (r.predicted_revenue || 0);
+            totalCogs += (r.estimated_cogs_usd || 0);
+            totalBrisket += (r.brisket_cooked_lbs || 0);
+            totalPork += (r.pork_cooked_lbs || 0);
+            rangeHours.push({
+              ...r,
+              hour_display: `${r.hour_display} (${curShortDay})`,
+              day_name: curShortDay
+            });
+          });
+        }
+      }
+
+      if (rangeHours.length > 0) {
+        activeForecast = rangeHours;
+        const avgFoodCost = totalRev > 0 ? (totalCogs / totalRev * 100).toFixed(1) : '29.5';
+        activeKpis = {
+          current_sales_velocity: `${maxOrders.toFixed(1)} orders/hr (Peak)`,
+          pacing_status: maxOrders >= 10.0 ? 'Heavy Rush Surge' : 'Normal Pacing',
+          estimated_food_cost_pct: avgFoodCost,
+          projected_24h_revenue_usd: Math.round(totalRev),
+          peak_rush_window: peakHourStr,
+          total_brisket_draw_lbs: totalBrisket.toFixed(1),
+          total_pork_draw_lbs: totalPork.toFixed(1)
+        };
+        activeDirectives = [
+          `Peak Customer Flow: Expected around ${peakHourStr} reaching ~${maxOrders.toFixed(1)} orders/hr across the ${daysCount}-day window.`,
+          `Meat Depletion Pacing: Projected cumulative draw of ~${totalBrisket.toFixed(1)} lbs smoked brisket and ~${totalPork.toFixed(1)} lbs pulled pork from hot storage.`,
+          `Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.`,
+          `Smoker Pacing: Balance smoke pit reload intervals to maintain continuous hot holding capacity.`
+        ];
+        chartTitle = `${daysCount}-Day Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal} to ${endDateVal})`;
+      }
+    }
+  }
+
   // Hydrate Crucial Top-Shelf KPIs
   const kpiVelocity = document.getElementById('kpi-current-velocity');
   const kpiPacing = document.getElementById('kpi-pacing-status');
   const kpiFoodCost = document.getElementById('kpi-food-cost-pct');
 
-  if (payload.summary_kpis) {
-    if (kpiVelocity) kpiVelocity.textContent = payload.summary_kpis.current_sales_velocity || '--';
-    if (kpiPacing) kpiPacing.textContent = `(${payload.summary_kpis.pacing_status || 'Normal'})`;
-    if (kpiFoodCost) kpiFoodCost.textContent = `${payload.summary_kpis.estimated_food_cost_pct || 29.5}%`;
+  if (activeKpis) {
+    if (kpiVelocity) kpiVelocity.textContent = activeKpis.current_sales_velocity || '--';
+    if (kpiPacing) kpiPacing.textContent = `(${activeKpis.pacing_status || 'Normal'})`;
+    if (kpiFoodCost) kpiFoodCost.textContent = `${activeKpis.estimated_food_cost_pct || 29.5}%`;
   }
 
   // Hydrate Directives
   const directivesList = document.getElementById('predictive-directives-list');
-  if (directivesList && Array.isArray(payload.operational_directives)) {
-    directivesList.innerHTML = payload.operational_directives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
+  if (directivesList && Array.isArray(activeDirectives)) {
+    directivesList.innerHTML = activeDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
   }
 
-  const hours = payload.hourly_forecast.map(r => `${r.hour_display} (${r.day_name})`);
-  const orders = payload.hourly_forecast.map(r => r.predicted_orders);
-  const revenue = payload.hourly_forecast.map(r => r.predicted_revenue);
-  const brisketDraw = payload.hourly_forecast.map(r => r.brisket_cooked_lbs);
+  const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : `${r.hour}:00`);
+  const orders = activeForecast.map(r => r.predicted_orders);
+  const revenue = activeForecast.map(r => r.predicted_revenue);
+  const brisketDraw = activeForecast.map(r => r.brisket_cooked_lbs);
 
   const traces = [
     {
@@ -2197,7 +2315,7 @@ async function renderPlotlyPredictiveChart() {
   ];
 
   const layout = {
-    title: '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate',
+    title: chartTitle,
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(20,20,30,0.6)',
     font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 11 },
