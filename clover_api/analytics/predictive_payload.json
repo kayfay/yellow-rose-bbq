@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-05T13:51:51.813042",
+  "generated_at": "2026-10-05T14:22:12.118612",
   "summary_kpis": {
-    "projected_24h_revenue_usd": 2192.2,
+    "projected_24h_revenue_usd": 2512.3,
     "estimated_food_cost_pct": 29.5,
     "peak_rush_window": "11:00 AM (Tue)",
-    "current_sales_velocity": "0.0 orders/hr",
-    "pacing_status": "Slow Period",
-    "total_brisket_draw_lbs": 10.9,
-    "total_pork_draw_lbs": 5.9
+    "current_sales_velocity": "0.2 orders/hr",
+    "pacing_status": "Normal Pacing",
+    "total_brisket_draw_lbs": 12.5,
+    "total_pork_draw_lbs": 6.8
   },
   "wholesale_meat_index": {
     "raw_brisket_price_per_lb": 5.08,
@@ -18,19 +18,6 @@
     "pork_yield_range": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-10-05T13:00:00",
-      "hour_display": "1:00 PM",
-      "day_name": "Mon",
-      "hour": 13,
-      "predicted_orders": 0.0,
-      "predicted_revenue": 0.0,
-      "estimated_cogs_usd": 0.0,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Slow Period",
-      "is_peak": false
-    },
     {
       "timestamp": "2026-10-05T14:00:00",
       "hour_display": "2:00 PM",
@@ -329,11 +316,24 @@
       "pork_cooked_lbs": 1.3,
       "pacing_status": "Normal Pacing",
       "is_peak": true
+    },
+    {
+      "timestamp": "2026-10-06T13:00:00",
+      "hour_display": "1:00 PM",
+      "day_name": "Tue",
+      "hour": 13,
+      "predicted_orders": 6.6,
+      "predicted_revenue": 320.1,
+      "estimated_cogs_usd": 94.43,
+      "brisket_cooked_lbs": 1.6,
+      "pork_cooked_lbs": 0.9,
+      "pacing_status": "Normal Pacing",
+      "is_peak": false
     }
   ],
   "operational_directives": [
     "Peak Customer Flow: Expected around 11:00 AM (Tue) reaching ~18.0 orders/hr.",
-    "Meat Depletion Pacing: Next 24 hours projected to draw ~10.9 lbs smoked brisket and ~5.9 lbs pulled pork from hot storage.",
+    "Meat Depletion Pacing: Next 24 hours projected to draw ~12.5 lbs smoked brisket and ~6.8 lbs pulled pork from hot storage.",
     "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
     "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
   ]

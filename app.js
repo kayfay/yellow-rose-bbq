@@ -812,49 +812,32 @@ function initForecastingControls() {
     });
   }
 
+  if (btnSubtabWeather) {
     btnSubtabWeather.addEventListener('click', () => {
-      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
-      btnSubtabWeather.classList.add('active');
-      if (viewWeather) viewWeather.style.display = 'block';
-      if (viewArima) viewArima.style.display = 'none';
-      if (viewEvent) viewEvent.style.display = 'none';
-      if (viewShift) viewShift.style.display = 'none';
-      if (viewAdvanced) viewAdvanced.style.display = 'none';
+      activateSubtab(btnSubtabWeather, viewWeather);
       renderPlotlyWeatherChart();
     });
+  }
 
+  if (btnSubtabEvent) {
     btnSubtabEvent.addEventListener('click', () => {
-      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
-      btnSubtabEvent.classList.add('active');
-      if (viewEvent) viewEvent.style.display = 'block';
-      if (viewArima) viewArima.style.display = 'none';
-      if (viewWeather) viewWeather.style.display = 'none';
-      if (viewShift) viewShift.style.display = 'none';
-      if (viewAdvanced) viewAdvanced.style.display = 'none';
+      activateSubtab(btnSubtabEvent, viewEvent);
       renderPlotlyEventChart();
       if (typeof refreshEventsCalendar === 'function') refreshEventsCalendar();
     });
+  }
 
+  if (btnSubtabShift) {
     btnSubtabShift.addEventListener('click', () => {
-      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
-      btnSubtabShift.classList.add('active');
-      if (viewShift) viewShift.style.display = 'block';
-      if (viewArima) viewArima.style.display = 'none';
-      if (viewWeather) viewWeather.style.display = 'none';
-      if (viewEvent) viewEvent.style.display = 'none';
-      if (viewAdvanced) viewAdvanced.style.display = 'none';
+      activateSubtab(btnSubtabShift, viewShift);
       const shiftSelector = document.getElementById('shift-selector');
       renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
     });
+  }
 
+  if (btnSubtabAdvanced) {
     btnSubtabAdvanced.addEventListener('click', () => {
-      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
-      btnSubtabAdvanced.classList.add('active');
-      if (viewAdvanced) viewAdvanced.style.display = 'block';
-      if (viewArima) viewArima.style.display = 'none';
-      if (viewWeather) viewWeather.style.display = 'none';
-      if (viewEvent) viewEvent.style.display = 'none';
-      if (viewShift) viewShift.style.display = 'none';
+      activateSubtab(btnSubtabAdvanced, viewAdvanced);
       if (typeof renderAdvancedAnalytics === 'function') renderAdvancedAnalytics();
     });
   }
