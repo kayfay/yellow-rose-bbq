@@ -902,21 +902,25 @@ function initForecastingControls() {
   }
 
   // Operational Horizon Presets
+  const btnYesterday = document.getElementById('btn-preset-yesterday');
   const btnToday = document.getElementById('btn-preset-today');
   const btnTomorrow = document.getElementById('btn-preset-tomorrow');
   const btnWeekend = document.getElementById('btn-preset-weekend');
   const btnThursday = document.getElementById('btn-preset-thursday');
   const btnFriday = document.getElementById('btn-preset-friday');
   const btnSaturday = document.getElementById('btn-preset-saturday');
+  const btnSunday = document.getElementById('btn-preset-sunday');
   const btn7 = document.getElementById('btn-preset-7');
   const btn14 = document.getElementById('btn-preset-14');
 
+  if (btnYesterday) btnYesterday.addEventListener('click', () => updatePresetHorizon('btn-preset-yesterday', 1, -1));
   if (btnToday) btnToday.addEventListener('click', () => updatePresetHorizon('btn-preset-today', 1, 0));
   if (btnTomorrow) btnTomorrow.addEventListener('click', () => updatePresetHorizon('btn-preset-tomorrow', 1, 1));
   if (btnWeekend) btnWeekend.addEventListener('click', () => updatePresetWeekend());
   if (btnThursday) btnThursday.addEventListener('click', () => updatePresetDay(4, 'btn-preset-thursday'));
   if (btnFriday) btnFriday.addEventListener('click', () => updatePresetDay(5, 'btn-preset-friday'));
   if (btnSaturday) btnSaturday.addEventListener('click', () => updatePresetDay(6, 'btn-preset-saturday'));
+  if (btnSunday) btnSunday.addEventListener('click', () => updatePresetDay(0, 'btn-preset-sunday'));
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
 }
@@ -1733,6 +1737,10 @@ function handleDateSelectionLookup(selectedDateStr) {
       if (demandVal) demandVal.textContent = '1.4x (High Friday Run)';
       if (eventVal) eventVal.textContent = 'Weekend Launch';
       if (weatherVal) weatherVal.textContent = '82°F | Mild';
+    } else if (dow === 0) { // Sunday
+      if (demandVal) demandVal.textContent = '1.3x (Sunday Family Pack Run)';
+      if (eventVal) eventVal.textContent = 'Sunday Smokehouse Service';
+      if (weatherVal) weatherVal.textContent = '86°F | Heavy Rain (31.7mm)';
     } else { // Weekday
       if (demandVal) demandVal.textContent = '1.0x (Standard Baseline)';
       if (eventVal) eventVal.textContent = 'Regular Operations';
