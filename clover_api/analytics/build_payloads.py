@@ -7,7 +7,7 @@ def build_payloads():
     analytics_dir = Path(__file__).parent
     
     payloads = {}
-    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "calendar_events"]:
+    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "calendar_events"]:
         filepath = analytics_dir / (filename + ".json")
         if filepath.exists():
             with open(filepath, 'r') as f:

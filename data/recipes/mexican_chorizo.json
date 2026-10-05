@@ -23,7 +23,7 @@
     { "id": "cloves", "label": "Ground Cloves", "amount": 0.125, "unit": "cups", "gramEq": 11.3, "desc": "" },
     { "id": "vinegar", "label": "Apple Cider Vinegar", "amount": 2.5, "unit": "cups", "desc": "Acidic Binder" },
     { "id": "milk", "label": "Powdered Milk", "amount": 3.0, "unit": "cups", "desc": "Non-Fat Dry Milk Powder" },
-    { "id": "water", "label": "Ice Cold Water", "amount": 10.0, "unit": "cups", "desc": "Split 2x 5.0 cups for before and after curing" },
+    { "id": "water", "label": "Ice Cold Water", "amount": 6.0, "unit": "cups", "desc": "Split 2x 3.0 cups for before and after curing (Vinegar adds liquid)" },
     { "id": "curing-salt", "label": "Pink Curing Salt (Day 1)", "amount": 60, "unit": "g", "desc": "Prague Powder #1", "highlight": true, "isGram": true }
   ],
   "customSteps": {

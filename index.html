@@ -447,18 +447,28 @@
               <span id="kpi-tacos" class="est-number">--</span>
               <span class="est-unit">tacos</span>
             </div>
-            <span class="est-label">Tacos (Draws from Smoked Inventory)</span>
+          <div class="est-card kpi-card-blue">
+            <div class="est-metric">
+              <span id="kpi-current-velocity" class="est-number">--</span>
+            </div>
+            <span class="est-label">Sales Velocity <br><span id="kpi-pacing-status" style="color:#10b981; font-weight:600;">(Normal Flow)</span></span>
+          </div>
+
+          <div class="est-card kpi-card-gold">
+            <div class="est-metric">
+              <span id="kpi-food-cost-pct" class="est-number">29.5%</span>
+            </div>
+            <span class="est-label">Estimated Food Cost <br><span id="kpi-cost-range-note" style="color:#f59e0b">(US Foods Invoices)</span></span>
           </div>
         </div>
       </section>
-
-
 
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <section class="control-card forecasting-header-card">
         <h3>🔬 Model Insights & Data Correlations</h3>
         <div>
-          <button type="button" class="preset-btn active" id="btn-subtab-arima">Baseline Sales Trends</button>
+          <button type="button" class="preset-btn active" id="btn-subtab-predictive">⚡ Hourly Operations & Economics</button>
+          <button type="button" class="preset-btn" id="btn-subtab-arima">Baseline Sales Trends</button>
           <button type="button" class="preset-btn" id="btn-subtab-shift">Hourly Demand Heatmap</button>
           <button type="button" class="preset-btn" id="btn-subtab-weather">Weather Impact Regression</button>
           <button type="button" class="preset-btn" id="btn-subtab-event">Live Event Correlation</button>
@@ -466,7 +476,81 @@
         </div>
       </section>
 
-      <div id="subtab-view-arima">
+      <div id="subtab-view-predictive">
+        <!-- TAB VIEW: Hourly Operations & Food Cost Economics -->
+        <section class="control-card marketing-card">
+          <h2 class="section-title">⚡ Real-Time Hourly Velocity & Wholesale Cost Economics</h2>
+          <div>
+            <h3>Step-by-Step Overview: Kitchen Throughput & Yield Cost</h3>
+            <ul>
+              <li><strong>24-Hour Projected Customer Velocity:</strong> <span id="predictive-velocity-summary">Expected peak volume concentrates during lunch (12:00 PM – 1:30 PM) reaching ~12–14 orders/hr, and dinner rush (5:30 PM – 7:30 PM) reaching ~10–12 orders/hr.</span></li>
+              <li><strong>Meat Yield Shrinkage Notice:</strong> Raw meat undergoes both fat/deckle trim loss and 12–14 hour smoker render loss. Cooked brisket yield typically ranges between <strong>38% – 45%</strong> (approx. 55% – 62% combined trim and shrinkage). At our verified US Foods invoice contract price of <strong>$5.08/lb raw</strong>, effective cooked meat cost is <strong>~$12.70/lb</strong> (Range: $11.29 – $13.37/lb).</li>
+              <li><strong>Kitchen Workflow Directives:</strong>
+                <ul id="predictive-directives-list" style="margin-top: 8px; margin-left: 20px;">
+                  <li>Pull Batch 2 Ribs by 4:00 PM to ensure a 45-minute rest before the 5:00 PM dinner rush.</li>
+                  <li>During rain or extreme humidity, stage 20% extra to-go packaging as dine-in volume shifts toward takeout family packs.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="chart-section">
+          <h2 class="section-title">24-Hour Predicted Order Velocity & Meat Draw</h2>
+          <div class="chart-card">
+            <div id="plotly-predictive-velocity-chart"></div>
+          </div>
+        </section>
+
+        <section class="chart-section" style="margin-top: 20px;">
+          <h2 class="section-title">Wholesale US Foods Commodity Index & Cooked Portion Costs</h2>
+          <div class="chart-card" style="padding: 16px; overflow-x: auto;">
+            <table class="recipe-scaling-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-secondary);">
+                  <th style="padding: 8px;">Wholesale Item</th>
+                  <th style="padding: 8px;">US Foods Raw Price</th>
+                  <th style="padding: 8px;">Estimated Cooked Yield</th>
+                  <th style="padding: 8px;">Effective Cost (Cooked)</th>
+                  <th style="padding: 8px;">Sample Portion Cost</th>
+                </tr>
+              </thead>
+              <tbody id="predictive-costs-tbody">
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Beef Brisket (Choice 120 Deckle-Off)</td>
+                  <td style="padding: 8px;">$5.08 / lb</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">38% – 45% (est. 55%–62% shrinkage)</td>
+                  <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$12.70 / cooked lb</td>
+                  <td style="padding: 8px;">7 oz Sandwich: <strong>$5.56</strong> | 2 oz Taco: <strong>$1.59</strong></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Pork Boston Butt (.25" Trim Bone-In)</td>
+                  <td style="padding: 8px;">$1.82 / lb</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">40% – 48% (est. 52%–60% shrinkage)</td>
+                  <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$4.14 / cooked lb</td>
+                  <td style="padding: 8px;">8 oz Pulled Pork Sandwich: <strong>$2.07</strong></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Pork Sparerib (5 lb Raw Slabs)</td>
+                  <td style="padding: 8px;">$2.40 / lb ($12.00 / slab)</td>
+                  <td style="padding: 8px;">~12 bones per rack</td>
+                  <td style="padding: 8px; font-weight: 600; color: #f1c40f;">$12.00 / full rack</td>
+                  <td style="padding: 8px;">Half Rack: <strong>$6.00</strong> | Full Rack: <strong>$12.00</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; font-weight: 600;">Turkey Roast Breast Skin-On</td>
+                  <td style="padding: 8px;">$3.58 / lb</td>
+                  <td style="padding: 8px;">65% – 75% yield</td>
+                  <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$5.11 / cooked lb</td>
+                  <td style="padding: 8px;">Turkey Sandwich (0.3 lb): <strong>$1.53</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div id="subtab-view-arima" style="display: none;">
       <!-- TAB 1 VIEW: ARIMA Baseline Model -->
       
         <section class="control-card marketing-card">

@@ -280,7 +280,7 @@ const RECIPES = {
       { id: 'cloves', label: 'Ground Cloves', amount: 0.125, unit: 'cups', gramEq: 11.3, desc: '' },
       { id: 'vinegar', label: 'Apple Cider Vinegar', amount: 2.5, unit: 'cups', desc: 'Acidic Binder' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Non-Fat Dry Milk Powder' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
+      { id: 'water', label: 'Ice Cold Water', amount: 6.0, unit: 'cups', desc: 'Split 2x 3.0 cups for before and after curing (Vinegar adds liquid)' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Prague Powder #1', highlight: true, isGram: true }
     ],
     customSteps: {
@@ -774,29 +774,43 @@ function initForecastingControls() {
   }
 
   // Subtab switching
+  const btnSubtabPredictive = document.getElementById('btn-subtab-predictive');
   const btnSubtabArima = document.getElementById('btn-subtab-arima');
   const btnSubtabWeather = document.getElementById('btn-subtab-weather');
   const btnSubtabEvent = document.getElementById('btn-subtab-event');
   const btnSubtabShift = document.getElementById('btn-subtab-shift');
   const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
 
+  const viewPredictive = document.getElementById('subtab-view-predictive');
   const viewArima = document.getElementById('subtab-view-arima');
   const viewWeather = document.getElementById('subtab-view-weather');
   const viewEvent = document.getElementById('subtab-view-event');
   const viewShift = document.getElementById('subtab-view-shift');
   const viewAdvanced = document.getElementById('subtab-view-advanced');
 
-  if (btnSubtabArima && btnSubtabWeather && btnSubtabEvent && btnSubtabShift && btnSubtabAdvanced) {
+  const allSubtabBtns = [btnSubtabPredictive, btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].filter(Boolean);
+  const allSubtabViews = [viewPredictive, viewArima, viewWeather, viewEvent, viewShift, viewAdvanced].filter(Boolean);
+
+  function activateSubtab(btn, view) {
+    allSubtabBtns.forEach(b => b.classList.remove('active'));
+    allSubtabViews.forEach(v => v.style.display = 'none');
+    if (btn) btn.classList.add('active');
+    if (view) view.style.display = 'block';
+  }
+
+  if (btnSubtabPredictive) {
+    btnSubtabPredictive.addEventListener('click', () => {
+      activateSubtab(btnSubtabPredictive, viewPredictive);
+      renderPlotlyPredictiveChart();
+    });
+  }
+
+  if (btnSubtabArima) {
     btnSubtabArima.addEventListener('click', () => {
-      [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
-      btnSubtabArima.classList.add('active');
-      if (viewArima) viewArima.style.display = 'block';
-      if (viewWeather) viewWeather.style.display = 'none';
-      if (viewEvent) viewEvent.style.display = 'none';
-      if (viewShift) viewShift.style.display = 'none';
-      if (viewAdvanced) viewAdvanced.style.display = 'none';
+      activateSubtab(btnSubtabArima, viewArima);
       renderPlotlyForecastingChart(getActiveDaysCount());
     });
+  }
 
     btnSubtabWeather.addEventListener('click', () => {
       [btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].forEach(b => b.classList.remove('active'));
@@ -864,6 +878,7 @@ function initForecastingControls() {
     if (!timeElem) return;
     
     fetch('clover_api/analytics/sync_status.json?v=' + Date.now())
+      .catch(() => fetch('analytics/sync_status.json?v=' + Date.now()))
       .then(res => res.json())
       .then(data => {
         if (data.last_synced_at) {
@@ -2117,5 +2132,99 @@ async function renderPlotlyWeatherChart() {
     Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, {responsive: true, displayModeBar: false});
   }
 }
+
+async function renderPlotlyPredictiveChart() {
+  const chartElem = document.getElementById('plotly-predictive-velocity-chart');
+  if (!chartElem) return;
+
+  let payload = null;
+  try {
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.predictive_payload) {
+      payload = window.BBQ_PAYLOADS.predictive_payload;
+    } else {
+      const res = await fetch('clover_api/analytics/predictive_payload.json?v=' + Date.now());
+      if (res.ok) payload = await res.json();
+    }
+  } catch (e) {
+    console.warn('Could not load predictive payload:', e);
+  }
+
+  if (!payload || !payload.hourly_forecast) return;
+
+  // Hydrate Crucial Top-Shelf KPIs
+  const kpiVelocity = document.getElementById('kpi-current-velocity');
+  const kpiPacing = document.getElementById('kpi-pacing-status');
+  const kpiFoodCost = document.getElementById('kpi-food-cost-pct');
+
+  if (payload.summary_kpis) {
+    if (kpiVelocity) kpiVelocity.textContent = payload.summary_kpis.current_sales_velocity || '--';
+    if (kpiPacing) kpiPacing.textContent = `(${payload.summary_kpis.pacing_status || 'Normal'})`;
+    if (kpiFoodCost) kpiFoodCost.textContent = `${payload.summary_kpis.estimated_food_cost_pct || 29.5}%`;
+  }
+
+  // Hydrate Directives
+  const directivesList = document.getElementById('predictive-directives-list');
+  if (directivesList && Array.isArray(payload.operational_directives)) {
+    directivesList.innerHTML = payload.operational_directives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
+  }
+
+  const hours = payload.hourly_forecast.map(r => `${r.hour_display} (${r.day_name})`);
+  const orders = payload.hourly_forecast.map(r => r.predicted_orders);
+  const revenue = payload.hourly_forecast.map(r => r.predicted_revenue);
+  const brisketDraw = payload.hourly_forecast.map(r => r.brisket_cooked_lbs);
+
+  const traces = [
+    {
+      x: hours,
+      y: orders,
+      name: 'Order Velocity (Orders/hr)',
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#3b82f6', width: 3 },
+      marker: { size: 6 }
+    },
+    {
+      x: hours,
+      y: brisketDraw,
+      name: 'Smoked Brisket Draw (lbs/hr)',
+      type: 'bar',
+      yaxis: 'y2',
+      marker: { color: '#e67e22', opacity: 0.7 }
+    }
+  ];
+
+  const layout = {
+    title: '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate',
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(20,20,30,0.6)',
+    font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 11 },
+    xaxis: { gridcolor: 'rgba(255,255,255,0.1)', tickangle: -45 },
+    yaxis: { title: 'Order Velocity (Orders/hr)', gridcolor: 'rgba(255,255,255,0.1)' },
+    yaxis2: {
+      title: 'Cooked Brisket Depleted (lbs/hr)',
+      overlaying: 'y',
+      side: 'right',
+      showgrid: false,
+      titlefont: { color: '#e67e22' },
+      tickfont: { color: '#e67e22' }
+    },
+    legend: { orientation: 'h', y: -0.3, x: 0 },
+    margin: { l: 50, r: 50, t: 40, b: 90 }
+  };
+
+  if (typeof Plotly !== 'undefined') {
+    Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, { responsive: true, displayModeBar: false });
+  }
+}
+
+// Ensure predictive KPIs hydrate on initial page load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    if (typeof renderPlotlyPredictiveChart === 'function') {
+      renderPlotlyPredictiveChart();
+    }
+  }, 300);
+});
+
 
 

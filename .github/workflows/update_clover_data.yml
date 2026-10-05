@@ -2,8 +2,8 @@ name: Update Clover Data
 
 on:
   schedule:
-    # Run every day at 3:00 AM EST (8:00 AM UTC)
-    - cron: '0 8 * * *'
+    # Run every hour at minute 0
+    - cron: '0 * * * *'
   workflow_dispatch: # Allow manual trigger from the GitHub Actions tab
 
 permissions:
@@ -49,25 +49,29 @@ jobs:
           
           echo "Running analytics engine..."
           python generate_historical_payload.py
+          python clover_api/analytics/food_cost_engine.py
           python clover_api/analytics/weather_impact.py
           python clover_api/analytics/event_impact.py
+          python clover_api/analytics/shift_forecast.py
           python clover_api/analytics/arima_baseline.py
           python clover_api/analytics/dashboard.py
           python clover_api/analytics/advanced_analytics.py
+          python scripts/update_predictive_cache.py
           
-          echo "Building javascript payloads..."
+          echo "Building javascript payloads and sync status..."
           python clover_api/analytics/build_payloads.py
+          python -c "import json, datetime, os; status = {'last_synced_at': datetime.datetime.now().isoformat(), 'status': 'success', 'message': '', 'next_scheduled_sync': 'Hourly via GitHub Actions'}; os.makedirs('clover_api/analytics', exist_ok=True); os.makedirs('analytics', exist_ok=True); open('clover_api/analytics/sync_status.json', 'w').write(json.dumps(status, indent=2)); open('analytics/sync_status.json', 'w').write(json.dumps(status, indent=2))"
 
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add clover_api/analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
+          git add clover_api/analytics/*.json analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
           
           # Only commit if there are changes
           if git diff-index --quiet HEAD --; then
             echo "No new data to commit."
           else
-            git commit -m "chore(data): auto-update clover api analytics data"
+            git commit -m "chore(data): auto-update clover api analytics data (hourly)"
             git push
           fi

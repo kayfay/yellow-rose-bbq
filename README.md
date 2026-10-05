@@ -9,10 +9,10 @@ The Yellow Rose BBQ Command Center operates on a decoupled, serverless architect
 Understanding this architecture is crucial for maintaining system reliability, auditing for potential bugs, and ensuring secure data handling.
 
 ### The Data Pipeline (Backend)
-The backend consists of automated Python scripts that run on a nightly cron schedule (3:00 AM EST) via GitHub Actions (`.github/workflows/update_clover_data.yml`). 
+The backend consists of automated Python scripts that run on an hourly cron schedule via GitHub Actions (`.github/workflows/update_clover_data.yml`). 
 - **Data Ingestion:** Scripts under `clover_api/ingest.py` securely authenticate with the Clover POS REST API to fetch orders, payments, and itemized catalog data.
 - **Processing & Storage:** Raw data is stored locally in an ephemeral SQLite database (`clover_sales.db`). Data transformations, merging, and machine learning computations are handled using a combination of `pandas` and `polars` for high-performance aggregations.
-- **Payload Generation:** The pipeline runs predictive analytics (SARIMA forecasting, weather impact, event correlations) and exports sanitized, aggregated statistical data into static JSON payloads (e.g., `weather_payload.json`, `advanced_payload.json`).
+- **Payload Generation:** The pipeline runs predictive analytics (SARIMA forecasting, weather impact, shift foot-traffic curves, event correlations) and exports sanitized, aggregated statistical data into static JSON payloads (e.g., `dashboard_payload.json`, `shift_payload.json`, `weather_payload.json`, `advanced_payload.json`).
 - **Deployment:** The GitHub Action commits these static JSON payloads and an auto-generated `WEBSITE_MENU.md` back to the repository, updating the live frontend data.
 
 ### The Frontend Dashboard

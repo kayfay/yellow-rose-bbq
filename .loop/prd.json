@@ -2,22 +2,27 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Research authentic Mexican Chorizo recipe metrics and compile standardized JSON/Markdown entry.",
+      "description": "Audit hourly data feeds and build feature engineering pipeline (hourly lag features, rolling averages, day/time cyclical encodings).",
       "passes": true
     },
     {
       "id": 2,
-      "description": "Add Mexican Chorizo recipe record to site database / static asset catalog.",
+      "description": "Build and execute notebooks/hourly_predictive_analytics.ipynb in Colab/Jupyter format with backtesting visualizations.",
       "passes": true
     },
     {
       "id": 3,
-      "description": "Build / update frontend recipe card component with interactive yield/ingredient scaling.",
+      "description": "Export predictive model outputs to structured JSON API endpoints (/api/analytics/predictive_hourly.json).",
       "passes": true
     },
     {
       "id": 4,
-      "description": "Write automated Tier 1 & Tier 2 verification script scripts/verify_recipe_integration.py.",
+      "description": "Integrate predictive analytics charts and anomaly alerts into the sausage.allen.tools web frontend.",
+      "passes": true
+    },
+    {
+      "id": 5,
+      "description": "Write automated Tier 1 & Tier 2 verification script scripts/verify_ml_analytics.py.",
       "passes": true
     }
   ]
