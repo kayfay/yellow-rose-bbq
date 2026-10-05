@@ -861,13 +861,30 @@ function initForecastingControls() {
   function updateSyncStatusTime() {
     const timeElem = document.getElementById('last-updated-time');
     if (!timeElem) return;
-    
-    if (typeof fetch !== 'function') {
+
+    const getPayloadTime = () => {
       if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-        timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
+        const d = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at);
+        if (!isNaN(d.getTime())) return d;
+      }
+      return null;
+    };
+
+    const setTimeText = (syncDate) => {
+      const payloadDate = getPayloadTime();
+      let bestDate = syncDate;
+      if (!bestDate || (payloadDate && payloadDate > bestDate)) {
+        bestDate = payloadDate;
+      }
+      if (bestDate && !isNaN(bestDate.getTime())) {
+        timeElem.textContent = bestDate.toLocaleString();
       } else {
         timeElem.textContent = new Date().toLocaleTimeString();
       }
+    };
+    
+    if (typeof fetch !== 'function') {
+      setTimeText(null);
       return;
     }
     
@@ -875,17 +892,11 @@ function initForecastingControls() {
       .catch(() => fetch('analytics/sync_status.json?v=' + Date.now()))
       .then(res => res.json())
       .then(data => {
-        if (data.last_synced_at) {
-          timeElem.textContent = new Date(data.last_synced_at).toLocaleString();
-        }
+        const syncDate = (data && data.last_synced_at) ? new Date(data.last_synced_at) : null;
+        setTimeText(syncDate);
       })
-      .catch(err => {
-        // Fallback to forecast generated time or current time
-        if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-          timeElem.textContent = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at).toLocaleString();
-        } else {
-          timeElem.textContent = new Date().toLocaleTimeString();
-        }
+      .catch(() => {
+        setTimeText(null);
       });
   }
 
