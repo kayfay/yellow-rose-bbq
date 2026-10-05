@@ -2616,7 +2616,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-05T14:22:12.118612",
+    "generated_at": "2026-10-05T14:28:36.542508",
     "summary_kpis": {
       "projected_24h_revenue_usd": 2512.3,
       "estimated_food_cost_pct": 29.5,

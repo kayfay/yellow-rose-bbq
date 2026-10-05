@@ -1435,6 +1435,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const turkeyElem = document.getElementById('kpi-turkey-lbs');
     const rosebudsElem = document.getElementById('kpi-rosebuds');
     const tacosElem = document.getElementById('kpi-tacos');
+    const totalCookedElem = document.getElementById('kpi-total-cooked-meat');
+    const totalCookedSub = document.getElementById('kpi-total-cooked-sub');
 
     // Sausage: sVal is in lbs. 1 Batch yields ~60 lbs stuffed weight. 3 links = 1 lb.
     const sausageBatches = Math.ceil(sVal / 60.0) || 0;
@@ -1458,6 +1460,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (turkeyElem) turkeyElem.textContent = '0';
       if (rosebudsElem) rosebudsElem.textContent = '0';
       if (tacosElem) tacosElem.textContent = '0';
+      if (totalCookedElem) totalCookedElem.textContent = '0';
+      if (totalCookedSub) totalCookedSub.textContent = '(Closed / 0 lbs)';
 
       if (bCasesElem) bCasesElem.textContent = '(Closed / 0 Cases)';
       if (pCasesElem) pCasesElem.textContent = '(Closed / 0 Cases)';
@@ -1475,6 +1479,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (turkeyElem) turkeyElem.textContent = tVal;
       if (rosebudsElem) rosebudsElem.textContent = rbVal;
       if (tacosElem) tacosElem.textContent = tacoVal;
+      if (totalCookedElem) totalCookedElem.textContent = totalCooked;
+      if (totalCookedSub) totalCookedSub.textContent = `(~${totalRaw} lbs raw trim)`;
 
       if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
       if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
@@ -1504,7 +1510,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
-    if (revenueElem) revenueElem.textContent = pctDisplay;
+    const demandPctElem = document.getElementById('kpi-demand-pct');
+    if (revenueElem) {
+      revenueElem.textContent = isTargetClosed ? '$0 (Closed)' : '$' + Math.round(totalRev).toLocaleString();
+    }
+    if (demandPctElem) {
+      demandPctElem.textContent = isTargetClosed ? '(Closed Today)' : `(${pctDisplay} vs Baseline)`;
+    }
     if (demandLabelElem) {
       if (isTargetClosed) {
         demandLabelElem.textContent = `Smokehouse & Restaurant Closed Today (${matchedRecord.day_name || shortDayStr} Pit Maintenance & Prep). Zero service demand.`;
