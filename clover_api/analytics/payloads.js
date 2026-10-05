@@ -2616,7 +2616,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-05T14:28:36.542508",
+    "generated_at": "2026-10-05T14:35:36.667156",
     "summary_kpis": {
       "projected_24h_revenue_usd": 2512.3,
       "estimated_food_cost_pct": 29.5,
@@ -2953,6 +2953,25 @@ window.BBQ_PAYLOADS = {
       "Meat Depletion Pacing: Next 24 hours projected to draw ~12.5 lbs smoked brisket and ~6.8 lbs pulled pork from hot storage.",
       "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
       "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
+    ]
+  },
+  "historical_payload": {
+    "historical_records": [
+      {
+        "date": "2023-11-14",
+        "day_name": "Tue",
+        "actual_revenue": 15.0,
+        "predicted_revenue": 15.0,
+        "brisket_raw_lbs": 40.0,
+        "pork_shoulder_raw_lbs": 24.0,
+        "sausage_lbs": 20.0,
+        "tacos_sold": 0,
+        "rosebuds_sold": 0,
+        "pork_ribs_racks": 0,
+        "beef_dino_ribs": 0,
+        "is_historical": true,
+        "data_type": "ACTUAL"
+      }
     ]
   },
   "calendar_events": [
