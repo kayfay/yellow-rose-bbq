@@ -35,7 +35,8 @@ def run_event_impact_analysis():
     pl_events = pl.from_pandas(df_events)
 
     pl_daily_sales = (
-        pl_orders.group_by("date")
+        pl_orders.with_columns(pl.col("total_usd").cast(pl.Float64, strict=False).fill_null(0.0))
+        .group_by("date")
         .agg(pl.sum("total_usd").alias("daily_revenue"))
         .sort("date")
     )

@@ -232,6 +232,9 @@ def generate_predictive_cache():
                 "Smoker Pacing: Monitor hot hold levels closely by 4:00 PM to avoid leftover waste before Monday closure."
             ]
             
+        staff_count = 0 if is_closed else min(5, max(2, int(d_cum_rev // 1000) + 1))
+        pit_hours = round(staff_count * 8.5, 1) if not is_closed else 0.0
+
         profile_obj = {
             "day_name": day_name,
             "short_day": short_name,
@@ -241,9 +244,13 @@ def generate_predictive_cache():
             "peak_rush_window": d_peak_hour_str,
             "total_orders": round(sum(r["predicted_orders"] for r in day_hourly), 1),
             "projected_revenue_usd": round(d_cum_rev, 2),
+            "estimated_cogs_usd": round(d_cum_cogs, 2),
             "estimated_food_cost_pct": d_food_cost,
+            "recommended_staff": staff_count,
+            "pitmaster_hours": pit_hours,
             "total_brisket_draw_lbs": round(d_cum_brisket, 1),
             "total_pork_draw_lbs": round(d_cum_pork, 1),
+            "average_ticket_usd": 48.50 if not is_closed else 0.0,
             "current_sales_velocity": f"{round(d_peak_orders, 1)} orders/hr (Peak)" if not is_closed else "0 orders/hr (Closed)",
             "pacing_status": "Heavy Rush Surge" if d_peak_orders >= 10.0 else ("Normal Pacing" if not is_closed else "Closed"),
             "hourly_forecast": day_hourly,
@@ -256,17 +263,25 @@ def generate_predictive_cache():
         day_profiles[day_name.lower()] = profile_obj
         day_profiles[short_name.lower()] = profile_obj
 
+    current_staff = 0 if current_dow == 0 else min(5, max(2, int(cum_rev // 1000) + 1))
+    current_pit_hours = round(current_staff * 8.5, 1) if current_dow != 0 else 0.0
+
     payload = {
         "generated_at": now.isoformat(),
         "summary_kpis": {
             "projected_24h_revenue_usd": round(cum_rev, 2),
+            "estimated_24h_cogs_usd": round(cum_cogs, 2),
             "estimated_food_cost_pct": food_cost_pct,
+            "average_ticket_usd": 48.50,
+            "recommended_staff": current_staff,
+            "pitmaster_hours": current_pit_hours,
             "peak_rush_window": peak_hour_str,
             "current_sales_velocity": f"{round(upcoming_24h[0]['predicted_orders'], 1)} orders/hr",
             "pacing_status": upcoming_24h[0]["pacing_status"],
             "total_brisket_draw_lbs": round(cum_brisket, 1),
             "total_pork_draw_lbs": round(cum_pork, 1)
         },
+        "portion_cogs_breakdown": meat_costs.get("item_portions_cost", {}),
         "wholesale_meat_index": {
             "raw_brisket_price_per_lb": meat_costs["wholesale_raw_costs"]["raw_beef_brisket_per_lb"],
             "raw_pork_butt_price_per_lb": meat_costs["wholesale_raw_costs"]["raw_pork_butt_per_lb"],

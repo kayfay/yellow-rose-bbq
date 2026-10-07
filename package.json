@@ -4,7 +4,8 @@
   "description": "A mobile-first, high-contrast, kitchen-line-optimized productivity tool and recipe calculator. Designed for elbow-tap interactions during production.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "bash run_tests.sh",
+    "check": "node --check app.js d3_charts.js"
   },
   "repository": {
     "type": "git",

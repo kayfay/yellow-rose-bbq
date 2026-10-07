@@ -472,7 +472,22 @@
             <div class="est-metric">
               <span id="kpi-food-cost-pct" class="est-number">29.5%</span>
             </div>
-            <span class="est-label">Estimated Food Cost <br><span id="kpi-cost-range-note" style="color:#f59e0b">(US Foods Invoices)</span></span>
+            <span class="est-label">Estimated Food Cost <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- COGS)</span></span>
+          </div>
+
+          <div class="est-card kpi-card-teal">
+            <div class="est-metric">
+              <span id="kpi-aov-usd" class="est-number">$48.50</span>
+            </div>
+            <span class="est-label">Average Ticket Revenue <br><span id="kpi-aov-sub" style="color:#14b8a6; font-weight:600;">(Average Order Value)</span></span>
+          </div>
+
+          <div class="est-card kpi-card-purple">
+            <div class="est-metric">
+              <span id="kpi-labor-hours" class="est-number">--</span>
+              <span class="est-unit">hrs</span>
+            </div>
+            <span class="est-label">Labor & Pitmaster Hours <br><span id="kpi-staff-count" style="color:#a855f7; font-weight:600;">(-- Staff)</span></span>
           </div>
         </div>
       </section>
@@ -517,7 +532,7 @@
         </section>
 
         <section class="chart-section" style="margin-top: 20px;">
-          <h2 class="section-title">Wholesale US Foods Commodity Index & Cooked Portion Costs</h2>
+          <h2 class="section-title">Wholesale US Foods Commodity Index & Cooked Meat Yields</h2>
           <div class="chart-card" style="padding: 16px; overflow-x: auto;">
             <table class="recipe-scaling-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
               <thead>
@@ -526,37 +541,286 @@
                   <th style="padding: 8px;">US Foods Raw Price</th>
                   <th style="padding: 8px;">Estimated Cooked Yield</th>
                   <th style="padding: 8px;">Effective Cost (Cooked)</th>
-                  <th style="padding: 8px;">Sample Portion Cost</th>
+                  <th style="padding: 8px;">Yield & Trim Shrinkage Notes</th>
                 </tr>
               </thead>
               <tbody id="predictive-costs-tbody">
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 8px; font-weight: 600;">Beef Brisket (Choice 120 Deckle-Off)</td>
                   <td style="padding: 8px;">$5.08 / lb</td>
-                  <td style="padding: 8px; color: var(--accent-orange);">38% – 45% (est. 55%–62% shrinkage)</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">38% – 45% (Nominal 40%)</td>
                   <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$12.70 / cooked lb</td>
-                  <td style="padding: 8px;">7 oz Sandwich: <strong>$5.56</strong> | 2 oz Taco: <strong>$1.59</strong></td>
+                  <td style="padding: 8px; color: var(--text-secondary);">55%–62% combined trim scrap & 14h smoker rendering loss</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 8px; font-weight: 600;">Pork Boston Butt (.25" Trim Bone-In)</td>
                   <td style="padding: 8px;">$1.82 / lb</td>
-                  <td style="padding: 8px; color: var(--accent-orange);">40% – 48% (est. 52%–60% shrinkage)</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">40% – 48% (Nominal 44%)</td>
                   <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$4.14 / cooked lb</td>
-                  <td style="padding: 8px;">8 oz Pulled Pork Sandwich: <strong>$2.07</strong></td>
+                  <td style="padding: 8px; color: var(--text-secondary);">52%–60% bone & fat trim plus 10h smoke rendering</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 8px; font-weight: 600;">Pork Sparerib (5 lb Raw Slabs)</td>
                   <td style="padding: 8px;">$2.40 / lb ($12.00 / slab)</td>
-                  <td style="padding: 8px;">~12 bones per rack</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">~12 bones per rack</td>
                   <td style="padding: 8px; font-weight: 600; color: #f1c40f;">$12.00 / full rack</td>
-                  <td style="padding: 8px;">Half Rack: <strong>$6.00</strong> | Full Rack: <strong>$12.00</strong></td>
+                  <td style="padding: 8px; color: var(--text-secondary);">3-2-1 smoke method; ~$1.00 raw bone cost / portion</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
                   <td style="padding: 8px; font-weight: 600;">Turkey Roast Breast Skin-On</td>
                   <td style="padding: 8px;">$3.58 / lb</td>
-                  <td style="padding: 8px;">65% – 75% yield</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">65% – 75% (Nominal 70%)</td>
                   <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$5.11 / cooked lb</td>
-                  <td style="padding: 8px;">Turkey Sandwich (0.3 lb): <strong>$1.53</strong></td>
+                  <td style="padding: 8px; color: var(--text-secondary);">Lean breast muscle; minimal trim with butter bath finish</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; font-weight: 600;">House Smoked Sausage Links (50 lb Batch)</td>
+                  <td style="padding: 8px;">$2.85 / lb (Trim Blend)</td>
+                  <td style="padding: 8px; color: var(--accent-orange);">80% – 90% (Nominal 85%)</td>
+                  <td style="padding: 8px; font-weight: 600; color: #f1c40f;">~$1.25 / 4 oz link</td>
+                  <td style="padding: 8px; color: var(--text-secondary);">Formulated with brisket trimmings & natural hog casings</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="chart-section" style="margin-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h2 class="section-title" style="margin-bottom: 0;">📋 Complete Menu Item & Portion-Level COGS Breakdown</h2>
+            <span style="font-size: 12px; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.3);">Target Food Cost Benchmark: ~28% – 32%</span>
+          </div>
+          <div class="chart-card" style="padding: 16px; overflow-x: auto;">
+            <table class="recipe-scaling-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-secondary);">
+                  <th style="padding: 8px;">Menu Category & Item</th>
+                  <th style="padding: 8px;">Portion / Cut Specification</th>
+                  <th style="padding: 8px;">Wholesale Component Cost Math</th>
+                  <th style="padding: 8px; color: #f1c40f;">Portion COGS</th>
+                  <th style="padding: 8px;">Menu Retail Price</th>
+                  <th style="padding: 8px;">Food Cost %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Sandwiches & Tacos -->
+                <tr style="background: rgba(255, 255, 255, 0.03); font-weight: 600; color: var(--accent-orange);">
+                  <td colspan="6" style="padding: 8px 8px 4px;">🥪 TEXAS BBQ SANDWICHES & TACOS</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Brisket Sandwich (Chopped / Moist / Lean)</td>
+                  <td style="padding: 8px;">7 oz cooked brisket + brioche bun & pickles</td>
+                  <td style="padding: 8px;">$(7/16) \times \$12.70 ($5.56 meat) + $0.35 bun</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$5.91</td>
+                  <td style="padding: 8px;">$17.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">34.8%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Pulled Pork Sandwich</td>
+                  <td style="padding: 8px;">8 oz cooked pork + brioche bun & slaw</td>
+                  <td style="padding: 8px;">$(8/16) \times \$4.14 ($2.07 meat) + $0.35 bun</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$2.42</td>
+                  <td style="padding: 8px;">$14.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">17.3%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Smoked Turkey Sandwich</td>
+                  <td style="padding: 8px;">5 oz cooked turkey breast + brioche bun</td>
+                  <td style="padding: 8px;">$(5/16) \times \$5.11 ($1.60 meat) + $0.35 bun</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$1.95</td>
+                  <td style="padding: 8px;">$14.50</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">13.4%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Sausage Sandwich</td>
+                  <td style="padding: 8px;">1 split house link (4 oz) + brioche bun</td>
+                  <td style="padding: 8px;">$1.25 link + $0.35 bun</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$1.60</td>
+                  <td style="padding: 8px;">$13.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">12.3%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Crispy Quesa Taco (Brisket)</td>
+                  <td style="padding: 8px;">2 oz brisket + griddled corn tortilla, queso, consommé</td>
+                  <td style="padding: 8px;">$(2/16) \times \$12.70 ($1.59 meat) + $0.45 taco shell/queso</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$2.04</td>
+                  <td style="padding: 8px;">$6.50</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">31.4%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Street Taco (Pork / Carnitas)</td>
+                  <td style="padding: 8px;">2 oz pulled pork + double street tortilla, cilantro, onion</td>
+                  <td style="padding: 8px;">$(2/16) \times \$4.14 ($0.52 meat) + $0.25 tortilla/garnish</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.77</td>
+                  <td style="padding: 8px;">$5.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">15.4%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Street Taco (Smoked Turkey)</td>
+                  <td style="padding: 8px;">2 oz sliced turkey + double street tortilla & salsa</td>
+                  <td style="padding: 8px;">$(2/16) \times \$5.11 ($0.64 meat) + $0.25 tortilla/garnish</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.89</td>
+                  <td style="padding: 8px;">$5.50</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">16.2%</td>
+                </tr>
+
+                <!-- Smoked Meats by the Pound & Racks -->
+                <tr style="background: rgba(255, 255, 255, 0.03); font-weight: 600; color: var(--accent-orange);">
+                  <td colspan="6" style="padding: 8px 8px 4px;">🥩 SMOKED MEATS BY THE POUND & RIBS</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Sliced Beef Brisket (1 lb)</td>
+                  <td style="padding: 8px;">16 oz net cooked butcher paper portion</td>
+                  <td style="padding: 8px;">$5.08 raw price / 0.40 yield factor</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$12.70</td>
+                  <td style="padding: 8px;">$34.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">37.4%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Pulled Pork (1 lb)</td>
+                  <td style="padding: 8px;">16 oz net cooked butcher paper portion</td>
+                  <td style="padding: 8px;">$1.82 raw price / 0.44 yield factor</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$4.14</td>
+                  <td style="padding: 8px;">$24.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">17.3%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Smoked Turkey Breast (1 lb)</td>
+                  <td style="padding: 8px;">16 oz net cooked sliced portion</td>
+                  <td style="padding: 8px;">$3.58 raw price / 0.70 yield factor</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$5.11</td>
+                  <td style="padding: 8px;">$26.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">19.7%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Jalapeño Cheddar Sausage Link</td>
+                  <td style="padding: 8px;">Single 4 oz smoked link</td>
+                  <td style="padding: 8px;">Trim scrap + casing + high-temp cheese</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$1.38</td>
+                  <td style="padding: 8px;">$7.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">19.7%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Full Rack Pork Spare Ribs</td>
+                  <td style="padding: 8px;">12 bones (~3.0 lbs cooked yield)</td>
+                  <td style="padding: 8px;">5 lb raw slab at $2.40 / lb wholesale</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$12.00</td>
+                  <td style="padding: 8px;">$38.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">31.6%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Half Rack Pork Spare Ribs</td>
+                  <td style="padding: 8px;">6 bones (~1.5 lbs cooked yield)</td>
+                  <td style="padding: 8px;">$12.00 full rack cost / 2</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$6.00</td>
+                  <td style="padding: 8px;">$21.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">28.6%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Single Bone Pork Rib</td>
+                  <td style="padding: 8px;">1 bone rib add-on</td>
+                  <td style="padding: 8px;">$12.00 full rack cost / 12</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$1.00</td>
+                  <td style="padding: 8px;">$4.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">25.0%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Beef Dino Short Rib</td>
+                  <td style="padding: 8px;">1 single giant plate short rib (~1.5 lbs cooked)</td>
+                  <td style="padding: 8px;">3-bone chuck flap short plate wholesale cut</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$14.50</td>
+                  <td style="padding: 8px;">$42.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">34.5%</td>
+                </tr>
+
+                <!-- Combo Platters -->
+                <tr style="background: rgba(255, 255, 255, 0.03); font-weight: 600; color: var(--accent-orange);">
+                  <td colspan="6" style="padding: 8px 8px 4px;">🍽️ COMBINATION PLATTERS & PLATES</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">BBQ Plate (1 Meat w/ 2 Sides)</td>
+                  <td style="padding: 8px;">0.5 lb brisket + 2 standard sides</td>
+                  <td style="padding: 8px;">$6.35 meat + $1.20 two sides</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$7.55</td>
+                  <td style="padding: 8px;">$23.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">32.8%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">2 Meat Plate (w/ 2 Sides)</td>
+                  <td style="padding: 8px;">0.5 lb brisket + 2 pork ribs + 2 sides</td>
+                  <td style="padding: 8px;">$6.35 brisket + $2.00 ribs + $1.20 sides</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$9.55</td>
+                  <td style="padding: 8px;">$29.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">32.9%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Hill Country Trinity w/ 3 Sides</td>
+                  <td style="padding: 8px;">0.5 lb brisket + 3 ribs + 1 sausage link + 3 sides</td>
+                  <td style="padding: 8px;">$6.35 + $3.00 + $1.25 + $1.80</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$12.40</td>
+                  <td style="padding: 8px;">$39.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">31.8%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Pitmaster Platter & 3 Sides</td>
+                  <td style="padding: 8px;">0.5 lb brisket + 0.5 lb pork + 3 ribs + 1 sausage + 3 sides</td>
+                  <td style="padding: 8px;">$6.35 + $2.07 + $3.00 + $1.25 + $1.80</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$14.47</td>
+                  <td style="padding: 8px;">$48.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">30.1%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Bevo Platter (Family Feast)</td>
+                  <td style="padding: 8px;">1.0 lb brisket + 2 sausage links + 6 ribs (half rack) + 4 sides</td>
+                  <td style="padding: 8px;">$12.70 + $2.50 + $6.00 + $2.40</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$23.60</td>
+                  <td style="padding: 8px;">$79.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">29.9%</td>
+                </tr>
+
+                <!-- Sides & Extras -->
+                <tr style="background: rgba(255, 255, 255, 0.03); font-weight: 600; color: var(--accent-orange);">
+                  <td colspan="6" style="padding: 8px 8px 4px;">🌽 SCRATCH SIDES & APPETIZERS</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Rose Buds (Bacon-Wrapped Bites)</td>
+                  <td style="padding: 8px;">4-pack (bacon, cream cheese, brisket rub)</td>
+                  <td style="padding: 8px;">$1.20 bacon + $0.45 cheese/spices + $0.20 packaging</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$1.85</td>
+                  <td style="padding: 8px;">$9.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">20.6%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Elote Street Corn / Pasta Salad</td>
+                  <td style="padding: 8px;">6 oz serving</td>
+                  <td style="padding: 8px;">Sweet corn + cotija + crema + tajin</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.85</td>
+                  <td style="padding: 8px;">$5.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">17.0%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Charro Beans</td>
+                  <td style="padding: 8px;">6 oz serving</td>
+                  <td style="padding: 8px;">Pinto beans + bacon trimmings + chiles</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.65</td>
+                  <td style="padding: 8px;">$4.50</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">14.4%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 8px; font-weight: 600;">Mac & Cheese</td>
+                  <td style="padding: 8px;">6 oz serving</td>
+                  <td style="padding: 8px;">Cavatappi pasta + sharp cheddar béchamel</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.95</td>
+                  <td style="padding: 8px;">$5.00</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">19.0%</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; font-weight: 600;">Potato Salad / Coleslaw</td>
+                  <td style="padding: 8px;">6 oz serving</td>
+                  <td style="padding: 8px;">Red potatoes / fresh cabbage + dressing</td>
+                  <td style="padding: 8px; font-weight: 700; color: #f1c40f;">$0.55</td>
+                  <td style="padding: 8px;">$4.50</td>
+                  <td style="padding: 8px; color: #10b981; font-weight: 600;">12.2%</td>
                 </tr>
               </tbody>
             </table>

@@ -32,3 +32,4 @@ playwright-report/
 test-results/
 .pytest_cache/
 *.bak
+.ipynb_checkpoints/

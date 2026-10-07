@@ -94,6 +94,7 @@ def normalize_quantity(df: pl.DataFrame) -> pl.DataFrame:
     weight_items = ["brisket", "pulled pork", "turkey", "sausage", "jalapeno cheddar sausage", "sausage (mild)"]
 
     
+    df = df.with_columns(pl.col("quantity").cast(pl.Float64, strict=False).fill_null(0.0))
     return df.with_columns(
         pl.when(pl.col("item_name").str.to_lowercase().is_in(weight_items))
         .then(pl.col("quantity") / 1000.0)

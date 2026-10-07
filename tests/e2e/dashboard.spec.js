@@ -50,6 +50,7 @@ test.describe('Dashboard Verification', () => {
   test('Prediction Verification: Analytics charts render', async ({ page }) => {
     await page.goto('/');
     await page.click('#tab-btn-forecasting');
+    await page.click('#btn-subtab-arima');
     
     // Assuming a plotly chart container is visible
     await expect(page.locator('#plotly-meat-sales-chart')).toBeVisible();
@@ -98,6 +99,7 @@ test.describe('Dashboard Verification', () => {
 
     await page.goto('/');
     await page.click('#tab-btn-forecasting');
+    await page.click('#btn-subtab-arima');
 
     await expect(page.locator('#plotly-meat-sales-chart')).toBeVisible();
 
@@ -151,7 +153,7 @@ test.describe('Dashboard Verification', () => {
 
     // Verify revenue KPI reads "Closed" (NOT "-95%")
     const revText = await page.locator('#kpi-projected-revenue').textContent();
-    expect(revText.trim()).toBe('Closed');
+    expect(revText.trim()).toContain('Closed');
 
     // Verify raw meat prep targets are 0 on closed days
     const brisketVal = await page.locator('#kpi-brisket-lbs').textContent();

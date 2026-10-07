@@ -60,7 +60,7 @@ jobs:
           
           echo "Building javascript payloads and sync status..."
           python clover_api/analytics/build_payloads.py
-          python -c "import json, datetime, os; status = {'last_synced_at': datetime.datetime.now().isoformat(), 'status': 'success', 'message': '', 'next_scheduled_sync': 'Hourly via GitHub Actions'}; os.makedirs('clover_api/analytics', exist_ok=True); os.makedirs('analytics', exist_ok=True); open('clover_api/analytics/sync_status.json', 'w').write(json.dumps(status, indent=2)); open('analytics/sync_status.json', 'w').write(json.dumps(status, indent=2))"
+          python -c "import json, datetime, os; p = json.load(open('clover_api/analytics/predictive_payload.json')) if os.path.exists('clover_api/analytics/predictive_payload.json') else {}; sk = p.get('summary_kpis', {}); cogs = sk.get('estimated_24h_cogs_usd', 0); staff = sk.get('recommended_staff', 0); hours = sk.get('pitmaster_hours', 0); fc = sk.get('estimated_food_cost_pct', 29.5); msg = f'COGS: ${cogs:,.2f} ({fc}%) | Labor: {staff} crew ({hours}h)'; status = {'last_synced_at': datetime.datetime.now().isoformat(), 'status': 'success', 'message': msg, 'next_scheduled_sync': 'Hourly via GitHub Actions'}; os.makedirs('clover_api/analytics', exist_ok=True); os.makedirs('analytics', exist_ok=True); open('clover_api/analytics/sync_status.json', 'w').write(json.dumps(status, indent=2)); open('analytics/sync_status.json', 'w').write(json.dumps(status, indent=2))"
 
       - name: Commit and push changes
         run: |

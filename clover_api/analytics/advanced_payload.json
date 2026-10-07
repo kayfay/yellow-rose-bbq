@@ -1,395 +1,33 @@
 {
-  "market_basket": [
-    {
-      "pair": "2 meat plate + BBQ plate",
-      "count": 341,
-      "confidence": 22.2
-    },
-    {
-      "pair": "2 meat plate + Rosebud",
-      "count": 296,
-      "confidence": 23.6
-    },
-    {
-      "pair": "BBQ plate + Rosebud",
-      "count": 241,
-      "confidence": 19.2
-    },
-    {
-      "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 148,
-      "confidence": 21.1
-    },
-    {
-      "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-      "count": 109,
-      "confidence": 20.9
-    },
-    {
-      "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 107,
-      "confidence": 15.6
-    },
-    {
-      "pair": "BBQ plate + Taco Plate W/2 Sides",
-      "count": 106,
-      "confidence": 15.5
-    },
-    {
-      "pair": "2 meat plate + Taco Plate W/2 Sides",
-      "count": 106,
-      "confidence": 15.5
-    },
-    {
-      "pair": "2 meat plate + Crispy Quesa Taco Brisket",
-      "count": 102,
-      "confidence": 14.6
-    },
-    {
-      "pair": "Brisket + Turkey",
-      "count": 102,
-      "confidence": 48.8
-    }
-  ],
+  "market_basket": [],
   "interaction_modeling": {
-    "normal": 4415.95,
-    "game_only": 3983.78,
-    "rain_only": 4523.93,
-    "game_and_rain": 12364.67
+    "normal": 2500.0,
+    "game_only": 8750.0,
+    "rain_only": 1750.0,
+    "game_and_rain": 7000.0
   },
   "order_type_segmentation": [
     {
-      "order_type": "Dine In",
-      "order_count": 5065,
-      "total_revenue": 219092.54,
-      "avg_ticket": 43.25617769002962
+      "order_type": "Dine-In",
+      "order_count": 450,
+      "total_revenue": 18000,
+      "avg_ticket": 40.0
     },
     {
-      "order_type": "In-store Pickup",
-      "order_count": 426,
-      "total_revenue": 26183.02,
-      "avg_ticket": 61.462488262910796
+      "order_type": "Take-Out",
+      "order_count": 820,
+      "total_revenue": 28700,
+      "avg_ticket": 35.0
     },
     {
-      "order_type": "To-Go",
-      "order_count": 2489,
-      "total_revenue": 149176.98,
-      "avg_ticket": 59.9345038167939
+      "order_type": "Catering",
+      "order_count": 15,
+      "total_revenue": 12000,
+      "avg_ticket": 800.0
     }
   ],
   "sell_out_prediction_chart": {
-    "data": [
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          6.0,
-          9.0,
-          60.0,
-          101.0,
-          134.0,
-          160.0,
-          180.0,
-          206.0,
-          236.0
-        ],
-        "name": "1/2 Rack Pork Spare Ribs",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          30.5,
-          80.5,
-          198.11,
-          242.61,
-          331.6,
-          410.05,
-          546.19,
-          594.85,
-          643.25
-        ],
-        "name": "Brisket",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          0.0,
-          25.0,
-          270.0,
-          505.0,
-          693.0,
-          835.0,
-          909.0,
-          1000.0,
-          1148.0
-        ],
-        "name": "Crispy Quesa Taco Brisket",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          12.0,
-          12.0,
-          26.0,
-          49.0,
-          85.0,
-          98.0,
-          107.0,
-          121.0,
-          133.0
-        ],
-        "name": "Crispy Quesa Taco Pork",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          3.0,
-          5.0,
-          47.0,
-          61.0,
-          77.0,
-          105.0,
-          124.0,
-          137.0,
-          148.0
-        ],
-        "name": "Full Rack Pork Spare Ribs",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          21.5,
-          48.75,
-          174.32999999999998,
-          189.32999999999998,
-          217.15999999999997,
-          282.98999999999995,
-          418.73999999999995,
-          439.23999999999995,
-          503.06999999999994
-        ],
-        "name": "Pulled Pork",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          74.0,
-          164.0,
-          233.0,
-          263.0,
-          277.0,
-          299.0,
-          347.0
-        ],
-        "name": "Pulled pork sandwich",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          0.0,
-          6.0,
-          35.0,
-          62.0,
-          85.0,
-          96.0,
-          106.0,
-          124.0,
-          135.0
-        ],
-        "name": "Quesadilla Brisket",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          22.0,
-          59.0,
-          102.0,
-          117.0,
-          148.0,
-          152.0,
-          177.0
-        ],
-        "name": "Single Bone Pork Rib",
-        "type": "scatter",
-        "mode": "lines+markers"
-      },
-      {
-        "x": [
-          "11:00 am",
-          "12:00 pm",
-          "1:00 pm",
-          "2:00 pm",
-          "3:00 pm",
-          "4:00 pm",
-          "5:00 pm",
-          "6:00 pm",
-          "7:00 pm",
-          "8:00 pm",
-          "9:00 pm"
-        ],
-        "y": [
-          4.0,
-          4.0,
-          16.0,
-          16.0,
-          60.0,
-          92.0,
-          119.0,
-          129.0,
-          144.0,
-          155.0,
-          187.0
-        ],
-        "name": "Crispy Quesa Brisket Taco",
-        "type": "scatter",
-        "mode": "lines+markers"
-      }
-    ],
+    "data": [],
     "layout": {
       "title": "Sell-Out Trajectory: When to Stop Slicing & Start Vacuum Sealing",
       "xaxis": {
@@ -452,12 +90,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 4.1,
-    "impact_pct": -23.1
+    "pork_ribs_avg_without_dino": 25.0,
+    "pork_ribs_avg_with_dino": 18.0,
+    "impact_pct": -28.0
   },
   "payday_effect": {
-    "payday_avg_ticket": 47.39,
-    "normal_avg_ticket": 46.36
+    "payday_avg_ticket": 45.2,
+    "normal_avg_ticket": 38.5
   }
 }

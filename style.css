@@ -381,6 +381,8 @@ body {
 .kpi-card-blue .est-number { color: var(--accent-blue); }
 .kpi-card-purple { border-left: 3px solid var(--accent-purple); }
 .kpi-card-purple .est-number { color: var(--accent-purple); }
+.kpi-card-teal { border-left: 3px solid #14b8a6; }
+.kpi-card-teal .est-number { color: #14b8a6; }
 
 /* --- Workflow Checklists (Tactile Large Hit Target Cards) --- */
 .day-container { margin-bottom: 14px; }

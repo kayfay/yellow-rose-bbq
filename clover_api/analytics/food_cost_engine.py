@@ -115,8 +115,21 @@ def compute_effective_meat_costs():
             "brisket_taco_2oz": round((brisket_raw / 0.40) * (2.0 / 16.0), 2),
             "brisket_sandwich_7oz": round((brisket_raw / 0.40) * (7.0 / 16.0), 2),
             "pork_sandwich_8oz": round((pork_raw / 0.44) * (8.0 / 16.0), 2),
+            "turkey_sandwich_5oz": round((turkey_raw / 0.70) * (5.0 / 16.0), 2),
+            "sausage_sandwich": 1.25,
             "full_rack_ribs": round(rib_raw * 5.0, 2),
-            "half_rack_ribs": round((rib_raw * 5.0) / 2.0, 2)
+            "half_rack_ribs": round((rib_raw * 5.0) / 2.0, 2),
+            "single_bone_rib": round((rib_raw * 5.0) / 12.0, 2),
+            "beef_dino_rib": 14.50,
+            "bbq_plate_brisket": round((brisket_raw / 0.40) * 0.5, 2),
+            "two_meat_plate": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * 5.0) / 12.0) * 2, 2),
+            "pitmaster_platter": round((brisket_raw / 0.40) * 0.5 + (pork_raw / 0.44) * 0.5 + ((rib_raw * 5.0) / 12.0) * 3 + 1.25, 2),
+            "hill_country_trinity": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * 5.0) / 12.0) * 3 + 1.25, 2),
+            "bevo_platter": round((brisket_raw / 0.40) * 1.0 + 2.50 + (rib_raw * 5.0) * 0.5, 2),
+            "rose_buds_portion": 1.85,
+            "elote_street_corn": 0.85,
+            "charro_beans": 0.65,
+            "mac_and_cheese": 0.95
         }
     }
     return cooked_costs
