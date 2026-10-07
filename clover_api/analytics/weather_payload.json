@@ -162,7 +162,7 @@
           87.98,
           86.0,
           75.38,
-          78.62
+          81.14
         ],
         "y": [
           4370.9,
@@ -175,7 +175,7 @@
           5332.11,
           4803.46,
           3247.8,
-          1735.06
+          3154.21
         ],
         "text": [
           "<b>Wednesday, 2026-08-12</b><br>Revenue: $4,370.90<br>Weather: 93.91999999999999\u00b0F, 67.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
@@ -188,7 +188,7 @@
           "<b>Saturday, 2026-10-03</b><br>Revenue: $5,332.11<br>Weather: 87.98\u00b0F, 11.9mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Sunday, 2026-10-04</b><br>Revenue: $4,803.46<br>Weather: 86.0\u00b0F, 31.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Tuesday, 2026-10-06</b><br>Revenue: $3,247.80<br>Weather: 75.38\u00b0F, 88.5mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-          "<b>Wednesday, 2026-10-07</b><br>Revenue: $1,735.06<br>Weather: 78.62\u00b0F, 52.6mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+          "<b>Wednesday, 2026-10-07</b><br>Revenue: $3,154.21<br>Weather: 81.14\u00b0F, 56.6mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -529,11 +529,11 @@
   },
   "weather_stats": {
     "normal_avg_usd": 4837.84,
-    "rain_avg_usd": 4543.8,
-    "rain_drop_pct": -6.1,
+    "rain_avg_usd": 4672.82,
+    "rain_drop_pct": -3.4,
     "heat_avg_usd": 5067.48,
-    "heat_drop_pct": 10.0,
-    "rain_coef": -15.44,
-    "temp_coef": 47.83
+    "heat_drop_pct": 9.2,
+    "rain_coef": -12.06,
+    "temp_coef": 37.97
   }
 }
