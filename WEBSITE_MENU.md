@@ -120,6 +120,8 @@ This document is automatically generated from live POS API metadata.
 | **Charro Bean Catering Tray** |  |
 | **Cheese Grits** |  |
 | **Coors Banquet** |  |
+| **Cup Chili** |  |
+| **Delivery Fee** |  |
 | **Delivery Fee** |  |
 | **Dos Equis** |  |
 | **Frito Pie** |  |
