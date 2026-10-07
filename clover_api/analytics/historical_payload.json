@@ -1274,6 +1274,21 @@
       "beef_dino_ribs": 1,
       "is_historical": true,
       "data_type": "ACTUAL"
+    },
+    {
+      "date": "2026-10-07",
+      "day_name": "Wed",
+      "actual_revenue": 5.38,
+      "predicted_revenue": 5.38,
+      "brisket_raw_lbs": 40.0,
+      "pork_shoulder_raw_lbs": 24.0,
+      "sausage_lbs": 20.0,
+      "tacos_sold": 0,
+      "rosebuds_sold": 1,
+      "pork_ribs_racks": 0,
+      "beef_dino_ribs": 0,
+      "is_historical": true,
+      "data_type": "ACTUAL"
     }
   ]
 }

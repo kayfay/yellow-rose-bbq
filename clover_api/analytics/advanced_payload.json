@@ -8,12 +8,12 @@
     {
       "pair": "2 meat plate + Rosebud",
       "count": 296,
-      "confidence": 23.7
+      "confidence": 23.6
     },
     {
       "pair": "BBQ plate + Rosebud",
       "count": 241,
-      "confidence": 19.3
+      "confidence": 19.2
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4415.95,
+    "normal": 4434.46,
     "game_only": 3983.78,
-    "rain_only": 5088.75,
-    "game_and_rain": 12364.67
+    "rain_only": 4386.56,
+    "game_and_rain": 12416.48
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5064,
-      "total_revenue": 219087.16,
-      "avg_ticket": 43.26365718799368
+      "order_count": 5065,
+      "total_revenue": 219092.54,
+      "avg_ticket": 43.25617769002962
     },
     {
       "order_type": "In-store Pickup",
@@ -452,9 +452,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 4.0,
-    "impact_pct": -23.1
+    "pork_ribs_avg_without_dino": 5.9,
+    "pork_ribs_avg_with_dino": 2.7,
+    "impact_pct": -54.0
   },
   "payday_effect": {
     "payday_avg_ticket": 47.39,
