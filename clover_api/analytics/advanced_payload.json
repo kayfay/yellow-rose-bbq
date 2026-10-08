@@ -2,7 +2,7 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 343,
+      "count": 344,
       "confidence": 22.2
     },
     {
@@ -18,7 +18,7 @@
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
       "count": 149,
-      "confidence": 21.1
+      "confidence": 21.0
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
@@ -32,8 +32,8 @@
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
-      "count": 107,
-      "confidence": 15.4
+      "count": 108,
+      "confidence": 15.5
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
@@ -41,28 +41,28 @@
       "confidence": 15.2
     },
     {
-      "pair": "Brisket + Turkey",
-      "count": 103,
-      "confidence": 49.0
-    },
-    {
       "pair": "2 meat plate + Crispy Quesa Taco Brisket",
       "count": 102,
       "confidence": 14.4
+    },
+    {
+      "pair": "Brisket + Turkey",
+      "count": 102,
+      "confidence": 48.8
     }
   ],
   "interaction_modeling": {
-    "normal": 4434.46,
+    "normal": 4357.37,
     "game_only": 3983.78,
-    "rain_only": 4672.82,
-    "game_and_rain": 12416.48
+    "rain_only": 4886.12,
+    "game_and_rain": 12200.64
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5108,
-      "total_revenue": 220778.73,
-      "avg_ticket": 43.22214761158966
+      "order_count": 5111,
+      "total_revenue": 220930.13,
+      "avg_ticket": 43.22639992173743
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2524,
-      "total_revenue": 156186.82,
-      "avg_ticket": 61.880673534072905
+      "order_count": 2526,
+      "total_revenue": 150300.47,
+      "avg_ticket": 59.501373713380836
     }
   ],
   "sell_out_prediction_chart": {
@@ -452,9 +452,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.6,
-    "pork_ribs_avg_with_dino": 3.3,
-    "impact_pct": -40.8
+    "pork_ribs_avg_without_dino": 5.7,
+    "pork_ribs_avg_with_dino": 3.2,
+    "impact_pct": -42.9
   },
   "payday_effect": {
     "payday_avg_ticket": 47.39,
