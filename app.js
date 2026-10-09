@@ -1383,6 +1383,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     let bRaw = 0, pRaw = 0, sVal = 0, rVal = 0, drVal = 0, totalTacos = 0, totalRosebuds = 0, totalRev = 0, tVal = 0;
     let totalCogs = 0, totalStaff = 0, totalLaborHours = 0;
     
+    function calcCalibratedTurkey(r) {
+      if (!r || r.is_closed || r.day_name === 'Mon') return { cooked: 0, raw: 0 };
+      const baselines = { 'Tue': 6.2, 'Wed': 7.2, 'Thu': 7.0, 'Fri': 11.5, 'Sat': 12.9, 'Sun': 8.9 };
+      const baseCooked = baselines[r.day_name] || 6.0;
+      const rev = r.predicted_revenue || 0;
+      const benchmark = ['Fri', 'Sat', 'Sun'].includes(r.day_name) ? 3500 : 2800;
+      const revMultiplier = rev > 0 ? Math.min(1.10, Math.max(0.90, rev / benchmark)) : 1.0;
+      const cookedDemand = baseCooked * revMultiplier;
+      const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // +10% safety buffer
+      const rawTarget = Math.round((cookedTarget / 0.70) * 10) / 10;   // 70% nominal yield
+      return { cooked: cookedTarget, raw: rawTarget };
+    }
+
     if (isTargetClosed) {
       bRaw = 0; pRaw = 0; sVal = 0; rVal = 0; drVal = 0; totalTacos = 0; totalRosebuds = 0; totalRev = 0; tVal = 0;
       totalCogs = 0; totalStaff = 0; totalLaborHours = 0;
@@ -1397,7 +1410,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         totalTacos += Math.round(r.tacos_sold || 0);
         totalRosebuds += Math.round(r.rosebuds_sold || 0);
         totalRev += Math.round(rev);
-        tVal += (rev ? Math.round(rev * 0.008 + 10) : 0);
+        tVal += Math.round(calcCalibratedTurkey(r).cooked);
         
         // Calculate daily staff and hours
         const isClosedDay = r.is_closed || r.day_name === 'Mon';
@@ -1417,7 +1430,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       totalTacos = Math.round(targetRecord.tacos_sold || 0);
       totalRosebuds = Math.round(targetRecord.rosebuds_sold || 0);
       totalRev = Math.round(targetRecord.predicted_revenue || 0);
-      tVal = totalRev ? Math.round(totalRev * 0.008 + 10) : 0;
+      tVal = Math.round(calcCalibratedTurkey(targetRecord).cooked);
       
       const isClosedDay = targetRecord.is_closed || targetRecord.day_name === 'Mon';
       totalStaff = isClosedDay ? 0 : (targetRecord.recommended_staff || minMaxStaff(totalRev));
@@ -1487,6 +1500,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const ribsElem = document.getElementById('kpi-pork-ribs-racks');
     const dinoElem = document.getElementById('kpi-beef-dino-ribs');
     const turkeyElem = document.getElementById('kpi-turkey-lbs');
+    const turkeySubElem = document.getElementById('kpi-turkey-sub');
     const rosebudsElem = document.getElementById('kpi-rosebuds');
     const tacosElem = document.getElementById('kpi-tacos');
     const totalCookedElem = document.getElementById('kpi-total-cooked-meat');
@@ -1518,6 +1532,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (ribsElem) ribsElem.textContent = '0';
       if (dinoElem) dinoElem.textContent = '0';
       if (turkeyElem) turkeyElem.textContent = '0';
+      if (turkeySubElem) turkeySubElem.textContent = '(Closed / 0 lbs)';
       if (rosebudsElem) rosebudsElem.textContent = '0';
       if (tacosElem) tacosElem.textContent = '0';
       if (totalCookedElem) totalCookedElem.textContent = '0';
@@ -1543,6 +1558,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (ribsElem) ribsElem.textContent = rVal;
       if (dinoElem) dinoElem.textContent = drVal;
       if (turkeyElem) turkeyElem.textContent = tVal;
+      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(tVal / 0.70)} lbs raw prep)`;
       if (rosebudsElem) rosebudsElem.textContent = rbVal;
       if (tacosElem) tacosElem.textContent = tacoVal;
       if (totalCookedElem) totalCookedElem.textContent = totalCooked;
@@ -1696,18 +1712,29 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       } else if (selectedCat === 'turkey_lbs') {
         layout.title = "Pit Production Targets: Smoked Turkey Breast (Raw vs Cooked)";
         layout.yaxis.title = "Meat Weight (lbs)";
+        const getTurkeyData = (r) => {
+          if (!r || r.is_closed || r.day_name === 'Mon') return { cooked: 0, raw: 0 };
+          const baselines = { 'Tue': 6.2, 'Wed': 7.2, 'Thu': 7.0, 'Fri': 11.5, 'Sat': 12.9, 'Sun': 8.9 };
+          const baseCooked = baselines[r.day_name] || 6.0;
+          const rev = r.predicted_revenue || 0;
+          const benchmark = ['Fri', 'Sat', 'Sun'].includes(r.day_name) ? 3500 : 2800;
+          const revMultiplier = rev > 0 ? Math.min(1.10, Math.max(0.90, rev / benchmark)) : 1.0;
+          const cookedDemand = baseCooked * revMultiplier;
+          const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10;
+          const rawTarget = Math.round((cookedTarget / 0.70) * 10) / 10;
+          return { cooked: cookedTarget, raw: rawTarget };
+        };
         let turkeyMax = 0;
-        slicedRecords.forEach(r => turkeyMax = Math.max(turkeyMax, r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0));
+        slicedRecords.forEach(r => turkeyMax = Math.max(turkeyMax, getTurkeyData(r).raw));
         layout.yaxis.range = [0, Math.max(10, turkeyMax * 1.15)];
-        const getTurkeyRaw = (r) => r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
         traces.push({
-          x: dates, y: slicedRecords.map(r => getTurkeyRaw(r)),
-          type: 'bar', name: 'Raw Turkey', marker: { color: '#e67e22' },
+          x: dates, y: slicedRecords.map(r => getTurkeyData(r).raw),
+          type: 'bar', name: 'Raw Turkey Breast (Prep)', marker: { color: '#e67e22' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
-          x: dates, y: slicedRecords.map(r => getTurkeyRaw(r) * 0.6),
-          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (60%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          x: dates, y: slicedRecords.map(r => getTurkeyData(r).cooked),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Target Yield (70%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'sausage_links') {

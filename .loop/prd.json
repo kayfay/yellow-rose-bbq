@@ -2,27 +2,32 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Audit hourly data feeds and build feature engineering pipeline (hourly lag features, rolling averages, day/time cyclical encodings).",
+      "description": "Audit historical turkey sales vs. projections across the last 30 days to quantify Mean Absolute Percentage Error (MAPE).",
+      "acceptance_criteria": "Historical 30-day turkey sales dataset parsed; legacy formula MAPE quantified (>150% baseline drift established).",
       "passes": true
     },
     {
       "id": 2,
-      "description": "Build and execute notebooks/hourly_predictive_analytics.ipynb in Colab/Jupyter format with backtesting visualizations.",
+      "description": "Build backtesting script scripts/backtest_turkey.py comparing raw vs. cooked weight conversion factors.",
+      "acceptance_criteria": "Backtesting engine evaluates raw vs cooked conversions (70% nominal yield) and compares legacy vs calibrated projections.",
       "passes": true
     },
     {
       "id": 3,
-      "description": "Export predictive model outputs to structured JSON API endpoints (/api/analytics/predictive_hourly.json).",
+      "description": "Refactor forecast engine to incorporate dynamic error-decay weights and day-of-week baseline scaling.",
+      "acceptance_criteria": "Deterministic Python module scripts/turkey_forecast.py calculates daily projections with DOW medians and rolling 14-day error correction.",
       "passes": true
     },
     {
       "id": 4,
-      "description": "Integrate predictive analytics charts and anomaly alerts into the sausage.allen.tools web frontend.",
+      "description": "Build automated drift alert threshold triggering a warning whenever |Projected - Actual| / Actual > 0.35.",
+      "acceptance_criteria": "Tracking signal outside [-4, 4] and absolute percentage error > 0.35 triggers automated recalibration flag logged to .loop/log.md.",
       "passes": true
     },
     {
       "id": 5,
-      "description": "Write automated Tier 1 & Tier 2 verification script scripts/verify_ml_analytics.py.",
+      "description": "Write automated Tier 1 & Tier 2 verification script scripts/verify_turkey_forecast.py.",
+      "acceptance_criteria": "Automated verification script executes 30-day backtest (MAPE < 15%), re-tests yesterday's scenario (9-11 lbs), verifies alert triggers, and exits with code 0.",
       "passes": true
     }
   ]
