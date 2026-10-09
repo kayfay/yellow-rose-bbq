@@ -183,7 +183,7 @@
           4803.46,
           3247.8,
           3265.02,
-          1957.81
+          3988.11
         ],
         "text": [
           "<b>Wednesday, 2026-08-12</b><br>Revenue: $4,370.90<br>Weather: 93.91999999999999\u00b0F, 67.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
@@ -197,7 +197,7 @@
           "<b>Sunday, 2026-10-04</b><br>Revenue: $4,803.46<br>Weather: 86.0\u00b0F, 31.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Tuesday, 2026-10-06</b><br>Revenue: $3,247.80<br>Weather: 75.38\u00b0F, 88.5mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Wednesday, 2026-10-07</b><br>Revenue: $3,265.02<br>Weather: 81.14\u00b0F, 56.6mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-          "<b>Friday, 2026-10-09</b><br>Revenue: $1,957.81<br>Weather: 77.36\u00b0F, 13.7mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+          "<b>Friday, 2026-10-09</b><br>Revenue: $3,988.11<br>Weather: 77.36\u00b0F, 14.8mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -514,8 +514,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4708.452121212122,
-          "y1": 4708.452121212122,
+          "y0": 4659.997121212121,
+          "y1": 4659.997121212121,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -527,8 +527,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 5008.452121212122,
-          "text": "Baseline Target ($4,708)",
+          "y": 4959.997121212121,
+          "text": "Baseline Target ($4,660)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -540,12 +540,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4708.45,
-    "rain_avg_usd": 4455.8,
-    "rain_drop_pct": -5.4,
+    "normal_avg_usd": 4660.0,
+    "rain_avg_usd": 4624.99,
+    "rain_drop_pct": -0.8,
     "heat_avg_usd": 5067.48,
-    "heat_drop_pct": 15.0,
-    "rain_coef": -12.55,
-    "temp_coef": 51.78
+    "heat_drop_pct": 15.6,
+    "rain_coef": -11.92,
+    "temp_coef": 39.31
   }
 }
