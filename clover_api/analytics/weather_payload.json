@@ -25,7 +25,7 @@
           89.41999999999999,
           86.36,
           81.5,
-          84.74
+          84.2
         ],
         "y": [
           2861.94,
@@ -50,7 +50,7 @@
           4689.7,
           3101.7,
           4245.26,
-          168.22
+          1323.58
         ],
         "text": [
           "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.16\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -75,7 +75,7 @@
           "<b>Tuesday, 2026-09-29</b><br>Revenue: $4,689.70<br>Weather: 89.41999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-09-30</b><br>Revenue: $3,101.70<br>Weather: 86.36\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-08</b><br>Revenue: $4,245.26<br>Weather: 81.5\u00b0F, 4.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Saturday, 2026-10-10</b><br>Revenue: $168.22<br>Weather: 84.74\u00b0F, 4.8mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Saturday, 2026-10-10</b><br>Revenue: $1,323.58<br>Weather: 84.2\u00b0F, 4.3mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -104,7 +104,7 @@
             10,
             10,
             18.0,
-            19.6
+            18.6
           ],
           "color": "#27ae60",
           "opacity": 0.8,
@@ -164,8 +164,6 @@
       },
       {
         "x": [
-          93.91999999999999,
-          92.84,
           89.6,
           92.11999999999999,
           86.0,
@@ -178,8 +176,6 @@
           77.54
         ],
         "y": [
-          4370.9,
-          3165.83,
           5009.98,
           6349.3099999999995,
           5470.4400000000005,
@@ -192,8 +188,6 @@
           4772.62
         ],
         "text": [
-          "<b>Wednesday, 2026-08-12</b><br>Revenue: $4,370.90<br>Weather: 93.91999999999999\u00b0F, 67.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-          "<b>Thursday, 2026-08-13</b><br>Revenue: $3,165.83<br>Weather: 92.84\u00b0F, 44.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Thursday, 2026-08-27</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Sunday, 2026-09-06</b><br>Revenue: $6,349.31<br>Weather: 92.11999999999999\u00b0F, 45.0mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Friday, 2026-09-18</b><br>Revenue: $5,470.44<br>Weather: 86.0\u00b0F, 12.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
@@ -210,8 +204,6 @@
         "name": "Heavy Rain (High To-Go Volume)",
         "marker": {
           "size": [
-            35,
-            35,
             35,
             35,
             34.4,
@@ -236,13 +228,9 @@
               1.5,
               1.5,
               1.5,
-              1.5,
-              1.5,
               1.5
             ],
             "color": [
-              "white",
-              "white",
               "white",
               "white",
               "white",
@@ -269,9 +257,11 @@
           96.61999999999999,
           93.74,
           93.56,
-          92.11999999999999,
-          96.61999999999999,
-          91.94,
+          98.6,
+          100.76,
+          98.78,
+          100.76,
+          101.3,
           91.03999999999999,
           96.26,
           96.8,
@@ -299,6 +289,8 @@
           7897.93,
           5708.12,
           3467.3,
+          4370.9,
+          3165.83,
           6036.86,
           8276.06,
           4931.26,
@@ -325,9 +317,11 @@
           "<b>Thursday, 2026-08-06</b><br>Revenue: $3,575.35<br>Weather: 96.61999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Friday, 2026-08-07</b><br>Revenue: $5,723.16<br>Weather: 93.74\u00b0F, 0.1mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Saturday, 2026-08-08</b><br>Revenue: $7,897.93<br>Weather: 93.56\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-          "<b>Sunday, 2026-08-09</b><br>Revenue: $5,708.12<br>Weather: 92.11999999999999\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-          "<b>Tuesday, 2026-08-11</b><br>Revenue: $3,467.30<br>Weather: 96.61999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-          "<b>Friday, 2026-08-14</b><br>Revenue: $6,036.86<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Sunday, 2026-08-09</b><br>Revenue: $5,708.12<br>Weather: 98.6\u00b0F, 7.5mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Tuesday, 2026-08-11</b><br>Revenue: $3,467.30<br>Weather: 100.76\u00b0F, 3.1mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Wednesday, 2026-08-12</b><br>Revenue: $4,370.90<br>Weather: 98.78\u00b0F, 6.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Thursday, 2026-08-13</b><br>Revenue: $3,165.83<br>Weather: 100.76\u00b0F, 0.1mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Friday, 2026-08-14</b><br>Revenue: $6,036.86<br>Weather: 101.3\u00b0F, 3.1mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Saturday, 2026-08-15</b><br>Revenue: $8,276.06<br>Weather: 91.03999999999999\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #2 Highest Recent Sales Day</b><br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Sunday, 2026-08-16</b><br>Revenue: $4,931.26<br>Weather: 96.26\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 96.8\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
@@ -357,9 +351,11 @@
             10,
             10.2,
             10,
-            10.8,
-            10,
-            10,
+            20,
+            16.2,
+            20,
+            10.2,
+            16.2,
             10,
             10,
             11.6,
@@ -391,6 +387,8 @@
               1.5,
               1.5,
               1.5,
+              1.5,
+              1.5,
               4,
               1.5,
               1.5,
@@ -406,6 +404,8 @@
               1.5
             ],
             "color": [
+              "white",
+              "white",
               "white",
               "white",
               "white",
@@ -520,8 +520,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4656.163787878787,
-          "y1": 4656.163787878787,
+          "y0": 4638.325441176471,
+          "y1": 4638.325441176471,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -533,8 +533,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4956.163787878787,
-          "text": "Baseline Target ($4,656)",
+          "y": 4938.325441176471,
+          "text": "Baseline Target ($4,638)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -546,12 +546,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4656.16,
-    "rain_avg_usd": 4690.37,
-    "rain_drop_pct": 0.7,
+    "normal_avg_usd": 4638.33,
+    "rain_avg_usd": 4874.77,
+    "rain_drop_pct": 5.1,
     "heat_avg_usd": 5067.48,
-    "heat_drop_pct": 15.3,
-    "rain_coef": -10.94,
-    "temp_coef": 45.21
+    "heat_drop_pct": 15.0,
+    "rain_coef": -8.47,
+    "temp_coef": 36.57
   }
 }
