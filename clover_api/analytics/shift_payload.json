@@ -188,10 +188,10 @@
             10.4,
             9.5,
             5.8,
-            1.5,
+            1.6,
             0.0,
             0.0,
-            0.0,
+            0.1,
             0.0
           ],
           [
@@ -372,10 +372,10 @@
             "Saturday 16:00<br>10.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
             "Saturday 17:00<br>9.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
             "Saturday 18:00<br>5.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-            "Saturday 19:00<br>1.5 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+            "Saturday 19:00<br>1.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
             "Saturday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
             "Saturday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-            "Saturday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+            "Saturday 22:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
             "Saturday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
           ],
           [
