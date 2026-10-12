@@ -552,15 +552,24 @@ function updateUI() {
       return `${lbs.toFixed(1)} lbs`;
     };
 
+    const setHTML = (id, html) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    };
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+
     // Switch between Beef and Standard Base in the Verification text
     if (state.recipeId === 'classic-beef') {
-      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(35.0 * scale)}</strong> Lean Beef (70%)`;
-      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(15.0 * scale)}</strong> Beef Fat (30%)`;
-      document.getElementById('verif-meat-3').innerHTML = `<em>(No Pork)</em>`;
+      setHTML('verif-meat-1', `<strong>${formatMeat(35.0 * scale)}</strong> Lean Beef (70%)`);
+      setHTML('verif-meat-2', `<strong>${formatMeat(15.0 * scale)}</strong> Beef Fat (30%)`);
+      setHTML('verif-meat-3', `<em>(No Pork)</em>`);
     } else {
-      document.getElementById('verif-meat-1').innerHTML = `<strong>${formatMeat(25.5 * scale)}</strong> Beef Trimmings`;
-      document.getElementById('verif-meat-2').innerHTML = `<strong>${formatMeat(16.0 * scale)}</strong> Pork Base`;
-      document.getElementById('verif-meat-3').innerHTML = `<strong>${formatMeat(8.5 * scale)}</strong> Pork/Beef Fat`;
+      setHTML('verif-meat-1', `<strong>${formatMeat(25.5 * scale)}</strong> Beef Trimmings`);
+      setHTML('verif-meat-2', `<strong>${formatMeat(16.0 * scale)}</strong> Pork Base`);
+      setHTML('verif-meat-3', `<strong>${formatMeat(8.5 * scale)}</strong> Pork/Beef Fat`);
     }
 
     const getIngAmount = (id) => {
@@ -578,14 +587,14 @@ function updateUI() {
       return `${amt.toFixed(1)} ${unit}`;
     };
 
-    document.getElementById('verif-cure').innerHTML = cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`;
-    document.getElementById('verif-pepper').innerHTML = pepperAmt > 0 ? `<strong>${formatVerif(pepperAmt, 'cups')}</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`;
-    document.getElementById('verif-water').innerHTML = waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : `<em>(No Water)</em>`;
-    document.getElementById('verif-milk').innerHTML = milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : `<em>(No Milk)</em>`;
+    setHTML('verif-cure', cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`);
+    setHTML('verif-pepper', pepperAmt > 0 ? `<strong>${formatVerif(pepperAmt, 'cups')}</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`);
+    setHTML('verif-water', waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : `<em>(No Water)</em>`);
+    setHTML('verif-milk', milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : `<em>(No Milk)</em>`);
     
-    document.getElementById('verif-yield-base').textContent = state.weight.toFixed(1);
-    document.getElementById('verif-yield-total').textContent = ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1);
-    document.getElementById('verif-yield-links').textContent = Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) / 0.375);
+    setText('verif-yield-base', state.weight.toFixed(1));
+    setText('verif-yield-total', ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1));
+    setText('verif-yield-links', Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) / 0.375));
   }
 
   // Update Task Checkbox states
@@ -1174,7 +1183,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (histPayload && Array.isArray(histPayload.historical_records) && histPayload.historical_records.length > 0) {
       // Sort and merge historical records with forecast records
       records = [...histPayload.historical_records, ...records];
-      records.sort((a, b) => new Date(a.date) - new Date(b.date));
+      records.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
       // Remove duplicates by date if any overlap exists
       records = Array.from(new Map(records.map(item => [item.date, item])).values());
     }
@@ -1558,7 +1567,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (ribsElem) ribsElem.textContent = rVal;
       if (dinoElem) dinoElem.textContent = drVal;
       if (turkeyElem) turkeyElem.textContent = tVal;
-      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(tVal / 0.70)} lbs raw prep)`;
+      const tRaw = Math.round(tVal / 0.70);
+      const tCases = (tRaw / 20.0).toFixed(1);
+      const tPortions = Math.round(tVal * 3.2);
+      if (turkeySubElem) turkeySubElem.textContent = `(~${tRaw} lbs raw / ~${tCases} cs / ~${tPortions} port)`;
       if (rosebudsElem) rosebudsElem.textContent = rbVal;
       if (tacosElem) tacosElem.textContent = tacoVal;
       if (totalCookedElem) totalCookedElem.textContent = totalCooked;
@@ -1952,44 +1964,50 @@ window.renderAdvancedAnalytics = function() {
   // 2. Interaction Modeling
   const interList = document.getElementById('interaction-list');
   if (interList) {
+    const im = payload.interaction_modeling || {};
     interList.innerHTML = `
-      <li><strong>Normal Day Avg:</strong> $${payload.interaction_modeling.normal.toFixed(2)}</li>
-      <li><strong>Jaguars Game (Ideal Weather):</strong> $${payload.interaction_modeling.game_only.toFixed(2)}</li>
-      <li><strong>Heavy Rain (No Event):</strong> $${payload.interaction_modeling.rain_only.toFixed(2)}</li>
-      <li><strong>Jaguars Game + Heavy Rain:</strong> $${payload.interaction_modeling.game_and_rain.toFixed(2)}</li>
+      <li><strong>Normal Day Avg:</strong> $${Number(im.normal || 0).toFixed(2)}</li>
+      <li><strong>Jaguars Game (Ideal Weather):</strong> $${Number(im.game_only || 0).toFixed(2)}</li>
+      <li><strong>Heavy Rain (No Event):</strong> $${Number(im.rain_only || 0).toFixed(2)}</li>
+      <li><strong>Jaguars Game + Heavy Rain:</strong> $${Number(im.game_and_rain || 0).toFixed(2)}</li>
     `;
   }
 
   // 3. Order Type Segmentation
   const orderTypeList = document.getElementById('order-type-list');
-  if (orderTypeList && payload.order_type_segmentation) {
+  if (orderTypeList && Array.isArray(payload.order_type_segmentation)) {
     orderTypeList.innerHTML = `<ul>` + payload.order_type_segmentation.map(ot => 
-      `<li><strong>${escapeHTML(ot.order_type)}</strong>: ${ot.order_count} orders, generating $${ot.total_revenue.toLocaleString()} (avg $${ot.avg_ticket.toFixed(2)}/ticket)</li>`
+      `<li><strong>${escapeHTML(ot.order_type || 'Unknown')}</strong>: ${ot.order_count || 0} orders, generating $${(ot.total_revenue || 0).toLocaleString()} (avg $${Number(ot.avg_ticket || 0).toFixed(2)}/ticket)</li>`
     ).join('') + `</ul>`;
   }
 
   // 5. Cannibalization
   const cannList = document.getElementById('cannibalization-list');
   if (cannList) {
+    const cann = payload.cannibalization || {};
     cannList.innerHTML = `
-      <li><strong>Avg Pork Ribs without Dino Ribs:</strong> ${payload.cannibalization.pork_ribs_avg_without_dino}</li>
-      <li><strong>Avg Pork Ribs with Dino Ribs:</strong> ${payload.cannibalization.pork_ribs_avg_with_dino}</li>
-      <li><strong>Impact on Pork Ribs:</strong> ${payload.cannibalization.impact_pct}%</li>
+      <li><strong>Avg Pork Ribs without Dino Ribs:</strong> ${cann.pork_ribs_avg_without_dino ?? '--'}</li>
+      <li><strong>Avg Pork Ribs with Dino Ribs:</strong> ${cann.pork_ribs_avg_with_dino ?? '--'}</li>
+      <li><strong>Impact on Pork Ribs:</strong> ${cann.impact_pct ?? 0}%</li>
     `;
   }
 
   // 6. Payday
   const paydayList = document.getElementById('payday-list');
   if (paydayList) {
+    const pe = payload.payday_effect || {};
     paydayList.innerHTML = `
-      <li><strong>Normal Avg Ticket:</strong> $${payload.payday_effect.normal_avg_ticket.toFixed(2)}</li>
-      <li><strong>Payday Avg Ticket:</strong> $${payload.payday_effect.payday_avg_ticket.toFixed(2)}</li>
+      <li><strong>Normal Avg Ticket:</strong> $${Number(pe.normal_avg_ticket || 0).toFixed(2)}</li>
+      <li><strong>Payday Avg Ticket:</strong> $${Number(pe.payday_avg_ticket || 0).toFixed(2)}</li>
     `;
   }
 
   // 4. Sell-Out Chart
-  if (document.getElementById('plotly-sellout-chart')) {
-    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout, {responsive: true, displayModeBar: false});
+  const selloutChartElem = document.getElementById('plotly-sellout-chart');
+  if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data) {
+    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout || {}, {responsive: true, displayModeBar: false});
+  } else if (selloutChartElem) {
+    selloutChartElem.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Sell-Out Data Available</div>';
   }
 };
 

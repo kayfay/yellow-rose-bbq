@@ -3,17 +3,37 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     if (!container) return;
     if (!Array.isArray(records) || records.length === 0) return;
     
-    // Inject and format all records to uniform pounds
-    records.forEach(r => {
-        if (!r) return;
-        // Generate realistic turkey lbs based on revenue (approx 15-35 lbs)
-        r.turkey_lbs = r.predicted_revenue ? Math.round(r.predicted_revenue * 0.008 + 10) : 0;
-        r.pork_ribs_lbs = (r.pork_ribs_racks || 0) * 3;
-        r.beef_dino_ribs_lbs = (r.beef_dino_ribs || 0) * 4;
-        r.brisket_raw_lbs = r.brisket_raw_lbs || 0;
-        r.pork_shoulder_raw_lbs = r.pork_shoulder_raw_lbs || 0;
-        r.sausage_lbs = r.sausage_lbs || 0;
-    });
+    // Format records into a cloned array without mutating the read-only input payload
+    const formattedRecords = records.map(r => {
+        if (!r) return null;
+        let tRaw = r.turkey_raw_lbs;
+        let tCooked = r.turkey_cooked_lbs || r.turkey_lbs;
+        if (tRaw === undefined) {
+            if (r.is_closed || r.day_name === 'Mon') {
+                tRaw = 0;
+                tCooked = 0;
+            } else {
+                const baselines = { 'Tue': 6.2, 'Wed': 7.2, 'Thu': 7.0, 'Fri': 11.5, 'Sat': 12.9, 'Sun': 8.9 };
+                const baseCooked = baselines[r.day_name] || 6.0;
+                const rev = r.predicted_revenue || 0;
+                const benchmark = ['Fri', 'Sat', 'Sun'].includes(r.day_name) ? 3500 : 2800;
+                const revMultiplier = rev > 0 ? Math.min(1.10, Math.max(0.90, rev / benchmark)) : 1.0;
+                tCooked = Math.round(baseCooked * revMultiplier * 1.10 * 10) / 10;
+                tRaw = Math.round((tCooked / 0.70) * 10) / 10;
+            }
+        }
+        return {
+            ...r,
+            turkey_lbs: tRaw || (tCooked ? Math.round(tCooked / 0.70) : 0),
+            pork_ribs_lbs: (r.pork_ribs_racks || 0) * 3,
+            beef_dino_ribs_lbs: (r.beef_dino_ribs || 0) * 4,
+            brisket_raw_lbs: r.brisket_raw_lbs || 0,
+            pork_shoulder_raw_lbs: r.pork_shoulder_raw_lbs || 0,
+            sausage_lbs: r.sausage_lbs || 0
+        };
+    }).filter(Boolean);
+
+    if (formattedRecords.length === 0) return;
     
     // Setup dimensions
     const margin = {top: 40, right: 60, bottom: 60, left: 60};
@@ -40,7 +60,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     }
 
     // X Axis - Dates
-    const dates = records.map(r => `${r.date} (${r.day_name})`);
+    const dates = formattedRecords.map(r => `${r.date} (${r.day_name})`);
     const x = d3.scaleBand()
         .domain(dates)
         .range([0, width])
@@ -68,7 +88,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     let yAxisTitle = "Volume (lbs)";
     
     if (selectedCat === 'baseline') {
-        const stackedData = d3.stack().keys(stackKeys)(records);
+        const stackedData = d3.stack().keys(stackKeys)(formattedRecords);
         maxMeat = d3.max(stackedData[stackedData.length - 1], d => d[1]);
     } else {
         // Find specific key to scale
@@ -78,6 +98,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         if (selectedCat === 'beef_dino_ribs') keyToScale = 'beef_dino_ribs_lbs';
         if (selectedCat === 'sausage_links') keyToScale = 'sausage_lbs';
         if (selectedCat === 'pulled_pork_lbs') keyToScale = 'pork_shoulder_raw_lbs';
+        if (selectedCat === 'turkey_lbs') keyToScale = 'turkey_lbs';
         if (selectedCat === 'tacos_sold') {
             keyToScale = 'tacos_sold';
             yAxisTitle = "Units Sold";
@@ -86,7 +107,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
             keyToScale = 'rosebuds_sold';
             yAxisTitle = "Units Sold";
         }
-        maxMeat = d3.max(records, r => r[keyToScale] || 0) || 100;
+        maxMeat = d3.max(formattedRecords, r => r[keyToScale] || 0) || 100;
     }
 
     const y = d3.scaleLinear()
@@ -153,7 +174,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
     }
 
     if (selectedCat === 'baseline') {
-        const stackedData = d3.stack().keys(stackKeys)(records);
+        const stackedData = d3.stack().keys(stackKeys)(formattedRecords);
 
         const groups = svg.append("g")
             .selectAll("g")
@@ -232,6 +253,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         if (selectedCat === 'beef_dino_ribs') key = 'beef_dino_ribs_lbs';
         if (selectedCat === 'sausage_links') key = 'sausage_lbs';
         if (selectedCat === 'pulled_pork_lbs') key = 'pork_shoulder_raw_lbs';
+        if (selectedCat === 'turkey_lbs') key = 'turkey_lbs';
         if (selectedCat === 'tacos_sold') key = 'tacos_sold';
         if (selectedCat === 'rosebuds') key = 'rosebuds_sold';
         
@@ -243,11 +265,11 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         if (key === 'tacos_sold') color = '#27ae60';
         if (key === 'rosebuds_sold') color = '#8e44ad';
 
-        const values = records.map(r => r[key] || 0);
+        const values = formattedRecords.map(r => r[key] || 0);
         const min = d3.min(values) || 0;
         const max = d3.max(values) || 0;
         const mean = (d3.mean(values) || 0).toFixed(1);
-        const median = (d3.median(values.sort(d3.ascending)) || 0).toFixed(1);
+        const median = (d3.median(values.slice().sort(d3.ascending)) || 0).toFixed(1);
 
         // SVG Gradients for beautiful area charts
         const defs = svg.append("defs");
@@ -267,7 +289,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
             .curve(d3.curveMonotoneX);
 
         svg.append("path")
-            .datum(records)
+            .datum(formattedRecords)
             .attr("fill", `url(#${gradientId})`)
             .attr("d", area)
             .style("opacity", 0)
@@ -281,7 +303,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
             .curve(d3.curveMonotoneX);
 
         const path = svg.append("path")
-            .datum(records)
+            .datum(formattedRecords)
             .attr("fill", "none")
             .attr("stroke", color)
             .attr("stroke-width", 4)
@@ -295,7 +317,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
 
         // Draw interactive dots
         svg.append("g").selectAll("circle")
-            .data(records)
+            .data(formattedRecords)
             .join("circle")
             .attr("cx", r => x(`${r.date} (${r.day_name})`) + x.bandwidth()/2)
             .attr("cy", r => y(r[key] || 0))
@@ -378,13 +400,19 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
 function renderD3GenericChart(containerId, traces, title, isBar = false, shift = 'all') {
     const container = document.getElementById(containerId);
     if (!container) return;
-    container.innerHTML = '';
+
+    if (!Array.isArray(traces) || traces.length === 0 || !traces[0] || !traces[0].x) {
+        container.innerHTML = '<div style="padding: 24px; text-align: center; color: #94a3b8; font-family: Inter, sans-serif; font-size: 13px;">No chart data available</div>';
+        return;
+    }
 
     // Handle Heatmap specifically
-    if (traces && traces[0] && traces[0].type === 'heatmap') {
+    if (traces[0].type === 'heatmap') {
         renderD3Heatmap(containerId, traces[0], title, shift);
         return;
     }
+
+    container.innerHTML = '';
     
     const margin = {top: 40, right: 30, bottom: 60, left: 60};
     const containerRect = container.getBoundingClientRect();
@@ -399,8 +427,6 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Assuming trace[0].x has dates
-    if (!traces || traces.length === 0 || !traces[0].x) return;
     const dates = traces[0].x;
 
     const x = d3.scalePoint()
@@ -574,7 +600,7 @@ function formatHourAMPM(hrStr, includeMinutes = false) {
 
 function renderD3Heatmap(containerId, trace, title, shift = 'all') {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container || !trace || !trace.x) return;
     container.innerHTML = '';
     
     const margin = {top: 40, right: 30, bottom: 60, left: 80};

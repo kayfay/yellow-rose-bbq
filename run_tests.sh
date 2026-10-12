@@ -21,7 +21,7 @@ PY_EOF
 
 python3 local_server.py &
 SERVER_PID=$!
-trap 'kill -9 $SERVER_PID 2>/dev/null; rm -f local_server.py' EXIT INT TERM
+trap 'kill -9 $SERVER_PID 2>/dev/null' EXIT INT TERM
 
 # Wait for server to become ready
 for i in {1..15}; do

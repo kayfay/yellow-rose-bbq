@@ -225,10 +225,18 @@ def calculate_daily_procurement(df_joined: pl.DataFrame) -> pl.DataFrame:
         )
         
     if "pulled_pork_lbs" in daily_pivot.columns:
-        # Pork Yield: ~50% shrinkage. 1 Whole Raw Butt = ~8 lbs raw
+        # Pork Yield: ~56% trim & smoke render (44% net yield). 1 Whole Raw Butt = ~8 lbs raw
         daily_pivot = daily_pivot.with_columns(
-            (pl.col("pulled_pork_lbs") / 0.4).alias("Total Raw Pork Needed (Lbs)"),
-            ((pl.col("pulled_pork_lbs") / 0.4) / 8.0).ceil().cast(pl.Int32).alias("Total Whole Pork Butts Needed")
+            (pl.col("pulled_pork_lbs") / 0.44).alias("Total Raw Pork Needed (Lbs)"),
+            ((pl.col("pulled_pork_lbs") / 0.44) / 8.0).ceil().cast(pl.Int32).alias("Total Whole Pork Butts Needed")
+        )
+
+    if "turkey_lbs" in daily_pivot.columns:
+        # Turkey Yield: 0% trim, 30% smoke render (70% net yield). 1 Whole Raw Breast = ~10 lbs raw, Case = 20 lbs
+        daily_pivot = daily_pivot.with_columns(
+            (pl.col("turkey_lbs") / 0.70).alias("Total Raw Turkey Needed (Lbs)"),
+            ((pl.col("turkey_lbs") / 0.70) / 10.0).ceil().cast(pl.Int32).alias("Total Whole Turkey Breasts Needed"),
+            (((pl.col("turkey_lbs") / 0.70) / 20.0)).ceil().cast(pl.Int32).alias("Total Cases of Turkey Needed")
         )
 
     return daily_pivot

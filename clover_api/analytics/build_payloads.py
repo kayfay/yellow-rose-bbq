@@ -31,6 +31,21 @@ def build_payloads():
                                     base_record = dict(day_map.get(target_day, data["forecast"]["forecast_records"][0]))
                                     base_record["date"] = new_date.strftime("%Y-%m-%d")
                                     base_record["day_name"] = target_day
+                                    if target_day == "Mon":
+                                        base_record["is_closed"] = True
+                                        base_record["predicted_revenue"] = 0.0
+                                        base_record["brisket_raw_lbs"] = 0.0
+                                        base_record["pork_shoulder_raw_lbs"] = 0.0
+                                        base_record["sausage_lbs"] = 0.0
+                                        base_record["turkey_lbs"] = 0.0
+                                        base_record["turkey_cooked_lbs"] = 0.0
+                                        base_record["turkey_raw_lbs"] = 0.0
+                                        base_record["tacos_sold"] = 0
+                                        base_record["rosebuds_sold"] = 0
+                                        base_record["pork_ribs_racks"] = 0
+                                        base_record["beef_dino_ribs"] = 0
+                                        base_record["recommended_staff"] = 0
+                                        base_record["pitmaster_hours"] = 0.0
                                     new_records.append(base_record)
                                 
                                 data["forecast"]["forecast_records"] = new_records

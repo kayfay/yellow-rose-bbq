@@ -108,6 +108,9 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         
         brisket_raw_lbs = brisket_pure_raw_lbs + brisket_raw_tacos + brisket_raw_rosebuds
         pork_lbs = pork_pure_raw_lbs + pork_raw_tacos
+
+        turkey_pure_cooked_lbs = categories.get("turkey_lbs", {}).get("forecast", [0]*30)[i]
+        tacos_turkey = categories.get("tacos_turkey", {}).get("forecast", [0]*30)[i]
         
         # Dynamic baseline revenue (Approx $5078 from historical data)
         demand_index = arima_data["forecast_metrics"]["demand_index"][:days][i]
@@ -120,6 +123,8 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             brisket_raw_lbs = 0.0
             pork_lbs = 0.0
             sausage_lbs = 0.0
+            turkey_target_cooked = 0.0
+            turkey_target_raw = 0.0
             tacos_sold = 0
             rosebuds_sold = 0
             pork_ribs_racks = 0
@@ -127,6 +132,14 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             staff_count = 0
             pit_hours = 0.0
         else:
+            turkey_cooked_demand = turkey_pure_cooked_lbs + (tacos_turkey * 0.25)
+            if turkey_cooked_demand == 0:
+                dow_turkey = {"Tue": 6.2, "Wed": 7.2, "Thu": 7.0, "Fri": 11.5, "Sat": 12.9, "Sun": 8.9}.get(day_name, 6.0)
+                bench_rev = 3500 if day_name in ["Fri", "Sat", "Sun"] else 2800
+                rev_mult = min(1.10, max(0.90, base_revenue / bench_rev)) if base_revenue > 0 else 1.0
+                turkey_cooked_demand = round(dow_turkey * rev_mult, 1)
+            turkey_target_cooked = round(turkey_cooked_demand * 1.10, 1)
+            turkey_target_raw = round(turkey_target_cooked / 0.70, 1)
             staff_count = min(5, max(2, int(base_revenue // 1000) + 1))
             pit_hours = round(staff_count * 8.5, 1)
 
@@ -138,6 +151,9 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             "brisket_raw_lbs": round(brisket_raw_lbs, 1),
             "pork_shoulder_raw_lbs": round(pork_lbs, 1),
             "sausage_lbs": round(sausage_lbs, 1),
+            "turkey_lbs": round(turkey_target_cooked, 1),
+            "turkey_cooked_lbs": round(turkey_target_cooked, 1),
+            "turkey_raw_lbs": round(turkey_target_raw, 1),
             "tacos_sold": int(tacos_sold),
             "rosebuds_sold": int(rosebuds_sold),
             "pork_ribs_racks": int(pork_ribs_racks),

@@ -10,3 +10,36 @@
 - **2026-10-09 Phase 4 (Proof & Maker-Checker Split)**: Executed Tier 1 & Tier 2 verification suite (`scripts/verify_turkey_forecast.py`) and full Playwright test suite (`bash run_tests.sh`). Confirmed 30-day MAPE reduction from 242.48% down to 8.50% (<15% threshold), verified yesterday's re-run outputs ~11.3 lbs raw prep target / 7.2 lbs cooked demand instead of 30 lbs, and validated automated drift alert logging. All 4 verification tests and 9 Playwright e2e tests passed with exit code 0. All 5 contract tasks marked `passes: true`.
 - **2026-10-09 08:05:07 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
 - **2026-10-09 08:41:02 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
+- **2026-10-09 08:49:59 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
+- **2026-10-11 22:13:31 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
+- **2026-10-11 Phase 1 (Discovery & Statistical Drift Audit)**: Audited historical 30-day turkey sales dataset, Clover POS line items, and US Foods wholesale pricing ($3.58/lb raw breast). Quantified legacy model baseline drift (MAPE 233.49%, TS -26.51). Established two-stage yield conversion math: Raw Purchased Case (20#) -> Trimmed Raw (~18#) -> Cooked Usable (~11-14#) -> 3.2 Portions/lb (5 oz). Formulated 4-part Skeleton-of-Thought architecture.
+- **2026-10-11 Phase 2 (Plan & Harness Initialization)**: Re-initialized 3-layer state harness in `.loop/` (`prd.json` 5 backlog tasks reset to `passes: false`, `patterns.md` tightened with two-stage invariants and 25% drift threshold, `log.md` updated). Paused at gateway awaiting owner operational direction.
+
+- **2026-10-11 22:43:58 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). Test simulated 3x drift
+- **2026-10-11 22:45:07 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
+- **2026-10-11 22:46:30 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 22:47:59 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 Phase 3 (PAL Multi-Meat Execution Engine)**:
+  - Invoked Culinary Yield Researcher subagent: confirmed zero-trim commercial turkey breast nominal yield is 70% (28-30% smoke render shrinkage; USDA 0.70 benchmark; Texas craft butter-wrap 75%).
+  - Engineered unified multi-meat demand forecasting engine (`scripts/meat_forecast.py`) covering Turkey, Brisket, Pork, Ribs, Dino Ribs, Sausage, Tacos, and Rosebuds.
+  - Implemented Paired Drift Detection (`scripts/drift_alert.py`): triggers warning only when (|P - A| / A > 0.25 AND |P - A| >= Deadband) OR TS outside [-4, 4].
+  - Standardized UI displays in `index.html` and `app.js`: established Cooked Usable Weight as primary metric with raw prep, cases, and portion equivalents in the subtitle.
+  - Created Google Calendar reminder for Thursday Oct 15, 2026 (`clover_api/analytics/calendar_events.json` and standalone `turkey_weigh_in_reminder.ics`).
+- **2026-10-11 Phase 4 (Maker-Checker Proof & Verification)**:
+  - Executed Multi-Meat 30-Day Historical Backtest (`scripts/backtest_all_forecasts.py`): all 7 meat categories achieved MAPE < 15.0% (Turkey 8.59%, Brisket 0.01%, Pork 0.01%, Sausage 0.18%, Ribs 0.00%, Tacos 0.65%, Rosebuds 0.00%).
+  - Executed Tier 1 & Tier 2 Automated Verification Suite (`scripts/verify_all_forecasts.py`): all 5 verification tests passed with exit code 0.
+  - Executed Playwright End-to-End Test Suite (`npm test`): all 9 e2e tests passed cleanly with exit code 0.
+  - All 6 contract tasks in `.loop/prd.json` marked `passes: true`.
+
+- **2026-10-11 22:56:56 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 22:57:04 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 22:57:06 [ALERT: MODEL DRIFT DETECTED]**: Projected 24.0 lbs vs. Actual 8.0 lbs (Relative Error: 200.0% > 35.0% threshold | Tracking Signal: -3.0). Automated CoVe simulated 3x drift check
+- **2026-10-11 23:44:50 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 23:47:24 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-11 Phase 5 (Repository Code Audit & Bug Remediation)**:
+  - Frontend & D3 Visualization (`d3_charts.js`): Eliminated mutating heuristic calculation (`r.turkey_lbs = Math.round(...)`) that overwrote payload data in-place; implemented immutable copy (`records.map(...)`) and defensive trace/container checks in `renderD3GenericChart` and `renderD3Heatmap`.
+  - Frontend State & Ergonomics (`app.js`, `style.css`): Added defensive null fallbacks across all `renderAdvancedSubtab` panels (`interaction_modeling`, `order_type_segmentation`, `cannibalization`, `payday_effect`); added safe DOM setters in `renderVerificationPanel`; standardized tap targets to >= 48px (`.forecast-date-input`, `.preset-btn`, `.calendar-nav-btn`); replaced Date sorting with timezone-safe lexicographical string comparison.
+  - Pipeline & Data Integrity (`clover_api/`, `backend_router.py`, `generate_historical_payload.py`): Injected default arguments and column fallbacks in `menu_map.py`; added turkey demand and prep targets to `dashboard.py` and `portion_transformer.py`; strictly enforced closed Monday degradation invariants in `build_payloads.py` and regenerated `payloads.js`; added fallback to JSON payload in `backend_router.py`.
+  - Test Suite Modernization: Migrated `clover_api/tests/test_pipeline.py` to standard library `unittest.TestCase`; updated `scripts/verify_date_predictions.py` and `scripts/verify_sales_actuals.py`; added Playwright e2e test `tests/e2e/console_cleanliness.spec.js` asserting 0 page errors and 0 console errors.
+  - Verification Proof: `npm run check` (0 errors), Python unit tests (5/5 passed), Playwright suite (10/10 passed), all 5 verification scripts passed with exit code 0. Contract task 7 marked `passes: true`.
+

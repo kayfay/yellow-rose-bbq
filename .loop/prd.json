@@ -2,32 +2,44 @@
   "tasks": [
     {
       "id": 1,
-      "description": "Audit historical turkey sales vs. projections across the last 30 days to quantify Mean Absolute Percentage Error (MAPE).",
-      "acceptance_criteria": "Historical 30-day turkey sales dataset parsed; legacy formula MAPE quantified (>150% baseline drift established).",
+      "description": "Audit historical sales vs. projections across all BBQ meat categories (Brisket, Pulled Pork, Ribs, Dino Ribs, Sausage, Turkey) across the last 30 days to quantify MAPE and tracking signal.",
+      "acceptance_criteria": "Historical 30-day dataset evaluated across all meats; baseline errors and systemic biases quantified.",
       "passes": true
     },
     {
       "id": 2,
-      "description": "Build backtesting script scripts/backtest_turkey.py comparing raw vs. cooked weight conversion factors.",
-      "acceptance_criteria": "Backtesting engine evaluates raw vs cooked conversions (70% nominal yield) and compares legacy vs calibrated projections.",
+      "description": "Standardize raw vs. cooked usable weight conversions across all meat categories and update UI cards to show Cooked Usable Weight as primary metric with raw prep/cases/portions subtitle.",
+      "acceptance_criteria": "All UI cards and data payloads display Cooked Usable Weight as primary metric; subtitles show raw prep weight, cases, and portion equivalents; turkey model reflects no-trim spec (100% prep yield, 70% nominal render).",
       "passes": true
     },
     {
       "id": 3,
-      "description": "Refactor forecast engine to incorporate dynamic error-decay weights and day-of-week baseline scaling.",
-      "acceptance_criteria": "Deterministic Python module scripts/turkey_forecast.py calculates daily projections with DOW medians and rolling 14-day error correction.",
+      "description": "Refactor demand forecasting engine to provide unified Day-of-Week baselines, bounded revenue scaling, and 14-day rolling error decay across ALL meat categories.",
+      "acceptance_criteria": "Unified deterministic forecasting engine scripts/meat_forecast.py calculates daily projections for Brisket, Pork, Ribs, Dino Ribs, Sausage, Turkey, Tacos, and Rosebuds.",
       "passes": true
     },
     {
       "id": 4,
-      "description": "Build automated drift alert threshold triggering a warning whenever |Projected - Actual| / Actual > 0.35.",
-      "acceptance_criteria": "Tracking signal outside [-4, 4] and absolute percentage error > 0.35 triggers automated recalibration flag logged to .loop/log.md.",
+      "description": "Build paired drift detection engine scripts/drift_alert.py combining 25% relative error threshold with item-specific absolute deadbands and tracking signal bounds [-4, 4], logging alerts to .loop/log.md.",
+      "acceptance_criteria": "Drift alert triggers only when (|P - A| / A > 0.25 AND |P - A| >= deadband) OR TS outside [-4, 4]; logs structured alerts to .loop/log.md.",
       "passes": true
     },
     {
       "id": 5,
-      "description": "Write automated Tier 1 & Tier 2 verification script scripts/verify_turkey_forecast.py.",
-      "acceptance_criteria": "Automated verification script executes 30-day backtest (MAPE < 15%), re-tests yesterday's scenario (9-11 lbs), verifies alert triggers, and exits with code 0.",
+      "description": "Build multi-item backtesting engine scripts/backtest_all_forecasts.py and automated Tier 1 & Tier 2 verification suite scripts/verify_all_forecasts.py verifying all models (MAPE < 15%).",
+      "acceptance_criteria": "Backtesting engine and verification test suite assert 30-day MAPE < 15% across all core meat categories, verify paired drift alert simulation, and exit code 0.",
+      "passes": true
+    },
+    {
+      "id": 6,
+      "description": "Add Thursday Oct 15, 2026 pitmaster turkey weigh-in audit reminder to Google Calendar (link, ICS file, and calendar_events.json).",
+      "acceptance_criteria": "Calendar event added to clover_api/analytics/calendar_events.json; standalone .ics reminder file generated; direct Google Calendar add link provided.",
+      "passes": true
+    },
+    {
+      "id": 7,
+      "description": "Perform comprehensive repository code audit across frontend, pipeline, and test suites, eliminating data mutations, uncalibrated heuristics, touch target violations, and unhandled nulls.",
+      "acceptance_criteria": "Zero payload mutations in d3_charts.js; defensive checks across app.js subtabs; all touch targets >= 48px; all pipeline scripts and tests passing with exit code 0.",
       "passes": true
     }
   ]

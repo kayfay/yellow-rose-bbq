@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Yellow Rose BBQ//Culinary Analytics//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261015-turkey-weighin-audit@yellowrosebbq.com
+DTSTAMP:20261012T024000Z
+DTSTART:20261015T140000Z
+DTEND:20261015T150000Z
+SUMMARY:Yellow Rose BBQ: Verify Actual Cooked Weight of Turkey
+DESCRIPTION:Operational Calibration: Weigh post-smoke and rested smoked turkey breasts at Yellow Rose BBQ to verify actual commercial render shrinkage (no-trim spec) and calibrate the demand forecasting engine.
+LOCATION:Yellow Rose BBQ Smokehouse
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Verify Actual Cooked Weight of Turkey
+END:VALARM
+END:VEVENT
+END:VCALENDAR

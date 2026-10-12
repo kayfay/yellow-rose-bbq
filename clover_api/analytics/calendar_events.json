@@ -15,6 +15,7 @@
     { "date": "2026-09-27", "title": "Jaguars vs. Texans (AFC South Rivalry)", "category": "jaguars", "multiplier": 3.5, "icon": "🏈", "note": "Major divisional rival home game. Double pit capacity with 2 staggered burns." },
     { "date": "2026-10-03", "title": "Daily's Place Acoustic Showcase", "category": "concert", "multiplier": 1.4, "icon": "🎸", "note": "Evening concert crowd. Steady dinner rush." },
     { "date": "2026-10-11", "title": "Jaguars vs. Chiefs (Blockbuster Game)", "category": "jaguars", "multiplier": 3.8, "icon": "🏈", "note": "National prime matchup! Extremely high tailgating volume. Order maximum raw cases by Thursday deadline." },
+    { "date": "2026-10-15", "title": "Turkey Weigh-In Calibration Audit", "category": "operational", "multiplier": 1.0, "icon": "🦃", "note": "Operational Pitmaster Audit: Weigh post-smoke and rested turkey breasts to verify actual commercial render percentage (no-trim spec)." },
     { "date": "2026-10-17", "title": "Daily's Place Autumn Jam", "category": "concert", "multiplier": 1.5, "icon": "🎸", "note": "Evening concert dinner rush." },
     { "date": "2026-10-25", "title": "Jaguars vs. Titans (AFC South Rivalry)", "category": "jaguars", "multiplier": 3.5, "icon": "🏈", "note": "Divisional rivalry game. High catering and tailgate pack demand." },
     { "date": "2026-10-29", "title": "FL-GA RV City Opens", "category": "jaguars", "multiplier": 2.5, "icon": "🏈", "note": "RV City opens at stadium days in advance. Fans start tailgating early. Launch 'RV Reheat Packs'." },

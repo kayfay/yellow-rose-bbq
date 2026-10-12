@@ -102,7 +102,9 @@ for d in dates:
         "is_historical": True, "data_type": "ACTUAL"
     })
 
-with open('clover_api/analytics/historical_payload.json', 'w') as f:
-    json.dump({"historical_records": historical_records}, f, indent=2)
-
-print(f"Generated {len(historical_records)} historical records in clover_api/analytics/historical_payload.json")
+if len(historical_records) == 0:
+    print("[SAFETY GUARD] No historical records found in SQLite orders table. Preserving existing historical_payload.json.")
+else:
+    with open('clover_api/analytics/historical_payload.json', 'w') as f:
+        json.dump({"historical_records": historical_records}, f, indent=2)
+    print(f"Generated {len(historical_records)} historical records in clover_api/analytics/historical_payload.json")

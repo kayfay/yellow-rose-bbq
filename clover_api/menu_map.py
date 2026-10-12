@@ -21,7 +21,7 @@ MENU_GROUPS = {
     "sides_extras": ["mac & cheese", "cole slaw", "beans", "salad", "fries", "cornbread", "banana pudding", "side"]
 }
 
-def classify_item(name: str, mods: str) -> str:
+def classify_item(name: str, mods: str = "") -> str:
     """
     Classifies a POS item name and its modifications into a standard category using keyword matching.
     """
@@ -60,6 +60,10 @@ def aggregate_by_category(df_line_items: pl.DataFrame) -> pl.DataFrame:
     """
     if df_line_items.height == 0:
         return df_line_items
+
+    # Ensure modifications column exists
+    if "modifications" not in df_line_items.columns:
+        df_line_items = df_line_items.with_columns(pl.lit("").alias("modifications"))
 
     # Ensure created_time is a datetime and map categories
     df = df_line_items.with_columns(

@@ -7,6 +7,7 @@ class DatabaseRouter:
     def __init__(self, db_path=DB_PATH):
         self.db_path = db_path
         self.dash_payload_path = ANALYTICS_DIR / "dashboard_payload.json"
+        self.hist_payload_path = ANALYTICS_DIR / "historical_payload.json"
 
     def get_actual_sales(self, date: str, item: str):
         conn = sqlite3.connect(self.db_path)
@@ -24,10 +25,35 @@ class DatabaseRouter:
         """, (parsed_date, f"%{item}%"))
         res = cur.fetchone()[0]
         conn.close()
+
+        # Fallback to historical_payload.json if SQLite line items are empty
+        if res is None and self.hist_payload_path.exists():
+            try:
+                with open(self.hist_payload_path, 'r') as f:
+                    hist_data = json.load(f)
+                recs = hist_data.get("historical_records", [])
+                matched = next((r for r in recs if r.get("date") == parsed_date), None)
+                if matched:
+                    item_low = item.lower()
+                    if "rosebud" in item_low:
+                        res = matched.get("rosebuds_sold", 0)
+                    elif "taco" in item_low:
+                        res = matched.get("tacos_sold", 0)
+                    elif "brisket" in item_low:
+                        res = matched.get("brisket_raw_lbs", 0)
+                    elif "pork" in item_low:
+                        res = matched.get("pork_shoulder_raw_lbs", 0)
+                    elif "sausage" in item_low:
+                        res = matched.get("sausage_lbs", 0)
+                    elif "rib" in item_low:
+                        res = matched.get("pork_ribs_racks", 0)
+            except Exception:
+                pass
+
         return {
             "date": parsed_date,
             "item": item,
-            "quantity": int(res) if res else 0,
+            "quantity": int(res) if res is not None else 0,
             "data_type": "ACTUAL"
         }
 

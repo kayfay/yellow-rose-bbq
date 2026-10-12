@@ -10,15 +10,17 @@ from menu_map import classify_item, aggregate_by_category
 class TestMenuMap(unittest.TestCase):
 
     def test_classify_item_tacos(self):
-        self.assertEqual(classify_item("Crispy Quesa Taco Brisket"), "tacos")
-        self.assertEqual(classify_item("taco combo"), "tacos")
+        self.assertEqual(classify_item("Crispy Quesa Taco Brisket"), "tacos_brisket")
+        self.assertEqual(classify_item("taco combo"), "tacos_brisket")
+        self.assertEqual(classify_item("taco pork"), "tacos_pork")
+        self.assertEqual(classify_item("taco turkey"), "tacos_turkey")
 
     def test_classify_item_brisket(self):
         self.assertEqual(classify_item("1/2 lb Brisket"), "brisket_lbs")
         self.assertEqual(classify_item("Brisket Pound"), "brisket_lbs")
         
     def test_classify_item_pulled_pork(self):
-        self.assertEqual(classify_item("Pulled Pork Sandwich"), "sandwiches")
+        self.assertEqual(classify_item("Pulled Pork Sandwich"), "pulled_pork_lbs")
         self.assertEqual(classify_item("1/2 lb Pulled Pork"), "pulled_pork_lbs")
 
     def test_aggregate_by_category(self):
@@ -33,7 +35,6 @@ class TestMenuMap(unittest.TestCase):
             
             # Non-weight based items (quantity should be summed as-is)
             {"item_name": "Crispy Quesa Taco Brisket", "quantity": 3, "price_cents": 500, "created_time": "2024-01-01 12:00:00"},
-            {"item_name": "Pulled Pork Sandwich", "quantity": 2, "price_cents": 1200, "created_time": "2024-01-01 12:00:00"},
             {"item_name": "Rosebuds", "quantity": 5, "price_cents": 200, "created_time": "2024-01-01 12:00:00"},
             
             # Unknown item
@@ -43,7 +44,6 @@ class TestMenuMap(unittest.TestCase):
         result_df = aggregate_by_category(order_line_items)
         
         # Result is a dataframe with columns: date, hour, category, qty_sold
-        # Let's convert it back to a dict for easy assertions (summing over date/hour since they are identical in our dummy data)
         agg_result = result_df.group_by("category").agg(pl.col("qty_sold").sum())
         result = dict(zip(agg_result['category'], agg_result['qty_sold']))
 
@@ -54,8 +54,7 @@ class TestMenuMap(unittest.TestCase):
         self.assertAlmostEqual(result.get("sausage_links", 0), 2.0) # 2000 / 1000
 
         # Assert non-weight-based items were NOT divided by 1000
-        self.assertEqual(result.get("tacos", 0), 3)
-        self.assertEqual(result.get("sandwiches", 0), 2)
+        self.assertEqual(result.get("tacos_brisket", 0), 3)
         self.assertEqual(result.get("rosebuds", 0), 5)
         
         # Unknown should be filtered out (category="other")

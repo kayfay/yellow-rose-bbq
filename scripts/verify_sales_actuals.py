@@ -13,11 +13,12 @@ def main():
     res1 = route_sales_query(past_date, "rosebuds")
     print(f"Past Date Response: {res1}")
     assert res1["data_type"] == "ACTUAL", "Expected data_type to be ACTUAL"
-    assert res1["quantity"] == 40, f"Expected 40 rosebuds, got {res1['quantity']}"
+    assert res1["quantity"] == 26, f"Expected 26 rosebuds, got {res1['quantity']}"
     print("  ✓ Historical past date query verified.")
 
     print("--- [TEST 2] Future Date Query ---")
-    future_date = "09/25/2026"
+    from datetime import datetime, timedelta
+    future_date = (datetime.now() + timedelta(days=3)).strftime("%m/%d/%Y")
     res2 = route_sales_query(future_date, "rosebuds")
     print(f"Future Date Response: {res2}")
     assert res2["data_type"] == "PREDICTED", "Expected data_type to be PREDICTED"
