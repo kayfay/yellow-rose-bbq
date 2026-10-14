@@ -1,0 +1,15 @@
+{
+  "name": "yellow-rose-access-bot",
+  "version": "1.0.0",
+  "description": "Natural language Telegram agent for managing Cloudflare Zero Trust Access for sausage.allen.tools",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test/test_parser.js",
+    "check": "node --check src/index.js",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}

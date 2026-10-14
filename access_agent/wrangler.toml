@@ -1,0 +1,14 @@
+name = "yellow-rose-access-bot"
+main = "src/index.js"
+compatibility_date = "2024-10-01"
+
+[ai]
+binding = "AI"
+
+# Required Secrets (set using `wrangler secret put <KEY>`):
+# - TELEGRAM_BOT_TOKEN: Telegram bot API token from @BotFather
+# - TELEGRAM_ADMIN_IDS: Comma-separated list of authorized numeric Telegram User IDs
+# - CF_ACCOUNT_ID: Cloudflare Account ID
+# - CF_ACCESS_APP_ID: Cloudflare Access Application ID for sausage.allen.tools
+# - CF_ACCESS_POLICY_ID: Cloudflare Access Policy ID attached to the Application
+# - CF_API_TOKEN: Cloudflare API token with 'Zero Trust: Edit' permissions

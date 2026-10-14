@@ -48,7 +48,7 @@ const RECIPES = {
     ingredients: [
       { id: 'lean-meat', label: 'Lean Beef Base', amount: 35.0, unit: 'lbs', desc: 'Beef Trimmings' },
       { id: 'hard-fat', label: 'Hard Fat', amount: 15.0, unit: 'lbs', desc: 'Chilled Beef Fat' },
-      { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', gramEq: 181.4, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'cure', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -71,7 +71,7 @@ const RECIPES = {
       { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
       { id: 'jalapenos', label: 'Diced Jalapeños', amount: 8.0, unit: 'cups', desc: 'Fully Drained & Diced' },
       { id: 'cheddar', label: 'Cheddar Cheese', amount: 5.0, unit: 'lbs', desc: 'High-Temp Cubes' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', gramEq: 136.1, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -93,7 +93,7 @@ const RECIPES = {
       { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
       { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
       { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', gramEq: 136.1, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -119,7 +119,7 @@ const RECIPES = {
       { id: 'parmesan', label: 'Parmesan Cheese', amount: 2.5, unit: 'lbs', desc: 'Shredded/Grated' },
       { id: 'cilantro', label: 'Chopped Cilantro', amount: 1.5, unit: 'cups', desc: 'Taco Station Chop' },
       { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', gramEq: 90.7, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -169,7 +169,7 @@ const RECIPES = {
       { id: 'cream-cheese', label: 'Cream Cheese', amount: 5.0, unit: 'lbs', desc: 'Chilled & Firm Cubes' },
       { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Rose Buds Bacon' },
       { id: 'honey', label: 'Honey Drizzle', amount: 1.5, unit: 'cups', desc: 'Binder & Sweetness' },
-      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
+      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', gramEq: 340.2, desc: 'Seasoning Station' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -193,7 +193,7 @@ const RECIPES = {
       { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
       { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 2.0, unit: 'lbs', desc: 'Cooled Sautéed Garlic' },
       { id: 'parmesan', label: 'Parmesan Cheese', amount: 5.0, unit: 'lbs', desc: 'Shredded/Grated' },
-      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', desc: 'Seasoning Station' },
+      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', gramEq: 340.2, desc: 'Seasoning Station' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -218,7 +218,7 @@ const RECIPES = {
       { id: 'sauteed-cabbage', label: 'Sautéed Cabbage', amount: 6.25, unit: 'lbs', desc: 'Well-Drained & Chilled' },
       { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Bacon Bits' },
       { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 1.5, unit: 'lbs', desc: 'Chilled Garlic' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', desc: 'Coarse Grind' },
+      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', gramEq: 90.7, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
       { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
@@ -587,8 +587,20 @@ function updateUI() {
       return `${amt.toFixed(1)} ${unit}`;
     };
 
+    const pepperIng = currentRecipe.ingredients.find(i => i.id === 'pepper');
+    const rubIng = currentRecipe.ingredients.find(i => i.id === 'bbq-rub');
+    let spiceVerifHtml = '<em>(No Black Pepper)</em>';
+    if (pepperAmt > 0) {
+      const gStr = pepperIng && pepperIng.gramEq ? ` (${Math.round(pepperIng.gramEq * scale)} g)` : '';
+      spiceVerifHtml = `<strong>${formatVerif(pepperAmt, 'cups')}${gStr}</strong> Coarse Black Pepper`;
+    } else if (rubIng) {
+      const rubAmt = rubIng.amount * scale;
+      const gStr = rubIng.gramEq ? ` (${Math.round(rubIng.gramEq * scale)} g)` : '';
+      spiceVerifHtml = `<strong>${formatVerif(rubAmt, 'cups')}${gStr}</strong> Signature BBQ Rub`;
+    }
+
     setHTML('verif-cure', cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`);
-    setHTML('verif-pepper', pepperAmt > 0 ? `<strong>${formatVerif(pepperAmt, 'cups')}</strong> Coarse Black Pepper` : `<em>(No Black Pepper)</em>`);
+    setHTML('verif-pepper', spiceVerifHtml);
     setHTML('verif-water', waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : `<em>(No Water)</em>`);
     setHTML('verif-milk', milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : `<em>(No Milk)</em>`);
     
