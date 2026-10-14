@@ -1,5 +1,10 @@
 import assert from "node:assert";
-import { extractEmailsFromPolicy, parseIntentWithAI } from "../src/index.js";
+import {
+  extractEmailsFromPolicy,
+  parseIntentWithAI,
+  serveRequestAccessHtml,
+  handleWebRequestAccess
+} from "../src/index.js";
 
 async function runTests() {
   console.log("Running unit tests for access_agent...\n");
@@ -51,7 +56,41 @@ async function runTests() {
   assert.strictEqual(parsedAi.email, "newwaiter@gmail.com");
   console.log("✓ AI response parser correctly stripped markdown fences and extracted JSON");
 
-  console.log("\nAll unit tests passed successfully! 🎉");
+  // Test 4: serveRequestAccessHtml
+  const htmlRes = serveRequestAccessHtml();
+  assert.strictEqual(htmlRes.status, 200);
+  assert.strictEqual(htmlRes.headers.get("Content-Type"), "text/html; charset=utf-8");
+  const htmlContent = await htmlRes.text();
+  assert(htmlContent.includes("Request Access"), "HTML should contain 'Request Access'");
+  assert(htmlContent.includes('type="email"'), "HTML should contain email input");
+  console.log("✓ serveRequestAccessHtml served responsive HTML request access form");
+
+  // Test 5: handleWebRequestAccess validation
+  const invalidReq = new Request("https://access.example.com/api/request-access", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: "invalid-email" })
+  });
+  const invalidRes = await handleWebRequestAccess(invalidReq, {});
+  assert.strictEqual(invalidRes.status, 400);
+  const invalidJson = await invalidRes.json();
+  assert.strictEqual(invalidJson.success, false);
+  console.log("✓ handleWebRequestAccess rejected malformed email address with 400");
+
+  // Test 6: handleWebRequestAccess valid request
+  const validReq = new Request("https://access.example.com/api/request-access", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: "newcook@yellowrosebbq.com", name: "Chef Dan" })
+  });
+  const validRes = await handleWebRequestAccess(validReq, { TELEGRAM_BOT_TOKEN: "", TELEGRAM_ADMIN_IDS: "" });
+  assert.strictEqual(validRes.status, 200);
+  const validJson = await validRes.json();
+  assert.strictEqual(validJson.success, true);
+  assert.strictEqual(validJson.email, "newcook@yellowrosebbq.com");
+  console.log("✓ handleWebRequestAccess processed valid access request successfully");
+
+  console.log("\nAll 6 unit tests passed successfully! 🎉");
 }
 
 runTests().catch((err) => {

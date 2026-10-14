@@ -1,19 +1,36 @@
-# Yellow Rose BBQ - Natural Language Access Agent
+# Yellow Rose BBQ - Natural Language Access Agent & Instant Approval Bot
 
-A serverless Cloudflare Worker AI Telegram bot that manages Cloudflare Zero Trust Access policies for `sausage.allen.tools` using plain natural English.
+A serverless Cloudflare Worker AI Telegram bot that manages Cloudflare Zero Trust Access policies for `sausage.allen.tools` using plain natural English, web request access forms, and instant interactive Telegram notifications.
 
 ---
 
 ## Capabilities
 
-Talk to the agent naturally on your phone via Telegram:
-- *"Add pitmaster.dave@gmail.com to the allowed list"*
-- *"Can you authorize sarah.bbq@yahoo.com to see the dashboard?"*
-- *"Who can view the site right now?"*
-- *"Remove mike@gmail.com"*
-- *"Status"*
+1. **Instant Telegram Push & One-Click Approval**:
+   - When a staff member or visitor requests access, the pitmaster receives an instant notification in Telegram with interactive buttons:
+     ```
+     🔔 Access Request: sausage.allen.tools
 
-The agent parses your intent using **Cloudflare Workers AI (Llama 3.1)** and updates your Cloudflare Zero Trust Access Policy in real-time.
+     • Email: cook.dan@gmail.com
+     • Requester: Dan (Morning Smoke Watch)
+     • Time: 6:30 PM EST
+
+     [ ✅ Approve Access ]   [ ❌ Deny ]
+     ```
+   - Tapping **[ ✅ Approve Access ]** instantly calls the Cloudflare Zero Trust API, adds the user to the Access Policy whitelist, and confirms in Telegram!
+
+2. **Web Request Access Portal & REST API**:
+   - Hosts a mobile-friendly web form at `https://<worker-subdomain>.workers.dev/request-access`.
+   - Provides a CORS-enabled REST API at `POST /api/request-access` that accepts `{ "email": "staff@example.com", "name": "Dave" }`.
+
+3. **Natural English Commands on Telegram**:
+   - *"Add pitmaster.dave@gmail.com to the allowed list"*
+   - *"Can you authorize sarah.bbq@yahoo.com to see the dashboard?"*
+   - *"Who can view the site right now?"*
+   - *"Remove mike@gmail.com"*
+   - *"Status"*
+
+The agent parses intent using **Cloudflare Workers AI (Llama 3.1)** and updates Cloudflare Zero Trust Access Policies in real-time.
 
 ---
 
@@ -24,14 +41,14 @@ The agent parses your intent using **Cloudflare Workers AI (Llama 3.1)** and upd
 3. Set:
    - **Application Name**: `Yellow Rose POS Analytics`
    - **Application domain**: `sausage.allen.tools`
-   - **Session Duration**: e.g., `30 days` (so kitchen staff aren't logged out daily).
+   - **Session Duration**: `1 month` (730 hours) so staff aren't logged out repeatedly.
+   - **Cookie Settings**: Disable **Binding Cookie** (Strict IP Binding) so shifting between Wi-Fi and 5G cellular doesn't invalidate sessions.
 4. Under **Policies**, create a policy:
    - **Policy Name**: `Staff Email Whitelist`
    - **Action**: `Allow`
    - **Configure rules** > **Include**: Add **Selector: Emails** (you can put your own email initially).
-5. Note down:
-   - Your **Cloudflare Account ID** (found in Cloudflare dashboard URL or Workers tab).
-   - The **Application ID** and **Policy ID** (from the URL or API).
+5. (Optional) Under **Custom Pages** > **Access Denied**:
+   - Add a link to your Request Access worker URL (`https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`) so blocked visitors can click "Request Access".
 
 ---
 
@@ -57,13 +74,7 @@ npx wrangler secret put TELEGRAM_ADMIN_IDS
 # Paste your numeric Telegram ID (or comma-separated IDs)
 
 npx wrangler secret put CF_ACCOUNT_ID
-# Paste your Cloudflare Account ID
-
-npx wrangler secret put CF_ACCESS_APP_ID
-# Paste your Cloudflare Access Application ID
-
-npx wrangler secret put CF_ACCESS_POLICY_ID
-# Paste your Cloudflare Access Policy ID
+# Paste your Cloudflare Account ID (from Cloudflare dashboard URL)
 
 npx wrangler secret put CF_API_TOKEN
 # Cloudflare API Token with "Zero Trust: Edit" permission
@@ -97,11 +108,21 @@ Telegram will respond with:
 
 ---
 
-## 6. Verification
+## 6. Verification & Usage
 
-1. Open your Telegram bot.
-2. Send: `/start`
-3. Try natural commands:
-   - *"Add mytest@gmail.com to the site"*
-   - *"Who has access?"*
-   - *"Remove mytest@gmail.com"*
+1. **Staff Requesting Access**:
+   - Visit `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access` (or click "🔑 Request Access" inside the dashboard).
+   - Enter `newcook@yellowrosebbq.com` and submit.
+2. **Pitmaster Approving on Telegram**:
+   - Your Telegram immediately receives an alert:
+     ```
+     🔔 Access Request: sausage.allen.tools
+     • Email: newcook@yellowrosebbq.com
+     • Requester: Dan
+     ```
+   - Tap **[ ✅ Approve Access ]**.
+   - Cloudflare Zero Trust is updated in real-time and the message updates to:
+     ```
+     ✅ Access Approved
+     User newcook@yellowrosebbq.com has been whitelisted on sausage.allen.tools by @pitmaster.
+     ```
