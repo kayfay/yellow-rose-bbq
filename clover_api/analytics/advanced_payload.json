@@ -38,7 +38,7 @@
     {
       "pair": "Brisket + Turkey",
       "count": 107,
-      "confidence": 51.4
+      "confidence": 51.2
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
@@ -47,22 +47,22 @@
     },
     {
       "pair": "Brisket + Mac & Cheese",
-      "count": 101,
+      "count": 100,
       "confidence": 20.2
     }
   ],
   "interaction_modeling": {
-    "normal": 4456.32,
+    "normal": 4294.93,
     "game_only": 3983.78,
-    "rain_only": 3119.42,
-    "game_and_rain": 12477.7
+    "rain_only": 5014.18,
+    "game_and_rain": 12025.81
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5041,
-      "total_revenue": 217602.99,
-      "avg_ticket": 43.16663162071018
+      "order_count": 5042,
+      "total_revenue": 217748.53,
+      "avg_ticket": 43.1869357397858
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2456,
-      "total_revenue": 148302.76,
-      "avg_ticket": 60.383859934853426
+      "order_count": 2453,
+      "total_revenue": 148172.11,
+      "avg_ticket": 60.4044476151651
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.7,
-    "pork_ribs_avg_with_dino": 2.9,
-    "impact_pct": -50.2
+    "pork_ribs_avg_without_dino": 5.0,
+    "pork_ribs_avg_with_dino": 4.2,
+    "impact_pct": -17.0
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.55
+    "normal_avg_ticket": 46.56
   }
 }
