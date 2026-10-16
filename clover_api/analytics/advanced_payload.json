@@ -38,7 +38,7 @@
     {
       "pair": "Brisket + Turkey",
       "count": 107,
-      "confidence": 51.2
+      "confidence": 51.0
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
@@ -52,10 +52,10 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4294.93,
+    "normal": 4295.25,
     "game_only": 3983.78,
     "rain_only": 5014.18,
-    "game_and_rain": 12025.81
+    "game_and_rain": 12026.69
   },
   "order_type_segmentation": [
     {
@@ -66,15 +66,15 @@
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 440,
-      "total_revenue": 26325.23,
-      "avg_ticket": 59.830068181818184
+      "order_count": 441,
+      "total_revenue": 26422.79,
+      "avg_ticket": 59.91562358276644
     },
     {
       "order_type": "To-Go",
-      "order_count": 2453,
-      "total_revenue": 148172.11,
-      "avg_ticket": 60.4044476151651
+      "order_count": 2452,
+      "total_revenue": 148096.16,
+      "avg_ticket": 60.39810766721044
     }
   ],
   "sell_out_prediction_chart": {
@@ -98,13 +98,13 @@
           0.0,
           3.0,
           6.0,
-          61.0,
-          100.0,
-          129.0,
-          158.0,
-          177.0,
-          201.0,
-          231.0
+          60.0,
+          99.0,
+          128.0,
+          157.0,
+          176.0,
+          200.0,
+          230.0
         ],
         "name": "1/2 Rack Pork Spare Ribs",
         "type": "scatter",
@@ -128,14 +128,14 @@
           0.0,
           0.0,
           28.5,
-          75.0,
-          192.61,
-          238.86,
-          333.20000000000005,
-          416.65000000000003,
-          558.29,
-          604.1999999999999,
-          655.0999999999999
+          72.5,
+          191.86,
+          238.11,
+          332.45000000000005,
+          415.90000000000003,
+          557.54,
+          603.4499999999999,
+          654.3499999999999
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -252,14 +252,14 @@
           0.0,
           0.0,
           21.5,
-          44.25,
-          166.07999999999998,
-          180.57999999999998,
-          214.90999999999997,
-          278.23999999999995,
-          416.23999999999995,
-          435.23999999999995,
-          500.06999999999994
+          41.75,
+          164.57999999999998,
+          179.07999999999998,
+          213.40999999999997,
+          276.73999999999995,
+          414.73999999999995,
+          433.73999999999995,
+          498.56999999999994
         ],
         "name": "Pulled Pork",
         "type": "scatter",
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 4.9,
-    "pork_ribs_avg_with_dino": 4.3,
-    "impact_pct": -11.3
+    "pork_ribs_avg_without_dino": 5.9,
+    "pork_ribs_avg_with_dino": 2.6,
+    "impact_pct": -56.2
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.56
+    "normal_avg_ticket": 46.57
   }
 }

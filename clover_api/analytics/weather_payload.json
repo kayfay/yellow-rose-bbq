@@ -28,7 +28,7 @@
           83.84,
           83.3,
           84.38000000000001,
-          81.5
+          83.3
         ],
         "y": [
           2861.94,
@@ -56,7 +56,7 @@
           3338.4,
           2740.24,
           3243.77,
-          196.60000000000002
+          611.85
         ],
         "text": [
           "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -84,7 +84,7 @@
           "<b>Tuesday, 2026-10-13</b><br>Revenue: $3,338.40<br>Weather: 83.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-10-14</b><br>Revenue: $2,740.24<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Friday, 2026-10-16</b><br>Revenue: $196.60<br>Weather: 81.5\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Friday, 2026-10-16</b><br>Revenue: $611.85<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -454,8 +454,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4624.6132307692305,
-          "y1": 4624.6132307692305,
+          "y0": 4624.945692307692,
+          "y1": 4624.945692307692,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -467,7 +467,7 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4924.6132307692305,
+          "y": 4924.945692307692,
           "text": "Baseline Target ($4,625)",
           "showarrow": false,
           "font": {
@@ -480,12 +480,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4624.61,
+    "normal_avg_usd": 4624.95,
     "rain_avg_usd": 5014.18,
     "rain_drop_pct": 8.4,
     "heat_avg_usd": 5178.81,
     "heat_drop_pct": 13.4,
-    "rain_coef": 9.95,
-    "temp_coef": 69.26
+    "rain_coef": 9.76,
+    "temp_coef": 62.76
   }
 }
