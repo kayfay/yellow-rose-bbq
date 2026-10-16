@@ -41,6 +41,30 @@
       "description": "Perform comprehensive repository code audit across frontend, pipeline, and test suites, eliminating data mutations, uncalibrated heuristics, touch target violations, and unhandled nulls.",
       "acceptance_criteria": "Zero payload mutations in d3_charts.js; defensive checks across app.js subtabs; all touch targets >= 48px; all pipeline scripts and tests passing with exit code 0.",
       "passes": true
+    },
+    {
+      "id": 8,
+      "description": "Fix UTC timestamp bug so Data Last Pulled reflects local date/time (America/New_York). Root cause: dashboard.get_last_updated_time() takes max() of naive-UTC DB created_time string and naive-local generated_at string; UTC wins and app.js new Date() renders it as tomorrow.",
+      "acceptance_criteria": "generated_at is tz-aware ISO in America/New_York; 2026-10-14T20:37:44-07:00 renders as October 14; UI shows date+time+zone.",
+      "passes": true
+    },
+    {
+      "id": 9,
+      "description": "Pre-compute hourly actuals as static JSON (hourly_actuals.json keyed by date, full history, also embedded in payloads.js) in the hourly Action, bucketed in America/New_York, 24 zero-filled buckets/day; also snapshot each day forecast going forward; reconstructed day-of-week baseline excluding the picked date. Optional local route /api/analytics/hourly_actuals?date= serves same payload.",
+      "acceptance_criteria": "Given YYYY-MM-DD returns exactly 24 buckets (hour 0-23, zero-filled) bucketed in America/New_York, from UTC-stored timestamps.",
+      "passes": true
+    },
+    {
+      "id": 10,
+      "description": "Date picker (future dates disabled, default today) in existing hourly forecast view; D3 chart (d3_charts.js) overlays actuals and baseline (labeled reconstructed). Display Data Last Pulled as \"October 14, 2026 at 11:38 PM EDT\".",
+      "acceptance_criteria": "Selecting a past date re-renders the chart; 0 console errors; tap target >=48px.",
+      "passes": true
+    },
+    {
+      "id": 11,
+      "description": "scripts/verify_timezone_and_actuals.py: Tier 1 = synthetic fixture DB with exact bucket asserts (incl. 11pm ET = 03:00 UTC next day, DST edges); Tier 2 = structural check of real hourly_actuals.json (FAIL in CI if missing, SKIPPED + exit 0 locally). Exit 0 with printed evidence.",
+      "acceptance_criteria": "Verifies tz formatting, 24-bucket response, hourly sync regression; run output printed to terminal.",
+      "passes": true
     }
   ]
 }

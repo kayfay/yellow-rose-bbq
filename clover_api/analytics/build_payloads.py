@@ -2,12 +2,22 @@ import json
 import os
 from pathlib import Path
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 def build_payloads():
     analytics_dir = Path(__file__).parent
+
+    # Refresh hourly actuals (America/New_York buckets) before bundling.
+    try:
+        import sys
+        sys.path.insert(0, str(analytics_dir))
+        from hourly_actuals import export_hourly_actuals
+        export_hourly_actuals()
+    except Exception as e:
+        print(f"[WARN] hourly actuals not refreshed: {e}")
     
     payloads = {}
-    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events"]:
+    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots"]:
         filepath = analytics_dir / (filename + ".json")
         if filepath.exists():
             with open(filepath, 'r') as f:
@@ -16,7 +26,7 @@ def build_payloads():
                     
                     # Shift forecast dates in dashboard_payload to start from today
                     if filename == "dashboard_payload":
-                        today = datetime.now()
+                        today = datetime.now(ZoneInfo("America/New_York"))
                         if "forecast" in data:
                             if "forecast_records" in data["forecast"]:
                                 day_map = {}

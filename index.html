@@ -534,6 +534,7 @@
           <h2 class="section-title">24-Hour Predicted Order Velocity & Meat Draw</h2>
           <div class="chart-card">
             <div id="plotly-predictive-velocity-chart"></div>
+            <div id="hourly-actuals-summary" style="display: none; margin-top: 8px; font-size: 12px; color: var(--text-secondary);"></div>
           </div>
         </section>
 
@@ -1397,6 +1398,7 @@
       var cb = new Date().getTime();
       document.write('<script src="clover_api/analytics/payloads.js?v=' + cb + '"><' + '/script>');
       document.write('<script src="d3_charts.js?v=' + cb + '"><' + '/script>');
+      document.write('<script src="tz_utils.js?v=' + cb + '"></' + 'script>');
       document.write('<script src="app.js?v=' + cb + '" defer><' + '/script>');
     })();
   </script>

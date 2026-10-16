@@ -1166,13 +1166,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     }
     
     if (dashPayload && dashPayload.forecast && dashPayload.forecast.generated_at) {
-      const parsedGen = new Date(dashPayload.forecast.generated_at);
-      if (!isNaN(parsedGen.getTime())) {
-        const dateStr = parsedGen.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        const lastPulledElem = document.getElementById('data-last-pulled');
-        if (lastPulledElem) {
-          lastPulledElem.textContent = `Data Last Pulled: ${dateStr}`;
-        }
+      const pulledStr = window.ShopTime ? window.ShopTime.formatShopTimestamp(dashPayload.forecast.generated_at) : null;
+      const lastPulledElem = document.getElementById('data-last-pulled');
+      if (pulledStr && lastPulledElem) {
+        lastPulledElem.textContent = `Data Last Pulled: ${pulledStr}`;
       }
     }
 
@@ -2445,6 +2442,63 @@ async function renderPlotlyPredictiveChart() {
       marker: { color: '#e67e22', opacity: 0.7 }
     }
   ];
+
+  // Hourly actuals overlay (single shop-local date, past or today)
+  const summaryElem = document.getElementById('hourly-actuals-summary');
+  if (summaryElem) { summaryElem.style.display = 'none'; summaryElem.textContent = ''; }
+  try {
+    const pickedDate = startDateVal || (window.ShopTime ? window.ShopTime.shopDateStr(new Date()) : '');
+    const isSingleDay = !endDateVal || endDateVal === startDateVal || !startDateVal;
+    if (window.ShopTime && pickedDate && isSingleDay && activeForecast.every(r => r.hour !== undefined)) {
+      let actuals = null;
+      let snapshots = null;
+      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.hourly_actuals) {
+        actuals = window.BBQ_PAYLOADS.hourly_actuals;
+        snapshots = window.BBQ_PAYLOADS.forecast_snapshots || null;
+      } else {
+        const aRes = await fetch('clover_api/analytics/hourly_actuals.json?v=' + Date.now());
+        if (aRes.ok) actuals = await aRes.json();
+        const sRes = await fetch('clover_api/analytics/forecast_snapshots.json?v=' + Date.now());
+        if (sRes.ok) snapshots = await sRes.json();
+      }
+      const overlay = window.ShopTime.buildActualsOverlay(actuals, snapshots, pickedDate, activeForecast, new Date());
+      if (overlay) {
+        if (overlay.baselineOrders) {
+          traces.push({
+            x: hours, y: overlay.baselineOrders, name: 'Baseline (avg same weekday, reconstructed)',
+            type: 'scatter', mode: 'lines', line: { color: '#94a3b8', width: 2, dash: 'dot' }
+          });
+        }
+        if (overlay.snapshotOrders) {
+          traces.push({
+            x: hours, y: overlay.snapshotOrders, name: 'Forecast as predicted that day',
+            type: 'scatter', mode: 'lines', line: { color: '#a78bfa', width: 2, dash: 'dash' }
+          });
+        }
+        if (overlay.hasActuals) {
+          traces.push({
+            x: hours, y: overlay.actualOrders, name: 'Actual Orders/hr (POS)',
+            type: 'scatter', mode: 'lines+markers', connectgaps: false,
+            line: { color: '#22c55e', width: 3 }, marker: { size: 7 }
+          });
+        }
+        if (summaryElem) {
+          const s = overlay.summary;
+          const money = v => '$' + Math.round(v).toLocaleString('en-US');
+          if (!overlay.hasActuals) {
+            summaryElem.textContent = `No POS records for ${overlay.date}.`;
+          } else if (overlay.isToday) {
+            summaryElem.textContent = `Today so far (through hour ${overlay.cutoffHour}:00 ET, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; full-day forecast ${money(s.forecastFullDay)}.`;
+          } else {
+            summaryElem.textContent = `${overlay.date}: ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastFullDay)} forecast total.`;
+          }
+          summaryElem.style.display = 'block';
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Hourly actuals overlay unavailable:', e);
+  }
 
   const layout = {
     title: chartTitle,

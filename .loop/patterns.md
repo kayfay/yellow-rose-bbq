@@ -24,3 +24,10 @@
 - Primary Metric: Cooked Usable Weight (lbs / units) on front line.
 - Subtitle Metric: (~X lbs Raw Prep / ~Y Cases / Z portions) for pitmasters and procurement.
 - Closed Days: Zero prep targets and $0 revenue without alert degradation.
+
+## 3. Timezone & Hourly Actuals Invariants
+- DB created_time is naive UTC (pd.to_datetime unit=ms). Never compare/max() it against naive-local strings.
+- Emit generated_at tz-aware: datetime.now(ZoneInfo("America/New_York")).isoformat().
+- Display: convert to America/New_York explicitly (timeZone option in JS), never the browser default.
+- Hourly actuals: localize UTC->America/New_York, then bucket; always 24 zero-filled buckets (0-23).
+- Payload: {date, timezone, buckets:[{hour, sales_usd, orders}]}

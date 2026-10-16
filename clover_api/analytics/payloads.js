@@ -14106,5 +14106,63 @@ window.BBQ_PAYLOADS = {
       "icon": "\ud83c\udf89",
       "note": "Evening party platters and whole brisket pickups."
     }
-  ]
+  ],
+  "hourly_actuals": {
+    "timezone": "America/New_York",
+    "generated_at": "2026-10-16T14:10:42.781730-04:00",
+    "days": {},
+    "weekday_baseline": {}
+  },
+  "forecast_snapshots": {
+    "2026-10-16": {
+      "captured_at": "2026-10-16T14:10:42.781926-04:00",
+      "hourly_forecast": [
+        {
+          "hour": 15,
+          "predicted_orders": 4.6,
+          "predicted_revenue": 223.1
+        },
+        {
+          "hour": 16,
+          "predicted_orders": 7.5,
+          "predicted_revenue": 363.75
+        },
+        {
+          "hour": 17,
+          "predicted_orders": 9.9,
+          "predicted_revenue": 480.15
+        },
+        {
+          "hour": 18,
+          "predicted_orders": 8.3,
+          "predicted_revenue": 402.55
+        },
+        {
+          "hour": 19,
+          "predicted_orders": 2.6,
+          "predicted_revenue": 126.1
+        },
+        {
+          "hour": 20,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 21,
+          "predicted_orders": 0.1,
+          "predicted_revenue": 4.85
+        },
+        {
+          "hour": 22,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 23,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        }
+      ]
+    }
+  }
 };
