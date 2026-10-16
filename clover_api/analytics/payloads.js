@@ -1,24 +1,24 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-10-16T15:03:13",
+      "generated_at": "2026-10-16T15:21:15-04:00",
       "days_count": 14,
-      "insight_string": "The forecast dictates prepping ~225.6 lbs raw brisket (~90.2 lbs cooked yield) and ~63.2 lbs raw pork shoulder (~25.3 lbs cooked yield) [~288.8 lbs total raw / ~115.5 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (44 projected) and Rosebuds (34 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
+      "insight_string": "The forecast dictates prepping ~225.3 lbs raw brisket (~90.1 lbs cooked yield) and ~63.2 lbs raw pork shoulder (~25.3 lbs cooked yield) [~288.5 lbs total raw / ~115.4 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (44 projected) and Rosebuds (34 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
         {
           "date": "2026-10-16",
           "day_name": "Fri",
           "is_closed": false,
-          "predicted_revenue": 5533.52,
-          "brisket_raw_lbs": 195.1,
-          "pork_shoulder_raw_lbs": 57.2,
+          "predicted_revenue": 5387.13,
+          "brisket_raw_lbs": 195.2,
+          "pork_shoulder_raw_lbs": 56.4,
           "sausage_lbs": 21.8,
           "turkey_lbs": 11.6,
           "turkey_cooked_lbs": 11.6,
           "turkey_raw_lbs": 16.6,
           "tacos_sold": 49,
           "rosebuds_sold": 35,
-          "pork_ribs_racks": 15,
+          "pork_ribs_racks": 14,
           "beef_dino_ribs": 0,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -28,8 +28,8 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-17",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 7817.2,
-          "brisket_raw_lbs": 225.6,
+          "predicted_revenue": 7646.25,
+          "brisket_raw_lbs": 225.3,
           "pork_shoulder_raw_lbs": 63.2,
           "sausage_lbs": 32.2,
           "turkey_lbs": 15.6,
@@ -37,7 +37,7 @@ window.BBQ_PAYLOADS = {
           "turkey_raw_lbs": 22.3,
           "tacos_sold": 44,
           "rosebuds_sold": 34,
-          "pork_ribs_racks": 19,
+          "pork_ribs_racks": 18,
           "beef_dino_ribs": 6,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -47,16 +47,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-18",
           "day_name": "Sun",
           "is_closed": false,
-          "predicted_revenue": 5577.44,
+          "predicted_revenue": 4996.13,
           "brisket_raw_lbs": 155.9,
-          "pork_shoulder_raw_lbs": 21.9,
+          "pork_shoulder_raw_lbs": 22.4,
           "sausage_lbs": 29.3,
           "turkey_lbs": 10.1,
           "turkey_cooked_lbs": 10.1,
           "turkey_raw_lbs": 14.4,
-          "tacos_sold": 32,
+          "tacos_sold": 33,
           "rosebuds_sold": 34,
-          "pork_ribs_racks": 15,
+          "pork_ribs_racks": 14,
           "beef_dino_ribs": 4,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -85,14 +85,14 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-20",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 3513.35,
-          "brisket_raw_lbs": 113.8,
-          "pork_shoulder_raw_lbs": 10.4,
+          "predicted_revenue": 3562.46,
+          "brisket_raw_lbs": 113.1,
+          "pork_shoulder_raw_lbs": 11.7,
           "sausage_lbs": 12.5,
           "turkey_lbs": 7.9,
           "turkey_cooked_lbs": 7.9,
           "turkey_raw_lbs": 11.3,
-          "tacos_sold": 31,
+          "tacos_sold": 30,
           "rosebuds_sold": 19,
           "pork_ribs_racks": 7,
           "beef_dino_ribs": 0,
@@ -104,16 +104,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-21",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 3381.6,
-          "brisket_raw_lbs": 111.0,
-          "pork_shoulder_raw_lbs": 13.8,
+          "predicted_revenue": 3301.79,
+          "brisket_raw_lbs": 109.8,
+          "pork_shoulder_raw_lbs": 14.2,
           "sausage_lbs": 11.6,
           "turkey_lbs": 7.2,
           "turkey_cooked_lbs": 7.2,
           "turkey_raw_lbs": 10.3,
           "tacos_sold": 29,
           "rosebuds_sold": 20,
-          "pork_ribs_racks": 9,
+          "pork_ribs_racks": 8,
           "beef_dino_ribs": 0,
           "recommended_staff": 4,
           "pitmaster_hours": 34.0,
@@ -123,16 +123,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-22",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 3864.68,
-          "brisket_raw_lbs": 130.4,
-          "pork_shoulder_raw_lbs": 30.4,
+          "predicted_revenue": 3779.68,
+          "brisket_raw_lbs": 129.3,
+          "pork_shoulder_raw_lbs": 29.9,
           "sausage_lbs": 14.7,
           "turkey_lbs": 8.1,
           "turkey_cooked_lbs": 8.1,
           "turkey_raw_lbs": 11.6,
-          "tacos_sold": 34,
+          "tacos_sold": 33,
           "rosebuds_sold": 28,
-          "pork_ribs_racks": 8,
+          "pork_ribs_racks": 9,
           "beef_dino_ribs": 0,
           "recommended_staff": 4,
           "pitmaster_hours": 34.0,
@@ -142,16 +142,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-23",
           "day_name": "Fri",
           "is_closed": false,
-          "predicted_revenue": 5533.52,
-          "brisket_raw_lbs": 195.1,
-          "pork_shoulder_raw_lbs": 57.2,
+          "predicted_revenue": 5387.13,
+          "brisket_raw_lbs": 195.2,
+          "pork_shoulder_raw_lbs": 56.4,
           "sausage_lbs": 21.8,
           "turkey_lbs": 11.6,
           "turkey_cooked_lbs": 11.6,
           "turkey_raw_lbs": 16.6,
           "tacos_sold": 49,
           "rosebuds_sold": 35,
-          "pork_ribs_racks": 15,
+          "pork_ribs_racks": 14,
           "beef_dino_ribs": 0,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -161,8 +161,8 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-24",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 7817.2,
-          "brisket_raw_lbs": 225.6,
+          "predicted_revenue": 7646.25,
+          "brisket_raw_lbs": 225.3,
           "pork_shoulder_raw_lbs": 63.2,
           "sausage_lbs": 32.2,
           "turkey_lbs": 15.6,
@@ -170,7 +170,7 @@ window.BBQ_PAYLOADS = {
           "turkey_raw_lbs": 22.3,
           "tacos_sold": 44,
           "rosebuds_sold": 34,
-          "pork_ribs_racks": 19,
+          "pork_ribs_racks": 18,
           "beef_dino_ribs": 6,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -180,16 +180,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-25",
           "day_name": "Sun",
           "is_closed": false,
-          "predicted_revenue": 5577.44,
+          "predicted_revenue": 4996.13,
           "brisket_raw_lbs": 155.9,
-          "pork_shoulder_raw_lbs": 21.9,
+          "pork_shoulder_raw_lbs": 22.4,
           "sausage_lbs": 29.3,
           "turkey_lbs": 10.1,
           "turkey_cooked_lbs": 10.1,
           "turkey_raw_lbs": 14.4,
-          "tacos_sold": 32,
+          "tacos_sold": 33,
           "rosebuds_sold": 34,
-          "pork_ribs_racks": 15,
+          "pork_ribs_racks": 14,
           "beef_dino_ribs": 4,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -218,14 +218,14 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-27",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 3513.35,
-          "brisket_raw_lbs": 113.8,
-          "pork_shoulder_raw_lbs": 10.4,
+          "predicted_revenue": 3562.46,
+          "brisket_raw_lbs": 113.1,
+          "pork_shoulder_raw_lbs": 11.7,
           "sausage_lbs": 12.5,
           "turkey_lbs": 7.9,
           "turkey_cooked_lbs": 7.9,
           "turkey_raw_lbs": 11.3,
-          "tacos_sold": 31,
+          "tacos_sold": 30,
           "rosebuds_sold": 19,
           "pork_ribs_racks": 7,
           "beef_dino_ribs": 0,
@@ -237,16 +237,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-28",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 3381.6,
-          "brisket_raw_lbs": 111.0,
-          "pork_shoulder_raw_lbs": 13.8,
+          "predicted_revenue": 3301.79,
+          "brisket_raw_lbs": 109.8,
+          "pork_shoulder_raw_lbs": 14.2,
           "sausage_lbs": 11.6,
           "turkey_lbs": 7.2,
           "turkey_cooked_lbs": 7.2,
           "turkey_raw_lbs": 10.3,
           "tacos_sold": 29,
           "rosebuds_sold": 20,
-          "pork_ribs_racks": 9,
+          "pork_ribs_racks": 8,
           "beef_dino_ribs": 0,
           "recommended_staff": 4,
           "pitmaster_hours": 34.0,
@@ -256,16 +256,16 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-29",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 3864.68,
-          "brisket_raw_lbs": 130.4,
-          "pork_shoulder_raw_lbs": 30.4,
+          "predicted_revenue": 3779.68,
+          "brisket_raw_lbs": 129.3,
+          "pork_shoulder_raw_lbs": 29.9,
           "sausage_lbs": 14.7,
           "turkey_lbs": 8.1,
           "turkey_cooked_lbs": 8.1,
           "turkey_raw_lbs": 11.6,
-          "tacos_sold": 34,
+          "tacos_sold": 33,
           "rosebuds_sold": 28,
-          "pork_ribs_racks": 8,
+          "pork_ribs_racks": 9,
           "beef_dino_ribs": 0,
           "recommended_staff": 4,
           "pitmaster_hours": 34.0,
@@ -293,20 +293,20 @@ window.BBQ_PAYLOADS = {
             "2026-10-29 (Thu)"
           ],
           "y": [
-            195.1,
-            225.6,
+            195.2,
+            225.3,
             155.9,
             0.0,
-            113.8,
-            111.0,
-            130.4,
-            192.2,
-            223.6,
-            151.2,
+            113.1,
+            109.8,
+            129.3,
+            192.0,
+            222.6,
+            151.7,
             0.0,
-            111.0,
-            106.8,
-            126.4
+            110.0,
+            106.0,
+            125.6
           ],
           "name": "Raw Brisket Prep (lbs)",
           "type": "bar",
@@ -332,20 +332,20 @@ window.BBQ_PAYLOADS = {
             "2026-10-29 (Thu)"
           ],
           "y": [
-            57.2,
+            56.4,
             63.2,
-            21.9,
+            22.4,
             0.0,
-            10.4,
-            13.8,
-            30.4,
-            34.4,
-            60.5,
-            20.4,
+            11.7,
+            14.2,
+            29.9,
+            36.8,
+            60.9,
+            21.0,
             0.0,
-            12.0,
-            17.8,
-            33.5
+            12.5,
+            17.9,
+            33.0
           ],
           "name": "Pork Shoulder (lbs)",
           "type": "bar",
@@ -418,18 +418,18 @@ window.BBQ_PAYLOADS = {
           "y": [
             49,
             44,
-            32,
+            33,
             0,
-            31,
+            30,
             29,
-            34,
-            48,
+            33,
+            49,
             44,
             32,
             0,
             30,
             28,
-            34
+            32
           ],
           "name": "Tacos Sold",
           "type": "scatter",
@@ -502,13 +502,13 @@ window.BBQ_PAYLOADS = {
             "2026-10-29 (Thu)"
           ],
           "y": [
-            15,
-            19,
-            15,
+            14,
+            18,
+            14,
             0,
             7,
-            9,
             8,
+            9,
             14,
             18,
             14,
@@ -641,7 +641,7 @@ window.BBQ_PAYLOADS = {
             83.84,
             83.3,
             84.38000000000001,
-            83.3
+            83.66
           ],
           "y": [
             2861.94,
@@ -669,7 +669,7 @@ window.BBQ_PAYLOADS = {
             3338.4,
             2740.24,
             3243.77,
-            611.85
+            2435.43
           ],
           "text": [
             "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -697,7 +697,7 @@ window.BBQ_PAYLOADS = {
             "<b>Tuesday, 2026-10-13</b><br>Revenue: $3,338.40<br>Weather: 83.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Wednesday, 2026-10-14</b><br>Revenue: $2,740.24<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Friday, 2026-10-16</b><br>Revenue: $611.85<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            "<b>Friday, 2026-10-16</b><br>Revenue: $2,435.43<br>Weather: 83.66\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
@@ -890,11 +890,10 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            96.44,
-            97.52,
-            96.26,
-            95.53999999999999,
-            90.32,
+            102.91999999999999,
+            102.38000000000001,
+            102.02,
+            94.64,
             91.22,
             91.94,
             91.58000000000001,
@@ -904,7 +903,6 @@ window.BBQ_PAYLOADS = {
             92.3
           ],
           "y": [
-            4931.26,
             3615.92,
             2823.19,
             4124.63,
@@ -918,11 +916,10 @@ window.BBQ_PAYLOADS = {
             6868.89
           ],
           "text": [
-            "<b>Sunday, 2026-08-16</b><br>Revenue: $4,931.26<br>Weather: 96.44\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 97.52\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Wednesday, 2026-08-19</b><br>Revenue: $2,823.19<br>Weather: 96.26\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Thursday, 2026-08-20</b><br>Revenue: $4,124.63<br>Weather: 95.53999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Friday, 2026-08-21</b><br>Revenue: $5,948.64<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 102.91999999999999\u00b0F, 2.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-08-19</b><br>Revenue: $2,823.19<br>Weather: 102.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Thursday, 2026-08-20</b><br>Revenue: $4,124.63<br>Weather: 102.02\u00b0F, 3.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-08-21</b><br>Revenue: $5,948.64<br>Weather: 94.64\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Saturday, 2026-08-22</b><br>Revenue: $7,577.28<br>Weather: 91.22\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #3 Highest Recent Sales Day</b><br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Sunday, 2026-08-23</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Wednesday, 2026-08-26</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
@@ -936,10 +933,9 @@ window.BBQ_PAYLOADS = {
           "name": "Extreme Heat (High Curbside Volume)",
           "marker": {
             "size": [
+              14.0,
               10,
-              11.6,
-              10,
-              10,
+              16.8,
               10,
               10,
               10,
@@ -957,7 +953,6 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
-                1.5,
                 4,
                 1.5,
                 1.5,
@@ -967,7 +962,6 @@ window.BBQ_PAYLOADS = {
                 1.5
               ],
               "color": [
-                "white",
                 "white",
                 "white",
                 "white",
@@ -1067,8 +1061,8 @@ window.BBQ_PAYLOADS = {
             "xref": "paper",
             "x0": 0,
             "x1": 1,
-            "y0": 4624.945692307692,
-            "y1": 4624.945692307692,
+            "y0": 4564.647538461538,
+            "y1": 4564.647538461538,
             "line": {
               "color": "#94a3b8",
               "width": 2,
@@ -1080,8 +1074,8 @@ window.BBQ_PAYLOADS = {
           {
             "xref": "paper",
             "x": 0.02,
-            "y": 4924.945692307692,
-            "text": "Baseline Target ($4,625)",
+            "y": 4864.647538461538,
+            "text": "Baseline Target ($4,565)",
             "showarrow": false,
             "font": {
               "color": "#94a3b8",
@@ -1093,13 +1087,13 @@ window.BBQ_PAYLOADS = {
       }
     },
     "weather_stats": {
-      "normal_avg_usd": 4624.95,
+      "normal_avg_usd": 4564.65,
       "rain_avg_usd": 5014.18,
-      "rain_drop_pct": 8.4,
-      "heat_avg_usd": 5178.81,
-      "heat_drop_pct": 13.4,
-      "rain_coef": 9.76,
-      "temp_coef": 62.76
+      "rain_drop_pct": 9.8,
+      "heat_avg_usd": 4959.6,
+      "heat_drop_pct": 8.6,
+      "rain_coef": 9.11,
+      "temp_coef": 26.21
     }
   },
   "event_payload": {
@@ -1114,7 +1108,7 @@ window.BBQ_PAYLOADS = {
           "y": [
             1.0,
             -0.02,
-            0.89
+            0.9
           ],
           "type": "bar",
           "marker": {
@@ -1185,7 +1179,7 @@ window.BBQ_PAYLOADS = {
       }
     },
     "event_stats": {
-      "normal_avg_usd": 4457.79,
+      "normal_avg_usd": 4408.8,
       "jags_avg_usd": 3983.78,
       "jags_multiplier": 0.9,
       "holiday_avg_usd": -81.0,
@@ -1348,14 +1342,14 @@ window.BBQ_PAYLOADS = {
               0.1,
               0.3,
               14.5,
-              12.6,
-              7.6,
-              6.4,
-              3.5,
-              4.6,
-              7.5,
-              9.9,
-              8.3,
+              13.4,
+              8.0,
+              6.8,
+              3.7,
+              4.5,
+              7.3,
+              9.6,
+              8.1,
               2.6,
               0.0,
               0.1,
@@ -1371,18 +1365,18 @@ window.BBQ_PAYLOADS = {
               0.0,
               0.0,
               0.0,
-              0.2,
-              0.8,
-              10.2,
-              14.3,
+              0.3,
+              1.1,
+              12.8,
               17.5,
-              10.7,
-              8.5,
-              7.9,
-              10.4,
-              9.5,
-              5.8,
-              1.6,
+              16.3,
+              12.2,
+              11.1,
+              10.6,
+              14.0,
+              12.8,
+              7.8,
+              2.1,
               0.0,
               0.0,
               0.1,
@@ -1532,14 +1526,14 @@ window.BBQ_PAYLOADS = {
               "Friday 08:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 09:00<br>0.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 10:00<br>14.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 11:00<br>12.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 12:00<br>7.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 13:00<br>6.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 14:00<br>3.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 15:00<br>4.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 16:00<br>7.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 17:00<br>9.9 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 18:00<br>8.3 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 11:00<br>13.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 12:00<br>8.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 13:00<br>6.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 14:00<br>3.7 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 15:00<br>4.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 16:00<br>7.3 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 17:00<br>9.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 18:00<br>8.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Friday 19:00<br>2.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 21:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
@@ -1555,18 +1549,18 @@ window.BBQ_PAYLOADS = {
               "Saturday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 08:00<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 09:00<br>0.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 10:00<br>10.2 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 11:00<br>14.3 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 12:00<br>17.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 13:00<br>10.7 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 14:00<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 15:00<br>7.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Saturday 16:00<br>10.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 17:00<br>9.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 18:00<br>5.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Saturday 19:00<br>1.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 08:00<br>0.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 09:00<br>1.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 10:00<br>12.8 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 11:00<br>17.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 12:00<br>16.3 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 13:00<br>12.2 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 14:00<br>11.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 15:00<br>10.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 16:00<br>14.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 17:00<br>12.8 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 18:00<br>7.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Saturday 19:00<br>2.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 22:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
@@ -1734,96 +1728,96 @@ window.BBQ_PAYLOADS = {
             "2026-10-15 (Thu)"
           ],
           "y": [
-            2.17,
-            1.34,
+            0.76,
+            1.36,
             0.03,
-            1.05,
+            1.07,
             0.02,
-            1.25,
-            1.55,
-            1.67,
-            1.85,
+            1.27,
+            1.58,
+            1.7,
+            1.88,
             0.0,
-            0.84,
-            1.21,
-            1.01,
-            1.49,
-            1.55,
-            1.63,
+            0.85,
+            1.23,
+            1.02,
+            1.52,
+            1.57,
+            1.66,
             0.0,
-            1.02,
-            1.02,
-            0.88,
-            1.42,
-            1.95,
-            1.41,
+            1.03,
+            1.03,
+            0.9,
+            1.44,
+            1.98,
+            1.43,
             0.01,
-            0.86,
-            1.08,
-            0.78,
-            1.49,
-            2.05,
-            1.22,
-            0.0,
-            0.89,
-            0.7,
-            1.02,
-            1.47,
-            1.87,
-            1.64,
-            0.0,
-            0.71,
-            1.09,
+            0.87,
+            1.1,
+            0.8,
+            1.52,
+            2.08,
             1.24,
-            1.13,
-            0.64,
-            1.22,
+            0.0,
+            0.91,
+            0.71,
+            1.04,
+            1.49,
+            1.9,
+            1.67,
+            0.0,
+            0.72,
+            1.1,
+            1.26,
+            1.15,
+            0.66,
+            1.24,
             0.06,
             0.0,
-            0.73,
-            0.98,
-            1.09,
-            2.03,
-            1.57,
-            -0.02,
-            0.79,
-            0.74,
-            0.7,
-            1.0,
-            1.7,
-            1.19,
-            0.81,
-            0.87,
-            0.82,
-            0.53,
-            1.35,
-            2.12,
-            1.26,
-            0.03,
-            0.84,
             0.75,
-            0.65,
-            1.28,
-            1.85,
-            0.78,
-            0.0,
-            1.16,
-            0.77,
-            1.06,
-            1.54,
-            1.32,
-            1.19,
-            0.0,
-            0.8,
+            0.99,
+            1.11,
+            2.06,
+            1.6,
+            -0.02,
             0.81,
-            1.05,
-            1.18,
-            1.85,
-            0.98,
+            0.75,
+            0.72,
+            1.02,
+            1.73,
+            1.21,
+            0.82,
+            0.88,
+            0.84,
+            0.54,
+            1.37,
+            2.16,
+            1.28,
+            0.03,
+            0.86,
+            0.76,
+            0.66,
+            1.3,
+            1.88,
+            0.79,
             0.0,
-            0.83,
-            0.68,
-            0.8
+            1.18,
+            0.78,
+            1.07,
+            1.57,
+            1.34,
+            1.21,
+            0.0,
+            0.82,
+            0.82,
+            1.07,
+            1.2,
+            1.88,
+            0.99,
+            0.0,
+            0.84,
+            0.69,
+            0.82
           ],
           "name": "Historical Demand Index",
           "type": "scatter",
@@ -1851,20 +1845,20 @@ window.BBQ_PAYLOADS = {
             "2026-10-29 (Thu)"
           ],
           "y": [
-            1.26,
-            1.78,
+            1.24,
+            1.76,
+            1.15,
+            0.06,
+            0.82,
+            0.76,
+            0.87,
             1.27,
-            0.07,
-            0.8,
+            1.73,
+            1.19,
+            0.06,
+            0.82,
             0.77,
-            0.88,
-            1.27,
-            1.78,
-            1.3,
-            0.08,
-            0.79,
-            0.77,
-            0.89
+            0.88
           ],
           "name": "14-Day Forecasted Demand Index",
           "type": "scatter",
@@ -1947,83 +1941,63 @@ window.BBQ_PAYLOADS = {
         },
         "brisket_lbs": {
           "forecast": [
-            157.3,
-            192.2,
+            157.5,
+            191.9,
             128.0,
             0.0,
-            91.6,
-            88.6,
-            105.0,
-            155.1,
-            190.7,
-            123.7,
+            90.9,
+            87.5,
+            103.9,
+            154.9,
+            189.7,
+            124.2,
             0.0,
-            89.3,
-            85.1,
-            101.4
+            88.2,
+            84.3,
+            100.6
           ],
           "prep_lead_hrs": 18.0,
           "draws_from": null
         },
         "pork_ribs_racks": {
           "forecast": [
-            15.1,
-            19.0,
-            15.1,
+            14.2,
+            18.8,
+            14.9,
             0.0,
-            7.0,
-            9.2,
-            8.8,
-            14.3,
-            18.5,
-            14.3,
+            7.6,
+            8.3,
+            9.0,
+            14.0,
+            18.6,
+            14.7,
             0.0,
-            7.8,
+            7.4,
             8.1,
-            8.3
+            8.8
           ],
           "prep_lead_hrs": 6.0,
           "draws_from": null
         },
         "pulled_pork_lbs": {
           "forecast": [
-            55.5,
-            60.3,
-            20.8,
-            0.4,
-            8.2,
-            12.6,
-            27.2,
-            32.4,
-            57.1,
-            19.0,
-            0.6,
-            9.7,
-            16.7,
-            30.3
+            54.6,
+            60.1,
+            21.1,
+            0.8,
+            10.1,
+            13.0,
+            27.5,
+            34.7,
+            57.6,
+            19.6,
+            1.1,
+            10.7,
+            16.8,
+            30.5
           ],
           "prep_lead_hrs": 14.0,
           "draws_from": null
-        },
-        "rosebuds": {
-          "forecast": [
-            28.0,
-            27.6,
-            27.9,
-            0.0,
-            15.7,
-            16.2,
-            23.0,
-            27.7,
-            27.3,
-            27.6,
-            0.0,
-            15.4,
-            15.9,
-            22.7
-          ],
-          "prep_lead_hrs": 4.0,
-          "draws_from": "brisket_lbs"
         },
         "sausage_links": {
           "forecast": [
@@ -2047,20 +2021,20 @@ window.BBQ_PAYLOADS = {
         },
         "sides_extras": {
           "forecast": [
-            46.2,
-            64.6,
-            47.6,
-            0.0,
-            30.8,
-            25.0,
-            28.6,
-            45.0,
-            63.4,
             46.4,
+            64.8,
+            47.1,
             0.0,
-            29.5,
-            23.8,
-            27.3
+            30.9,
+            25.2,
+            28.7,
+            45.2,
+            63.6,
+            45.9,
+            0.0,
+            29.7,
+            24.1,
+            27.6
           ],
           "prep_lead_hrs": 0,
           "draws_from": null
@@ -2072,7 +2046,7 @@ window.BBQ_PAYLOADS = {
             31.1,
             0.0,
             27.9,
-            27.8,
+            27.7,
             29.5,
             45.7,
             39.1,
@@ -2087,20 +2061,20 @@ window.BBQ_PAYLOADS = {
         },
         "tacos_pork": {
           "forecast": [
-            2.7,
-            4.6,
-            1.7,
+            2.9,
+            5.0,
+            2.1,
             0.1,
-            3.5,
-            2.0,
+            2.6,
+            1.9,
+            3.8,
+            3.3,
             5.2,
-            3.2,
-            5.4,
-            2.2,
-            0.1,
-            3.7,
+            2.3,
+            0.0,
+            2.9,
             1.7,
-            5.2
+            4.0
           ],
           "prep_lead_hrs": 0,
           "draws_from": null
@@ -2144,23 +2118,43 @@ window.BBQ_PAYLOADS = {
           ],
           "prep_lead_hrs": 6.0,
           "draws_from": null
+        },
+        "rosebuds": {
+          "forecast": [
+            28.0,
+            27.6,
+            27.9,
+            0.0,
+            15.7,
+            16.2,
+            22.9,
+            27.7,
+            27.3,
+            27.6,
+            0.0,
+            15.4,
+            15.9,
+            22.7
+          ],
+          "prep_lead_hrs": 4.0,
+          "draws_from": "brisket_lbs"
         }
       },
       "demand_index": [
-        1.26,
-        1.78,
+        1.24,
+        1.76,
+        1.15,
+        0.06,
+        0.82,
+        0.76,
+        0.87,
         1.27,
-        0.07,
-        0.8,
+        1.73,
+        1.19,
+        0.06,
+        0.82,
         0.77,
-        0.88,
-        1.27,
-        1.78,
-        1.3,
-        0.08,
-        0.79,
-        0.77,
-        0.89
+        0.88
       ]
     }
   },
@@ -2168,79 +2162,79 @@ window.BBQ_PAYLOADS = {
     "market_basket": [
       {
         "pair": "2 meat plate + BBQ plate",
-        "count": 326,
-        "confidence": 21.3
+        "count": 319,
+        "confidence": 21.0
       },
       {
         "pair": "2 meat plate + Rosebud",
-        "count": 281,
-        "confidence": 22.5
+        "count": 279,
+        "confidence": 22.6
       },
       {
         "pair": "BBQ plate + Rosebud",
         "count": 236,
-        "confidence": 18.9
+        "confidence": 19.1
       },
       {
         "pair": "Crispy Quesa Taco Brisket + Rosebud",
         "count": 141,
-        "confidence": 20.8
+        "confidence": 21.1
       },
       {
         "pair": "Rosebud + Taco Plate W/2 Sides",
-        "count": 112,
+        "count": 111,
         "confidence": 16.3
       },
       {
         "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-        "count": 108,
-        "confidence": 21.4
-      },
-      {
-        "pair": "2 meat plate + Taco Plate W/2 Sides",
-        "count": 108,
-        "confidence": 15.7
+        "count": 107,
+        "confidence": 21.5
       },
       {
         "pair": "Brisket + Turkey",
-        "count": 107,
+        "count": 106,
         "confidence": 51.0
+      },
+      {
+        "pair": "2 meat plate + Taco Plate W/2 Sides",
+        "count": 106,
+        "confidence": 15.6
       },
       {
         "pair": "BBQ plate + Taco Plate W/2 Sides",
         "count": 103,
-        "confidence": 15.0
+        "confidence": 15.2
       },
       {
         "pair": "Brisket + Mac & Cheese",
         "count": 100,
-        "confidence": 20.2
+        "confidence": 20.4
       }
     ],
     "interaction_modeling": {
-      "normal": 4295.25,
+      "normal": 4238.44,
       "game_only": 3983.78,
       "rain_only": 5014.18,
-      "game_and_rain": 12026.69
+      "game_and_rain": 11867.64
     },
     "order_type_segmentation": [
       {
         "order_type": "Dine In",
-        "order_count": 5042,
-        "total_revenue": 217748.53,
-        "avg_ticket": 43.1869357397858
+        "order_count": 4943,
+        "total_revenue": 214532.53,
+        "avg_ticket": 43.401280598826624
       },
       {
         "order_type": "In-store Pickup",
-        "order_count": 441,
-        "total_revenue": 26422.79,
-        "avg_ticket": 59.91562358276644
+        "order_count": 436,
+        "total_revenue": 26117.0,
+        "avg_ticket": 59.90137614678899
       },
       {
         "order_type": "To-Go",
-        "order_count": 2452,
-        "total_revenue": 148096.16,
-        "avg_ticket": 60.39810766721044
+        "order_count": 2445,
+        "total_revenue": 147698.57,
+        "avg_ticket": 60.40841308793456
       }
     ],
     "sell_out_prediction_chart": {
@@ -2264,13 +2258,13 @@ window.BBQ_PAYLOADS = {
             0.0,
             3.0,
             6.0,
-            60.0,
+            58.0,
             99.0,
-            128.0,
-            157.0,
-            176.0,
-            200.0,
-            230.0
+            126.0,
+            154.0,
+            173.0,
+            197.0,
+            227.0
           ],
           "name": "1/2 Rack Pork Spare Ribs",
           "type": "scatter",
@@ -2297,11 +2291,11 @@ window.BBQ_PAYLOADS = {
             72.5,
             191.86,
             238.11,
-            332.45000000000005,
-            415.90000000000003,
-            557.54,
-            603.4499999999999,
-            654.3499999999999
+            326.20000000000005,
+            408.15000000000003,
+            549.29,
+            595.1999999999999,
+            646.0999999999999
           ],
           "name": "Brisket",
           "type": "scatter",
@@ -2326,13 +2320,13 @@ window.BBQ_PAYLOADS = {
             0.0,
             0.0,
             22.0,
-            247.0,
-            500.0,
-            667.0,
-            803.0,
-            888.0,
-            965.0,
-            1095.0
+            246.0,
+            501.0,
+            654.0,
+            785.0,
+            870.0,
+            947.0,
+            1077.0
           ],
           "name": "Crispy Quesa Taco Brisket",
           "type": "scatter",
@@ -2358,12 +2352,12 @@ window.BBQ_PAYLOADS = {
             12.0,
             12.0,
             28.0,
-            47.0,
+            48.0,
             82.0,
-            97.0,
-            106.0,
-            117.0,
-            132.0
+            94.0,
+            103.0,
+            114.0,
+            129.0
           ],
           "name": "Crispy Quesa Taco Pork",
           "type": "scatter",
@@ -2391,10 +2385,10 @@ window.BBQ_PAYLOADS = {
             47.0,
             61.0,
             78.0,
-            106.0,
-            127.0,
-            139.0,
-            149.0
+            104.0,
+            125.0,
+            137.0,
+            147.0
           ],
           "name": "Full Rack Pork Spare Ribs",
           "type": "scatter",
@@ -2419,13 +2413,13 @@ window.BBQ_PAYLOADS = {
             0.0,
             21.5,
             41.75,
-            164.57999999999998,
-            179.07999999999998,
-            213.40999999999997,
-            276.73999999999995,
-            414.73999999999995,
-            433.73999999999995,
-            498.56999999999994
+            165.07999999999998,
+            179.57999999999998,
+            213.65999999999997,
+            276.98999999999995,
+            414.98999999999995,
+            433.98999999999995,
+            498.81999999999994
           ],
           "name": "Pulled Pork",
           "type": "scatter",
@@ -2451,12 +2445,12 @@ window.BBQ_PAYLOADS = {
             0.0,
             0.0,
             68.0,
-            160.0,
-            231.0,
-            262.0,
-            279.0,
-            300.0,
-            345.0
+            158.0,
+            218.0,
+            249.0,
+            264.0,
+            285.0,
+            330.0
           ],
           "name": "Pulled pork sandwich",
           "type": "scatter",
@@ -2483,11 +2477,11 @@ window.BBQ_PAYLOADS = {
             6.0,
             31.0,
             54.0,
-            72.0,
-            84.0,
-            95.0,
-            111.0,
-            123.0
+            71.0,
+            82.0,
+            94.0,
+            110.0,
+            122.0
           ],
           "name": "Quesadilla Brisket",
           "type": "scatter",
@@ -2513,12 +2507,12 @@ window.BBQ_PAYLOADS = {
             0.0,
             0.0,
             20.0,
-            58.0,
-            96.0,
-            113.0,
-            140.0,
-            149.0,
-            178.0
+            57.0,
+            91.0,
+            106.0,
+            133.0,
+            142.0,
+            171.0
           ],
           "name": "Single Bone Pork Rib",
           "type": "scatter",
@@ -2543,13 +2537,13 @@ window.BBQ_PAYLOADS = {
             4.0,
             10.0,
             13.0,
-            63.0,
-            100.0,
-            131.0,
-            139.0,
-            154.0,
-            162.0,
-            196.0
+            61.0,
+            98.0,
+            129.0,
+            137.0,
+            150.0,
+            158.0,
+            192.0
           ],
           "name": "Crispy Quesa Brisket Taco",
           "type": "scatter",
@@ -2649,29 +2643,29 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 5.9,
-      "pork_ribs_avg_with_dino": 2.6,
-      "impact_pct": -56.2
+      "pork_ribs_avg_without_dino": 5.3,
+      "pork_ribs_avg_with_dino": 3.4,
+      "impact_pct": -35.6
     },
     "payday_effect": {
       "payday_avg_ticket": 45.8,
-      "normal_avg_ticket": 46.57
+      "normal_avg_ticket": 46.75
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-16T15:17:19.884801",
+    "generated_at": "2026-10-16T19:24:48.465334",
     "summary_kpis": {
-      "projected_24h_revenue_usd": 4617.2,
-      "estimated_24h_cogs_usd": 1362.07,
+      "projected_24h_revenue_usd": 5781.2,
+      "estimated_24h_cogs_usd": 1705.45,
       "estimated_food_cost_pct": 29.5,
       "average_ticket_usd": 48.5,
       "recommended_staff": 5,
       "pitmaster_hours": 42.5,
-      "peak_rush_window": "12:00 PM (Sat)",
-      "current_sales_velocity": "4.6 orders/hr",
+      "peak_rush_window": "11:00 AM (Sat)",
+      "current_sales_velocity": "2.6 orders/hr",
       "pacing_status": "Normal Pacing",
-      "total_brisket_draw_lbs": 91.4,
-      "total_pork_draw_lbs": 24.1
+      "total_brisket_draw_lbs": 91.8,
+      "total_pork_draw_lbs": 23.7
     },
     "portion_cogs_breakdown": {
       "brisket_taco_2oz": 1.59,
@@ -2737,58 +2731,6 @@ window.BBQ_PAYLOADS = {
       "pork_yield_range": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-10-16T15:00:00",
-        "hour_display": "3:00 PM",
-        "day_name": "Fri",
-        "hour": 15,
-        "predicted_orders": 4.6,
-        "predicted_revenue": 223.1,
-        "estimated_cogs_usd": 65.81,
-        "brisket_cooked_lbs": 4.7,
-        "pork_cooked_lbs": 1.3,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-16T16:00:00",
-        "hour_display": "4:00 PM",
-        "day_name": "Fri",
-        "hour": 16,
-        "predicted_orders": 7.5,
-        "predicted_revenue": 363.75,
-        "estimated_cogs_usd": 107.31,
-        "brisket_cooked_lbs": 7.6,
-        "pork_cooked_lbs": 2.1,
-        "pacing_status": "Normal Pacing",
-        "is_peak": true
-      },
-      {
-        "timestamp": "2026-10-16T17:00:00",
-        "hour_display": "5:00 PM",
-        "day_name": "Fri",
-        "hour": 17,
-        "predicted_orders": 9.9,
-        "predicted_revenue": 480.15,
-        "estimated_cogs_usd": 141.64,
-        "brisket_cooked_lbs": 10.1,
-        "pork_cooked_lbs": 2.8,
-        "pacing_status": "Normal Pacing",
-        "is_peak": true
-      },
-      {
-        "timestamp": "2026-10-16T18:00:00",
-        "hour_display": "6:00 PM",
-        "day_name": "Fri",
-        "hour": 18,
-        "predicted_orders": 8.3,
-        "predicted_revenue": 402.55,
-        "estimated_cogs_usd": 118.75,
-        "brisket_cooked_lbs": 8.4,
-        "pork_cooked_lbs": 2.3,
-        "pacing_status": "Normal Pacing",
-        "is_peak": true
-      },
       {
         "timestamp": "2026-10-16T19:00:00",
         "hour_display": "7:00 PM",
@@ -2963,11 +2905,11 @@ window.BBQ_PAYLOADS = {
         "hour_display": "8:00 AM",
         "day_name": "Sat",
         "hour": 8,
-        "predicted_orders": 0.2,
-        "predicted_revenue": 9.7,
-        "estimated_cogs_usd": 2.86,
+        "predicted_orders": 0.3,
+        "predicted_revenue": 14.55,
+        "estimated_cogs_usd": 4.29,
         "brisket_cooked_lbs": 0.2,
-        "pork_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.1,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       },
@@ -2976,10 +2918,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "9:00 AM",
         "day_name": "Sat",
         "hour": 9,
-        "predicted_orders": 0.8,
-        "predicted_revenue": 38.8,
-        "estimated_cogs_usd": 11.45,
-        "brisket_cooked_lbs": 0.7,
+        "predicted_orders": 1.1,
+        "predicted_revenue": 53.35,
+        "estimated_cogs_usd": 15.74,
+        "brisket_cooked_lbs": 0.8,
         "pork_cooked_lbs": 0.2,
         "pacing_status": "Normal Pacing",
         "is_peak": false
@@ -2989,10 +2931,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "10:00 AM",
         "day_name": "Sat",
         "hour": 10,
-        "predicted_orders": 10.2,
-        "predicted_revenue": 494.7,
-        "estimated_cogs_usd": 145.94,
-        "brisket_cooked_lbs": 9.5,
+        "predicted_orders": 12.8,
+        "predicted_revenue": 620.8,
+        "estimated_cogs_usd": 183.14,
+        "brisket_cooked_lbs": 9.8,
         "pork_cooked_lbs": 2.5,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -3002,11 +2944,11 @@ window.BBQ_PAYLOADS = {
         "hour_display": "11:00 AM",
         "day_name": "Sat",
         "hour": 11,
-        "predicted_orders": 14.3,
-        "predicted_revenue": 693.55,
-        "estimated_cogs_usd": 204.6,
-        "brisket_cooked_lbs": 13.3,
-        "pork_cooked_lbs": 3.4,
+        "predicted_orders": 17.5,
+        "predicted_revenue": 848.75,
+        "estimated_cogs_usd": 250.38,
+        "brisket_cooked_lbs": 13.4,
+        "pork_cooked_lbs": 3.5,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
       },
@@ -3015,11 +2957,11 @@ window.BBQ_PAYLOADS = {
         "hour_display": "12:00 PM",
         "day_name": "Sat",
         "hour": 12,
-        "predicted_orders": 17.5,
-        "predicted_revenue": 848.75,
-        "estimated_cogs_usd": 250.38,
-        "brisket_cooked_lbs": 16.3,
-        "pork_cooked_lbs": 4.2,
+        "predicted_orders": 16.3,
+        "predicted_revenue": 790.55,
+        "estimated_cogs_usd": 233.21,
+        "brisket_cooked_lbs": 12.5,
+        "pork_cooked_lbs": 3.2,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
       },
@@ -3028,11 +2970,11 @@ window.BBQ_PAYLOADS = {
         "hour_display": "1:00 PM",
         "day_name": "Sat",
         "hour": 13,
-        "predicted_orders": 10.7,
-        "predicted_revenue": 518.95,
-        "estimated_cogs_usd": 153.09,
-        "brisket_cooked_lbs": 10.0,
-        "pork_cooked_lbs": 2.6,
+        "predicted_orders": 12.2,
+        "predicted_revenue": 591.7,
+        "estimated_cogs_usd": 174.55,
+        "brisket_cooked_lbs": 9.3,
+        "pork_cooked_lbs": 2.4,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
       },
@@ -3041,18 +2983,70 @@ window.BBQ_PAYLOADS = {
         "hour_display": "2:00 PM",
         "day_name": "Sat",
         "hour": 14,
-        "predicted_orders": 8.5,
-        "predicted_revenue": 412.25,
-        "estimated_cogs_usd": 121.61,
-        "brisket_cooked_lbs": 7.9,
-        "pork_cooked_lbs": 2.0,
+        "predicted_orders": 11.1,
+        "predicted_revenue": 538.35,
+        "estimated_cogs_usd": 158.81,
+        "brisket_cooked_lbs": 8.5,
+        "pork_cooked_lbs": 2.2,
+        "pacing_status": "Heavy Rush Surge",
+        "is_peak": true
+      },
+      {
+        "timestamp": "2026-10-17T15:00:00",
+        "hour_display": "3:00 PM",
+        "day_name": "Sat",
+        "hour": 15,
+        "predicted_orders": 10.6,
+        "predicted_revenue": 514.1,
+        "estimated_cogs_usd": 151.66,
+        "brisket_cooked_lbs": 8.1,
+        "pork_cooked_lbs": 2.1,
+        "pacing_status": "Heavy Rush Surge",
+        "is_peak": true
+      },
+      {
+        "timestamp": "2026-10-17T16:00:00",
+        "hour_display": "4:00 PM",
+        "day_name": "Sat",
+        "hour": 16,
+        "predicted_orders": 14.0,
+        "predicted_revenue": 679.0,
+        "estimated_cogs_usd": 200.3,
+        "brisket_cooked_lbs": 10.7,
+        "pork_cooked_lbs": 2.8,
+        "pacing_status": "Heavy Rush Surge",
+        "is_peak": true
+      },
+      {
+        "timestamp": "2026-10-17T17:00:00",
+        "hour_display": "5:00 PM",
+        "day_name": "Sat",
+        "hour": 17,
+        "predicted_orders": 12.8,
+        "predicted_revenue": 620.8,
+        "estimated_cogs_usd": 183.14,
+        "brisket_cooked_lbs": 9.8,
+        "pork_cooked_lbs": 2.5,
+        "pacing_status": "Heavy Rush Surge",
+        "is_peak": true
+      },
+      {
+        "timestamp": "2026-10-17T18:00:00",
+        "hour_display": "6:00 PM",
+        "day_name": "Sat",
+        "hour": 18,
+        "predicted_orders": 7.8,
+        "predicted_revenue": 378.3,
+        "estimated_cogs_usd": 111.6,
+        "brisket_cooked_lbs": 6.0,
+        "pork_cooked_lbs": 1.5,
         "pacing_status": "Normal Pacing",
         "is_peak": true
       }
     ],
     "operational_directives": [
-      "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr.",
-      "Meat Depletion Pacing: Next 24 hours projected to draw ~91.4 lbs smoked brisket and ~24.1 lbs pulled pork from hot storage.",
+      "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr.",
+      "Meat Depletion Pacing: Next 24 hours projected to draw ~91.8 lbs smoked brisket and ~23.7 lbs pulled pork from hot storage.",
       "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
       "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
     ],
@@ -8484,14 +8478,14 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 78.1,
-        "projected_revenue_usd": 3787.85,
-        "estimated_cogs_usd": 1117.41,
+        "total_orders": 79.1,
+        "projected_revenue_usd": 3836.35,
+        "estimated_cogs_usd": 1131.71,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
         "total_brisket_draw_lbs": 79.3,
-        "total_pork_draw_lbs": 21.7,
+        "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
         "pacing_status": "Heavy Rush Surge",
@@ -8634,7 +8628,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 14.5,
             "predicted_revenue": 703.25,
             "estimated_cogs_usd": 207.46,
-            "brisket_cooked_lbs": 14.7,
+            "brisket_cooked_lbs": 14.6,
             "pork_cooked_lbs": 4.0,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -8644,11 +8638,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Fri",
             "hour": 11,
-            "predicted_orders": 12.6,
-            "predicted_revenue": 611.1,
-            "estimated_cogs_usd": 180.27,
-            "brisket_cooked_lbs": 12.8,
-            "pork_cooked_lbs": 3.5,
+            "predicted_orders": 13.4,
+            "predicted_revenue": 649.9,
+            "estimated_cogs_usd": 191.72,
+            "brisket_cooked_lbs": 13.5,
+            "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -8657,11 +8651,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Fri",
             "hour": 12,
-            "predicted_orders": 7.6,
-            "predicted_revenue": 368.6,
-            "estimated_cogs_usd": 108.74,
-            "brisket_cooked_lbs": 7.7,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 8.0,
+            "predicted_revenue": 388.0,
+            "estimated_cogs_usd": 114.46,
+            "brisket_cooked_lbs": 8.0,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -8670,11 +8664,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Fri",
             "hour": 13,
-            "predicted_orders": 6.4,
-            "predicted_revenue": 310.4,
-            "estimated_cogs_usd": 91.57,
-            "brisket_cooked_lbs": 6.5,
-            "pork_cooked_lbs": 1.8,
+            "predicted_orders": 6.8,
+            "predicted_revenue": 329.8,
+            "estimated_cogs_usd": 97.29,
+            "brisket_cooked_lbs": 6.8,
+            "pork_cooked_lbs": 1.9,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -8683,10 +8677,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Fri",
             "hour": 14,
-            "predicted_orders": 3.5,
-            "predicted_revenue": 169.75,
-            "estimated_cogs_usd": 50.08,
-            "brisket_cooked_lbs": 3.6,
+            "predicted_orders": 3.7,
+            "predicted_revenue": 179.45,
+            "estimated_cogs_usd": 52.94,
+            "brisket_cooked_lbs": 3.7,
             "pork_cooked_lbs": 1.0,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -8696,11 +8690,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Fri",
             "hour": 15,
-            "predicted_orders": 4.6,
-            "predicted_revenue": 223.1,
-            "estimated_cogs_usd": 65.81,
-            "brisket_cooked_lbs": 4.7,
-            "pork_cooked_lbs": 1.3,
+            "predicted_orders": 4.5,
+            "predicted_revenue": 218.25,
+            "estimated_cogs_usd": 64.38,
+            "brisket_cooked_lbs": 4.5,
+            "pork_cooked_lbs": 1.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -8709,11 +8703,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Fri",
             "hour": 16,
-            "predicted_orders": 7.5,
-            "predicted_revenue": 363.75,
-            "estimated_cogs_usd": 107.31,
-            "brisket_cooked_lbs": 7.6,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 7.3,
+            "predicted_revenue": 354.05,
+            "estimated_cogs_usd": 104.44,
+            "brisket_cooked_lbs": 7.3,
+            "pork_cooked_lbs": 2.0,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -8722,11 +8716,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Fri",
             "hour": 17,
-            "predicted_orders": 9.9,
-            "predicted_revenue": 480.15,
-            "estimated_cogs_usd": 141.64,
-            "brisket_cooked_lbs": 10.1,
-            "pork_cooked_lbs": 2.8,
+            "predicted_orders": 9.6,
+            "predicted_revenue": 465.6,
+            "estimated_cogs_usd": 137.35,
+            "brisket_cooked_lbs": 9.6,
+            "pork_cooked_lbs": 2.6,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -8735,11 +8729,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Fri",
             "hour": 18,
-            "predicted_orders": 8.3,
-            "predicted_revenue": 402.55,
-            "estimated_cogs_usd": 118.75,
-            "brisket_cooked_lbs": 8.4,
-            "pork_cooked_lbs": 2.3,
+            "predicted_orders": 8.1,
+            "predicted_revenue": 392.85,
+            "estimated_cogs_usd": 115.89,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -8811,7 +8805,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -8823,14 +8817,14 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 78.1,
-        "projected_revenue_usd": 3787.85,
-        "estimated_cogs_usd": 1117.41,
+        "total_orders": 79.1,
+        "projected_revenue_usd": 3836.35,
+        "estimated_cogs_usd": 1131.71,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
         "total_brisket_draw_lbs": 79.3,
-        "total_pork_draw_lbs": 21.7,
+        "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
         "pacing_status": "Heavy Rush Surge",
@@ -8973,7 +8967,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 14.5,
             "predicted_revenue": 703.25,
             "estimated_cogs_usd": 207.46,
-            "brisket_cooked_lbs": 14.7,
+            "brisket_cooked_lbs": 14.6,
             "pork_cooked_lbs": 4.0,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -8983,11 +8977,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Fri",
             "hour": 11,
-            "predicted_orders": 12.6,
-            "predicted_revenue": 611.1,
-            "estimated_cogs_usd": 180.27,
-            "brisket_cooked_lbs": 12.8,
-            "pork_cooked_lbs": 3.5,
+            "predicted_orders": 13.4,
+            "predicted_revenue": 649.9,
+            "estimated_cogs_usd": 191.72,
+            "brisket_cooked_lbs": 13.5,
+            "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -8996,11 +8990,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Fri",
             "hour": 12,
-            "predicted_orders": 7.6,
-            "predicted_revenue": 368.6,
-            "estimated_cogs_usd": 108.74,
-            "brisket_cooked_lbs": 7.7,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 8.0,
+            "predicted_revenue": 388.0,
+            "estimated_cogs_usd": 114.46,
+            "brisket_cooked_lbs": 8.0,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9009,11 +9003,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Fri",
             "hour": 13,
-            "predicted_orders": 6.4,
-            "predicted_revenue": 310.4,
-            "estimated_cogs_usd": 91.57,
-            "brisket_cooked_lbs": 6.5,
-            "pork_cooked_lbs": 1.8,
+            "predicted_orders": 6.8,
+            "predicted_revenue": 329.8,
+            "estimated_cogs_usd": 97.29,
+            "brisket_cooked_lbs": 6.8,
+            "pork_cooked_lbs": 1.9,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9022,10 +9016,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Fri",
             "hour": 14,
-            "predicted_orders": 3.5,
-            "predicted_revenue": 169.75,
-            "estimated_cogs_usd": 50.08,
-            "brisket_cooked_lbs": 3.6,
+            "predicted_orders": 3.7,
+            "predicted_revenue": 179.45,
+            "estimated_cogs_usd": 52.94,
+            "brisket_cooked_lbs": 3.7,
             "pork_cooked_lbs": 1.0,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9035,11 +9029,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Fri",
             "hour": 15,
-            "predicted_orders": 4.6,
-            "predicted_revenue": 223.1,
-            "estimated_cogs_usd": 65.81,
-            "brisket_cooked_lbs": 4.7,
-            "pork_cooked_lbs": 1.3,
+            "predicted_orders": 4.5,
+            "predicted_revenue": 218.25,
+            "estimated_cogs_usd": 64.38,
+            "brisket_cooked_lbs": 4.5,
+            "pork_cooked_lbs": 1.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9048,11 +9042,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Fri",
             "hour": 16,
-            "predicted_orders": 7.5,
-            "predicted_revenue": 363.75,
-            "estimated_cogs_usd": 107.31,
-            "brisket_cooked_lbs": 7.6,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 7.3,
+            "predicted_revenue": 354.05,
+            "estimated_cogs_usd": 104.44,
+            "brisket_cooked_lbs": 7.3,
+            "pork_cooked_lbs": 2.0,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9061,11 +9055,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Fri",
             "hour": 17,
-            "predicted_orders": 9.9,
-            "predicted_revenue": 480.15,
-            "estimated_cogs_usd": 141.64,
-            "brisket_cooked_lbs": 10.1,
-            "pork_cooked_lbs": 2.8,
+            "predicted_orders": 9.6,
+            "predicted_revenue": 465.6,
+            "estimated_cogs_usd": 137.35,
+            "brisket_cooked_lbs": 9.6,
+            "pork_cooked_lbs": 2.6,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9074,11 +9068,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Fri",
             "hour": 18,
-            "predicted_orders": 8.3,
-            "predicted_revenue": 402.55,
-            "estimated_cogs_usd": 118.75,
-            "brisket_cooked_lbs": 8.4,
-            "pork_cooked_lbs": 2.3,
+            "predicted_orders": 8.1,
+            "predicted_revenue": 392.85,
+            "estimated_cogs_usd": 115.89,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9150,7 +9144,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9162,14 +9156,14 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 78.1,
-        "projected_revenue_usd": 3787.85,
-        "estimated_cogs_usd": 1117.41,
+        "total_orders": 79.1,
+        "projected_revenue_usd": 3836.35,
+        "estimated_cogs_usd": 1131.71,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
         "total_brisket_draw_lbs": 79.3,
-        "total_pork_draw_lbs": 21.7,
+        "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
         "pacing_status": "Heavy Rush Surge",
@@ -9312,7 +9306,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 14.5,
             "predicted_revenue": 703.25,
             "estimated_cogs_usd": 207.46,
-            "brisket_cooked_lbs": 14.7,
+            "brisket_cooked_lbs": 14.6,
             "pork_cooked_lbs": 4.0,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -9322,11 +9316,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Fri",
             "hour": 11,
-            "predicted_orders": 12.6,
-            "predicted_revenue": 611.1,
-            "estimated_cogs_usd": 180.27,
-            "brisket_cooked_lbs": 12.8,
-            "pork_cooked_lbs": 3.5,
+            "predicted_orders": 13.4,
+            "predicted_revenue": 649.9,
+            "estimated_cogs_usd": 191.72,
+            "brisket_cooked_lbs": 13.5,
+            "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -9335,11 +9329,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Fri",
             "hour": 12,
-            "predicted_orders": 7.6,
-            "predicted_revenue": 368.6,
-            "estimated_cogs_usd": 108.74,
-            "brisket_cooked_lbs": 7.7,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 8.0,
+            "predicted_revenue": 388.0,
+            "estimated_cogs_usd": 114.46,
+            "brisket_cooked_lbs": 8.0,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9348,11 +9342,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Fri",
             "hour": 13,
-            "predicted_orders": 6.4,
-            "predicted_revenue": 310.4,
-            "estimated_cogs_usd": 91.57,
-            "brisket_cooked_lbs": 6.5,
-            "pork_cooked_lbs": 1.8,
+            "predicted_orders": 6.8,
+            "predicted_revenue": 329.8,
+            "estimated_cogs_usd": 97.29,
+            "brisket_cooked_lbs": 6.8,
+            "pork_cooked_lbs": 1.9,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9361,10 +9355,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Fri",
             "hour": 14,
-            "predicted_orders": 3.5,
-            "predicted_revenue": 169.75,
-            "estimated_cogs_usd": 50.08,
-            "brisket_cooked_lbs": 3.6,
+            "predicted_orders": 3.7,
+            "predicted_revenue": 179.45,
+            "estimated_cogs_usd": 52.94,
+            "brisket_cooked_lbs": 3.7,
             "pork_cooked_lbs": 1.0,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9374,11 +9368,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Fri",
             "hour": 15,
-            "predicted_orders": 4.6,
-            "predicted_revenue": 223.1,
-            "estimated_cogs_usd": 65.81,
-            "brisket_cooked_lbs": 4.7,
-            "pork_cooked_lbs": 1.3,
+            "predicted_orders": 4.5,
+            "predicted_revenue": 218.25,
+            "estimated_cogs_usd": 64.38,
+            "brisket_cooked_lbs": 4.5,
+            "pork_cooked_lbs": 1.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9387,11 +9381,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Fri",
             "hour": 16,
-            "predicted_orders": 7.5,
-            "predicted_revenue": 363.75,
-            "estimated_cogs_usd": 107.31,
-            "brisket_cooked_lbs": 7.6,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 7.3,
+            "predicted_revenue": 354.05,
+            "estimated_cogs_usd": 104.44,
+            "brisket_cooked_lbs": 7.3,
+            "pork_cooked_lbs": 2.0,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9400,11 +9394,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Fri",
             "hour": 17,
-            "predicted_orders": 9.9,
-            "predicted_revenue": 480.15,
-            "estimated_cogs_usd": 141.64,
-            "brisket_cooked_lbs": 10.1,
-            "pork_cooked_lbs": 2.8,
+            "predicted_orders": 9.6,
+            "predicted_revenue": 465.6,
+            "estimated_cogs_usd": 137.35,
+            "brisket_cooked_lbs": 9.6,
+            "pork_cooked_lbs": 2.6,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9413,11 +9407,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Fri",
             "hour": 18,
-            "predicted_orders": 8.3,
-            "predicted_revenue": 402.55,
-            "estimated_cogs_usd": 118.75,
-            "brisket_cooked_lbs": 8.4,
-            "pork_cooked_lbs": 2.3,
+            "predicted_orders": 8.1,
+            "predicted_revenue": 392.85,
+            "estimated_cogs_usd": 115.89,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9489,7 +9483,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9501,14 +9495,14 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 78.1,
-        "projected_revenue_usd": 3787.85,
-        "estimated_cogs_usd": 1117.41,
+        "total_orders": 79.1,
+        "projected_revenue_usd": 3836.35,
+        "estimated_cogs_usd": 1131.71,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 4,
         "pitmaster_hours": 34.0,
         "total_brisket_draw_lbs": 79.3,
-        "total_pork_draw_lbs": 21.7,
+        "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
         "pacing_status": "Heavy Rush Surge",
@@ -9651,7 +9645,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 14.5,
             "predicted_revenue": 703.25,
             "estimated_cogs_usd": 207.46,
-            "brisket_cooked_lbs": 14.7,
+            "brisket_cooked_lbs": 14.6,
             "pork_cooked_lbs": 4.0,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -9661,11 +9655,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Fri",
             "hour": 11,
-            "predicted_orders": 12.6,
-            "predicted_revenue": 611.1,
-            "estimated_cogs_usd": 180.27,
-            "brisket_cooked_lbs": 12.8,
-            "pork_cooked_lbs": 3.5,
+            "predicted_orders": 13.4,
+            "predicted_revenue": 649.9,
+            "estimated_cogs_usd": 191.72,
+            "brisket_cooked_lbs": 13.5,
+            "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -9674,11 +9668,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Fri",
             "hour": 12,
-            "predicted_orders": 7.6,
-            "predicted_revenue": 368.6,
-            "estimated_cogs_usd": 108.74,
-            "brisket_cooked_lbs": 7.7,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 8.0,
+            "predicted_revenue": 388.0,
+            "estimated_cogs_usd": 114.46,
+            "brisket_cooked_lbs": 8.0,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9687,11 +9681,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Fri",
             "hour": 13,
-            "predicted_orders": 6.4,
-            "predicted_revenue": 310.4,
-            "estimated_cogs_usd": 91.57,
-            "brisket_cooked_lbs": 6.5,
-            "pork_cooked_lbs": 1.8,
+            "predicted_orders": 6.8,
+            "predicted_revenue": 329.8,
+            "estimated_cogs_usd": 97.29,
+            "brisket_cooked_lbs": 6.8,
+            "pork_cooked_lbs": 1.9,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9700,10 +9694,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Fri",
             "hour": 14,
-            "predicted_orders": 3.5,
-            "predicted_revenue": 169.75,
-            "estimated_cogs_usd": 50.08,
-            "brisket_cooked_lbs": 3.6,
+            "predicted_orders": 3.7,
+            "predicted_revenue": 179.45,
+            "estimated_cogs_usd": 52.94,
+            "brisket_cooked_lbs": 3.7,
             "pork_cooked_lbs": 1.0,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9713,11 +9707,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Fri",
             "hour": 15,
-            "predicted_orders": 4.6,
-            "predicted_revenue": 223.1,
-            "estimated_cogs_usd": 65.81,
-            "brisket_cooked_lbs": 4.7,
-            "pork_cooked_lbs": 1.3,
+            "predicted_orders": 4.5,
+            "predicted_revenue": 218.25,
+            "estimated_cogs_usd": 64.38,
+            "brisket_cooked_lbs": 4.5,
+            "pork_cooked_lbs": 1.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9726,11 +9720,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Fri",
             "hour": 16,
-            "predicted_orders": 7.5,
-            "predicted_revenue": 363.75,
-            "estimated_cogs_usd": 107.31,
-            "brisket_cooked_lbs": 7.6,
-            "pork_cooked_lbs": 2.1,
+            "predicted_orders": 7.3,
+            "predicted_revenue": 354.05,
+            "estimated_cogs_usd": 104.44,
+            "brisket_cooked_lbs": 7.3,
+            "pork_cooked_lbs": 2.0,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9739,11 +9733,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Fri",
             "hour": 17,
-            "predicted_orders": 9.9,
-            "predicted_revenue": 480.15,
-            "estimated_cogs_usd": 141.64,
-            "brisket_cooked_lbs": 10.1,
-            "pork_cooked_lbs": 2.8,
+            "predicted_orders": 9.6,
+            "predicted_revenue": 465.6,
+            "estimated_cogs_usd": 137.35,
+            "brisket_cooked_lbs": 9.6,
+            "pork_cooked_lbs": 2.6,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9752,11 +9746,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Fri",
             "hour": 18,
-            "predicted_orders": 8.3,
-            "predicted_revenue": 402.55,
-            "estimated_cogs_usd": 118.75,
-            "brisket_cooked_lbs": 8.4,
-            "pork_cooked_lbs": 2.3,
+            "predicted_orders": 8.1,
+            "predicted_revenue": 392.85,
+            "estimated_cogs_usd": 115.89,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.2,
             "pacing_status": "Normal Pacing",
             "is_peak": true
           },
@@ -9828,7 +9822,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.3 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9838,11 +9832,11 @@ window.BBQ_PAYLOADS = {
         "short_day": "Sat",
         "is_closed": false,
         "peak_orders": 17.5,
-        "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
-        "total_orders": 97.5,
-        "projected_revenue_usd": 4728.75,
-        "estimated_cogs_usd": 1394.98,
+        "peak_hour": 11,
+        "peak_rush_window": "11:00 AM (Sat)",
+        "total_orders": 118.7,
+        "projected_revenue_usd": 5756.95,
+        "estimated_cogs_usd": 1698.3,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
@@ -9961,11 +9955,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "8:00 AM",
             "day_name": "Sat",
             "hour": 8,
-            "predicted_orders": 0.2,
-            "predicted_revenue": 9.7,
-            "estimated_cogs_usd": 2.86,
+            "predicted_orders": 0.3,
+            "predicted_revenue": 14.55,
+            "estimated_cogs_usd": 4.29,
             "brisket_cooked_lbs": 0.2,
-            "pork_cooked_lbs": 0.0,
+            "pork_cooked_lbs": 0.1,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -9974,10 +9968,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 0.8,
-            "predicted_revenue": 38.8,
-            "estimated_cogs_usd": 11.45,
-            "brisket_cooked_lbs": 0.7,
+            "predicted_orders": 1.1,
+            "predicted_revenue": 53.35,
+            "estimated_cogs_usd": 15.74,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9987,10 +9981,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "10:00 AM",
             "day_name": "Sat",
             "hour": 10,
-            "predicted_orders": 10.2,
-            "predicted_revenue": 494.7,
-            "estimated_cogs_usd": 145.94,
-            "brisket_cooked_lbs": 9.5,
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10000,11 +9994,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Sat",
             "hour": 11,
-            "predicted_orders": 14.3,
-            "predicted_revenue": 693.55,
-            "estimated_cogs_usd": 204.6,
-            "brisket_cooked_lbs": 13.3,
-            "pork_cooked_lbs": 3.4,
+            "predicted_orders": 17.5,
+            "predicted_revenue": 848.75,
+            "estimated_cogs_usd": 250.38,
+            "brisket_cooked_lbs": 13.4,
+            "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10013,11 +10007,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Sat",
             "hour": 12,
-            "predicted_orders": 17.5,
-            "predicted_revenue": 848.75,
-            "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 16.3,
-            "pork_cooked_lbs": 4.2,
+            "predicted_orders": 16.3,
+            "predicted_revenue": 790.55,
+            "estimated_cogs_usd": 233.21,
+            "brisket_cooked_lbs": 12.5,
+            "pork_cooked_lbs": 3.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10026,11 +10020,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 10.7,
-            "predicted_revenue": 518.95,
-            "estimated_cogs_usd": 153.09,
-            "brisket_cooked_lbs": 10.0,
-            "pork_cooked_lbs": 2.6,
+            "predicted_orders": 12.2,
+            "predicted_revenue": 591.7,
+            "estimated_cogs_usd": 174.55,
+            "brisket_cooked_lbs": 9.3,
+            "pork_cooked_lbs": 2.4,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10039,12 +10033,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 8.5,
-            "predicted_revenue": 412.25,
-            "estimated_cogs_usd": 121.61,
-            "brisket_cooked_lbs": 7.9,
-            "pork_cooked_lbs": 2.0,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 11.1,
+            "predicted_revenue": 538.35,
+            "estimated_cogs_usd": 158.81,
+            "brisket_cooked_lbs": 8.5,
+            "pork_cooked_lbs": 2.2,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10052,12 +10046,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Sat",
             "hour": 15,
-            "predicted_orders": 7.9,
-            "predicted_revenue": 383.15,
-            "estimated_cogs_usd": 113.03,
-            "brisket_cooked_lbs": 7.4,
-            "pork_cooked_lbs": 1.9,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 10.6,
+            "predicted_revenue": 514.1,
+            "estimated_cogs_usd": 151.66,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.1,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10065,11 +10059,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 10.4,
-            "predicted_revenue": 504.4,
-            "estimated_cogs_usd": 148.8,
-            "brisket_cooked_lbs": 9.7,
-            "pork_cooked_lbs": 2.5,
+            "predicted_orders": 14.0,
+            "predicted_revenue": 679.0,
+            "estimated_cogs_usd": 200.3,
+            "brisket_cooked_lbs": 10.7,
+            "pork_cooked_lbs": 2.8,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10078,12 +10072,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Sat",
             "hour": 17,
-            "predicted_orders": 9.5,
-            "predicted_revenue": 460.75,
-            "estimated_cogs_usd": 135.92,
-            "brisket_cooked_lbs": 8.8,
-            "pork_cooked_lbs": 2.3,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
+            "pork_cooked_lbs": 2.5,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10091,23 +10085,23 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 5.8,
-            "predicted_revenue": 281.3,
-            "estimated_cogs_usd": 82.98,
-            "brisket_cooked_lbs": 5.4,
-            "pork_cooked_lbs": 1.4,
+            "predicted_orders": 7.8,
+            "predicted_revenue": 378.3,
+            "estimated_cogs_usd": 111.6,
+            "brisket_cooked_lbs": 6.0,
+            "pork_cooked_lbs": 1.5,
             "pacing_status": "Normal Pacing",
-            "is_peak": false
+            "is_peak": true
           },
           {
             "timestamp": "2026-10-010T19:00:00",
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 1.6,
-            "predicted_revenue": 77.6,
-            "estimated_cogs_usd": 22.89,
-            "brisket_cooked_lbs": 1.5,
+            "predicted_orders": 2.1,
+            "predicted_revenue": 101.85,
+            "estimated_cogs_usd": 30.05,
+            "brisket_cooked_lbs": 1.6,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10166,7 +10160,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10177,11 +10171,11 @@ window.BBQ_PAYLOADS = {
         "short_day": "Sat",
         "is_closed": false,
         "peak_orders": 17.5,
-        "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
-        "total_orders": 97.5,
-        "projected_revenue_usd": 4728.75,
-        "estimated_cogs_usd": 1394.98,
+        "peak_hour": 11,
+        "peak_rush_window": "11:00 AM (Sat)",
+        "total_orders": 118.7,
+        "projected_revenue_usd": 5756.95,
+        "estimated_cogs_usd": 1698.3,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
@@ -10300,11 +10294,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "8:00 AM",
             "day_name": "Sat",
             "hour": 8,
-            "predicted_orders": 0.2,
-            "predicted_revenue": 9.7,
-            "estimated_cogs_usd": 2.86,
+            "predicted_orders": 0.3,
+            "predicted_revenue": 14.55,
+            "estimated_cogs_usd": 4.29,
             "brisket_cooked_lbs": 0.2,
-            "pork_cooked_lbs": 0.0,
+            "pork_cooked_lbs": 0.1,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -10313,10 +10307,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 0.8,
-            "predicted_revenue": 38.8,
-            "estimated_cogs_usd": 11.45,
-            "brisket_cooked_lbs": 0.7,
+            "predicted_orders": 1.1,
+            "predicted_revenue": 53.35,
+            "estimated_cogs_usd": 15.74,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10326,10 +10320,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "10:00 AM",
             "day_name": "Sat",
             "hour": 10,
-            "predicted_orders": 10.2,
-            "predicted_revenue": 494.7,
-            "estimated_cogs_usd": 145.94,
-            "brisket_cooked_lbs": 9.5,
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10339,11 +10333,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Sat",
             "hour": 11,
-            "predicted_orders": 14.3,
-            "predicted_revenue": 693.55,
-            "estimated_cogs_usd": 204.6,
-            "brisket_cooked_lbs": 13.3,
-            "pork_cooked_lbs": 3.4,
+            "predicted_orders": 17.5,
+            "predicted_revenue": 848.75,
+            "estimated_cogs_usd": 250.38,
+            "brisket_cooked_lbs": 13.4,
+            "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10352,11 +10346,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Sat",
             "hour": 12,
-            "predicted_orders": 17.5,
-            "predicted_revenue": 848.75,
-            "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 16.3,
-            "pork_cooked_lbs": 4.2,
+            "predicted_orders": 16.3,
+            "predicted_revenue": 790.55,
+            "estimated_cogs_usd": 233.21,
+            "brisket_cooked_lbs": 12.5,
+            "pork_cooked_lbs": 3.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10365,11 +10359,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 10.7,
-            "predicted_revenue": 518.95,
-            "estimated_cogs_usd": 153.09,
-            "brisket_cooked_lbs": 10.0,
-            "pork_cooked_lbs": 2.6,
+            "predicted_orders": 12.2,
+            "predicted_revenue": 591.7,
+            "estimated_cogs_usd": 174.55,
+            "brisket_cooked_lbs": 9.3,
+            "pork_cooked_lbs": 2.4,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10378,12 +10372,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 8.5,
-            "predicted_revenue": 412.25,
-            "estimated_cogs_usd": 121.61,
-            "brisket_cooked_lbs": 7.9,
-            "pork_cooked_lbs": 2.0,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 11.1,
+            "predicted_revenue": 538.35,
+            "estimated_cogs_usd": 158.81,
+            "brisket_cooked_lbs": 8.5,
+            "pork_cooked_lbs": 2.2,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10391,12 +10385,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Sat",
             "hour": 15,
-            "predicted_orders": 7.9,
-            "predicted_revenue": 383.15,
-            "estimated_cogs_usd": 113.03,
-            "brisket_cooked_lbs": 7.4,
-            "pork_cooked_lbs": 1.9,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 10.6,
+            "predicted_revenue": 514.1,
+            "estimated_cogs_usd": 151.66,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.1,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10404,11 +10398,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 10.4,
-            "predicted_revenue": 504.4,
-            "estimated_cogs_usd": 148.8,
-            "brisket_cooked_lbs": 9.7,
-            "pork_cooked_lbs": 2.5,
+            "predicted_orders": 14.0,
+            "predicted_revenue": 679.0,
+            "estimated_cogs_usd": 200.3,
+            "brisket_cooked_lbs": 10.7,
+            "pork_cooked_lbs": 2.8,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10417,12 +10411,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Sat",
             "hour": 17,
-            "predicted_orders": 9.5,
-            "predicted_revenue": 460.75,
-            "estimated_cogs_usd": 135.92,
-            "brisket_cooked_lbs": 8.8,
-            "pork_cooked_lbs": 2.3,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
+            "pork_cooked_lbs": 2.5,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10430,23 +10424,23 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 5.8,
-            "predicted_revenue": 281.3,
-            "estimated_cogs_usd": 82.98,
-            "brisket_cooked_lbs": 5.4,
-            "pork_cooked_lbs": 1.4,
+            "predicted_orders": 7.8,
+            "predicted_revenue": 378.3,
+            "estimated_cogs_usd": 111.6,
+            "brisket_cooked_lbs": 6.0,
+            "pork_cooked_lbs": 1.5,
             "pacing_status": "Normal Pacing",
-            "is_peak": false
+            "is_peak": true
           },
           {
             "timestamp": "2026-10-010T19:00:00",
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 1.6,
-            "predicted_revenue": 77.6,
-            "estimated_cogs_usd": 22.89,
-            "brisket_cooked_lbs": 1.5,
+            "predicted_orders": 2.1,
+            "predicted_revenue": 101.85,
+            "estimated_cogs_usd": 30.05,
+            "brisket_cooked_lbs": 1.6,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10505,7 +10499,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10516,11 +10510,11 @@ window.BBQ_PAYLOADS = {
         "short_day": "Sat",
         "is_closed": false,
         "peak_orders": 17.5,
-        "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
-        "total_orders": 97.5,
-        "projected_revenue_usd": 4728.75,
-        "estimated_cogs_usd": 1394.98,
+        "peak_hour": 11,
+        "peak_rush_window": "11:00 AM (Sat)",
+        "total_orders": 118.7,
+        "projected_revenue_usd": 5756.95,
+        "estimated_cogs_usd": 1698.3,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
@@ -10639,11 +10633,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "8:00 AM",
             "day_name": "Sat",
             "hour": 8,
-            "predicted_orders": 0.2,
-            "predicted_revenue": 9.7,
-            "estimated_cogs_usd": 2.86,
+            "predicted_orders": 0.3,
+            "predicted_revenue": 14.55,
+            "estimated_cogs_usd": 4.29,
             "brisket_cooked_lbs": 0.2,
-            "pork_cooked_lbs": 0.0,
+            "pork_cooked_lbs": 0.1,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -10652,10 +10646,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 0.8,
-            "predicted_revenue": 38.8,
-            "estimated_cogs_usd": 11.45,
-            "brisket_cooked_lbs": 0.7,
+            "predicted_orders": 1.1,
+            "predicted_revenue": 53.35,
+            "estimated_cogs_usd": 15.74,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10665,10 +10659,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "10:00 AM",
             "day_name": "Sat",
             "hour": 10,
-            "predicted_orders": 10.2,
-            "predicted_revenue": 494.7,
-            "estimated_cogs_usd": 145.94,
-            "brisket_cooked_lbs": 9.5,
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10678,11 +10672,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Sat",
             "hour": 11,
-            "predicted_orders": 14.3,
-            "predicted_revenue": 693.55,
-            "estimated_cogs_usd": 204.6,
-            "brisket_cooked_lbs": 13.3,
-            "pork_cooked_lbs": 3.4,
+            "predicted_orders": 17.5,
+            "predicted_revenue": 848.75,
+            "estimated_cogs_usd": 250.38,
+            "brisket_cooked_lbs": 13.4,
+            "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10691,11 +10685,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Sat",
             "hour": 12,
-            "predicted_orders": 17.5,
-            "predicted_revenue": 848.75,
-            "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 16.3,
-            "pork_cooked_lbs": 4.2,
+            "predicted_orders": 16.3,
+            "predicted_revenue": 790.55,
+            "estimated_cogs_usd": 233.21,
+            "brisket_cooked_lbs": 12.5,
+            "pork_cooked_lbs": 3.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10704,11 +10698,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 10.7,
-            "predicted_revenue": 518.95,
-            "estimated_cogs_usd": 153.09,
-            "brisket_cooked_lbs": 10.0,
-            "pork_cooked_lbs": 2.6,
+            "predicted_orders": 12.2,
+            "predicted_revenue": 591.7,
+            "estimated_cogs_usd": 174.55,
+            "brisket_cooked_lbs": 9.3,
+            "pork_cooked_lbs": 2.4,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10717,12 +10711,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 8.5,
-            "predicted_revenue": 412.25,
-            "estimated_cogs_usd": 121.61,
-            "brisket_cooked_lbs": 7.9,
-            "pork_cooked_lbs": 2.0,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 11.1,
+            "predicted_revenue": 538.35,
+            "estimated_cogs_usd": 158.81,
+            "brisket_cooked_lbs": 8.5,
+            "pork_cooked_lbs": 2.2,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10730,12 +10724,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Sat",
             "hour": 15,
-            "predicted_orders": 7.9,
-            "predicted_revenue": 383.15,
-            "estimated_cogs_usd": 113.03,
-            "brisket_cooked_lbs": 7.4,
-            "pork_cooked_lbs": 1.9,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 10.6,
+            "predicted_revenue": 514.1,
+            "estimated_cogs_usd": 151.66,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.1,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10743,11 +10737,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 10.4,
-            "predicted_revenue": 504.4,
-            "estimated_cogs_usd": 148.8,
-            "brisket_cooked_lbs": 9.7,
-            "pork_cooked_lbs": 2.5,
+            "predicted_orders": 14.0,
+            "predicted_revenue": 679.0,
+            "estimated_cogs_usd": 200.3,
+            "brisket_cooked_lbs": 10.7,
+            "pork_cooked_lbs": 2.8,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -10756,12 +10750,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Sat",
             "hour": 17,
-            "predicted_orders": 9.5,
-            "predicted_revenue": 460.75,
-            "estimated_cogs_usd": 135.92,
-            "brisket_cooked_lbs": 8.8,
-            "pork_cooked_lbs": 2.3,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
+            "pork_cooked_lbs": 2.5,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -10769,23 +10763,23 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 5.8,
-            "predicted_revenue": 281.3,
-            "estimated_cogs_usd": 82.98,
-            "brisket_cooked_lbs": 5.4,
-            "pork_cooked_lbs": 1.4,
+            "predicted_orders": 7.8,
+            "predicted_revenue": 378.3,
+            "estimated_cogs_usd": 111.6,
+            "brisket_cooked_lbs": 6.0,
+            "pork_cooked_lbs": 1.5,
             "pacing_status": "Normal Pacing",
-            "is_peak": false
+            "is_peak": true
           },
           {
             "timestamp": "2026-10-010T19:00:00",
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 1.6,
-            "predicted_revenue": 77.6,
-            "estimated_cogs_usd": 22.89,
-            "brisket_cooked_lbs": 1.5,
+            "predicted_orders": 2.1,
+            "predicted_revenue": 101.85,
+            "estimated_cogs_usd": 30.05,
+            "brisket_cooked_lbs": 1.6,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10844,7 +10838,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10855,11 +10849,11 @@ window.BBQ_PAYLOADS = {
         "short_day": "Sat",
         "is_closed": false,
         "peak_orders": 17.5,
-        "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
-        "total_orders": 97.5,
-        "projected_revenue_usd": 4728.75,
-        "estimated_cogs_usd": 1394.98,
+        "peak_hour": 11,
+        "peak_rush_window": "11:00 AM (Sat)",
+        "total_orders": 118.7,
+        "projected_revenue_usd": 5756.95,
+        "estimated_cogs_usd": 1698.3,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
@@ -10978,11 +10972,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "8:00 AM",
             "day_name": "Sat",
             "hour": 8,
-            "predicted_orders": 0.2,
-            "predicted_revenue": 9.7,
-            "estimated_cogs_usd": 2.86,
+            "predicted_orders": 0.3,
+            "predicted_revenue": 14.55,
+            "estimated_cogs_usd": 4.29,
             "brisket_cooked_lbs": 0.2,
-            "pork_cooked_lbs": 0.0,
+            "pork_cooked_lbs": 0.1,
             "pacing_status": "Normal Pacing",
             "is_peak": false
           },
@@ -10991,10 +10985,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 0.8,
-            "predicted_revenue": 38.8,
-            "estimated_cogs_usd": 11.45,
-            "brisket_cooked_lbs": 0.7,
+            "predicted_orders": 1.1,
+            "predicted_revenue": 53.35,
+            "estimated_cogs_usd": 15.74,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -11004,10 +10998,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "10:00 AM",
             "day_name": "Sat",
             "hour": 10,
-            "predicted_orders": 10.2,
-            "predicted_revenue": 494.7,
-            "estimated_cogs_usd": 145.94,
-            "brisket_cooked_lbs": 9.5,
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11017,11 +11011,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "11:00 AM",
             "day_name": "Sat",
             "hour": 11,
-            "predicted_orders": 14.3,
-            "predicted_revenue": 693.55,
-            "estimated_cogs_usd": 204.6,
-            "brisket_cooked_lbs": 13.3,
-            "pork_cooked_lbs": 3.4,
+            "predicted_orders": 17.5,
+            "predicted_revenue": 848.75,
+            "estimated_cogs_usd": 250.38,
+            "brisket_cooked_lbs": 13.4,
+            "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -11030,11 +11024,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "12:00 PM",
             "day_name": "Sat",
             "hour": 12,
-            "predicted_orders": 17.5,
-            "predicted_revenue": 848.75,
-            "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 16.3,
-            "pork_cooked_lbs": 4.2,
+            "predicted_orders": 16.3,
+            "predicted_revenue": 790.55,
+            "estimated_cogs_usd": 233.21,
+            "brisket_cooked_lbs": 12.5,
+            "pork_cooked_lbs": 3.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -11043,11 +11037,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 10.7,
-            "predicted_revenue": 518.95,
-            "estimated_cogs_usd": 153.09,
-            "brisket_cooked_lbs": 10.0,
-            "pork_cooked_lbs": 2.6,
+            "predicted_orders": 12.2,
+            "predicted_revenue": 591.7,
+            "estimated_cogs_usd": 174.55,
+            "brisket_cooked_lbs": 9.3,
+            "pork_cooked_lbs": 2.4,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -11056,12 +11050,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 8.5,
-            "predicted_revenue": 412.25,
-            "estimated_cogs_usd": 121.61,
-            "brisket_cooked_lbs": 7.9,
-            "pork_cooked_lbs": 2.0,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 11.1,
+            "predicted_revenue": 538.35,
+            "estimated_cogs_usd": 158.81,
+            "brisket_cooked_lbs": 8.5,
+            "pork_cooked_lbs": 2.2,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -11069,12 +11063,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "3:00 PM",
             "day_name": "Sat",
             "hour": 15,
-            "predicted_orders": 7.9,
-            "predicted_revenue": 383.15,
-            "estimated_cogs_usd": 113.03,
-            "brisket_cooked_lbs": 7.4,
-            "pork_cooked_lbs": 1.9,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 10.6,
+            "predicted_revenue": 514.1,
+            "estimated_cogs_usd": 151.66,
+            "brisket_cooked_lbs": 8.1,
+            "pork_cooked_lbs": 2.1,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -11082,11 +11076,11 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 10.4,
-            "predicted_revenue": 504.4,
-            "estimated_cogs_usd": 148.8,
-            "brisket_cooked_lbs": 9.7,
-            "pork_cooked_lbs": 2.5,
+            "predicted_orders": 14.0,
+            "predicted_revenue": 679.0,
+            "estimated_cogs_usd": 200.3,
+            "brisket_cooked_lbs": 10.7,
+            "pork_cooked_lbs": 2.8,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
@@ -11095,12 +11089,12 @@ window.BBQ_PAYLOADS = {
             "hour_display": "5:00 PM",
             "day_name": "Sat",
             "hour": 17,
-            "predicted_orders": 9.5,
-            "predicted_revenue": 460.75,
-            "estimated_cogs_usd": 135.92,
-            "brisket_cooked_lbs": 8.8,
-            "pork_cooked_lbs": 2.3,
-            "pacing_status": "Normal Pacing",
+            "predicted_orders": 12.8,
+            "predicted_revenue": 620.8,
+            "estimated_cogs_usd": 183.14,
+            "brisket_cooked_lbs": 9.8,
+            "pork_cooked_lbs": 2.5,
+            "pacing_status": "Heavy Rush Surge",
             "is_peak": true
           },
           {
@@ -11108,23 +11102,23 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 5.8,
-            "predicted_revenue": 281.3,
-            "estimated_cogs_usd": 82.98,
-            "brisket_cooked_lbs": 5.4,
-            "pork_cooked_lbs": 1.4,
+            "predicted_orders": 7.8,
+            "predicted_revenue": 378.3,
+            "estimated_cogs_usd": 111.6,
+            "brisket_cooked_lbs": 6.0,
+            "pork_cooked_lbs": 1.5,
             "pacing_status": "Normal Pacing",
-            "is_peak": false
+            "is_peak": true
           },
           {
             "timestamp": "2026-10-010T19:00:00",
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 1.6,
-            "predicted_revenue": 77.6,
-            "estimated_cogs_usd": 22.89,
-            "brisket_cooked_lbs": 1.5,
+            "predicted_orders": 2.1,
+            "predicted_revenue": 101.85,
+            "estimated_cogs_usd": 30.05,
+            "brisket_cooked_lbs": 1.6,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -11183,7 +11177,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -12552,15 +12546,15 @@ window.BBQ_PAYLOADS = {
       {
         "date": "2026-07-18",
         "day_name": "Sat",
-        "actual_revenue": 8774.32,
-        "predicted_revenue": 8774.32,
-        "brisket_raw_lbs": 185.9,
-        "pork_shoulder_raw_lbs": 92.1,
-        "sausage_lbs": 87.7,
-        "tacos_sold": 114,
-        "rosebuds_sold": 32,
-        "pork_ribs_racks": 15.1,
-        "beef_dino_ribs": 4,
+        "actual_revenue": 3031.36,
+        "predicted_revenue": 3031.36,
+        "brisket_raw_lbs": 61.5,
+        "pork_shoulder_raw_lbs": 29.8,
+        "sausage_lbs": 30.3,
+        "tacos_sold": 42,
+        "rosebuds_sold": 0,
+        "pork_ribs_racks": 4.8,
+        "beef_dino_ribs": 1,
         "is_historical": true,
         "data_type": "ACTUAL"
       },
@@ -13827,14 +13821,14 @@ window.BBQ_PAYLOADS = {
       {
         "date": "2026-10-16",
         "day_name": "Fri",
-        "actual_revenue": 611.85,
-        "predicted_revenue": 611.85,
-        "brisket_raw_lbs": 40.0,
+        "actual_revenue": 2435.43,
+        "predicted_revenue": 2435.43,
+        "brisket_raw_lbs": 42.9,
         "pork_shoulder_raw_lbs": 24.0,
-        "sausage_lbs": 20.0,
-        "tacos_sold": 1,
-        "rosebuds_sold": 0,
-        "pork_ribs_racks": 0,
+        "sausage_lbs": 24.4,
+        "tacos_sold": 24,
+        "rosebuds_sold": 4,
+        "pork_ribs_racks": 2.9,
         "beef_dino_ribs": 0,
         "is_historical": true,
         "data_type": "ACTUAL"
@@ -14109,34 +14103,10607 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-16T14:10:42.781730-04:00",
-    "days": {},
-    "weekday_baseline": {}
+    "generated_at": "2026-10-16T15:24:48.586737-04:00",
+    "days": {
+      "2026-07-18": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 345.12,
+            "orders": 11
+          },
+          {
+            "hour": 16,
+            "sales_usd": 612.39,
+            "orders": 13
+          },
+          {
+            "hour": 17,
+            "sales_usd": 840.76,
+            "orders": 21
+          },
+          {
+            "hour": 18,
+            "sales_usd": 860.64,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 372.45,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3031.36,
+        "total_orders": 68
+      },
+      "2026-07-19": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 707.63,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 920.02,
+            "orders": 18
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1270.33,
+            "orders": 21
+          },
+          {
+            "hour": 14,
+            "sales_usd": 737.09,
+            "orders": 13
+          },
+          {
+            "hour": 15,
+            "sales_usd": 273.51,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 233.55,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 450.62,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 625.34,
+            "orders": 14
+          },
+          {
+            "hour": 19,
+            "sales_usd": 184.59,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5402.68,
+        "total_orders": 103
+      },
+      "2026-07-20": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 1
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 17,
+            "sales_usd": 65.58,
+            "orders": 1
+          },
+          {
+            "hour": 18,
+            "sales_usd": 54.83,
+            "orders": 1
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 120.41,
+        "total_orders": 3
+      },
+      "2026-07-21": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 867.95,
+            "orders": 24
+          },
+          {
+            "hour": 12,
+            "sales_usd": 729.02,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 424.17,
+            "orders": 7
+          },
+          {
+            "hour": 14,
+            "sales_usd": 338.35,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 361.02,
+            "orders": 9
+          },
+          {
+            "hour": 16,
+            "sales_usd": 253.11,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 557.73,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 494.28,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 224.12,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 93.57,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4343.32,
+        "total_orders": 99
+      },
+      "2026-07-23": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 79.55,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1474.8,
+            "orders": 19
+          },
+          {
+            "hour": 12,
+            "sales_usd": 706.99,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 270.93,
+            "orders": 7
+          },
+          {
+            "hour": 14,
+            "sales_usd": 508.06,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 252.87,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 130.88,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 451.1,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 654.89,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 518.78,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 157.46,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5206.31,
+        "total_orders": 96
+      },
+      "2026-07-24": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 49.99,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1131.96,
+            "orders": 29
+          },
+          {
+            "hour": 12,
+            "sales_usd": 613.32,
+            "orders": 18
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1073.57,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 694.1,
+            "orders": 18
+          },
+          {
+            "hour": 15,
+            "sales_usd": 568.24,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 346.95,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 234.68,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 786.86,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 625.38,
+            "orders": 18
+          },
+          {
+            "hour": 20,
+            "sales_usd": 127.42,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6252.47,
+        "total_orders": 135
+      },
+      "2026-07-25": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 87.82,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1069.42,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 766.93,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 658.25,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 929.27,
+            "orders": 16
+          },
+          {
+            "hour": 15,
+            "sales_usd": 741.94,
+            "orders": 16
+          },
+          {
+            "hour": 16,
+            "sales_usd": 411.82,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 678.22,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 672.56,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 618.95,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 96.25,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6731.43,
+        "total_orders": 126
+      },
+      "2026-07-26": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1440.57,
+            "orders": 25
+          },
+          {
+            "hour": 12,
+            "sales_usd": 835.33,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1042.29,
+            "orders": 21
+          },
+          {
+            "hour": 14,
+            "sales_usd": 636.28,
+            "orders": 18
+          },
+          {
+            "hour": 15,
+            "sales_usd": 433.16,
+            "orders": 15
+          },
+          {
+            "hour": 16,
+            "sales_usd": 876.69,
+            "orders": 18
+          },
+          {
+            "hour": 17,
+            "sales_usd": 820.13,
+            "orders": 20
+          },
+          {
+            "hour": 18,
+            "sales_usd": 1069.49,
+            "orders": 19
+          },
+          {
+            "hour": 19,
+            "sales_usd": 219.23,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 7373.17,
+        "total_orders": 157
+      },
+      "2026-07-28": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 552.92,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 565.97,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 244.2,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 273.02,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 223.63,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 203.75,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 265.79,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 412.61,
+            "orders": 9
+          },
+          {
+            "hour": 19,
+            "sales_usd": 642.9,
+            "orders": 13
+          },
+          {
+            "hour": 20,
+            "sales_usd": 302.41,
+            "orders": 7
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3687.2,
+        "total_orders": 92
+      },
+      "2026-07-29": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 669.81,
+            "orders": 10
+          },
+          {
+            "hour": 12,
+            "sales_usd": 754.81,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 390.34,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 155.0,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 119.13,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 379.43,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 794.17,
+            "orders": 15
+          },
+          {
+            "hour": 18,
+            "sales_usd": 709.74,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 611.59,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4584.02,
+        "total_orders": 107
+      },
+      "2026-07-30": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 67.19,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 932.84,
+            "orders": 23
+          },
+          {
+            "hour": 12,
+            "sales_usd": 717.67,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 446.39,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 241.12,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 193.39,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 124.59,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 586.34,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 314.0,
+            "orders": 5
+          },
+          {
+            "hour": 19,
+            "sales_usd": 455.34,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 321.99,
+            "orders": 6
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4400.86,
+        "total_orders": 107
+      },
+      "2026-07-31": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 242.54,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 808.27,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 845.72,
+            "orders": 21
+          },
+          {
+            "hour": 13,
+            "sales_usd": 438.6,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 652.5,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 358.86,
+            "orders": 9
+          },
+          {
+            "hour": 16,
+            "sales_usd": 163.26,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 764.63,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 831.41,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 611.87,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 449.1,
+            "orders": 9
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 318.47,
+            "orders": 1
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6485.23,
+        "total_orders": 115
+      },
+      "2026-08-01": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 148.02,
+            "orders": 2
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 337.91,
+            "orders": 9
+          },
+          {
+            "hour": 12,
+            "sales_usd": 873.82,
+            "orders": 23
+          },
+          {
+            "hour": 13,
+            "sales_usd": 775.81,
+            "orders": 19
+          },
+          {
+            "hour": 14,
+            "sales_usd": 407.42,
+            "orders": 12
+          },
+          {
+            "hour": 15,
+            "sales_usd": 1063.45,
+            "orders": 19
+          },
+          {
+            "hour": 16,
+            "sales_usd": 983.75,
+            "orders": 15
+          },
+          {
+            "hour": 17,
+            "sales_usd": 596.37,
+            "orders": 13
+          },
+          {
+            "hour": 18,
+            "sales_usd": 399.75,
+            "orders": 10
+          },
+          {
+            "hour": 19,
+            "sales_usd": -102.7,
+            "orders": 2
+          },
+          {
+            "hour": 20,
+            "sales_usd": -32.0,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5451.6,
+        "total_orders": 125
+      },
+      "2026-08-02": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 198.42,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 524.13,
+            "orders": 10
+          },
+          {
+            "hour": 12,
+            "sales_usd": 987.84,
+            "orders": 20
+          },
+          {
+            "hour": 13,
+            "sales_usd": 663.16,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 805.54,
+            "orders": 14
+          },
+          {
+            "hour": 15,
+            "sales_usd": 937.74,
+            "orders": 11
+          },
+          {
+            "hour": 16,
+            "sales_usd": 683.46,
+            "orders": 13
+          },
+          {
+            "hour": 17,
+            "sales_usd": 668.48,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 784.35,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 378.33,
+            "orders": 9
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6631.45,
+        "total_orders": 118
+      },
+      "2026-08-04": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 684.54,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 427.68,
+            "orders": 9
+          },
+          {
+            "hour": 13,
+            "sales_usd": 568.78,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 386.02,
+            "orders": 10
+          },
+          {
+            "hour": 15,
+            "sales_usd": 312.97,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 305.89,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 354.61,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 464.15,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 607.36,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 39.96,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4151.96,
+        "total_orders": 90
+      },
+      "2026-08-05": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 17.2,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1164.85,
+            "orders": 30
+          },
+          {
+            "hour": 12,
+            "sales_usd": 588.07,
+            "orders": 18
+          },
+          {
+            "hour": 13,
+            "sales_usd": 380.5,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 250.45,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 179.11,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 292.29,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 233.35,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 379.64,
+            "orders": 7
+          },
+          {
+            "hour": 19,
+            "sales_usd": 586.62,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 133.08,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4205.16,
+        "total_orders": 107
+      },
+      "2026-08-06": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 475.11,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 495.58,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 441.6,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 86.41,
+            "orders": 3
+          },
+          {
+            "hour": 15,
+            "sales_usd": 171.99,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 344.31,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 394.39,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 458.76,
+            "orders": 14
+          },
+          {
+            "hour": 19,
+            "sales_usd": 574.12,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 290.0,
+            "orders": 5
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3732.27,
+        "total_orders": 86
+      },
+      "2026-08-07": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 45.15,
+            "orders": 1
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 940.28,
+            "orders": 25
+          },
+          {
+            "hour": 12,
+            "sales_usd": 799.89,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 789.43,
+            "orders": 17
+          },
+          {
+            "hour": 14,
+            "sales_usd": 383.89,
+            "orders": 10
+          },
+          {
+            "hour": 15,
+            "sales_usd": 149.86,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 369.1,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 682.82,
+            "orders": 18
+          },
+          {
+            "hour": 18,
+            "sales_usd": 728.74,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 544.0,
+            "orders": 11
+          },
+          {
+            "hour": 20,
+            "sales_usd": 177.72,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5610.88,
+        "total_orders": 133
+      },
+      "2026-08-08": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1103.66,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1264.0,
+            "orders": 26
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1255.76,
+            "orders": 20
+          },
+          {
+            "hour": 14,
+            "sales_usd": 579.84,
+            "orders": 11
+          },
+          {
+            "hour": 15,
+            "sales_usd": 717.24,
+            "orders": 12
+          },
+          {
+            "hour": 16,
+            "sales_usd": 376.09,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1220.51,
+            "orders": 23
+          },
+          {
+            "hour": 18,
+            "sales_usd": 685.78,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 517.33,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 55.78,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 7775.99,
+        "total_orders": 139
+      },
+      "2026-08-09": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 950.67,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1444.56,
+            "orders": 24
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1045.85,
+            "orders": 20
+          },
+          {
+            "hour": 14,
+            "sales_usd": 465.28,
+            "orders": 12
+          },
+          {
+            "hour": 15,
+            "sales_usd": 299.72,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 662.41,
+            "orders": 12
+          },
+          {
+            "hour": 17,
+            "sales_usd": 366.2,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 406.55,
+            "orders": 14
+          },
+          {
+            "hour": 19,
+            "sales_usd": 11.1,
+            "orders": 1
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5652.34,
+        "total_orders": 117
+      },
+      "2026-08-10": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 1
+          },
+          {
+            "hour": 17,
+            "sales_usd": 38.7,
+            "orders": 1
+          },
+          {
+            "hour": 18,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 38.7,
+        "total_orders": 2
+      },
+      "2026-08-11": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 183.83,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 815.15,
+            "orders": 22
+          },
+          {
+            "hour": 12,
+            "sales_usd": 693.95,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 173.62,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 136.83,
+            "orders": 3
+          },
+          {
+            "hour": 15,
+            "sales_usd": 340.99,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 103.17,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 254.14,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 419.89,
+            "orders": 10
+          },
+          {
+            "hour": 19,
+            "sales_usd": 345.73,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 199.69,
+            "orders": 5
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3666.99,
+        "total_orders": 95
+      },
+      "2026-08-12": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 248.59,
+            "orders": 2
+          },
+          {
+            "hour": 10,
+            "sales_usd": 454.54,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 575.54,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 721.88,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 145.63,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 178.43,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 112.75,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 201.88,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 621.07,
+            "orders": 14
+          },
+          {
+            "hour": 18,
+            "sales_usd": 696.07,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 214.83,
+            "orders": 6
+          },
+          {
+            "hour": 20,
+            "sales_usd": 20.42,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4191.63,
+        "total_orders": 103
+      },
+      "2026-08-13": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 851.02,
+            "orders": 22
+          },
+          {
+            "hour": 12,
+            "sales_usd": 505.54,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 355.67,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 256.34,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 181.3,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 418.86,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 165.83,
+            "orders": 4
+          },
+          {
+            "hour": 18,
+            "sales_usd": 295.8,
+            "orders": 8
+          },
+          {
+            "hour": 19,
+            "sales_usd": 115.05,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 142.59,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3288.0,
+        "total_orders": 80
+      },
+      "2026-08-14": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 695.56,
+            "orders": 19
+          },
+          {
+            "hour": 12,
+            "sales_usd": 640.93,
+            "orders": 23
+          },
+          {
+            "hour": 13,
+            "sales_usd": 500.62,
+            "orders": 16
+          },
+          {
+            "hour": 14,
+            "sales_usd": 435.5,
+            "orders": 11
+          },
+          {
+            "hour": 15,
+            "sales_usd": 156.23,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 162.34,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1036.01,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 1256.49,
+            "orders": 25
+          },
+          {
+            "hour": 19,
+            "sales_usd": 1010.59,
+            "orders": 16
+          },
+          {
+            "hour": 20,
+            "sales_usd": 85.46,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5979.73,
+        "total_orders": 137
+      },
+      "2026-08-15": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 87.7,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1131.73,
+            "orders": 18
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1546.46,
+            "orders": 26
+          },
+          {
+            "hour": 13,
+            "sales_usd": 840.51,
+            "orders": 20
+          },
+          {
+            "hour": 14,
+            "sales_usd": 681.83,
+            "orders": 21
+          },
+          {
+            "hour": 15,
+            "sales_usd": 724.53,
+            "orders": 13
+          },
+          {
+            "hour": 16,
+            "sales_usd": 710.7,
+            "orders": 14
+          },
+          {
+            "hour": 17,
+            "sales_usd": 796.02,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 1127.55,
+            "orders": 20
+          },
+          {
+            "hour": 19,
+            "sales_usd": 543.57,
+            "orders": 9
+          },
+          {
+            "hour": 20,
+            "sales_usd": 90.97,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 8281.57,
+        "total_orders": 162
+      },
+      "2026-08-16": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 681.47,
+            "orders": 9
+          },
+          {
+            "hour": 12,
+            "sales_usd": 897.86,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 772.96,
+            "orders": 17
+          },
+          {
+            "hour": 14,
+            "sales_usd": 485.08,
+            "orders": 13
+          },
+          {
+            "hour": 15,
+            "sales_usd": 59.38,
+            "orders": 1
+          },
+          {
+            "hour": 16,
+            "sales_usd": 590.93,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 741.71,
+            "orders": 13
+          },
+          {
+            "hour": 18,
+            "sales_usd": 520.51,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 90.39,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4840.29,
+        "total_orders": 95
+      },
+      "2026-08-18": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 615.62,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 811.72,
+            "orders": 25
+          },
+          {
+            "hour": 13,
+            "sales_usd": 438.53,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 264.26,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 276.12,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 302.87,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 357.15,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 430.68,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 118.97,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 31.08,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": -18.47,
+            "orders": 2
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3628.53,
+        "total_orders": 98
+      },
+      "2026-08-19": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 47.74,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 500.4,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 531.5,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 477.99,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 87.09,
+            "orders": 3
+          },
+          {
+            "hour": 15,
+            "sales_usd": 160.69,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 37.74,
+            "orders": 1
+          },
+          {
+            "hour": 17,
+            "sales_usd": 370.12,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 526.81,
+            "orders": 17
+          },
+          {
+            "hour": 19,
+            "sales_usd": 70.5,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 66.34,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2876.92,
+        "total_orders": 81
+      },
+      "2026-08-20": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 16.66,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 735.54,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 765.14,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 313.37,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 131.05,
+            "orders": 4
+          },
+          {
+            "hour": 15,
+            "sales_usd": 354.48,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 389.84,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 433.0,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 349.64,
+            "orders": 7
+          },
+          {
+            "hour": 19,
+            "sales_usd": 569.57,
+            "orders": 13
+          },
+          {
+            "hour": 20,
+            "sales_usd": 121.84,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4180.13,
+        "total_orders": 102
+      },
+      "2026-08-21": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1315.71,
+            "orders": 25
+          },
+          {
+            "hour": 12,
+            "sales_usd": 876.45,
+            "orders": 31
+          },
+          {
+            "hour": 13,
+            "sales_usd": 268.81,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 429.71,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 266.77,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 456.85,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 965.31,
+            "orders": 22
+          },
+          {
+            "hour": 18,
+            "sales_usd": 689.14,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 558.05,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 281.91,
+            "orders": 5
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6108.71,
+        "total_orders": 142
+      },
+      "2026-08-22": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 740.45,
+            "orders": 14
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1085.15,
+            "orders": 21
+          },
+          {
+            "hour": 13,
+            "sales_usd": 584.25,
+            "orders": 16
+          },
+          {
+            "hour": 14,
+            "sales_usd": 547.43,
+            "orders": 11
+          },
+          {
+            "hour": 15,
+            "sales_usd": 503.6,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 775.9,
+            "orders": 14
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1245.56,
+            "orders": 18
+          },
+          {
+            "hour": 18,
+            "sales_usd": 902.01,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 911.02,
+            "orders": 21
+          },
+          {
+            "hour": 20,
+            "sales_usd": 243.84,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 7539.21,
+        "total_orders": 145
+      },
+      "2026-08-23": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 40.52,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1328.88,
+            "orders": 18
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1007.68,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 745.55,
+            "orders": 21
+          },
+          {
+            "hour": 14,
+            "sales_usd": 750.2,
+            "orders": 17
+          },
+          {
+            "hour": 15,
+            "sales_usd": 381.84,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 599.54,
+            "orders": 12
+          },
+          {
+            "hour": 17,
+            "sales_usd": 845.22,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 491.88,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 194.89,
+            "orders": 6
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6386.2,
+        "total_orders": 126
+      },
+      "2026-08-25": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 235.04,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 556.7,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 332.05,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 323.66,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 26.82,
+            "orders": 1
+          },
+          {
+            "hour": 15,
+            "sales_usd": 202.77,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 263.26,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 299.89,
+            "orders": 5
+          },
+          {
+            "hour": 18,
+            "sales_usd": 478.95,
+            "orders": 8
+          },
+          {
+            "hour": 19,
+            "sales_usd": 142.8,
+            "orders": 2
+          },
+          {
+            "hour": 20,
+            "sales_usd": 79.88,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2941.82,
+        "total_orders": 67
+      },
+      "2026-08-26": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 132.36,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 579.83,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 768.56,
+            "orders": 24
+          },
+          {
+            "hour": 13,
+            "sales_usd": 635.16,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 206.76,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 210.86,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 372.57,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 231.29,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 975.7,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 195.43,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 3.88,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4312.4,
+        "total_orders": 95
+      },
+      "2026-08-27": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 1214.62,
+            "orders": 2
+          },
+          {
+            "hour": 11,
+            "sales_usd": 746.99,
+            "orders": 20
+          },
+          {
+            "hour": 12,
+            "sales_usd": 591.83,
+            "orders": 14
+          },
+          {
+            "hour": 13,
+            "sales_usd": 212.27,
+            "orders": 5
+          },
+          {
+            "hour": 14,
+            "sales_usd": 303.11,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 166.93,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 188.01,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 523.43,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 422.36,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 636.55,
+            "orders": 15
+          },
+          {
+            "hour": 20,
+            "sales_usd": 173.19,
+            "orders": 6
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5179.29,
+        "total_orders": 101
+      },
+      "2026-08-28": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 11.1,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 991.95,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 601.82,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 351.85,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 349.83,
+            "orders": 10
+          },
+          {
+            "hour": 15,
+            "sales_usd": 330.72,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 238.78,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 365.96,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 707.33,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 453.95,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 103.89,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4507.18,
+        "total_orders": 109
+      },
+      "2026-08-29": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 492.08,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 524.78,
+            "orders": 10
+          },
+          {
+            "hour": 12,
+            "sales_usd": 586.4,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 900.26,
+            "orders": 20
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 17,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 18,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2503.52,
+        "total_orders": 43
+      },
+      "2026-08-30": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1063.76,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 946.11,
+            "orders": 21
+          },
+          {
+            "hour": 13,
+            "sales_usd": 895.66,
+            "orders": 19
+          },
+          {
+            "hour": 14,
+            "sales_usd": 373.71,
+            "orders": 12
+          },
+          {
+            "hour": 15,
+            "sales_usd": 294.45,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 384.11,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 527.94,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 359.42,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 102.29,
+            "orders": 2
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4947.45,
+        "total_orders": 102
+      },
+      "2026-08-31": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 230.88,
+            "orders": 1
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 17,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 18,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 230.88,
+        "total_orders": 1
+      },
+      "2026-09-02": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 654.05,
+            "orders": 27
+          },
+          {
+            "hour": 12,
+            "sales_usd": 734.59,
+            "orders": 27
+          },
+          {
+            "hour": 13,
+            "sales_usd": 300.55,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 85.81,
+            "orders": 3
+          },
+          {
+            "hour": 15,
+            "sales_usd": 72.71,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 143.08,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 467.16,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 316.19,
+            "orders": 8
+          },
+          {
+            "hour": 19,
+            "sales_usd": 196.84,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 212.46,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3183.44,
+        "total_orders": 94
+      },
+      "2026-09-03": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 33.8,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 442.01,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 685.78,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 381.92,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 96.35,
+            "orders": 4
+          },
+          {
+            "hour": 15,
+            "sales_usd": 418.48,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 231.64,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 237.85,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 762.69,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 447.53,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 157.28,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3895.33,
+        "total_orders": 86
+      },
+      "2026-09-04": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 17.2,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1056.48,
+            "orders": 34
+          },
+          {
+            "hour": 12,
+            "sales_usd": 783.84,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 267.14,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 223.29,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 171.1,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 326.9,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 378.19,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 431.88,
+            "orders": 9
+          },
+          {
+            "hour": 19,
+            "sales_usd": 596.3,
+            "orders": 10
+          },
+          {
+            "hour": 20,
+            "sales_usd": 147.03,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4399.35,
+        "total_orders": 112
+      },
+      "2026-09-05": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 61.28,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 782.58,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1062.29,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 832.78,
+            "orders": 16
+          },
+          {
+            "hour": 14,
+            "sales_usd": 658.75,
+            "orders": 17
+          },
+          {
+            "hour": 15,
+            "sales_usd": 2079.38,
+            "orders": 14
+          },
+          {
+            "hour": 16,
+            "sales_usd": 617.42,
+            "orders": 11
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1132.51,
+            "orders": 17
+          },
+          {
+            "hour": 18,
+            "sales_usd": 473.2,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 368.06,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 129.27,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 8197.52,
+        "total_orders": 134
+      },
+      "2026-09-06": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 741.31,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1267.28,
+            "orders": 25
+          },
+          {
+            "hour": 13,
+            "sales_usd": 713.06,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 1252.36,
+            "orders": 23
+          },
+          {
+            "hour": 15,
+            "sales_usd": 334.87,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 237.57,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 506.52,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 958.28,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 208.79,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": -81.0,
+            "orders": 1
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6139.04,
+        "total_orders": 119
+      },
+      "2026-09-08": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 459.22,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 391.15,
+            "orders": 10
+          },
+          {
+            "hour": 13,
+            "sales_usd": 337.2,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 240.71,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 248.87,
+            "orders": 8
+          },
+          {
+            "hour": 16,
+            "sales_usd": 398.38,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 206.85,
+            "orders": 3
+          },
+          {
+            "hour": 18,
+            "sales_usd": 514.5,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 416.06,
+            "orders": 10
+          },
+          {
+            "hour": 20,
+            "sales_usd": 124.79,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3337.73,
+        "total_orders": 78
+      },
+      "2026-09-09": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 648.34,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 440.2,
+            "orders": 14
+          },
+          {
+            "hour": 13,
+            "sales_usd": 187.94,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 396.95,
+            "orders": 3
+          },
+          {
+            "hour": 15,
+            "sales_usd": 2.78,
+            "orders": 1
+          },
+          {
+            "hour": 16,
+            "sales_usd": 180.94,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 450.91,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 412.68,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 126.49,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 158.56,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3005.79,
+        "total_orders": 71
+      },
+      "2026-09-10": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 472.41,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 356.05,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 422.64,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 153.51,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 70.92,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 286.89,
+            "orders": 8
+          },
+          {
+            "hour": 17,
+            "sales_usd": 179.05,
+            "orders": 5
+          },
+          {
+            "hour": 18,
+            "sales_usd": 352.0,
+            "orders": 6
+          },
+          {
+            "hour": 19,
+            "sales_usd": 394.45,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 72.67,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2760.59,
+        "total_orders": 73
+      },
+      "2026-09-11": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 111.26,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 169.85,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 589.73,
+            "orders": 19
+          },
+          {
+            "hour": 12,
+            "sales_usd": 592.27,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 245.93,
+            "orders": 9
+          },
+          {
+            "hour": 14,
+            "sales_usd": 267.92,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 184.52,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 213.81,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 424.54,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 701.53,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 489.33,
+            "orders": 10
+          },
+          {
+            "hour": 20,
+            "sales_usd": 203.58,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4194.27,
+        "total_orders": 100
+      },
+      "2026-09-12": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 27.76,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 591.79,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 685.8,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1031.34,
+            "orders": 23
+          },
+          {
+            "hour": 14,
+            "sales_usd": 711.17,
+            "orders": 13
+          },
+          {
+            "hour": 15,
+            "sales_usd": 690.56,
+            "orders": 15
+          },
+          {
+            "hour": 16,
+            "sales_usd": 699.86,
+            "orders": 14
+          },
+          {
+            "hour": 17,
+            "sales_usd": 684.09,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 1199.76,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 343.18,
+            "orders": 9
+          },
+          {
+            "hour": 20,
+            "sales_usd": 51.08,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6716.39,
+        "total_orders": 138
+      },
+      "2026-09-13": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 366.25,
+            "orders": 10
+          },
+          {
+            "hour": 12,
+            "sales_usd": 753.34,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1107.08,
+            "orders": 21
+          },
+          {
+            "hour": 14,
+            "sales_usd": 252.82,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 437.0,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 317.63,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 696.71,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 602.94,
+            "orders": 10
+          },
+          {
+            "hour": 19,
+            "sales_usd": 244.27,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4778.04,
+        "total_orders": 94
+      },
+      "2026-09-14": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 3214.02,
+            "orders": 2
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 16,
+            "sales_usd": 58.05,
+            "orders": 1
+          },
+          {
+            "hour": 17,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 18,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3272.07,
+        "total_orders": 3
+      },
+      "2026-09-15": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 515.04,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 461.91,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1085.95,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 199.1,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 267.7,
+            "orders": 9
+          },
+          {
+            "hour": 15,
+            "sales_usd": 167.57,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 163.02,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 214.11,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 334.79,
+            "orders": 7
+          },
+          {
+            "hour": 19,
+            "sales_usd": 97.44,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 73.21,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3579.84,
+        "total_orders": 78
+      },
+      "2026-09-16": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 551.67,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 306.9,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 437.59,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 159.62,
+            "orders": 4
+          },
+          {
+            "hour": 15,
+            "sales_usd": 260.07,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 51.56,
+            "orders": 2
+          },
+          {
+            "hour": 17,
+            "sales_usd": 443.32,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 668.73,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 382.69,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3262.15,
+        "total_orders": 83
+      },
+      "2026-09-17": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 175.39,
+            "orders": 6
+          },
+          {
+            "hour": 12,
+            "sales_usd": 639.94,
+            "orders": 11
+          },
+          {
+            "hour": 13,
+            "sales_usd": 256.91,
+            "orders": 6
+          },
+          {
+            "hour": 14,
+            "sales_usd": 286.86,
+            "orders": 10
+          },
+          {
+            "hour": 15,
+            "sales_usd": 73.67,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 60.58,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 68.77,
+            "orders": 2
+          },
+          {
+            "hour": 18,
+            "sales_usd": 316.01,
+            "orders": 7
+          },
+          {
+            "hour": 19,
+            "sales_usd": 257.75,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 200.04,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2335.92,
+        "total_orders": 55
+      },
+      "2026-09-18": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1096.12,
+            "orders": 20
+          },
+          {
+            "hour": 12,
+            "sales_usd": 783.27,
+            "orders": 30
+          },
+          {
+            "hour": 13,
+            "sales_usd": 330.02,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 186.84,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 78.82,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 622.67,
+            "orders": 14
+          },
+          {
+            "hour": 17,
+            "sales_usd": 805.66,
+            "orders": 13
+          },
+          {
+            "hour": 18,
+            "sales_usd": 814.12,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 552.88,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 330.59,
+            "orders": 6
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5600.99,
+        "total_orders": 129
+      },
+      "2026-09-19": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 143.26,
+            "orders": 8
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1217.71,
+            "orders": 28
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1208.12,
+            "orders": 37
+          },
+          {
+            "hour": 13,
+            "sales_usd": 902.44,
+            "orders": 27
+          },
+          {
+            "hour": 14,
+            "sales_usd": 797.87,
+            "orders": 17
+          },
+          {
+            "hour": 15,
+            "sales_usd": 1733.34,
+            "orders": 16
+          },
+          {
+            "hour": 16,
+            "sales_usd": 717.7,
+            "orders": 16
+          },
+          {
+            "hour": 17,
+            "sales_usd": 573.51,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 738.65,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 227.29,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 336.73,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 8596.62,
+        "total_orders": 183
+      },
+      "2026-09-20": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 946.85,
+            "orders": 11
+          },
+          {
+            "hour": 12,
+            "sales_usd": 866.82,
+            "orders": 20
+          },
+          {
+            "hour": 13,
+            "sales_usd": 521.98,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 753.34,
+            "orders": 15
+          },
+          {
+            "hour": 15,
+            "sales_usd": 415.76,
+            "orders": 8
+          },
+          {
+            "hour": 16,
+            "sales_usd": 244.64,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 553.33,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 262.86,
+            "orders": 7
+          },
+          {
+            "hour": 19,
+            "sales_usd": 188.98,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4754.56,
+        "total_orders": 93
+      },
+      "2026-09-21": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 12,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 13,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 14,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 15,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 17,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 18,
+            "sales_usd": 137.06,
+            "orders": 2
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 137.06,
+        "total_orders": 2
+      },
+      "2026-09-22": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 400.05,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 616.95,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 361.47,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 177.34,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 142.97,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 153.47,
+            "orders": 4
+          },
+          {
+            "hour": 17,
+            "sales_usd": 651.5,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 307.15,
+            "orders": 10
+          },
+          {
+            "hour": 19,
+            "sales_usd": 592.12,
+            "orders": 10
+          },
+          {
+            "hour": 20,
+            "sales_usd": 25.54,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3428.56,
+        "total_orders": 96
+      },
+      "2026-09-23": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 423.59,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 714.55,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 149.19,
+            "orders": 4
+          },
+          {
+            "hour": 14,
+            "sales_usd": 126.49,
+            "orders": 2
+          },
+          {
+            "hour": 15,
+            "sales_usd": 241.65,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 148.74,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 396.61,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 513.17,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 289.14,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 47.84,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3050.97,
+        "total_orders": 74
+      },
+      "2026-09-24": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 260.66,
+            "orders": 7
+          },
+          {
+            "hour": 12,
+            "sales_usd": 641.83,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 195.4,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 174.12,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 154.31,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 31.64,
+            "orders": 1
+          },
+          {
+            "hour": 17,
+            "sales_usd": 241.11,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 512.42,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 367.8,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 158.98,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2738.27,
+        "total_orders": 67
+      },
+      "2026-09-25": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 988.09,
+            "orders": 24
+          },
+          {
+            "hour": 12,
+            "sales_usd": 426.44,
+            "orders": 13
+          },
+          {
+            "hour": 13,
+            "sales_usd": 235.1,
+            "orders": 7
+          },
+          {
+            "hour": 14,
+            "sales_usd": 939.13,
+            "orders": 14
+          },
+          {
+            "hour": 15,
+            "sales_usd": 98.82,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 253.32,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 798.58,
+            "orders": 16
+          },
+          {
+            "hour": 18,
+            "sales_usd": 718.81,
+            "orders": 15
+          },
+          {
+            "hour": 19,
+            "sales_usd": 550.64,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 28.81,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5037.74,
+        "total_orders": 112
+      },
+      "2026-09-26": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 715.96,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 322.77,
+            "orders": 2
+          },
+          {
+            "hour": 11,
+            "sales_usd": 358.07,
+            "orders": 12
+          },
+          {
+            "hour": 12,
+            "sales_usd": 749.99,
+            "orders": 13
+          },
+          {
+            "hour": 13,
+            "sales_usd": 871.14,
+            "orders": 20
+          },
+          {
+            "hour": 14,
+            "sales_usd": 859.55,
+            "orders": 19
+          },
+          {
+            "hour": 15,
+            "sales_usd": 367.48,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 598.17,
+            "orders": 13
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1095.42,
+            "orders": 19
+          },
+          {
+            "hour": 18,
+            "sales_usd": 915.19,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 601.75,
+            "orders": 14
+          },
+          {
+            "hour": 20,
+            "sales_usd": 11.12,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 7466.61,
+        "total_orders": 143
+      },
+      "2026-09-27": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 179.38,
+            "orders": 5
+          },
+          {
+            "hour": 12,
+            "sales_usd": 832.28,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 543.5,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 296.78,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 302.81,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 353.04,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 233.3,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 258.97,
+            "orders": 6
+          },
+          {
+            "hour": 19,
+            "sales_usd": 127.27,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3127.33,
+        "total_orders": 71
+      },
+      "2026-09-29": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 1884.5,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 558.51,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 606.91,
+            "orders": 13
+          },
+          {
+            "hour": 13,
+            "sales_usd": 339.75,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 111.02,
+            "orders": 2
+          },
+          {
+            "hour": 15,
+            "sales_usd": 50.45,
+            "orders": 2
+          },
+          {
+            "hour": 16,
+            "sales_usd": 98.29,
+            "orders": 2
+          },
+          {
+            "hour": 17,
+            "sales_usd": 302.86,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 625.57,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 111.84,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 51.06,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4740.76,
+        "total_orders": 71
+      },
+      "2026-09-30": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 715.15,
+            "orders": 15
+          },
+          {
+            "hour": 12,
+            "sales_usd": 721.79,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 116.97,
+            "orders": 7
+          },
+          {
+            "hour": 14,
+            "sales_usd": 140.45,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 54.5,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 64.82,
+            "orders": 2
+          },
+          {
+            "hour": 17,
+            "sales_usd": 213.34,
+            "orders": 5
+          },
+          {
+            "hour": 18,
+            "sales_usd": 474.44,
+            "orders": 14
+          },
+          {
+            "hour": 19,
+            "sales_usd": 549.18,
+            "orders": 11
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3050.64,
+        "total_orders": 83
+      },
+      "2026-10-01": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1353.7,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 265.14,
+            "orders": 10
+          },
+          {
+            "hour": 13,
+            "sales_usd": 538.43,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 191.25,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 148.17,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 237.91,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 536.05,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 725.71,
+            "orders": 16
+          },
+          {
+            "hour": 19,
+            "sales_usd": 270.03,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 75.04,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4341.43,
+        "total_orders": 91
+      },
+      "2026-10-02": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1112.61,
+            "orders": 19
+          },
+          {
+            "hour": 12,
+            "sales_usd": 737.26,
+            "orders": 14
+          },
+          {
+            "hour": 13,
+            "sales_usd": 462.29,
+            "orders": 13
+          },
+          {
+            "hour": 14,
+            "sales_usd": 1286.88,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 244.34,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 529.87,
+            "orders": 13
+          },
+          {
+            "hour": 17,
+            "sales_usd": 473.39,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 903.02,
+            "orders": 21
+          },
+          {
+            "hour": 19,
+            "sales_usd": 405.84,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 132.87,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 6288.37,
+        "total_orders": 118
+      },
+      "2026-10-03": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 172.6,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 570.54,
+            "orders": 10
+          },
+          {
+            "hour": 12,
+            "sales_usd": 783.94,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1048.41,
+            "orders": 18
+          },
+          {
+            "hour": 14,
+            "sales_usd": 463.82,
+            "orders": 12
+          },
+          {
+            "hour": 15,
+            "sales_usd": 392.51,
+            "orders": 11
+          },
+          {
+            "hour": 16,
+            "sales_usd": 350.73,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 668.66,
+            "orders": 14
+          },
+          {
+            "hour": 18,
+            "sales_usd": 523.01,
+            "orders": 10
+          },
+          {
+            "hour": 19,
+            "sales_usd": 225.02,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5199.24,
+        "total_orders": 105
+      },
+      "2026-10-04": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1008.08,
+            "orders": 14
+          },
+          {
+            "hour": 12,
+            "sales_usd": 666.02,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 522.85,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 360.1,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 448.67,
+            "orders": 8
+          },
+          {
+            "hour": 16,
+            "sales_usd": 754.14,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 349.85,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 503.58,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 190.17,
+            "orders": 4
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4803.46,
+        "total_orders": 87
+      },
+      "2026-10-06": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 822.1,
+            "orders": 21
+          },
+          {
+            "hour": 12,
+            "sales_usd": 780.8,
+            "orders": 20
+          },
+          {
+            "hour": 13,
+            "sales_usd": 447.22,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 56.56,
+            "orders": 2
+          },
+          {
+            "hour": 15,
+            "sales_usd": 170.62,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 45.46,
+            "orders": 2
+          },
+          {
+            "hour": 17,
+            "sales_usd": 162.09,
+            "orders": 6
+          },
+          {
+            "hour": 18,
+            "sales_usd": 537.28,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 225.67,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 5.38,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3253.18,
+        "total_orders": 86
+      },
+      "2026-10-07": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 306.92,
+            "orders": 1
+          },
+          {
+            "hour": 9,
+            "sales_usd": 28.81,
+            "orders": 1
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 211.66,
+            "orders": 8
+          },
+          {
+            "hour": 12,
+            "sales_usd": 642.6,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 264.42,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 413.75,
+            "orders": 9
+          },
+          {
+            "hour": 15,
+            "sales_usd": 92.68,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 151.01,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 528.41,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 471.09,
+            "orders": 11
+          },
+          {
+            "hour": 19,
+            "sales_usd": 148.29,
+            "orders": 6
+          },
+          {
+            "hour": 20,
+            "sales_usd": 139.3,
+            "orders": 3
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3398.94,
+        "total_orders": 88
+      },
+      "2026-10-08": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 765.01,
+            "orders": 14
+          },
+          {
+            "hour": 12,
+            "sales_usd": 456.0,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 418.13,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 163.38,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 849.72,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 342.72,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 314.86,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 527.16,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 268.98,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 137.72,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4243.68,
+        "total_orders": 85
+      },
+      "2026-10-09": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 58.05,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 790.25,
+            "orders": 24
+          },
+          {
+            "hour": 12,
+            "sales_usd": 388.24,
+            "orders": 14
+          },
+          {
+            "hour": 13,
+            "sales_usd": 562.45,
+            "orders": 19
+          },
+          {
+            "hour": 14,
+            "sales_usd": 870.37,
+            "orders": 18
+          },
+          {
+            "hour": 15,
+            "sales_usd": 125.1,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 297.13,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 406.07,
+            "orders": 9
+          },
+          {
+            "hour": 18,
+            "sales_usd": 352.73,
+            "orders": 6
+          },
+          {
+            "hour": 19,
+            "sales_usd": 784.51,
+            "orders": 15
+          },
+          {
+            "hour": 20,
+            "sales_usd": 168.22,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4803.12,
+        "total_orders": 118
+      },
+      "2026-10-10": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1017.34,
+            "orders": 17
+          },
+          {
+            "hour": 12,
+            "sales_usd": 706.65,
+            "orders": 13
+          },
+          {
+            "hour": 13,
+            "sales_usd": 1596.39,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 1103.4,
+            "orders": 19
+          },
+          {
+            "hour": 15,
+            "sales_usd": 245.71,
+            "orders": 5
+          },
+          {
+            "hour": 16,
+            "sales_usd": 823.06,
+            "orders": 12
+          },
+          {
+            "hour": 17,
+            "sales_usd": 699.46,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 908.95,
+            "orders": 19
+          },
+          {
+            "hour": 19,
+            "sales_usd": 201.76,
+            "orders": 5
+          },
+          {
+            "hour": 20,
+            "sales_usd": 104.9,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 93.53,
+            "orders": 1
+          }
+        ],
+        "total_sales_usd": 7501.15,
+        "total_orders": 117
+      },
+      "2026-10-11": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 437.13,
+            "orders": 9
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1086.98,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 451.08,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 314.92,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 455.85,
+            "orders": 8
+          },
+          {
+            "hour": 16,
+            "sales_usd": 301.07,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 280.16,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 245.84,
+            "orders": 5
+          },
+          {
+            "hour": 19,
+            "sales_usd": 180.04,
+            "orders": 6
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3753.07,
+        "total_orders": 79
+      },
+      "2026-10-13": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 661.21,
+            "orders": 14
+          },
+          {
+            "hour": 12,
+            "sales_usd": 587.93,
+            "orders": 15
+          },
+          {
+            "hour": 13,
+            "sales_usd": 311.63,
+            "orders": 8
+          },
+          {
+            "hour": 14,
+            "sales_usd": 221.52,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 152.7,
+            "orders": 3
+          },
+          {
+            "hour": 16,
+            "sales_usd": 62.53,
+            "orders": 3
+          },
+          {
+            "hour": 17,
+            "sales_usd": 333.31,
+            "orders": 11
+          },
+          {
+            "hour": 18,
+            "sales_usd": 529.44,
+            "orders": 13
+          },
+          {
+            "hour": 19,
+            "sales_usd": 478.13,
+            "orders": 12
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3338.4,
+        "total_orders": 85
+      },
+      "2026-10-14": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 49.99,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 541.46,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 376.53,
+            "orders": 12
+          },
+          {
+            "hour": 13,
+            "sales_usd": 342.69,
+            "orders": 10
+          },
+          {
+            "hour": 14,
+            "sales_usd": 186.8,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 214.54,
+            "orders": 6
+          },
+          {
+            "hour": 16,
+            "sales_usd": 21.1,
+            "orders": 2
+          },
+          {
+            "hour": 17,
+            "sales_usd": 360.99,
+            "orders": 10
+          },
+          {
+            "hour": 18,
+            "sales_usd": 420.35,
+            "orders": 8
+          },
+          {
+            "hour": 19,
+            "sales_usd": 225.79,
+            "orders": 2
+          },
+          {
+            "hour": 20,
+            "sales_usd": 19.35,
+            "orders": 1
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2759.59,
+        "total_orders": 74
+      },
+      "2026-10-15": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 589.78,
+            "orders": 14
+          },
+          {
+            "hour": 12,
+            "sales_usd": 463.42,
+            "orders": 16
+          },
+          {
+            "hour": 13,
+            "sales_usd": 444.13,
+            "orders": 14
+          },
+          {
+            "hour": 14,
+            "sales_usd": 220.83,
+            "orders": 6
+          },
+          {
+            "hour": 15,
+            "sales_usd": 255.18,
+            "orders": 7
+          },
+          {
+            "hour": 16,
+            "sales_usd": 284.68,
+            "orders": 7
+          },
+          {
+            "hour": 17,
+            "sales_usd": 127.54,
+            "orders": 4
+          },
+          {
+            "hour": 18,
+            "sales_usd": 767.87,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 70.99,
+            "orders": 3
+          },
+          {
+            "hour": 20,
+            "sales_usd": 196.6,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 3421.02,
+        "total_orders": 91
+      },
+      "2026-10-16": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 97.56,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 552.31,
+            "orders": 8
+          },
+          {
+            "hour": 12,
+            "sales_usd": 658.0,
+            "orders": 22
+          },
+          {
+            "hour": 13,
+            "sales_usd": 479.94,
+            "orders": 11
+          },
+          {
+            "hour": 14,
+            "sales_usd": 331.59,
+            "orders": 11
+          },
+          {
+            "hour": 15,
+            "sales_usd": 119.43,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 17,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 18,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 19,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 20,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 2238.83,
+        "total_orders": 57
+      }
+    },
+    "weekday_baseline": {
+      "0": {
+        "n": 5,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          3214.02,
+          0.0,
+          0.0,
+          0.0,
+          230.88,
+          0.0,
+          58.05,
+          104.28,
+          191.89,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          1,
+          2,
+          2,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "1": {
+        "n": 12,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2303.37,
+          515.04,
+          7455.88,
+          7630.08,
+          4169.33,
+          2500.15,
+          2650.68,
+          2353.2,
+          3960.03,
+          5549.29,
+          4003.14,
+          1026.57,
+          -18.47,
+          0.0,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          1,
+          203,
+          197,
+          108,
+          66,
+          65,
+          49,
+          93,
+          132,
+          89,
+          27,
+          2,
+          0,
+          0
+        ]
+      },
+      "2": {
+        "n": 12,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          306.92,
+          277.4,
+          701.83,
+          7236.35,
+          7301.98,
+          3828.97,
+          2387.6,
+          1721.47,
+          2045.16,
+          5110.74,
+          6564.61,
+          3597.39,
+          801.23,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          3,
+          5,
+          191,
+          219,
+          102,
+          63,
+          47,
+          55,
+          121,
+          151,
+          84,
+          18,
+          0,
+          0,
+          0
+        ]
+      },
+      "3": {
+        "n": 13,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1411.82,
+          9275.26,
+          7290.91,
+          4697.79,
+          2812.39,
+          3291.41,
+          3072.55,
+          4259.32,
+          6459.31,
+          4946.94,
+          2205.4,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          198,
+          186,
+          128,
+          77,
+          53,
+          76,
+          104,
+          139,
+          109,
+          44,
+          0,
+          0,
+          0
+        ]
+      },
+      "4": {
+        "n": 13,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          45.15,
+          0.0,
+          161.25,
+          596.3,
+          12069.32,
+          8747.45,
+          6005.75,
+          7051.55,
+          2852.81,
+          3980.98,
+          7335.84,
+          8922.06,
+          7183.34,
+          2236.6,
+          0.0,
+          318.47,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2,
+          6,
+          278,
+          258,
+          153,
+          131,
+          70,
+          87,
+          141,
+          184,
+          156,
+          49,
+          0,
+          1,
+          0
+        ]
+      },
+      "5": {
+        "n": 13,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1356.06,
+          903.19,
+          9445.98,
+          11319.55,
+          11297.34,
+          7740.35,
+          9604.86,
+          7677.59,
+          10231.09,
+          9407.05,
+          4827.68,
+          1087.94,
+          0.0,
+          0.0,
+          93.53
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          15,
+          175,
+          241,
+          224,
+          168,
+          152,
+          145,
+          192,
+          176,
+          107,
+          28,
+          0,
+          0,
+          1
+        ]
+      },
+      "6": {
+        "n": 13,
+        "sales_sum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          238.94,
+          10376.11,
+          12512.12,
+          10295.35,
+          7483.5,
+          5074.76,
+          6238.78,
+          7040.17,
+          7090.01,
+          2320.34,
+          0.0,
+          -81.0,
+          0.0,
+          0.0
+        ],
+        "orders_sum": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          167,
+          249,
+          216,
+          166,
+          96,
+          112,
+          135,
+          157,
+          60,
+          0,
+          1,
+          0,
+          0
+        ]
+      }
+    }
   },
   "forecast_snapshots": {
     "2026-10-16": {
-      "captured_at": "2026-10-16T14:10:42.781926-04:00",
+      "captured_at": "2026-10-16T15:24:48.597220-04:00",
       "hourly_forecast": [
-        {
-          "hour": 15,
-          "predicted_orders": 4.6,
-          "predicted_revenue": 223.1
-        },
-        {
-          "hour": 16,
-          "predicted_orders": 7.5,
-          "predicted_revenue": 363.75
-        },
-        {
-          "hour": 17,
-          "predicted_orders": 9.9,
-          "predicted_revenue": 480.15
-        },
-        {
-          "hour": 18,
-          "predicted_orders": 8.3,
-          "predicted_revenue": 402.55
-        },
         {
           "hour": 19,
           "predicted_orders": 2.6,
