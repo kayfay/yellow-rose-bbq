@@ -2649,9 +2649,9 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 5.4,
-      "pork_ribs_avg_with_dino": 3.3,
-      "impact_pct": -37.8
+      "pork_ribs_avg_without_dino": 5.1,
+      "pork_ribs_avg_with_dino": 3.6,
+      "impact_pct": -30.2
     },
     "payday_effect": {
       "payday_avg_ticket": 45.8,
@@ -2659,19 +2659,19 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-17T06:41:10.760159",
+    "generated_at": "2026-10-17T11:27:24.155766",
     "summary_kpis": {
-      "projected_24h_revenue_usd": 5490.2,
-      "estimated_24h_cogs_usd": 1619.6,
+      "projected_24h_revenue_usd": 5218.6,
+      "estimated_24h_cogs_usd": 1539.47,
       "estimated_food_cost_pct": 29.5,
       "average_ticket_usd": 48.5,
       "recommended_staff": 5,
       "pitmaster_hours": 42.5,
       "peak_rush_window": "11:00 AM (Sat)",
-      "current_sales_velocity": "0.0 orders/hr",
-      "pacing_status": "Normal Pacing",
-      "total_brisket_draw_lbs": 90.8,
-      "total_pork_draw_lbs": 23.4
+      "current_sales_velocity": "17.5 orders/hr",
+      "pacing_status": "Heavy Rush Surge",
+      "total_brisket_draw_lbs": 88.1,
+      "total_pork_draw_lbs": 21.7
     },
     "portion_cogs_breakdown": {
       "brisket_taco_2oz": 1.59,
@@ -2737,71 +2737,6 @@ window.BBQ_PAYLOADS = {
       "pork_yield_range": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-10-17T06:00:00",
-        "hour_display": "6:00 AM",
-        "day_name": "Sat",
-        "hour": 6,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-17T07:00:00",
-        "hour_display": "7:00 AM",
-        "day_name": "Sat",
-        "hour": 7,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-17T08:00:00",
-        "hour_display": "8:00 AM",
-        "day_name": "Sat",
-        "hour": 8,
-        "predicted_orders": 0.3,
-        "predicted_revenue": 14.55,
-        "estimated_cogs_usd": 4.29,
-        "brisket_cooked_lbs": 0.2,
-        "pork_cooked_lbs": 0.1,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-17T09:00:00",
-        "hour_display": "9:00 AM",
-        "day_name": "Sat",
-        "hour": 9,
-        "predicted_orders": 1.0,
-        "predicted_revenue": 48.5,
-        "estimated_cogs_usd": 14.31,
-        "brisket_cooked_lbs": 0.8,
-        "pork_cooked_lbs": 0.2,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-17T10:00:00",
-        "hour_display": "10:00 AM",
-        "day_name": "Sat",
-        "hour": 10,
-        "predicted_orders": 12.7,
-        "predicted_revenue": 615.95,
-        "estimated_cogs_usd": 181.71,
-        "brisket_cooked_lbs": 10.2,
-        "pork_cooked_lbs": 2.6,
-        "pacing_status": "Heavy Rush Surge",
-        "is_peak": true
-      },
       {
         "timestamp": "2026-10-17T11:00:00",
         "hour_display": "11:00 AM",
@@ -3048,11 +2983,76 @@ window.BBQ_PAYLOADS = {
         "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-18T06:00:00",
+        "hour_display": "6:00 AM",
+        "day_name": "Sun",
+        "hour": 6,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-18T07:00:00",
+        "hour_display": "7:00 AM",
+        "day_name": "Sun",
+        "hour": 7,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-18T08:00:00",
+        "hour_display": "8:00 AM",
+        "day_name": "Sun",
+        "hour": 8,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-18T09:00:00",
+        "hour_display": "9:00 AM",
+        "day_name": "Sun",
+        "hour": 9,
+        "predicted_orders": 0.1,
+        "predicted_revenue": 4.85,
+        "estimated_cogs_usd": 1.43,
+        "brisket_cooked_lbs": 0.1,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-18T10:00:00",
+        "hour_display": "10:00 AM",
+        "day_name": "Sun",
+        "hour": 10,
+        "predicted_orders": 8.3,
+        "predicted_revenue": 402.55,
+        "estimated_cogs_usd": 118.75,
+        "brisket_cooked_lbs": 8.4,
+        "pork_cooked_lbs": 1.2,
+        "pacing_status": "Normal Pacing",
+        "is_peak": true
       }
     ],
     "operational_directives": [
       "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr.",
-      "Meat Depletion Pacing: Next 24 hours projected to draw ~90.8 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
+      "Meat Depletion Pacing: Next 24 hours projected to draw ~88.1 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
       "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
       "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
     ],
@@ -14109,7 +14109,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-17T02:41:10.880664-04:00",
+    "generated_at": "2026-10-17T07:27:24.279200-04:00",
     "days": {
       "2026-07-19": {
         "buckets": [
@@ -24597,33 +24597,8 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-10-17": {
-      "captured_at": "2026-10-17T02:41:10.891381-04:00",
+      "captured_at": "2026-10-17T07:27:24.289649-04:00",
       "hourly_forecast": [
-        {
-          "hour": 6,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 7,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 8,
-          "predicted_orders": 0.3,
-          "predicted_revenue": 14.55
-        },
-        {
-          "hour": 9,
-          "predicted_orders": 1.0,
-          "predicted_revenue": 48.5
-        },
-        {
-          "hour": 10,
-          "predicted_orders": 12.7,
-          "predicted_revenue": 615.95
-        },
         {
           "hour": 11,
           "predicted_orders": 17.5,
