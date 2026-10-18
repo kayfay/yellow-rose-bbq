@@ -326,26 +326,6 @@
         "prep_lead_hrs": 0,
         "draws_from": null
       },
-      "turkey_lbs": {
-        "forecast": [
-          8.0,
-          2.8,
-          6.8,
-          6.0,
-          7.0,
-          10.1,
-          13.5,
-          8.1,
-          3.0,
-          7.0,
-          6.1,
-          7.1,
-          10.3,
-          13.6
-        ],
-        "prep_lead_hrs": 6.0,
-        "draws_from": null
-      },
       "beef_dino_ribs": {
         "forecast": [
           3.9,
@@ -504,6 +484,26 @@
           4.1
         ],
         "prep_lead_hrs": 0,
+        "draws_from": null
+      },
+      "turkey_lbs": {
+        "forecast": [
+          8.0,
+          2.8,
+          6.8,
+          6.0,
+          7.0,
+          10.1,
+          13.5,
+          8.1,
+          3.0,
+          7.0,
+          6.1,
+          7.1,
+          10.3,
+          13.6
+        ],
+        "prep_lead_hrs": 6.0,
         "draws_from": null
       }
     },

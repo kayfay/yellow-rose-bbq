@@ -10,7 +10,7 @@
         "y": [
           1.0,
           -0.02,
-          0.72
+          0.82
         ],
         "type": "bar",
         "marker": {
@@ -24,7 +24,7 @@
         "text": [
           "1.0x",
           "-0.0x",
-          "0.7x"
+          "0.8x"
         ],
         "textposition": "auto",
         "hovertext": [
@@ -82,8 +82,8 @@
   },
   "event_stats": {
     "normal_avg_usd": 4453.05,
-    "jags_avg_usd": 3201.13,
-    "jags_multiplier": 0.7,
+    "jags_avg_usd": 3642.83,
+    "jags_multiplier": 0.8,
     "holiday_avg_usd": -81.0,
     "holiday_multiplier": -0.0
   }
