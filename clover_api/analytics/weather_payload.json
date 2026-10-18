@@ -54,11 +54,11 @@
           4689.7,
           3101.7,
           4245.26,
-          3338.4,
+          3688.06,
           2740.24,
           3243.77,
           4623.76,
-          4696.73
+          4983.11
         ],
         "text": [
           "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -83,11 +83,11 @@
           "<b>Tuesday, 2026-09-29</b><br>Revenue: $4,689.70<br>Weather: 89.6\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-09-30</b><br>Revenue: $3,101.70<br>Weather: 86.72\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-08</b><br>Revenue: $4,245.26<br>Weather: 81.5\u00b0F, 4.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Tuesday, 2026-10-13</b><br>Revenue: $3,338.40<br>Weather: 83.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+          "<b>Tuesday, 2026-10-13</b><br>Revenue: $3,688.06<br>Weather: 83.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-10-14</b><br>Revenue: $2,740.24<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Friday, 2026-10-16</b><br>Revenue: $4,623.76<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Saturday, 2026-10-17</b><br>Revenue: $4,696.73<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Saturday, 2026-10-17</b><br>Revenue: $4,983.11<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -454,8 +454,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4611.76734375,
-          "y1": 4611.76734375,
+          "y0": 4575.768923076924,
+          "y1": 4575.768923076924,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -467,8 +467,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4911.76734375,
-          "text": "Baseline Target ($4,612)",
+          "y": 4875.768923076924,
+          "text": "Baseline Target ($4,576)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -480,12 +480,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4611.77,
+    "normal_avg_usd": 4575.77,
     "rain_avg_usd": 5014.18,
-    "rain_drop_pct": 8.7,
+    "rain_drop_pct": 9.6,
     "heat_avg_usd": 4959.6,
-    "heat_drop_pct": 7.4,
-    "rain_coef": 7.93,
-    "temp_coef": 17.83
+    "heat_drop_pct": 8.3,
+    "rain_coef": 8.9,
+    "temp_coef": 39.87
   }
 }
