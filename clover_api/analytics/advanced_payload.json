@@ -483,9 +483,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.6,
-    "pork_ribs_avg_with_dino": 3.3,
-    "impact_pct": -41.2
+    "pork_ribs_avg_without_dino": 5.4,
+    "pork_ribs_avg_with_dino": 3.4,
+    "impact_pct": -38.0
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
