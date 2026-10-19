@@ -1,133 +1,7 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-10-18T18:50:47.396572-04:00",
+  "generated_at": "2026-10-18T20:53:30.769614-04:00",
   "days": {
-    "2026-07-20": {
-      "buckets": [
-        {
-          "hour": 0,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 1,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 2,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 3,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 4,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 5,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 6,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 7,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 8,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 9,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 10,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 11,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 12,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 13,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 14,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 15,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 16,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 17,
-          "sales_usd": 65.58,
-          "orders": 1
-        },
-        {
-          "hour": 18,
-          "sales_usd": 54.83,
-          "orders": 1
-        },
-        {
-          "hour": 19,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 20,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 21,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 22,
-          "sales_usd": 0.0,
-          "orders": 0
-        },
-        {
-          "hour": 23,
-          "sales_usd": 0.0,
-          "orders": 0
-        }
-      ],
-      "total_sales_usd": 120.41,
-      "total_orders": 2
-    },
     "2026-07-21": {
       "buckets": [
         {
@@ -10176,13 +10050,13 @@
         },
         {
           "hour": 18,
-          "sales_usd": 375.63,
-          "orders": 9
+          "sales_usd": 409.21,
+          "orders": 10
         },
         {
           "hour": 19,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 64.94,
+          "orders": 2
         },
         {
           "hour": 20,
@@ -10205,13 +10079,13 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 4668.96,
-      "total_orders": 96
+      "total_sales_usd": 4767.48,
+      "total_orders": 99
     }
   },
   "weekday_baseline": {
     "0": {
-      "n": 5,
+      "n": 4,
       "sales_sum": [
         0.0,
         0.0,
@@ -10230,8 +10104,8 @@
         230.88,
         0.0,
         58.05,
-        104.28,
-        191.89,
+        38.7,
+        137.06,
         0.0,
         0.0,
         0.0,
@@ -10256,8 +10130,8 @@
         1,
         0,
         2,
+        1,
         2,
-        3,
         0,
         0,
         0,
@@ -10561,8 +10435,8 @@
         5306.6,
         6537.47,
         7320.71,
-        6840.3,
-        2135.75,
+        6873.88,
+        2200.69,
         0.0,
         -81.0,
         0.0,
@@ -10587,8 +10461,8 @@
         99,
         116,
         141,
-        152,
-        55,
+        153,
+        57,
         0,
         1,
         0,

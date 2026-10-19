@@ -48,33 +48,33 @@
     {
       "pair": "Brisket + Mac & Cheese",
       "count": 104,
-      "confidence": 20.9
+      "confidence": 20.8
     }
   ],
   "interaction_modeling": {
-    "normal": 4297.82,
-    "game_only": 4212.18,
-    "rain_only": 5014.56,
-    "game_and_rain": 12033.9
+    "normal": 4349.54,
+    "game_only": 4245.02,
+    "rain_only": 5014.18,
+    "game_and_rain": 12178.72
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4996,
-      "total_revenue": 217141.09,
-      "avg_ticket": 43.46298839071257
+      "order_count": 4998,
+      "total_revenue": 217194.65,
+      "avg_ticket": 43.456312525010006
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 433,
-      "total_revenue": 25797.19,
-      "avg_ticket": 59.577806004618935
+      "order_count": 431,
+      "total_revenue": 25676.78,
+      "avg_ticket": 59.574895591647326
     },
     {
       "order_type": "To-Go",
-      "order_count": 2471,
-      "total_revenue": 149165.84,
-      "avg_ticket": 60.36658842573856
+      "order_count": 2472,
+      "total_revenue": 149210.8,
+      "avg_ticket": 60.36035598705501
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.5,
-    "pork_ribs_avg_with_dino": 3.4,
-    "impact_pct": -38.8
+    "pork_ribs_avg_without_dino": 6.1,
+    "pork_ribs_avg_with_dino": 2.0,
+    "impact_pct": -66.6
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.77
+    "normal_avg_ticket": 46.76
   }
 }

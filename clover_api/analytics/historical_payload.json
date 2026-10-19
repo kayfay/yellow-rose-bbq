@@ -1,21 +1,6 @@
 {
   "historical_records": [
     {
-      "date": "2026-07-20",
-      "day_name": "Mon",
-      "actual_revenue": 120.41,
-      "predicted_revenue": 120.41,
-      "brisket_raw_lbs": 40.0,
-      "pork_shoulder_raw_lbs": 24.0,
-      "sausage_lbs": 20.0,
-      "tacos_sold": 0,
-      "rosebuds_sold": 0,
-      "pork_ribs_racks": 0,
-      "beef_dino_ribs": 0,
-      "is_historical": true,
-      "data_type": "ACTUAL"
-    },
-    {
       "date": "2026-07-21",
       "day_name": "Tue",
       "actual_revenue": 4260.5,
@@ -1278,12 +1263,12 @@
     {
       "date": "2026-10-18",
       "day_name": "Sun",
-      "actual_revenue": 4668.96,
-      "predicted_revenue": 4668.96,
-      "brisket_raw_lbs": 96.9,
-      "pork_shoulder_raw_lbs": 35.9,
-      "sausage_lbs": 46.7,
-      "tacos_sold": 58,
+      "actual_revenue": 4767.48,
+      "predicted_revenue": 4767.48,
+      "brisket_raw_lbs": 100.0,
+      "pork_shoulder_raw_lbs": 36.9,
+      "sausage_lbs": 47.7,
+      "tacos_sold": 63,
       "rosebuds_sold": 27,
       "pork_ribs_racks": 8.4,
       "beef_dino_ribs": 3,
