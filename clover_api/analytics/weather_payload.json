@@ -29,7 +29,8 @@
           83.3,
           84.38000000000001,
           84.38000000000001,
-          75.92
+          75.92,
+          72.32
         ],
         "y": [
           2861.94,
@@ -58,7 +59,8 @@
           2740.24,
           3243.77,
           4623.76,
-          4983.11
+          4983.11,
+          1810.03
         ],
         "text": [
           "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -87,7 +89,8 @@
           "<b>Wednesday, 2026-10-14</b><br>Revenue: $2,740.24<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Friday, 2026-10-16</b><br>Revenue: $4,623.76<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Saturday, 2026-10-17</b><br>Revenue: $4,983.11<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Saturday, 2026-10-17</b><br>Revenue: $4,983.11<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+          "<b>Tuesday, 2026-10-20</b><br>Revenue: $1,810.03<br>Weather: 72.32\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -116,6 +119,7 @@
             10,
             10,
             18.0,
+            10,
             10,
             10,
             10,
@@ -152,6 +156,7 @@
               1.5,
               1.5,
               1.5,
+              1.5,
               5
             ],
             "color": [
@@ -168,6 +173,7 @@
               "white",
               "white",
               "#39ff14",
+              "white",
               "white",
               "white",
               "white",
@@ -454,8 +460,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4701.798571428571,
-          "y1": 4701.798571428571,
+          "y0": 4656.926874999999,
+          "y1": 4656.926874999999,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -467,8 +473,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 5001.798571428571,
-          "text": "Baseline Target ($4,702)",
+          "y": 4956.926874999999,
+          "text": "Baseline Target ($4,657)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -480,12 +486,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4701.8,
+    "normal_avg_usd": 4656.93,
     "rain_avg_usd": 5014.18,
-    "rain_drop_pct": 6.6,
+    "rain_drop_pct": 7.7,
     "heat_avg_usd": 4959.6,
-    "heat_drop_pct": 5.3,
-    "rain_coef": 7.48,
-    "temp_coef": 8.87
+    "heat_drop_pct": 6.4,
+    "rain_coef": 8.65,
+    "temp_coef": 23.55
   }
 }
