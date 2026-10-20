@@ -3,7 +3,8 @@ import {
   extractEmailsFromPolicy,
   parseIntentWithAI,
   serveRequestAccessHtml,
-  handleWebRequestAccess
+  handleWebRequestAccess,
+  configureAccessLoginPage
 } from "../src/index.js";
 
 async function runTests() {
@@ -44,6 +45,10 @@ async function runTests() {
   const parsedList = await parseIntentWithAI(dummyAi, "who has access right now?");
   assert.strictEqual(parsedList.action, "list_users");
   console.log("✓ Fallback parser correctly handled list request");
+
+  const parsedConfig = await parseIntentWithAI(dummyAi, "configure login screen");
+  assert.strictEqual(parsedConfig.action, "configure_login");
+  console.log("✓ Fallback parser correctly handled configure_login request");
 
   // Test 3: AI response mock parsing
   const mockAi = {
@@ -88,9 +93,12 @@ async function runTests() {
   const validJson = await validRes.json();
   assert.strictEqual(validJson.success, true);
   assert.strictEqual(validJson.email, "newcook@yellowrosebbq.com");
-  console.log("✓ handleWebRequestAccess processed valid access request successfully");
+  // Test 7: configureAccessLoginPage handles missing credentials cleanly
+  const configResult = await configureAccessLoginPage({});
+  assert(configResult.includes("missing"), "Should report missing credentials");
+  console.log("✓ configureAccessLoginPage handled missing credentials cleanly");
 
-  console.log("\nAll 6 unit tests passed successfully! 🎉");
+  console.log("\nAll 7 unit tests passed successfully! 🎉");
 }
 
 runTests().catch((err) => {

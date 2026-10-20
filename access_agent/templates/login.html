@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yellow Rose BBQ - Staff Sign In & Access Portal</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151c2c;
+      --border: #2d3748;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --success-border: #10b981;
+      --error-bg: rgba(239, 68, 68, 0.15);
+      --error-border: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .auth-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 460px;
+      width: 100%;
+      padding: 32px 26px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .brand-icon { font-size: 32px; }
+    .brand-title { font-size: 20px; font-weight: 700; color: #fff; line-height: 1.2; }
+    .brand-sub { font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .panel-section {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    
+    .btn-login {
+      display: block;
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-login:hover { background: #1d4ed8; }
+
+    /* Request Access Card */
+    .request-box {
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 10px;
+      padding: 18px 16px;
+    }
+    .request-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .request-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    input {
+      width: 100%;
+      background: #0b0f19;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: var(--accent); }
+    
+    .btn-request {
+      width: 100%;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .btn-request:hover { background: var(--accent-hover); }
+    .btn-request:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .status-msg {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.45;
+      display: none;
+    }
+    .status-msg.success {
+      display: block;
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: #34d399;
+    }
+    .status-msg.error {
+      display: block;
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="brand">
+      <span class="brand-icon">🔥</span>
+      <div>
+        <div class="brand-title">Sausage & BBQ Prep</div>
+        <div class="brand-sub">Zero Trust Authentication</div>
+      </div>
+    </div>
+
+    <!-- Primary Authentication Section -->
+    <div class="panel-section">
+      <h2 class="section-title">Sign In with Authorized Email</h2>
+      <p class="section-desc">
+        Access to <strong>sausage.allen.tools</strong> is restricted to whitelisted kitchen staff. Enter your email to receive an instant login code.
+      </p>
+      <!-- Cloudflare Access Standard Auth Trigger -->
+      <a href="/cdn-cgi/access/login" class="btn-login">
+        Proceed with Email Sign In &rarr;
+      </a>
+    </div>
+
+    <!-- Staff Access Request Section directly on the Login Page -->
+    <div class="request-box">
+      <div class="request-header">
+        <h3><span>🔑</span> Need Access?</h3>
+        <span style="font-size: 11px; color: var(--text-muted);">Instant Approval</span>
+      </div>
+      <p class="section-desc" style="margin-bottom: 12px;">
+        Not on the whitelist yet? Enter your email below. The pitmaster receives an instant approval request on Telegram to activate your account.
+      </p>
+      <form id="access-form">
+        <div class="form-group">
+          <label for="req-email">Staff Email Address</label>
+          <input type="email" id="req-email" name="email" required placeholder="chef@yellowrosebbq.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="req-name">Your Name / Role (Optional)</label>
+          <input type="text" id="req-name" name="name" placeholder="e.g. Dave (Morning Smoker Prep)" />
+        </div>
+        <button type="submit" id="btn-submit" class="btn-request">Request Access</button>
+        <div id="status-box" class="status-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('access-form');
+    const submitBtn = document.getElementById('btn-submit');
+    const statusBox = document.getElementById('status-box');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('req-email').value.trim();
+      const name = document.getElementById('req-name').value.trim();
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting Request...';
+      statusBox.className = 'status-msg';
+      statusBox.style.display = 'none';
+
+      try {
+        const endpoint = window.ACCESS_AGENT_URL || '/api/request-access';
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name })
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.success) {
+          statusBox.className = 'status-msg success';
+          statusBox.innerHTML = '<strong>✅ Request Dispatched!</strong><br>' + (data.message || 'The pitmaster has received an instant authorization alert on Telegram. Once approved, refresh this page to sign in.');
+          form.reset();
+        } else {
+          statusBox.className = 'status-msg error';
+          statusBox.innerHTML = '<strong>⚠️ Notice:</strong> ' + (data.error || 'Unable to submit request.');
+        }
+      } catch (err) {
+        statusBox.className = 'status-msg error';
+        statusBox.innerHTML = '<strong>Network Notice:</strong> Access request logged. If this persists, notify the pitmaster on Telegram to add <code>' + email + '</code>.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Request Access';
+      }
+    });
+  </script>
+</body>
+</html>

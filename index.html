@@ -27,12 +27,6 @@
         <span class="brand-logo">🔥</span>
         <h1>Sausage & BBQ Prep Command</h1>
       </div>
-      <div class="header-actions">
-        <button type="button" id="btn-open-access-modal" class="access-trigger-btn" title="Request dashboard access for staff">
-          <span class="access-trigger-icon">🔑</span>
-          <span>Request Access</span>
-        </button>
-      </div>
     </div>
 
     <!-- Multi-Tab Navigation Bar -->
@@ -1359,39 +1353,6 @@
       </section>
     </div>
   </main>
-
-  <!-- Request Access Modal -->
-  <div id="modal-request-access" class="access-modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
-    <div class="access-modal-card">
-      <div class="access-modal-header">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 18px;">🔥</span>
-          <h3 id="access-modal-title" style="margin: 0; font-size: 15px; font-weight: 700; color: #fff;">Request Dashboard Access</h3>
-        </div>
-        <button type="button" id="btn-close-access-modal" class="access-modal-close" aria-label="Close dialog">&times;</button>
-      </div>
-      <form id="form-request-access" style="padding: 14px 0 0;">
-        <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 12px; line-height: 1.45;">
-          Enter your staff email to request access to <strong>sausage.allen.tools</strong>. The pitmaster will receive an instant push notification on Telegram to approve your account.
-        </p>
-        <div style="margin-bottom: 12px;">
-          <label for="req-email" style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 4px;">Staff Email Address</label>
-          <input type="email" id="req-email" name="email" placeholder="chef@yellowrosebbq.com" required class="access-modal-input" autocomplete="email" />
-        </div>
-        <div style="margin-bottom: 14px;">
-          <label for="req-name" style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 4px;">Your Name / Role (Optional)</label>
-          <input type="text" id="req-name" name="name" placeholder="e.g. Dave (Morning Smoker Prep)" class="access-modal-input" />
-        </div>
-        <div id="req-feedback" style="display: none; padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 12px;"></div>
-        <div style="display: flex; gap: 8px; justify-content: flex-end;">
-          <button type="button" id="btn-cancel-access" class="access-modal-cancel">Cancel</button>
-          <button type="submit" id="btn-submit-access" class="access-modal-submit">
-            <span>Send Request</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <script>
     (function() {

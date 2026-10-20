@@ -47,8 +47,22 @@ The agent parses intent using **Cloudflare Workers AI (Llama 3.1)** and updates 
    - **Policy Name**: `Staff Email Whitelist`
    - **Action**: `Allow`
    - **Configure rules** > **Include**: Add **Selector: Emails** (you can put your own email initially).
-5. (Optional) Under **Custom Pages** > **Access Denied**:
-   - Add a link to your Request Access worker URL (`https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`) so blocked visitors can click "Request Access".
+
+5. **Display Request Access on the Authentication Login Screen**:
+   - Because `sausage.allen.tools` is protected by Cloudflare Access, staff who need access will only see the authentication screen where an email is asked.
+   - **Automated setup**:
+     ```bash
+     cd access_agent
+     CF_ACCOUNT_ID="<id>" CF_API_TOKEN="<token>" node scripts/configure_login_screen.js
+     ```
+     Or simply message your Telegram bot: `/setup_login` or *"Configure login screen"*.
+   - **Manual Dashboard setup**:
+     1. In Cloudflare Zero Trust, go to **Reusable components** > **Custom pages** > **Access login page** > **Manage**.
+     2. In **Footer text**, enter:
+        `Need dashboard access? Request Access: https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`
+     3. Go to **Access** > **Applications** > `sausage.allen.tools` > **Edit** > under **Custom Deny URL**, enter:
+        `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`
+     Now, unapproved staff entering their email will see the Request Access link directly on the authentication prompt and will be redirected to the access portal if blocked.
 
 ---
 
@@ -111,7 +125,7 @@ Telegram will respond with:
 ## 6. Verification & Usage
 
 1. **Staff Requesting Access**:
-   - Visit `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access` (or click "🔑 Request Access" inside the dashboard).
+   - Staff visit `https://sausage.allen.tools` and see the Request Access link directly on the Cloudflare email authentication page (or visit `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`).
    - Enter `newcook@yellowrosebbq.com` and submit.
 2. **Pitmaster Approving on Telegram**:
    - Your Telegram immediately receives an alert:

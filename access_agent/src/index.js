@@ -245,6 +245,7 @@ export async function handleTelegramWebhook(request, env) {
         "• _\"Add yellowrosebbqjax@gmail.com to the whitelist\"_\n" +
         "• _\"Remove olduser@gmail.com\"_\n" +
         "• _\"Who has access right now?\"_\n" +
+        "• _\"Configure login screen\"_ (sets Request Access prompt on Cloudflare email auth page)\n" +
         "• _\"Status\"_"
       );
       return new Response("OK", { status: 200 });
@@ -253,6 +254,18 @@ export async function handleTelegramWebhook(request, env) {
     if (userText.toLowerCase() === "debug" || userText.toLowerCase() === "/debug") {
       const debugInfo = await handleDebug(env);
       await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, debugInfo);
+      return new Response("OK", { status: 200 });
+    }
+
+    if (
+      userText.toLowerCase() === "setup login" ||
+      userText.toLowerCase() === "/setup_login" ||
+      userText.toLowerCase() === "configure login" ||
+      userText.toLowerCase() === "/configure_login" ||
+      userText.toLowerCase() === "configure login screen"
+    ) {
+      const setupResult = await configureAccessLoginPage(env);
+      await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, setupResult);
       return new Response("OK", { status: 200 });
     }
 
@@ -300,6 +313,11 @@ export async function handleTelegramWebhook(request, env) {
 
       case "status": {
         replyText = await handleStatus(env);
+        break;
+      }
+
+      case "configure_login": {
+        replyText = await configureAccessLoginPage(env);
         break;
       }
 
@@ -536,12 +554,13 @@ export async function parseIntentWithAI(ai, userText) {
 
   const systemPrompt = `You are an intent parser for access management.
 Return ONLY valid JSON in format:
-{"action": "add_user"|"remove_user"|"list_users"|"status"|"unknown", "email": "email_or_null", "explanation": "string"}
+{"action": "add_user"|"remove_user"|"list_users"|"status"|"configure_login"|"unknown", "email": "email_or_null", "explanation": "string"}
 Actions:
 - add_user: Add, whitelist, permit, or grant an email.
 - remove_user: Remove, revoke, delete, or kick an email.
 - list_users: Who has access, list users, show whitelist.
-- status: Health check, status.`;
+- status: Health check, status.
+- configure_login: Configure, setup, or link Request Access on the login/auth screen.`;
 
   try {
     const response = await ai.run("@cf/meta/llama-3.1-8b-instruct", {
@@ -564,6 +583,9 @@ Actions:
     const lower = userText.toLowerCase();
     if (lower.includes("list") || lower.includes("who") || lower.includes("whitelist")) {
       return { action: "list_users", email: null };
+    }
+    if (lower.includes("login") || lower.includes("auth screen") || lower.includes("setup login") || lower.includes("configure login")) {
+      return { action: "configure_login", email: null };
     }
     if ((lower.includes("add") || lower.includes("whitelist") || lower.includes("allow") || lower.includes("approve")) && foundEmail) {
       return { action: "add_user", email: foundEmail };
@@ -860,3 +882,98 @@ export async function editTelegramMessage(botToken, chatId, messageId, text, rep
     });
   }
 }
+
+/**
+ * Automatically configures Cloudflare Zero Trust Access so the Request Access
+ * button presents itself directly on the login screen where email authentication is asked.
+ */
+export async function configureAccessLoginPage(env, customWorkerUrl = null) {
+  try {
+    const accountId = env.CF_ACCOUNT_ID;
+    const token = env.CF_API_TOKEN;
+    if (!accountId || !token) {
+      return "⚠️ Cloudflare credentials (CF_ACCOUNT_ID and CF_API_TOKEN) are missing.";
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const workerUrl =
+      customWorkerUrl ||
+      (env.WORKER_DOMAIN
+        ? env.WORKER_DOMAIN.startsWith("http")
+          ? env.WORKER_DOMAIN
+          : `https://${env.WORKER_DOMAIN}`
+        : "https://yellow-rose-access-bot.workers.dev");
+
+    let summary = `🔐 *Zero Trust Authentication Screen Setup*\n\n`;
+
+    // 1. Update Access Organization login_design
+    const orgUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/access/organizations`;
+    const orgRes = await fetch(orgUrl, { headers });
+    const orgData = await orgRes.json();
+
+    if (orgData.success && orgData.result) {
+      const org = orgData.result;
+      const updatePayload = {
+        name: org.name || "Yellow Rose BBQ",
+        auth_domain: org.auth_domain,
+        login_design: {
+          background_color: "#0b0f19",
+          text_color: "#f8fafc",
+          header_text: "Yellow Rose BBQ - Sausage & Prep Command",
+          footer_text: `Need dashboard access? Request Access: ${workerUrl}/request-access`,
+        },
+      };
+
+      const putRes = await fetch(orgUrl, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(updatePayload),
+      });
+      const putData = await putRes.json();
+      if (putData.success) {
+        summary += `✅ *Login Screen Prompt Attached:*\nFooter updated with Request Access prompt on the email authentication screen.\n\n`;
+      } else {
+        summary += `⚠️ Login Design Notice: ${putData.errors?.[0]?.message || "Could not update footer"}\n\n`;
+      }
+    }
+
+    // 2. Update Application Deny URL
+    const appsUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/access/apps`;
+    const appsRes = await fetch(appsUrl, { headers });
+    const appsData = await appsRes.json();
+
+    if (appsData.success && appsData.result) {
+      const targetApp = appsData.result.find(
+        (a) => (a.domain || "").includes("sausage") || (a.domain || "").includes("allen.tools")
+      );
+      if (targetApp) {
+        const updateAppUrl = `${appsUrl}/${targetApp.id}`;
+        const appPayload = {
+          ...targetApp,
+          custom_deny_url: `${workerUrl}/request-access`,
+          custom_deny_message:
+            "Staff access requires pitmaster authorization. Use the Request Access portal to get approved.",
+        };
+        const appRes = await fetch(updateAppUrl, {
+          method: "PUT",
+          headers,
+          body: JSON.stringify(appPayload),
+        });
+        const appData = await appRes.json();
+        if (appData.success) {
+          summary += `✅ *Application Deny Redirect Configured:*\nBlocked visitors on ${targetApp.domain} are routed directly to the Request Access portal.\n\n`;
+        }
+      }
+    }
+
+    summary += `👉 *Staff will now see the Request Access button right where email is asked for authentication!*`;
+    return summary;
+  } catch (err) {
+    return `❌ Configuration failed: ${cleanError(err.message)}`;
+  }
+}
+
