@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-10-20T18:14:54.986470-04:00",
+  "generated_at": "2026-10-20T21:22:29.562099-04:00",
   "days": {
     "2026-07-23": {
       "buckets": [
@@ -10045,23 +10045,23 @@
         },
         {
           "hour": 17,
-          "sales_usd": 236.48,
-          "orders": 5
+          "sales_usd": 290.32,
+          "orders": 6
         },
         {
           "hour": 18,
-          "sales_usd": 85.41,
-          "orders": 1
+          "sales_usd": 247.49,
+          "orders": 7
         },
         {
           "hour": 19,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 494.83,
+          "orders": 10
         },
         {
           "hour": 20,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 62.72,
+          "orders": 2
         },
         {
           "hour": 21,
@@ -10079,8 +10079,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 2495.87,
-      "total_orders": 72
+      "total_sales_usd": 3269.34,
+      "total_orders": 91
     }
   },
   "weekday_baseline": {
@@ -10159,10 +10159,10 @@
         2302.67,
         2455.04,
         2279.31,
-        3638.78,
-        5140.42,
-        3779.02,
-        933.0,
+        3692.62,
+        5302.5,
+        4273.85,
+        995.72,
         -18.47,
         0.0,
         0.0
@@ -10185,10 +10185,10 @@
         65,
         61,
         49,
-        89,
-        120,
-        82,
-        24,
+        90,
+        126,
+        92,
+        26,
         2,
         0,
         0

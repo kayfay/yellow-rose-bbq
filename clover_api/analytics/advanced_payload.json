@@ -2,43 +2,43 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 318,
-      "confidence": 20.7
+      "count": 319,
+      "confidence": 20.8
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 289,
+      "count": 291,
       "confidence": 23.0
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 244,
+      "count": 245,
       "confidence": 19.4
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
       "count": 147,
-      "confidence": 21.8
+      "confidence": 21.7
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 115,
-      "confidence": 16.7
+      "count": 116,
+      "confidence": 16.8
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
       "count": 112,
-      "confidence": 16.3
+      "confidence": 16.2
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
       "count": 108,
-      "confidence": 21.9
+      "confidence": 21.8
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
       "count": 106,
-      "confidence": 15.4
+      "confidence": 15.3
     },
     {
       "pair": "Brisket + Turkey",
@@ -48,21 +48,21 @@
     {
       "pair": "Brisket + Mac & Cheese",
       "count": 104,
-      "confidence": 21.3
+      "confidence": 21.2
     }
   ],
   "interaction_modeling": {
-    "normal": 4387.45,
+    "normal": 4343.46,
     "game_only": 4245.02,
-    "rain_only": 5014.18,
-    "game_and_rain": 12284.87
+    "rain_only": 5014.56,
+    "game_and_rain": 12161.69
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4991,
-      "total_revenue": 216439.28,
-      "avg_ticket": 43.36591464636346
+      "order_count": 5001,
+      "total_revenue": 216946.59,
+      "avg_ticket": 43.38064187162568
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2457,
-      "total_revenue": 148346.62,
-      "avg_ticket": 60.377134717134716
+      "order_count": 2465,
+      "total_revenue": 148571.39,
+      "avg_ticket": 60.272369168357
     }
   ],
   "sell_out_prediction_chart": {
@@ -352,7 +352,7 @@
           106.0,
           134.0,
           141.0,
-          167.0
+          169.0
         ],
         "name": "Single Bone Pork Rib",
         "type": "scatter",
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.9,
-    "pork_ribs_avg_with_dino": 2.8,
-    "impact_pct": -53.5
+    "pork_ribs_avg_without_dino": 5.5,
+    "pork_ribs_avg_with_dino": 3.3,
+    "impact_pct": -40.3
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.68
+    "normal_avg_ticket": 46.66
   }
 }

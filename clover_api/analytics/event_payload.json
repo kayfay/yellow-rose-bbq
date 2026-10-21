@@ -10,7 +10,7 @@
         "y": [
           1.0,
           -0.02,
-          0.93
+          0.94
         ],
         "type": "bar",
         "marker": {
@@ -81,7 +81,7 @@
     }
   },
   "event_stats": {
-    "normal_avg_usd": 4543.16,
+    "normal_avg_usd": 4494.83,
     "jags_avg_usd": 4245.02,
     "jags_multiplier": 0.9,
     "holiday_avg_usd": -81.0,
