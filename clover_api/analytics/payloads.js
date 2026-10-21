@@ -6,25 +6,6 @@ window.BBQ_PAYLOADS = {
       "insight_string": "The forecast dictates prepping ~217.9 lbs raw brisket (~87.2 lbs cooked yield) and ~50.4 lbs raw pork shoulder (~20.2 lbs cooked yield) [~268.3 lbs total raw / ~107.4 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (50 projected) and Rosebuds (34 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
         {
-          "date": "2026-10-20",
-          "day_name": "Tue",
-          "is_closed": false,
-          "predicted_revenue": 3499.61,
-          "brisket_raw_lbs": 113.9,
-          "pork_shoulder_raw_lbs": 20.6,
-          "sausage_lbs": 9.2,
-          "turkey_lbs": 8.1,
-          "turkey_cooked_lbs": 8.1,
-          "turkey_raw_lbs": 11.6,
-          "tacos_sold": 34,
-          "rosebuds_sold": 18,
-          "pork_ribs_racks": 6,
-          "beef_dino_ribs": 0,
-          "recommended_staff": 4,
-          "pitmaster_hours": 34.0,
-          "data_type": "PREDICTED"
-        },
-        {
           "date": "2026-10-21",
           "day_name": "Wed",
           "is_closed": false,
@@ -269,6 +250,25 @@ window.BBQ_PAYLOADS = {
           "beef_dino_ribs": 0,
           "recommended_staff": 0,
           "pitmaster_hours": 0.0,
+          "data_type": "PREDICTED"
+        },
+        {
+          "date": "2026-11-03",
+          "day_name": "Tue",
+          "is_closed": false,
+          "predicted_revenue": 3499.61,
+          "brisket_raw_lbs": 113.9,
+          "pork_shoulder_raw_lbs": 20.6,
+          "sausage_lbs": 9.2,
+          "turkey_lbs": 8.1,
+          "turkey_cooked_lbs": 8.1,
+          "turkey_raw_lbs": 11.6,
+          "tacos_sold": 34,
+          "rosebuds_sold": 18,
+          "pork_ribs_racks": 6,
+          "beef_dino_ribs": 0,
+          "recommended_staff": 4,
+          "pitmaster_hours": 34.0,
           "data_type": "PREDICTED"
         }
       ]
@@ -616,32 +616,42 @@ window.BBQ_PAYLOADS = {
       "data": [
         {
           "x": [
-            87.08000000000001,
-            89.6,
-            87.98,
             88.7,
-            84.91999999999999,
-            88.16,
+            88.7,
+            89.78,
+            89.96000000000001,
+            88.34,
+            87.26,
+            89.78,
+            87.98,
+            88.88000000000001,
+            85.1,
+            88.34,
             87.61999999999999,
-            87.8,
+            87.98,
             85.46000000000001,
             88.34,
-            84.02,
+            84.2,
             77.36,
-            76.46,
+            76.64,
             80.6,
-            89.41999999999999,
-            86.36,
+            89.6,
+            86.72,
             81.5,
             83.84,
             83.3,
-            84.2,
+            84.38000000000001,
             84.38000000000001,
             75.92,
             72.32,
-            77.54
+            76.46
           ],
           "y": [
+            2861.94,
+            4576.48,
+            2607.41,
+            4947.45,
+            2970.98,
             3950.5099999999998,
             8215.279999999999,
             3212.94,
@@ -668,36 +678,46 @@ window.BBQ_PAYLOADS = {
             62.72
           ],
           "text": [
-            "<b>Thursday, 2026-09-03</b><br>Revenue: $3,950.51<br>Weather: 87.08000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-09-05</b><br>Revenue: $8,215.28<br>Weather: 89.6\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #2 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Friday, 2026-08-28</b><br>Revenue: $4,576.48<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Saturday, 2026-08-29</b><br>Revenue: $2,607.41<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Sunday, 2026-08-30</b><br>Revenue: $4,947.45<br>Weather: 89.96000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-09-02</b><br>Revenue: $2,970.98<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Thursday, 2026-09-03</b><br>Revenue: $3,950.51<br>Weather: 87.26\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Saturday, 2026-09-05</b><br>Revenue: $8,215.28<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #2 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Tuesday, 2026-09-08</b><br>Revenue: $3,212.94<br>Weather: 87.98\u00b0F, 1.5mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Wednesday, 2026-09-09</b><br>Revenue: $2,972.02<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Tuesday, 2026-09-15</b><br>Revenue: $3,506.63<br>Weather: 84.91999999999999\u00b0F, 3.6mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Wednesday, 2026-09-16</b><br>Revenue: $3,335.36<br>Weather: 88.16\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-09-09</b><br>Revenue: $2,972.02<br>Weather: 88.88000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Tuesday, 2026-09-15</b><br>Revenue: $3,506.63<br>Weather: 85.1\u00b0F, 3.6mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-09-16</b><br>Revenue: $3,335.36<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-09-17</b><br>Revenue: $2,135.88<br>Weather: 87.61999999999999\u00b0F, 9.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-09-19</b><br>Revenue: $8,590.48<br>Weather: 87.8\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #1 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Saturday, 2026-09-19</b><br>Revenue: $8,590.48<br>Weather: 87.98\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #1 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Sunday, 2026-09-20</b><br>Revenue: $5,091.29<br>Weather: 85.46000000000001\u00b0F, 0.8mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Tuesday, 2026-09-22</b><br>Revenue: $3,403.02<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Wednesday, 2026-09-23</b><br>Revenue: $3,028.67<br>Weather: 84.02\u00b0F, 0.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-09-23</b><br>Revenue: $3,028.67<br>Weather: 84.2\u00b0F, 0.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-09-24</b><br>Revenue: $2,627.13<br>Weather: 77.36\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Friday, 2026-09-25</b><br>Revenue: $5,167.91<br>Weather: 76.46\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-09-26</b><br>Revenue: $7,484.30<br>Weather: 80.6\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #3 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Tuesday, 2026-09-29</b><br>Revenue: $4,689.70<br>Weather: 89.41999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Wednesday, 2026-09-30</b><br>Revenue: $3,101.70<br>Weather: 86.36\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Friday, 2026-09-25</b><br>Revenue: $5,167.91<br>Weather: 76.64\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Saturday, 2026-09-26</b><br>Revenue: $7,484.30<br>Weather: 80.6\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Tuesday, 2026-09-29</b><br>Revenue: $4,689.70<br>Weather: 89.6\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-09-30</b><br>Revenue: $3,101.70<br>Weather: 86.72\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-10-08</b><br>Revenue: $4,245.26<br>Weather: 81.5\u00b0F, 4.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Tuesday, 2026-10-13</b><br>Revenue: $3,688.06<br>Weather: 83.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Wednesday, 2026-10-14</b><br>Revenue: $2,740.24<br>Weather: 83.3\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.2\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Thursday, 2026-10-15</b><br>Revenue: $3,243.77<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Friday, 2026-10-16</b><br>Revenue: $4,623.76<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Saturday, 2026-10-17</b><br>Revenue: $4,983.11<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Tuesday, 2026-10-20</b><br>Revenue: $3,206.62<br>Weather: 72.32\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Wednesday, 2026-10-21</b><br>Revenue: $62.72<br>Weather: 77.54\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            "<b>Wednesday, 2026-10-21</b><br>Revenue: $62.72<br>Weather: 76.46\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Ideal Patio Weather (Normal)",
           "marker": {
             "size": [
+              10,
+              10,
+              10,
+              10,
+              10,
               10,
               10,
               13.0,
@@ -728,7 +748,6 @@ window.BBQ_PAYLOADS = {
             "line": {
               "width": [
                 1.5,
-                4,
                 1.5,
                 1.5,
                 1.5,
@@ -741,6 +760,12 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 4,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
                 1.5,
                 1.5,
                 1.5,
@@ -754,7 +779,6 @@ window.BBQ_PAYLOADS = {
               ],
               "color": [
                 "white",
-                "#39ff14",
                 "white",
                 "white",
                 "white",
@@ -767,6 +791,12 @@ window.BBQ_PAYLOADS = {
                 "white",
                 "white",
                 "#39ff14",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
                 "white",
                 "white",
                 "white",
@@ -783,19 +813,21 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            92.11999999999999,
-            86.0,
+            89.6,
+            92.3,
+            86.18,
             87.08000000000001,
-            86.0,
+            86.53999999999999,
             87.98,
-            86.0,
-            75.38,
+            86.53999999999999,
+            75.56,
             81.14,
             77.54,
             86.0,
-            80.96
+            81.14
           ],
           "y": [
+            5009.98,
             6349.3099999999995,
             5470.4400000000005,
             4266.39,
@@ -809,23 +841,25 @@ window.BBQ_PAYLOADS = {
             3951.5
           ],
           "text": [
-            "<b>Sunday, 2026-09-06</b><br>Revenue: $6,349.31<br>Weather: 92.11999999999999\u00b0F, 45.0mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-            "<b>Friday, 2026-09-18</b><br>Revenue: $5,470.44<br>Weather: 86.0\u00b0F, 12.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Thursday, 2026-08-27</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Sunday, 2026-09-06</b><br>Revenue: $6,349.31<br>Weather: 92.3\u00b0F, 45.0mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Friday, 2026-09-18</b><br>Revenue: $5,470.44<br>Weather: 86.18\u00b0F, 12.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Thursday, 2026-10-01</b><br>Revenue: $4,266.39<br>Weather: 87.08000000000001\u00b0F, 14.8mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-            "<b>Friday, 2026-10-02</b><br>Revenue: $6,230.54<br>Weather: 86.0\u00b0F, 10.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Friday, 2026-10-02</b><br>Revenue: $6,230.54<br>Weather: 86.53999999999999\u00b0F, 10.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Saturday, 2026-10-03</b><br>Revenue: $5,332.11<br>Weather: 87.98\u00b0F, 11.9mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-            "<b>Sunday, 2026-10-04</b><br>Revenue: $4,803.46<br>Weather: 86.0\u00b0F, 31.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-            "<b>Tuesday, 2026-10-06</b><br>Revenue: $3,247.80<br>Weather: 75.38\u00b0F, 88.5mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Sunday, 2026-10-04</b><br>Revenue: $4,803.46<br>Weather: 86.53999999999999\u00b0F, 31.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Tuesday, 2026-10-06</b><br>Revenue: $3,247.80<br>Weather: 75.56\u00b0F, 87.8mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Wednesday, 2026-10-07</b><br>Revenue: $3,265.02<br>Weather: 81.14\u00b0F, 56.6mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Friday, 2026-10-09</b><br>Revenue: $4,772.62<br>Weather: 77.54\u00b0F, 15.9mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Saturday, 2026-10-10</b><br>Revenue: $7,470.94<br>Weather: 86.0\u00b0F, 74.6mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-            "<b>Sunday, 2026-10-11</b><br>Revenue: $3,951.50<br>Weather: 80.96\u00b0F, 34.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+            "<b>Sunday, 2026-10-11</b><br>Revenue: $3,951.50<br>Weather: 81.14\u00b0F, 34.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Heavy Rain (High To-Go Volume)",
           "marker": {
             "size": [
+              35,
               35,
               34.4,
               35,
@@ -852,9 +886,11 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
+                1.5,
                 1.5
               ],
               "color": [
+                "white",
                 "white",
                 "white",
                 "white",
@@ -872,28 +908,56 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            90.32,
+            102.91999999999999,
+            102.38000000000001,
+            102.02,
+            94.64,
+            91.22,
             91.94,
-            90.5,
-            91.58000000000001
+            91.58000000000001,
+            90.32,
+            92.11999999999999,
+            90.68,
+            92.3
           ],
           "y": [
+            3615.92,
+            2823.19,
+            4124.63,
+            5948.64,
+            7577.28,
+            6630.04,
+            4388.4,
             4409.6,
             2846.48,
             4063.36,
             6868.89
           ],
           "text": [
+            "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 102.91999999999999\u00b0F, 2.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-08-19</b><br>Revenue: $2,823.19<br>Weather: 102.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Thursday, 2026-08-20</b><br>Revenue: $4,124.63<br>Weather: 102.02\u00b0F, 3.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-08-21</b><br>Revenue: $5,948.64<br>Weather: 94.64\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Saturday, 2026-08-22</b><br>Revenue: $7,577.28<br>Weather: 91.22\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #3 Highest Recent Sales Day</b><br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Sunday, 2026-08-23</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-08-26</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Friday, 2026-09-04</b><br>Revenue: $4,409.60<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Thursday, 2026-09-10</b><br>Revenue: $2,846.48<br>Weather: 91.94\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Friday, 2026-09-11</b><br>Revenue: $4,063.36<br>Weather: 90.5\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Saturday, 2026-09-12</b><br>Revenue: $6,868.89<br>Weather: 91.58000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
+            "<b>Thursday, 2026-09-10</b><br>Revenue: $2,846.48<br>Weather: 92.11999999999999\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-09-11</b><br>Revenue: $4,063.36<br>Weather: 90.68\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Saturday, 2026-09-12</b><br>Revenue: $6,868.89<br>Weather: 92.3\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Extreme Heat (High Curbside Volume)",
           "marker": {
             "size": [
+              14.0,
+              10,
+              16.8,
+              10,
+              10,
+              10,
+              10.8,
               10,
               11.6,
               10,
@@ -906,9 +970,23 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
+                1.5,
+                4,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
                 1.5
               ],
               "color": [
+                "white",
+                "white",
+                "white",
+                "white",
+                "#39ff14",
+                "white",
+                "white",
                 "white",
                 "white",
                 "white",
@@ -1001,8 +1079,8 @@ window.BBQ_PAYLOADS = {
             "xref": "paper",
             "x0": 0,
             "x1": 1,
-            "y0": 4613.524696969696,
-            "y1": 4613.524696969696,
+            "y0": 4607.425384615384,
+            "y1": 4607.425384615384,
             "line": {
               "color": "#94a3b8",
               "width": 2,
@@ -1014,8 +1092,8 @@ window.BBQ_PAYLOADS = {
           {
             "xref": "paper",
             "x": 0.02,
-            "y": 4913.524696969696,
-            "text": "Baseline Target ($4,614)",
+            "y": 4907.425384615384,
+            "text": "Baseline Target ($4,607)",
             "showarrow": false,
             "font": {
               "color": "#94a3b8",
@@ -1027,13 +1105,13 @@ window.BBQ_PAYLOADS = {
       }
     },
     "weather_stats": {
-      "normal_avg_usd": 4613.52,
-      "rain_avg_usd": 5014.56,
-      "rain_drop_pct": 8.7,
-      "heat_avg_usd": 4894.46,
-      "heat_drop_pct": 5.2,
-      "rain_coef": 10.22,
-      "temp_coef": 53.5
+      "normal_avg_usd": 4607.43,
+      "rain_avg_usd": 5014.18,
+      "rain_drop_pct": 8.8,
+      "heat_avg_usd": 4959.6,
+      "heat_drop_pct": 7.5,
+      "rain_coef": 9.91,
+      "temp_coef": 31.95
     }
   },
   "event_payload": {
@@ -2152,10 +2230,10 @@ window.BBQ_PAYLOADS = {
       }
     ],
     "interaction_modeling": {
-      "normal": 4343.46,
+      "normal": 4333.51,
       "game_only": 4245.02,
-      "rain_only": 5014.56,
-      "game_and_rain": 12161.69
+      "rain_only": 5014.18,
+      "game_and_rain": 12133.83
     },
     "order_type_segmentation": [
       {
@@ -2583,9 +2661,9 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 5.5,
-      "pork_ribs_avg_with_dino": 3.3,
-      "impact_pct": -40.3
+      "pork_ribs_avg_without_dino": 5.8,
+      "pork_ribs_avg_with_dino": 2.8,
+      "impact_pct": -51.3
     },
     "payday_effect": {
       "payday_avg_ticket": 45.8,
@@ -2593,7 +2671,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-21T01:22:29.485888",
+    "generated_at": "2026-10-21T07:12:01.539571",
     "summary_kpis": {
       "projected_24h_revenue_usd": 1876.95,
       "estimated_24h_cogs_usd": 553.69,
@@ -2671,84 +2749,6 @@ window.BBQ_PAYLOADS = {
       "pork_yield_range": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-10-21T01:00:00",
-        "hour_display": "1:00 AM",
-        "day_name": "Wed",
-        "hour": 1,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-21T02:00:00",
-        "hour_display": "2:00 AM",
-        "day_name": "Wed",
-        "hour": 2,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-21T03:00:00",
-        "hour_display": "3:00 AM",
-        "day_name": "Wed",
-        "hour": 3,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-21T04:00:00",
-        "hour_display": "4:00 AM",
-        "day_name": "Wed",
-        "hour": 4,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-21T05:00:00",
-        "hour_display": "5:00 AM",
-        "day_name": "Wed",
-        "hour": 5,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-21T06:00:00",
-        "hour_display": "6:00 AM",
-        "day_name": "Wed",
-        "hour": 6,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
       {
         "timestamp": "2026-10-21T07:00:00",
         "hour_display": "7:00 AM",
@@ -2975,6 +2975,84 @@ window.BBQ_PAYLOADS = {
         "hour_display": "12:00 AM",
         "day_name": "Thu",
         "hour": 0,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T01:00:00",
+        "hour_display": "1:00 AM",
+        "day_name": "Thu",
+        "hour": 1,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T02:00:00",
+        "hour_display": "2:00 AM",
+        "day_name": "Thu",
+        "hour": 2,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T03:00:00",
+        "hour_display": "3:00 AM",
+        "day_name": "Thu",
+        "hour": 3,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T04:00:00",
+        "hour_display": "4:00 AM",
+        "day_name": "Thu",
+        "hour": 4,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T05:00:00",
+        "hour_display": "5:00 AM",
+        "day_name": "Thu",
+        "hour": 5,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-22T06:00:00",
+        "hour_display": "6:00 AM",
+        "day_name": "Thu",
+        "hour": 6,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -14058,7 +14136,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-20T21:22:29.562099-04:00",
+    "generated_at": "2026-10-21T03:12:01.613026-04:00",
     "days": {
       "2026-07-23": {
         "buckets": [
@@ -24581,8 +24659,98 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-10-20": {
-      "captured_at": "2026-10-20T18:14:54.997217-04:00",
+      "captured_at": "2026-10-20T19:19:00.454187-04:00",
       "hourly_forecast": [
+        {
+          "hour": 22,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 23,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        }
+      ]
+    },
+    "2026-10-21": {
+      "captured_at": "2026-10-21T03:12:01.619469-04:00",
+      "hourly_forecast": [
+        {
+          "hour": 7,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 8,
+          "predicted_orders": 0.1,
+          "predicted_revenue": 4.85
+        },
+        {
+          "hour": 9,
+          "predicted_orders": 0.2,
+          "predicted_revenue": 9.7
+        },
+        {
+          "hour": 10,
+          "predicted_orders": 7.0,
+          "predicted_revenue": 339.5
+        },
+        {
+          "hour": 11,
+          "predicted_orders": 8.0,
+          "predicted_revenue": 388.0
+        },
+        {
+          "hour": 12,
+          "predicted_orders": 3.7,
+          "predicted_revenue": 179.45
+        },
+        {
+          "hour": 13,
+          "predicted_orders": 2.3,
+          "predicted_revenue": 111.55
+        },
+        {
+          "hour": 14,
+          "predicted_orders": 1.7,
+          "predicted_revenue": 82.45
+        },
+        {
+          "hour": 15,
+          "predicted_orders": 2.0,
+          "predicted_revenue": 97.0
+        },
+        {
+          "hour": 16,
+          "predicted_orders": 4.4,
+          "predicted_revenue": 213.4
+        },
+        {
+          "hour": 17,
+          "predicted_orders": 5.5,
+          "predicted_revenue": 266.75
+        },
+        {
+          "hour": 18,
+          "predicted_orders": 3.1,
+          "predicted_revenue": 150.35
+        },
+        {
+          "hour": 19,
+          "predicted_orders": 0.7,
+          "predicted_revenue": 33.95
+        },
+        {
+          "hour": 20,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 21,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
         {
           "hour": 22,
           "predicted_orders": 0.0,
