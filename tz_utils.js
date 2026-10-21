@@ -48,6 +48,22 @@
     return parseInt(h, 10) % 24;
   }
 
+  /** Construct a Date instant matching YYYY-MM-DD and integer hour (0-23) in shop timezone. */
+  function createShopInstant(dateStr, hour) {
+    if (!dateStr) dateStr = shopDateStr();
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const noonUtc = new Date(Date.UTC(y, m - 1, d, 12, 0, 0, 0));
+    const dtf = new Intl.DateTimeFormat('en-US', {
+      timeZone: SHOP_TZ,
+      hourCycle: 'h23',
+      hour: 'numeric'
+    });
+    const parts = Object.fromEntries(dtf.formatToParts(noonUtc).map(p => [p.type, p.value]));
+    const nyHourAtNoonUtc = parseInt(parts.hour, 10);
+    const diffHours = (hour !== undefined && hour !== null ? hour : 12) - nyHourAtNoonUtc;
+    return new Date(noonUtc.getTime() + diffHours * 3600000);
+  }
+
   /**
    * "October 14, 2026 at 11:38 PM EDT" for a tz-aware ISO string.
    * Legacy naive strings are treated as shop wall-clock time and shown with "ET".
@@ -277,6 +293,7 @@
     isSimulating,
     shopDateStr,
     shopHour,
+    createShopInstant,
     formatShopTimestamp,
     buildActualsOverlay,
     computeBlendedDayMetrics

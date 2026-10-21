@@ -2744,9 +2744,10 @@ function setupTimeTravelControls() {
   function setSimHour(hour) {
     if (!window.ShopTime) return;
     const targetDateInput = document.getElementById('forecast-start-date')?.value;
-    const baseDate = targetDateInput ? new Date(targetDateInput + 'T12:00:00') : new Date();
-    const simDate = new Date(baseDate);
-    simDate.setHours(hour, 0, 0, 0);
+    const targetDateStr = targetDateInput || window.ShopTime.shopDateStr();
+    const simDate = typeof window.ShopTime.createShopInstant === 'function'
+      ? window.ShopTime.createShopInstant(targetDateStr, hour)
+      : new Date(new Date(targetDateStr + 'T12:00:00').setHours(hour, 0, 0, 0));
     window.ShopTime.setSimulatedNow(simDate);
     updateSimulatorUI();
   }
