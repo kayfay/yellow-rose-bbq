@@ -966,6 +966,8 @@ function initForecastingControls() {
   if (btnSunday) btnSunday.addEventListener('click', () => updatePresetDay(0, 'btn-preset-sunday'));
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
+
+  setupTimeTravelControls();
 }
 
 function updatePresetHorizon(btnId, days, startOffset = 0) {
@@ -1620,8 +1622,62 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
     const demandPctElem = document.getElementById('kpi-demand-pct');
+    const blendedPill = document.getElementById('kpi-revenue-blended-sub');
+
+    // Blended Real-Time POS Turnover computation
+    let blendedMetrics = null;
+    const effNow = window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date();
+    const shopTodayStr = window.ShopTime ? window.ShopTime.shopDateStr(effNow) : '';
+    const activeDateForBlended = (!isRangeSelected && targetDateInput) ? targetDateInput : shopTodayStr;
+
+    if (window.ShopTime && !isTargetClosed && (!isRangeSelected || daysCount === 1)) {
+      const actualsPayload = window.BBQ_PAYLOADS?.hourly_actuals || null;
+      const predictivePayload = window.BBQ_PAYLOADS?.predictive_payload || null;
+      
+      const dayProfiles = predictivePayload?.day_profiles;
+      let hourlyRecs = predictivePayload?.hourly_forecast || [];
+      if (dayProfiles) {
+        const dObj = parseValidDate(activeDateForBlended);
+        if (dObj) {
+          const longName = dObj.toLocaleDateString('en-US', { weekday: 'long' });
+          const shortName = dObj.toLocaleDateString('en-US', { weekday: 'short' });
+          const prof = dayProfiles[longName] || dayProfiles[shortName];
+          if (prof && prof.hourly_forecast) hourlyRecs = prof.hourly_forecast;
+        }
+      }
+
+      if (actualsPayload && hourlyRecs.length > 0) {
+        blendedMetrics = window.ShopTime.computeBlendedDayMetrics(actualsPayload, hourlyRecs, effNow, activeDateForBlended);
+      }
+    }
+
     if (revenueElem) {
-      revenueElem.textContent = isTargetClosed ? '$0 (Closed)' : '$' + Math.round(totalRev).toLocaleString();
+      if (isTargetClosed) {
+        revenueElem.textContent = '$0 (Closed)';
+        if (blendedPill) { blendedPill.style.display = 'none'; blendedPill.innerHTML = ''; }
+      } else if (blendedMetrics && (blendedMetrics.isToday || blendedMetrics.isPast) && blendedMetrics.summary.actualSalesSoFar > 0) {
+        // Blended Total Revenue
+        const blendedTotal = Math.round(blendedMetrics.summary.blendedTotalRevenue);
+        revenueElem.textContent = '$' + blendedTotal.toLocaleString();
+        
+        if (blendedPill) {
+          const cutH = blendedMetrics.cutoffHour;
+          const h12 = cutH === 0 ? 12 : (cutH > 12 ? cutH - 12 : cutH);
+          const ampm = cutH >= 12 ? 'PM' : 'AM';
+          const pSign = blendedMetrics.summary.pacingPct >= 0 ? '+' : '';
+          const pColor = blendedMetrics.summary.pacingPct >= 0 ? '#34d399' : '#f87171';
+          
+          blendedPill.innerHTML = `
+            <strong>Blended Live Total</strong>: $${Math.round(blendedMetrics.summary.actualSalesSoFar).toLocaleString()} actual + $${Math.round(blendedMetrics.summary.forecastRemaining).toLocaleString()} remaining<br>
+            <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm}: $${Math.round(blendedMetrics.summary.actualSalesSoFar).toLocaleString()} (${blendedMetrics.summary.actualOrdersSoFar} orders)</span> • 
+            <span style="color: ${pColor}; font-weight: 700;">${pSign}${blendedMetrics.summary.pacingPct}% Pacing</span>
+          `;
+          blendedPill.style.display = 'block';
+        }
+      } else {
+        revenueElem.textContent = '$' + Math.round(totalRev).toLocaleString();
+        if (blendedPill) { blendedPill.style.display = 'none'; blendedPill.innerHTML = ''; }
+      }
     }
     if (demandPctElem) {
       demandPctElem.textContent = isTargetClosed ? '(Closed Today)' : `(${pctDisplay} vs Baseline)`;
@@ -1630,7 +1686,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (isTargetClosed) {
         demandLabelElem.textContent = `Smokehouse & Restaurant Closed Today (${matchedRecord.day_name || shortDayStr} Pit Maintenance & Prep). Zero service demand.`;
       } else {
-        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : 'Projected Sales';
+        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : (blendedMetrics && blendedMetrics.isToday && blendedMetrics.summary.actualSalesSoFar > 0 ? 'Blended Sales' : 'Projected Sales');
         if (pctDiff > 0) {
           demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day operating baseline pace.`;
         } else if (pctDiff < 0) {
@@ -2447,21 +2503,24 @@ async function renderPlotlyPredictiveChart() {
   const summaryElem = document.getElementById('hourly-actuals-summary');
   if (summaryElem) { summaryElem.style.display = 'none'; summaryElem.textContent = ''; }
   try {
-    const pickedDate = startDateVal || (window.ShopTime ? window.ShopTime.shopDateStr(new Date()) : '');
+    const effDate = window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date();
+    const pickedDate = startDateVal || (window.ShopTime ? window.ShopTime.shopDateStr(effDate) : '');
     const isSingleDay = !endDateVal || endDateVal === startDateVal || !startDateVal;
+    
+    let actuals = null;
+    let snapshots = null;
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.hourly_actuals) {
+      actuals = window.BBQ_PAYLOADS.hourly_actuals;
+      snapshots = window.BBQ_PAYLOADS.forecast_snapshots || null;
+    } else {
+      const aRes = await fetch('clover_api/analytics/hourly_actuals.json?v=' + Date.now());
+      if (aRes.ok) actuals = await aRes.json();
+      const sRes = await fetch('clover_api/analytics/forecast_snapshots.json?v=' + Date.now());
+      if (sRes.ok) snapshots = await sRes.json();
+    }
+
     if (window.ShopTime && pickedDate && isSingleDay && activeForecast.every(r => r.hour !== undefined)) {
-      let actuals = null;
-      let snapshots = null;
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.hourly_actuals) {
-        actuals = window.BBQ_PAYLOADS.hourly_actuals;
-        snapshots = window.BBQ_PAYLOADS.forecast_snapshots || null;
-      } else {
-        const aRes = await fetch('clover_api/analytics/hourly_actuals.json?v=' + Date.now());
-        if (aRes.ok) actuals = await aRes.json();
-        const sRes = await fetch('clover_api/analytics/forecast_snapshots.json?v=' + Date.now());
-        if (sRes.ok) snapshots = await sRes.json();
-      }
-      const overlay = window.ShopTime.buildActualsOverlay(actuals, snapshots, pickedDate, activeForecast, new Date());
+      const overlay = window.ShopTime.buildActualsOverlay(actuals, snapshots, pickedDate, activeForecast, effDate);
       if (overlay) {
         if (overlay.baselineOrders) {
           traces.push({
@@ -2496,6 +2555,11 @@ async function renderPlotlyPredictiveChart() {
         }
       }
     }
+
+    // Hydrate Hourly Rush & Service Turnover Deck
+    if (actuals && Array.isArray(activeForecast)) {
+      renderHourlyTurnoverDeck(activeForecast, actuals, effDate, isOperatingHoursFiltered);
+    }
   } catch (e) {
     console.warn('Hourly actuals overlay unavailable:', e);
   }
@@ -2522,6 +2586,208 @@ async function renderPlotlyPredictiveChart() {
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, { responsive: true, displayModeBar: false });
   }
+}
+
+let isOperatingHoursFiltered = true;
+
+function renderHourlyTurnoverDeck(activeForecast, actuals, effectiveNow, filterOperatingHours = isOperatingHoursFiltered) {
+  const container = document.getElementById('hourly-turnover-deck');
+  if (!container) return;
+
+  const effNow = effectiveNow || (window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date());
+  
+  const startDateInput = document.getElementById('forecast-start-date');
+  const targetDateStr = startDateInput && startDateInput.value ? startDateInput.value : (window.ShopTime ? window.ShopTime.shopDateStr(effNow) : '');
+
+  if (!window.ShopTime || typeof window.ShopTime.computeBlendedDayMetrics !== 'function') {
+    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">Turnover metrics engine loading...</div>';
+    return;
+  }
+
+  const result = window.ShopTime.computeBlendedDayMetrics(actuals, activeForecast, effNow, targetDateStr);
+  if (!result || !Array.isArray(result.hourly)) {
+    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">No hourly records available for turnover deck.</div>';
+    return;
+  }
+
+  const operatingHours = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  const list = filterOperatingHours
+    ? result.hourly.filter(h => operatingHours.includes(h.hour))
+    : result.hourly;
+
+  if (list.length === 0) {
+    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">No operating hours match current filter.</div>';
+    return;
+  }
+
+  const html = list.map(item => {
+    let cardClass = 'turnover-card card-predicted';
+    let badgeHtml = '<span class="turnover-badge badge-predicted">Projected</span>';
+    let mainMetricHtml = '';
+    let subMetricHtml = '';
+
+    const pRev = Math.round(item.predictedRevenue);
+    const pOrders = item.predictedOrders;
+    const aRev = Math.round(item.actualSales);
+    const aOrders = item.actualOrders;
+
+    if (item.status === 'actual') {
+      cardClass = 'turnover-card card-actual';
+      badgeHtml = '<span class="turnover-badge badge-actual">POS Actual</span>';
+      const vSign = item.varianceSales >= 0 ? '+' : '';
+      const vClass = item.varianceSales >= 0 ? 'pill-positive' : 'pill-negative';
+      mainMetricHtml = `
+        <div class="turnover-metric-main">$${aRev.toLocaleString()}</div>
+        <div class="turnover-sub">${aOrders} POS Orders</div>
+      `;
+      subMetricHtml = `
+        <div class="turnover-sub">
+          Model: $${pRev.toLocaleString()} (${pOrders} ord)<br>
+          <span class="${vClass}">${vSign}$${Math.round(item.varianceSales).toLocaleString()} (${vSign}${item.variancePct}%)</span>
+        </div>
+      `;
+    } else if (item.status === 'live') {
+      cardClass = 'turnover-card card-live';
+      badgeHtml = '<span class="turnover-badge badge-live">Live Pacing</span>';
+      mainMetricHtml = `
+        <div class="turnover-metric-main">$${aRev.toLocaleString()}</div>
+        <div class="turnover-sub">${aOrders} orders so far</div>
+      `;
+      subMetricHtml = `
+        <div class="turnover-sub">
+          Target: $${pRev.toLocaleString()} (${pOrders} ord)<br>
+          <span style="color:#fbbf24; font-weight:600;">Current Active Hour</span>
+        </div>
+      `;
+    } else {
+      cardClass = 'turnover-card card-predicted';
+      badgeHtml = '<span class="turnover-badge badge-predicted">Projected</span>';
+      mainMetricHtml = `
+        <div class="turnover-metric-main">$${pRev.toLocaleString()}</div>
+        <div class="turnover-sub">~${pOrders} projected orders</div>
+      `;
+      subMetricHtml = `
+        <div class="turnover-sub">
+          Cooked Meat Draw Target:<br>
+          <span style="color:#f59e0b; font-weight:600;">~${item.brisketCookedLbs} lbs Brisket</span> • 
+          <span style="color:#cbd5e1;">~${item.porkCookedLbs} lbs Pork</span>
+        </div>
+      `;
+    }
+
+    let rushTag = '';
+    if (item.hour === 12 || item.hour === 13) rushTag = ' • Lunch Rush';
+    else if (item.hour === 18 || item.hour === 19) rushTag = ' • Dinner Rush';
+
+    return `
+      <div class="${cardClass}" data-hour="${item.hour}">
+        <div class="turnover-card-header">
+          <span class="turnover-hour-title">${item.hourDisplay}${rushTag}</span>
+          ${badgeHtml}
+        </div>
+        ${mainMetricHtml}
+        ${subMetricHtml}
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = html;
+}
+
+function setupTimeTravelControls() {
+  const slider = document.getElementById('time-travel-slider');
+  const badge = document.getElementById('time-travel-badge');
+  const currentLabel = document.getElementById('time-travel-current-label');
+  const btnLunch = document.getElementById('sim-btn-lunch');
+  const btnRush = document.getElementById('sim-btn-rush');
+  const btnPostrush = document.getElementById('sim-btn-postrush');
+  const btnReset = document.getElementById('sim-btn-reset');
+  const btnOperating = document.getElementById('btn-turnover-operating');
+  const btnAll = document.getElementById('btn-turnover-all');
+
+  function updateSimulatorUI() {
+    if (!window.ShopTime) return;
+    const isSim = window.ShopTime.isSimulating();
+    const effNow = window.ShopTime.getEffectiveNow();
+    const currentHour = window.ShopTime.shopHour(effNow);
+    const dateStr = window.ShopTime.shopDateStr(effNow);
+
+    if (slider) {
+      slider.value = currentHour;
+    }
+
+    const h12 = currentHour === 0 ? 12 : (currentHour > 12 ? currentHour - 12 : currentHour);
+    const ampm = currentHour >= 12 ? 'PM' : 'AM';
+
+    if (badge) {
+      if (isSim) {
+        badge.className = 'badge-sim-pulse';
+        badge.textContent = `⚡ Simulated: ${h12}:00 ${ampm} ET`;
+      } else {
+        badge.className = 'badge-live-pulse';
+        badge.textContent = '● Live America/New_York';
+      }
+    }
+
+    if (currentLabel) {
+      if (isSim) {
+        currentLabel.innerHTML = `Simulated Cutoff Hour: <strong>${h12}:00 ${ampm} ET</strong> (${dateStr})`;
+      } else {
+        currentLabel.innerHTML = `Clock Status: <strong>Live Mode (${h12}:${String(effNow.getMinutes()).padStart(2, '0')} ${ampm} ET)</strong>`;
+      }
+    }
+
+    if (typeof renderPlotlyForecastingChart === 'function') {
+      renderPlotlyForecastingChart(getActiveDaysCount());
+    }
+    if (typeof renderPlotlyPredictiveChart === 'function') {
+      renderPlotlyPredictiveChart();
+    }
+  }
+
+  function setSimHour(hour) {
+    if (!window.ShopTime) return;
+    const targetDateInput = document.getElementById('forecast-start-date')?.value;
+    const baseDate = targetDateInput ? new Date(targetDateInput + 'T12:00:00') : new Date();
+    const simDate = new Date(baseDate);
+    simDate.setHours(hour, 0, 0, 0);
+    window.ShopTime.setSimulatedNow(simDate);
+    updateSimulatorUI();
+  }
+
+  if (slider) {
+    slider.addEventListener('input', (e) => {
+      const h = parseInt(e.target.value, 10);
+      setSimHour(h);
+    });
+  }
+
+  if (btnLunch) btnLunch.addEventListener('click', () => setSimHour(12));
+  if (btnRush) btnRush.addEventListener('click', () => setSimHour(19));
+  if (btnPostrush) btnPostrush.addEventListener('click', () => setSimHour(20));
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      if (window.ShopTime) window.ShopTime.clearSimulatedNow();
+      updateSimulatorUI();
+    });
+  }
+
+  if (btnOperating && btnAll) {
+    btnOperating.addEventListener('click', () => {
+      btnOperating.classList.add('active');
+      btnAll.classList.remove('active');
+      isOperatingHoursFiltered = true;
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
+    });
+    btnAll.addEventListener('click', () => {
+      btnAll.classList.add('active');
+      btnOperating.classList.remove('active');
+      isOperatingHoursFiltered = false;
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
+    });
+  }
+
+  updateSimulatorUI();
 }
 
 // Ensure predictive KPIs hydrate on initial page load

@@ -354,6 +354,43 @@
           </div>
         </div>
 
+        <!-- Time-Travel / Hour Scrub Simulation Bar -->
+        <div id="time-travel-control-card" class="time-travel-bar">
+          <div class="time-travel-header">
+            <div class="time-travel-status-group">
+              <span class="time-travel-title">⏱️ POS Turnover & Time-Travel Simulator</span>
+              <span id="time-travel-badge" class="badge-live-pulse">● Live America/New_York</span>
+            </div>
+            <div class="time-travel-btn-group">
+              <button type="button" class="sim-btn" id="sim-btn-lunch">☀️ Lunch (12 PM)</button>
+              <button type="button" class="sim-btn" id="sim-btn-rush">🔥 Dinner Rush (7 PM)</button>
+              <button type="button" class="sim-btn" id="sim-btn-postrush">⏪ 8 PM Turnover</button>
+              <button type="button" class="sim-btn active-reset" id="sim-btn-reset">↺ Reset to Live</button>
+            </div>
+          </div>
+          <div class="time-travel-slider-row">
+            <div class="time-travel-label-row">
+              <span id="time-travel-current-label">Clock Status: <strong>Live Mode</strong></span>
+              <span id="time-travel-cutoff-note" class="time-travel-note">Hours prior to cutoff display verified POS actuals; subsequent hours display forecast.</span>
+            </div>
+            <div class="slider-wrapper">
+              <input type="range" id="time-travel-slider" min="0" max="23" step="1" value="12" class="turnover-slider" aria-label="Hour of day simulator">
+              <div class="slider-ticks">
+                <span>12A</span>
+                <span>6A</span>
+                <span>11A</span>
+                <span>12P</span>
+                <span>3P</span>
+                <span>5P</span>
+                <span>7P</span>
+                <span>8P</span>
+                <span>9P</span>
+                <span>11P</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Historical Verification Reference Card (Integrated into control card without layout reflow) -->
         <div id="historical-reference-card" style="display: none; margin-top: 14px; padding: 12px 16px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -382,11 +419,12 @@
       <section class="estimator-section">
         <h2 class="section-title">Projected Prep Targets & Supplier Case Orders</h2>
         <div class="estimator-grid forecasting-kpi-grid">
-          <div class="est-card kpi-card-gold">
+          <div class="est-card kpi-card-gold" id="kpi-card-revenue-container">
             <div class="est-metric">
               <span id="kpi-projected-revenue" class="est-number">$0</span>
             </div>
             <span id="kpi-demand-label" class="est-label">Projected Sales <br><span id="kpi-demand-pct" style="color:#f1c40f; font-weight:600;">(Baseline)</span></span>
+            <div id="kpi-revenue-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
           <div class="est-card kpi-card-red">
@@ -529,6 +567,25 @@
           <div class="chart-card">
             <div id="plotly-predictive-velocity-chart"></div>
             <div id="hourly-actuals-summary" style="display: none; margin-top: 8px; font-size: 12px; color: var(--text-secondary);"></div>
+          </div>
+        </section>
+
+        <!-- Hourly Rush & Service Turnover Deck -->
+        <section class="chart-section" style="margin-top: 20px;">
+          <div class="turnover-section-header">
+            <div>
+              <h2 class="section-title" style="margin-bottom: 2px;">⚡ Hourly Rush & Service Turnover Deck</h2>
+              <span style="font-size: 11.5px; color: var(--text-secondary);">Hours prior to cutoff turn over into verified Clover POS actuals. Compare revenue, orders, and smoked meat draw against predictions.</span>
+            </div>
+            <div class="turnover-filter-group">
+              <button type="button" class="preset-btn active" id="btn-turnover-operating">Smokehouse Hours (11 AM – 9 PM)</button>
+              <button type="button" class="preset-btn" id="btn-turnover-all">All 24 Hours</button>
+            </div>
+          </div>
+          <div class="chart-card" style="padding: 16px;">
+            <div id="hourly-turnover-deck" class="hourly-turnover-grid">
+              <!-- Dynamically populated by app.js -->
+            </div>
           </div>
         </section>
 

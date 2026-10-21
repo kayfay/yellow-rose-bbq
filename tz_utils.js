@@ -7,18 +7,44 @@
   const SHOP_TZ = 'America/New_York';
   const HAS_ZONE = /(Z|[+-]\d{2}:?\d{2})$/;
 
+  let simulatedNow = null;
+
+  function setSimulatedNow(val) {
+    if (!val) {
+      simulatedNow = null;
+      return null;
+    }
+    const d = val instanceof Date ? new Date(val.getTime()) : new Date(val);
+    simulatedNow = isNaN(d.getTime()) ? null : d;
+    return simulatedNow;
+  }
+
+  function clearSimulatedNow() {
+    simulatedNow = null;
+  }
+
+  function getEffectiveNow() {
+    return simulatedNow ? new Date(simulatedNow.getTime()) : new Date();
+  }
+
+  function isSimulating() {
+    return simulatedNow !== null;
+  }
+
   /** YYYY-MM-DD of an instant in the shop timezone. */
   function shopDateStr(date) {
+    const d = date || getEffectiveNow();
     return new Intl.DateTimeFormat('en-CA', {
       timeZone: SHOP_TZ, year: 'numeric', month: '2-digit', day: '2-digit'
-    }).format(date);
+    }).format(d);
   }
 
   /** Hour (0-23) of an instant in the shop timezone. */
   function shopHour(date) {
+    const d = date || getEffectiveNow();
     const h = new Intl.DateTimeFormat('en-US', {
       timeZone: SHOP_TZ, hour: 'numeric', hourCycle: 'h23'
-    }).format(date);
+    }).format(d);
     return parseInt(h, 10) % 24;
   }
 
@@ -62,10 +88,11 @@
    * Returns null when the date is in the future (forecast-only).
    */
   function buildActualsOverlay(actuals, snapshots, dateStr, forecastRecords, now) {
-    const today = shopDateStr(now);
+    const effNow = now || getEffectiveNow();
+    const today = shopDateStr(effNow);
     if (dateStr > today) return null;
     const isToday = dateStr === today;
-    const cutoff = isToday ? shopHour(now) : 23;
+    const cutoff = isToday ? shopHour(effNow) : 23;
     const dayData = actuals && actuals.days ? actuals.days[dateStr] : null;
     const recs = Array.isArray(forecastRecords) ? forecastRecords : [];
 
@@ -127,7 +154,134 @@
     };
   }
 
-  const api = { SHOP_TZ, shopDateStr, shopHour, formatShopTimestamp, buildActualsOverlay };
+  /**
+   * Compute hour-by-hour turnover and blended summary for a given date.
+   * Distinguishes:
+   *   - 'actual': hour has elapsed (< cutoff on today, or all hours on past date)
+   *   - 'live': current hour in progress (=== cutoff on today)
+   *   - 'predicted': upcoming hour (> cutoff on today, or future date)
+   */
+  function computeBlendedDayMetrics(actuals, forecastRecords, now, dateStr) {
+    const effNow = now || getEffectiveNow();
+    const today = shopDateStr(effNow);
+    const targetDate = dateStr || today;
+    const isToday = targetDate === today;
+    const isPast = targetDate < today;
+    const isFuture = targetDate > today;
+    const cutoff = isPast ? 23 : (isToday ? shopHour(effNow) : -1);
+
+    const dayData = actuals && actuals.days ? actuals.days[targetDate] : null;
+    const recs = Array.isArray(forecastRecords) ? forecastRecords : [];
+
+    const hourly = [];
+    let actualSalesSoFar = 0;
+    let actualOrdersSoFar = 0;
+    let forecastToHour = 0;
+    let forecastRemaining = 0;
+    let forecastFullDay = 0;
+
+    for (let h = 0; h < 24; h++) {
+      const rec = recs.find(r => r.hour === h) || {};
+      const actualBucket = (dayData && dayData.buckets && dayData.buckets[h])
+        ? dayData.buckets[h]
+        : { sales_usd: 0.0, orders: 0 };
+
+      const predRev = Number(rec.predicted_revenue || 0);
+      const predOrders = Number(rec.predicted_orders || 0);
+      const brisketLbs = Number(rec.brisket_cooked_lbs || 0);
+      const porkLbs = Number(rec.pork_cooked_lbs || 0);
+      forecastFullDay += predRev;
+
+      let status = 'predicted';
+      if (isPast) {
+        status = 'actual';
+      } else if (isToday) {
+        if (h < cutoff) {
+          status = 'actual';
+        } else if (h === cutoff) {
+          status = 'live';
+        } else {
+          status = 'predicted';
+        }
+      } else {
+        status = 'predicted';
+      }
+
+      const actSales = actualBucket.sales_usd;
+      const actOrders = actualBucket.orders;
+
+      if (status === 'actual' || status === 'live') {
+        actualSalesSoFar += actSales;
+        actualOrdersSoFar += actOrders;
+        forecastToHour += predRev;
+      } else {
+        forecastRemaining += predRev;
+      }
+
+      // Variance calculation
+      const varSales = Math.round((actSales - predRev) * 100) / 100;
+      const varOrders = actOrders - predOrders;
+      const varPct = predRev > 0 ? Math.round(((actSales - predRev) / predRev) * 1000) / 10 : 0;
+
+      // Format 12-hour display string
+      const hour12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const hourDisplay = `${hour12}:00 ${ampm}`;
+
+      hourly.push({
+        hour: h,
+        hourDisplay,
+        status, // 'actual' | 'live' | 'predicted'
+        actualSales: actSales,
+        actualOrders: actOrders,
+        predictedRevenue: predRev,
+        predictedOrders: predOrders,
+        varianceSales: varSales,
+        varianceOrders: varOrders,
+        variancePct: varPct,
+        brisketCookedLbs: brisketLbs,
+        porkCookedLbs: porkLbs
+      });
+    }
+
+    const blendedTotalRevenue = Math.round((actualSalesSoFar + forecastRemaining) * 100) / 100;
+    const pacingUsd = Math.round((actualSalesSoFar - forecastToHour) * 100) / 100;
+    const pacingPct = forecastToHour > 0 ? Math.round(((actualSalesSoFar - forecastToHour) / forecastToHour) * 1000) / 10 : 0;
+
+    return {
+      date: targetDate,
+      isToday,
+      isPast,
+      isFuture,
+      cutoffHour: cutoff,
+      hasActuals: !!dayData,
+      hourly,
+      summary: {
+        actualSalesSoFar: Math.round(actualSalesSoFar * 100) / 100,
+        actualOrdersSoFar,
+        forecastToHour: Math.round(forecastToHour * 100) / 100,
+        forecastRemaining: Math.round(forecastRemaining * 100) / 100,
+        forecastFullDay: Math.round(forecastFullDay * 100) / 100,
+        blendedTotalRevenue,
+        pacingUsd,
+        pacingPct
+      }
+    };
+  }
+
+  const api = {
+    SHOP_TZ,
+    setSimulatedNow,
+    clearSimulatedNow,
+    getEffectiveNow,
+    isSimulating,
+    shopDateStr,
+    shopHour,
+    formatShopTimestamp,
+    buildActualsOverlay,
+    computeBlendedDayMetrics
+  };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.ShopTime = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+
