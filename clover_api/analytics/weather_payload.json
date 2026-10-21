@@ -31,7 +31,7 @@
           84.38000000000001,
           75.92,
           72.32,
-          77.18
+          77.72
         ],
         "y": [
           2861.94,
@@ -43,7 +43,7 @@
           8215.279999999999,
           3212.94,
           2972.02,
-          3548.81,
+          3506.63,
           3335.36,
           2135.88,
           8590.48,
@@ -62,7 +62,7 @@
           4623.76,
           4983.11,
           3206.62,
-          2140.98
+          2922.44
         ],
         "text": [
           "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -74,7 +74,7 @@
           "<b>Saturday, 2026-09-05</b><br>Revenue: $8,215.28<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #2 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Tuesday, 2026-09-08</b><br>Revenue: $3,212.94<br>Weather: 87.98\u00b0F, 1.5mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-09-09</b><br>Revenue: $2,972.02<br>Weather: 88.88000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Tuesday, 2026-09-15</b><br>Revenue: $3,548.81<br>Weather: 85.1\u00b0F, 3.6mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+          "<b>Tuesday, 2026-09-15</b><br>Revenue: $3,506.63<br>Weather: 85.1\u00b0F, 3.6mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-09-16</b><br>Revenue: $3,335.36<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-09-17</b><br>Revenue: $2,135.88<br>Weather: 87.61999999999999\u00b0F, 9.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Saturday, 2026-09-19</b><br>Revenue: $8,590.48<br>Weather: 87.98\u00b0F, 0.0mm rain<br><br><b>\ud83c\udfc6 #1 Highest Recent Sales Day</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -93,7 +93,7 @@
           "<b>Friday, 2026-10-16</b><br>Revenue: $4,623.76<br>Weather: 84.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Saturday, 2026-10-17</b><br>Revenue: $4,983.11<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Tuesday, 2026-10-20</b><br>Revenue: $3,206.62<br>Weather: 72.32\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Wednesday, 2026-10-21</b><br>Revenue: $2,140.98<br>Weather: 77.18\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Wednesday, 2026-10-21</b><br>Revenue: $2,922.44<br>Weather: 77.72\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -466,8 +466,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4602.440461538461,
-          "y1": 4602.440461538461,
+          "y0": 4591.239230769231,
+          "y1": 4591.239230769231,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -479,8 +479,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4902.440461538461,
-          "text": "Baseline Target ($4,602)",
+          "y": 4891.239230769231,
+          "text": "Baseline Target ($4,591)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -492,12 +492,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4602.44,
+    "normal_avg_usd": 4591.24,
     "rain_avg_usd": 5014.18,
-    "rain_drop_pct": 8.9,
+    "rain_drop_pct": 9.2,
     "heat_avg_usd": 4959.6,
-    "heat_drop_pct": 7.7,
-    "rain_coef": 9.0,
-    "temp_coef": 23.39
+    "heat_drop_pct": 7.9,
+    "rain_coef": 8.67,
+    "temp_coef": 20.35
   }
 }
