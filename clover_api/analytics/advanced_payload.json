@@ -36,14 +36,14 @@
       "confidence": 21.8
     },
     {
+      "pair": "Brisket + Turkey",
+      "count": 107,
+      "confidence": 50.0
+    },
+    {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
       "count": 106,
       "confidence": 15.3
-    },
-    {
-      "pair": "Brisket + Turkey",
-      "count": 106,
-      "confidence": 49.8
     },
     {
       "pair": "Brisket + Mac & Cheese",
@@ -52,10 +52,10 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4333.51,
+    "normal": 4335.77,
     "game_only": 4245.02,
     "rain_only": 5014.18,
-    "game_and_rain": 12133.83
+    "game_and_rain": 12140.15
   },
   "order_type_segmentation": [
     {
@@ -66,9 +66,9 @@
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 428,
-      "total_revenue": 25490.27,
-      "avg_ticket": 59.55670560747664
+      "order_count": 429,
+      "total_revenue": 25641.31,
+      "avg_ticket": 59.769953379953385
     },
     {
       "order_type": "To-Go",
@@ -127,15 +127,15 @@
         "y": [
           0.0,
           0.0,
-          28.5,
-          73.5,
-          193.36,
-          244.36,
-          330.20000000000005,
-          406.65000000000003,
-          548.04,
-          596.1999999999999,
-          651.43
+          31.5,
+          76.5,
+          196.36,
+          247.36,
+          333.20000000000005,
+          409.65000000000003,
+          551.04,
+          599.1999999999999,
+          654.43
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -251,15 +251,15 @@
         "y": [
           0.0,
           0.0,
-          21.5,
-          41.75,
-          162.07999999999998,
-          182.57999999999998,
-          216.65999999999997,
-          279.98999999999995,
-          418.98999999999995,
-          439.23999999999995,
-          505.56999999999994
+          22.5,
+          42.75,
+          163.07999999999998,
+          183.57999999999998,
+          217.65999999999997,
+          280.98999999999995,
+          419.98999999999995,
+          440.23999999999995,
+          506.56999999999994
         ],
         "name": "Pulled Pork",
         "type": "scatter",
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.8,
-    "pork_ribs_avg_with_dino": 2.8,
-    "impact_pct": -51.3
+    "pork_ribs_avg_without_dino": 5.1,
+    "pork_ribs_avg_with_dino": 3.8,
+    "impact_pct": -25.2
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.66
+    "normal_avg_ticket": 46.67
   }
 }
