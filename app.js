@@ -2466,10 +2466,6 @@ async function renderPlotlyPredictiveChart() {
       if (activeKpis.recommended_staff !== undefined && activeKpis.pitmaster_hours !== undefined) {
         customDirectives.push(`Labor & Shift Coverage: Recommended roster of <strong>${activeKpis.recommended_staff} crew members</strong> (~${activeKpis.pitmaster_hours} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
       }
-      if (activeKpis.estimated_24h_cogs_usd || activeKpis.projected_24h_revenue_usd) {
-        const cogsVal = activeKpis.estimated_24h_cogs_usd || (activeKpis.projected_24h_revenue_usd ? Math.round(activeKpis.projected_24h_revenue_usd * 0.295) : 0);
-        customDirectives.push(`Target COGS & Food Cost: Wholesale meat cost modeled at <strong>$${Math.round(cogsVal).toLocaleString()}</strong> (${activeKpis.estimated_food_cost_pct || 29.5}% of projected revenue) based on confirmed US Foods contract pricing.`);
-      }
     }
     directivesList.innerHTML = customDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
   }
