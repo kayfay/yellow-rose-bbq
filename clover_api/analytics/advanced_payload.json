@@ -48,14 +48,14 @@
     {
       "pair": "Brisket + Mac & Cheese",
       "count": 104,
-      "confidence": 21.4
+      "confidence": 21.5
     }
   ],
   "interaction_modeling": {
-    "normal": 4309.22,
+    "normal": 4312.33,
     "game_only": 4245.02,
     "rain_only": 5014.18,
-    "game_and_rain": 12065.8
+    "game_and_rain": 12074.53
   },
   "order_type_segmentation": [
     {
@@ -67,8 +67,8 @@
     {
       "order_type": "In-store Pickup",
       "order_count": 424,
-      "total_revenue": 24450.75,
-      "avg_ticket": 57.666863207547166
+      "total_revenue": 24659.57,
+      "avg_ticket": 58.159363207547166
     },
     {
       "order_type": "To-Go",
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.7,
-    "pork_ribs_avg_with_dino": 2.8,
-    "impact_pct": -50.6
+    "pork_ribs_avg_without_dino": 5.3,
+    "pork_ribs_avg_with_dino": 3.4,
+    "impact_pct": -35.4
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.44
+    "normal_avg_ticket": 46.47
   }
 }
