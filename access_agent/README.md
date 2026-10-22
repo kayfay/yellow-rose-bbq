@@ -60,13 +60,36 @@ The agent parses intent using **Cloudflare Workers AI (Llama 3.1)** and updates 
      1. In Cloudflare Zero Trust, go to **Reusable components** > **Custom pages** > **Access login page** > **Manage**.
      2. In **Footer text**, enter:
         `Need dashboard access? Request Access: https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`
-     3. Go to **Access** > **Applications** > `sausage.allen.tools` > **Edit** > under **Custom Deny URL**, enter:
-        `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`
      Now, unapproved staff entering their email will see the Request Access link directly on the authentication prompt and will be redirected to the access portal if blocked.
 
 ---
 
-## 2. Create Your Telegram Bot
+## 2. Making the Page Public (Removing Zero Trust Security)
+
+Now that COGS and sensitive financials are removed, you can make `sausage.allen.tools` completely open to anyone who has the link without asking for any login:
+
+### Option A: 1-Click via Telegram Bot
+Message your Telegram bot:
+- `/make_public` or *"Make public"*
+- The bot sets the Access policy to **Bypass (Everyone)** in real time.
+
+### Option B: Automated CLI Script
+```bash
+cd access_agent
+CF_ACCOUNT_ID="<account-id>" CF_API_TOKEN="<api-token>" node scripts/make_public.js
+```
+*(To delete the Access application completely from Cloudflare, append `--delete-app`)*.
+
+### Option C: Cloudflare Zero Trust Dashboard
+1. Open the [Cloudflare Zero Trust Dashboard](https://one.dash.cloudflare.com/).
+2. Go to **Access** > **Applications**.
+3. Next to `sausage.allen.tools`, either:
+   - Click the `...` menu and click **Delete** (completely removes Access protection).
+   - Or click **Edit** > **Policies** > Add a policy with **Action: Bypass** and rule **Include: Selector -> Everyone**.
+
+---
+
+## 3. Create Your Telegram Bot
 
 1. Open Telegram and message `@BotFather`.
 2. Send `/newbot`, name it (e.g., `YellowRoseAccessBot`), and choose a username.
@@ -75,7 +98,7 @@ The agent parses intent using **Cloudflare Workers AI (Llama 3.1)** and updates 
 
 ---
 
-## 3. Configure Worker Secrets
+## 4. Configure Worker Secrets
 
 In the `access_agent/` directory:
 
@@ -96,7 +119,7 @@ npx wrangler secret put CF_API_TOKEN
 
 ---
 
-## 4. Deploy the Worker
+## 5. Deploy the Worker
 
 ```bash
 npx wrangler deploy
@@ -106,7 +129,7 @@ Once deployed, Wrangler will output your worker URL (e.g., `https://yellow-rose-
 
 ---
 
-## 5. Register the Telegram Webhook
+## 6. Register the Telegram Webhook
 
 Point Telegram to your newly deployed Worker:
 
@@ -122,7 +145,7 @@ Telegram will respond with:
 
 ---
 
-## 6. Verification & Usage
+## 7. Verification & Usage
 
 1. **Staff Requesting Access**:
    - Staff visit `https://sausage.allen.tools` and see the Request Access link directly on the Cloudflare email authentication page (or visit `https://yellow-rose-access-bot.<subdomain>.workers.dev/request-access`).

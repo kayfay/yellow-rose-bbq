@@ -4,7 +4,8 @@ import {
   parseIntentWithAI,
   serveRequestAccessHtml,
   handleWebRequestAccess,
-  configureAccessLoginPage
+  configureAccessLoginPage,
+  handleMakePublic
 } from "../src/index.js";
 
 async function runTests() {
@@ -49,6 +50,10 @@ async function runTests() {
   const parsedConfig = await parseIntentWithAI(dummyAi, "configure login screen");
   assert.strictEqual(parsedConfig.action, "configure_login");
   console.log("✓ Fallback parser correctly handled configure_login request");
+
+  const parsedPublic = await parseIntentWithAI(dummyAi, "remove security and make public");
+  assert.strictEqual(parsedPublic.action, "make_public");
+  console.log("✓ Fallback parser correctly handled make_public request");
 
   // Test 3: AI response mock parsing
   const mockAi = {
@@ -98,7 +103,12 @@ async function runTests() {
   assert(configResult.includes("missing"), "Should report missing credentials");
   console.log("✓ configureAccessLoginPage handled missing credentials cleanly");
 
-  console.log("\nAll 7 unit tests passed successfully! 🎉");
+  // Test 8: handleMakePublic handles missing credentials cleanly
+  const publicResult = await handleMakePublic({});
+  assert(publicResult.includes("missing"), "Should report missing credentials");
+  console.log("✓ handleMakePublic handled missing credentials cleanly");
+
+  console.log("\nAll 8 unit tests passed successfully! 🎉");
 }
 
 runTests().catch((err) => {

@@ -245,6 +245,7 @@ export async function handleTelegramWebhook(request, env) {
         "• _\"Add yellowrosebbqjax@gmail.com to the whitelist\"_\n" +
         "• _\"Remove olduser@gmail.com\"_\n" +
         "• _\"Who has access right now?\"_\n" +
+        "• _\"Make public\"_ or _\"/make_public\"_ (removes security & opens page to everyone)\n" +
         "• _\"Configure login screen\"_ (sets Request Access prompt on Cloudflare email auth page)\n" +
         "• _\"Status\"_"
       );
@@ -254,6 +255,19 @@ export async function handleTelegramWebhook(request, env) {
     if (userText.toLowerCase() === "debug" || userText.toLowerCase() === "/debug") {
       const debugInfo = await handleDebug(env);
       await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, debugInfo);
+      return new Response("OK", { status: 200 });
+    }
+
+    if (
+      userText.toLowerCase() === "make public" ||
+      userText.toLowerCase() === "/make_public" ||
+      userText.toLowerCase() === "/open" ||
+      userText.toLowerCase() === "open access" ||
+      userText.toLowerCase() === "remove security" ||
+      userText.toLowerCase() === "disable security"
+    ) {
+      const publicResult = await handleMakePublic(env);
+      await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, publicResult);
       return new Response("OK", { status: 200 });
     }
 
@@ -318,6 +332,11 @@ export async function handleTelegramWebhook(request, env) {
 
       case "configure_login": {
         replyText = await configureAccessLoginPage(env);
+        break;
+      }
+
+      case "make_public": {
+        replyText = await handleMakePublic(env);
         break;
       }
 
@@ -554,13 +573,14 @@ export async function parseIntentWithAI(ai, userText) {
 
   const systemPrompt = `You are an intent parser for access management.
 Return ONLY valid JSON in format:
-{"action": "add_user"|"remove_user"|"list_users"|"status"|"configure_login"|"unknown", "email": "email_or_null", "explanation": "string"}
+{"action": "add_user"|"remove_user"|"list_users"|"status"|"configure_login"|"make_public"|"unknown", "email": "email_or_null", "explanation": "string"}
 Actions:
 - add_user: Add, whitelist, permit, or grant an email.
 - remove_user: Remove, revoke, delete, or kick an email.
 - list_users: Who has access, list users, show whitelist.
 - status: Health check, status.
-- configure_login: Configure, setup, or link Request Access on the login/auth screen.`;
+- configure_login: Configure, setup, or link Request Access on the login/auth screen.
+- make_public: Make public, remove security, open access to everyone.`;
 
   try {
     const response = await ai.run("@cf/meta/llama-3.1-8b-instruct", {
@@ -583,6 +603,17 @@ Actions:
     const lower = userText.toLowerCase();
     if (lower.includes("list") || lower.includes("who") || lower.includes("whitelist")) {
       return { action: "list_users", email: null };
+    }
+    if (
+      lower.includes("make public") ||
+      lower.includes("open access") ||
+      lower.includes("remove security") ||
+      lower.includes("disable security") ||
+      lower.includes("public access") ||
+      lower.includes("open to anyone") ||
+      lower.includes("open to everyone")
+    ) {
+      return { action: "make_public", email: null };
     }
     if (lower.includes("login") || lower.includes("auth screen") || lower.includes("setup login") || lower.includes("configure login")) {
       return { action: "configure_login", email: null };
@@ -976,4 +1007,106 @@ export async function configureAccessLoginPage(env, customWorkerUrl = null) {
     return `❌ Configuration failed: ${cleanError(err.message)}`;
   }
 }
+
+/**
+ * Removes Cloudflare Zero Trust Access restrictions on sausage.allen.tools,
+ * opening the page to anyone who has the link.
+ */
+export async function handleMakePublic(env, shouldDeleteApp = false) {
+  try {
+    const accountId = env.CF_ACCOUNT_ID;
+    const token = env.CF_API_TOKEN;
+    if (!accountId || !token) {
+      return "⚠️ Cloudflare credentials (CF_ACCOUNT_ID and CF_API_TOKEN) are missing.";
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const appsUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/access/apps`;
+    const appsRes = await fetch(appsUrl, { headers });
+    const appsData = await appsRes.json();
+
+    if (!appsData.success || !appsData.result || appsData.result.length === 0) {
+      return "ℹ️ No Access applications found in this Cloudflare account.";
+    }
+
+    const targetApp = appsData.result.find(
+      (a) =>
+        (a.domain || "").includes("sausage.allen.tools") ||
+        (a.domain || "").includes("sausage") ||
+        (a.domain || "").includes("allen.tools")
+    );
+
+    if (!targetApp) {
+      return "ℹ️ Could not find an Access application matching *sausage.allen.tools*.";
+    }
+
+    if (shouldDeleteApp) {
+      const delRes = await fetch(`${appsUrl}/${targetApp.id}`, {
+        method: "DELETE",
+        headers,
+      });
+      const delData = await delRes.json();
+      if (delData.success) {
+        return (
+          `🔓 *Security Removed - Dashboard is Public!*\n\n` +
+          `Cloudflare Access application for *${targetApp.domain}* has been deleted.\n` +
+          `Anyone who has the link can now access the page directly without any authentication.`
+        );
+      } else {
+        return `❌ Failed to delete Access app: ${delData.errors?.[0]?.message || "Unknown error"}`;
+      }
+    }
+
+    // Attach or update a Bypass policy for Everyone
+    const polUrl = `${appsUrl}/${targetApp.id}/policies`;
+    const polRes = await fetch(polUrl, { headers });
+    const polData = await polRes.json();
+
+    const existingPolicies = (polData.success && polData.result) || [];
+    const bypassPolicy = existingPolicies.find((p) => p.name === "Public Access (Bypass)");
+
+    const policyPayload = {
+      name: "Public Access (Bypass)",
+      decision: "bypass",
+      include: [{ everyone: {} }],
+      exclude: [],
+      require: [],
+    };
+
+    if (bypassPolicy) {
+      const updateRes = await fetch(`${polUrl}/${bypassPolicy.id}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(policyPayload),
+      });
+      const updateData = await updateRes.json();
+      if (!updateData.success) {
+        return `❌ Failed to update bypass policy: ${updateData.errors?.[0]?.message || "Unknown error"}`;
+      }
+    } else {
+      const createRes = await fetch(polUrl, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(policyPayload),
+      });
+      const createData = await createRes.json();
+      if (!createData.success) {
+        return `❌ Failed to create bypass policy: ${createData.errors?.[0]?.message || "Unknown error"}`;
+      }
+    }
+
+    return (
+      `🔓 *Dashboard is Now Public!*\n\n` +
+      `Zero Trust Access policy on *${targetApp.domain}* is now set to **Bypass (Everyone)**.\n\n` +
+      `Anyone who has the link can now open the dashboard directly without entering an email or logging in.`
+    );
+  } catch (err) {
+    return `❌ Failed to make public: ${cleanError(err.message)}`;
+  }
+}
+
 
