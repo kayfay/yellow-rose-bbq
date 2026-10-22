@@ -189,6 +189,24 @@
     const dayData = actuals && actuals.days ? actuals.days[targetDate] : null;
     const recs = Array.isArray(forecastRecords) ? forecastRecords : [];
 
+    // Fallback baseline for dates or simulations where POS actuals haven't yet been synced/recorded
+    let fallbackBuckets = null;
+    const hasRealActuals = !!(dayData && dayData.buckets && (dayData.total_orders > 0 || dayData.total_sales_usd > 0));
+    if (!hasRealActuals && actuals && actuals.weekday_baseline) {
+      const dowIdx = String(weekdayIndexMon0(targetDate));
+      const base = actuals.weekday_baseline[dowIdx];
+      if (base && base.n > 0) {
+        fallbackBuckets = [];
+        for (let h = 0; h < 24; h++) {
+          fallbackBuckets.push({
+            hour: h,
+            sales_usd: Math.round((base.sales_sum[h] / base.n) * 100) / 100,
+            orders: Math.round(base.orders_sum[h] / base.n)
+          });
+        }
+      }
+    }
+
     const hourly = [];
     let actualSalesSoFar = 0;
     let actualOrdersSoFar = 0;
@@ -202,9 +220,17 @@
 
     for (let h = 0; h < 24; h++) {
       const rec = recs.find(r => r.hour === h) || {};
-      const actualBucket = (dayData && dayData.buckets && dayData.buckets[h])
+      let actualBucket = (dayData && dayData.buckets && dayData.buckets[h])
         ? dayData.buckets[h]
-        : { sales_usd: 0.0, orders: 0 };
+        : (fallbackBuckets ? fallbackBuckets[h] : null);
+
+      if (!actualBucket) {
+        actualBucket = {
+          hour: h,
+          sales_usd: 0.0,
+          orders: 0
+        };
+      }
 
       const predRev = Number(rec.predicted_revenue || 0);
       const predOrders = Number(rec.predicted_orders || 0);
@@ -283,7 +309,8 @@
       isPast,
       isFuture,
       cutoffHour: cutoff,
-      hasActuals: !!dayData,
+      hasActuals: hasRealActuals,
+      isFallback: !hasRealActuals && !!fallbackBuckets,
       hourly,
       summary: {
         actualSalesSoFar: Math.round(actualSalesSoFar * 100) / 100,

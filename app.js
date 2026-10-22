@@ -757,10 +757,12 @@ function initForecastingControls() {
     });
   }
 
-  // Set default timezone-aware today string
+  // Set default timezone-aware today string in shop operating timezone
   const d = new Date();
   const tzOffset = d.getTimezoneOffset() * 60000;
-  const today = (new Date(d.getTime() - tzOffset)).toISOString().split('T')[0];
+  const today = (window.ShopTime && typeof window.ShopTime.shopDateStr === 'function')
+    ? window.ShopTime.shopDateStr()
+    : (new Date(d.getTime() - tzOffset)).toISOString().split('T')[0];
 
   if (dateInput && !dateInput.value) {
     dateInput.value = today;
@@ -1606,7 +1608,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
-    const hasBlended = Boolean(blendedMetrics && (blendedMetrics.isToday || blendedMetrics.isPast) && blendedMetrics.summary.actualSalesSoFar > 0);
+    const hasBlended = Boolean(blendedMetrics && (blendedMetrics.isToday || blendedMetrics.isPast || (window.ShopTime && window.ShopTime.isSimulating())) && blendedMetrics.summary.actualSalesSoFar > 0);
 
     const rosebudsSubElem = document.getElementById('kpi-rosebuds-sub');
     const tacosSubElem = document.getElementById('kpi-tacos-sub');
