@@ -195,6 +195,10 @@
     let forecastToHour = 0;
     let forecastRemaining = 0;
     let forecastFullDay = 0;
+    let forecastBrisketToHour = 0;
+    let forecastPorkToHour = 0;
+    let remainingBrisketCooked = 0;
+    let remainingPorkCooked = 0;
 
     for (let h = 0; h < 24; h++) {
       const rec = recs.find(r => r.hour === h) || {};
@@ -230,8 +234,12 @@
         actualSalesSoFar += actSales;
         actualOrdersSoFar += actOrders;
         forecastToHour += predRev;
+        forecastBrisketToHour += brisketLbs;
+        forecastPorkToHour += porkLbs;
       } else {
         forecastRemaining += predRev;
+        remainingBrisketCooked += brisketLbs;
+        remainingPorkCooked += porkLbs;
       }
 
       // Variance calculation
@@ -263,6 +271,11 @@
     const blendedTotalRevenue = Math.round((actualSalesSoFar + forecastRemaining) * 100) / 100;
     const pacingUsd = Math.round((actualSalesSoFar - forecastToHour) * 100) / 100;
     const pacingPct = forecastToHour > 0 ? Math.round(((actualSalesSoFar - forecastToHour) / forecastToHour) * 1000) / 10 : 0;
+    const pacingRatio = forecastToHour > 0 ? (actualSalesSoFar / forecastToHour) : 1.0;
+    const actualBrisketCooked = Math.round(forecastBrisketToHour * pacingRatio * 10) / 10;
+    const actualPorkCooked = Math.round(forecastPorkToHour * pacingRatio * 10) / 10;
+    const blendedBrisketCooked = Math.round((actualBrisketCooked + remainingBrisketCooked) * 10) / 10;
+    const blendedPorkCooked = Math.round((actualPorkCooked + remainingPorkCooked) * 10) / 10;
 
     return {
       date: targetDate,
@@ -280,7 +293,14 @@
         forecastFullDay: Math.round(forecastFullDay * 100) / 100,
         blendedTotalRevenue,
         pacingUsd,
-        pacingPct
+        pacingPct,
+        pacingRatio: Math.round(pacingRatio * 100) / 100,
+        actualBrisketCooked,
+        remainingBrisketCooked: Math.round(remainingBrisketCooked * 10) / 10,
+        blendedBrisketCooked,
+        actualPorkCooked,
+        remainingPorkCooked: Math.round(remainingPorkCooked * 10) / 10,
+        blendedPorkCooked
       }
     };
   }

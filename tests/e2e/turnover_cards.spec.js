@@ -73,6 +73,40 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     const badge9pm = card9pm.locator('.turnover-badge');
     await expect(badge9pm).toContainText('Projected');
 
+    // Assert blended live total pills across all top-shelf KPI summary cards
+    const pillRevenue = page.locator('#kpi-revenue-blended-sub');
+    const pillBrisket = page.locator('#kpi-brisket-blended-sub');
+    const pillPork = page.locator('#kpi-pork-blended-sub');
+    const pillSausage = page.locator('#kpi-sausage-blended-sub');
+    const pillFoodCost = page.locator('#kpi-food-cost-blended-sub');
+    const pillVelocity = page.locator('#kpi-velocity-blended-sub');
+    const pillAov = page.locator('#kpi-aov-blended-sub');
+    const pillLabor = page.locator('#kpi-labor-blended-sub');
+    const pillRosebuds = page.locator('#kpi-rosebuds-blended-sub');
+    const subBrisket = page.locator('#kpi-brisket-cooked');
+    const subRosebuds = page.locator('#kpi-rosebuds-sub');
+
+    await expect(pillRevenue).toBeVisible();
+    await expect(pillRevenue).toContainText('Blended Live Total');
+    await expect(pillBrisket).toBeVisible();
+    await expect(pillBrisket).toContainText('actual drawn');
+    await expect(subBrisket).toContainText('actual sold');
+    await expect(pillPork).toBeVisible();
+    await expect(pillPork).toContainText('actual drawn');
+    await expect(pillSausage).toBeVisible();
+    await expect(pillSausage).toContainText('actual links sold');
+    await expect(pillRosebuds).toBeVisible();
+    await expect(pillRosebuds).toContainText('actual sold');
+    await expect(subRosebuds).toContainText('actual sold');
+    await expect(pillFoodCost).toBeVisible();
+    await expect(pillFoodCost).toContainText('Blended Live COGS');
+    await expect(pillVelocity).toBeVisible();
+    await expect(pillVelocity).toContainText('Blended Velocity');
+    await expect(pillAov).toBeVisible();
+    await expect(pillAov).toContainText('Blended Live Ticket');
+    await expect(pillLabor).toBeVisible();
+    await expect(pillLabor).toContainText('Blended Shift Hours');
+
     // 6. Test Quick Preset: Reset to Live (#sim-btn-reset)
     const btnReset = page.locator('#sim-btn-reset');
     await btnReset.click();
@@ -96,6 +130,10 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     const btn14 = page.locator('#btn-preset-14');
     await btn14.click();
     await page.waitForTimeout(400);
+
+    // Multi-day range should hide individual single-day blended pills
+    await expect(pillBrisket).toBeHidden();
+    await expect(pillFoodCost).toBeHidden();
 
     // Top-shelf Revenue KPI card should be visible with non-zero revenue
     const kpiRevenue = page.locator('#kpi-projected-revenue');

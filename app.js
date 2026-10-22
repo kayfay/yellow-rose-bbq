@@ -1543,86 +1543,41 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const cogsUsdElem = document.getElementById('kpi-cogs-usd');
     const aovUsdElem = document.getElementById('kpi-aov-usd');
     const aovSubElem = document.getElementById('kpi-aov-sub');
-
-    if (isTargetClosed) {
-      if (brisketElem) brisketElem.textContent = '0';
-      if (porkElem) porkElem.textContent = '0';
-      if (sausageElem) sausageElem.textContent = '0';
-      if (sausageLinksSub) sausageLinksSub.textContent = '(Closed / 0 lbs)';
-      if (ribsElem) ribsElem.textContent = '0';
-      if (dinoElem) dinoElem.textContent = '0';
-      if (turkeyElem) turkeyElem.textContent = '0';
-      if (turkeySubElem) turkeySubElem.textContent = '(Closed / 0 lbs)';
-      if (rosebudsElem) rosebudsElem.textContent = '0';
-      if (tacosElem) tacosElem.textContent = '0';
-      if (totalCookedElem) totalCookedElem.textContent = '0';
-      if (totalCookedSub) totalCookedSub.textContent = '(Closed / 0 lbs)';
-
-      if (bCasesElem) bCasesElem.textContent = '(Closed / 0 Cases)';
-      if (pCasesElem) pCasesElem.textContent = '(Closed / 0 Cases)';
-      if (bCookedElem) bCookedElem.textContent = '(0 lbs cooked)';
-      if (pCookedElem) pCookedElem.textContent = '(0 lbs cooked)';
-      if (rCasesElem) rCasesElem.textContent = '(Closed / 0 Cases)';
-      if (drCasesElem) drCasesElem.textContent = '(Closed / 0 Cases)';
-
-      if (laborHoursElem) laborHoursElem.textContent = '0';
-      if (staffCountElem) staffCountElem.textContent = '(Closed / 0 Staff)';
-      if (cogsUsdElem) cogsUsdElem.textContent = '($0 COGS)';
-      if (aovUsdElem) aovUsdElem.textContent = '$0.00';
-      if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
-    } else {
-      if (brisketElem) brisketElem.textContent = bVal;
-      if (porkElem) porkElem.textContent = pVal;
-      if (sausageElem) sausageElem.textContent = sausageBatches;
-      if (sausageLinksSub) sausageLinksSub.textContent = `(${sausageLinks} links / ${sVal} lbs)`;
-      if (ribsElem) ribsElem.textContent = rVal;
-      if (dinoElem) dinoElem.textContent = drVal;
-      if (turkeyElem) turkeyElem.textContent = tVal;
-      const tRaw = Math.round(tVal / 0.70);
-      const tCases = (tRaw / 20.0).toFixed(1);
-      const tPortions = Math.round(tVal * 3.2);
-      if (turkeySubElem) turkeySubElem.textContent = `(~${tRaw} lbs raw / ~${tCases} cs / ~${tPortions} port)`;
-      if (rosebudsElem) rosebudsElem.textContent = rbVal;
-      if (tacosElem) tacosElem.textContent = tacoVal;
-      if (totalCookedElem) totalCookedElem.textContent = totalCooked;
-      if (totalCookedSub) totalCookedSub.textContent = `(~${totalRaw} lbs raw trim)`;
-
-      if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
-      if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
-      if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
-      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
-      if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
-      if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
-
-      if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
-      if (staffCountElem) staffCountElem.textContent = `(~${totalStaff} Staff / 8.5h Shift)`;
-      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} COGS)`;
-      if (aovUsdElem) aovUsdElem.textContent = '$48.50';
-      if (aovSubElem) aovSubElem.textContent = '(Average Order Value)';
-    }
-
-    // Update dynamic baseline trend card
-    const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
-    if (baselineTrendElem) {
-      let comparisonNote = '';
-      const revLabel = matchedRecord.is_historical ? 'actual' : 'projected';
-      if (isTargetClosed) {
-        comparisonNote = `For your selected horizon (<strong>${matchedRecord.day_name || shortDayStr}, ${matchedRecord.date || targetDateInput}</strong>), the smokehouse is <strong>Closed</strong> (standard weekly non-operating day). Operating revenue and meat prep targets are set to 0.`;
-      } else if (pctDiff > 0) {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the operating baseline pace (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
-      } else if (pctDiff < 0) {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the operating baseline pace (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for midweek prep windows.`;
-      } else {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> matches standard operational baseline expectations.`;
-      }
-
-      baselineTrendElem.innerHTML = `Our model establishes a rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> across active operating days (Tue–Sun; ~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Note: Mondays are standard non-operating days reserved for pit cleaning and wood replenishment. ${comparisonNote}`;
-    }
-
     const revenueElem = document.getElementById('kpi-projected-revenue');
     const demandLabelElem = document.getElementById('kpi-demand-label');
     const demandPctElem = document.getElementById('kpi-demand-pct');
-    const blendedPill = document.getElementById('kpi-revenue-blended-sub');
+
+    // Helper functions for KPI blended live total pills
+    const allBlendedPills = [
+      'kpi-revenue-blended-sub',
+      'kpi-brisket-blended-sub',
+      'kpi-pork-blended-sub',
+      'kpi-sausage-blended-sub',
+      'kpi-pork-ribs-blended-sub',
+      'kpi-beef-dino-blended-sub',
+      'kpi-turkey-blended-sub',
+      'kpi-rosebuds-blended-sub',
+      'kpi-tacos-blended-sub',
+      'kpi-total-cooked-blended-sub',
+      'kpi-velocity-blended-sub',
+      'kpi-food-cost-blended-sub',
+      'kpi-aov-blended-sub',
+      'kpi-labor-blended-sub'
+    ];
+    function setBlendedPill(id, html) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (html) {
+        el.innerHTML = html;
+        el.style.display = 'block';
+      } else {
+        el.innerHTML = '';
+        el.style.display = 'none';
+      }
+    }
+    function clearAllBlendedPills() {
+      allBlendedPills.forEach(id => setBlendedPill(id, ''));
+    }
 
     // Blended Real-Time POS Turnover computation
     let blendedMetrics = null;
@@ -1651,34 +1606,297 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
-    if (revenueElem) {
-      if (isTargetClosed) {
-        revenueElem.textContent = '$0 (Closed)';
-        if (blendedPill) { blendedPill.style.display = 'none'; blendedPill.innerHTML = ''; }
-      } else if (blendedMetrics && (blendedMetrics.isToday || blendedMetrics.isPast) && blendedMetrics.summary.actualSalesSoFar > 0) {
-        // Blended Total Revenue
-        const blendedTotal = Math.round(blendedMetrics.summary.blendedTotalRevenue);
-        revenueElem.textContent = '$' + blendedTotal.toLocaleString();
-        
-        if (blendedPill) {
-          const cutH = blendedMetrics.cutoffHour;
-          const h12 = cutH === 0 ? 12 : (cutH > 12 ? cutH - 12 : cutH);
-          const ampm = cutH >= 12 ? 'PM' : 'AM';
-          const pSign = blendedMetrics.summary.pacingPct >= 0 ? '+' : '';
-          const pColor = blendedMetrics.summary.pacingPct >= 0 ? '#34d399' : '#f87171';
-          
-          blendedPill.innerHTML = `
-            <strong>Blended Live Total</strong>: $${Math.round(blendedMetrics.summary.actualSalesSoFar).toLocaleString()} actual + $${Math.round(blendedMetrics.summary.forecastRemaining).toLocaleString()} remaining<br>
-            <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm}: $${Math.round(blendedMetrics.summary.actualSalesSoFar).toLocaleString()} (${blendedMetrics.summary.actualOrdersSoFar} orders)</span> • 
-            <span style="color: ${pColor}; font-weight: 700;">${pSign}${blendedMetrics.summary.pacingPct}% Pacing</span>
-          `;
-          blendedPill.style.display = 'block';
-        }
-      } else {
-        revenueElem.textContent = '$' + Math.round(totalRev).toLocaleString();
-        if (blendedPill) { blendedPill.style.display = 'none'; blendedPill.innerHTML = ''; }
+    const hasBlended = Boolean(blendedMetrics && (blendedMetrics.isToday || blendedMetrics.isPast) && blendedMetrics.summary.actualSalesSoFar > 0);
+
+    const rosebudsSubElem = document.getElementById('kpi-rosebuds-sub');
+    const tacosSubElem = document.getElementById('kpi-tacos-sub');
+
+    if (isTargetClosed) {
+      clearAllBlendedPills();
+
+      if (brisketElem) brisketElem.textContent = '0';
+      if (porkElem) porkElem.textContent = '0';
+      if (sausageElem) sausageElem.textContent = '0';
+      if (sausageLinksSub) sausageLinksSub.textContent = '(Closed / 0 lbs)';
+      if (ribsElem) ribsElem.textContent = '0';
+      if (dinoElem) dinoElem.textContent = '0';
+      if (turkeyElem) turkeyElem.textContent = '0';
+      if (turkeySubElem) turkeySubElem.textContent = '(Closed / 0 lbs)';
+      if (rosebudsElem) rosebudsElem.textContent = '0';
+      if (rosebudsSubElem) rosebudsSubElem.textContent = '(Closed / 0 units)';
+      if (tacosElem) tacosElem.textContent = '0';
+      if (tacosSubElem) tacosSubElem.textContent = '(Closed / 0 tacos)';
+      if (totalCookedElem) totalCookedElem.textContent = '0';
+      if (totalCookedSub) totalCookedSub.textContent = '(Closed / 0 lbs)';
+
+      if (bCasesElem) bCasesElem.textContent = '(Closed / 0 Cases)';
+      if (pCasesElem) pCasesElem.textContent = '(Closed / 0 Cases)';
+      if (bCookedElem) bCookedElem.textContent = '(0 lbs cooked)';
+      if (pCookedElem) pCookedElem.textContent = '(0 lbs cooked)';
+      if (rCasesElem) rCasesElem.textContent = '(Closed / 0 Cases)';
+      if (drCasesElem) drCasesElem.textContent = '(Closed / 0 Cases)';
+
+      if (laborHoursElem) laborHoursElem.textContent = '0';
+      if (staffCountElem) staffCountElem.textContent = '(Closed / 0 Staff)';
+      if (cogsUsdElem) cogsUsdElem.textContent = '($0 COGS)';
+      if (aovUsdElem) aovUsdElem.textContent = '$0.00';
+      if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
+      if (revenueElem) revenueElem.textContent = '$0 (Closed)';
+    } else if (hasBlended) {
+      const bSum = blendedMetrics.summary;
+      const cutH = blendedMetrics.cutoffHour;
+      const h12 = cutH === 0 ? 12 : (cutH > 12 ? cutH - 12 : cutH);
+      const ampm = cutH >= 12 ? 'PM' : 'AM';
+      const pSign = bSum.pacingPct >= 0 ? '+' : '';
+      const pColor = bSum.pacingPct >= 0 ? '#34d399' : '#f87171';
+
+      const actSalesSoFar = Math.round(bSum.actualSalesSoFar);
+      const remSales = Math.round(bSum.forecastRemaining);
+      const blendedTotalRev = Math.round(bSum.blendedTotalRevenue);
+      const salesProgress = bSum.forecastFullDay > 0 ? (bSum.forecastToHour / bSum.forecastFullDay) : 0;
+      const pacingRatio = bSum.pacingRatio || (bSum.forecastToHour > 0 ? (bSum.actualSalesSoFar / bSum.forecastToHour) : 1.0);
+
+      // 1. Brisket
+      const actCookedBrisket = bSum.actualBrisketCooked !== undefined ? bSum.actualBrisketCooked : Math.round(bCooked * salesProgress * pacingRatio * 10) / 10;
+      const remCookedBrisket = bSum.remainingBrisketCooked !== undefined ? bSum.remainingBrisketCooked : Math.round(bCooked * (1 - salesProgress) * 10) / 10;
+      const blendedCookedBrisket = Math.round((actCookedBrisket + remCookedBrisket) * 10) / 10;
+      const blendedRawBrisket = Math.round(blendedCookedBrisket / 0.4);
+
+      if (brisketElem) brisketElem.textContent = blendedRawBrisket;
+      if (bCasesElem) bCasesElem.textContent = `(~${blendedRawBrisket} lbs raw / ~${(blendedRawBrisket / 70.0).toFixed(1)} Cases)`;
+      if (bCookedElem) bCookedElem.textContent = `(~${Math.round(actCookedBrisket)} lbs actual sold • ~${Math.round(remCookedBrisket)} lbs remaining)`;
+      setBlendedPill('kpi-brisket-blended-sub', `
+        <strong>Blended Live Total</strong>: ~${Math.round(actCookedBrisket)} lbs actual drawn + ~${Math.round(remCookedBrisket)} lbs remaining (${Math.round(blendedCookedBrisket)} lbs total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.4)} lbs raw)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Draw Pacing</span>
+      `);
+
+      // 2. Pork Shoulder
+      const actCookedPork = bSum.actualPorkCooked !== undefined ? bSum.actualPorkCooked : Math.round(pCooked * salesProgress * pacingRatio * 10) / 10;
+      const remCookedPork = bSum.remainingPorkCooked !== undefined ? bSum.remainingPorkCooked : Math.round(pCooked * (1 - salesProgress) * 10) / 10;
+      const blendedCookedPork = Math.round((actCookedPork + remCookedPork) * 10) / 10;
+      const blendedRawPork = Math.round(blendedCookedPork / 0.4);
+
+      if (porkElem) porkElem.textContent = blendedRawPork;
+      if (pCasesElem) pCasesElem.textContent = `(~${blendedRawPork} lbs raw / ~${(blendedRawPork / 32.0).toFixed(1)} Cases)`;
+      if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} lbs actual sold • ~${Math.round(remCookedPork)} lbs remaining)`;
+      setBlendedPill('kpi-pork-blended-sub', `
+        <strong>Blended Live Total</strong>: ~${Math.round(actCookedPork)} lbs actual drawn + ~${Math.round(remCookedPork)} lbs remaining (${Math.round(blendedCookedPork)} lbs total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.4)} lbs raw)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Draw Pacing</span>
+      `);
+
+      // 3. Sausage
+      const actSausageLinks = Math.round(sausageLinks * salesProgress * pacingRatio);
+      const remSausageLinks = Math.max(0, Math.round(sausageLinks * (1 - salesProgress)));
+      const blendedSausageLinks = actSausageLinks + remSausageLinks;
+      const actSausageLbs = Math.round(actSausageLinks / 3);
+      const blendedSausageLbs = Math.round(blendedSausageLinks / 3);
+      const blendedSausageBatches = Math.ceil(blendedSausageLbs / 60.0) || 1;
+
+      if (sausageElem) sausageElem.textContent = blendedSausageBatches;
+      if (sausageLinksSub) sausageLinksSub.textContent = `(${actSausageLinks} actual links sold • ${remSausageLinks} remaining)`;
+      setBlendedPill('kpi-sausage-blended-sub', `
+        <strong>Blended Live Total</strong>: ~${actSausageLinks} actual links sold + ~${remSausageLinks} remaining (${blendedSausageLinks} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actSausageLinks} links sold (~${actSausageLbs} lbs)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 4. Pork Spare Ribs
+      const actRibsRacks = Math.round(rVal * salesProgress * pacingRatio);
+      const remRibsRacks = Math.max(0, Math.round(rVal * (1 - salesProgress)));
+      const blendedRibsRacks = actRibsRacks + remRibsRacks;
+
+      if (ribsElem) ribsElem.textContent = blendedRibsRacks;
+      if (rCasesElem) rCasesElem.textContent = `(${actRibsRacks} actual racks sold • ${remRibsRacks} remaining)`;
+      setBlendedPill('kpi-pork-ribs-blended-sub', `
+        <strong>Blended Live Total</strong>: ${actRibsRacks} actual racks sold + ${remRibsRacks} remaining (${blendedRibsRacks} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actRibsRacks} racks sold (~${(actRibsRacks / 6.0).toFixed(1)} cs)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 5. Beef Dino Ribs
+      const actDinoRibs = Math.round(drVal * salesProgress * pacingRatio);
+      const remDinoRibs = Math.max(0, Math.round(drVal * (1 - salesProgress)));
+      const blendedDinoRibs = actDinoRibs + remDinoRibs;
+
+      if (dinoElem) dinoElem.textContent = blendedDinoRibs;
+      if (drCasesElem) drCasesElem.textContent = `(${actDinoRibs} actual ribs sold • ${remDinoRibs} remaining)`;
+      setBlendedPill('kpi-beef-dino-blended-sub', `
+        <strong>Blended Live Total</strong>: ${actDinoRibs} actual ribs sold + ${remDinoRibs} remaining (${blendedDinoRibs} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actDinoRibs} ribs sold (~${(blendedDinoRibs / 12.0).toFixed(1)} Cases)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 6. Smoked Turkey
+      const actTurkeyCooked = Math.round(tVal * salesProgress * pacingRatio * 10) / 10;
+      const remTurkeyCooked = Math.round(tVal * (1 - salesProgress) * 10) / 10;
+      const blendedTurkeyCooked = Math.round((actTurkeyCooked + remTurkeyCooked) * 10) / 10;
+      const blendedTurkeyRaw = Math.round(blendedTurkeyCooked / 0.70);
+      const blendedTurkeyCases = (blendedTurkeyRaw / 20.0).toFixed(1);
+      const blendedTurkeyPort = Math.round(blendedTurkeyCooked * 3.2);
+
+      if (turkeyElem) turkeyElem.textContent = Math.round(blendedTurkeyCooked);
+      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} lbs actual • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
+      setBlendedPill('kpi-turkey-blended-sub', `
+        <strong>Blended Live Total</strong>: ~${Math.round(actTurkeyCooked)} lbs actual drawn + ~${Math.round(remTurkeyCooked)} lbs remaining (${Math.round(blendedTurkeyCooked)} lbs total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 7. Rosebuds
+      const actRosebuds = Math.round(rbVal * salesProgress * pacingRatio);
+      const remRosebuds = Math.max(0, Math.round(rbVal * (1 - salesProgress)));
+      const blendedRosebuds = actRosebuds + remRosebuds;
+
+      if (rosebudsElem) rosebudsElem.textContent = blendedRosebuds;
+      if (rosebudsSubElem) rosebudsSubElem.textContent = `(${actRosebuds} actual sold • ${remRosebuds} remaining)`;
+      setBlendedPill('kpi-rosebuds-blended-sub', `
+        <strong>Blended Live Total</strong>: ${actRosebuds} actual sold + ${remRosebuds} remaining (${blendedRosebuds} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actRosebuds} units (~${(actRosebuds * 0.25).toFixed(1)} lbs brisket draw)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 8. Tacos
+      const actTacos = Math.round(tacoVal * salesProgress * pacingRatio);
+      const remTacos = Math.max(0, Math.round(tacoVal * (1 - salesProgress)));
+      const blendedTacos = actTacos + remTacos;
+
+      if (tacosElem) tacosElem.textContent = blendedTacos;
+      if (tacosSubElem) tacosSubElem.textContent = `(${actTacos} actual sold • ${remTacos} remaining)`;
+      setBlendedPill('kpi-tacos-blended-sub', `
+        <strong>Blended Live Total</strong>: ${actTacos} actual sold + ${remTacos} remaining (${blendedTacos} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actTacos} tacos (~${(actTacos * 0.15).toFixed(1)} lbs meat draw)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 9. Total Cooked Barbecue
+      const actTotalCooked = Math.round(actCookedBrisket + actCookedPork);
+      const remTotalCooked = Math.round(remCookedBrisket + remCookedPork);
+      const blendedTotalCooked = actTotalCooked + remTotalCooked;
+
+      if (totalCookedElem) totalCookedElem.textContent = blendedTotalCooked;
+      if (totalCookedSub) totalCookedSub.textContent = `(~${actTotalCooked} lbs actual sold • ~${remTotalCooked} lbs remaining)`;
+      setBlendedPill('kpi-total-cooked-blended-sub', `
+        <strong>Blended Live Total</strong>: ~${actTotalCooked} lbs actual pulled + ~${remTotalCooked} lbs remaining (${blendedTotalCooked} lbs total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actTotalCooked} lbs cooked (~${Math.round(actTotalCooked / 0.4)} lbs raw trim)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 10. Sales Velocity
+      const elapsedHours = Math.max(1, cutH >= 11 ? Math.min(cutH - 10, 10) : 1);
+      const liveVelocity = (bSum.actualOrdersSoFar / elapsedHours).toFixed(1);
+      const targetVelocity = ((bSum.forecastFullDay / 48.5) / 10).toFixed(1);
+      const velElem = document.getElementById('kpi-current-velocity');
+      const pacingStatusElem = document.getElementById('kpi-pacing-status');
+
+      if (velElem) velElem.textContent = `${liveVelocity} ord/hr`;
+      if (pacingStatusElem) {
+        pacingStatusElem.textContent = `(${pSign}${bSum.pacingPct}% Pacing)`;
+        pacingStatusElem.style.color = pColor;
       }
+      setBlendedPill('kpi-velocity-blended-sub', `
+        <strong>Blended Velocity</strong>: ${liveVelocity} orders/hr actual pace<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${bSum.actualOrdersSoFar} orders in ${elapsedHours}h (Target: ${targetVelocity} ord/hr)</span> • 
+        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+      // 11. Estimated Food Cost / COGS
+      const blendedCOGS = Math.round(blendedTotalRev * 0.295);
+      const actCOGS = Math.round(actSalesSoFar * 0.295);
+      const remCOGS = Math.round(remSales * 0.295);
+      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} actual COGS • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
+      setBlendedPill('kpi-food-cost-blended-sub', `
+        <strong>Blended Live COGS</strong>: ~$${Math.round(actCOGS).toLocaleString()} actual + ~$${Math.round(remCOGS).toLocaleString()} remaining (~$${Math.round(blendedCOGS).toLocaleString()} total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~$${Math.round(actCOGS).toLocaleString()} food cost on $${actSalesSoFar.toLocaleString()} sales</span> • 
+        <span style="color:#10b981; font-weight:700;">29.5% Target Met</span>
+      `);
+
+      // 12. Average Ticket Revenue
+      const liveAOV = bSum.actualOrdersSoFar > 0 ? (actSalesSoFar / bSum.actualOrdersSoFar).toFixed(2) : '48.50';
+      if (aovUsdElem) aovUsdElem.textContent = `$${liveAOV}`;
+      if (aovSubElem) aovSubElem.textContent = `($${actSalesSoFar.toLocaleString()} actual POS • ${bSum.actualOrdersSoFar} orders)`;
+      setBlendedPill('kpi-aov-blended-sub', `
+        <strong>Blended Live Ticket</strong>: $${liveAOV} actual average ticket<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: $${actSalesSoFar.toLocaleString()} POS revenue / ${bSum.actualOrdersSoFar} orders</span> • 
+        <span style="color:${pColor}; font-weight:700;">Target: $48.50</span>
+      `);
+
+      // 13. Labor Hours
+      const actLaborHours = Math.min(totalLaborHours, Math.round(elapsedHours * totalStaff * 10) / 10);
+      const remLaborHours = Math.max(0, Math.round((totalLaborHours - actLaborHours) * 10) / 10);
+      const blendedLaborHours = Math.round((actLaborHours + remLaborHours) * 10) / 10;
+      if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
+      if (staffCountElem) staffCountElem.textContent = `(~${actLaborHours.toFixed(1)}h actual clocked • ~${remLaborHours.toFixed(1)}h remaining)`;
+      setBlendedPill('kpi-labor-blended-sub', `
+        <strong>Blended Shift Hours</strong>: ~${actLaborHours.toFixed(1)}h actual worked + ~${remLaborHours.toFixed(1)}h remaining (${blendedLaborHours.toFixed(1)}h total)<br>
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actLaborHours.toFixed(1)} pit hours clocked (${totalStaff} staff)</span> • 
+        <span style="color:#a855f7; font-weight:700;">On Schedule</span>
+      `);
+
+      // 14. Revenue Card
+      if (revenueElem) revenueElem.textContent = '$' + blendedTotalRev.toLocaleString();
+      setBlendedPill('kpi-revenue-blended-sub', `
+        <strong>Blended Live Total</strong>: $${actSalesSoFar.toLocaleString()} actual + $${remSales.toLocaleString()} remaining<br>
+        <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm}: $${actSalesSoFar.toLocaleString()} (${bSum.actualOrdersSoFar} orders)</span> • 
+        <span style="color: ${pColor}; font-weight: 700;">${pSign}${bSum.pacingPct}% Pacing</span>
+      `);
+
+    } else {
+      clearAllBlendedPills();
+
+      if (brisketElem) brisketElem.textContent = bVal;
+      if (porkElem) porkElem.textContent = pVal;
+      if (sausageElem) sausageElem.textContent = sausageBatches;
+      if (sausageLinksSub) sausageLinksSub.textContent = `(${sausageLinks} links / ${sVal} lbs)`;
+      if (ribsElem) ribsElem.textContent = rVal;
+      if (dinoElem) dinoElem.textContent = drVal;
+      if (turkeyElem) turkeyElem.textContent = tVal;
+      const tRaw = Math.round(tVal / 0.70);
+      const tCases = (tRaw / 20.0).toFixed(1);
+      const tPortions = Math.round(tVal * 3.2);
+      if (turkeySubElem) turkeySubElem.textContent = `(~${tRaw} lbs raw / ~${tCases} cs / ~${tPortions} port)`;
+      if (rosebudsElem) rosebudsElem.textContent = rbVal;
+      if (rosebudsSubElem) rosebudsSubElem.textContent = '(Draws from Brisket)';
+      if (tacosElem) tacosElem.textContent = tacoVal;
+      if (tacosSubElem) tacosSubElem.textContent = '(Draws from Smoked Inventory)';
+      if (totalCookedElem) totalCookedElem.textContent = totalCooked;
+      if (totalCookedSub) totalCookedSub.textContent = `(~${totalRaw} lbs raw trim)`;
+
+      if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
+      if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
+      if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
+      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
+      if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
+      if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
+
+      if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
+      if (staffCountElem) staffCountElem.textContent = `(~${totalStaff} Staff / 8.5h Shift)`;
+      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} COGS)`;
+      if (aovUsdElem) aovUsdElem.textContent = '$48.50';
+      if (aovSubElem) aovSubElem.textContent = '(Average Order Value)';
+
+      if (revenueElem) revenueElem.textContent = '$' + Math.round(totalRev).toLocaleString();
     }
+
+    // Update dynamic baseline trend card
+    const baselineTrendElem = document.getElementById('dynamic-baseline-trend');
+    if (baselineTrendElem) {
+      let comparisonNote = '';
+      const revLabel = matchedRecord.is_historical ? 'actual' : 'projected';
+      if (isTargetClosed) {
+        comparisonNote = `For your selected horizon (<strong>${matchedRecord.day_name || shortDayStr}, ${matchedRecord.date || targetDateInput}</strong>), the smokehouse is <strong>Closed</strong> (standard weekly non-operating day). Operating revenue and meat prep targets are set to 0.`;
+      } else if (pctDiff > 0) {
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the operating baseline pace (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
+      } else if (pctDiff < 0) {
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the operating baseline pace (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for midweek prep windows.`;
+      } else {
+        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> matches standard operational baseline expectations.`;
+      }
+
+      baselineTrendElem.innerHTML = `Our model establishes a rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> across active operating days (Tue–Sun; ~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Note: Mondays are standard non-operating days reserved for pit cleaning and wood replenishment. ${comparisonNote}`;
+    }
+
     if (demandPctElem) {
       demandPctElem.textContent = isTargetClosed ? '(Closed Today)' : `(${pctDisplay} vs Baseline)`;
     }
@@ -1686,7 +1904,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (isTargetClosed) {
         demandLabelElem.textContent = `Smokehouse & Restaurant Closed Today (${matchedRecord.day_name || shortDayStr} Pit Maintenance & Prep). Zero service demand.`;
       } else {
-        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : (blendedMetrics && blendedMetrics.isToday && blendedMetrics.summary.actualSalesSoFar > 0 ? 'Blended Sales' : 'Projected Sales');
+        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : (hasBlended ? 'Blended Sales' : 'Projected Sales');
         if (pctDiff > 0) {
           demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day operating baseline pace.`;
         } else if (pctDiff < 0) {
