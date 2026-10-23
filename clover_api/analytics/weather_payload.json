@@ -64,7 +64,7 @@
           3206.62,
           3567.98,
           4240.92,
-          3232.81
+          4436.54
         ],
         "text": [
           "<b>Friday, 2026-08-28</b><br>Revenue: $4,576.48<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -96,7 +96,7 @@
           "<b>Tuesday, 2026-10-20</b><br>Revenue: $3,206.62<br>Weather: 72.32\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-10-21</b><br>Revenue: $3,567.98<br>Weather: 77.72\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-22</b><br>Revenue: $4,240.92<br>Weather: 76.28\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Friday, 2026-10-23</b><br>Revenue: $3,232.81<br>Weather: 73.58\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Friday, 2026-10-23</b><br>Revenue: $4,436.54<br>Weather: 73.58\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -478,8 +478,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4558.0670769230765,
-          "y1": 4558.0670769230765,
+          "y0": 4539.149846153845,
+          "y1": 4539.149846153845,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -491,8 +491,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4858.0670769230765,
-          "text": "Baseline Target ($4,558)",
+          "y": 4839.149846153845,
+          "text": "Baseline Target ($4,539)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -504,12 +504,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4558.07,
+    "normal_avg_usd": 4539.15,
     "rain_avg_usd": 5014.18,
-    "rain_drop_pct": 10.0,
+    "rain_drop_pct": 10.5,
     "heat_avg_usd": 4823.12,
-    "heat_drop_pct": 5.3,
-    "rain_coef": 9.01,
-    "temp_coef": 28.2
+    "heat_drop_pct": 5.7,
+    "rain_coef": 8.49,
+    "temp_coef": 23.57
   }
 }
