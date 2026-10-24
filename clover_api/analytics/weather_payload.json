@@ -40,7 +40,7 @@
           77.72,
           76.28,
           73.58,
-          72.32
+          70.7
         ],
         "y": [
           4078.87,
@@ -120,7 +120,7 @@
           "<b>Wednesday, 2026-10-21</b><br>Revenue: $3,567.98<br>Weather: 77.72\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-10-22</b><br>Revenue: $4,240.92<br>Weather: 76.28\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Friday, 2026-10-23</b><br>Revenue: $5,817.73<br>Weather: 73.58\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Saturday, 2026-10-24</b><br>Revenue: $190.72<br>Weather: 72.32\u00b0F, 5.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Saturday, 2026-10-24</b><br>Revenue: $190.72<br>Weather: 70.7\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -164,7 +164,7 @@
             10,
             10,
             10,
-            20.0
+            10
           ],
           "color": "#27ae60",
           "opacity": 0.8,
@@ -629,7 +629,7 @@
     "rain_drop_pct": 11.8,
     "heat_avg_usd": 5014.96,
     "heat_drop_pct": 13.5,
-    "rain_coef": 1.03,
-    "temp_coef": 45.81
+    "rain_coef": 1.91,
+    "temp_coef": 47.26
   }
 }
