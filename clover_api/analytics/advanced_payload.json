@@ -3,7 +3,7 @@
     {
       "pair": "2 meat plate + BBQ plate",
       "count": 320,
-      "confidence": 20.8
+      "confidence": 20.9
     },
     {
       "pair": "2 meat plate + Rosebud",
@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4267.85,
+    "normal": 4226.17,
     "game_only": 4245.02,
-    "rain_only": 5014.18,
-    "game_and_rain": 11949.98
+    "rain_only": 5040.32,
+    "game_and_rain": 11833.28
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5010,
-      "total_revenue": 216830.97,
-      "avg_ticket": 43.27963473053892
+      "order_count": 5008,
+      "total_revenue": 216768.02,
+      "avg_ticket": 43.284349041533545
     },
     {
       "order_type": "In-store Pickup",
@@ -73,8 +73,8 @@
     {
       "order_type": "To-Go",
       "order_count": 2418,
-      "total_revenue": 144532.83,
-      "avg_ticket": 59.77370967741935
+      "total_revenue": 144559.47,
+      "avg_ticket": 59.784727047146404
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,9 +483,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.0,
-    "pork_ribs_avg_with_dino": 3.7,
-    "impact_pct": -25.4
+    "pork_ribs_avg_without_dino": 5.3,
+    "pork_ribs_avg_with_dino": 3.3,
+    "impact_pct": -37.4
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,

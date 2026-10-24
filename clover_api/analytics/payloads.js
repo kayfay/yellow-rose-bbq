@@ -1,34 +1,15 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-10-23T20:16:53-04:00",
+      "generated_at": "2026-10-23T20:38:48-04:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~226.1 lbs raw brisket (~90.4 lbs cooked yield) and ~44.6 lbs raw pork shoulder (~17.8 lbs cooked yield) [~270.7 lbs total raw / ~108.2 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (53 projected) and Rosebuds (34 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
         {
-          "date": "2026-10-23",
-          "day_name": "Fri",
-          "is_closed": false,
-          "predicted_revenue": 5689.1,
-          "brisket_raw_lbs": 199.7,
-          "pork_shoulder_raw_lbs": 23.6,
-          "sausage_lbs": 20.2,
-          "turkey_lbs": 12.9,
-          "turkey_cooked_lbs": 12.9,
-          "turkey_raw_lbs": 18.4,
-          "tacos_sold": 56,
-          "rosebuds_sold": 35,
-          "pork_ribs_racks": 13,
-          "beef_dino_ribs": 0,
-          "recommended_staff": 5,
-          "pitmaster_hours": 42.5,
-          "data_type": "PREDICTED"
-        },
-        {
           "date": "2026-10-24",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 7089.5,
+          "predicted_revenue": 7132.54,
           "brisket_raw_lbs": 226.1,
           "pork_shoulder_raw_lbs": 44.6,
           "sausage_lbs": 30.7,
@@ -47,7 +28,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-25",
           "day_name": "Sun",
           "is_closed": false,
-          "predicted_revenue": 5251.48,
+          "predicted_revenue": 5250.95,
           "brisket_raw_lbs": 168.3,
           "pork_shoulder_raw_lbs": 22.9,
           "sausage_lbs": 28.3,
@@ -85,7 +66,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-27",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 3632.27,
+          "predicted_revenue": 3631.91,
           "brisket_raw_lbs": 118.3,
           "pork_shoulder_raw_lbs": 21.6,
           "sausage_lbs": 11.8,
@@ -104,7 +85,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-28",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 3588.51,
+          "predicted_revenue": 3588.15,
           "brisket_raw_lbs": 125.6,
           "pork_shoulder_raw_lbs": 15.1,
           "sausage_lbs": 10.9,
@@ -123,7 +104,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-29",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 3982.37,
+          "predicted_revenue": 3981.97,
           "brisket_raw_lbs": 136.7,
           "pork_shoulder_raw_lbs": 30.6,
           "sausage_lbs": 13.0,
@@ -142,7 +123,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-30",
           "day_name": "Fri",
           "is_closed": false,
-          "predicted_revenue": 5689.1,
+          "predicted_revenue": 5688.53,
           "brisket_raw_lbs": 199.7,
           "pork_shoulder_raw_lbs": 23.6,
           "sausage_lbs": 20.2,
@@ -161,7 +142,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-10-31",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 7089.5,
+          "predicted_revenue": 7132.54,
           "brisket_raw_lbs": 226.1,
           "pork_shoulder_raw_lbs": 44.6,
           "sausage_lbs": 30.7,
@@ -180,7 +161,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-01",
           "day_name": "Sun",
           "is_closed": false,
-          "predicted_revenue": 5251.48,
+          "predicted_revenue": 5250.95,
           "brisket_raw_lbs": 168.3,
           "pork_shoulder_raw_lbs": 22.9,
           "sausage_lbs": 28.3,
@@ -218,7 +199,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-03",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 3632.27,
+          "predicted_revenue": 3631.91,
           "brisket_raw_lbs": 118.3,
           "pork_shoulder_raw_lbs": 21.6,
           "sausage_lbs": 11.8,
@@ -237,7 +218,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-04",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 3588.51,
+          "predicted_revenue": 3588.15,
           "brisket_raw_lbs": 125.6,
           "pork_shoulder_raw_lbs": 15.1,
           "sausage_lbs": 10.9,
@@ -256,7 +237,7 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-05",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 3982.37,
+          "predicted_revenue": 3981.97,
           "brisket_raw_lbs": 136.7,
           "pork_shoulder_raw_lbs": 30.6,
           "sausage_lbs": 13.0,
@@ -269,6 +250,25 @@ window.BBQ_PAYLOADS = {
           "beef_dino_ribs": 0,
           "recommended_staff": 4,
           "pitmaster_hours": 34.0,
+          "data_type": "PREDICTED"
+        },
+        {
+          "date": "2026-11-06",
+          "day_name": "Fri",
+          "is_closed": false,
+          "predicted_revenue": 5688.53,
+          "brisket_raw_lbs": 199.7,
+          "pork_shoulder_raw_lbs": 23.6,
+          "sausage_lbs": 20.2,
+          "turkey_lbs": 12.9,
+          "turkey_cooked_lbs": 12.9,
+          "turkey_raw_lbs": 18.4,
+          "tacos_sold": 56,
+          "rosebuds_sold": 35,
+          "pork_ribs_racks": 13,
+          "beef_dino_ribs": 0,
+          "recommended_staff": 5,
+          "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
         }
       ]
@@ -345,7 +345,7 @@ window.BBQ_PAYLOADS = {
             18.8,
             11.4,
             28.3,
-            20.6
+            20.7
           ],
           "name": "Pork Shoulder (lbs)",
           "type": "bar",
@@ -616,6 +616,13 @@ window.BBQ_PAYLOADS = {
       "data": [
         {
           "x": [
+            88.34,
+            89.6,
+            87.26,
+            87.44,
+            88.34,
+            88.16,
+            88.7,
             88.7,
             89.78,
             89.96000000000001,
@@ -646,9 +653,16 @@ window.BBQ_PAYLOADS = {
             77.72,
             76.28,
             73.58,
-            73.94
+            72.32
           ],
           "y": [
+            4078.87,
+            6039.65,
+            6251.17,
+            6599.45,
+            4112.0,
+            4112.04,
+            2861.94,
             4576.48,
             2607.41,
             4947.45,
@@ -679,9 +693,16 @@ window.BBQ_PAYLOADS = {
             3567.98,
             4240.92,
             5817.7300000000005,
-            130.78
+            190.72
           ],
           "text": [
+            "<b>Thursday, 2026-07-30</b><br>Revenue: $4,078.87<br>Weather: 88.34\u00b0F, 1.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Friday, 2026-07-31</b><br>Revenue: $6,039.65<br>Weather: 89.6\u00b0F, 1.1mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Saturday, 2026-08-01</b><br>Revenue: $6,251.17<br>Weather: 87.26\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Sunday, 2026-08-02</b><br>Revenue: $6,599.45<br>Weather: 87.44\u00b0F, 0.8mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Tuesday, 2026-08-04</b><br>Revenue: $4,112.00<br>Weather: 88.34\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Wednesday, 2026-08-05</b><br>Revenue: $4,112.04<br>Weather: 88.16\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+            "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Friday, 2026-08-28</b><br>Revenue: $4,576.48<br>Weather: 88.7\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Saturday, 2026-08-29</b><br>Revenue: $2,607.41<br>Weather: 89.78\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Sunday, 2026-08-30</b><br>Revenue: $4,947.45<br>Weather: 89.96000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -712,13 +733,20 @@ window.BBQ_PAYLOADS = {
             "<b>Wednesday, 2026-10-21</b><br>Revenue: $3,567.98<br>Weather: 77.72\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-10-22</b><br>Revenue: $4,240.92<br>Weather: 76.28\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Friday, 2026-10-23</b><br>Revenue: $5,817.73<br>Weather: 73.58\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-10-24</b><br>Revenue: $130.78<br>Weather: 73.94\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            "<b>Saturday, 2026-10-24</b><br>Revenue: $190.72<br>Weather: 72.32\u00b0F, 5.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
           "name": "Ideal Patio Weather (Normal)",
           "marker": {
             "size": [
+              12.8,
+              12.2,
+              10,
+              11.6,
+              10,
+              10,
+              10,
               10,
               10,
               10,
@@ -749,12 +777,19 @@ window.BBQ_PAYLOADS = {
               10,
               10,
               10,
-              10
+              20.0
             ],
             "color": "#27ae60",
             "opacity": 0.8,
             "line": {
               "width": [
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
                 1.5,
                 1.5,
                 1.5,
@@ -793,6 +828,13 @@ window.BBQ_PAYLOADS = {
                 "white",
                 "white",
                 "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
                 "#39ff14",
                 "white",
                 "white",
@@ -825,7 +867,10 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            95.18,
+            89.6,
+            94.64,
+            93.2,
+            89.6,
             92.3,
             86.18,
             87.08000000000001,
@@ -839,6 +884,9 @@ window.BBQ_PAYLOADS = {
             81.14
           ],
           "y": [
+            7897.93,
+            4370.9,
+            3165.83,
             5009.98,
             6349.3099999999995,
             5470.4400000000005,
@@ -853,7 +901,10 @@ window.BBQ_PAYLOADS = {
             3951.5
           ],
           "text": [
-            "<b>Thursday, 2026-08-27</b><br>Revenue: $5,009.98<br>Weather: 95.18\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Saturday, 2026-08-08</b><br>Revenue: $7,897.93<br>Weather: 89.6\u00b0F, 11.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Wednesday, 2026-08-12</b><br>Revenue: $4,370.90<br>Weather: 94.64\u00b0F, 67.3mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Thursday, 2026-08-13</b><br>Revenue: $3,165.83<br>Weather: 93.2\u00b0F, 44.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
+            "<b>Thursday, 2026-08-27</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Sunday, 2026-09-06</b><br>Revenue: $6,349.31<br>Weather: 92.3\u00b0F, 45.0mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Friday, 2026-09-18</b><br>Revenue: $5,470.44<br>Weather: 86.18\u00b0F, 12.2mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
             "<b>Thursday, 2026-10-01</b><br>Revenue: $4,266.39<br>Weather: 87.08000000000001\u00b0F, 14.8mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
@@ -871,6 +922,9 @@ window.BBQ_PAYLOADS = {
           "name": "Heavy Rain (High To-Go Volume)",
           "marker": {
             "size": [
+              32.4,
+              35,
+              35,
               35,
               35,
               34.4,
@@ -899,9 +953,15 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
+                1.5,
+                1.5,
+                1.5,
                 1.5
               ],
               "color": [
+                "white",
+                "white",
+                "white",
                 "white",
                 "white",
                 "white",
@@ -920,27 +980,45 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            102.91999999999999,
-            102.38000000000001,
-            102.02,
-            97.7,
-            98.41999999999999,
-            99.86,
-            98.24,
+            95.36,
+            96.98,
+            96.61999999999999,
+            91.58000000000001,
+            91.03999999999999,
+            92.48,
+            96.8,
+            92.11999999999999,
+            91.03999999999999,
+            96.44,
+            97.52,
             96.26,
+            95.53999999999999,
+            90.32,
+            91.22,
+            91.94,
+            91.58000000000001,
             90.32,
             92.11999999999999,
             90.68,
             92.3
           ],
           "y": [
+            7373.17,
+            3384.79,
+            4886.43,
+            3575.35,
+            5723.16,
+            5708.12,
+            3467.3,
+            6036.86,
+            8276.06,
+            4931.26,
             3615.92,
             2823.19,
             4124.63,
             5948.64,
             7577.28,
             6630.04,
-            2861.94,
             4388.4,
             4409.6,
             2846.48,
@@ -948,14 +1026,23 @@ window.BBQ_PAYLOADS = {
             6868.89
           ],
           "text": [
-            "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 102.91999999999999\u00b0F, 2.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Wednesday, 2026-08-19</b><br>Revenue: $2,823.19<br>Weather: 102.38000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Thursday, 2026-08-20</b><br>Revenue: $4,124.63<br>Weather: 102.02\u00b0F, 3.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Friday, 2026-08-21</b><br>Revenue: $5,948.64<br>Weather: 97.7\u00b0F, 1.1mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Saturday, 2026-08-22</b><br>Revenue: $7,577.28<br>Weather: 98.41999999999999\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Sunday, 2026-08-23</b><br>Revenue: $6,630.04<br>Weather: 99.86\u00b0F, 1.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Tuesday, 2026-08-25</b><br>Revenue: $2,861.94<br>Weather: 98.24\u00b0F, 2.9mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
-            "<b>Wednesday, 2026-08-26</b><br>Revenue: $4,388.40<br>Weather: 96.26\u00b0F, 2.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Sunday, 2026-07-26</b><br>Revenue: $7,373.17<br>Weather: 95.36\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Tuesday, 2026-07-28</b><br>Revenue: $3,384.79<br>Weather: 96.98\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-07-29</b><br>Revenue: $4,886.43<br>Weather: 96.61999999999999\u00b0F, 3.3mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Thursday, 2026-08-06</b><br>Revenue: $3,575.35<br>Weather: 91.58000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-08-07</b><br>Revenue: $5,723.16<br>Weather: 91.03999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Sunday, 2026-08-09</b><br>Revenue: $5,708.12<br>Weather: 92.48\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Tuesday, 2026-08-11</b><br>Revenue: $3,467.30<br>Weather: 96.8\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-08-14</b><br>Revenue: $6,036.86<br>Weather: 92.11999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Saturday, 2026-08-15</b><br>Revenue: $8,276.06<br>Weather: 91.03999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Sunday, 2026-08-16</b><br>Revenue: $4,931.26<br>Weather: 96.44\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Tuesday, 2026-08-18</b><br>Revenue: $3,615.92<br>Weather: 97.52\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-08-19</b><br>Revenue: $2,823.19<br>Weather: 96.26\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Thursday, 2026-08-20</b><br>Revenue: $4,124.63<br>Weather: 95.53999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Friday, 2026-08-21</b><br>Revenue: $5,948.64<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Saturday, 2026-08-22</b><br>Revenue: $7,577.28<br>Weather: 91.22\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Sunday, 2026-08-23</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+            "<b>Wednesday, 2026-08-26</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Friday, 2026-09-04</b><br>Revenue: $4,409.60<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Thursday, 2026-09-10</b><br>Revenue: $2,846.48<br>Weather: 92.11999999999999\u00b0F, 0.8mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
             "<b>Friday, 2026-09-11</b><br>Revenue: $4,063.36<br>Weather: 90.68\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
@@ -966,14 +1053,23 @@ window.BBQ_PAYLOADS = {
           "name": "Extreme Heat (High Curbside Volume)",
           "marker": {
             "size": [
-              14.0,
               10,
-              16.8,
-              12.2,
+              10,
+              16.6,
+              10,
+              10,
               10.8,
-              13.6,
-              15.8,
-              14.8,
+              10,
+              10,
+              10,
+              10,
+              11.6,
+              10,
+              10,
+              10,
+              10,
+              10,
+              10.8,
               10,
               11.6,
               10,
@@ -994,9 +1090,27 @@ window.BBQ_PAYLOADS = {
                 1.5,
                 1.5,
                 1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
+                1.5,
                 1.5
               ],
               "color": [
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
+                "white",
                 "white",
                 "white",
                 "white",
@@ -1097,8 +1211,8 @@ window.BBQ_PAYLOADS = {
             "xref": "paper",
             "x0": 0,
             "x1": 1,
-            "y0": 4539.744307692308,
-            "y1": 4539.744307692308,
+            "y0": 4509.87758064516,
+            "y1": 4509.87758064516,
             "line": {
               "color": "#94a3b8",
               "width": 2,
@@ -1110,8 +1224,8 @@ window.BBQ_PAYLOADS = {
           {
             "xref": "paper",
             "x": 0.02,
-            "y": 4839.744307692308,
-            "text": "Baseline Target ($4,540)",
+            "y": 4809.87758064516,
+            "text": "Baseline Target ($4,510)",
             "showarrow": false,
             "font": {
               "color": "#94a3b8",
@@ -1123,13 +1237,13 @@ window.BBQ_PAYLOADS = {
       }
     },
     "weather_stats": {
-      "normal_avg_usd": 4539.74,
-      "rain_avg_usd": 5014.18,
-      "rain_drop_pct": 10.5,
-      "heat_avg_usd": 4823.12,
-      "heat_drop_pct": 5.7,
-      "rain_coef": 9.69,
-      "temp_coef": 32.68
+      "normal_avg_usd": 4509.88,
+      "rain_avg_usd": 5040.32,
+      "rain_drop_pct": 11.8,
+      "heat_avg_usd": 5014.96,
+      "heat_drop_pct": 13.5,
+      "rain_coef": 1.03,
+      "temp_coef": 45.81
     }
   },
   "event_payload": {
@@ -1215,7 +1329,7 @@ window.BBQ_PAYLOADS = {
       }
     },
     "event_stats": {
-      "normal_avg_usd": 4438.42,
+      "normal_avg_usd": 4437.96,
       "jags_avg_usd": 4245.02,
       "jags_multiplier": 1.0,
       "holiday_avg_usd": -81.0,
@@ -1386,7 +1500,7 @@ window.BBQ_PAYLOADS = {
               8.4,
               10.3,
               8.5,
-              2.6,
+              2.7,
               0.0,
               0.1,
               0.0,
@@ -1402,17 +1516,17 @@ window.BBQ_PAYLOADS = {
               0.0,
               0.0,
               0.3,
-              1.1,
+              1.0,
               12.0,
               17.5,
               16.6,
-              12.1,
-              10.6,
+              12.0,
+              10.5,
               10.0,
-              12.7,
+              12.6,
               11.1,
-              6.1,
-              2.1,
+              6.2,
+              1.8,
               0.0,
               0.0,
               0.1,
@@ -1570,7 +1684,7 @@ window.BBQ_PAYLOADS = {
               "Friday 16:00<br>8.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Friday 17:00<br>10.3 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Friday 18:00<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 19:00<br>2.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 19:00<br>2.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 21:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Friday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
@@ -1586,17 +1700,17 @@ window.BBQ_PAYLOADS = {
               "Saturday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 08:00<br>0.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 09:00<br>1.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 09:00<br>1.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 10:00<br>12.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Saturday 11:00<br>17.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Saturday 12:00<br>16.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 13:00<br>12.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 14:00<br>10.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 13:00<br>12.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 14:00<br>10.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Saturday 15:00<br>10.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 16:00<br>12.7 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 16:00<br>12.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
               "Saturday 17:00<br>11.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 18:00<br>6.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Saturday 19:00<br>2.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 18:00<br>6.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Saturday 19:00<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
               "Saturday 22:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
@@ -1764,7 +1878,7 @@ window.BBQ_PAYLOADS = {
             "2026-10-23 (Fri)"
           ],
           "y": [
-            1.87,
+            1.85,
             0.0,
             0.85,
             1.23,
@@ -1783,13 +1897,13 @@ window.BBQ_PAYLOADS = {
             0.87,
             1.1,
             0.79,
-            1.51,
+            1.52,
             2.08,
             1.24,
             0.0,
             0.91,
             0.71,
-            1.03,
+            1.04,
             1.49,
             1.9,
             1.66,
@@ -1836,7 +1950,7 @@ window.BBQ_PAYLOADS = {
             1.34,
             1.21,
             0.0,
-            0.81,
+            0.82,
             0.82,
             1.07,
             1.2,
@@ -1881,7 +1995,7 @@ window.BBQ_PAYLOADS = {
             "2026-11-06 (Fri)"
           ],
           "y": [
-            1.62,
+            1.63,
             1.2,
             0.06,
             0.83,
@@ -2030,7 +2144,7 @@ window.BBQ_PAYLOADS = {
             16.9,
             9.8,
             26.3,
-            18.0
+            18.1
           ],
           "prep_lead_hrs": 14.0,
           "draws_from": null
@@ -2177,7 +2291,7 @@ window.BBQ_PAYLOADS = {
         }
       },
       "demand_index": [
-        1.62,
+        1.63,
         1.2,
         0.06,
         0.83,
@@ -2199,7 +2313,7 @@ window.BBQ_PAYLOADS = {
       {
         "pair": "2 meat plate + BBQ plate",
         "count": 320,
-        "confidence": 20.8
+        "confidence": 20.9
       },
       {
         "pair": "2 meat plate + Rosebud",
@@ -2248,17 +2362,17 @@ window.BBQ_PAYLOADS = {
       }
     ],
     "interaction_modeling": {
-      "normal": 4267.85,
+      "normal": 4226.17,
       "game_only": 4245.02,
-      "rain_only": 5014.18,
-      "game_and_rain": 11949.98
+      "rain_only": 5040.32,
+      "game_and_rain": 11833.28
     },
     "order_type_segmentation": [
       {
         "order_type": "Dine In",
-        "order_count": 5010,
-        "total_revenue": 216830.97,
-        "avg_ticket": 43.27963473053892
+        "order_count": 5008,
+        "total_revenue": 216768.02,
+        "avg_ticket": 43.284349041533545
       },
       {
         "order_type": "In-store Pickup",
@@ -2269,8 +2383,8 @@ window.BBQ_PAYLOADS = {
       {
         "order_type": "To-Go",
         "order_count": 2418,
-        "total_revenue": 144532.83,
-        "avg_ticket": 59.77370967741935
+        "total_revenue": 144559.47,
+        "avg_ticket": 59.784727047146404
       }
     ],
     "sell_out_prediction_chart": {
@@ -2679,9 +2793,9 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 5.0,
-      "pork_ribs_avg_with_dino": 3.7,
-      "impact_pct": -25.4
+      "pork_ribs_avg_without_dino": 5.3,
+      "pork_ribs_avg_with_dino": 3.3,
+      "impact_pct": -37.4
     },
     "payday_effect": {
       "payday_avg_ticket": 45.8,
@@ -2689,10 +2803,10 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-24T00:21:11.745151",
+    "generated_at": "2026-10-24T05:28:47.749955",
     "summary_kpis": {
-      "projected_24h_revenue_usd": 5446.55,
-      "estimated_24h_cogs_usd": 1606.73,
+      "projected_24h_revenue_usd": 5417.45,
+      "estimated_24h_cogs_usd": 1598.13,
       "estimated_food_cost_pct": 29.5,
       "average_ticket_usd": 48.5,
       "recommended_staff": 5,
@@ -2700,7 +2814,7 @@ window.BBQ_PAYLOADS = {
       "peak_rush_window": "11:00 AM (Sat)",
       "current_sales_velocity": "0.0 orders/hr",
       "pacing_status": "Normal Pacing",
-      "total_brisket_draw_lbs": 90.8,
+      "total_brisket_draw_lbs": 90.7,
       "total_pork_draw_lbs": 23.5
     },
     "portion_cogs_breakdown": {
@@ -2768,71 +2882,6 @@ window.BBQ_PAYLOADS = {
     },
     "hourly_forecast": [
       {
-        "timestamp": "2026-10-24T00:00:00",
-        "hour_display": "12:00 AM",
-        "day_name": "Sat",
-        "hour": 0,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-24T01:00:00",
-        "hour_display": "1:00 AM",
-        "day_name": "Sat",
-        "hour": 1,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-24T02:00:00",
-        "hour_display": "2:00 AM",
-        "day_name": "Sat",
-        "hour": 2,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-24T03:00:00",
-        "hour_display": "3:00 AM",
-        "day_name": "Sat",
-        "hour": 3,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-24T04:00:00",
-        "hour_display": "4:00 AM",
-        "day_name": "Sat",
-        "hour": 4,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
         "timestamp": "2026-10-24T05:00:00",
         "hour_display": "5:00 AM",
         "day_name": "Sat",
@@ -2889,10 +2938,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "9:00 AM",
         "day_name": "Sat",
         "hour": 9,
-        "predicted_orders": 1.1,
-        "predicted_revenue": 53.35,
-        "estimated_cogs_usd": 15.74,
-        "brisket_cooked_lbs": 0.9,
+        "predicted_orders": 1.0,
+        "predicted_revenue": 48.5,
+        "estimated_cogs_usd": 14.31,
+        "brisket_cooked_lbs": 0.8,
         "pork_cooked_lbs": 0.2,
         "pacing_status": "Normal Pacing",
         "is_peak": false
@@ -2905,7 +2954,7 @@ window.BBQ_PAYLOADS = {
         "predicted_orders": 12.0,
         "predicted_revenue": 582.0,
         "estimated_cogs_usd": 171.69,
-        "brisket_cooked_lbs": 9.7,
+        "brisket_cooked_lbs": 9.8,
         "pork_cooked_lbs": 2.5,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -2918,7 +2967,7 @@ window.BBQ_PAYLOADS = {
         "predicted_orders": 17.5,
         "predicted_revenue": 848.75,
         "estimated_cogs_usd": 250.38,
-        "brisket_cooked_lbs": 14.1,
+        "brisket_cooked_lbs": 14.2,
         "pork_cooked_lbs": 3.7,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -2931,7 +2980,7 @@ window.BBQ_PAYLOADS = {
         "predicted_orders": 16.6,
         "predicted_revenue": 805.1,
         "estimated_cogs_usd": 237.5,
-        "brisket_cooked_lbs": 13.4,
+        "brisket_cooked_lbs": 13.5,
         "pork_cooked_lbs": 3.5,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -2941,9 +2990,9 @@ window.BBQ_PAYLOADS = {
         "hour_display": "1:00 PM",
         "day_name": "Sat",
         "hour": 13,
-        "predicted_orders": 12.1,
-        "predicted_revenue": 586.85,
-        "estimated_cogs_usd": 173.12,
+        "predicted_orders": 12.0,
+        "predicted_revenue": 582.0,
+        "estimated_cogs_usd": 171.69,
         "brisket_cooked_lbs": 9.8,
         "pork_cooked_lbs": 2.5,
         "pacing_status": "Heavy Rush Surge",
@@ -2954,10 +3003,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "2:00 PM",
         "day_name": "Sat",
         "hour": 14,
-        "predicted_orders": 10.6,
-        "predicted_revenue": 514.1,
-        "estimated_cogs_usd": 151.66,
-        "brisket_cooked_lbs": 8.6,
+        "predicted_orders": 10.5,
+        "predicted_revenue": 509.25,
+        "estimated_cogs_usd": 150.23,
+        "brisket_cooked_lbs": 8.5,
         "pork_cooked_lbs": 2.2,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -2980,10 +3029,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "4:00 PM",
         "day_name": "Sat",
         "hour": 16,
-        "predicted_orders": 12.7,
-        "predicted_revenue": 615.95,
-        "estimated_cogs_usd": 181.71,
-        "brisket_cooked_lbs": 10.3,
+        "predicted_orders": 12.6,
+        "predicted_revenue": 611.1,
+        "estimated_cogs_usd": 180.27,
+        "brisket_cooked_lbs": 10.2,
         "pork_cooked_lbs": 2.7,
         "pacing_status": "Heavy Rush Surge",
         "is_peak": true
@@ -3006,10 +3055,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "6:00 PM",
         "day_name": "Sat",
         "hour": 18,
-        "predicted_orders": 6.1,
-        "predicted_revenue": 295.85,
-        "estimated_cogs_usd": 87.28,
-        "brisket_cooked_lbs": 4.9,
+        "predicted_orders": 6.2,
+        "predicted_revenue": 300.7,
+        "estimated_cogs_usd": 88.71,
+        "brisket_cooked_lbs": 5.0,
         "pork_cooked_lbs": 1.3,
         "pacing_status": "Normal Pacing",
         "is_peak": false
@@ -3019,10 +3068,10 @@ window.BBQ_PAYLOADS = {
         "hour_display": "7:00 PM",
         "day_name": "Sat",
         "hour": 19,
-        "predicted_orders": 2.1,
-        "predicted_revenue": 101.85,
-        "estimated_cogs_usd": 30.05,
-        "brisket_cooked_lbs": 1.7,
+        "predicted_orders": 1.8,
+        "predicted_revenue": 87.3,
+        "estimated_cogs_usd": 25.75,
+        "brisket_cooked_lbs": 1.5,
         "pork_cooked_lbs": 0.4,
         "pacing_status": "Normal Pacing",
         "is_peak": false
@@ -3078,11 +3127,76 @@ window.BBQ_PAYLOADS = {
         "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-25T00:00:00",
+        "hour_display": "12:00 AM",
+        "day_name": "Sun",
+        "hour": 0,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-25T01:00:00",
+        "hour_display": "1:00 AM",
+        "day_name": "Sun",
+        "hour": 1,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-25T02:00:00",
+        "hour_display": "2:00 AM",
+        "day_name": "Sun",
+        "hour": 2,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-25T03:00:00",
+        "hour_display": "3:00 AM",
+        "day_name": "Sun",
+        "hour": 3,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-10-25T04:00:00",
+        "hour_display": "4:00 AM",
+        "day_name": "Sun",
+        "hour": 4,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
       }
     ],
     "operational_directives": [
       "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr.",
-      "Meat Depletion Pacing: Next 24 hours projected to draw ~90.8 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
+      "Meat Depletion Pacing: Next 24 hours projected to draw ~90.7 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
       "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
       "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
     ],
@@ -8514,13 +8628,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 82.7,
-        "projected_revenue_usd": 4010.95,
-        "estimated_cogs_usd": 1183.23,
+        "total_orders": 82.8,
+        "projected_revenue_usd": 4015.8,
+        "estimated_cogs_usd": 1184.66,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 79.4,
+        "total_brisket_draw_lbs": 79.5,
         "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
@@ -8778,10 +8892,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Fri",
             "hour": 19,
-            "predicted_orders": 2.6,
-            "predicted_revenue": 126.1,
-            "estimated_cogs_usd": 37.2,
-            "brisket_cooked_lbs": 2.5,
+            "predicted_orders": 2.7,
+            "predicted_revenue": 130.95,
+            "estimated_cogs_usd": 38.63,
+            "brisket_cooked_lbs": 2.6,
             "pork_cooked_lbs": 0.7,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -8841,7 +8955,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.4 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -8853,13 +8967,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 82.7,
-        "projected_revenue_usd": 4010.95,
-        "estimated_cogs_usd": 1183.23,
+        "total_orders": 82.8,
+        "projected_revenue_usd": 4015.8,
+        "estimated_cogs_usd": 1184.66,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 79.4,
+        "total_brisket_draw_lbs": 79.5,
         "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
@@ -9117,10 +9231,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Fri",
             "hour": 19,
-            "predicted_orders": 2.6,
-            "predicted_revenue": 126.1,
-            "estimated_cogs_usd": 37.2,
-            "brisket_cooked_lbs": 2.5,
+            "predicted_orders": 2.7,
+            "predicted_revenue": 130.95,
+            "estimated_cogs_usd": 38.63,
+            "brisket_cooked_lbs": 2.6,
             "pork_cooked_lbs": 0.7,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9180,7 +9294,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.4 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9192,13 +9306,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 82.7,
-        "projected_revenue_usd": 4010.95,
-        "estimated_cogs_usd": 1183.23,
+        "total_orders": 82.8,
+        "projected_revenue_usd": 4015.8,
+        "estimated_cogs_usd": 1184.66,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 79.4,
+        "total_brisket_draw_lbs": 79.5,
         "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
@@ -9456,10 +9570,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Fri",
             "hour": 19,
-            "predicted_orders": 2.6,
-            "predicted_revenue": 126.1,
-            "estimated_cogs_usd": 37.2,
-            "brisket_cooked_lbs": 2.5,
+            "predicted_orders": 2.7,
+            "predicted_revenue": 130.95,
+            "estimated_cogs_usd": 38.63,
+            "brisket_cooked_lbs": 2.6,
             "pork_cooked_lbs": 0.7,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9519,7 +9633,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.4 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9531,13 +9645,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 14.5,
         "peak_hour": 10,
         "peak_rush_window": "10:00 AM (Fri)",
-        "total_orders": 82.7,
-        "projected_revenue_usd": 4010.95,
-        "estimated_cogs_usd": 1183.23,
+        "total_orders": 82.8,
+        "projected_revenue_usd": 4015.8,
+        "estimated_cogs_usd": 1184.66,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 79.4,
+        "total_brisket_draw_lbs": 79.5,
         "total_pork_draw_lbs": 21.6,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "14.5 orders/hr (Peak)",
@@ -9795,10 +9909,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Fri",
             "hour": 19,
-            "predicted_orders": 2.6,
-            "predicted_revenue": 126.1,
-            "estimated_cogs_usd": 37.2,
-            "brisket_cooked_lbs": 2.5,
+            "predicted_orders": 2.7,
+            "predicted_revenue": 130.95,
+            "estimated_cogs_usd": 38.63,
+            "brisket_cooked_lbs": 2.6,
             "pork_cooked_lbs": 0.7,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -9858,7 +9972,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 10:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
-          "Meat Depletion Pacing: Day projected to draw ~79.4 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.6 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
         ]
@@ -9870,13 +9984,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 17.5,
         "peak_hour": 11,
         "peak_rush_window": "11:00 AM (Sat)",
-        "total_orders": 112.3,
-        "projected_revenue_usd": 5446.55,
-        "estimated_cogs_usd": 1606.73,
+        "total_orders": 111.7,
+        "projected_revenue_usd": 5417.45,
+        "estimated_cogs_usd": 1598.13,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 90.8,
+        "total_brisket_draw_lbs": 90.7,
         "total_pork_draw_lbs": 23.5,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "17.5 orders/hr (Peak)",
@@ -10004,10 +10118,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 1.1,
-            "predicted_revenue": 53.35,
-            "estimated_cogs_usd": 15.74,
-            "brisket_cooked_lbs": 0.9,
+            "predicted_orders": 1.0,
+            "predicted_revenue": 48.5,
+            "estimated_cogs_usd": 14.31,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10020,7 +10134,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 12.0,
             "predicted_revenue": 582.0,
             "estimated_cogs_usd": 171.69,
-            "brisket_cooked_lbs": 9.7,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10033,7 +10147,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 17.5,
             "predicted_revenue": 848.75,
             "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 14.1,
+            "brisket_cooked_lbs": 14.2,
             "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10046,7 +10160,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 16.6,
             "predicted_revenue": 805.1,
             "estimated_cogs_usd": 237.5,
-            "brisket_cooked_lbs": 13.4,
+            "brisket_cooked_lbs": 13.5,
             "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10056,9 +10170,9 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 12.1,
-            "predicted_revenue": 586.85,
-            "estimated_cogs_usd": 173.12,
+            "predicted_orders": 12.0,
+            "predicted_revenue": 582.0,
+            "estimated_cogs_usd": 171.69,
             "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
@@ -10069,10 +10183,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 10.6,
-            "predicted_revenue": 514.1,
-            "estimated_cogs_usd": 151.66,
-            "brisket_cooked_lbs": 8.6,
+            "predicted_orders": 10.5,
+            "predicted_revenue": 509.25,
+            "estimated_cogs_usd": 150.23,
+            "brisket_cooked_lbs": 8.5,
             "pork_cooked_lbs": 2.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10095,10 +10209,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 12.7,
-            "predicted_revenue": 615.95,
-            "estimated_cogs_usd": 181.71,
-            "brisket_cooked_lbs": 10.3,
+            "predicted_orders": 12.6,
+            "predicted_revenue": 611.1,
+            "estimated_cogs_usd": 180.27,
+            "brisket_cooked_lbs": 10.2,
             "pork_cooked_lbs": 2.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10121,10 +10235,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 6.1,
-            "predicted_revenue": 295.85,
-            "estimated_cogs_usd": 87.28,
-            "brisket_cooked_lbs": 4.9,
+            "predicted_orders": 6.2,
+            "predicted_revenue": 300.7,
+            "estimated_cogs_usd": 88.71,
+            "brisket_cooked_lbs": 5.0,
             "pork_cooked_lbs": 1.3,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10134,10 +10248,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 2.1,
-            "predicted_revenue": 101.85,
-            "estimated_cogs_usd": 30.05,
-            "brisket_cooked_lbs": 1.7,
+            "predicted_orders": 1.8,
+            "predicted_revenue": 87.3,
+            "estimated_cogs_usd": 25.75,
+            "brisket_cooked_lbs": 1.5,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10197,7 +10311,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
-          "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~90.7 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
         ]
@@ -10209,13 +10323,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 17.5,
         "peak_hour": 11,
         "peak_rush_window": "11:00 AM (Sat)",
-        "total_orders": 112.3,
-        "projected_revenue_usd": 5446.55,
-        "estimated_cogs_usd": 1606.73,
+        "total_orders": 111.7,
+        "projected_revenue_usd": 5417.45,
+        "estimated_cogs_usd": 1598.13,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 90.8,
+        "total_brisket_draw_lbs": 90.7,
         "total_pork_draw_lbs": 23.5,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "17.5 orders/hr (Peak)",
@@ -10343,10 +10457,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 1.1,
-            "predicted_revenue": 53.35,
-            "estimated_cogs_usd": 15.74,
-            "brisket_cooked_lbs": 0.9,
+            "predicted_orders": 1.0,
+            "predicted_revenue": 48.5,
+            "estimated_cogs_usd": 14.31,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10359,7 +10473,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 12.0,
             "predicted_revenue": 582.0,
             "estimated_cogs_usd": 171.69,
-            "brisket_cooked_lbs": 9.7,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10372,7 +10486,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 17.5,
             "predicted_revenue": 848.75,
             "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 14.1,
+            "brisket_cooked_lbs": 14.2,
             "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10385,7 +10499,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 16.6,
             "predicted_revenue": 805.1,
             "estimated_cogs_usd": 237.5,
-            "brisket_cooked_lbs": 13.4,
+            "brisket_cooked_lbs": 13.5,
             "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10395,9 +10509,9 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 12.1,
-            "predicted_revenue": 586.85,
-            "estimated_cogs_usd": 173.12,
+            "predicted_orders": 12.0,
+            "predicted_revenue": 582.0,
+            "estimated_cogs_usd": 171.69,
             "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
@@ -10408,10 +10522,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 10.6,
-            "predicted_revenue": 514.1,
-            "estimated_cogs_usd": 151.66,
-            "brisket_cooked_lbs": 8.6,
+            "predicted_orders": 10.5,
+            "predicted_revenue": 509.25,
+            "estimated_cogs_usd": 150.23,
+            "brisket_cooked_lbs": 8.5,
             "pork_cooked_lbs": 2.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10434,10 +10548,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 12.7,
-            "predicted_revenue": 615.95,
-            "estimated_cogs_usd": 181.71,
-            "brisket_cooked_lbs": 10.3,
+            "predicted_orders": 12.6,
+            "predicted_revenue": 611.1,
+            "estimated_cogs_usd": 180.27,
+            "brisket_cooked_lbs": 10.2,
             "pork_cooked_lbs": 2.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10460,10 +10574,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 6.1,
-            "predicted_revenue": 295.85,
-            "estimated_cogs_usd": 87.28,
-            "brisket_cooked_lbs": 4.9,
+            "predicted_orders": 6.2,
+            "predicted_revenue": 300.7,
+            "estimated_cogs_usd": 88.71,
+            "brisket_cooked_lbs": 5.0,
             "pork_cooked_lbs": 1.3,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10473,10 +10587,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 2.1,
-            "predicted_revenue": 101.85,
-            "estimated_cogs_usd": 30.05,
-            "brisket_cooked_lbs": 1.7,
+            "predicted_orders": 1.8,
+            "predicted_revenue": 87.3,
+            "estimated_cogs_usd": 25.75,
+            "brisket_cooked_lbs": 1.5,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10536,7 +10650,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
-          "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~90.7 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
         ]
@@ -10548,13 +10662,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 17.5,
         "peak_hour": 11,
         "peak_rush_window": "11:00 AM (Sat)",
-        "total_orders": 112.3,
-        "projected_revenue_usd": 5446.55,
-        "estimated_cogs_usd": 1606.73,
+        "total_orders": 111.7,
+        "projected_revenue_usd": 5417.45,
+        "estimated_cogs_usd": 1598.13,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 90.8,
+        "total_brisket_draw_lbs": 90.7,
         "total_pork_draw_lbs": 23.5,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "17.5 orders/hr (Peak)",
@@ -10682,10 +10796,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 1.1,
-            "predicted_revenue": 53.35,
-            "estimated_cogs_usd": 15.74,
-            "brisket_cooked_lbs": 0.9,
+            "predicted_orders": 1.0,
+            "predicted_revenue": 48.5,
+            "estimated_cogs_usd": 14.31,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10698,7 +10812,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 12.0,
             "predicted_revenue": 582.0,
             "estimated_cogs_usd": 171.69,
-            "brisket_cooked_lbs": 9.7,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10711,7 +10825,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 17.5,
             "predicted_revenue": 848.75,
             "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 14.1,
+            "brisket_cooked_lbs": 14.2,
             "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10724,7 +10838,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 16.6,
             "predicted_revenue": 805.1,
             "estimated_cogs_usd": 237.5,
-            "brisket_cooked_lbs": 13.4,
+            "brisket_cooked_lbs": 13.5,
             "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10734,9 +10848,9 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 12.1,
-            "predicted_revenue": 586.85,
-            "estimated_cogs_usd": 173.12,
+            "predicted_orders": 12.0,
+            "predicted_revenue": 582.0,
+            "estimated_cogs_usd": 171.69,
             "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
@@ -10747,10 +10861,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 10.6,
-            "predicted_revenue": 514.1,
-            "estimated_cogs_usd": 151.66,
-            "brisket_cooked_lbs": 8.6,
+            "predicted_orders": 10.5,
+            "predicted_revenue": 509.25,
+            "estimated_cogs_usd": 150.23,
+            "brisket_cooked_lbs": 8.5,
             "pork_cooked_lbs": 2.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10773,10 +10887,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 12.7,
-            "predicted_revenue": 615.95,
-            "estimated_cogs_usd": 181.71,
-            "brisket_cooked_lbs": 10.3,
+            "predicted_orders": 12.6,
+            "predicted_revenue": 611.1,
+            "estimated_cogs_usd": 180.27,
+            "brisket_cooked_lbs": 10.2,
             "pork_cooked_lbs": 2.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -10799,10 +10913,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 6.1,
-            "predicted_revenue": 295.85,
-            "estimated_cogs_usd": 87.28,
-            "brisket_cooked_lbs": 4.9,
+            "predicted_orders": 6.2,
+            "predicted_revenue": 300.7,
+            "estimated_cogs_usd": 88.71,
+            "brisket_cooked_lbs": 5.0,
             "pork_cooked_lbs": 1.3,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10812,10 +10926,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 2.1,
-            "predicted_revenue": 101.85,
-            "estimated_cogs_usd": 30.05,
-            "brisket_cooked_lbs": 1.7,
+            "predicted_orders": 1.8,
+            "predicted_revenue": 87.3,
+            "estimated_cogs_usd": 25.75,
+            "brisket_cooked_lbs": 1.5,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -10875,7 +10989,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
-          "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~90.7 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
         ]
@@ -10887,13 +11001,13 @@ window.BBQ_PAYLOADS = {
         "peak_orders": 17.5,
         "peak_hour": 11,
         "peak_rush_window": "11:00 AM (Sat)",
-        "total_orders": 112.3,
-        "projected_revenue_usd": 5446.55,
-        "estimated_cogs_usd": 1606.73,
+        "total_orders": 111.7,
+        "projected_revenue_usd": 5417.45,
+        "estimated_cogs_usd": 1598.13,
         "estimated_food_cost_pct": 29.5,
         "recommended_staff": 5,
         "pitmaster_hours": 42.5,
-        "total_brisket_draw_lbs": 90.8,
+        "total_brisket_draw_lbs": 90.7,
         "total_pork_draw_lbs": 23.5,
         "average_ticket_usd": 48.5,
         "current_sales_velocity": "17.5 orders/hr (Peak)",
@@ -11021,10 +11135,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "9:00 AM",
             "day_name": "Sat",
             "hour": 9,
-            "predicted_orders": 1.1,
-            "predicted_revenue": 53.35,
-            "estimated_cogs_usd": 15.74,
-            "brisket_cooked_lbs": 0.9,
+            "predicted_orders": 1.0,
+            "predicted_revenue": 48.5,
+            "estimated_cogs_usd": 14.31,
+            "brisket_cooked_lbs": 0.8,
             "pork_cooked_lbs": 0.2,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -11037,7 +11151,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 12.0,
             "predicted_revenue": 582.0,
             "estimated_cogs_usd": 171.69,
-            "brisket_cooked_lbs": 9.7,
+            "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11050,7 +11164,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 17.5,
             "predicted_revenue": 848.75,
             "estimated_cogs_usd": 250.38,
-            "brisket_cooked_lbs": 14.1,
+            "brisket_cooked_lbs": 14.2,
             "pork_cooked_lbs": 3.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11063,7 +11177,7 @@ window.BBQ_PAYLOADS = {
             "predicted_orders": 16.6,
             "predicted_revenue": 805.1,
             "estimated_cogs_usd": 237.5,
-            "brisket_cooked_lbs": 13.4,
+            "brisket_cooked_lbs": 13.5,
             "pork_cooked_lbs": 3.5,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11073,9 +11187,9 @@ window.BBQ_PAYLOADS = {
             "hour_display": "1:00 PM",
             "day_name": "Sat",
             "hour": 13,
-            "predicted_orders": 12.1,
-            "predicted_revenue": 586.85,
-            "estimated_cogs_usd": 173.12,
+            "predicted_orders": 12.0,
+            "predicted_revenue": 582.0,
+            "estimated_cogs_usd": 171.69,
             "brisket_cooked_lbs": 9.8,
             "pork_cooked_lbs": 2.5,
             "pacing_status": "Heavy Rush Surge",
@@ -11086,10 +11200,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "2:00 PM",
             "day_name": "Sat",
             "hour": 14,
-            "predicted_orders": 10.6,
-            "predicted_revenue": 514.1,
-            "estimated_cogs_usd": 151.66,
-            "brisket_cooked_lbs": 8.6,
+            "predicted_orders": 10.5,
+            "predicted_revenue": 509.25,
+            "estimated_cogs_usd": 150.23,
+            "brisket_cooked_lbs": 8.5,
             "pork_cooked_lbs": 2.2,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11112,10 +11226,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "4:00 PM",
             "day_name": "Sat",
             "hour": 16,
-            "predicted_orders": 12.7,
-            "predicted_revenue": 615.95,
-            "estimated_cogs_usd": 181.71,
-            "brisket_cooked_lbs": 10.3,
+            "predicted_orders": 12.6,
+            "predicted_revenue": 611.1,
+            "estimated_cogs_usd": 180.27,
+            "brisket_cooked_lbs": 10.2,
             "pork_cooked_lbs": 2.7,
             "pacing_status": "Heavy Rush Surge",
             "is_peak": true
@@ -11138,10 +11252,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "6:00 PM",
             "day_name": "Sat",
             "hour": 18,
-            "predicted_orders": 6.1,
-            "predicted_revenue": 295.85,
-            "estimated_cogs_usd": 87.28,
-            "brisket_cooked_lbs": 4.9,
+            "predicted_orders": 6.2,
+            "predicted_revenue": 300.7,
+            "estimated_cogs_usd": 88.71,
+            "brisket_cooked_lbs": 5.0,
             "pork_cooked_lbs": 1.3,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -11151,10 +11265,10 @@ window.BBQ_PAYLOADS = {
             "hour_display": "7:00 PM",
             "day_name": "Sat",
             "hour": 19,
-            "predicted_orders": 2.1,
-            "predicted_revenue": 101.85,
-            "estimated_cogs_usd": 30.05,
-            "brisket_cooked_lbs": 1.7,
+            "predicted_orders": 1.8,
+            "predicted_revenue": 87.3,
+            "estimated_cogs_usd": 25.75,
+            "brisket_cooked_lbs": 1.5,
             "pork_cooked_lbs": 0.4,
             "pacing_status": "Normal Pacing",
             "is_peak": false
@@ -11214,7 +11328,7 @@ window.BBQ_PAYLOADS = {
         ],
         "operational_directives": [
           "Peak Customer Flow: Expected around 11:00 AM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
-          "Meat Depletion Pacing: Day projected to draw ~90.8 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
+          "Meat Depletion Pacing: Day projected to draw ~90.7 lbs smoked brisket and ~23.5 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
         ]
@@ -12597,11 +12711,11 @@ window.BBQ_PAYLOADS = {
       {
         "date": "2026-07-26",
         "day_name": "Sun",
-        "actual_revenue": 7483.41,
-        "predicted_revenue": 7483.41,
-        "brisket_raw_lbs": 133.6,
-        "pork_shoulder_raw_lbs": 50.0,
-        "sausage_lbs": 74.8,
+        "actual_revenue": 7387.16,
+        "predicted_revenue": 7387.16,
+        "brisket_raw_lbs": 132.9,
+        "pork_shoulder_raw_lbs": 49.8,
+        "sausage_lbs": 73.9,
         "tacos_sold": 77,
         "rosebuds_sold": 44,
         "pork_ribs_racks": 12.3,
@@ -13872,8 +13986,8 @@ window.BBQ_PAYLOADS = {
       {
         "date": "2026-10-24",
         "day_name": "Sat",
-        "actual_revenue": 130.78,
-        "predicted_revenue": 130.78,
+        "actual_revenue": 190.72,
+        "predicted_revenue": 190.72,
         "brisket_raw_lbs": 40.0,
         "pork_shoulder_raw_lbs": 24.0,
         "sausage_lbs": 20.0,
@@ -14154,134 +14268,8 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-23T20:21:11.866749-04:00",
+    "generated_at": "2026-10-24T01:28:47.877462-04:00",
     "days": {
-      "2026-07-25": {
-        "buckets": [
-          {
-            "hour": 0,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 1,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 2,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 3,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 4,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 5,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 6,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 7,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 8,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 9,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 10,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 11,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 12,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 13,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 14,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 15,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 16,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 17,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 18,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 19,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 20,
-            "sales_usd": 96.25,
-            "orders": 3
-          },
-          {
-            "hour": 21,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 22,
-            "sales_usd": 0.0,
-            "orders": 0
-          },
-          {
-            "hour": 23,
-            "sales_usd": 0.0,
-            "orders": 0
-          }
-        ],
-        "total_sales_usd": 96.25,
-        "total_orders": 3
-      },
       "2026-07-26": {
         "buckets": [
           {
@@ -24340,8 +24328,8 @@ window.BBQ_PAYLOADS = {
           },
           {
             "hour": 20,
-            "sales_usd": 130.78,
-            "orders": 2
+            "sales_usd": 190.72,
+            "orders": 3
           },
           {
             "hour": 21,
@@ -24359,8 +24347,8 @@ window.BBQ_PAYLOADS = {
             "orders": 0
           }
         ],
-        "total_sales_usd": 5917.43,
-        "total_orders": 115
+        "total_sales_usd": 5977.37,
+        "total_orders": 116
       }
     },
     "weekday_baseline": {
@@ -24607,7 +24595,7 @@ window.BBQ_PAYLOADS = {
           8465.66,
           9627.3,
           7408.89,
-          2328.17,
+          2388.11,
           0.0,
           318.47,
           0.0
@@ -24633,14 +24621,14 @@ window.BBQ_PAYLOADS = {
           156,
           193,
           158,
-          50,
+          51,
           0,
           1,
           0
         ]
       },
       "5": {
-        "n": 13,
+        "n": 12,
         "sales_sum": [
           0.0,
           0.0,
@@ -24662,7 +24650,7 @@ window.BBQ_PAYLOADS = {
           9302.97,
           8014.11,
           3836.28,
-          1087.94,
+          991.69,
           0.0,
           0.0,
           93.53
@@ -24688,7 +24676,7 @@ window.BBQ_PAYLOADS = {
           174,
           152,
           85,
-          28,
+          25,
           0,
           0,
           1
@@ -24859,6 +24847,106 @@ window.BBQ_PAYLOADS = {
           "hour": 22,
           "predicted_orders": 0.0,
           "predicted_revenue": 0.0
+        },
+        {
+          "hour": 23,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        }
+      ]
+    },
+    "2026-10-24": {
+      "captured_at": "2026-10-24T01:28:47.888551-04:00",
+      "hourly_forecast": [
+        {
+          "hour": 5,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 6,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 7,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 8,
+          "predicted_orders": 0.3,
+          "predicted_revenue": 14.55
+        },
+        {
+          "hour": 9,
+          "predicted_orders": 1.0,
+          "predicted_revenue": 48.5
+        },
+        {
+          "hour": 10,
+          "predicted_orders": 12.0,
+          "predicted_revenue": 582.0
+        },
+        {
+          "hour": 11,
+          "predicted_orders": 17.5,
+          "predicted_revenue": 848.75
+        },
+        {
+          "hour": 12,
+          "predicted_orders": 16.6,
+          "predicted_revenue": 805.1
+        },
+        {
+          "hour": 13,
+          "predicted_orders": 12.0,
+          "predicted_revenue": 582.0
+        },
+        {
+          "hour": 14,
+          "predicted_orders": 10.5,
+          "predicted_revenue": 509.25
+        },
+        {
+          "hour": 15,
+          "predicted_orders": 10.0,
+          "predicted_revenue": 485.0
+        },
+        {
+          "hour": 16,
+          "predicted_orders": 12.6,
+          "predicted_revenue": 611.1
+        },
+        {
+          "hour": 17,
+          "predicted_orders": 11.1,
+          "predicted_revenue": 538.35
+        },
+        {
+          "hour": 18,
+          "predicted_orders": 6.2,
+          "predicted_revenue": 300.7
+        },
+        {
+          "hour": 19,
+          "predicted_orders": 1.8,
+          "predicted_revenue": 87.3
+        },
+        {
+          "hour": 20,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 21,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 22,
+          "predicted_orders": 0.1,
+          "predicted_revenue": 4.85
         },
         {
           "hour": 23,
