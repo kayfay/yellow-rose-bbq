@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T21:31:19.781870",
+  "generated_at": "2026-10-25T23:54:16.558636",
   "summary_kpis": {
     "projected_24h_revenue_usd": 0.0,
     "estimated_24h_cogs_usd": 0.0,
@@ -77,32 +77,6 @@
     "pork_yield_range": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-10-25T21:00:00",
-      "hour_display": "9:00 PM",
-      "day_name": "Sun",
-      "hour": 21,
-      "predicted_orders": 0.0,
-      "predicted_revenue": 0.0,
-      "estimated_cogs_usd": 0.0,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Normal Pacing",
-      "is_peak": false
-    },
-    {
-      "timestamp": "2026-10-25T22:00:00",
-      "hour_display": "10:00 PM",
-      "day_name": "Sun",
-      "hour": 22,
-      "predicted_orders": 0.0,
-      "predicted_revenue": 0.0,
-      "estimated_cogs_usd": 0.0,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Normal Pacing",
-      "is_peak": false
-    },
     {
       "timestamp": "2026-10-25T23:00:00",
       "hour_display": "11:00 PM",
@@ -387,6 +361,32 @@
       "brisket_cooked_lbs": 0.0,
       "pork_cooked_lbs": 0.0,
       "pacing_status": "Slow Period",
+      "is_peak": false
+    },
+    {
+      "timestamp": "2026-10-26T21:00:00",
+      "hour_display": "9:00 PM",
+      "day_name": "Mon",
+      "hour": 21,
+      "predicted_orders": 0.0,
+      "predicted_revenue": 0.0,
+      "estimated_cogs_usd": 0.0,
+      "brisket_cooked_lbs": 0.0,
+      "pork_cooked_lbs": 0.0,
+      "pacing_status": "Normal Pacing",
+      "is_peak": false
+    },
+    {
+      "timestamp": "2026-10-26T22:00:00",
+      "hour_display": "10:00 PM",
+      "day_name": "Mon",
+      "hour": 22,
+      "predicted_orders": 0.0,
+      "predicted_revenue": 0.0,
+      "estimated_cogs_usd": 0.0,
+      "brisket_cooked_lbs": 0.0,
+      "pork_cooked_lbs": 0.0,
+      "pacing_status": "Normal Pacing",
       "is_peak": false
     }
   ],
