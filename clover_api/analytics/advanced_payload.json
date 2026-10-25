@@ -60,9 +60,9 @@
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4982,
-      "total_revenue": 215920.53,
-      "avg_ticket": 43.340130469690884
+      "order_count": 4983,
+      "total_revenue": 216580.99,
+      "avg_ticket": 43.463975516756975
     },
     {
       "order_type": "In-store Pickup",
@@ -133,9 +133,9 @@
           238.01999999999998,
           311.86,
           386.81,
-          527.7,
-          576.36,
-          630.09
+          537.7,
+          586.36,
+          640.09
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -483,9 +483,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 3.2,
-    "impact_pct": -39.8
+    "pork_ribs_avg_without_dino": 4.7,
+    "pork_ribs_avg_with_dino": 4.5,
+    "impact_pct": -4.2
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
