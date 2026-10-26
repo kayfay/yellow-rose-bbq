@@ -620,9 +620,13 @@ section[style], div[style], h3[style], p[style], details div[style] {
   background: var(--bg-base);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  padding: 4px 10px;
+  padding: 8px 14px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 20px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -848,7 +852,8 @@ section[style], div[style], h3[style], p[style], details div[style] {
   background: #2563eb;
   border: 1px solid #3b82f6;
   color: #fff;
-  padding: 8px 16px;
+  padding: 10px 16px;
+  min-height: 48px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 700;
@@ -953,11 +958,11 @@ section[style], div[style], h3[style], p[style], details div[style] {
   color: #cbd5e1;
   font-size: 11.5px;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.15s ease;
-  min-height: 44px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
 }
@@ -1392,5 +1397,229 @@ section[style], div[style], h3[style], p[style], details div[style] {
   font-size: 12px;
   color: #e2e8f0;
 }
+
+/* ==========================================================================
+   v2.0.0 Executive BI Facelift, Mobile-First Ergonomics & Touch-Safe Charts
+   ========================================================================== */
+:root {
+  --bg-color: #020617;
+  --surface-color: #0f172a;
+  --accent-primary: #e69d00;
+  --accent-secondary: #d84315;
+}
+
+body.pit-high-contrast {
+  --bg-base: #000000;
+  --bg-panel: #0a0f1d;
+  --border-color: #64748b;
+  --border-light: #94a3b8;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+}
+
+.version-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  letter-spacing: 0.04em;
+}
+
+.debug-drawer-toggle-btn {
+  background: var(--bg-base);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  min-height: 48px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+.debug-drawer-toggle-btn:hover {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.design-debug-drawer {
+  background: rgba(2, 6, 23, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 4px;
+}
+
+.debug-drawer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.debug-control-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.debug-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.debug-vp-btn,
+.debug-action-btn {
+  background: #1e293b;
+  border: 1px solid var(--border-color);
+  color: #e2e8f0;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  min-height: 48px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.debug-vp-btn.active {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.debug-copy-btn {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+.debug-token-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #34d399;
+}
+
+/* Ergonomic Selects & Refresh Button (>= 48px touch targets) */
+#category-selector,
+#shift-selector {
+  min-height: 48px;
+  padding: 8px 12px;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#btn-refresh-analytics {
+  min-height: 48px !important;
+  padding: 10px 16px !important;
+  font-weight: 700;
+}
+
+#plotly-predictive-velocity-chart,
+#plotly-sellout-chart {
+  width: 100% !important;
+  min-height: 340px;
+}
+
+/* Sticky Mobile Bottom Thumb-Zone Navigation (< 768px) */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .app-content {
+    max-width: 1400px;
+  }
+  .forecasting-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .forecasting-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Strict Mobile Viewport Rules (< 768px): Non-Interactive Charts & Thumb Nav */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 110px;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(2, 6, 23, 0.96);
+    backdrop-filter: blur(10px);
+    border-top: 1.5px solid var(--border-color);
+  }
+
+  .mobile-bottom-nav-btn {
+    min-height: 48px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    background: #0f172a;
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .mobile-bottom-nav-btn.active {
+    background: rgba(59, 130, 246, 0.22);
+    border-color: var(--accent-blue);
+    color: #ffffff;
+  }
+
+  .chart-card,
+  .chart-card svg,
+  .js-plotly-plot,
+  .plot-container,
+  .svg-container,
+  #plotly-meat-sales-chart,
+  #plotly-predictive-velocity-chart,
+  #plotly-weather-impact-chart,
+  #plotly-event-impact-chart,
+  #plotly-shift-heatmap,
+  #plotly-sellout-chart {
+    pointer-events: none !important;
+    touch-action: pan-y !important;
+    user-select: none !important;
+  }
+}
+
 
 

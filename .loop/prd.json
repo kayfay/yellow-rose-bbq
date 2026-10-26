@@ -65,6 +65,42 @@
       "description": "scripts/verify_timezone_and_actuals.py: Tier 1 = synthetic fixture DB with exact bucket asserts (incl. 11pm ET = 03:00 UTC next day, DST edges); Tier 2 = structural check of real hourly_actuals.json (FAIL in CI if missing, SKIPPED + exit 0 locally). Exit 0 with printed evidence.",
       "acceptance_criteria": "Verifies tz formatting, 24-bucket response, hourly sync regression; run output printed to terminal.",
       "passes": true
+    },
+    {
+      "id": 12,
+      "description": "Phase 2 Directory Cleanup & Artifact Sanitation: Archive or remove stale one-off root scripts (fix_*.py, patch*.js, app_old.js), redundant virtual environments (.venv2, .venv3, .venv4, venv), orphaned root CSV/PNG/log dumps, and document clean repository structure.",
+      "acceptance_criteria": "Baseline backup archive verified intact; root workspace free of orphaned fix_*.py/patch*.js/app_old.js/duplicate venvs; all active pipelines and tests run cleanly.",
+      "passes": true
+    },
+    {
+      "id": 13,
+      "description": "Phase 4.1 Code Logic, Bug Audit & PAL Math/Model Optimization: Audit and verify all sausage formulation ratios, culinary yield conversions, COGS/food-cost calculations, and forecasting formulas with deterministic PAL unit tests.",
+      "acceptance_criteria": "Zero runtime/console errors; all yield, portion, sausage scaling, and forecasting math models pass deterministic PAL test suite with exit code 0.",
+      "passes": true
+    },
+    {
+      "id": 14,
+      "description": "Phase 4.2 Zero-Trust Security & Vulnerability Audit: Remediate world-writable (0777/0666) file permissions, eliminate document.write() and unsafe-eval/inline CSP vectors where possible, audit SQL parameterization and CORS policies, and verify zero secret exposure.",
+      "acceptance_criteria": "Zero world-writable files/dirs; strict CSP & sanitized DOM rendering; parameterized SQL across all DB modules; npm audit / security verifier script exits 0.",
+      "passes": true
+    },
+    {
+      "id": 15,
+      "description": "Phase 4.3 Executive Data Visualization Overhaul & Strict Mobile Touch-Safe Charts: Redesign all dashboard charts to executive BI standards (high data-ink ratio, calibrated axes/units) and enforce strictly non-interactive, touch-safe chart rendering on mobile viewports (< 768px).",
+      "acceptance_criteria": "On viewports < 768px, all charts enforce pointer-events: none / touch-action: pan-y with zero hover traps or gesture hijacking; high-contrast executive palette and unit labels verified.",
+      "passes": true
+    },
+    {
+      "id": 16,
+      "description": "Phase 4.4 Editorial & Anti-Slop Copywriting Overhaul: Audit and rewrite all headers, banners, tooltips, step-by-step explainers, and executive insights to eliminate verbose AI slop and conversational filler.",
+      "acceptance_criteria": "All application copy is concise, active, operational, and scannable; anti-slop linter/audit passes with zero flagged filler phrases.",
+      "passes": true
+    },
+    {
+      "id": 17,
+      "description": "Phase 4.5 & Phase 6 Mobile-First Responsive Facelift, Debug Token Panel & Visual Progress Gallery (progress.html): Implement responsive layout/navigation with >= 44x44px touch targets, on-screen viewport/theme debug panel with 'Copy Settings as JSON', and side-by-side desktop/mobile screenshots in progress.html.",
+      "acceptance_criteria": "All interactive targets >= 44x44px; mobile & desktop layouts render with zero horizontal overflow at 375px, 414px, 768px, 1280px; progress.html generated; Adversarial Critic score >= 9/10.",
+      "passes": true
     }
   ]
 }

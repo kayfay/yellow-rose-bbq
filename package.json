@@ -1,7 +1,7 @@
 {
   "name": "yellow-rose-bbq",
-  "version": "1.0.0",
-  "description": "A mobile-first, high-contrast, kitchen-line-optimized productivity tool and recipe calculator. Designed for elbow-tap interactions during production.",
+  "version": "2.0.0",
+  "description": "Executive BI & mobile-first kitchen-line command center, recipe calculator, and multi-meat POS forecasting platform for Yellow Rose BBQ.",
   "main": "app.js",
   "scripts": {
     "test": "bash run_tests.sh",

@@ -1,34 +1,44 @@
-# Yellow Rose BBQ - Sausage & BBQ Prep Command Center
+# Yellow Rose BBQ — Sausage & BBQ Prep Command Center (`v2.0.0`)
 
-A mobile-first, high-contrast, kitchen-line-optimized productivity tool, recipe calculator, and production forecasting platform for Yellow Rose BBQ.
+An executive Business Intelligence (BI) and mobile-first kitchen-line command center, sausage formulation calculator, and multi-meat Clover POS forecasting platform for Yellow Rose BBQ.
 
 ## System Overview & Architecture
 
-The Yellow Rose BBQ Command Center operates on a decoupled, serverless architecture. It combines a highly responsive static frontend hosted on GitHub Pages with a robust backend data pipeline executed via GitHub Actions. This design ensures zero maintenance costs, high availability, and strict separation between secure data processing and public client-side rendering.
+The Yellow Rose BBQ Command Center operates on a decoupled, serverless architecture combining a responsive static frontend hosted on GitHub Pages with an automated Python analytics pipeline executed via GitHub Actions (`.github/workflows/update_clover_data.yml`).
 
-Understanding this architecture is crucial for maintaining system reliability, auditing for potential bugs, and ensuring secure data handling.
+### 1. Repository Directory Structure (`v2.0.0`)
+```text
+yellow-rose-bbq/
+├── index.html                    # Unified responsive Command Center entry point (Desktop BI + Mobile Kitchen Line)
+├── style.css                     # Slate Dark design system, responsive breakpoints, & touch-safe chart rules
+├── app.js                        # Core client controller, recipe scaler, KPI hydration, & POS turnover simulator
+├── d3_charts.js                  # Calibrated D3 v7 SVG chart engine (desktop crosshair / mobile static mode)
+├── tz_utils.js                   # America/New_York explicit timezone localization utilities
+├── fonts/ & fonts.css            # Self-hosted Inter & JetBrains Mono typography assets
+├── clover_api/                   # Clover POS ingestion & ML forecasting backend
+│   ├── ingest.py / ingest_*.py   # Clover REST API transaction & catalog ingestion
+│   ├── menu_map.py               # POS item-to-meat weight conversion mapping
+│   └── analytics/                # Forecasting models (SARIMA, weather, shift, events, COGS) & JSON payloads
+├── data/                         # Recipe specifications, COGS models, & wholesale yield tables
+├── scripts/                      # Deterministic PAL verifiers, backtesters, drift alerts, & COGS auditors
+├── tests/e2e/                    # Playwright end-to-end verification suites
+├── .loop/                        # 3-Layer autonomous state harness (prd.json, patterns.md, log.md)
+├── archive/legacy_v1/            # Archived v1.0 one-off migration scripts & historical snapshots
+├── backups/                      # Local compressed pre-update workspace archives (git-ignored)
+├── VERSION_PLAN.md               # v2.0.0 architectural roadmap & wireframe specifications
+└── CHANGELOG.md                  # Semantic version release history
+```
 
-### The Data Pipeline (Backend)
-The backend consists of automated Python scripts that run on an hourly cron schedule via GitHub Actions (`.github/workflows/update_clover_data.yml`). 
-- **Data Ingestion:** Scripts under `clover_api/ingest.py` securely authenticate with the Clover POS REST API to fetch orders, payments, and itemized catalog data.
-- **Processing & Storage:** Raw data is stored locally in an ephemeral SQLite database (`clover_sales.db`). Data transformations, merging, and machine learning computations are handled using a combination of `pandas` and `polars` for high-performance aggregations.
-- **Payload Generation:** The pipeline runs predictive analytics (SARIMA forecasting, weather impact, shift foot-traffic curves, event correlations) and exports sanitized, aggregated statistical data into static JSON payloads (e.g., `dashboard_payload.json`, `shift_payload.json`, `weather_payload.json`, `advanced_payload.json`).
-- **Deployment:** The GitHub Action commits these static JSON payloads and an auto-generated `WEBSITE_MENU.md` back to the repository, updating the live frontend data.
+### 2. Data Pipeline & Forecasting Engine
+- **Ingestion:** `clover_api/ingest.py` authenticates with the Clover POS REST API and stores records in a local SQLite database (`clover_sales.db`) using parameterized queries.
+- **Multi-Meat Forecasting & Yield Model:** Computes daily and 24-hour demand across Brisket (40% yield), Pulled Pork (44% yield), Smoked Turkey (70% no-trim yield), Pork Spare Ribs, Beef Dino Ribs, Sausage (60 lb stuffed batches), Tacos, and Rosebuds.
+- **Timezone Invariant:** All timestamps and 24-hour actual buckets are explicitly localized from UTC to `America/New_York`.
 
-### The Frontend Dashboard
-The user interface is a static web application built with HTML, CSS, and Vanilla JavaScript (`app.js`), designed strictly for client-side execution.
-- **Data Hydration:** Upon loading, the JavaScript asynchronously fetches the pre-calculated JSON payloads generated by the nightly pipeline. It gracefully handles data loading states and renders interactive charts using Plotly.js and D3.js.
-- **Dynamic Workflows:** Features dynamic ratio scaling for recipes and interactive Day-split workflow checklists. The DOM manipulation is handled via Vanilla JS, requiring careful state management to prevent race conditions during payload hydration.
+### 3. Responsive & Mobile Touch-Safe UX
+- **Desktop (`>= 768px`):** High-density multi-column executive dashboard with interactive Plotly/D3 crosshairs and calibrated tooltips.
+- **Mobile (`< 768px`):** Ergonomic `>= 48px` touch targets, sticky bottom thumb-navigation bar, and strictly non-interactive charts (`staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`) to prevent scroll trapping on kitchen handhelds.
 
-## Features & Implementation Details
-
-- **Production Forecasting Engine:** Uses Scikit-learn and historical sales trends to calculate raw meat target yields. It integrates external APIs (Open-Meteo for weather, local event schedules) to adjust predictions dynamically.
-- **Dynamic Ratio Scaling:** Interactive UI sliders and tap buttons recalculate sausage formulations on the fly. 
-- **Guided Insights & Tooltips:** Formats and displays actionable procurement and staffing insights dynamically based on the merged ML datasets.
-
-## Security & Infrastructure Model
-
-The architecture is designed with security and data isolation as a primary focus:
-- **Strict Secrets Management:** Sensitive credentials (like `CLOVER_MERCHANT_ID` and `CLOVER_API_KEY`) are stored exclusively as GitHub Actions Secrets. They are only injected into the runner environment during the nightly data pipeline execution.
-- **Client-Side Security (Zero-Trust Frontend):** The frontend JavaScript (`app.js`) contains zero API keys, auth headers, or direct external endpoint calls to Clover. It only consumes the sanitized, aggregated JSON payloads, meaning malicious actors cannot extract backend access from the browser.
-- **Static Hosting:** By utilizing GitHub Pages, there are no active web servers, databases, or API routes exposed to the public internet, completely eliminating vectors for SQL injection, server-side request forgery (SSRF), and traditional backend vulnerabilities.
+### 4. Zero-Trust Security Model
+- **Strict Secret Isolation:** `CLOVER_MERCHANT_ID` and `CLOVER_API_KEY` reside exclusively in GitHub Actions Secrets / git-ignored `.env` (`0600`).
+- **Static Client Isolation:** Zero credentials, auth headers, or proprietary portion COGS formulas are exposed in public client payloads.
+- **Least-Privilege File Permissions:** Source files enforce `0644` and directories/executables enforce `0755`.

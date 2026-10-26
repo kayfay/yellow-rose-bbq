@@ -281,21 +281,12 @@ def generate_predictive_cache():
             "total_brisket_draw_lbs": round(cum_brisket, 1),
             "total_pork_draw_lbs": round(cum_pork, 1)
         },
-        "portion_cogs_breakdown": meat_costs.get("item_portions_cost", {}),
-        "wholesale_meat_index": {
-            "raw_brisket_price_per_lb": meat_costs["wholesale_raw_costs"]["raw_beef_brisket_per_lb"],
-            "raw_pork_butt_price_per_lb": meat_costs["wholesale_raw_costs"]["raw_pork_butt_per_lb"],
-            "raw_sparerib_price_per_lb": meat_costs["wholesale_raw_costs"]["raw_pork_sparerib_per_lb"],
-            "brisket_estimated_cooked_cost": meat_costs["yield_estimates"]["brisket"]["nominal_cost_per_cooked_lb"],
-            "brisket_yield_range": meat_costs["yield_estimates"]["brisket"]["expected_yield_pct"],
-            "pork_yield_range": meat_costs["yield_estimates"]["pulled_pork"]["expected_yield_pct"]
-        },
         "hourly_forecast": upcoming_24h,
         "operational_directives": [
-            f"Peak Customer Flow: Expected around {peak_hour_str} reaching ~{round(peak_orders, 1)} orders/hr.",
-            f"Meat Depletion Pacing: Next 24 hours projected to draw ~{round(cum_brisket, 1)} lbs smoked brisket and ~{round(cum_pork, 1)} lbs pulled pork from hot storage.",
-            "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
-            "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
+            f"Peak Window: {peak_hour_str} (~{round(peak_orders, 1)} orders/hr).",
+            f"24h Meat Draw: ~{round(cum_brisket, 1)} lbs cooked brisket & ~{round(cum_pork, 1)} lbs pulled pork.",
+            "Rain / Humidity (>85%): Stage +20% takeout packaging as dine-in shifts to family packs.",
+            "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM for a 45-min rest before the 5:00 PM rush."
         ],
         "day_profiles": day_profiles
     }

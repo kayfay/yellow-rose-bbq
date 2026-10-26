@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yellow Rose BBQ v2.0.0 — Visual Review & Progress Gallery</title>
+  <style>
+    :root {
+      --bg-primary: #0f1115;
+      --bg-card: #161920;
+      --border: #2a2f3a;
+      --text-primary: #f5f6f8;
+      --text-secondary: #9ba3b0;
+      --accent-amber: #ff9f43;
+      --accent-green: #2ed573;
+      --accent-blue: #48dbfb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 2rem;
+    }
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+    }
+    .badge-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(46, 213, 115, 0.14);
+      border: 1px solid rgba(46, 213, 115, 0.4);
+      color: var(--accent-green);
+    }
+    .badge.amber {
+      background: rgba(255, 159, 67, 0.15);
+      border-color: rgba(255, 159, 67, 0.45);
+      color: var(--accent-amber);
+    }
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .milestone-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem;
+    }
+    .milestone-card h3 {
+      font-size: 0.9rem;
+      color: var(--accent-amber);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .milestone-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .comparison-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .comparison-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .frame-card {
+      background: #0b0d11;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+    .frame-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .frame-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #222630;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <header>
+      <div>
+        <h1>Yellow Rose BBQ Command Center — v2.0.0 Visual Progress Gallery</h1>
+        <p class="subtitle">Side-by-Side Executive Desktop (1280px) &amp; Mobile-First Touch-Safe (375px) Audit</p>
+      </div>
+      <div class="badge-row">
+        <span class="badge amber">Release v2.0.0</span>
+        <span class="badge">PAL Math Gate: 25/25 PASS</span>
+        <span class="badge">Security Audit: Zero High/Crit</span>
+        <span class="badge">Mobile Touch-Safe Charts: Verified</span>
+      </div>
+    </header>
+
+    <section class="milestone-grid">
+      <div class="milestone-card">
+        <h3>1. Culinary &amp; Yield Math (PAL)</h3>
+        <p>Pulled pork cooked yield unified at 44% (0.44); Brisket 2.3 portions/lb (7 oz); Pork 2.0 portions/lb (8 oz); Spare Ribs 5.0 lbs/rack; Sausage link yield 3.0 links/lb across all calculators.</p>
+      </div>
+      <div class="milestone-card">
+        <h3>2. Zero-Trust Security</h3>
+        <p>Removed all document.write() loaders, tightened CSP (no unsafe-inline scripts), sanitized HTML sinks, stripped COGS breakdown from client bundles, and normalized file permissions.</p>
+      </div>
+      <div class="milestone-card">
+        <h3>3. Executive BI &amp; Mobile Charts</h3>
+        <p>Calibrated dark-smoke palette and strictly non-interactive mobile charts (&lt;768px staticPlot: true, pointer-events: none, touch-action: pan-y) preventing scroll traps.</p>
+      </div>
+      <div class="milestone-card">
+        <h3>4. Mobile-First Ergonomics</h3>
+        <p>Sticky mobile bottom thumb-navigation bar, &ge;48px touch targets, de-slopped executive operational copy, and live viewport/theme JSON token exporter.</p>
+      </div>
+    </section>
+
+    <section class="comparison-section">
+      <div class="comparison-header">
+        <h2>Milestone A: Sausage Prep &amp; Two-Day Production Tracker</h2>
+        <span class="badge">Desktop 1280&times;900 vs. Mobile 375&times;812</span>
+      </div>
+      <div class="comparison-grid">
+        <div class="frame-card">
+          <div class="frame-label">
+            <span>Desktop View (1280px) — 2-Column Interactive Calculator &amp; Batch Scaling</span>
+            <span>v2_desktop_prep.png</span>
+          </div>
+          <img src="assets/screenshots/v2_desktop_prep.png" alt="Desktop Sausage Prep Tracker v2.0.0">
+        </div>
+        <div class="frame-card">
+          <div class="frame-label">
+            <span>Mobile View (375px) — Sticky Bottom Nav &amp; 48px Touch Controls</span>
+            <span>v2_mobile_prep.png</span>
+          </div>
+          <img src="assets/screenshots/v2_mobile_prep.png" alt="Mobile Sausage Prep Tracker v2.0.0">
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison-section">
+      <div class="comparison-header">
+        <h2>Milestone B: POS Analytics, Blended Forecasting &amp; Touch-Safe Charts</h2>
+        <span class="badge">Static Non-Interactive Mobile Charts (&lt;768px)</span>
+      </div>
+      <div class="comparison-grid">
+        <div class="frame-card">
+          <div class="frame-label">
+            <span>Desktop View (1280px) — 4-Column Executive KPI Grid &amp; Interactive Plotly/D3</span>
+            <span>v2_desktop_analytics.png</span>
+          </div>
+          <img src="assets/screenshots/v2_desktop_analytics.png" alt="Desktop POS Analytics v2.0.0">
+        </div>
+        <div class="frame-card">
+          <div class="frame-label">
+            <span>Mobile View (375px) — Touch-Safe Non-Interactive Charts (pan-y scroll safe)</span>
+            <span>v2_mobile_analytics.png</span>
+          </div>
+          <img src="assets/screenshots/v2_mobile_analytics.png" alt="Mobile POS Analytics v2.0.0">
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison-section">
+      <div class="comparison-header">
+        <h2>Milestone C: Interactive Viewport &amp; Design Token Debug Harness</h2>
+        <span class="badge">Copy Settings as JSON</span>
+      </div>
+      <div class="frame-card">
+        <div class="frame-label">
+          <span>On-Screen Design &amp; Viewport Debug Panel (375px / 414px / 768px / 1280px + Contrast Toggle + JSON Token Exporter)</span>
+          <span>v2_desktop_debug_drawer.png</span>
+        </div>
+        <img src="assets/screenshots/v2_desktop_debug_drawer.png" alt="Design Token Debug Drawer v2.0.0">
+      </div>
+    </section>
+  </div>
+</body>
+</html>

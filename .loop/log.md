@@ -52,3 +52,36 @@
 - **Proof**: npm run check exit 0; npm test 10 passed; verify_timezone_and_actuals.py 24/25 pass, exit 1. Failure is a checker test-input bug (05:10Z used as "00:10 ET"; it is 01:10 EDT) - code is correct (cutoff=1). Verifier is frozen per Phase 5; awaiting owner approval to change 05:10Z -> 04:10Z. Task 11 stays passes:false.
 
 - **2026-10-16 Task 11 closed**: owner approved one-line verifier input fix (05:10Z -> 04:10Z, test input only, no assertion weakened). verify_timezone_and_actuals.py 25/25, exit 0. All tasks 8-11 passes:true.
+- **2026-10-25 20:00:49 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-25 20:05:53 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-25 21:45:55 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+- **2026-10-26 11:15 Phase 2 & 3 (System Version Update Baseline Backup, Inventory Audit & Loop Harness Setup)**:
+  - Created verified baseline archive `backups/archive_pre_v2_20261026.tar.gz` (3.9 MB) before any destructive cleanup or code modifications.
+  - Audited repository inventory across `index.html`, `app.js`, `d3_charts.js`, `style.css`, `tz_utils.js`, `clover_api/`, `access_agent/`, `scripts/`, and `tests/e2e/`.
+  - Identified 20+ orphaned root scripts/dumps (`fix_*.py`, `patch*.js`, `app_old.js`, root CSVs/screenshots), 5 redundant Python virtualenvs, world-writable (`0777`/`0666`) file permissions, dual Plotly+D3 chart bundle overhead, mobile chart hover-trap overlays, and verbose explainer copy.
+  - Initialized `.loop/prd.json` with Tasks 12–17 (`passes: false`) and updated `.loop/patterns.md` (23 lines <= 40-line cap). Pausing at Phase 9 Gateway for `/grill-me` alignment.
+- **2026-10-26 11:21 Phase 1 (/grill-me Alignment Complete)**:
+  - **Target Version**: `v2.0.0` Major Release + root `CHANGELOG.md` & `VERSION_PLAN.md`.
+  - **Responsive Architecture**: Unified Fluid Responsive Layout (`index.html` + `style.css`) with sticky bottom thumb bar on `< 768px` and `>= 44x44px` (`48px`) touch targets.
+  - **Charting Tech Stack & Mobile Touch Invariant**: Calibrated SVG/D3 + Executive Plotly Theme with strict mobile static mode (`< 768px` enforces `staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`, and direct data badges).
+  - **Directory Sanitation**: Relocate orphaned root scripts/CSVs/screenshots to `archive/legacy_v1/` and prune redundant virtualenvs (`.venv2`, `.venv3`, `.venv4`, `venv`), retaining `.venv` and `backups/archive_pre_v2_20261026.tar.gz`.
+  - Synthesized `VERSION_PLAN.md`. Ready for `/goal` autonomous execution loop.
+- **2026-10-26 14:39:17 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-10-26 14:55 Phase 4–7 (v2.0.0 System Version Update, PAL Verification, Adversarial Critic & GitHub Pages Release)**:
+  - **Task 12 (Directory Cleanup & Backups)**: Verified `backups/archive_pre_v2_20261026.tar.gz` (3.9 MB), relocated 24 legacy root scripts to `archive/legacy_v1/` and root CSV/XLSX/JSON dumps to `data/`, pruned 4 redundant virtualenvs (`.venv2`, `.venv3`, `.venv4`, `venv`), and documented v2.0.0 architecture in `README.md`.
+  - **Task 13 (Code Logic & PAL Math Audit)**: Aligned Pulled Pork 44% (`0.44`) cooked yield across `portion_transformer.py` and `app.js`, calibrated Brisket `2.3` portions/lb (7 oz) and Pork `2.0` portions/lb (8 oz), standardized Spare Ribs to `5.0 lbs/rack`, unified sausage link multiplier to `3.0` links/lb (`#est-links-expected` == `#verif-yield-links`), fixed `classic-beef` curing salt ID (`curing-salt`), set `mild-sausage` `stuffedAddInLbs: 5.5`, wired Day 2 `customSteps` (`8, 9, 11`) to `.task-row[data-step] .task-content p`, and guarded live blended KPIs with `hasActiveBlendedKPIs`.
+  - **Task 14 (Zero-Trust Security Audit)**: Removed all `document.write()` loaders from `index.html`, tightened CSP (`script-src 'self' 'unsafe-eval'`), added `escapeHTML()` and `d3EscapeHTML()`, blocked dotfile/secret paths in `server.py` and `run_tests.sh`, stripped proprietary `portion_cogs_breakdown` and `wholesale_meat_index` from client payloads, and normalized file permissions (`chmod -R o-w .`, `clover_api/.env` `0600`).
+  - **Task 15 (Executive BI Charts & Mobile Touch Invariant)**: Enforced `staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`, and `data-mobile-static="true"` on all Plotly and D3 charts when `window.innerWidth < 768`.
+  - **Task 16 (Editorial Anti-Slop Overhaul)**: Eliminated verbose filler phrases across `index.html` and `app.js` and replaced with concise executive/pitmaster operational bullets.
+  - **Task 17 (Mobile-First Responsive Facelift, Debug Token Panel & `progress.html`)**: Added sticky `.mobile-bottom-nav`, `>= 48px` touch targets, `#design-debug-drawer` with `"Copy Settings as JSON"` exporter, side-by-side desktop/mobile visual gallery in `progress.html`, and `CHANGELOG.md`.
+  - **Deterministic Verification & Adversarial Critic Proof**:
+    - `scripts/verify_v2_facelift_pal.py`: 27/27 PASS (Exit Code 0)
+    - `scripts/verify_all_forecasts.py`: 5/5 PASS (Exit Code 0)
+    - `scripts/verify_timezone_and_actuals.py`: 26/26 PASS (Exit Code 0)
+    - `scripts/verify_ml_analytics.py`: 5/5 PASS (Exit Code 0)
+    - `scripts/verify_turnover_engine.py`: 18/18 PASS (Exit Code 0)
+    - `clover_api/test_web_security_and_payloads.py`: 16/16 PASS (Exit Code 0)
+    - Playwright E2E Suite (`./run_tests.sh`): 14/14 PASS (Exit Code 0)
+    - Independent Adversarial Critic Subagent (`7dc121b1-304f-47b2-843b-b58b2088b4b4`): **9.2 / 10** (and the single `.task-content p` selector defect + 3 minor nits identified by the Critic were immediately remediated and verified).
+  - Marked Tasks 12–17 `passes: true` in `.loop/prd.json`.

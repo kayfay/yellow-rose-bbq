@@ -19,6 +19,10 @@ venv/
 *.db
 *.sqlite
 *.csv
+*.xlsx
+backups/
+data/*.json
+archive/legacy_v1/*.json
 clover_api/data/*.db
 clover_api/data/*.sqlite
 clover_api/data/*.csv

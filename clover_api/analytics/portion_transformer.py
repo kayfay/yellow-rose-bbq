@@ -169,8 +169,10 @@ def get_daily_category_aggregates(db_path: str = "clover_api/data/clover_sales.d
     
     # Apply yield factors so ARIMA forecasts the RAW weights natively
     daily_totals = daily_totals.with_columns(
-        pl.when(pl.col("category").is_in(["brisket_lbs", "pulled_pork_lbs"]))
-        .then(pl.col("qty_sold") / 0.4)
+        pl.when(pl.col("category") == "brisket_lbs")
+        .then(pl.col("qty_sold") / 0.40)
+        .when(pl.col("category") == "pulled_pork_lbs")
+        .then(pl.col("qty_sold") / 0.44)
         .otherwise(pl.col("qty_sold"))
         .alias("qty_sold")
     )

@@ -9,8 +9,9 @@ import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-INVOICE_1 = BASE_DIR / "Review order detail_91714857_09042026.csv"
-INVOICE_2 = BASE_DIR / "Submitted_Order564310_Cust91714857_09032026.csv"
+DATA_DIR = BASE_DIR / "data"
+INVOICE_1 = (DATA_DIR / "Review order detail_91714857_09042026.csv") if (DATA_DIR / "Review order detail_91714857_09042026.csv").exists() else (BASE_DIR / "Review order detail_91714857_09042026.csv")
+INVOICE_2 = (DATA_DIR / "Submitted_Order564310_Cust91714857_09032026.csv") if (DATA_DIR / "Submitted_Order564310_Cust91714857_09032026.csv").exists() else (BASE_DIR / "Submitted_Order564310_Cust91714857_09032026.csv")
 
 # Realistic range bounds for smoked Texas BBQ (Trim scraps + Smoker render loss)
 YIELD_RANGES = {
@@ -102,7 +103,7 @@ def compute_effective_meat_costs():
                 "expected_yield_pct": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
             },
             "pork_spare_ribs": {
-                "nominal_cost_per_rack": round((rib_raw * 5.0) * 0.85, 2), # 5 lb average slab raw
+                "nominal_cost_per_rack": round(rib_raw * 5.0, 2), # 5 lb average slab raw
                 "cost_per_lb_raw": rib_raw,
                 "expected_yield_pct": "Approx. 12 bones per 5 lb raw rack"
             },

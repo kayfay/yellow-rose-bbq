@@ -2,21 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://d3js.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <script>
-    document.write('<link rel="stylesheet" href="style.css?v=' + new Date().getTime() + '">');
-  </script>
-  <!-- Include Inter Font for enterprise dense aesthetic -->
-  
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="fonts.css" rel="stylesheet">
-  <!-- Plotly.js for interactive dynamic visualizations -->
+  <link rel="stylesheet" href="style.css?v=2.0.0">
+  <link href="fonts.css?v=2.0.0" rel="stylesheet">
+  <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
   <script src="d3.v7.min.js"></script>
 </head>
@@ -26,6 +21,29 @@
       <div class="brand">
         <span class="brand-logo">🔥</span>
         <h1>Sausage & BBQ Prep Command</h1>
+        <span class="version-badge">v2.0.0</span>
+      </div>
+      <button type="button" id="btn-toggle-debug-drawer" class="debug-drawer-toggle-btn" aria-expanded="false" aria-controls="design-debug-drawer">
+        ⚙️ UI &amp; Viewport Controls
+      </button>
+    </div>
+
+    <!-- Collapsible On-Screen Viewport & Design Token Debug Panel -->
+    <div id="design-debug-drawer" class="design-debug-drawer" hidden>
+      <div class="debug-drawer-inner">
+        <div class="debug-control-group">
+          <span class="debug-group-label">Viewport Width Test:</span>
+          <button type="button" class="debug-vp-btn" data-vp="375">375px</button>
+          <button type="button" class="debug-vp-btn" data-vp="414">414px</button>
+          <button type="button" class="debug-vp-btn" data-vp="768">768px</button>
+          <button type="button" class="debug-vp-btn" data-vp="1280">1280px</button>
+          <button type="button" class="debug-vp-btn active" data-vp="fluid">Fluid 100%</button>
+        </div>
+        <div class="debug-control-group">
+          <button type="button" id="btn-debug-contrast" class="debug-action-btn">Contrast: Smokehouse Dark</button>
+          <button type="button" id="btn-copy-debug-tokens" class="debug-action-btn debug-copy-btn">Copy Settings as JSON</button>
+          <span id="debug-token-status" class="debug-token-status">Ready (v2.0.0 Tokens)</span>
+        </div>
       </div>
     </div>
 
@@ -165,7 +183,7 @@
             </div>
           </div>
           <p style="margin: 0; padding: 0.5rem 0.8rem; background: rgba(52, 152, 219, 0.15); border-radius: 4px; color: #e2e8f0; font-size: 0.85rem;">
-            ✅ <strong>Batch Yield Verification:</strong> <span id='verif-yield-base'>50.0</span> lbs base meat + liquids & binders = <strong>~<span id='verif-yield-total'>62.5</span> lbs Total Stuffed Sausage Batch Weight</strong>. At ~0.38 lbs (6 oz) per stuffed link, 1 batch yields <strong>~<span id='verif-yield-links'>155</span> links</strong>. 
+            ✅ <strong>Batch Yield Verification:</strong> <span id='verif-yield-base'>50.0</span> lbs base meat + liquids &amp; inclusions = <strong>~<span id='verif-yield-total'>59.5</span> lbs Total Stuffed Weight</strong> (~3.0 links/lb &rarr; <strong>~<span id='verif-yield-links'>179</span> links</strong>).
           </p>
         </div>
       </section>
@@ -273,43 +291,35 @@
       
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <div id="forecasting-operational-tools">
-        <!-- Beginner-Friendly Meat Industry & Delivery Window Explainer -->
+        <!-- Meat Delivery & Case Pack Reference -->
       <section class="control-card">
         <details>
           <summary>
-            🚚 Daily Smoker Cheat Sheet: Meat Deliveries & Case Packs
+            🚚 Supplier Delivery Schedule &amp; Cryovac Case Specs
           </summary>
           <div>
-            <div>
-              <div>
-                <strong>🚚 3 Delivery Days:</strong>
-                <div style="font-size: 13px; color: #94a3b8; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px;">
-                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                        <strong style="color: #38bdf8;">Saturday Order</strong><br>
-                        Delivered Sunday<br>
-                        <em>(Next-Day Turnaround)</em>
-                    </div>
-                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                        <strong style="color: #38bdf8;">Monday Order</strong><br>
-                        Delivered Tuesday<br>
-                        <em>(Next-Day Turnaround)</em>
-                    </div>
-                    <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                        <strong style="color: #38bdf8;">Thursday Order</strong><br>
-                        Delivered Friday<br>
-                        <em>(Next-Day Turnaround)</em>
-                    </div>
+            <div style="margin-top: 8px;">
+              <strong>🚚 Next-Day Supplier Cutoff Windows:</strong>
+              <div style="font-size: 13px; color: #94a3b8; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 8px;">
+                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                  <strong style="color: #38bdf8;">Saturday Order</strong> &rarr; Sunday Delivery
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                  <strong style="color: #38bdf8;">Monday Order</strong> &rarr; Tuesday Delivery
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                  <strong style="color: #38bdf8;">Thursday Order</strong> &rarr; Friday Delivery
                 </div>
               </div>
-
-              <div>
-                <strong>📦 Cryovac & Case Pack Specs:</strong>
-                <ul>
-                  <li><strong>Brisket:</strong> 1 brisket/cryovac &rarr; <strong>5 briskets/case</strong> (~70 lbs).</li>
-                  <li><strong>Pork Shoulder:</strong> 2 butts/cryovac &rarr; <strong>4 butts/case</strong> (~32 lbs).</li>
-                  <li><strong>Spare Ribs:</strong> 2 racks/cryovac &rarr; <strong>6 racks/case</strong> (3 cryovacs/case).</li>
-                </ul>
-              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <strong>📦 Standard Case Pack &amp; Yield Specs:</strong>
+              <ul style="margin-top: 4px;">
+                <li><strong>Brisket:</strong> 5 packers/case (~70 lbs raw; 40% cooked yield).</li>
+                <li><strong>Pork Shoulder:</strong> 4 bone-in butts/case (~32 lbs raw; 44% cooked yield).</li>
+                <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~30 lbs raw at 5 lbs/rack; 60% cooked yield).</li>
+                <li><strong>Beef Dino Ribs:</strong> 12 plate ribs/case (3 cryovac bags).</li>
+              </ul>
             </div>
           </div>
         </details>
@@ -319,7 +329,7 @@
         <!-- Target Date Purpose & Explanation Banner -->
         <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
           <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; max-width: 700px;">
-            <strong style="color: var(--text-primary);">How to use the Date Picker:</strong> Select any <strong>past date</strong> to pull verified POS sales records and actual performance metrics, or pick any <strong>future date</strong> to generate SARIMA model prep forecasts for your smoker. 
+            <strong style="color: var(--text-primary);">Horizon Controls:</strong> Select a <strong>past date</strong> for verified Clover POS actuals or a <strong>future date</strong> for SARIMA pit prep targets.
           </div>
           <div id="data-last-pulled" style="font-size: 10px; color: #34d399; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); white-space: nowrap;">
             Data Last Pulled: ...
@@ -584,16 +594,16 @@
       <div id="subtab-view-predictive">
         <!-- TAB VIEW: Hourly Operations & Service Flow -->
         <section class="control-card marketing-card">
-          <h2 class="section-title">⚡ Real-Time Hourly Velocity & Service Flow</h2>
+          <h2 class="section-title">⚡ Real-Time Hourly Velocity &amp; Service Flow</h2>
           <div>
-            <h3>Step-by-Step Overview: Kitchen Throughput & Smoker Pacing</h3>
+            <h3>Pit Throughput &amp; Smoker Pacing</h3>
             <ul>
-              <li><strong>24-Hour Projected Customer Velocity:</strong> <span id="predictive-velocity-summary">Expected peak volume concentrates during lunch (12:00 PM – 1:30 PM) reaching ~12–14 orders/hr, and dinner rush (5:30 PM – 7:30 PM) reaching ~10–12 orders/hr.</span></li>
-              <li><strong>Meat Yield Shrinkage Notice:</strong> Raw meat undergoes both fat/deckle trim loss and 12–14 hour smoker render loss. Cooked brisket yield typically ranges between <strong>38% – 45%</strong> (approx. 55% – 62% combined trim scrap and rendering shrinkage in the pit).</li>
-              <li><strong>Kitchen Workflow Directives:</strong>
+              <li><strong>Peak Service Windows:</strong> <span id="predictive-velocity-summary">Lunch rush (12:00 PM – 1:30 PM) averages 12–14 orders/hr; dinner rush (5:30 PM – 7:30 PM) averages 10–12 orders/hr.</span></li>
+              <li><strong>Cooked Yield Standards:</strong> Brisket yields <strong>40%</strong> cooked weight after trim and 14-hour smoke; Pork Shoulder yields <strong>44%</strong>; Turkey Breast yields <strong>70%</strong>.</li>
+              <li><strong>Active Shift Directives:</strong>
                 <ul id="predictive-directives-list" style="margin-top: 8px; margin-left: 20px;">
-                  <li>Pull Batch 2 Ribs by 4:00 PM to ensure a 45-minute rest before the 5:00 PM dinner rush.</li>
-                  <li>During rain or extreme humidity, stage 20% extra to-go packaging as dine-in volume shifts toward takeout family packs.</li>
+                  <li>Pull Batch 2 Ribs by 4:00 PM for a 45-minute hold before the 5:00 PM dinner rush.</li>
+                  <li>Stage +20% to-go packaging during rain (&gt;5mm) or high humidity (&gt;85%).</li>
                 </ul>
               </li>
             </ul>
@@ -633,12 +643,12 @@
       <!-- TAB 1 VIEW: ARIMA Baseline Model -->
       
         <section class="control-card marketing-card">
-          <h2 class="section-title">🧠 Baseline Smoker Demand & Sales Pace</h2>
+          <h2 class="section-title">🧠 Baseline Smoker Demand &amp; Sales Pace</h2>
           <div>
-            <h3>Step-by-Step Reasoning: Weekly Cycle Baseline</h3>
+            <h3>Weekly Operating Cycle Baseline</h3>
             <ul>
-              <li><strong>The Baseline Trend:</strong> <span id="dynamic-baseline-trend">By analyzing historical sales data through our Standard Forecasting Model, our pit operations maintain a daily average baseline of <strong>~$2,330/day</strong> (with normal weekdays averaging ~$1,620/day and peak weekend surges hitting ~$4,250/day).</span></li>
-              <li><strong>Actionable Insight - Meat Procurement:</strong> <span id="dynamic-insight-string">The forecast dictates prepping ~165 lbs raw brisket (~66 lbs cooked yield) and ~85 lbs raw pork shoulder (~34 lbs cooked yield) [~250 lbs total raw / ~100 lbs total cooked meat] for peak Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, purchasing exactly the projected raw amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing without premature sellouts or expensive food waste.</span></li>
+              <li><strong>Operating Baseline:</strong> <span id="dynamic-baseline-trend">Operating days (Tue–Sun) average <strong>~$2,330/day</strong> (~$1,620/day Tue–Thu; ~$4,250/day Fri–Sun).</span></li>
+              <li><strong>Procurement Directive:</strong> <span id="dynamic-insight-string">Stage raw proteins to match projected cooked yield (40% Brisket, 44% Pork Shoulder) plus composed item draw (Tacos, Rosebuds) through 9:00 PM close.</span></li>
             </ul>
           </div>
         </section>
@@ -672,11 +682,11 @@
         <section class="control-card marketing-card">
           <h2 class="section-title">🌧️ Weather Impact on Sales</h2>
           <div>
-            <h3>Step-by-Step Reasoning: How Weather Affects Sales</h3>
+            <h3>Exogenous Weather Elasticity</h3>
             <ul>
-              <li><strong>Precipitation Impact (+$97.37/mm):</strong> Blending Open-Meteo Jacksonville rainfall data with daily POS transactions reveals that moderate rain shifts ordering behavior to higher-ticket family bundles for at-home dining.</li>
-              <li><strong>Extreme Heat (>90&deg;F):</strong> Outdoor patio dining drops significantly during Florida heat waves. Dine-in volume concentrates heavily at the indoor air-conditioned tables, and overflow customers shift toward quick takeout or curbside pickup rather than sitting outside.</li>
-              <li><strong>Operational Choice - Weather Adjustments:</strong> Since we avoid margin-killing third-party delivery, leverage heavy rain days by promoting "Rainy Day Vacuum-Sealed Freezer Packs." On days when rainfall exceeds 10mm, reduce walk-in hot brisket prep by 15%, but immediately vacuum-seal the surplus and promote it on social media for customers to stock their freezers. During extreme heat, shift front-of-house staff to expedite curbside pickup to keep customers in their air-conditioned cars.</li>
+              <li><strong>Precipitation (+$97.37/mm):</strong> Moderate rainfall shifts volume into higher-ticket takeout family packs.</li>
+              <li><strong>Extreme Heat (&gt;90&deg;F):</strong> Patio traffic contracts (-5.8%); volume concentrates indoors and at curbside pickup.</li>
+              <li><strong>Pit &amp; Packaging Protocol:</strong> On &gt;10mm rain days, trim hot-holding brisket by 15% and vacuum-seal surplus for chilled retail packs.</li>
             </ul>
           </div>
         </section>
@@ -692,14 +702,14 @@
       <!-- TAB 3 VIEW: Live Event Correlation -->
       <div id="subtab-view-event" style="display: none;">
         <section class="control-card marketing-card">
-          <h2 class="section-title">🏈 Game Day & Event Sales Surges</h2>
+          <h2 class="section-title">🏈 Game Day &amp; Event Sales Surges</h2>
           <div>
-            <h3>Step-by-Step Reasoning: Jaguars Game Day Tailgating Spikes</h3>
+            <h3>Downtown Stadium &amp; Arena Demand Multipliers</h3>
             <ul>
-              <li><strong>Jaguars Game Day (3.5x Multiplier):</strong> EverBank Stadium home games trigger a massive 3.5x revenue multiplier ($17.4k vs $4.9k). <em>Actionable Insight:</em> Shift menus strictly to high-margin, 48-hour pre-order family tailgating bundles. Convert 4 parking spaces to a drive-thru express lane for lightning-fast pickups.</li>
-              <li><strong>Florida-Georgia Game (5.0x Multiplier):</strong> The "World's Largest Outdoor Cocktail Party" brings an unprecedented weekend surge. <em>Actionable Insight:</em> Because RV City opens days in advance, demand spikes on Thursday and Friday, not just Saturday. Stagger smoke times starting Tuesday, and offer "RV Smoker Packs" that fans can easily reheat on their own grills.</li>
-              <li><strong>Daily's Place Concerts (1.5x Multiplier):</strong> Evening concerts create a sharp, concentrated dinner rush between 5:00 PM and 7:00 PM as attendees eat before the show. <em>Actionable Insight:</em> Shift Cook #3 (Evening Pit Lead) to purely front-of-house expediting during these two hours to clear the line quickly, holding brisket hot in the warmer instead of cutting to order.</li>
-              <li><strong>Jumbo Shrimp Baseball (1.2x Multiplier):</strong> Steady, low-impact bumps on summer evenings. <em>Actionable Insight:</em> Great opportunity to push high-margin sides (elote, loaded mac and cheese) to families heading to the ballpark.</li>
+              <li><strong>Jaguars Home Game (3.5x):</strong> ~$17.4k vs. $4.9k baseline. Prioritize 48-hour pre-order tailgate bundles and express curbside pickup.</li>
+              <li><strong>Florida-Georgia Weekend (5.0x):</strong> Multi-day RV City surge starting Thursday. Stagger smoker loads from Tuesday.</li>
+              <li><strong>Daily's Place Concerts (1.5x):</strong> Concentrated 5:00 PM – 7:00 PM pre-show rush. Assign Evening Pit Lead to line expediting.</li>
+              <li><strong>Jumbo Shrimp Baseball (1.2x):</strong> Steady pre-game family traffic; feature high-margin sides (elote, mac &amp; cheese).</li>
             </ul>
           </div>
         </section>
@@ -759,11 +769,11 @@
         <section class="control-card marketing-card">
           <h2 class="section-title">⏱️ Hourly Rush Patterns</h2>
           <div>
-            <h3>Step-by-Step Reasoning: Hourly Demand Patterns</h3>
+            <h3>Shift Demand Distribution</h3>
             <ul>
-              <li><strong>Dual-Peak Rush Windows:</strong> Sales consistently concentrate in two distinct rushes: a primary <strong>Lunch Rush (11:00 AM – 1:30 PM)</strong> and an evening <strong>Dinner Rush (5:00 PM – 7:30 PM)</strong> across all operating days.</li>
-              <li><strong>Evening Wind-Down & 9:00 PM Close:</strong> Volume drops off sharply after 8:00 PM down to 0 at 9:00 PM, allowing the crew to break down stations, wash dishes, haul trash, and complete closing duties without incoming orders.</li>
-              <li><strong>Actionable Insight:</strong> Use the shift drop-down below to visualize volume across specific team shifts. This validates our staggered staffing and ensures smokers are pulled right before the 11 AM and 5 PM rushes.</li>
+              <li><strong>Dual-Peak Windows:</strong> Volume concentrates in <strong>Lunch (11:00 AM – 1:30 PM)</strong> and <strong>Dinner (5:00 PM – 7:30 PM)</strong>.</li>
+              <li><strong>8:00 PM Taper / 9:00 PM Close:</strong> Post-8:00 PM taper allows station breakdown without overtime.</li>
+              <li><strong>Shift Filter:</strong> Isolate Morning Prep, Lunch, or Dinner windows below to align carving and rest times.</li>
             </ul>
           </div>
         </section>
@@ -791,23 +801,23 @@
         <section class="control-card marketing-card" style="margin-bottom: 20px;">
           <h2 class="section-title">💡 Executive Insights Summary</h2>
           <div class="insight-content" style="line-height: 1.6; color: #cbd5e1; padding: 10px 0;">
-            <p style="margin-bottom: 12px;"><strong>1. Sell-Out / Stock Depletion Trajectory</strong><br>
-            &bull; <strong>The "Taco Rush":</strong> <em>Crispy Quesa Taco Brisket</em> is a volume monster. Trajectory is flat until 2:00 PM, spikes violently, and climbs through 9:00 PM (a heavy dinner item).<br>
-            &bull; <strong>Ribs are for Dinner:</strong> <em>Full Rack Pork Spare Ribs</em> register almost no sales before 4:00 PM, selling entirely during the dinner rush.<br>
-            &bull; <strong>No Early Sell-Outs:</strong> Crucially, none of the curves go completely flat before 9:00 PM. This means the restaurant is successfully prepping enough to meet demand through closing time without leaving money on the table.</p>
+            <p style="margin-bottom: 12px;"><strong>1. Stock Depletion Trajectory</strong><br>
+            &bull; <strong>Quesa Taco Brisket:</strong> Accelerates sharply after 2:00 PM through 9:00 PM close.<br>
+            &bull; <strong>Pork Spare Ribs:</strong> Concentrates almost exclusively in the 4:00 PM – 8:30 PM dinner window.<br>
+            &bull; <strong>Zero Premature 86s:</strong> Current par levels sustain availability until 9:00 PM close.</p>
 
-            <p style="margin-bottom: 12px;"><strong>2. Cannibalization (Dino Ribs vs. Pork Ribs)</strong><br>
-            Offering <strong>Beef Dino Ribs</strong> as a special definitively cannibalizes normal <strong>Pork Spare Rib</strong> sales, dropping average daily racks sold from <strong>6.2</strong> to <strong>3.9</strong> (-37%). Prep targets for pork should be intentionally reduced on Dino Rib days to prevent waste.</p>
+            <p style="margin-bottom: 12px;"><strong>2. Menu Cannibalization (Dino Ribs vs. Pork Ribs)</strong><br>
+            Running <strong>Beef Dino Ribs</strong> reduces daily <strong>Pork Spare Rib</strong> volume from <strong>6.2</strong> to <strong>3.9 racks</strong> (-37%). Trim pork rib prep on Dino Rib days.</p>
 
-            <p style="margin-bottom: 12px;"><strong>3. Order Type Segmentation</strong><br>
-            &bull; <strong>Dine-in (~$44 avg ticket):</strong> Primarily individuals or couples buying single plates and sandwiches.<br>
-            &bull; <strong>In-Store Pickup (~$62) & To-Go (~$50):</strong> Higher tickets driven by "Family Meals" (buying meat by the pound to feed a household).</p>
+            <p style="margin-bottom: 12px;"><strong>3. Order Channel Mix</strong><br>
+            &bull; <strong>Dine-In (~$44 avg check):</strong> Single plates and sandwiches.<br>
+            &bull; <strong>In-Store Pickup (~$62) &amp; To-Go (~$50):</strong> Bulk meat-by-the-pound family packs.</p>
 
-            <p style="margin-bottom: 12px;"><strong>4. Weather & Event Interactions</strong><br>
-            While rain kills walk-in traffic (dropping revenue from ~$4.9k to ~$3.4k), <strong>Game Days</strong> trigger massive spikes up to <strong>~$17.3k</strong>. Even if it rains on a Game Day, revenue stays incredibly high (~$13.8k) as customers simply pivot to To-Go orders for watch parties.</p>
+            <p style="margin-bottom: 12px;"><strong>4. Weather &amp; Stadium Interaction</strong><br>
+            Rain alone reduces walk-in sales (~$4.9k &rarr; ~$3.4k), whereas <strong>Jaguars Game Days</strong> surge to <strong>~$17.3k</strong> (and hold ~$13.8k in rain via takeout watch-party orders).</p>
 
-            <p><strong>5. The "Payday" Myth</strong><br>
-            There is virtually no difference in ticket size between Payday weekends ($44.92) and normal days ($45.91). Yellow Rose BBQ acts as a steady, reliable comfort food staple rather than a transient "payday splurge."</p>
+            <p><strong>5. Payday Stability</strong><br>
+            Payday weekend checks ($44.92) match standard weekends ($45.91), confirming steady baseline demand.</p>
           </div>
         </section>
 
@@ -861,15 +871,22 @@
     </div>
   </main>
 
-  <script>
-    (function() {
-      var cb = new Date().getTime();
-      document.write('<script src="clover_api/analytics/payloads.js?v=' + cb + '"><' + '/script>');
-      document.write('<script src="d3_charts.js?v=' + cb + '"><' + '/script>');
-      document.write('<script src="tz_utils.js?v=' + cb + '"></' + 'script>');
-      document.write('<script src="app.js?v=' + cb + '" defer><' + '/script>');
-    })();
-  </script>
+  <!-- Sticky Mobile Bottom Thumb-Zone Navigation (<768px) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Primary Navigation">
+    <button type="button" class="mobile-bottom-nav-btn active" data-tab="sausage-tracker" aria-selected="true">
+      <span class="mobile-nav-icon">🌭</span>
+      <span class="mobile-nav-label">Sausage Prep</span>
+    </button>
+    <button type="button" class="mobile-bottom-nav-btn" data-tab="forecasting-analytics" aria-selected="false">
+      <span class="mobile-nav-icon">📊</span>
+      <span class="mobile-nav-label">POS &amp; Pit Forecast</span>
+    </button>
+  </nav>
+
+  <script src="clover_api/analytics/payloads.js?v=2.0.0"></script>
+  <script src="d3_charts.js?v=2.0.0"></script>
+  <script src="tz_utils.js?v=2.0.0"></script>
+  <script src="app.js?v=2.0.0" defer></script>
 </body>
 </html>
 

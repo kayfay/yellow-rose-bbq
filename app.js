@@ -1,3 +1,52 @@
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>'"]/g, tag => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  }[tag] || tag));
+}
+
+function isMobileViewport() {
+  return typeof window !== 'undefined' && window.innerWidth < 768;
+}
+
+function getPlotlyConfig(extra = {}) {
+  const mobile = isMobileViewport();
+  return {
+    responsive: true,
+    displayModeBar: false,
+    staticPlot: mobile,
+    scrollZoom: false,
+    doubleClick: false,
+    ...extra
+  };
+}
+
+function applyChartTouchSafety(containerOrId) {
+  const el = typeof containerOrId === 'string' ? document.getElementById(containerOrId) : containerOrId;
+  if (!el) return;
+  const mobile = isMobileViewport();
+  el.style.touchAction = 'pan-y';
+  if (mobile) {
+    el.style.pointerEvents = 'none';
+    el.setAttribute('data-mobile-static', 'true');
+    el.querySelectorAll('svg, .plot-container, .svg-container, .js-plotly-plot').forEach(node => {
+      node.style.pointerEvents = 'none';
+      node.style.touchAction = 'pan-y';
+    });
+  } else {
+    el.style.pointerEvents = 'auto';
+    el.setAttribute('data-mobile-static', 'false');
+    el.querySelectorAll('svg, .plot-container, .svg-container, .js-plotly-plot').forEach(node => {
+      node.style.pointerEvents = '';
+      node.style.touchAction = 'pan-y';
+    });
+  }
+}
+
 function parseValidDate(val) {
   if (!val || typeof val !== 'string') return null;
   const trimmed = val.trim();
@@ -51,10 +100,11 @@ const RECIPES = {
       { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', gramEq: 181.4, desc: 'Coarse Grind' },
       { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
       { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'cure', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
+      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
     ],
     customSteps: {
       8: "Mix lean beef and beef fat thoroughly with Day 1 cure.",
+      9: "Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.",
       11: "Fold in powdered milk and ice water until sticky."
     }
   },
@@ -88,7 +138,7 @@ const RECIPES = {
     icon: '',
     menuSource: 'Pitmaster Original Signature',
     description: 'Classic Texas smoked sausage. Same great flavor as the Jalapeño Cheddar, but without the heat and cheese.',
-    stuffedAddInLbs: 0.0,
+    stuffedAddInLbs: 5.5,
     ingredients: [
       { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
       { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
@@ -606,8 +656,21 @@ function updateUI() {
     
     setText('verif-yield-base', state.weight.toFixed(1));
     setText('verif-yield-total', ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1));
-    setText('verif-yield-links', Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) / 0.375));
+    setText('verif-yield-links', Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 3.0));
   }
+
+  // Hydrate recipe-specific customSteps (Steps 8, 9, 11) in the Day 2 checklist
+  const defaultStepTexts = {
+    8: "Strain brine from diced jalapeños; whisk first half of ice water with powdered milk and black pepper.",
+    9: "Mix lean beef, pork base, and chilled fat with Day 1 pink curing salt.",
+    11: "Fold in remaining ice water, high-temp cheddar cubes, and drained jalapeño dice until tacky."
+  };
+  [8, 9, 11].forEach(stepNum => {
+    const stepDescEl = document.querySelector(`.task-row[data-step="${stepNum}"] .task-content p`);
+    if (stepDescEl) {
+      stepDescEl.textContent = (currentRecipe.customSteps && currentRecipe.customSteps[stepNum]) || defaultStepTexts[stepNum];
+    }
+  });
 
   // Update Task Checkbox states
   const taskRows = document.querySelectorAll('.task-row');
@@ -692,49 +755,176 @@ window.addEventListener('DOMContentLoaded', () => {
   initMultiTabNavigation();
   initForecastingControls();
   initEventsCalendar();
+  initDesignDebugPanel();
   // Pre-render forecasting data so it's instantly available
   renderPlotlyForecastingChart(getActiveDaysCount());
 });
 
-// Multi-Tab & POS Analytics Forecasting Module Integration
-function initMultiTabNavigation() {
-  const tabBtns = document.querySelectorAll('.app-tab-btn');
+let _lastViewportIsMobile = isMobileViewport();
+let _resizeDebounceTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeDebounceTimer);
+  _resizeDebounceTimer = setTimeout(() => {
+    const nowMobile = isMobileViewport();
+    [
+      'plotly-meat-sales-chart',
+      'plotly-predictive-velocity-chart',
+      'plotly-weather-impact-chart',
+      'plotly-event-impact-chart',
+      'plotly-sellout-chart',
+      'plotly-shift-heatmap'
+    ].forEach(applyChartTouchSafety);
+
+    if (nowMobile !== _lastViewportIsMobile) {
+      _lastViewportIsMobile = nowMobile;
+      renderPlotlyForecastingChart(getActiveDaysCount());
+      renderPlotlyPredictiveChart();
+      renderPlotlyEventChart();
+      renderPlotlyWeatherChart();
+      renderPlotlyShiftHeatmap();
+    }
+  }, 150);
+});
+
+function switchMainTab(targetTab) {
+  if (!targetTab) return;
+  const tabBtns = document.querySelectorAll('.app-tab-btn, .mobile-bottom-nav-btn');
   const tabPanes = document.querySelectorAll('.tab-pane');
 
+  tabBtns.forEach(b => {
+    const isMatch = b.getAttribute('data-tab') === targetTab;
+    b.classList.toggle('active', isMatch);
+    b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+  });
+
+  tabPanes.forEach(pane => {
+    pane.classList.remove('active');
+    pane.style.display = 'none';
+  });
+
+  const activePane = document.getElementById(`tab-${targetTab}`);
+  if (activePane) {
+    activePane.style.display = 'block';
+    activePane.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  if (targetTab === 'forecasting-analytics') {
+    renderPlotlyForecastingChart(getActiveDaysCount());
+    if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
+    renderPlotlyEventChart();
+    renderPlotlyWeatherChart();
+    renderPlotlyShiftHeatmap();
+    [
+      'plotly-meat-sales-chart',
+      'plotly-predictive-velocity-chart',
+      'plotly-weather-impact-chart',
+      'plotly-event-impact-chart',
+      'plotly-sellout-chart',
+      'plotly-shift-heatmap'
+    ].forEach(applyChartTouchSafety);
+    document.body.classList.add('hide-footer');
+    const footer = document.querySelector('.app-footer');
+    if (footer) footer.style.display = 'none';
+  } else {
+    document.body.classList.remove('hide-footer');
+    const footer = document.querySelector('.app-footer');
+    if (footer) footer.style.display = 'block';
+  }
+}
+
+// Multi-Tab & POS Analytics Forecasting Module Integration
+function initMultiTabNavigation() {
+  const tabBtns = document.querySelectorAll('.app-tab-btn, .mobile-bottom-nav-btn');
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
-      if (!targetTab) return;
-
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanes.forEach(pane => {
-        pane.classList.remove('active');
-        pane.style.display = 'none';
-      });
-
-      btn.classList.add('active');
-      const activePane = document.getElementById(`tab-${targetTab}`);
-      if (activePane) {
-        activePane.style.display = 'block';
-        activePane.classList.add('active');
-        window.scrollTo(0, 0);
-      }
-
-      if (targetTab === 'forecasting-analytics') {
-        renderPlotlyForecastingChart(getActiveDaysCount());
-        renderPlotlyEventChart();
-        renderPlotlyWeatherChart();
-        renderPlotlyShiftHeatmap();
-        document.body.classList.add('hide-footer');
-        const footer = document.querySelector('.app-footer');
-        if (footer) footer.style.display = 'none';
-      } else {
-        document.body.classList.remove('hide-footer');
-        const footer = document.querySelector('.app-footer');
-        if (footer) footer.style.display = 'block';
-      }
+      switchMainTab(targetTab);
     });
   });
+}
+
+function initDesignDebugPanel() {
+  const toggleBtn = document.getElementById('btn-toggle-debug-drawer');
+  const drawer = document.getElementById('design-debug-drawer');
+  const vpBtns = document.querySelectorAll('.debug-vp-btn');
+  const themeBtn = document.getElementById('btn-debug-contrast');
+  const copyBtn = document.getElementById('btn-copy-debug-tokens');
+  const statusEl = document.getElementById('debug-token-status');
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = drawer.hasAttribute('hidden');
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        drawer.setAttribute('hidden', '');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  let activePreviewWidth = 'fluid';
+  vpBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      vpBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const w = btn.getAttribute('data-vp') || 'fluid';
+      activePreviewWidth = w;
+      const appShell = document.querySelector('.app-content');
+      if (appShell) {
+        if (w === 'fluid') {
+          appShell.style.maxWidth = '';
+          document.body.removeAttribute('data-preview-vp');
+        } else {
+          appShell.style.maxWidth = `${w}px`;
+          document.body.setAttribute('data-preview-vp', w);
+        }
+      }
+      if (statusEl) statusEl.textContent = `Viewport preset: ${w === 'fluid' ? '100% Fluid' : w + 'px'}`;
+    });
+  });
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      const isHighContrast = document.body.classList.toggle('pit-high-contrast');
+      themeBtn.textContent = isHighContrast ? 'Contrast: Pit Daylight (High)' : 'Contrast: Smokehouse Dark';
+      if (statusEl) statusEl.textContent = isHighContrast ? 'High-Contrast Pit Daylight active' : 'Smokehouse Dark active';
+    });
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const styles = getComputedStyle(document.documentElement);
+      const tokenPayload = {
+        version: '2.0.0',
+        activeViewportPreset: activePreviewWidth,
+        windowInnerWidth: window.innerWidth,
+        mobileTouchSafeCharts: isMobileViewport(),
+        contrastMode: document.body.classList.contains('pit-high-contrast') ? 'pit-high-contrast' : 'smokehouse-dark',
+        breakpoints: { mobileMax: 767, tabletMin: 768, desktopMin: 1280 },
+        tokens: {
+          bgColor: styles.getPropertyValue('--bg-color').trim() || '#0f0e0e',
+          surfaceColor: styles.getPropertyValue('--surface-color').trim() || '#1c1a17',
+          accentGold: styles.getPropertyValue('--accent-primary').trim() || '#e69d00',
+          accentEmber: styles.getPropertyValue('--accent-secondary').trim() || '#d84315',
+          touchTargetMinPx: 48
+        }
+      };
+      const jsonStr = JSON.stringify(tokenPayload, null, 2);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(jsonStr).then(() => {
+          if (statusEl) statusEl.textContent = 'Copied v2.0.0 JSON tokens to clipboard';
+        }).catch(() => {
+          if (statusEl) statusEl.textContent = 'Tokens serialized (clipboard unavailable)';
+        });
+      } else if (statusEl) {
+        statusEl.textContent = 'Tokens serialized';
+      }
+      window.__LAST_COPIED_DESIGN_TOKENS__ = tokenPayload;
+    });
+  }
 }
 
 function initForecastingControls() {
@@ -1203,9 +1393,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     // Helper for special holiday open operations
     const isHolidayOpen = (dateStr) => {
-      const events = (window.BBQ_PAYLOADS?.calendar_events?.events || []);
+      const rawCal = window.BBQ_PAYLOADS?.calendar_events;
+      const events = Array.isArray(rawCal) ? rawCal : (rawCal?.events || []);
       const evt = events.find(e => e.date === dateStr);
-      return Boolean(evt && evt.category === 'holiday' && evt.multiplier > 0 && !evt.title.toLowerCase().includes('closed'));
+      return Boolean(evt && evt.category === 'holiday' && evt.multiplier > 0 && !String(evt.title || '').toLowerCase().includes('closed'));
     };
 
     // Sanitize records: Guarantee closed non-operating Mondays (and Christmas) have 0 revenue and 0 prep targets
@@ -1471,7 +1662,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     }
 
     const bCooked = Math.round(bRaw * 0.4);
-    const pCooked = Math.round(pRaw * 0.4);
+    const pCooked = Math.round(pRaw * 0.44);
     const totalRaw = Math.round(bRaw + pRaw);
     const totalCooked = bCooked + pCooked;
 
@@ -1481,7 +1672,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const avgBrisketRaw = Math.round(openRecords.reduce((acc, curr) => acc + (curr.brisket_raw_lbs || 0), 0) / (openRecords.length || 1));
     const avgBrisketCooked = Math.round(avgBrisketRaw * 0.4);
     const avgPorkRaw = Math.round(openRecords.reduce((acc, curr) => acc + (curr.pork_shoulder_raw_lbs || 0), 0) / (openRecords.length || 1));
-    const avgPorkCooked = Math.round(avgPorkRaw * 0.4);
+    const avgPorkCooked = Math.round(avgPorkRaw * 0.44);
 
     const weekdays = records.filter(r => ['Tue', 'Wed', 'Thu'].includes(r.day_name));
     const weekends = records.filter(r => ['Fri', 'Sat', 'Sun'].includes(r.day_name));
@@ -1496,16 +1687,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let insightStr = '';
     if (isTargetClosed) {
-      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Yellow Rose BBQ is closed on Mondays for pit maintenance, smoker seasoning, and equipment sanitization. No production smoking run is scheduled for today. Regular smokehouse operations resume Tuesday at 11:00 AM.`;
+      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance and wood restocking. Zero retail smoking run; service resumes Tuesday 11:00 AM.`;
     } else if (isRangeSelected) {
-      insightStr = `Cumulative Prep Horizon (${startDateVal} to ${endDateVal}, ${slicedRecords.length} days [${activeOpenDays} operating days]): Target ordering dictates prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull from this inventory. Prepping these quantities mathematically covers peak customer surges across the entire operating window without premature 86'ing or food waste.`;
+      insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} operating days): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked, 40% yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked, 44% yield) [~${totalRaw} lbs raw / ~${totalCooked} lbs cooked]. Includes composed draw for ${totalTacos} Tacos and ${totalRosebuds} Rosebuds.`;
     } else {
-      insightStr = `Single-Day Target Forecast (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Ordering targets dictate prepping ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked yield) [~${totalRaw} lbs total raw / ~${totalCooked} lbs total cooked]. Because brisket and pork lose ~60% of their weight during the long smoke, and composed items like Tacos (${totalTacos} projected) and Rosebuds (${totalRosebuds} projected) pull directly from this yield, prepping these exact amounts mathematically ensures we hit our target sell-out time right at 9:00 PM closing.`;
+      insightStr = `Single-Day Prep (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked, 40% yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked, 44% yield) [~${totalRaw} lbs raw / ~${totalCooked} lbs cooked]. Covers composed draw (${totalTacos} Tacos, ${totalRosebuds} Rosebuds) through 9:00 PM close.`;
     }
 
     if (selectedCat !== 'baseline' && catSelector && !isTargetClosed) {
       const selectedText = catSelector.options[catSelector.selectedIndex]?.text || selectedCat;
-      insightStr = `Isolated Analysis (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): The forecast model dictates carefully tracking "${selectedText}" volumes independently to isolate its specific peak demand windows. Ensure procurement aligns with these exact projections to minimize waste and optimize pit capacity.`;
+      insightStr = `Category Focus (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): Isolating "${selectedText}" demand curve to align butcher pulls and smoker capacity.`;
     }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
@@ -1775,14 +1966,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const actCookedPork = bSum.actualPorkCooked !== undefined ? bSum.actualPorkCooked : Math.round(pCooked * salesProgress * pacingRatio * 10) / 10;
       const remCookedPork = bSum.remainingPorkCooked !== undefined ? bSum.remainingPorkCooked : Math.round(pCooked * (1 - salesProgress) * 10) / 10;
       const blendedCookedPork = Math.round((actCookedPork + remCookedPork) * 10) / 10;
-      const blendedRawPork = Math.round(blendedCookedPork / 0.4);
+      const blendedRawPork = Math.round(blendedCookedPork / 0.44);
 
       if (porkElem) porkElem.textContent = blendedRawPork;
       if (pCasesElem) pCasesElem.textContent = `(~${blendedRawPork} lbs raw / ~${(blendedRawPork / 32.0).toFixed(1)} Cases)`;
       if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} lbs actual sold • ~${Math.round(remCookedPork)} lbs remaining)`;
       setBlendedPill('kpi-pork-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedPork)} lbs sold so far + ~${Math.round(remCookedPork)} lbs needed to close (~${Math.round(blendedCookedPork)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.4)} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1956,9 +2147,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       const bDiff = blendedRawBrisket - bVal;
       const bPct = bVal > 0 ? Math.round((bDiff / bVal) * 1000) / 10 : 0;
-      const predBPortions = Math.round(bCooked * 4);
-      const actBPortions = Math.round(actCookedBrisket * 4);
-      const estBPortions = Math.round(blendedCookedBrisket * 4);
+      const predBPortions = Math.round(bCooked * 2.3);
+      const actBPortions = Math.round(actCookedBrisket * 2.3);
+      const estBPortions = Math.round(blendedCookedBrisket * 2.3);
       setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
         'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedBrisket) + '# ck sold (~' + blendedRawBrisket + '# raw)',
@@ -1968,8 +2159,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       const pDiff = blendedRawPork - pVal;
       const pPct = pVal > 0 ? Math.round((pDiff / pVal) * 1000) / 10 : 0;
-      const actPPortions = Math.round(actCookedPork * 3.2);
-      const estPPortions = Math.round(blendedCookedPork * 3.2);
+      const actPPortions = Math.round(actCookedPork * 2.0);
+      const estPPortions = Math.round(blendedCookedPork * 2.0);
       setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
         'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedPork) + '# ck sold (~' + blendedRawPork + '# raw)',
@@ -2113,7 +2304,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
       if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
       if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
-      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.4)} lbs cooked)`;
+      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.44)} lbs cooked)`;
       if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
       if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
@@ -2182,8 +2373,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const aBCooked = Math.round(aBRawRound * 0.4);
         const bDiff = aBRawRound - pBRawRound;
         const bPct = pBRawRound > 0 ? Math.round((bDiff / pBRawRound) * 1000) / 10 : 0;
-        const pBPortions = Math.round(pBCooked * 4);
-        const aBPortions = Math.round(aBCooked * 4);
+        const pBPortions = Math.round(pBCooked * 2.3);
+        const aBPortions = Math.round(aBCooked * 2.3);
         setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
           'Predicted Target', '~' + pBRawRound + ' lbs raw (~' + pBCooked + '# ck)',
           'Actual Measured', '~' + aBRawRound + ' lbs raw (~' + aBCooked + '# ck)',
@@ -2193,12 +2384,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
         const pPRawRound = Math.round(sumPredPRaw);
         const aPRawRound = Math.round(sumActPRaw);
-        const pPCooked = Math.round(pPRawRound * 0.4);
-        const aPCooked = Math.round(aPRawRound * 0.4);
+        const pPCooked = Math.round(pPRawRound * 0.44);
+        const aPCooked = Math.round(aPRawRound * 0.44);
         const pDiff = aPRawRound - pPRawRound;
         const pPct = pPRawRound > 0 ? Math.round((pDiff / pPRawRound) * 1000) / 10 : 0;
-        const pPPortions = Math.round(pPCooked * 3.2);
-        const aPPortions = Math.round(aPCooked * 3.2);
+        const pPPortions = Math.round(pPCooked * 2.0);
+        const aPPortions = Math.round(aPCooked * 2.0);
         setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
           'Predicted Target', '~' + pPRawRound + ' lbs raw (~' + pPCooked + '# ck)',
           'Actual Measured', '~' + aPRawRound + ' lbs raw (~' + aPCooked + '# ck)',
@@ -2338,8 +2529,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         }
       } else {
         setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target $${Math.round(totalRev).toLocaleString()} sales across service (~${Math.round(totalRev / 48.50)} orders at $48.50 avg check).`));
-        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 4)} 1/4-lb servings).`));
-        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 3.2)} sandwiches).`));
+        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
+        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
         setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Mix & stuff ${sausageBatches} batches (~${sausageLinks} links, 1/3-lb each).`));
         setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${rVal} whole spare rib racks (~${rVal * 12} individual bones from ~${(rVal / 6.0).toFixed(1)} cases).`));
         setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted Target', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${drVal} plate short ribs (~${(drVal / 12.0).toFixed(1)} cases). Pull in small batches to preserve bark.`));
@@ -2370,17 +2561,20 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (baselineTrendElem) {
       let comparisonNote = '';
       const revLabel = matchedRecord.is_historical ? 'actual' : 'projected';
+      const safeDay = escapeHTML(matchedRecord.day_name || shortDayStr);
+      const safeDate = escapeHTML(matchedRecord.date || targetDateInput);
+      const safeHorizon = isRangeSelected ? `${escapeHTML(startDateVal)} to ${escapeHTML(endDateVal)}` : `${safeDay}, ${safeDate}`;
       if (isTargetClosed) {
-        comparisonNote = `For your selected horizon (<strong>${matchedRecord.day_name || shortDayStr}, ${matchedRecord.date || targetDateInput}</strong>), the smokehouse is <strong>Closed</strong> (standard weekly non-operating day). Operating revenue and meat prep targets are set to 0.`;
+        comparisonNote = `Selected horizon (<strong>${safeDay}, ${safeDate}</strong>): Smokehouse <strong>Closed</strong> (weekly pit maintenance). Revenue and prep targets are 0.`;
       } else if (pctDiff > 0) {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> the operating baseline pace (+$${Math.round(incrementalRev).toLocaleString()} incremental demand).`;
+        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> baseline (+$${Math.round(incrementalRev).toLocaleString()}).`;
       } else if (pctDiff < 0) {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> the operating baseline pace (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}), typical for midweek prep windows.`;
+        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}).`;
       } else {
-        comparisonNote = `For your selected horizon (<strong>${isRangeSelected ? startDateVal + ' to ' + endDateVal : matchedRecord.day_name + ', ' + matchedRecord.date}</strong>), ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> matches standard operational baseline expectations.`;
+        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> aligns with operating baseline.`;
       }
 
-      baselineTrendElem.innerHTML = `Our model establishes a rolling average baseline of <strong>$${baselineRev.toLocaleString()}/day</strong> across active operating days (Tue–Sun; ~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Normal weekdays (Tue–Thu) baseline at <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>, while peak weekend runs (Fri–Sun) baseline at <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Note: Mondays are standard non-operating days reserved for pit cleaning and wood replenishment. ${comparisonNote}`;
+      baselineTrendElem.innerHTML = `Operating baseline (Tue–Sun): <strong>$${baselineRev.toLocaleString()}/day</strong> (~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Weekdays (Tue–Thu) average <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>; weekends (Fri–Sun) average <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Mondays closed for pit maintenance. ${comparisonNote}`;
     }
 
     if (demandPctElem) {
@@ -2454,24 +2648,24 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
-          x: dates, y: slicedRecords.map(r => (r.pork_shoulder_raw_lbs || 0) * 0.4),
-          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (40%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          x: dates, y: slicedRecords.map(r => (r.pork_shoulder_raw_lbs || 0) * 0.44),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (44%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'pork_ribs_racks') {
         layout.title = "Pit Production Targets: Pork Spare Ribs (Raw vs Cooked)";
         layout.yaxis.title = "Meat Weight (lbs)";
         let ribMax = 0;
-        slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * 3));
+        slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * 5));
         layout.yaxis.range = [0, Math.max(10, ribMax * 1.15)];
         traces.push({
-          x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * 3),
-          type: 'bar', name: 'Raw Weight (3 lbs/rack)', marker: { color: '#9b59b6' },
+          x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * 5),
+          type: 'bar', name: 'Raw Weight (5 lbs/rack)', marker: { color: '#9b59b6' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
-          x: dates, y: slicedRecords.map(r => ((r.pork_ribs_racks || 0) * 3) * 0.5),
-          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (50%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
+          x: dates, y: slicedRecords.map(r => ((r.pork_ribs_racks || 0) * 5) * 0.6),
+          type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (60%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
       } else if (selectedCat === 'beef_dino_ribs') {
@@ -2570,9 +2764,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
       
       // In-place chart update without destroying container DOM structure
-      Plotly.react(chartContainer, traces, layout, {responsive: true, displayModeBar: false});
+      Plotly.react(chartContainer, traces, layout, getPlotlyConfig());
+      applyChartTouchSafety(chartContainer);
     } else if (typeof renderD3ForecastingChart === 'function') {
       renderD3ForecastingChart('plotly-meat-sales-chart', slicedRecords, dashPayload ? dashPayload.anomalies : [], selectedCat);
+      applyChartTouchSafety(chartContainer);
     }
   } catch (error) {
     console.error("Dashboard Rendering Error: ", error);
@@ -2707,20 +2903,8 @@ async function renderPlotlyShiftHeatmap(shift) {
 }
 
 window.renderAdvancedAnalytics = function() {
-  const payload = window.BBQ_PAYLOADS.advanced_payload;
+  const payload = window.BBQ_PAYLOADS?.advanced_payload;
   if (!payload) return;
-  function escapeHTML(str) {
-    if (!str) return '';
-    return String(str).replace(/[&<>'"]/g, 
-      tag => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-      }[tag] || tag)
-    );
-  }
 
   // 1. Market Basket
   if (payload.market_basket) {
@@ -2774,7 +2958,8 @@ window.renderAdvancedAnalytics = function() {
   // 4. Sell-Out Chart
   const selloutChartElem = document.getElementById('plotly-sellout-chart');
   if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data) {
-    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout || {}, {responsive: true, displayModeBar: false});
+    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout || {}, getPlotlyConfig());
+    applyChartTouchSafety(selloutChartElem);
   } else if (selloutChartElem) {
     selloutChartElem.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Sell-Out Data Available</div>';
   }
@@ -2827,8 +3012,10 @@ async function renderPlotlyEventChart() {
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_event_chart.data;
       if (typeof Plotly !== 'undefined') {
-        Plotly.newPlot('plotly-event-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
+        Plotly.newPlot('plotly-event-impact-chart', traces, layout, getPlotlyConfig());
+        applyChartTouchSafety(container);
       }
+      refreshEventsCalendar();
       return;
     }
   } catch (err) {
@@ -2836,7 +3023,8 @@ async function renderPlotlyEventChart() {
   }
 
   if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, {responsive: true, displayModeBar: false});
+    Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, getPlotlyConfig());
+    applyChartTouchSafety(container);
   }
   refreshEventsCalendar();
 }
@@ -3007,9 +3195,11 @@ async function renderPlotlyWeatherChart() {
       const traces = payload.plotly_weather_chart.data;
 
       if (typeof Plotly !== 'undefined') {
-        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, {responsive: true, displayModeBar: false});
+        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, getPlotlyConfig());
+        applyChartTouchSafety(container);
       } else if (typeof d3 !== 'undefined') {
         renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
+        applyChartTouchSafety(container);
       }
       return;
     }
@@ -3018,7 +3208,8 @@ async function renderPlotlyWeatherChart() {
   }
 
   if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, {responsive: true, displayModeBar: false});
+    Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, getPlotlyConfig());
+    applyChartTouchSafety(container);
   }
 }
 
@@ -3139,25 +3330,30 @@ async function renderPlotlyPredictiveChart() {
     }
   }
 
-  // Hydrate Crucial Top-Shelf KPIs
+  // Hydrate Crucial Top-Shelf KPIs without overwriting live blended POS actuals
   const kpiVelocity = document.getElementById('kpi-current-velocity');
   const kpiPacing = document.getElementById('kpi-pacing-status');
   const kpiFoodCost = document.getElementById('kpi-food-cost-pct');
   const kpiAov = document.getElementById('kpi-aov-usd');
   const kpiAovSub = document.getElementById('kpi-aov-sub');
 
+  const velBlendedPill = document.getElementById('kpi-velocity-blended-sub');
+  const hasActiveBlendedKPIs = Boolean(velBlendedPill && velBlendedPill.style.display === 'block' && velBlendedPill.innerHTML.trim() !== '');
+
   if (activeKpis) {
-    if (kpiVelocity) kpiVelocity.textContent = activeKpis.current_sales_velocity || '--';
-    if (kpiPacing) kpiPacing.textContent = `(${activeKpis.pacing_status || 'Normal'})`;
     if (kpiFoodCost) kpiFoodCost.textContent = `${activeKpis.estimated_food_cost_pct || 29.5}%`;
-    if (kpiAov) {
-      if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
-        kpiAov.textContent = '$0.00';
-        if (kpiAovSub) kpiAovSub.textContent = '(Closed / 0 Orders)';
-      } else {
-        const aovVal = activeKpis.average_ticket_usd || 48.50;
-        kpiAov.textContent = `$${Number(aovVal).toFixed(2)}`;
-        if (kpiAovSub) kpiAovSub.textContent = '(Average Order Value)';
+    if (!hasActiveBlendedKPIs) {
+      if (kpiVelocity) kpiVelocity.textContent = activeKpis.current_sales_velocity || '--';
+      if (kpiPacing) kpiPacing.textContent = `(${activeKpis.pacing_status || 'Normal'})`;
+      if (kpiAov) {
+        if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
+          kpiAov.textContent = '$0.00';
+          if (kpiAovSub) kpiAovSub.textContent = '(Closed / 0 Orders)';
+        } else {
+          const aovVal = activeKpis.average_ticket_usd || 48.50;
+          kpiAov.textContent = `$${Number(aovVal).toFixed(2)}`;
+          if (kpiAovSub) kpiAovSub.textContent = '(Average Order Value)';
+        }
       }
     }
   }
@@ -3165,13 +3361,11 @@ async function renderPlotlyPredictiveChart() {
   // Hydrate Directives
   const directivesList = document.getElementById('predictive-directives-list');
   if (directivesList && Array.isArray(activeDirectives)) {
-    const customDirectives = [...activeDirectives];
-    if (activeKpis) {
-      if (activeKpis.recommended_staff !== undefined && activeKpis.pitmaster_hours !== undefined) {
-        customDirectives.push(`Labor & Shift Coverage: Recommended roster of <strong>${activeKpis.recommended_staff} crew members</strong> (~${activeKpis.pitmaster_hours} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
-      }
+    const safeDirectives = activeDirectives.map(d => escapeHTML(d));
+    if (activeKpis && activeKpis.recommended_staff !== undefined && activeKpis.pitmaster_hours !== undefined) {
+      safeDirectives.push(`Labor &amp; Shift Coverage: Recommended roster of <strong>${escapeHTML(activeKpis.recommended_staff)} crew members</strong> (~${escapeHTML(activeKpis.pitmaster_hours)} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
     }
-    directivesList.innerHTML = customDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
+    directivesList.innerHTML = safeDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
   }
 
   const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : `${r.hour}:00`);
@@ -3284,7 +3478,8 @@ async function renderPlotlyPredictiveChart() {
   };
 
   if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, { responsive: true, displayModeBar: false });
+    Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, getPlotlyConfig());
+    applyChartTouchSafety(chartElem);
   }
 }
 
