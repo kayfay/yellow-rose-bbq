@@ -395,7 +395,7 @@
           92.3
         ],
         "y": [
-          3384.79,
+          2432.94,
           4886.43,
           3575.35,
           5723.16,
@@ -417,7 +417,7 @@
           6868.89
         ],
         "text": [
-          "<b>Tuesday, 2026-07-28</b><br>Revenue: $3,384.79<br>Weather: 96.98\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Tuesday, 2026-07-28</b><br>Revenue: $2,432.94<br>Weather: 96.98\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Wednesday, 2026-07-29</b><br>Revenue: $4,886.43<br>Weather: 96.61999999999999\u00b0F, 3.3mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Thursday, 2026-08-06</b><br>Revenue: $3,575.35<br>Weather: 91.58000000000001\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Friday, 2026-08-07</b><br>Revenue: $5,723.16<br>Weather: 91.03999999999999\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
@@ -598,8 +598,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4562.931639344262,
-          "y1": 4562.931639344262,
+          "y0": 4547.327540983606,
+          "y1": 4547.327540983606,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -611,8 +611,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4862.931639344262,
-          "text": "Baseline Target ($4,563)",
+          "y": 4847.327540983606,
+          "text": "Baseline Target ($4,547)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -624,12 +624,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4562.93,
+    "normal_avg_usd": 4547.33,
     "rain_avg_usd": 4725.65,
-    "rain_drop_pct": 3.6,
-    "heat_avg_usd": 4916.71,
-    "heat_drop_pct": 10.4,
-    "rain_coef": -0.59,
-    "temp_coef": 32.3
+    "rain_drop_pct": 3.9,
+    "heat_avg_usd": 4877.04,
+    "heat_drop_pct": 9.6,
+    "rain_coef": -0.29,
+    "temp_coef": 29.6
   }
 }
