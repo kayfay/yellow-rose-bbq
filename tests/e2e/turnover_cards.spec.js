@@ -73,7 +73,7 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     const badge9pm = card9pm.locator('.turnover-badge');
     await expect(badge9pm).toContainText('Projected');
 
-    // Assert blended live total pills across all top-shelf KPI summary cards
+    // Assert projected finish pills across all top-shelf KPI summary cards
     const pillRevenue = page.locator('#kpi-revenue-blended-sub');
     const pillBrisket = page.locator('#kpi-brisket-blended-sub');
     const pillPork = page.locator('#kpi-pork-blended-sub');
@@ -87,25 +87,25 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     const subRosebuds = page.locator('#kpi-rosebuds-sub');
 
     await expect(pillRevenue).toBeVisible();
-    await expect(pillRevenue).toContainText('Blended Live Total');
+    await expect(pillRevenue).toContainText("Today's Projected Finish");
     await expect(pillBrisket).toBeVisible();
-    await expect(pillBrisket).toContainText('actual drawn');
+    await expect(pillBrisket).toContainText('sold so far');
     await expect(subBrisket).toContainText('actual sold');
     await expect(pillPork).toBeVisible();
-    await expect(pillPork).toContainText('actual drawn');
+    await expect(pillPork).toContainText('sold so far');
     await expect(pillSausage).toBeVisible();
-    await expect(pillSausage).toContainText('actual links sold');
+    await expect(pillSausage).toContainText('sold so far');
     await expect(pillRosebuds).toBeVisible();
-    await expect(pillRosebuds).toContainText('actual sold');
+    await expect(pillRosebuds).toContainText('sold so far');
     await expect(subRosebuds).toContainText('actual sold');
     await expect(pillFoodCost).toBeVisible();
-    await expect(pillFoodCost).toContainText('Blended Live COGS');
+    await expect(pillFoodCost).toContainText("Today's Food Cost Finish");
     await expect(pillVelocity).toBeVisible();
-    await expect(pillVelocity).toContainText('Blended Velocity');
+    await expect(pillVelocity).toContainText('Current Pace');
     await expect(pillAov).toBeVisible();
-    await expect(pillAov).toContainText('Blended Live Ticket');
+    await expect(pillAov).toContainText('Average Ticket So Far');
     await expect(pillLabor).toBeVisible();
-    await expect(pillLabor).toContainText('Blended Shift Hours');
+    await expect(pillLabor).toContainText('Shift Labor Hours');
 
     // 6. Test Quick Preset: Reset to Live (#sim-btn-reset)
     const btnReset = page.locator('#sim-btn-reset');
