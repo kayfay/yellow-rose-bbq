@@ -384,6 +384,13 @@ body {
 .kpi-card-teal { border-left: 3px solid #14b8a6; }
 .kpi-card-teal .est-number { color: #14b8a6; }
 
+.kpi-plain-desc {
+  font-size: 11px;
+  line-height: 1.35;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
 /* --- Workflow Checklists (Tactile Large Hit Target Cards) --- */
 .day-container { margin-bottom: 14px; }
 .day-title {

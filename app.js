@@ -1391,9 +1391,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const endDateVal = document.getElementById('forecast-end-date')?.value || targetDateInput;
     const isRangeSelected = Boolean(startDateVal && endDateVal && (startDateVal !== endDateVal) && daysCount > 1);
     
-    // Check if the current single target date is a closed day (e.g. Monday or Christmas)
+    // Check if the current single target date is a closed day (e.g. Monday or Christmas).
+    // Note: If the user is actively simulating in Time-Travel mode, allow simulation to execute even if today is Monday.
+    const isSimActive = Boolean(window.ShopTime && typeof window.ShopTime.isSimulating === 'function' && window.ShopTime.isSimulating());
     const isTargetClosed = Boolean(
-      !isRangeSelected && (
+      !isRangeSelected && !isSimActive && (
         matchedRecord?.is_closed ||
         (matchedRecord?.day_name === 'Mon' && !isHolidayOpen(matchedRecord.date)) ||
         (targetDateObj.getDay() === 1 && !isHolidayOpen(targetDateInput)) ||
@@ -1715,16 +1717,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (revenueElem) revenueElem.textContent = '$0 (Closed)';
 
       // Closed Day Comparison Badges
-      setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted', '$0', 'Measured', '$0 (Closed)', 0, '$', 0, { text: 'Closed Monday', className: 'pill-closed' }, 'Weekly pit maintenance & smoker sanitization. No retail service.'));
-      setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs cooked yield • 0 portions prepared'));
-      setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs cooked yield • 0 portions prepared'));
-      setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted', '0 links', 'Measured', '0 links (Closed)', 0, 'links', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 links stuffed • Pit closed'));
-      setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted', '0 racks', 'Measured', '0 racks (Closed)', 0, 'racks', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 racks smoked • 0 bones served'));
-      setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted', '0 ribs', 'Measured', '0 ribs (Closed)', 0, 'ribs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 dino plate ribs • Pit closed'));
-      setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs cooked breast • 0 portions prepared'));
-      setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted', '0 units', 'Measured', '0 units (Closed)', 0, 'units', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 bacon-wrapped bites • Pit closed'));
-      setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted', '0 tacos', 'Measured', '0 tacos (Closed)', 0, 'tacos', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 tacos served • Pit closed'));
-      setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Closed Day', className: 'pill-closed' }, 'Total Cooked Yield: 0 lbs across all proteins'));
+      setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted', '$0', 'Measured', '$0 (Closed)', 0, '$', 0, { text: 'Closed Monday', className: 'pill-closed' }, 'Weekly pit maintenance & smoker sanitization. Zero retail service.'));
+      setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs raw briskets pulled • 0 lbs cooked yield slicing'));
+      setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs bone-in pork butts • 0 lbs pulled pork prepared'));
+      setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted', '0 links', 'Measured', '0 links (Closed)', 0, 'links', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 mixer batches • 0 sausage links stuffed'));
+      setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted', '0 racks', 'Measured', '0 racks (Closed)', 0, 'racks', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 spare rib racks smoked • 0 bones served'));
+      setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted', '0 ribs', 'Measured', '0 ribs (Closed)', 0, 'ribs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 dino plate ribs • Smoker pits shut down'));
+      setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs cooked breast • 0 carved portions prepared'));
+      setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted', '0 units', 'Measured', '0 units (Closed)', 0, 'units', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 bacon-wrapped burnt end bites prepped'));
+      setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted', '0 tacos', 'Measured', '0 tacos (Closed)', 0, 'tacos', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 street tacos served • Hot-holding idle'));
+      setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Closed Day', className: 'pill-closed' }, 'Total Cooked Yield: 0 lbs across all proteins.'));
 
       // Render Model Evaluation Banner for Closed Day
       const evalBannerElem = document.getElementById('kpi-model-eval-banner');
@@ -1949,7 +1951,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '$' + Math.round(bSum.forecastFullDay).toLocaleString(),
         'Measured + Proj', '$' + actSalesSoFar.toLocaleString() + ' sold (~$' + blendedTotalRev.toLocaleString() + ')',
         revDiff, '$', revPct, null,
-        `Plain English: Model targeted ~${predOrders} customer orders; currently tracking towards ~${estBlendedOrders} orders.`
+        `Plain English: Model targeted ~${predOrders} customer orders; currently pacing towards ~${estBlendedOrders} orders ($${actSalesSoFar.toLocaleString()} registered in POS so far).`
       ));
 
       const bDiff = blendedRawBrisket - bVal;
@@ -1961,18 +1963,18 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedBrisket) + '# ck sold (~' + blendedRawBrisket + '# raw)',
         bDiff, 'lbs', bPct, null,
-        `Plain English: ~${actBPortions} portions sold (~${Math.round(actCookedBrisket)}# ck) out of ~${estBPortions} blended portions.`
+        `Plain English: ~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) out of ~${estBPortions} blended portions (~${blendedRawBrisket} lbs raw prep).`
       ));
 
       const pDiff = blendedRawPork - pVal;
       const pPct = pVal > 0 ? Math.round((pDiff / pVal) * 1000) / 10 : 0;
-      const actPPortions = Math.round(actCookedPork * 4);
-      const estPPortions = Math.round(blendedCookedPork * 4);
+      const actPPortions = Math.round(actCookedPork * 3.2);
+      const estPPortions = Math.round(blendedCookedPork * 3.2);
       setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
         'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedPork) + '# ck sold (~' + blendedRawPork + '# raw)',
         pDiff, 'lbs', pPct, null,
-        `Plain English: ~${actPPortions} portions sold (~${Math.round(actCookedPork)}# ck) out of ~${estPPortions} blended portions.`
+        `Plain English: ~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) out of ~${estPPortions} blended sandwiches.`
       ));
 
       const sDiff = blendedSausageLinks - sausageLinks;
@@ -1981,7 +1983,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', sausageLinks + ' links (~' + sVal + ' lbs)',
         'Measured Yield', actSausageLinks + ' sold (~' + blendedSausageLinks + ' links)',
         sDiff, 'links', sPct, null,
-        `Plain English: ${actSausageLinks} links sold out of ~${blendedSausageLinks} blended links.`
+        `Plain English: ${actSausageLinks} links sold at the counter out of ~${blendedSausageLinks} blended links (${blendedSausageBatches} mixer batches).`
       ));
 
       const rDiff = blendedRibsRacks - rVal;
@@ -1990,7 +1992,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)',
         'Measured Yield', actRibsRacks + ' sold (~' + blendedRibsRacks + ' racks)',
         rDiff, 'racks', rPct, null,
-        `Plain English: ${actRibsRacks} racks sold (${actRibsRacks * 12} bones) out of ~${blendedRibsRacks} blended racks.`
+        `Plain English: ${actRibsRacks} racks sold (${actRibsRacks * 12} individual bones) out of ~${blendedRibsRacks} blended racks (~${(blendedRibsRacks / 6.0).toFixed(1)} cases).`
       ));
 
       const drDiff = blendedDinoRibs - drVal;
@@ -1999,17 +2001,18 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)',
         'Measured Yield', actDinoRibs + ' sold (~' + blendedDinoRibs + ' ribs)',
         drDiff, 'ribs', drPct, null,
-        `Plain English: ${actDinoRibs} giant dino ribs sold out of ~${blendedDinoRibs} projected.`
+        `Plain English: ${actDinoRibs} jumbo plate ribs sold out of ~${blendedDinoRibs} blended ribs.`
       ));
 
       const tDiff = Math.round(blendedTurkeyCooked - tVal);
       const tPct = tVal > 0 ? Math.round((tDiff / tVal) * 1000) / 10 : 0;
-      const actTPortions = Math.round(actTurkeyCooked * 4);
+      const actTPortions = Math.round(actTurkeyCooked * 3.2);
+      const estTPortions = Math.round(blendedTurkeyCooked * 3.2);
       setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
         'Predicted Total', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)',
         'Measured Yield', '~' + Math.round(actTurkeyCooked) + '# sold (~' + Math.round(blendedTurkeyCooked) + '# ck)',
         tDiff, 'lbs', tPct, null,
-        `Plain English: ~${actTPortions} portions sold out of ~${Math.round(blendedTurkeyCooked * 4)} blended portions.`
+        `Plain English: ~${actTPortions} carved plates sold out of ~${estTPortions} blended portions (~${blendedTurkeyRaw} lbs raw prep).`
       ));
 
       const rbDiff = blendedRosebuds - rbVal;
@@ -2018,7 +2021,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rbVal + ' units',
         'Measured Yield', actRosebuds + ' sold (~' + blendedRosebuds + ' units)',
         rbDiff, 'units', rbPct, null,
-        `Plain English: ${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} 4-pack orders) out of ~${blendedRosebuds} blended units.`
+        `Plain English: ${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} orders of 4) out of ~${blendedRosebuds} blended units from brisket burnt ends.`
       ));
 
       const tacoDiff = blendedTacos - tacoVal;
@@ -2027,7 +2030,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', tacoVal + ' tacos',
         'Measured Yield', actTacos + ' sold (~' + blendedTacos + ' tacos)',
         tacoDiff, 'tacos', tacoPct, null,
-        `Plain English: ${actTacos} tacos sold out of ~${blendedTacos} blended orders.`
+        `Plain English: ${actTacos} tacos served out of ~${blendedTacos} blended orders across shift.`
       ));
 
       const tcDiff = blendedTotalCooked - totalCooked;
@@ -2036,7 +2039,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)',
         'Measured Yield', '~' + actTotalCooked + '# sold (~' + blendedTotalCooked + '# ck)',
         tcDiff, 'lbs', tcPct, null,
-        `Plain English: ~${actTotalCooked} lbs cooked meat sold so far out of ~${blendedTotalCooked} lbs total.`
+        `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far out of ~${blendedTotalCooked} lbs total hot-holding yield.`
       ));
 
       // Render Model Evaluation Banner for Live Blended Day
@@ -2170,7 +2173,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Total', '$' + pRevRound.toLocaleString(),
           'Actual POS Total', '$' + aRevRound.toLocaleString(),
           revDiff, '$', revPct, null,
-          `Plain English: Model predicted ${pOrders} customer orders vs ${aOrders} actual POS orders.`
+          `Plain English: Model predicted ${pOrders} customer orders ($${pRevRound.toLocaleString()}) vs ${aOrders} actual register orders ($${aRevRound.toLocaleString()}).`
         ));
 
         const pBRawRound = Math.round(sumPredBRaw);
@@ -2185,7 +2188,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', '~' + pBRawRound + ' lbs raw (~' + pBCooked + '# ck)',
           'Actual Measured', '~' + aBRawRound + ' lbs raw (~' + aBCooked + '# ck)',
           bDiff, 'lbs', bPct, null,
-          `Plain English: Model target ~${pBPortions} portions vs ~${aBPortions} measured portions.`
+          `Plain English: Model targeted ~${pBPortions} sliced servings (~${pBRawRound} lbs raw) vs ~${aBPortions} actual portions served (~${aBCooked} lbs cooked).`
         ));
 
         const pPRawRound = Math.round(sumPredPRaw);
@@ -2194,13 +2197,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const aPCooked = Math.round(aPRawRound * 0.4);
         const pDiff = aPRawRound - pPRawRound;
         const pPct = pPRawRound > 0 ? Math.round((pDiff / pPRawRound) * 1000) / 10 : 0;
-        const pPPortions = Math.round(pPCooked * 4);
-        const aPPortions = Math.round(aPCooked * 4);
+        const pPPortions = Math.round(pPCooked * 3.2);
+        const aPPortions = Math.round(aPCooked * 3.2);
         setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
           'Predicted Target', '~' + pPRawRound + ' lbs raw (~' + pPCooked + '# ck)',
           'Actual Measured', '~' + aPRawRound + ' lbs raw (~' + aPCooked + '# ck)',
           pDiff, 'lbs', pPct, null,
-          `Plain English: Model target ~${pPPortions} portions vs ~${aPPortions} measured portions.`
+          `Plain English: Model targeted ~${pPPortions} pork sandwiches (~${pPRawRound} lbs raw) vs ~${aPPortions} actual sandwiches served (~${aPCooked} lbs cooked).`
         ));
 
         const pSLinks = Math.round(sumPredSLbs * 3);
@@ -2211,7 +2214,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pSLinks + ' links (~' + Math.round(sumPredSLbs) + ' lbs)',
           'Actual Measured', aSLinks + ' links (~' + Math.round(sumActSLbs) + ' lbs)',
           sDiff, 'links', sPct, null,
-          `Plain English: Target ${pSLinks} links vs ${aSLinks} actual links sold.`
+          `Plain English: Target ${pSLinks} links (${Math.ceil(pSLinks / 180)} batches) vs ${aSLinks} actual links sold at counter.`
         ));
 
         const pRRacks = Math.round(sumPredRRacks);
@@ -2222,7 +2225,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pRRacks + ' racks (~' + (pRRacks / 6.0).toFixed(1) + ' cs)',
           'Actual Measured', aRRacks + ' racks (~' + (aRRacks / 6.0).toFixed(1) + ' cs)',
           rDiff, 'racks', rPct, null,
-          `Plain English: Target ${pRRacks} racks vs ${aRRacks} actual racks sold (${aRRacks * 12} bones).`
+          `Plain English: Target ${pRRacks} racks (~${pRRacks * 12} bones) vs ${aRRacks} actual racks served (~${aRRacks * 12} bones).`
         ));
 
         const pDRibs = Math.round(sumPredDRibs);
@@ -2233,20 +2236,20 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pDRibs + ' ribs (~' + (pDRibs / 12.0).toFixed(1) + ' cs)',
           'Actual Measured', aDRibs + ' ribs (~' + (aDRibs / 12.0).toFixed(1) + ' cs)',
           drDiff, 'ribs', drPct, null,
-          `Plain English: Target ${pDRibs} dino ribs vs ${aDRibs} actual dino ribs sold.`
+          `Plain English: Target ${pDRibs} dino plate ribs vs ${aDRibs} actual dino ribs sold.`
         ));
 
         const pTCooked = Math.round(sumPredTCooked);
         const aTCooked = Math.round(sumActTCooked);
         const tDiff = aTCooked - pTCooked;
         const tPct = pTCooked > 0 ? Math.round((tDiff / pTCooked) * 1000) / 10 : 0;
-        const pTPortions = Math.round(pTCooked * 4);
-        const aTPortions = Math.round(aTCooked * 4);
+        const pTPortions = Math.round(pTCooked * 3.2);
+        const aTPortions = Math.round(aTCooked * 3.2);
         setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
           'Predicted Target', pTCooked + ' lbs ck (~' + Math.round(pTCooked / 0.70) + '# raw)',
           'Actual Measured', aTCooked + ' lbs ck (~' + Math.round(aTCooked / 0.70) + '# raw)',
           tDiff, 'lbs', tPct, null,
-          `Plain English: Target ~${pTPortions} portions vs ~${aTPortions} measured portions.`
+          `Plain English: Target ~${pTPortions} carved plates (~${pTCooked} lbs cooked) vs ~${aTPortions} actual plates served (~${aTCooked} lbs cooked).`
         ));
 
         const pTacos = Math.round(sumPredTacos);
@@ -2257,7 +2260,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pTacos + ' tacos',
           'Actual Measured', aTacos + ' tacos',
           tacoDiff, 'tacos', tacoPct, null,
-          `Plain English: Target ${pTacos} tacos vs ${aTacos} actual tacos sold.`
+          `Plain English: Target ${pTacos} tacos vs ${aTacos} actual tacos sold across daily service.`
         ));
 
         const pRosebuds = Math.round(sumPredRosebuds);
@@ -2268,7 +2271,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pRosebuds + ' units',
           'Actual Measured', aRosebuds + ' units',
           rbDiff, 'units', rbPct, null,
-          `Plain English: Target ${pRosebuds} bites vs ${aRosebuds} actual bites sold.`
+          `Plain English: Target ${pRosebuds} bites (~${Math.round(pRosebuds / 4)} orders of 4) vs ${aRosebuds} actual bites sold.`
         ));
 
         const pTotCooked = pBCooked + pPCooked;
@@ -2279,7 +2282,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', '~' + pTotCooked + ' lbs ck (~' + (pBRawRound + pPRawRound) + '# raw)',
           'Actual Measured', '~' + aTotCooked + ' lbs ck (~' + (aBRawRound + aPRawRound) + '# raw)',
           tcDiff, 'lbs', tcPct, null,
-          `Plain English: Target ~${pTotCooked} lbs cooked yield vs ~${aTotCooked} lbs measured yield.`
+          `Plain English: Target ~${pTotCooked} lbs cooked meat yield vs ~${aTotCooked} lbs actual cooked barbecue sliced.`
         ));
 
         // Render End-of-Day Model Evaluation Banner for Historical Date
@@ -2334,16 +2337,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           `;
         }
       } else {
-        setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, 'Advance projected revenue target. Measured yield audit populates after daily close.'));
-        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ~${Math.round(bCooked * 4)} portions based on ~${bVal} lbs raw prep.`));
-        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ~${Math.round(pCooked * 4)} portions based on ~${pVal} lbs raw prep.`));
-        setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${sausageLinks} links to stuff.`));
-        setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${rVal} racks (${rVal * 12} individual bones).`));
-        setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted Target', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${drVal} dino plate ribs.`));
-        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ~${Math.round(tVal * 4)} portions (~${Math.round(tVal / 0.70)} lbs raw breast).`));
-        setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted Target', rbVal + ' units', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${rbVal} bites (~${Math.round(rbVal / 4)} orders of 4).`));
-        setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted Target', tacoVal + ' tacos', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${tacoVal} tacos across daily service.`));
-        setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ~${totalCooked} lbs cooked yield across all smoked meats.`));
+        setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target $${Math.round(totalRev).toLocaleString()} sales across service (~${Math.round(totalRev / 48.50)} orders at $48.50 avg check).`));
+        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 4)} 1/4-lb servings).`));
+        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 3.2)} sandwiches).`));
+        setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Mix & stuff ${sausageBatches} batches (~${sausageLinks} links, 1/3-lb each).`));
+        setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${rVal} whole spare rib racks (~${rVal * 12} individual bones from ~${(rVal / 6.0).toFixed(1)} cases).`));
+        setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted Target', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${drVal} plate short ribs (~${(drVal / 12.0).toFixed(1)} cases). Pull in small batches to preserve bark.`));
+        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ~${tVal} lbs cooked breast (~${Math.round(tVal / 0.70)} lbs raw prep) yielding ~${Math.round(tVal * 3.2)} 5-oz sliced plates.`));
+        setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted Target', rbVal + ' units', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Prep ${rbVal} bacon-wrapped brisket bites (~${Math.round(rbVal / 4)} orders of 4). Trims drawn from brisket burnt ends.`));
+        setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted Target', tacoVal + ' tacos', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${tacoVal} tacos across daily service. Portions pulled from hot-holding brisket and pork bins.`));
+        setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Total kitchen yield: ~${totalCooked} lbs hot-holding barbecue ready to carve from ~${totalRaw} lbs raw butcher trim.`));
 
         // Render Scheduled Horizon Banner
         const evalBannerElem = document.getElementById('kpi-model-eval-banner');
