@@ -300,43 +300,8 @@
     ]
   },
   "2026-10-26": {
-    "captured_at": "2026-10-26T16:51:21.778488-04:00",
+    "captured_at": "2026-10-26T17:26:57.027536-04:00",
     "hourly_forecast": [
-      {
-        "hour": 14,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 15,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 16,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 17,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 18,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 19,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 20,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
       {
         "hour": 21,
         "predicted_orders": 0.0,
