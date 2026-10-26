@@ -1942,7 +1942,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         <span style="color: ${pColor}; font-weight: 700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
-      // Blended / Live Prediction vs. Measured Yield Comparison Badges with Serving Numbers & Plain English
+      // Real-time vs Target Prediction Comparison Badges with Serving Numbers & Plain English
       const revDiff = Math.round(blendedTotalRev - bSum.forecastFullDay);
       const revPct = bSum.forecastFullDay > 0 ? Math.round((revDiff / bSum.forecastFullDay) * 1000) / 10 : 0;
       const predOrders = Math.round(bSum.forecastFullDay / 48.50);
@@ -1951,7 +1951,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '$' + Math.round(bSum.forecastFullDay).toLocaleString(),
         'Measured + Proj', '$' + actSalesSoFar.toLocaleString() + ' sold (~$' + blendedTotalRev.toLocaleString() + ')',
         revDiff, '$', revPct, null,
-        `Plain English: Model targeted ~${predOrders} customer orders; currently pacing towards ~${estBlendedOrders} orders ($${actSalesSoFar.toLocaleString()} registered in POS so far).`
+        `Plain English: Model targeted ~${predOrders} customer orders; currently pacing toward ~${estBlendedOrders} day-end orders ($${actSalesSoFar.toLocaleString()} registered in POS so far).`
       ));
 
       const bDiff = blendedRawBrisket - bVal;
@@ -1963,7 +1963,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedBrisket) + '# ck sold (~' + blendedRawBrisket + '# raw)',
         bDiff, 'lbs', bPct, null,
-        `Plain English: ~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) out of ~${estBPortions} blended portions (~${blendedRawBrisket} lbs raw prep).`
+        `Plain English: ~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ~${estBPortions} day-end portions (~${blendedRawBrisket} lbs raw prep).`
       ));
 
       const pDiff = blendedRawPork - pVal;
@@ -1974,7 +1974,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)',
         'Measured Yield', '~' + Math.round(actCookedPork) + '# ck sold (~' + blendedRawPork + '# raw)',
         pDiff, 'lbs', pPct, null,
-        `Plain English: ~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) out of ~${estPPortions} blended sandwiches.`
+        `Plain English: ~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ~${estPPortions} day-end sandwiches.`
       ));
 
       const sDiff = blendedSausageLinks - sausageLinks;
@@ -1983,7 +1983,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', sausageLinks + ' links (~' + sVal + ' lbs)',
         'Measured Yield', actSausageLinks + ' sold (~' + blendedSausageLinks + ' links)',
         sDiff, 'links', sPct, null,
-        `Plain English: ${actSausageLinks} links sold at the counter out of ~${blendedSausageLinks} blended links (${blendedSausageBatches} mixer batches).`
+        `Plain English: ${actSausageLinks} links sold at the counter so far; tracking toward ~${blendedSausageLinks} day-end links (${blendedSausageBatches} mixer batches).`
       ));
 
       const rDiff = blendedRibsRacks - rVal;
@@ -1992,7 +1992,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)',
         'Measured Yield', actRibsRacks + ' sold (~' + blendedRibsRacks + ' racks)',
         rDiff, 'racks', rPct, null,
-        `Plain English: ${actRibsRacks} racks sold (${actRibsRacks * 12} individual bones) out of ~${blendedRibsRacks} blended racks (~${(blendedRibsRacks / 6.0).toFixed(1)} cases).`
+        `Plain English: ${actRibsRacks} racks sold (${actRibsRacks * 12} individual bones) so far; tracking toward ~${blendedRibsRacks} day-end racks (~${(blendedRibsRacks / 6.0).toFixed(1)} cases).`
       ));
 
       const drDiff = blendedDinoRibs - drVal;
@@ -2001,7 +2001,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)',
         'Measured Yield', actDinoRibs + ' sold (~' + blendedDinoRibs + ' ribs)',
         drDiff, 'ribs', drPct, null,
-        `Plain English: ${actDinoRibs} jumbo plate ribs sold out of ~${blendedDinoRibs} blended ribs.`
+        `Plain English: ${actDinoRibs} jumbo plate ribs sold so far; tracking toward ~${blendedDinoRibs} day-end ribs.`
       ));
 
       const tDiff = Math.round(blendedTurkeyCooked - tVal);
@@ -2012,7 +2012,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)',
         'Measured Yield', '~' + Math.round(actTurkeyCooked) + '# sold (~' + Math.round(blendedTurkeyCooked) + '# ck)',
         tDiff, 'lbs', tPct, null,
-        `Plain English: ~${actTPortions} carved plates sold out of ~${estTPortions} blended portions (~${blendedTurkeyRaw} lbs raw prep).`
+        `Plain English: ~${actTPortions} carved plates sold so far; tracking toward ~${estTPortions} day-end portions (~${blendedTurkeyRaw} lbs raw prep).`
       ));
 
       const rbDiff = blendedRosebuds - rbVal;
@@ -2021,7 +2021,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rbVal + ' units',
         'Measured Yield', actRosebuds + ' sold (~' + blendedRosebuds + ' units)',
         rbDiff, 'units', rbPct, null,
-        `Plain English: ${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} orders of 4) out of ~${blendedRosebuds} blended units from brisket burnt ends.`
+        `Plain English: ${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} orders of 4) so far; tracking toward ~${blendedRosebuds} day-end bites from brisket burnt ends.`
       ));
 
       const tacoDiff = blendedTacos - tacoVal;
@@ -2030,7 +2030,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', tacoVal + ' tacos',
         'Measured Yield', actTacos + ' sold (~' + blendedTacos + ' tacos)',
         tacoDiff, 'tacos', tacoPct, null,
-        `Plain English: ${actTacos} tacos served out of ~${blendedTacos} blended orders across shift.`
+        `Plain English: ${actTacos} tacos served so far; tracking toward ~${blendedTacos} day-end orders across shift.`
       ));
 
       const tcDiff = blendedTotalCooked - totalCooked;
@@ -2039,7 +2039,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)',
         'Measured Yield', '~' + actTotalCooked + '# sold (~' + blendedTotalCooked + '# ck)',
         tcDiff, 'lbs', tcPct, null,
-        `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far out of ~${blendedTotalCooked} lbs total hot-holding yield.`
+        `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far; tracking toward ~${blendedTotalCooked} lbs total hot-holding yield.`
       ));
 
       // Render Model Evaluation Banner for Live Service Day
@@ -2390,7 +2390,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (isTargetClosed) {
         demandLabelElem.textContent = `Smokehouse & Restaurant Closed Today (${matchedRecord.day_name || shortDayStr} Pit Maintenance & Prep). Zero service demand.`;
       } else {
-        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : (hasBlended ? 'Blended Sales' : 'Projected Sales');
+        const surgeLabel = matchedRecord.is_historical ? 'Actual Sales' : (hasBlended ? "Today's Sales Pace" : 'Projected Sales');
         if (pctDiff > 0) {
           demandLabelElem.textContent = `${surgeLabel} Surge of +${pctDiff}% (+$${Math.round(incrementalRev).toLocaleString()}) above the $${baselineRev.toLocaleString()}/day operating baseline pace.`;
         } else if (pctDiff < 0) {
