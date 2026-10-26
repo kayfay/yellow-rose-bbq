@@ -45,6 +45,10 @@ test.describe('Dashboard Verification', () => {
     // Brisket daily target is normally < 1000 lbs
     expect(brisketVal).toBeLessThan(1000);
     expect(porkVal).toBeLessThan(1000);
+
+    // Verify model evaluation banner container is rendered
+    await expect(page.locator('#kpi-model-eval-banner')).toBeVisible();
+    await expect(page.locator('#model-eval-status-pill')).toBeVisible();
   });
 
   test('Prediction Verification: Analytics charts render', async ({ page }) => {

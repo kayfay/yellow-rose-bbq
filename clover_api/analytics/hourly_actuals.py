@@ -169,9 +169,16 @@ def export_hourly_actuals(db_path: Path = DEFAULT_DB_PATH, out_file: Path = OUT_
         payload = build_payload(conn)
     finally:
         conn.close()
-    out_file.write_text(json.dumps(payload, indent=2))
+    if not payload.get("days") and out_file.exists():
+        print(f"[SAFETY GUARD] No locked orders found in DB. Preserving existing {out_file}")
+        try:
+            payload = json.loads(out_file.read_text())
+        except Exception:
+            pass
+    else:
+        out_file.write_text(json.dumps(payload, indent=2))
     snapshot_forecast(ANALYTICS_DIR / "predictive_payload.json", SNAPSHOT_FILE)
-    print(f"[HOURLY ACTUALS] {len(payload['days'])} days written to {out_file}")
+    print(f"[HOURLY ACTUALS] {len(payload.get('days', {}))} days written to {out_file}")
     return payload
 
 

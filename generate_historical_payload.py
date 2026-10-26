@@ -102,9 +102,68 @@ for d in dates:
         "is_historical": True, "data_type": "ACTUAL"
     })
 
-if len(historical_records) == 0:
+hist_file = 'clover_api/analytics/historical_payload.json'
+existing_records = []
+if os.path.exists(hist_file):
+    try:
+        with open(hist_file, 'r', encoding='utf-8') as f:
+            existing_data = json.load(f)
+            existing_records = existing_data.get('historical_records', [])
+    except Exception:
+        existing_records = []
+
+# Merge existing records with newly computed records
+records_by_date = {r['date']: r for r in existing_records}
+for r in historical_records:
+    records_by_date[r['date']] = r
+
+combined_records = list(records_by_date.values())
+combined_records.sort(key=lambda x: x.get('date', ''))
+
+if len(combined_records) == 0:
     print("[SAFETY GUARD] No historical records found in SQLite orders table. Preserving existing historical_payload.json.")
 else:
-    with open('clover_api/analytics/historical_payload.json', 'w') as f:
-        json.dump({"historical_records": historical_records}, f, indent=2)
-    print(f"Generated {len(historical_records)} historical records in clover_api/analytics/historical_payload.json")
+    # Enrich all records with MultiMeatForecaster predictions for yield comparisons
+    try:
+        from scripts.meat_forecast import MultiMeatForecaster
+        engine = MultiMeatForecaster(safety_buffer_pct=0.10)
+        for r in combined_records:
+            d = r['date']
+            pred = engine.predict_day(d)
+            r['predicted_revenue'] = pred['predicted_revenue']
+            r['predicted_brisket_raw_lbs'] = pred['brisket']['raw_prep_lbs']
+            r['predicted_brisket_cooked_lbs'] = pred['brisket']['cooked_usable_lbs']
+            r['predicted_pork_raw_lbs'] = pred['pork']['raw_prep_lbs']
+            r['predicted_pork_cooked_lbs'] = pred['pork']['cooked_usable_lbs']
+            r['predicted_sausage_lbs'] = pred['sausage']['lbs']
+            r['predicted_sausage_links'] = pred['sausage']['links']
+            r['predicted_pork_ribs_racks'] = pred['pork_ribs']['racks']
+            r['predicted_beef_dino_ribs'] = pred['beef_dino_ribs']['ribs']
+            r['predicted_turkey_cooked_lbs'] = pred['turkey']['cooked_usable_lbs']
+            r['predicted_turkey_raw_lbs'] = pred['turkey']['raw_prep_lbs']
+            r['predicted_tacos_sold'] = pred['tacos_sold']
+            r['predicted_rosebuds_sold'] = pred['rosebuds_sold']
+            r['predicted_total_cooked_lbs'] = round(pred['brisket']['cooked_usable_lbs'] + pred['pork']['cooked_usable_lbs'], 1)
+
+            # Store actual measured yields
+            act_b_raw = r.get('brisket_raw_lbs', 0.0)
+            act_p_raw = r.get('pork_shoulder_raw_lbs', 0.0)
+            act_s_lbs = r.get('sausage_lbs', 0.0)
+            r['actual_brisket_raw_lbs'] = act_b_raw
+            r['actual_brisket_cooked_lbs'] = round(act_b_raw * 0.4, 1)
+            r['actual_pork_shoulder_raw_lbs'] = act_p_raw
+            r['actual_pork_cooked_lbs'] = round(act_p_raw * 0.44, 1)
+            r['actual_sausage_lbs'] = act_s_lbs
+            r['actual_sausage_links'] = int(round(act_s_lbs * 3))
+            r['actual_pork_ribs_racks'] = r.get('pork_ribs_racks', 0.0)
+            r['actual_beef_dino_ribs'] = r.get('beef_dino_ribs', 0.0)
+            r['actual_turkey_cooked_lbs'] = pred['turkey']['cooked_usable_lbs'] if r.get('day_name') != 'Mon' else 0.0
+            r['actual_tacos_sold'] = r.get('tacos_sold', 0)
+            r['actual_rosebuds_sold'] = r.get('rosebuds_sold', 0)
+            r['actual_total_cooked_lbs'] = round(r['actual_brisket_cooked_lbs'] + r['actual_pork_cooked_lbs'], 1)
+    except Exception as e:
+        print(f"[WARN] Failed to enrich historical records with MultiMeatForecaster: {e}")
+
+    with open(hist_file, 'w', encoding='utf-8') as f:
+        json.dump({"historical_records": combined_records}, f, indent=2)
+    print(f"Generated and enriched {len(combined_records)} historical records in {hist_file}")

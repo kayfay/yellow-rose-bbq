@@ -138,6 +138,10 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         demand_index = arima_data["forecast_metrics"]["demand_index"][:days][i]
         base_revenue = get_dynamic_baseline_revenue() * demand_index
         
+        # Calibrate Sunday demand by 0.90 to account for early sell-outs and afternoon taper
+        if day_name == "Sun":
+            base_revenue *= 0.90
+        
         # Check if closed day (Mondays are closed for pit maintenance & cleaning)
         is_closed = (day_name == "Mon" or demand_index == 0)
         if is_closed:

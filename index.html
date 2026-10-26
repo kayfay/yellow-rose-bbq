@@ -417,13 +417,14 @@
       
       <!-- KPI Summary Cards with Case Counts -->
       <section class="estimator-section">
-        <h2 class="section-title">Projected Prep Targets & Supplier Case Orders</h2>
+        <h2 class="section-title">Projected Prep Targets & Supplier Case Orders <span class="kpi-compare-header-badge">Predictions vs. Measured Yields</span></h2>
         <div class="estimator-grid forecasting-kpi-grid">
           <div class="est-card kpi-card-gold" id="kpi-card-revenue-container">
             <div class="est-metric">
               <span id="kpi-projected-revenue" class="est-number">$0</span>
             </div>
             <span id="kpi-demand-label" class="est-label">Projected Sales <br><span id="kpi-demand-pct" style="color:#f1c40f; font-weight:600;">(Baseline)</span></span>
+            <div id="kpi-revenue-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-revenue-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -433,6 +434,7 @@
               <span class="est-unit">lbs</span>
             </div>
             <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases">(-- Cases)</span><br><span id="kpi-brisket-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
+            <div id="kpi-brisket-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-brisket-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -442,6 +444,7 @@
               <span class="est-unit">lbs</span>
             </div>
             <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases">(-- Cases)</span><br><span id="kpi-pork-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
+            <div id="kpi-pork-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-pork-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -451,6 +454,7 @@
               <span class="est-unit">batches</span>
             </div>
             <span class="est-label">Sausage Prep Target <br><span id="kpi-sausage-links-sub">(-- links)</span></span>
+            <div id="kpi-sausage-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-sausage-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -460,6 +464,7 @@
               <span class="est-unit">racks</span>
             </div>
             <span class="est-label">Pork Spare Ribs <br><span id="kpi-pork-ribs-cases">(-- Cases)</span></span>
+            <div id="kpi-pork-ribs-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-pork-ribs-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
           
@@ -469,6 +474,7 @@
               <span class="est-unit">ribs</span>
             </div>
             <span class="est-label">Beef Dino Ribs <br><span id="kpi-beef-dino-ribs-cases">(-- Cases)</span></span>
+            <div id="kpi-beef-dino-ribs-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-beef-dino-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
           
@@ -478,6 +484,7 @@
               <span class="est-unit">lbs</span>
             </div>
             <span class="est-label">Smoked Turkey (Cooked Usable) <br><span id="kpi-turkey-sub">(-- lbs raw prep)</span></span>
+            <div id="kpi-turkey-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-turkey-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -487,6 +494,7 @@
               <span class="est-unit">units</span>
             </div>
             <span class="est-label">Rosebuds <br><span id="kpi-rosebuds-sub" style="color:#f1c40f;">(Draws from Brisket)</span></span>
+            <div id="kpi-rosebuds-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-rosebuds-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
           
@@ -496,6 +504,7 @@
               <span class="est-unit">tacos</span>
             </div>
             <span class="est-label">Tacos <br><span id="kpi-tacos-sub" style="color:#f1c40f;">(Draws from Smoked Inventory)</span></span>
+            <div id="kpi-tacos-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-tacos-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -505,6 +514,7 @@
               <span class="est-unit">lbs</span>
             </div>
             <span class="est-label">Total Cooked Barbecue <br><span id="kpi-total-cooked-sub" style="color:#f1c40f;">(-- lbs raw trim)</span></span>
+            <div id="kpi-total-cooked-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-total-cooked-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -539,6 +549,20 @@
             </div>
             <span class="est-label">Labor & Pitmaster Hours <br><span id="kpi-staff-count" style="color:#a855f7; font-weight:600;">(-- Staff)</span></span>
             <div id="kpi-labor-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
+          </div>
+        </div>
+
+        <!-- End-of-Day Model Evaluation & Performance Summary -->
+        <div id="kpi-model-eval-banner" class="model-eval-container" style="display: none;">
+          <div class="model-eval-header">
+            <div class="model-eval-title-wrap">
+              <span class="model-eval-icon">📊</span>
+              <strong class="model-eval-title">End-of-Day Model Evaluation & Plain-English Yield Audit</strong>
+            </div>
+            <span id="model-eval-status-pill" class="eval-pill eval-pill-match">Evaluating...</span>
+          </div>
+          <div id="model-eval-body" class="model-eval-body">
+            <!-- Populated dynamically by app.js -->
           </div>
         </div>
       </section>

@@ -26,25 +26,44 @@ def build_shift_forecast():
     finally:
         conn.close()
         
+    hourly_actuals_path = ANALYTICS_DIR / "hourly_actuals.json"
     if len(df_orders) == 0:
-        return
-    
-    df_orders['dt'] = pd.to_datetime(df_orders['created_time'])
-    if df_orders['dt'].dt.tz is None:
-        df_orders['dt'] = df_orders['dt'].dt.tz_localize('UTC').dt.tz_convert('America/Chicago')
+        if hourly_actuals_path.exists():
+            with open(hourly_actuals_path, 'r') as f:
+                ha_data = json.load(f)
+            wb = ha_data.get("weekday_baseline", {})
+            dow_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+            rows = []
+            for dow_idx, day_name in enumerate(dow_names):
+                entry = wb.get(str(dow_idx))
+                if entry and entry.get("n", 0) > 0:
+                    n = entry["n"]
+                    for h in range(24):
+                        avg_ord = round(entry["orders_sum"][h] / n, 1)
+                        rows.append({"day_of_week": day_name, "hour": h, "avg_orders": avg_ord})
+                else:
+                    for h in range(24):
+                        rows.append({"day_of_week": day_name, "hour": h, "avg_orders": 0.0})
+            heatmap_data = pd.DataFrame(rows)
+        else:
+            return
+    else:
+        df_orders['dt'] = pd.to_datetime(df_orders['created_time'])
+        if df_orders['dt'].dt.tz is None:
+            df_orders['dt'] = df_orders['dt'].dt.tz_localize('UTC').dt.tz_convert('America/New_York')
+            
+        df_orders['day_of_week'] = df_orders['dt'].dt.day_name()
+        df_orders['hour'] = df_orders['dt'].dt.hour
         
-    df_orders['day_of_week'] = df_orders['dt'].dt.day_name()
-    df_orders['hour'] = df_orders['dt'].dt.hour
-    
-    df_orders['date'] = df_orders['dt'].dt.date
-    day_counts = df_orders.groupby('day_of_week')['date'].nunique()
-    
-    heatmap_data = df_orders.groupby(['day_of_week', 'hour']).size().reset_index(name='total_orders')
-    
-    heatmap_data['avg_orders'] = heatmap_data.apply(
-        lambda row: round(row['total_orders'] / day_counts.get(row['day_of_week'], 1), 1), 
-        axis=1
-    )
+        df_orders['date'] = df_orders['dt'].dt.date
+        day_counts = df_orders.groupby('day_of_week')['date'].nunique()
+        
+        heatmap_data = df_orders.groupby(['day_of_week', 'hour']).size().reset_index(name='total_orders')
+        
+        heatmap_data['avg_orders'] = heatmap_data.apply(
+            lambda row: round(row['total_orders'] / day_counts.get(row['day_of_week'], 1), 1), 
+            axis=1
+        )
     
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     hours = list(range(24))
@@ -106,7 +125,7 @@ def build_shift_forecast():
             }],
             "layout": {
                 "title": "Labor Optimization: Hourly Foot Traffic by Shift",
-                "xaxis": {"title": "Hour of Day (Central Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
+                "xaxis": {"title": "Hour of Day (Eastern Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
                 "yaxis": {"title": "Day of Week — Identifies Required Staffing Levels", "gridcolor": "rgba(255,255,255,0.1)"},
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",

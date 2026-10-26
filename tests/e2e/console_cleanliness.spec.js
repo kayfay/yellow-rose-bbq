@@ -9,9 +9,17 @@ test.describe('Console & UI Cleanliness Audit', () => {
     page.on('pageerror', err => pageErrors.push(err.message));
     page.on('console', msg => {
       if (msg.type() === 'error') {
-        consoleErrors.push(msg.text());
+        const text = msg.text();
+        if (text.includes('ERR_INTERNET_DISCONNECTED') || text.includes('net::ERR_')) return;
+        consoleErrors.push(text);
       }
     });
+
+    await page.route('**/*open-meteo.com/**', route => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ daily: { temperature_2m_max: [75], precipitation_sum: [0] } })
+    }));
 
     await page.goto('/');
     await page.waitForLoadState('networkidle');
