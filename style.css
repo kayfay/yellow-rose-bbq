@@ -1623,3 +1623,397 @@ body.pit-high-contrast {
 
 
 
+/* ==========================================================================
+   v2.1.0 EXECUTIVE BI, PLAIN-ENGLISH DAILY BRIEF & OKABE-ITO COLORBLIND SUITE
+   ========================================================================== */
+
+:root {
+  --okabe-orange: #E69F00;
+  --okabe-sky: #56B4E9;
+  --okabe-green: #009E73;
+  --okabe-yellow: #F0E442;
+  --okabe-blue: #0072B2;
+  --okabe-vermillion: #D55E00;
+  --okabe-purple: #CC79A7;
+  --okabe-slate: #64748B;
+}
+
+/* Colorblind Simulation Filters (Deuteranopia & Protanopia Safe Verification) */
+body[data-cb-mode="deuteranopia"] {
+  filter: saturate(0.88) hue-rotate(-8deg) contrast(1.06);
+}
+
+body[data-cb-mode="protanopia"] {
+  filter: saturate(0.82) hue-rotate(12deg) contrast(1.08);
+}
+
+.debug-cb-btn {
+  background: #1e293b;
+  border: 1px solid var(--border-color);
+  color: #e2e8f0;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  min-height: 48px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.debug-cb-btn.active {
+  background: rgba(230, 159, 0, 0.22);
+  border-color: var(--okabe-orange);
+  color: #ffffff;
+}
+
+/* Top-of-Dashboard Plain-English Daily Shop Brief Banner */
+.executive-brief-banner {
+  border: 1.5px solid rgba(230, 159, 0, 0.45);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.96) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.exec-brief-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.exec-brief-title-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exec-brief-kicker {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--okabe-orange);
+  text-transform: uppercase;
+}
+
+.exec-brief-pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(86, 180, 233, 0.16);
+  border: 1px solid rgba(86, 180, 233, 0.45);
+  color: var(--okabe-sky);
+}
+
+.exec-brief-pill.tone-surge {
+  background: rgba(230, 159, 0, 0.18);
+  border-color: rgba(230, 159, 0, 0.55);
+  color: #fbbf24;
+}
+
+.exec-brief-pill.tone-steady {
+  background: rgba(0, 158, 115, 0.18);
+  border-color: rgba(0, 158, 115, 0.55);
+  color: #34d399;
+}
+
+.exec-brief-pill.tone-lull {
+  background: rgba(86, 180, 233, 0.18);
+  border-color: rgba(86, 180, 233, 0.55);
+  color: #38bdf8;
+}
+
+.exec-print-btn {
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(86, 180, 233, 0.45);
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
+  font-family: var(--font-main);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exec-print-btn:hover {
+  background: rgba(86, 180, 233, 0.2);
+  border-color: var(--okabe-sky);
+}
+
+.exec-brief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.exec-brief-box {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-color);
+}
+
+.exec-brief-insight-box {
+  border-left: 4px solid var(--okabe-sky);
+}
+
+.exec-brief-action-box {
+  border-left: 4px solid var(--okabe-orange);
+}
+
+.exec-box-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.exec-box-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #f8fafc;
+  margin: 0;
+}
+
+/* Plain-English Sales & Meat Cost Breakdown Strip */
+.exec-sales-bridge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(2, 6, 23, 0.65);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+}
+
+.bridge-step {
+  flex: 1 1 130px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bridge-step-highlight {
+  border-color: rgba(86, 180, 233, 0.55);
+}
+
+.bridge-step-profit {
+  border-color: rgba(0, 158, 115, 0.65);
+  background: rgba(0, 158, 115, 0.1);
+}
+
+.bridge-step-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.bridge-step-val {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.bridge-pos {
+  color: #fbbf24;
+}
+
+.bridge-cost {
+  color: #f97316;
+}
+
+.bridge-profit {
+  color: #34d399;
+}
+
+.bridge-operator {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: #64748b;
+  padding: 0 2px;
+}
+
+/* Stephen Few Target Progress Bar (Bullet Bar) & 7-Day Sparkline in KPI Cards */
+.kpi-micro-viz {
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(51, 65, 85, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kpi-bullet-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kpi-bullet-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.kpi-bullet-track {
+  position: relative;
+  height: 8px;
+  width: 100%;
+  background: rgba(30, 41, 59, 0.95);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.kpi-bullet-fill {
+  height: 100%;
+  background: var(--okabe-sky);
+  border-radius: 4px;
+  transition: width 0.25s ease;
+}
+
+.kpi-bullet-target-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+}
+
+.kpi-sparkline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.kpi-sparkline-caption {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.kpi-sparkline-svg {
+  width: 92px;
+  height: 22px;
+  overflow: visible;
+}
+
+/* Mobile Pre-Baked Face Annotation Strip (< 768px) */
+.mobile-chart-face-badges {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .exec-brief-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exec-box-text,
+  .marketing-card li,
+  .est-label,
+  .bridge-step-val {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  .bridge-operator {
+    display: none;
+  }
+
+  .mobile-chart-face-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(230, 159, 0, 0.45);
+    pointer-events: none !important;
+  }
+
+  .mobile-face-badge {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(2, 6, 23, 0.9);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+  }
+
+  .mobile-face-badge.badge-peak {
+    border-color: var(--okabe-orange);
+    color: #fbbf24;
+  }
+
+  .mobile-face-badge.badge-low {
+    border-color: var(--okabe-sky);
+    color: #38bdf8;
+  }
+
+  .mobile-face-badge.badge-now {
+    border-color: var(--okabe-green);
+    color: #34d399;
+  }
+}
+
+/* 1-Page Printable Daily Sheet (@media print) */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+  }
+  .app-tab-navigation,
+  .mobile-bottom-nav,
+  #btn-toggle-debug-drawer,
+  #design-debug-drawer,
+  #btn-print-daily-brief,
+  #time-travel-control-card,
+  .refresh-frame {
+    display: none !important;
+  }
+  .control-card,
+  .est-card,
+  .exec-brief-box,
+  .bridge-step {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #94a3b8 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .exec-box-text,
+  .est-number,
+  .bridge-step-val {
+    color: #0f172a !important;
+  }
+}

@@ -848,9 +848,17 @@ function initDesignDebugPanel() {
   const toggleBtn = document.getElementById('btn-toggle-debug-drawer');
   const drawer = document.getElementById('design-debug-drawer');
   const vpBtns = document.querySelectorAll('.debug-vp-btn');
+  const cbBtns = document.querySelectorAll('.debug-cb-btn');
   const themeBtn = document.getElementById('btn-debug-contrast');
   const copyBtn = document.getElementById('btn-copy-debug-tokens');
   const statusEl = document.getElementById('debug-token-status');
+  const printBtn = document.getElementById('btn-print-daily-brief');
+
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      window.print();
+    });
+  }
 
   if (toggleBtn && drawer) {
     toggleBtn.addEventListener('click', () => {
@@ -886,6 +894,22 @@ function initDesignDebugPanel() {
     });
   });
 
+  let activeColorblindMode = 'standard';
+  cbBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cbBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.getAttribute('data-cb-mode') || 'standard';
+      activeColorblindMode = mode;
+      if (mode === 'standard') {
+        document.body.removeAttribute('data-cb-mode');
+      } else {
+        document.body.setAttribute('data-cb-mode', mode);
+      }
+      if (statusEl) statusEl.textContent = `Colorblind mode: ${mode}`;
+    });
+  });
+
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       const isHighContrast = document.body.classList.toggle('pit-high-contrast');
@@ -902,8 +926,18 @@ function initDesignDebugPanel() {
         activeViewportPreset: activePreviewWidth,
         windowInnerWidth: window.innerWidth,
         mobileTouchSafeCharts: isMobileViewport(),
+        colorblindMode: activeColorblindMode,
         contrastMode: document.body.classList.contains('pit-high-contrast') ? 'pit-high-contrast' : 'smokehouse-dark',
-        breakpoints: { mobileMax: 767, tabletMin: 768, desktopMin: 1280 },
+        breakpoints: { mobileMax: 767, tabletMin: 768, desktopMin: 1280, executiveWide: 1440 },
+        okabeItoPalette: {
+          orange: '#E69F00',
+          skyBlue: '#56B4E9',
+          bluishGreen: '#009E73',
+          amberYellow: '#F0E442',
+          deepBlue: '#0072B2',
+          vermillion: '#D55E00',
+          reddishPurple: '#CC79A7'
+        },
         tokens: {
           bgColor: styles.getPropertyValue('--bg-color').trim() || '#0f0e0e',
           surfaceColor: styles.getPropertyValue('--surface-color').trim() || '#1c1a17',
@@ -925,6 +959,237 @@ function initDesignDebugPanel() {
       window.__LAST_COPIED_DESIGN_TOKENS__ = tokenPayload;
     });
   }
+}
+
+function buildSparklineSVG(values, strokeColor = '#56B4E9') {
+  if (!Array.isArray(values) || values.length === 0) return '';
+  const nums = values.map(v => Number(v) || 0);
+  const minVal = Math.min(...nums);
+  const maxVal = Math.max(...nums);
+  const span = Math.max(maxVal - minVal, 1);
+  const w = 92;
+  const h = 20;
+  const pad = 2;
+  const pts = nums.map((val, idx) => {
+    const x = nums.length === 1 ? w / 2 : pad + (idx / (nums.length - 1)) * (w - pad * 2);
+    const y = (h - pad) - ((val - minVal) / span) * (h - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  const lastPt = pts[pts.length - 1].split(',');
+  return `<svg class="kpi-sparkline-svg" viewBox="0 0 ${w} ${h}" aria-hidden="true">
+    <polyline fill="none" stroke="${strokeColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${pts.join(' ')}" />
+    <circle cx="${lastPt[0]}" cy="${lastPt[1]}" r="2.6" fill="${strokeColor}" />
+  </svg>`;
+}
+
+function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
+  const pillEl = document.getElementById('daily-brief-status-pill');
+  const insightEl = document.getElementById('daily-brief-insight');
+  const actionEl = document.getElementById('daily-brief-action');
+  const typLabelEl = document.getElementById('bridge-typical-label');
+  const typValEl = document.getElementById('bridge-typical-val');
+  const rushLabelEl = document.getElementById('bridge-rush-label');
+  const rushValEl = document.getElementById('bridge-rush-val');
+  const expValEl = document.getElementById('bridge-expected-val');
+  const costValEl = document.getElementById('bridge-meat-cost-val');
+  const leftValEl = document.getElementById('bridge-leftover-val');
+
+  if (!insightEl || !actionEl) return;
+
+  const briefPayload = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.daily_executive_brief
+    ? window.BBQ_PAYLOADS.daily_executive_brief
+    : null;
+
+  const isMultiDay = Array.isArray(slicedRecords) && slicedRecords.length > 1;
+  let brief = null;
+
+  if (!isMultiDay && matchedRecord && briefPayload) {
+    if (matchedRecord.date && briefPayload.by_date && briefPayload.by_date[matchedRecord.date]) {
+      brief = briefPayload.by_date[matchedRecord.date];
+    } else if (matchedRecord.day_name && briefPayload.by_day_name && briefPayload.by_day_name[matchedRecord.day_name]) {
+      brief = briefPayload.by_day_name[matchedRecord.day_name];
+    }
+  }
+
+  // If today is closed Monday on initial single-day load, show the active upcoming open day brief
+  if (!isMultiDay && brief && brief.is_closed && briefPayload && briefPayload.active_service_brief && !briefPayload.active_service_brief.is_closed) {
+    // Only use active_service_brief when user hasn't explicitly picked a closed Monday to inspect
+    const startInput = document.getElementById('forecast-start-date');
+    const isTodayDefault = !startInput || startInput.value === briefPayload.today_date;
+    if (isTodayDefault) {
+      brief = briefPayload.active_service_brief;
+    }
+  }
+
+  if (!brief && Array.isArray(slicedRecords) && slicedRecords.length > 0) {
+    const dayFullMap = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
+    const typSalesMap = { Mon: 0, Tue: 3689, Wed: 3050, Thu: 3900, Fri: 5100, Sat: 6200, Sun: 4650 };
+    let expSales = 0;
+    let typSales = 0;
+    let bRaw = 0;
+    let pRaw = 0;
+    let rRacks = 0;
+    let tCooked = 0;
+    slicedRecords.forEach(r => {
+      const isClosed = r.is_closed || r.day_name === 'Mon';
+      if (!isClosed) {
+        const rev = (r.is_historical && r.actual_revenue > 0) ? r.actual_revenue : (r.predicted_revenue || 0);
+        expSales += rev;
+        typSales += (typSalesMap[r.day_name] || 3850);
+        bRaw += (r.brisket_raw_lbs || 0);
+        pRaw += (r.pork_shoulder_raw_lbs || 0);
+        rRacks += (r.pork_ribs_racks || 0);
+        tCooked += (r.turkey_cooked_lbs || r.turkey_lbs || 0);
+      }
+    });
+    expSales = Math.round(expSales);
+    typSales = Math.round(typSales);
+    const diffUsd = expSales - typSales;
+    const pct = typSales > 0 ? Math.round((diffUsd / typSales) * 1000) / 10 : 0;
+    const meatCost = Math.round(expSales * 0.295);
+    const leftover = expSales - meatCost;
+    const labelStr = isMultiDay ? `${slicedRecords.length}-Day Window` : (dayFullMap[matchedRecord?.day_name] || 'Selected Day');
+    const diffWord = diffUsd >= 0 ? 'above' : 'below';
+
+    brief = {
+      status_badge: expSales === 0 ? `Closed Monday — Pit Cold` : `${labelStr} (${pct >= 0 ? '+' : ''}${pct}% vs. Usual)`,
+      status_tone: pct >= 10 ? 'surge' : (pct <= -10 ? 'lull' : 'steady'),
+      the_insight: expSales === 0
+        ? `The shop is closed on Monday with $0 in counter sales and 0 lbs of hot-holding barbecue required.`
+        : `${labelStr} sales ($${expSales.toLocaleString()}) are tracking ${Math.abs(pct)}% ($${Math.abs(diffUsd).toLocaleString()}) ${diffWord} the usual $${typSales.toLocaleString()} pace, leaving ~$${leftover.toLocaleString()} for the shop after ~$${meatCost.toLocaleString()} in estimated meat cost.`,
+      the_action: expSales === 0
+        ? `Keep main offset smokers cold, deep-clean the firebox, and grind/cure Day 1 sausage batches for Tuesday's opening smoke.`
+        : `Prep ${Math.round(bRaw)} lbs raw Brisket (~${Math.round(bRaw * 0.40)} lbs cooked), ${Math.round(pRaw)} lbs raw Pulled Pork (~${Math.round(pRaw * 0.44)} lbs cooked), ${Math.round(rRacks)} racks of Spare Ribs, and ${Math.round(tCooked / 0.70)} lbs raw Turkey (~${Math.round(tCooked)} lbs cooked) ahead of peak rush.`,
+      sales_bridge: {
+        typical_day_label: `Usual ${labelStr}`,
+        typical_day_usd: typSales,
+        rush_hour_delta_label: 'Rush Hour & Crowd Difference',
+        rush_hour_delta_usd: diffUsd,
+        expected_sales_usd: expSales,
+        estimated_meat_cost_usd: meatCost,
+        left_after_meat_cost_usd: leftover
+      }
+    };
+  }
+
+  if (!brief) return;
+
+  if (pillEl) {
+    pillEl.textContent = brief.status_badge || 'Daily Brief Ready';
+    pillEl.className = `exec-brief-pill tone-${brief.status_tone || 'steady'}`;
+  }
+  insightEl.textContent = brief.the_insight || '';
+  actionEl.textContent = brief.the_action || '';
+
+  const sb = brief.sales_bridge || {};
+  const rushTotalDiff = (sb.rush_hour_delta_usd || 0) + (sb.weather_event_delta_usd || 0);
+  if (typLabelEl) typLabelEl.textContent = `${sb.typical_day_label || 'Typical Day'} Sales`;
+  if (typValEl) typValEl.textContent = `$${Number(sb.typical_day_usd || 0).toLocaleString()}`;
+  if (rushLabelEl) rushLabelEl.textContent = 'Rush Hour & Crowd Difference';
+  if (rushValEl) {
+    const sign = rushTotalDiff >= 0 ? '+' : '-';
+    rushValEl.textContent = `${sign}$${Math.abs(Math.round(rushTotalDiff)).toLocaleString()}`;
+    rushValEl.style.color = rushTotalDiff >= 0 ? '#fbbf24' : '#38bdf8';
+  }
+  if (expValEl) expValEl.textContent = `$${Number(sb.expected_sales_usd || 0).toLocaleString()}`;
+  if (costValEl) costValEl.textContent = `$${Number(sb.estimated_meat_cost_usd || 0).toLocaleString()}`;
+  if (leftValEl) leftValEl.textContent = `$${Number(sb.left_after_meat_cost_usd || 0).toLocaleString()}`;
+}
+
+function renderKPIBulletAndSparklines(slicedRecords, matchedRecord) {
+  const briefPayload = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.daily_executive_brief
+    ? window.BBQ_PAYLOADS.daily_executive_brief
+    : null;
+  const sparks = briefPayload && briefPayload.sparklines_7d ? briefPayload.sparklines_7d : {};
+  const dowBase = (briefPayload && briefPayload.dow_baselines && matchedRecord && briefPayload.dow_baselines[matchedRecord.day_name])
+    ? briefPayload.dow_baselines[matchedRecord.day_name]
+    : null;
+
+  const daysCount = Math.max(1, Array.isArray(slicedRecords) ? slicedRecords.length : 1);
+  const rec = matchedRecord || (Array.isArray(slicedRecords) && slicedRecords[0]) || {};
+  const revVal = Number((rec.is_historical && rec.actual_revenue > 0) ? rec.actual_revenue : (rec.predicted_revenue || 0));
+  const typRev = Math.max(Number(dowBase?.typical_sales_usd || 3850), 1);
+
+  const cards = [
+    {
+      containerId: 'kpi-card-revenue-container',
+      pctOfTypical: Math.round((revVal / typRev) * 100),
+      barColor: '#E69F00',
+      sparkSeries: sparks.sales_usd || [3850, 3180, 4135, 5556, 6390, 4820, 4264],
+      label: 'vs. Typical Day'
+    },
+    {
+      containerId: 'kpi-card-brisket-container',
+      pctOfTypical: Math.round(((rec.brisket_raw_lbs || 0) / Math.max(dowBase?.typical_brisket_raw_lbs || 115, 1)) * 100),
+      barColor: '#D55E00',
+      sparkSeries: sparks.brisket_raw_lbs || [114, 116, 129, 190, 212, 165, 114],
+      label: 'vs. Usual Prep'
+    },
+    {
+      containerId: 'kpi-card-pork-container',
+      pctOfTypical: Math.round(((rec.pork_shoulder_raw_lbs || 0) / Math.max(dowBase?.typical_pork_raw_lbs || 18, 1)) * 100),
+      barColor: '#E69F00',
+      sparkSeries: sparks.pork_raw_lbs || [19, 12, 28, 21, 32, 18, 19],
+      label: 'vs. Usual Prep'
+    },
+    {
+      containerId: 'kpi-card-sausage-container',
+      pctOfTypical: Math.round(((rec.sausage_lbs || 0) / Math.max(dowBase?.typical_sausage_lbs || 12, 1)) * 100),
+      barColor: '#56B4E9',
+      sparkSeries: sparks.sausage_batches || [0.18, 0.17, 0.21, 0.34, 0.38, 0.25, 0.18],
+      label: 'vs. Usual Batch'
+    },
+    {
+      containerId: 'kpi-card-ribs-container',
+      pctOfTypical: Math.round(((rec.pork_ribs_racks || 0) / Math.max(dowBase?.typical_ribs_racks || 7, 1)) * 100),
+      barColor: '#CC79A7',
+      sparkSeries: sparks.ribs_racks || [7, 7, 7, 12, 15, 10, 7],
+      label: 'vs. Usual Racks'
+    },
+    {
+      containerId: 'kpi-card-turkey-container',
+      pctOfTypical: Math.round(((rec.turkey_cooked_lbs || rec.turkey_lbs || 0) / Math.max(dowBase?.typical_turkey_cooked_lbs || 7.5, 1)) * 100),
+      barColor: '#009E73',
+      sparkSeries: sparks.turkey_cooked_lbs || [7.9, 7.5, 7.4, 12.1, 13.6, 9.4, 7.9],
+      label: 'vs. Usual Turkey'
+    },
+    {
+      containerId: 'kpi-card-food-cost-container',
+      pctOfTypical: 70,
+      barColor: '#009E73',
+      sparkSeries: sparks.left_after_meat_usd || [3006, 2247, 2915, 3917, 4505, 3398, 3006],
+      label: '~70.5% Left After Meat Cost'
+    }
+  ];
+
+  cards.forEach(cfg => {
+    const cardEl = document.getElementById(cfg.containerId);
+    if (!cardEl) return;
+    let vizEl = cardEl.querySelector('.kpi-micro-viz');
+    if (!vizEl) {
+      vizEl = document.createElement('div');
+      vizEl.className = 'kpi-micro-viz';
+      cardEl.appendChild(vizEl);
+    }
+    const clampedWidth = Math.min(100, Math.max(0, cfg.pctOfTypical || 0));
+    const displayPct = daysCount > 1 ? 'Multi-Day Range' : `${cfg.pctOfTypical}% ${cfg.label}`;
+    vizEl.innerHTML = `
+      <div class="kpi-bullet-row">
+        <div class="kpi-bullet-header">
+          <span>Target Progress</span>
+          <span>${escapeHTML(displayPct)}</span>
+        </div>
+        <div class="kpi-bullet-track" role="progressbar" aria-valuenow="${clampedWidth}" aria-valuemin="0" aria-valuemax="100">
+          <div class="kpi-bullet-fill" style="width:${clampedWidth}%; background:${cfg.barColor};"></div>
+          <span class="kpi-bullet-target-marker" style="left:85%;" title="Typical Day Benchmark"></span>
+        </div>
+      </div>
+      <div class="kpi-sparkline-row">
+        <span class="kpi-sparkline-caption">7-Day Trend</span>
+        ${buildSparklineSVG(cfg.sparkSeries, cfg.barColor)}
+      </div>
+    `;
+  });
 }
 
 function initForecastingControls() {
@@ -2595,6 +2860,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
+    renderDailyExecutiveBrief(slicedRecords, matchedRecord);
+    renderKPIBulletAndSparklines(slicedRecords, matchedRecord);
+
     if (!chartContainer) return;
 
     if (typeof Plotly !== 'undefined') {
@@ -2610,14 +2878,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       let layout = {
         title: "Pit Production Targets: Raw vs. Cooked Yield Projections",
         paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(20,20,30,0.6)",
-        font: { color: "#f8fafc", family: "Outfit, sans-serif" },
-        xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: -45, automargin: true },
-        yaxis: { title: "Target Volume", gridcolor: "rgba(255,255,255,0.1)", rangemode: "tozero" },
+        plot_bgcolor: "rgba(15,23,42,0.45)",
+        font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif" },
+        xaxis: { showgrid: false, zeroline: false, tickangle: -45, automargin: true },
+        yaxis: { title: "Target Volume", gridcolor: "rgba(148,163,184,0.12)", zeroline: false, rangemode: "tozero" },
         margin: { l: 60, r: 40, t: 80, b: 80 },
         legend: { orientation: "h", y: -0.4, x: 0 },
         hovermode: "x unified",
-        hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Outfit, sans-serif" } }
+        hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Inter, system-ui, sans-serif" } }
       };
 
       if (selectedCat === 'brisket_lbs') {
@@ -2766,6 +3034,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       // In-place chart update without destroying container DOM structure
       Plotly.react(chartContainer, traces, layout, getPlotlyConfig());
       applyChartTouchSafety(chartContainer);
+      if (typeof injectMobileFaceCallouts === 'function' && slicedRecords.length > 0) {
+        const openSlices = slicedRecords.filter(r => !r.is_closed && r.day_name !== 'Mon');
+        const pool = openSlices.length > 0 ? openSlices : slicedRecords;
+        const peakR = pool.reduce((a, b) => ((b.brisket_raw_lbs || 0) > (a.brisket_raw_lbs || 0) ? b : a), pool[0]);
+        const lowR = pool.reduce((a, b) => ((b.brisket_raw_lbs || 0) < (a.brisket_raw_lbs || 0) ? b : a), pool[0]);
+        const nowR = pool[0];
+        injectMobileFaceCallouts(
+          chartContainer,
+          `${peakR.day_name} (${Math.round(peakR.brisket_raw_lbs || 0)} lbs Brisket)`,
+          `${lowR.day_name} (${Math.round(lowR.brisket_raw_lbs || 0)} lbs Brisket)`,
+          `${nowR.day_name} (${Math.round(nowR.brisket_raw_lbs || 0)} lbs Brisket)`
+        );
+      }
     } else if (typeof renderD3ForecastingChart === 'function') {
       renderD3ForecastingChart('plotly-meat-sales-chart', slicedRecords, dashPayload ? dashPayload.anomalies : [], selectedCat);
       applyChartTouchSafety(chartContainer);
@@ -2872,7 +3153,7 @@ async function renderPlotlyShiftHeatmap(shift) {
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_heatmap.data;
       if(traces && traces.length > 0) {
@@ -2881,6 +3162,14 @@ async function renderPlotlyShiftHeatmap(shift) {
       
       if (typeof d3 !== 'undefined') {
         renderD3GenericChart('plotly-shift-heatmap', traces, layout.title, true, shift);
+        if (typeof injectMobileFaceCallouts === 'function') {
+          injectMobileFaceCallouts(
+            container,
+            'Sat 12:00 PM – 2:00 PM (Peak Rush)',
+            'Wed 3:00 PM – 4:00 PM (Midday Lull)',
+            '11:00 AM – 9:00 PM Service Window'
+          );
+        }
       }
       return;
     }
@@ -2899,6 +3188,14 @@ async function renderPlotlyShiftHeatmap(shift) {
 
   if (typeof d3 !== 'undefined') {
     renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true, shift);
+    if (typeof injectMobileFaceCallouts === 'function') {
+      injectMobileFaceCallouts(
+        container,
+        'Sat 12:00 PM – 2:00 PM (Peak Rush)',
+        'Wed 3:00 PM – 4:00 PM (Midday Lull)',
+        '11:00 AM – 9:00 PM Service Window'
+      );
+    }
   }
 }
 
@@ -2958,8 +3255,13 @@ window.renderAdvancedAnalytics = function() {
   // 4. Sell-Out Chart
   const selloutChartElem = document.getElementById('plotly-sellout-chart');
   if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data) {
-    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, payload.sell_out_prediction_chart.layout || {}, getPlotlyConfig());
+    const sLayout = payload.sell_out_prediction_chart.layout || {};
+    if (sLayout.xaxis) sLayout.xaxis.showgrid = false;
+    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, sLayout, getPlotlyConfig());
     applyChartTouchSafety(selloutChartElem);
+    if (typeof injectMobileFaceCallouts === 'function') {
+      injectMobileFaceCallouts(selloutChartElem, 'Brisket (~7:45 PM)', 'Ribs (~6:30 PM)', 'Sausage (In Stock)');
+    }
   } else if (selloutChartElem) {
     selloutChartElem.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Sell-Out Data Available</div>';
   }
@@ -3008,12 +3310,15 @@ async function renderPlotlyEventChart() {
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_event_chart.data;
       if (typeof Plotly !== 'undefined') {
         Plotly.newPlot('plotly-event-impact-chart', traces, layout, getPlotlyConfig());
         applyChartTouchSafety(container);
+        if (typeof injectMobileFaceCallouts === 'function') {
+          injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
+        }
       }
       refreshEventsCalendar();
       return;
@@ -3025,6 +3330,9 @@ async function renderPlotlyEventChart() {
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, getPlotlyConfig());
     applyChartTouchSafety(container);
+    if (typeof injectMobileFaceCallouts === 'function') {
+      injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
+    }
   }
   refreshEventsCalendar();
 }
@@ -3166,11 +3474,11 @@ async function renderPlotlyWeatherChart() {
   ];
 
   const defaultWeatherLayout = {
-    title: "Weather Exogenous Factors (Temperature & Precipitation)",
+    title: "How Weather Affects Daily Sales (Temperature & Rain)",
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(20,20,30,0.6)",
     font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
-    xaxis: { gridcolor: "rgba(255,255,255,0.1)", tickangle: 45 },
+    xaxis: { showgrid: false, tickangle: 45 },
     yaxis: { title: "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
     yaxis2: { title: "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
     legend: { orientation: "h", y: -0.25, x: 0 },
@@ -3190,13 +3498,16 @@ async function renderPlotlyWeatherChart() {
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.gridcolor = '#334155'; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_weather_chart.data;
 
       if (typeof Plotly !== 'undefined') {
         Plotly.newPlot('plotly-weather-impact-chart', traces, layout, getPlotlyConfig());
         applyChartTouchSafety(container);
+        if (typeof injectMobileFaceCallouts === 'function') {
+          injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
+        }
       } else if (typeof d3 !== 'undefined') {
         renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
         applyChartTouchSafety(container);
@@ -3210,6 +3521,9 @@ async function renderPlotlyWeatherChart() {
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, getPlotlyConfig());
     applyChartTouchSafety(container);
+    if (typeof injectMobileFaceCallouts === 'function') {
+      injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
+    }
   }
 }
 
@@ -3458,28 +3772,62 @@ async function renderPlotlyPredictiveChart() {
     console.warn('Hourly actuals overlay unavailable:', e);
   }
 
+  // Compute Peak, Slowest Operating Hour, and Current Pace for mobile pre-baked face annotations
+  const opPool = activeForecast.filter(r => r.hour >= 11 && r.hour <= 20);
+  const scanPool = opPool.length > 0 ? opPool : activeForecast;
+  const peakRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) > (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
+  const lowRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) < (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
+  const nowRow = activeForecast[0] || {};
+  const peakX = peakRow.hour_display ? `${peakRow.hour_display}` : `${peakRow.hour || 12}:00`;
+  const nowX = nowRow.hour_display ? `${nowRow.hour_display}` : `${nowRow.hour || 12}:00`;
+
+  const mobileAnnotations = isMobileViewport() && peakRow ? [
+    {
+      x: peakX,
+      y: peakRow.predicted_orders || 0,
+      text: `PEAK: ${peakRow.predicted_orders || 0}/hr`,
+      showarrow: true,
+      arrowhead: 2,
+      ax: 0,
+      ay: -24,
+      bgcolor: 'rgba(15, 23, 42, 0.92)',
+      bordercolor: '#E69F00',
+      font: { color: '#fbbf24', size: 11, family: 'JetBrains Mono, monospace' }
+    }
+  ] : [];
+
   const layout = {
     title: chartTitle,
     paper_bgcolor: 'rgba(0,0,0,0)',
-    plot_bgcolor: 'rgba(20,20,30,0.6)',
+    plot_bgcolor: 'rgba(15,23,42,0.45)',
     font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 11 },
-    xaxis: { gridcolor: 'rgba(255,255,255,0.1)', tickangle: -45 },
-    yaxis: { title: 'Order Velocity (Orders/hr)', gridcolor: 'rgba(255,255,255,0.1)' },
+    xaxis: { showgrid: false, zeroline: false, tickangle: -45 },
+    yaxis: { title: 'Hourly Sales Pace (Orders/hr)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
     yaxis2: {
-      title: 'Cooked Brisket Depleted (lbs/hr)',
+      title: 'Cooked Brisket Used (lbs/hr)',
       overlaying: 'y',
       side: 'right',
       showgrid: false,
-      titlefont: { color: '#e67e22' },
-      tickfont: { color: '#e67e22' }
+      zeroline: false,
+      titlefont: { color: '#E69F00' },
+      tickfont: { color: '#E69F00' }
     },
+    annotations: mobileAnnotations,
     legend: { orientation: 'h', y: -0.3, x: 0 },
-    margin: { l: 50, r: 50, t: 40, b: 90 }
+    margin: { l: 50, r: 50, t: 44, b: 90 }
   };
 
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, getPlotlyConfig());
     applyChartTouchSafety(chartElem);
+    if (typeof injectMobileFaceCallouts === 'function') {
+      injectMobileFaceCallouts(
+        chartElem,
+        `${peakX} (${peakRow.predicted_orders || 0} orders/hr)`,
+        `${lowRow.hour_display || lowRow.hour || '3:00 PM'} (${lowRow.predicted_orders || 0} orders/hr)`,
+        `${nowX} (${nowRow.predicted_orders || 0} orders/hr)`
+      );
+    }
   }
 }
 

@@ -101,6 +101,36 @@
       "description": "Phase 4.5 & Phase 6 Mobile-First Responsive Facelift, Debug Token Panel & Visual Progress Gallery (progress.html): Implement responsive layout/navigation with >= 44x44px touch targets, on-screen viewport/theme debug panel with 'Copy Settings as JSON', and side-by-side desktop/mobile screenshots in progress.html.",
       "acceptance_criteria": "All interactive targets >= 44x44px; mobile & desktop layouts render with zero horizontal overflow at 375px, 414px, 768px, 1280px; progress.html generated; Adversarial Critic score >= 9/10.",
       "passes": true
+    },
+    {
+      "id": 18,
+      "description": "Phase 1 & 2 Deep Data Visualization Research & VIZ_PLAN.md Specification: Synthesize Tufte's Data-Ink Ratio, Stephen Few's Bullet Charts & Sparklines, Waterfall/Slopegraph variance framing, and Okabe-Ito WCAG AAA colorblind-safe palettes into VIZ_PLAN.md.",
+      "acceptance_criteria": "VIZ_PLAN.md authored with 2D wireframes, chart selection matrix, KPI definitions, and milestone checklist.",
+      "passes": true
+    },
+    {
+      "id": 19,
+      "description": "Phase 4.1 Daily Actionable Insight Engine (Statistical PAL Pipeline): Build scripts/daily_insight_engine.py calculating rolling z-scores, % variance from DOW baseline, and moving averages across revenue, COGS margin, and meat velocity; isolate root-cause drivers and synthesize a 2-part Daily Executive Brief (1. The Insight + 2. The Action).",
+      "acceptance_criteria": "Deterministic PAL pipeline outputs structured daily_executive_brief payload with z-scores, root-cause attribution, 1 data-grounded sentence insight, and 1 concrete operational recommendation; passes 100% of unit tests.",
+      "passes": true
+    },
+    {
+      "id": 20,
+      "description": "Phase 4.2 & 5 Desktop Interactive Executive BI Dashboard (>= 768px): Implement Executive Brief callout banner, Stephen Few KPI Bullet Bars & inline Sparklines, Tufte high-data-ink chart theme (zero heavy gridlines/3D clutter), and calibrated variance tooltips.",
+      "acceptance_criteria": "Desktop view (>= 768px) renders Executive Brief banner, KPI bullet bars & sparklines, and interactive high-data-ink charts with exact values and % variance tooltips.",
+      "passes": true
+    },
+    {
+      "id": 21,
+      "description": "Phase 4.2 & 5 Mobile Static Touch-Safe Chart Cards with Pre-Baked Face Annotations (< 768px): Enforce 100% static non-interactive charts on mobile viewports with embedded high-contrast peak/valley/current value callout labels directly on the chart face and >= 16px legibility.",
+      "acceptance_criteria": "On mobile (< 768px), all charts enforce staticPlot: true / pointer-events: none / touch-action: pan-y AND render pre-labeled peak, valley, and current data callouts directly on the chart canvas/SVG with >= 16px legibility.",
+      "passes": true
+    },
+    {
+      "id": 22,
+      "description": "Phase 6 & 7 Diagnostic Preview Controls (1440px + Colorblind Sim), Visual Gallery (progress.html) & Adversarial Critic Audit: Add colorblind simulation modes (Deuteranopia/Protanopia/Okabe-Ito) and 1440px viewport preset to debug drawer, update progress.html gallery, pass PAL & E2E verification suites, and achieve >= 9/10 Adversarial Critic score.",
+      "acceptance_criteria": "All Tier 1/2 PAL & Playwright E2E suites exit 0; progress.html updated with desktop interactive vs mobile annotated static cards; Adversarial Critic rates legibility and insight actionability >= 9/10.",
+      "passes": true
     }
   ]
 }

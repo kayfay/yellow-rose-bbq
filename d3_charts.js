@@ -32,6 +32,20 @@ function enforceMobileTouchSafety(container, svgNode) {
     }
 }
 
+function injectMobileFaceCallouts(container, peakLabel, lowLabel, nowLabel) {
+    if (!container) return;
+    const existing = container.querySelector('.mobile-chart-face-badges');
+    if (existing) existing.remove();
+    const bar = document.createElement('div');
+    bar.className = 'mobile-chart-face-badges';
+    bar.innerHTML = `
+        <span class="mobile-face-badge badge-peak">▲ PEAK: ${d3EscapeHTML(peakLabel)}</span>
+        <span class="mobile-face-badge badge-low">▼ LOW: ${d3EscapeHTML(lowLabel)}</span>
+        <span class="mobile-face-badge badge-now">● CURRENT: ${d3EscapeHTML(nowLabel)}</span>
+    `;
+    container.insertBefore(bar, container.firstChild);
+}
+
 function renderD3ForecastingChart(containerId, records, anomalies = [], selectedCat = 'baseline') {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -111,10 +125,10 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
 
     const stackKeys = ['brisket_raw_lbs', 'pork_shoulder_raw_lbs', 'sausage_lbs', 'turkey_lbs', 'pork_ribs_lbs', 'beef_dino_ribs_lbs'];
 
-    // Executive BI High-Contrast Palette
+    // Executive BI High-Contrast Palette (Okabe-Ito Colorblind Safe)
     const colorScale = d3.scaleOrdinal()
         .domain(stackKeys)
-        .range(['#ef4444', '#f97316', '#eab308', '#38bdf8', '#a855f7', '#14b8a6']);
+        .range(['#D55E00', '#E69F00', '#F0E442', '#56B4E9', '#CC79A7', '#009E73']);
 
     const prettyNames = {
         'brisket_raw_lbs': 'Brisket (Raw lbs)',
@@ -283,6 +297,40 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
 
             legendItem.append("span").text(prettyNames[key]);
         });
+
+        // Pre-baked Peak/Low/Current annotations for mobile & executive scan
+        const openRecs = formattedRecords.filter(r => !r.is_closed && r.day_name !== 'Mon');
+        const scanPool = openRecs.length > 0 ? openRecs : formattedRecords;
+        const totals = scanPool.map(r => ({
+            rec: r,
+            total: stackKeys.reduce((acc, k) => acc + (r[k] || 0), 0)
+        }));
+        if (totals.length > 0) {
+            const peakObj = totals.reduce((a, b) => (b.total > a.total ? b : a), totals[0]);
+            const lowObj = totals.reduce((a, b) => (b.total < a.total ? b : a), totals[0]);
+            const nowObj = totals[0];
+            injectMobileFaceCallouts(
+                container,
+                `${peakObj.rec.day_name} (${Math.round(peakObj.total)} lbs)`,
+                `${lowObj.rec.day_name} (${Math.round(lowObj.total)} lbs)`,
+                `${nowObj.rec.day_name} (${Math.round(nowObj.total)} lbs)`
+            );
+            if (isMobile) {
+                const px = x(`${peakObj.rec.date} (${peakObj.rec.day_name})`);
+                if (px !== undefined) {
+                    svg.append("text")
+                        .attr("class", "d3-mobile-face-annotation")
+                        .attr("x", px + x.bandwidth() / 2)
+                        .attr("y", Math.max(12, y(peakObj.total) - 6))
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#fbbf24")
+                        .style("font-size", "10px")
+                        .style("font-weight", "700")
+                        .style("font-family", "JetBrains Mono, monospace")
+                        .text(`▲ ${Math.round(peakObj.total)}#`);
+                }
+            }
+        }
     } else {
         let key = selectedCat;
         if (selectedCat === 'brisket_lbs') key = 'brisket_raw_lbs';
@@ -367,6 +415,20 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
                 d3.select(this).attr("r", 5).style("filter", "none");
                 hideTooltip.call(this);
             });
+        }
+
+        const openSingle = formattedRecords.filter(r => !r.is_closed && r.day_name !== 'Mon');
+        const singlePool = openSingle.length > 0 ? openSingle : formattedRecords;
+        if (singlePool.length > 0) {
+            const peakRec = singlePool.reduce((a, b) => ((b[key] || 0) > (a[key] || 0) ? b : a), singlePool[0]);
+            const lowRec = singlePool.reduce((a, b) => ((b[key] || 0) < (a[key] || 0) ? b : a), singlePool[0]);
+            const nowRec = singlePool[0];
+            injectMobileFaceCallouts(
+                container,
+                `${peakRec.day_name} (${peakRec[key] || 0} ${unitLabel})`,
+                `${lowRec.day_name} (${lowRec[key] || 0} ${unitLabel})`,
+                `${nowRec.day_name} (${nowRec[key] || 0} ${unitLabel})`
+            );
         }
     }
 

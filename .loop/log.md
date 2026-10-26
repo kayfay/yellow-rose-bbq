@@ -85,3 +85,24 @@
     - Playwright E2E Suite (`./run_tests.sh`): 14/14 PASS (Exit Code 0)
     - Independent Adversarial Critic Subagent (`7dc121b1-304f-47b2-843b-b58b2088b4b4`): **9.2 / 10** (and the single `.task-content p` selector defect + 3 minor nits identified by the Critic were immediately remediated and verified).
   - Marked Tasks 12–17 `passes: true` in `.loop/prd.json`.
+- **2026-10-26 16:03 Phase 2 & 3 (Executive BI & Daily Actionable Insight Engine — Research & Loop Harness Initialization)**:
+  - Conducted Data Visualization Theory Research: synthesized Edward Tufte's Data-Ink Ratio (`Data-Ink / Total-Ink`), Stephen Few's Bullet Charts (actual vs. target + qualitative horizon bands) and inline Sparklines, Waterfall/Slopegraph variance framing, and Masataka Okabe & Kei Ito's WCAG AAA colorblind-safe palette (`#E69F00`, `#56B4E9`, `#009E73`, `#F0E442`, `#0072B2`, `#D55E00`, `#CC79A7`).
+  - Audited active repository data sources (`clover_api/analytics/predictive_payload.json`, `clover_api/analytics/hourly_actuals.json`, `clover_api/analytics/dashboard_data.json`, `clover_api/analytics/food_cost_engine.py`, `scripts/meat_forecast.py`) and chart containers (`#plotly-predictive-velocity-chart`, `#plotly-meat-sales-chart`, `#plotly-shift-heatmap`, `#plotly-weather-impact-chart`, `#plotly-event-impact-chart`, `#plotly-sellout-chart`).
+  - Initialized `.loop/prd.json` with Tasks 18–22 (`passes: false`) and updated `.loop/patterns.md` (26 lines <= 40-line cap). Pausing at Phase 9 Gateway for `/grill-me` alignment.
+- **2026-10-26 16:13 Phase 1 (/grill-me Alignment Complete — Plain-English BI & Daily Shop Brief)**:
+  - **KPI & Language Alignment**: Combined Pit Operations (raw/cooked lbs, hourly pace, sell-out risk) + Shop Financials (Daily Sales $, Est. Meat Cost $, Sales Left After Meat Cost $) in **100% plain kitchen/owner English** (zero statistical/BI jargon in UI).
+  - **Delivery Format**: Top-of-Dashboard Daily Shop Brief Banner + 1-Click Printable 1-Page Kitchen/Owner Sheet + `clover_api/analytics/daily_executive_brief.json` (and `payloads.js` export).
+  - **Theme & Viewport Controls**: Clean Smokehouse Dark Theme + Okabe-Ito Colorblind-Safe Palette + 1-Click Printable Daylight Mode + Colorblind Simulation toggles (`Deuteranopia`, `Protanopia`) and `1440px` preset in `#design-debug-drawer`.
+  - Authored `VIZ_PLAN.md` and marked Task 18 `passes: true` in `.loop/prd.json`.
+
+- **2026-10-26 16:48 Phase 4–8 (Executive BI Dashboard & Plain-English Daily Insight Engine `v2.1.0` Complete)**:
+  - **Task 19 (Daily Actionable Insight Engine)**: Created `scripts/daily_insight_engine.py` and generated `clover_api/analytics/daily_executive_brief.json` (bundled into `payloads.js` via `build_payloads.py`) producing 1 Plain-English Insight (`the_insight`), 1 Concrete Recommended Action (`the_action`), and a Plain-English Sales & Meat Cost Breakdown (`sales_left_after_meat_cost`) with zero statistical/BI jargon.
+  - **Task 20 (Desktop Interactive BI, Tufte Data-Ink, Stephen Few Bullet Bars & Sparklines)**: Added `#daily-executive-brief-banner`, `#daily-sales-bridge-container`, `#btn-print-daily-brief` (`@media print` 1-page printable sheet), Stephen Few Target Progress Bars (`.kpi-bullet-track`) and 7-Day SVG Sparklines (`.kpi-sparkline-svg`) across all 7 KPI cards, and Okabe-Ito WCAG AAA colorblind-safe tokens (`#E69F00`, `#56B4E9`, `#009E73`, `#F0E442`, `#0072B2`, `#D55E00`, `#CC79A7`).
+  - **Task 21 (Mobile Static Touch-Safe Cards & Pre-Baked Face Annotations)**: Enforced `staticPlot: true`, `pointer-events: none`, `touch-action: pan-y` on `< 768px` paired with `.mobile-chart-face-badges` (`▲ PEAK`, `▼ LOW`, `● CURRENT`), `.d3-mobile-face-annotation`, and `>= 16px` (`1rem`) body legibility.
+  - **Task 22 (Diagnostic Preview Controls, `progress.html` & Adversarial Critic Sign-Off)**: Added `1440px` desktop preset and Deuteranopia/Protanopia simulation modes (`data-cb-mode`) in `#design-debug-drawer`, recaptured all 5 gallery screenshots in `assets/screenshots/v2_*.png`, and updated `progress.html` and `CHANGELOG.md`.
+  - **Verification Proof**:
+    - `scripts/verify_bi_insight_engine.py`: 100% PASS (Exit Code 0)
+    - `scripts/verify_v2_facelift_pal.py`: 27/27 PASS (Exit Code 0)
+    - Playwright Full E2E Suite (`./run_tests.sh`): 15/15 PASS (13.2s, Exit Code 0)
+    - Independent Adversarial Critic Subagent (`7dc121b1-304f-47b2-843b-b58b2088b4b4`): **9.6 / 10 (PASS)** (all 3 minor non-blocking nits also polished immediately).
+  - Marked Tasks 19–22 `passes: true` in `.loop/prd.json`.

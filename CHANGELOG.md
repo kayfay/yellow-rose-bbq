@@ -5,6 +5,26 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [2.1.0] — 2026-10-26
+
+### Added
+- **Plain-English Daily Actionable Insight Engine (`scripts/daily_insight_engine.py`):**
+  - Automated PAL pipeline computing day-of-week sales & meat baselines, anomaly z-scores, and dollar variance across Brisket, Pulled Pork, Spare Ribs, Sausage, and Turkey.
+  - Synthesizes a 2-part **Daily Shop Brief** with **zero statistical/BI jargon**:
+    1. **What's Happening Today (`the_insight`):** Plain-English comparison against a typical day of the week, including expected sales (`$`), estimated meat cost (`$`), and money left over after meat cost (`$`).
+    2. **Recommended Next Step (`the_action`):** Concrete raw and cooked poundage prep targets and cutting-block timing ahead of the peak rush hour.
+  - Exports `clover_api/analytics/daily_executive_brief.json` and bundles `daily_executive_brief` into `clover_api/analytics/payloads.js`.
+- **Top-of-Dashboard Daily Shop Brief Banner & 1-Click Printable Sheet (`index.html`, `style.css`, `app.js`):**
+  - Added `#daily-executive-brief-banner`, `#daily-sales-bridge-container` (showing `Typical Day Sales + Rush Difference = Expected Sales − Est. Meat Cost = Left After Meat Cost`), and `#btn-print-daily-brief` (`@media print` 1-page kitchen/owner sheet).
+- **Stephen Few Target Progress Bars & Tufte 7-Day Mini-Trends (`app.js`, `style.css`):**
+  - Embedded horizontal target progress bars (`.kpi-bullet-track`) and 7-day SVG sparklines (`.kpi-sparkline-svg`) directly inside the core revenue, meat prep, and food-cost KPI cards using the **Okabe-Ito WCAG AAA Colorblind-Safe Palette**.
+- **Mobile Pre-Baked Chart Face Annotations (`< 768px`):**
+  - Added `injectMobileFaceCallouts()` (`▲ PEAK`, `▼ LOW`, `● CURRENT`) and direct SVG/Plotly peak annotations on mobile static chart cards along with `>= 16px` (`1rem`) body legibility.
+- **1440px Executive Preset & Colorblind Simulation Controls (`#design-debug-drawer`):**
+  - Added `1440px` viewport preset and `Okabe-Ito Standard` / `Deuteranopia` / `Protanopia` simulation toggles, plus `scripts/verify_bi_insight_engine.py` (85 deterministic PAL assertions).
+
+---
+
 ## [2.0.0] — 2026-10-26
 
 ### Added

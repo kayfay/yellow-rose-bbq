@@ -37,7 +37,14 @@
           <button type="button" class="debug-vp-btn" data-vp="414">414px</button>
           <button type="button" class="debug-vp-btn" data-vp="768">768px</button>
           <button type="button" class="debug-vp-btn" data-vp="1280">1280px</button>
+          <button type="button" class="debug-vp-btn" data-vp="1440">1440px</button>
           <button type="button" class="debug-vp-btn active" data-vp="fluid">Fluid 100%</button>
+        </div>
+        <div class="debug-control-group">
+          <span class="debug-group-label">Colorblind Sim:</span>
+          <button type="button" class="debug-cb-btn active" data-cb-mode="standard">Okabe-Ito Standard</button>
+          <button type="button" class="debug-cb-btn" data-cb-mode="deuteranopia">Deuteranopia</button>
+          <button type="button" class="debug-cb-btn" data-cb-mode="protanopia">Protanopia</button>
         </div>
         <div class="debug-control-group">
           <button type="button" id="btn-debug-contrast" class="debug-action-btn">Contrast: Smokehouse Dark</button>
@@ -288,6 +295,62 @@
 
     <!-- TAB 2: INTERACTIVE FORECASTING DASHBOARD -->
     <div id="tab-forecasting-analytics" class="tab-pane">
+
+      <!-- TOP-OF-DASHBOARD PLAIN-ENGLISH DAILY SHOP BRIEF BANNER -->
+      <section id="daily-executive-brief-banner" class="control-card executive-brief-banner" aria-label="Daily Pit and Sales Brief">
+        <div class="exec-brief-header">
+          <div class="exec-brief-title-group">
+            <span class="exec-brief-kicker">📋 TODAY'S PIT &amp; SALES BRIEF</span>
+            <span id="daily-brief-status-pill" class="exec-brief-pill">Busy Tuesday Rush (+15.6% vs. Typical Tuesday)</span>
+          </div>
+          <div class="exec-brief-actions">
+            <button type="button" id="btn-print-daily-brief" class="exec-print-btn">🖨️ Print 1-Page Daily Sheet</button>
+          </div>
+        </div>
+
+        <div class="exec-brief-grid">
+          <div class="exec-brief-box exec-brief-insight-box">
+            <span class="exec-box-label">1. What's Happening Today (Sales &amp; Meat Cost)</span>
+            <p id="daily-brief-insight" class="exec-box-text">
+              Tuesday sales ($4,264) are tracking 15.6% ($575) above a typical Tuesday ($3,689), led by strong 12:00 PM – 1:30 PM Lunch Counter Rush orders, leaving ~$3,006 for the shop after ~$1,258 in estimated meat cost.
+            </p>
+          </div>
+          <div class="exec-brief-box exec-brief-action-box">
+            <span class="exec-box-label">2. Recommended Next Step (Pit &amp; Counter Action)</span>
+            <p id="daily-brief-action" class="exec-box-text">
+              Prep 114 lbs raw Brisket (~46 lbs cooked), 19 lbs raw Pulled Pork (~8 lbs cooked), 7 racks of Spare Ribs, and 11 lbs raw Turkey (~8 lbs cooked); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM – 1:30 PM Lunch Counter Rush.
+            </p>
+          </div>
+        </div>
+
+        <!-- Plain-English Sales & Meat Cost Breakdown Strip -->
+        <div id="daily-sales-bridge-container" class="exec-sales-bridge">
+          <div class="bridge-step">
+            <span class="bridge-step-label" id="bridge-typical-label">Typical Tuesday Sales</span>
+            <strong class="bridge-step-val" id="bridge-typical-val">$3,689</strong>
+          </div>
+          <span class="bridge-operator">+</span>
+          <div class="bridge-step">
+            <span class="bridge-step-label" id="bridge-rush-label">Rush Hour &amp; Crowd Difference</span>
+            <strong class="bridge-step-val bridge-pos" id="bridge-rush-val">+$575</strong>
+          </div>
+          <span class="bridge-operator">=</span>
+          <div class="bridge-step bridge-step-highlight">
+            <span class="bridge-step-label">Expected Sales Today</span>
+            <strong class="bridge-step-val" id="bridge-expected-val">$4,264</strong>
+          </div>
+          <span class="bridge-operator">&minus;</span>
+          <div class="bridge-step">
+            <span class="bridge-step-label">Est. Meat Cost (~29.5%)</span>
+            <strong class="bridge-step-val bridge-cost" id="bridge-meat-cost-val">$1,258</strong>
+          </div>
+          <span class="bridge-operator">=</span>
+          <div class="bridge-step bridge-step-profit">
+            <span class="bridge-step-label">Left After Meat Cost (~70.5%)</span>
+            <strong class="bridge-step-val bridge-profit" id="bridge-leftover-val">$3,006</strong>
+          </div>
+        </div>
+      </section>
       
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <div id="forecasting-operational-tools">
@@ -329,7 +392,7 @@
         <!-- Target Date Purpose & Explanation Banner -->
         <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
           <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; max-width: 700px;">
-            <strong style="color: var(--text-primary);">Horizon Controls:</strong> Select a <strong>past date</strong> for verified Clover POS actuals or a <strong>future date</strong> for SARIMA pit prep targets.
+            <strong style="color: var(--text-primary);">Date &amp; Horizon Controls:</strong> Pick a <strong>past date</strong> for recorded Clover POS sales or a <strong>future date</strong> for upcoming pit prep targets.
           </div>
           <div id="data-last-pulled" style="font-size: 10px; color: #34d399; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); white-space: nowrap;">
             Data Last Pulled: ...
@@ -533,7 +596,7 @@
             <div class="est-metric">
               <span id="kpi-current-velocity" class="est-number">--</span>
             </div>
-            <span class="est-label">Sales Velocity <br><span id="kpi-pacing-status" style="color:#10b981; font-weight:600;">(Normal Flow)</span></span>
+            <span class="est-label">Hourly Sales Pace <br><span id="kpi-pacing-status" style="color:#10b981; font-weight:600;">(Normal Flow)</span></span>
             <div id="kpi-velocity-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -541,7 +604,7 @@
             <div class="est-metric">
               <span id="kpi-food-cost-pct" class="est-number">29.5%</span>
             </div>
-            <span class="est-label">Estimated Food Cost <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- COGS)</span></span>
+            <span class="est-label">Est. Meat Cost Share <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- Est. Meat Cost)</span></span>
             <div id="kpi-food-cost-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
@@ -580,14 +643,14 @@
 
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <section class="control-card forecasting-header-card">
-        <h3>🔬 Model Insights & Data Correlations</h3>
+        <h3>📊 Shop Sales, Busy Hours &amp; Local Demand Breakdown</h3>
         <div>
-          <button type="button" class="preset-btn active" id="btn-subtab-predictive">⚡ Hourly Operations & Velocity</button>
-          <button type="button" class="preset-btn" id="btn-subtab-arima">Baseline Sales Trends</button>
-          <button type="button" class="preset-btn" id="btn-subtab-shift">Hourly Demand Heatmap</button>
-          <button type="button" class="preset-btn" id="btn-subtab-weather">Weather Impact Regression</button>
-          <button type="button" class="preset-btn" id="btn-subtab-event">Live Event Correlation</button>
-          <button type="button" class="preset-btn" id="btn-subtab-advanced">Advanced Analytics</button>
+          <button type="button" class="preset-btn active" id="btn-subtab-predictive">⚡ Hourly Sales Pace &amp; Meat Draw</button>
+          <button type="button" class="preset-btn" id="btn-subtab-arima">📈 Daily Sales vs. Typical Day</button>
+          <button type="button" class="preset-btn" id="btn-subtab-shift">⏱️ Busy Hours Heatmap</button>
+          <button type="button" class="preset-btn" id="btn-subtab-weather">🌧️ Today's Weather Impact</button>
+          <button type="button" class="preset-btn" id="btn-subtab-event">🏈 Local Game Day Boost</button>
+          <button type="button" class="preset-btn" id="btn-subtab-advanced">📋 Menu Mix &amp; Rush Patterns</button>
         </div>
       </section>
 
@@ -682,7 +745,7 @@
         <section class="control-card marketing-card">
           <h2 class="section-title">🌧️ Weather Impact on Sales</h2>
           <div>
-            <h3>Exogenous Weather Elasticity</h3>
+            <h3>How Rain &amp; Heat Affect Counter Orders</h3>
             <ul>
               <li><strong>Precipitation (+$97.37/mm):</strong> Moderate rainfall shifts volume into higher-ticket takeout family packs.</li>
               <li><strong>Extreme Heat (&gt;90&deg;F):</strong> Patio traffic contracts (-5.8%); volume concentrates indoors and at curbside pickup.</li>
