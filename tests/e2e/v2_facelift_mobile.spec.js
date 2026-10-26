@@ -6,8 +6,8 @@ test.describe('v2.0.0 & v2.1.0 Facelift: Mobile-First Ergonomics, Touch-Safe Cha
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
-    // 1. Verify v2.0.0 badge and sticky mobile bottom navigation bar
-    await expect(page.locator('.version-badge')).toContainText('v2.0.0');
+    // 1. Verify v2.1.0 badge and sticky mobile bottom navigation bar
+    await expect(page.locator('.version-badge')).toContainText('v2.1.0');
     const bottomNav = page.locator('.mobile-bottom-nav');
     await expect(bottomNav).toBeVisible();
 
@@ -99,7 +99,7 @@ test.describe('v2.0.0 & v2.1.0 Facelift: Mobile-First Ergonomics, Touch-Safe Cha
     await page.click('#btn-copy-debug-tokens');
     const exportedTokens = await page.evaluate(() => window.__LAST_COPIED_DESIGN_TOKENS__);
     expect(exportedTokens).toBeTruthy();
-    expect(exportedTokens.version).toBe('2.0.0');
+    expect(exportedTokens.version).toBe('2.1.0');
     expect(exportedTokens.colorblindMode).toBe('deuteranopia');
     expect(exportedTokens.okabeItoPalette.orange).toBe('#E69F00');
     expect(exportedTokens.tokens.touchTargetMinPx).toBe(48);

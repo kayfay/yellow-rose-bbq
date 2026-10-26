@@ -922,7 +922,7 @@ function initDesignDebugPanel() {
     copyBtn.addEventListener('click', () => {
       const styles = getComputedStyle(document.documentElement);
       const tokenPayload = {
-        version: '2.0.0',
+        version: '2.1.0',
         activeViewportPreset: activePreviewWidth,
         windowInnerWidth: window.innerWidth,
         mobileTouchSafeCharts: isMobileViewport(),
@@ -949,7 +949,7 @@ function initDesignDebugPanel() {
       const jsonStr = JSON.stringify(tokenPayload, null, 2);
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(jsonStr).then(() => {
-          if (statusEl) statusEl.textContent = 'Copied v2.0.0 JSON tokens to clipboard';
+          if (statusEl) statusEl.textContent = 'Copied v2.1.0 JSON tokens to clipboard';
         }).catch(() => {
           if (statusEl) statusEl.textContent = 'Tokens serialized (clipboard unavailable)';
         });
