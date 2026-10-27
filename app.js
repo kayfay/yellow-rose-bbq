@@ -983,6 +983,7 @@ function buildSparklineSVG(values, strokeColor = '#56B4E9') {
 }
 
 function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
+  const kickerEl = document.getElementById('daily-brief-kicker');
   const pillEl = document.getElementById('daily-brief-status-pill');
   const insightEl = document.getElementById('daily-brief-insight');
   const actionEl = document.getElementById('daily-brief-action');
@@ -1002,6 +1003,7 @@ function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
 
   const isMultiDay = Array.isArray(slicedRecords) && slicedRecords.length > 1;
   let brief = null;
+  let isNextServicePreview = false;
 
   if (!isMultiDay && matchedRecord && briefPayload) {
     if (matchedRecord.date && briefPayload.by_date && briefPayload.by_date[matchedRecord.date]) {
@@ -1011,13 +1013,14 @@ function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
     }
   }
 
-  // If today is closed Monday on initial single-day load, show the active upcoming open day brief
+  // If today is closed Monday on initial single-day load, show preview of active upcoming open day brief with clear Monday labeling
   if (!isMultiDay && brief && brief.is_closed && briefPayload && briefPayload.active_service_brief && !briefPayload.active_service_brief.is_closed) {
-    // Only use active_service_brief when user hasn't explicitly picked a closed Monday to inspect
+    // Only use active_service_brief when user hasn't explicitly picked a past closed Monday to inspect
     const startInput = document.getElementById('forecast-start-date');
     const isTodayDefault = !startInput || startInput.value === briefPayload.today_date;
     if (isTodayDefault) {
       brief = briefPayload.active_service_brief;
+      isNextServicePreview = true;
     }
   }
 
@@ -1074,22 +1077,51 @@ function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
 
   if (!brief) return;
 
-  if (pillEl) {
-    pillEl.textContent = brief.status_badge || 'Daily Brief Ready';
-    pillEl.className = `exec-brief-pill tone-${brief.status_tone || 'steady'}`;
+  if (kickerEl) {
+    if (isNextServicePreview) {
+      kickerEl.textContent = "📋 TODAY IS MONDAY (SHOP CLOSED) — NEXT SERVICE PREVIEW";
+    } else {
+      kickerEl.textContent = "📋 TODAY'S PIT & SALES BRIEF";
+    }
   }
-  insightEl.textContent = brief.the_insight || '';
-  actionEl.textContent = brief.the_action || '';
+
+  if (pillEl) {
+    if (isNextServicePreview) {
+      pillEl.textContent = `Monday Closed — Next Open Service: ${brief.day_full_name || 'Tuesday'}`;
+      pillEl.className = 'exec-brief-pill tone-steady';
+    } else {
+      pillEl.textContent = brief.status_badge || 'Daily Brief Ready';
+      pillEl.className = `exec-brief-pill tone-${brief.status_tone || 'steady'}`;
+    }
+  }
+
+  if (isNextServicePreview) {
+    insightEl.innerHTML = `<strong>Today is Monday (Shop Closed).</strong> Previewing opening service for <strong>${brief.day_full_name} (${brief.date})</strong>: Projected sales ($${Number(brief.expected_sales_usd || 0).toLocaleString()}) are tracking ${Math.abs(brief.pct_vs_typical || 0)}% ($${Math.abs(brief.sales_diff_usd || 0).toLocaleString()}) ${brief.sales_diff_usd >= 0 ? 'above' : 'below'} a typical ${brief.day_full_name} ($${Number(brief.typical_day_sales_usd || 0).toLocaleString()}), leaving ~$${Number(brief.left_after_meat_cost_usd || 0).toLocaleString()} for the shop after ~$${Number(brief.estimated_meat_cost_usd || 0).toLocaleString()} in estimated meat cost.`;
+    actionEl.innerHTML = `<strong>Monday Pit Maintenance:</strong> Keep main offset smokers cold and fireboxes clean today. For ${brief.day_full_name}'s opening smoke: ${brief.the_action}`;
+  } else {
+    insightEl.textContent = brief.the_insight || '';
+    actionEl.textContent = brief.the_action || '';
+  }
 
   const sb = brief.sales_bridge || {};
   const rushTotalDiff = (sb.rush_hour_delta_usd || 0) + (sb.weather_event_delta_usd || 0);
-  if (typLabelEl) typLabelEl.textContent = `${sb.typical_day_label || 'Typical Day'} Sales`;
+  if (typLabelEl) {
+    typLabelEl.textContent = isNextServicePreview
+      ? `Typical ${brief.day_full_name || 'Tuesday'} Sales`
+      : `${sb.typical_day_label || 'Typical Day'} Sales`;
+  }
   if (typValEl) typValEl.textContent = `$${Number(sb.typical_day_usd || 0).toLocaleString()}`;
   if (rushLabelEl) rushLabelEl.textContent = 'Rush Hour & Crowd Difference';
   if (rushValEl) {
     const sign = rushTotalDiff >= 0 ? '+' : '-';
     rushValEl.textContent = `${sign}$${Math.abs(Math.round(rushTotalDiff)).toLocaleString()}`;
     rushValEl.style.color = rushTotalDiff >= 0 ? '#fbbf24' : '#38bdf8';
+  }
+  const expLabelEl = document.getElementById('bridge-expected-label');
+  if (expLabelEl) {
+    expLabelEl.textContent = isNextServicePreview
+      ? `Expected ${brief.day_full_name || 'Tuesday'} Sales`
+      : 'Expected Sales Today';
   }
   if (expValEl) expValEl.textContent = `$${Number(sb.expected_sales_usd || 0).toLocaleString()}`;
   if (costValEl) costValEl.textContent = `$${Number(sb.estimated_meat_cost_usd || 0).toLocaleString()}`;
@@ -3338,11 +3370,11 @@ async function renderPlotlyEventChart() {
 }
 
 // Live Events & Multiplier Calendar State Management
-const _now = new Date();
+const _now = window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date();
 let currentCalYear = _now.getFullYear();
 let currentCalMonth = _now.getMonth();
 let currentCalFilter = 'all';
-let selectedCalDate = _now.toISOString().split('T')[0];
+let selectedCalDate = window.ShopTime ? window.ShopTime.shopDateStr(_now) : _now.toLocaleDateString('en-CA');
 let calInitialized = false;
 
 function refreshEventsCalendar() {
@@ -3548,8 +3580,9 @@ async function renderPlotlyPredictiveChart() {
   // Inspect currently active start date and end date
   const startDateInput = document.getElementById('forecast-start-date');
   const endDateInput = document.getElementById('forecast-end-date');
-  const startDateVal = startDateInput ? startDateInput.value : '';
-  const endDateVal = endDateInput ? endDateInput.value : '';
+  const fallbackDateStr = window.ShopTime ? window.ShopTime.shopDateStr() : (new Date()).toLocaleDateString('en-CA');
+  const startDateVal = (startDateInput && startDateInput.value) ? startDateInput.value : fallbackDateStr;
+  const endDateVal = (endDateInput && endDateInput.value) ? endDateInput.value : startDateVal;
 
   let activeForecast = payload.hourly_forecast;
   let activeDirectives = payload.operational_directives;
@@ -3581,7 +3614,10 @@ async function renderPlotlyPredictiveChart() {
           projected_24h_revenue_usd: profile.projected_revenue_usd,
           peak_rush_window: profile.peak_rush_window,
           total_brisket_draw_lbs: profile.total_brisket_draw_lbs,
-          total_pork_draw_lbs: profile.total_pork_draw_lbs
+          total_pork_draw_lbs: profile.total_pork_draw_lbs,
+          recommended_staff: profile.recommended_staff,
+          pitmaster_hours: profile.pitmaster_hours,
+          average_ticket_usd: profile.average_ticket_usd
         };
         chartTitle = `${dayName} Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal})`;
       }
@@ -3672,7 +3708,7 @@ async function renderPlotlyPredictiveChart() {
     }
   }
 
-  // Hydrate Directives
+  // Hydrate Directives & Velocity Summary Text
   const directivesList = document.getElementById('predictive-directives-list');
   if (directivesList && Array.isArray(activeDirectives)) {
     const safeDirectives = activeDirectives.map(d => escapeHTML(d));
@@ -3680,6 +3716,15 @@ async function renderPlotlyPredictiveChart() {
       safeDirectives.push(`Labor &amp; Shift Coverage: Recommended roster of <strong>${escapeHTML(activeKpis.recommended_staff)} crew members</strong> (~${escapeHTML(activeKpis.pitmaster_hours)} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
     }
     directivesList.innerHTML = safeDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
+  }
+
+  const velocitySummaryElem = document.getElementById('predictive-velocity-summary');
+  if (velocitySummaryElem && activeKpis) {
+    if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
+      velocitySummaryElem.textContent = 'Shop is closed today (Monday pit maintenance). Retail counter service and order flow resume Tuesday at 11:00 AM.';
+    } else if (activeKpis.peak_rush_window) {
+      velocitySummaryElem.textContent = `Peak rush window concentrates around ${activeKpis.peak_rush_window} (${activeKpis.current_sales_velocity}); dinner service tapers after 7:30 PM.`;
+    }
   }
 
   const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : `${r.hour}:00`);

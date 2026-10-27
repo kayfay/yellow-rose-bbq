@@ -7,6 +7,7 @@ Uses plain-English summary metrics without mathematical formulas or jargon.
 import json
 import math
 import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import sys
 
@@ -19,6 +20,8 @@ from clover_api.analytics.hourly_feature_engineering import build_feature_engine
 OUTPUT_JSON = BASE_DIR / "clover_api" / "analytics" / "predictive_payload.json"
 API_OUTPUT_DIR = BASE_DIR / "api" / "analytics"
 API_OUTPUT_FILE = API_OUTPUT_DIR / "predictive_hourly.json"
+
+LOCAL_TZ = ZoneInfo("America/New_York")
 
 def generate_predictive_cache():
     print("[PREDICTIVE] Loading feature dataset & US Foods economics...")
@@ -35,7 +38,7 @@ def generate_predictive_cache():
         'Sunday': {'brisket': 68.9, 'pork': 10.0}
     }
 
-    now = datetime.datetime.now()
+    now = datetime.datetime.now(LOCAL_TZ)
     current_dow = now.weekday() # 0 = Monday, 6 = Sunday
     current_hour = now.hour
     

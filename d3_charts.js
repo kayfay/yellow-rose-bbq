@@ -842,8 +842,9 @@ function renderMonthEventsCalendar(containerId, year, month, activeFilter = 'all
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-    const today = new Date();
-    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const todayStr = (window.ShopTime && typeof window.ShopTime.shopDateStr === 'function')
+        ? window.ShopTime.shopDateStr()
+        : `${(new Date()).getFullYear()}-${String((new Date()).getMonth() + 1).padStart(2, '0')}-${String((new Date()).getDate()).padStart(2, '0')}`;
 
     function getBaselineMultiplier(dow) {
         if (dow === 6) return '1.8x';
