@@ -773,7 +773,15 @@ window.addEventListener('resize', () => {
       'plotly-event-impact-chart',
       'plotly-sellout-chart',
       'plotly-shift-heatmap'
-    ].forEach(applyChartTouchSafety);
+    ].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        applyChartTouchSafety(el);
+        if (typeof Plotly !== 'undefined' && el.offsetWidth > 0) {
+          try { Plotly.Plots.resize(el); } catch (e) {}
+        }
+      }
+    });
 
     if (nowMobile !== _lastViewportIsMobile) {
       _lastViewportIsMobile = nowMobile;
@@ -807,6 +815,16 @@ function switchMainTab(targetTab) {
     activePane.style.display = 'block';
     activePane.classList.add('active');
     window.scrollTo(0, 0);
+    if (typeof Plotly !== 'undefined') {
+      activePane.querySelectorAll('.js-plotly-plot').forEach(el => {
+        try { Plotly.Plots.resize(el); } catch (e) {}
+      });
+      requestAnimationFrame(() => {
+        activePane.querySelectorAll('.js-plotly-plot').forEach(el => {
+          try { Plotly.Plots.resize(el); } catch (e) {}
+        });
+      });
+    }
   }
 
   if (targetTab === 'forecasting-analytics') {
@@ -1307,7 +1325,19 @@ function initForecastingControls() {
     allSubtabBtns.forEach(b => b.classList.remove('active'));
     allSubtabViews.forEach(v => v.style.display = 'none');
     if (btn) btn.classList.add('active');
-    if (view) view.style.display = 'block';
+    if (view) {
+      view.style.display = 'block';
+      if (typeof Plotly !== 'undefined') {
+        view.querySelectorAll('.js-plotly-plot').forEach(el => {
+          try { Plotly.Plots.resize(el); } catch (e) {}
+        });
+        requestAnimationFrame(() => {
+          view.querySelectorAll('.js-plotly-plot').forEach(el => {
+            try { Plotly.Plots.resize(el); } catch (e) {}
+          });
+        });
+      }
+    }
   }
 
   if (btnSubtabPredictive) {
@@ -2906,15 +2936,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       });
       maxVal = maxVal * 1.15; // Give 15% headroom to prevent clipping
 
+      const isMobile = isMobileViewport();
       let traces = [];
       let layout = {
-        title: "Pit Production Targets: Raw vs. Cooked Yield Projections",
+        title: isMobile ? "Pit Targets: Core Meats" : "Pit Production Targets: Raw vs. Cooked Yield Projections",
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(15,23,42,0.45)",
-        font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif" },
+        font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: isMobile ? 10 : 12 },
         xaxis: { showgrid: false, zeroline: false, tickangle: -45, automargin: true },
         yaxis: { title: "Target Volume", gridcolor: "rgba(148,163,184,0.12)", zeroline: false, rangemode: "tozero" },
-        margin: { l: 60, r: 40, t: 80, b: 80 },
+        margin: isMobile ? { l: 40, r: 20, t: 40, b: 60 } : { l: 60, r: 40, t: 80, b: 80 },
         legend: { orientation: "h", y: -0.4, x: 0 },
         hovermode: "x unified",
         hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Inter, system-ui, sans-serif" } }
@@ -3065,6 +3096,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       
       // In-place chart update without destroying container DOM structure
       Plotly.react(chartContainer, traces, layout, getPlotlyConfig());
+      if (chartContainer.offsetWidth > 0 && typeof Plotly !== 'undefined') {
+        try { Plotly.Plots.resize(chartContainer); } catch (e) {}
+      }
       applyChartTouchSafety(chartContainer);
       if (typeof injectMobileFaceCallouts === 'function' && slicedRecords.length > 0) {
         const openSlices = slicedRecords.filter(r => !r.is_closed && r.day_name !== 'Mon');
@@ -3186,8 +3220,6 @@ async function renderPlotlyShiftHeatmap(shift) {
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
       if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
-      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
-      const traces = payload.plotly_heatmap.data;
       if(traces && traces.length > 0) {
         traces[0].colorscale = 'YlOrBr';
       }
@@ -3289,7 +3321,14 @@ window.renderAdvancedAnalytics = function() {
   if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data) {
     const sLayout = payload.sell_out_prediction_chart.layout || {};
     if (sLayout.xaxis) sLayout.xaxis.showgrid = false;
+    if (isMobileViewport()) {
+      sLayout.title = { text: 'Sell-Out Trajectory', font: { size: 11, color: '#f8fafc' } };
+      sLayout.margin = { l: 40, r: 20, t: 36, b: 40 };
+    }
     Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, sLayout, getPlotlyConfig());
+    if (selloutChartElem.offsetWidth > 0) {
+      try { Plotly.Plots.resize(selloutChartElem); } catch (e) {}
+    }
     applyChartTouchSafety(selloutChartElem);
     if (typeof injectMobileFaceCallouts === 'function') {
       injectMobileFaceCallouts(selloutChartElem, 'Brisket (~7:45 PM)', 'Ribs (~6:30 PM)', 'Sausage (In Stock)');
@@ -3320,13 +3359,13 @@ async function renderPlotlyEventChart() {
   }];
 
   const defaultEventLayout = {
-    title: "Demand Surge Multipliers: Local Events vs. Normal Operations",
+    title: isMobileViewport() ? "Event Revenue Multipliers" : "Demand Surge Multipliers: Local Events vs. Normal Operations",
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(20,20,30,0.6)",
     font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
     xaxis: { gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis: { title: "Demand Multiplier (vs. Normal Day)", gridcolor: "rgba(255,255,255,0.1)" },
-    margin: { l: 60, r: 50, t: 50, b: 50 }
+    yaxis: { title: isMobileViewport() ? "Multiplier" : "Demand Multiplier (vs. Normal Day)", gridcolor: "rgba(255,255,255,0.1)" },
+    margin: isMobileViewport() ? { l: 40, r: 20, t: 36, b: 40 } : { l: 60, r: 50, t: 50, b: 50 }
   };
 
   try {
@@ -3342,11 +3381,25 @@ async function renderPlotlyEventChart() {
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (isMobileViewport()) {
+        layout.title = { text: 'Event Revenue Multipliers', font: { size: 11, color: '#f8fafc' } };
+        layout.margin = { l: 40, r: 20, t: 36, b: 40 };
+      }
+      if (layout.xaxis) {
+        layout.xaxis.showgrid = false;
+        layout.xaxis.zerolinecolor = '#334155';
+        layout.xaxis.color = '#94a3b8';
+        if (isMobileViewport()) {
+          layout.xaxis.title = { text: 'Event Type', font: { size: 10, color: '#94a3b8' } };
+        }
+      }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_event_chart.data;
       if (typeof Plotly !== 'undefined') {
         Plotly.newPlot('plotly-event-impact-chart', traces, layout, getPlotlyConfig());
+        if (container.offsetWidth > 0) {
+          try { Plotly.Plots.resize(container); } catch (e) {}
+        }
         applyChartTouchSafety(container);
         if (typeof injectMobileFaceCallouts === 'function') {
           injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
@@ -3361,6 +3414,9 @@ async function renderPlotlyEventChart() {
 
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, getPlotlyConfig());
+    if (container.offsetWidth > 0) {
+      try { Plotly.Plots.resize(container); } catch (e) {}
+    }
     applyChartTouchSafety(container);
     if (typeof injectMobileFaceCallouts === 'function') {
       injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
@@ -3506,15 +3562,15 @@ async function renderPlotlyWeatherChart() {
   ];
 
   const defaultWeatherLayout = {
-    title: "How Weather Affects Daily Sales (Temperature & Rain)",
+    title: isMobileViewport() ? "Weather vs. Sales Impact" : "How Weather Affects Daily Sales (Temperature & Rain)",
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(20,20,30,0.6)",
     font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
     xaxis: { showgrid: false, tickangle: 45 },
-    yaxis: { title: "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis2: { title: "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
+    yaxis: { title: isMobileViewport() ? "Temp (°F)" : "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
+    yaxis2: { title: isMobileViewport() ? "Rain (mm)" : "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
     legend: { orientation: "h", y: -0.25, x: 0 },
-    margin: { l: 60, r: 60, t: 50, b: 80 }
+    margin: isMobileViewport() ? { l: 40, r: 40, t: 36, b: 60 } : { l: 60, r: 60, t: 50, b: 80 }
   };
 
   try {
@@ -3530,12 +3586,26 @@ async function renderPlotlyWeatherChart() {
       layout.plot_bgcolor = 'rgba(0,0,0,0)';
       layout.paper_bgcolor = 'rgba(0,0,0,0)';
       layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
+      if (isMobileViewport()) {
+        layout.title = { text: 'Weather vs. Sales Impact', font: { size: 11, color: '#f8fafc' } };
+        layout.margin = { l: 40, r: 40, t: 36, b: 60 };
+      }
+      if (layout.xaxis) {
+        layout.xaxis.showgrid = false;
+        layout.xaxis.zerolinecolor = '#334155';
+        layout.xaxis.color = '#94a3b8';
+        if (isMobileViewport()) {
+          layout.xaxis.title = { text: 'High Temp (°F)', font: { size: 10, color: '#94a3b8' } };
+        }
+      }
       if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
       const traces = payload.plotly_weather_chart.data;
 
       if (typeof Plotly !== 'undefined') {
         Plotly.newPlot('plotly-weather-impact-chart', traces, layout, getPlotlyConfig());
+        if (container.offsetWidth > 0) {
+          try { Plotly.Plots.resize(container); } catch (e) {}
+        }
         applyChartTouchSafety(container);
         if (typeof injectMobileFaceCallouts === 'function') {
           injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
@@ -3552,6 +3622,9 @@ async function renderPlotlyWeatherChart() {
 
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, getPlotlyConfig());
+    if (container.offsetWidth > 0) {
+      try { Plotly.Plots.resize(container); } catch (e) {}
+    }
     applyChartTouchSafety(container);
     if (typeof injectMobileFaceCallouts === 'function') {
       injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
@@ -3588,11 +3661,13 @@ async function renderPlotlyPredictiveChart() {
   let activeDirectives = payload.operational_directives;
   let activeKpis = payload.summary_kpis;
   let chartTitle = '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate';
+  let currentDayName = '';
 
   if (payload.day_profiles && startDateVal) {
     const parts = startDateVal.split('-').map(Number);
     const startObj = new Date(parts[0], parts[1] - 1, parts[2]);
     const dayName = startObj.toLocaleDateString('en-US', { weekday: 'long' });
+    currentDayName = dayName;
     const shortDay = startObj.toLocaleDateString('en-US', { weekday: 'short' });
 
     let daysCount = 1;
@@ -3841,15 +3916,19 @@ async function renderPlotlyPredictiveChart() {
     }
   ] : [];
 
+  const mobile = isMobileViewport();
   const layout = {
-    title: chartTitle,
+    title: {
+      text: mobile ? (currentDayName ? `${currentDayName} Hourly Velocity & Meat Draw` : 'Hourly Velocity & Meat Draw') : chartTitle,
+      font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: mobile ? 11 : 13 }
+    },
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(15,23,42,0.45)',
-    font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 11 },
+    font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 10 },
     xaxis: { showgrid: false, zeroline: false, tickangle: -45 },
-    yaxis: { title: 'Hourly Sales Pace (Orders/hr)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
+    yaxis: { title: mobile ? 'Pace (Orders/hr)' : 'Hourly Sales Pace (Orders/hr)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
     yaxis2: {
-      title: 'Cooked Brisket Used (lbs/hr)',
+      title: mobile ? 'Brisket (lbs/hr)' : 'Cooked Brisket Used (lbs/hr)',
       overlaying: 'y',
       side: 'right',
       showgrid: false,
@@ -3859,11 +3938,14 @@ async function renderPlotlyPredictiveChart() {
     },
     annotations: mobileAnnotations,
     legend: { orientation: 'h', y: -0.3, x: 0 },
-    margin: { l: 50, r: 50, t: 44, b: 90 }
+    margin: mobile ? { l: 38, r: 38, t: 36, b: 70 } : { l: 50, r: 50, t: 44, b: 90 }
   };
 
   if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, getPlotlyConfig());
+    if (chartElem.offsetWidth > 0) {
+      try { Plotly.Plots.resize(chartElem); } catch (e) {}
+    }
     applyChartTouchSafety(chartElem);
     if (typeof injectMobileFaceCallouts === 'function') {
       injectMobileFaceCallouts(

@@ -27125,7 +27125,7 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-10-26": {
-      "captured_at": "2026-10-26T21:42:20.599847-04:00",
+      "captured_at": "2026-10-26T22:10:36.310886-04:00",
       "hourly_forecast": [
         {
           "hour": 21,
@@ -27146,7 +27146,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-10-26T21:42:19-04:00",
+    "generated_at": "2026-10-26T22:10:36-04:00",
     "timezone": "America/New_York",
     "today_date": "2026-10-26",
     "active_service_brief": {
