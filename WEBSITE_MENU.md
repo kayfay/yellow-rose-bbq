@@ -128,6 +128,7 @@ This document is automatically generated from live POS API metadata.
 | **Gift Card** |  |
 | **Gift card** |  |
 | **Gift card** |  |
+| **Green Bean Catering Tray** |  |
 | **Hat** |  |
 | **Horchata** |  |
 | **King Of The Hill** |  |

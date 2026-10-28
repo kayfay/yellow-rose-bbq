@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-10-28T07:03:30.169112-04:00",
+  "generated_at": "2026-10-28T14:00:05.931536-04:00",
   "days": {
     "2026-07-30": {
       "buckets": [
@@ -56,23 +56,23 @@
         },
         {
           "hour": 10,
-          "sales_usd": 67.19,
-          "orders": 1
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 11,
-          "sales_usd": 932.84,
-          "orders": 23
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 12,
-          "sales_usd": 717.67,
-          "orders": 16
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 13,
-          "sales_usd": 446.39,
-          "orders": 13
+          "sales_usd": 8.33,
+          "orders": 1
         },
         {
           "hour": 14,
@@ -125,8 +125,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 4400.86,
-      "total_orders": 107
+      "total_sales_usd": 2245.1,
+      "total_orders": 55
     },
     "2026-07-31": {
       "buckets": [
@@ -10081,6 +10081,132 @@
       ],
       "total_sales_usd": 4401.95,
       "total_orders": 105
+    },
+    "2026-10-28": {
+      "buckets": [
+        {
+          "hour": 0,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 1,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 2,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 3,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 4,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 5,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 6,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 7,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 8,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 9,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 10,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 11,
+          "sales_usd": 664.78,
+          "orders": 11
+        },
+        {
+          "hour": 12,
+          "sales_usd": 708.32,
+          "orders": 16
+        },
+        {
+          "hour": 13,
+          "sales_usd": 574.96,
+          "orders": 15
+        },
+        {
+          "hour": 14,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 15,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 16,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 17,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 18,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 19,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 20,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 21,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 22,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 23,
+          "sales_usd": 0.0,
+          "orders": 0
+        }
+      ],
+      "total_sales_usd": 1948.06,
+      "total_orders": 42
     }
   },
   "weekday_baseline": {
@@ -10195,7 +10321,7 @@
       ]
     },
     "2": {
-      "n": 12,
+      "n": 13,
       "sales_sum": [
         0.0,
         0.0,
@@ -10208,9 +10334,9 @@
         306.92,
         428.44,
         701.83,
-        7527.66,
-        7226.33,
-        3725.57,
+        8192.44,
+        7934.65,
+        4300.53,
         2423.53,
         1804.22,
         1686.16,
@@ -10234,9 +10360,9 @@
         1,
         4,
         5,
-        206,
-        219,
-        96,
+        217,
+        235,
+        111,
         62,
         48,
         48,
@@ -10262,10 +10388,10 @@
         0.0,
         258.81,
         0.0,
-        1332.27,
-        8803.02,
-        7009.85,
-        4834.22,
+        1265.08,
+        7870.18,
+        6292.18,
+        4396.16,
         2470.12,
         3190.06,
         3203.09,
@@ -10288,10 +10414,10 @@
         0,
         1,
         0,
-        5,
-        205,
-        188,
-        131,
+        4,
+        182,
+        172,
+        119,
         76,
         50,
         76,
