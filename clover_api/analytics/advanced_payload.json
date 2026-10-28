@@ -2,17 +2,17 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 311,
-      "confidence": 20.7
+      "count": 312,
+      "confidence": 20.8
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 283,
-      "confidence": 22.9
+      "count": 282,
+      "confidence": 22.8
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 242,
+      "count": 243,
       "confidence": 19.6
     },
     {
@@ -23,7 +23,7 @@
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
       "count": 114,
-      "confidence": 17.3
+      "confidence": 17.4
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
@@ -47,22 +47,22 @@
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
-      "count": 96,
-      "confidence": 14.6
+      "count": 95,
+      "confidence": 14.5
     }
   ],
   "interaction_modeling": {
-    "normal": 4205.61,
+    "normal": 4160.12,
     "game_only": 4245.02,
-    "rain_only": 4628.9,
-    "game_and_rain": 11775.71
+    "rain_only": 4725.65,
+    "game_and_rain": 11648.35
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4920,
-      "total_revenue": 213806.35,
-      "avg_ticket": 43.45657520325204
+      "order_count": 4917,
+      "total_revenue": 213670.91,
+      "avg_ticket": 43.45554403091316
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2414,
-      "total_revenue": 146455.11,
-      "avg_ticket": 60.66905965202982
+      "order_count": 2415,
+      "total_revenue": 146497.36,
+      "avg_ticket": 60.661432712215316
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,9 +483,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 4.6,
-    "pork_ribs_avg_with_dino": 4.0,
-    "impact_pct": -12.6
+    "pork_ribs_avg_without_dino": 4.9,
+    "pork_ribs_avg_with_dino": 3.6,
+    "impact_pct": -26.2
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
