@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-26T21:42:20.571855-04:00",
-  "total_insights_mined": 11,
+  "generated_at": "2026-10-28T18:30:06.782501-04:00",
+  "total_insights_mined": 9,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
     "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
@@ -16,44 +16,11 @@
   ],
   "insights": [
     {
-      "id": 101,
-      "title": "High-Profit Anchor: Banana Pudding Catering Tray (12.9% Food Cost)",
-      "category": "profitability",
-      "category_label": "\u2b50 Profitability Mining",
-      "insight": "Machine learning clustering ranks Banana Pudding Catering Tray in the highest profitability tier ('Super Star'): delivering $39.20 in gross profit on a $45.00 ticket with only 12.9% food cost.",
-      "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier COGS Model",
-      "quantitative_proof": "$39.20 profit (87.1% margin) vs 29.5% kitchen average",
-      "actionable_recommendation": "Train counter staff to actively recommend Banana Pudding Catering Tray and feature it on POS modifier quick-keys; every 10 incremental orders generates +$392.00 pure gross profit.",
-      "impact_usd": 588.0,
-      "terms": [
-        "COGS",
-        "Food Cost %",
-        "Gross Margin %",
-        "PAR Level"
-      ]
-    },
-    {
-      "id": 102,
-      "title": "Clover POS vs Menu Board Pricing Anomaly: Brisket Sandwich Margin Risk",
-      "category": "margin_anomaly",
-      "category_label": "\u26a0\ufe0f Pricing Disparity",
-      "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 portion COGS), severely compressing margin.",
-      "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
-      "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 variance)",
-      "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to restore effective gross margin above 68%.",
-      "impact_usd": 480.0,
-      "terms": [
-        "COGS",
-        "Food Cost %",
-        "AOV"
-      ]
-    },
-    {
       "id": 103,
       "title": "Midweek vs Weekend Revenue Gap: $64 Family Feast Playbook",
       "category": "midweek_revenue",
       "category_label": "\ud83d\udcc8 Revenue Strategy",
-      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,773.31/day compared to $6,980.79 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
+      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,902.22/day compared to $6,980.79 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
       "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Historical Baseline",
       "quantitative_proof": "Weekend $37,654 vs Midweek $6,719",
       "actionable_recommendation": "Promote the $64 Family Feast Pack (1 lb brisket, 1/2 rack ribs, 2 sausage links, 3 sides) for early 2:00\u20134:30 PM pickup to capture suburban dinner commuters before evening pit cool-down.",
