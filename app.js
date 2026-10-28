@@ -756,6 +756,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initForecastingControls();
   initEventsCalendar();
   initDesignDebugPanel();
+  initDailyPitIntelligence();
   // Pre-render forecasting data so it's instantly available
   renderPlotlyForecastingChart(getActiveDaysCount());
 });
@@ -828,6 +829,15 @@ function switchMainTab(targetTab) {
   }
 
   if (targetTab === 'forecasting-analytics') {
+    // Zero Trust Access Gate Check: If payloads are blocked (or window.BBQ_PAYLOADS missing), reveal auth gate
+    const authGate = document.getElementById('analytics-auth-gate');
+    if (!window.BBQ_PAYLOADS || !window.BBQ_PAYLOADS.dashboard_payload) {
+      if (authGate) authGate.style.display = 'block';
+    } else {
+      if (authGate) authGate.style.display = 'none';
+    }
+
+    initDailyPitIntelligence();
     renderPlotlyForecastingChart(getActiveDaysCount());
     if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
     renderPlotlyEventChart();
@@ -858,8 +868,26 @@ function initMultiTabNavigation() {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
       switchMainTab(targetTab);
+      try {
+        localStorage.setItem('yellow_rose_active_tab', targetTab);
+      } catch (e) {}
     });
   });
+
+  const hash = (window.location.hash || '').toLowerCase();
+  const search = (window.location.search || '').toLowerCase();
+  let defaultTab = null;
+  if (hash.includes('forecasting') || hash.includes('predictive') || search.includes('forecasting') || search.includes('predictive')) {
+    defaultTab = 'forecasting-analytics';
+  } else {
+    try {
+      const savedTab = localStorage.getItem('yellow_rose_active_tab');
+      if (savedTab === 'forecasting-analytics') defaultTab = savedTab;
+    } catch (e) {}
+  }
+  if (defaultTab) {
+    switchMainTab(defaultTab);
+  }
 }
 
 function initDesignDebugPanel() {
@@ -1144,6 +1172,696 @@ function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
   if (expValEl) expValEl.textContent = `$${Number(sb.expected_sales_usd || 0).toLocaleString()}`;
   if (costValEl) costValEl.textContent = `$${Number(sb.estimated_meat_cost_usd || 0).toLocaleString()}`;
   if (leftValEl) leftValEl.textContent = `$${Number(sb.left_after_meat_cost_usd || 0).toLocaleString()}`;
+
+  // Update Daily Pitmaster Intelligence (Random Insight, Day Summary, 10 Tips)
+  updateDailyPitIntelligence(matchedRecord, brief, isNextServicePreview);
+}
+
+/* ==========================================================================
+   Daily Pitmaster Intelligence & 10 Watchlist Tips Module
+   ========================================================================== */
+
+const RANDOM_SMOKEHOUSE_INSIGHTS = [
+  "Pre-creasing 1-lb and 2-lb butcher paper wraps at 11:15 AM cuts counter service ticket times by 22 seconds per platter during peak rush.",
+  "Always rest briskets in rendered beef tallow at 145°F–150°F—it creates an impermeable barrier against evaporative moisture loss in the flat.",
+  "Chill grinder heads and cutter plates below 32°F before grinding sausage; warm friction smears fat and destroys the emulsified snap.",
+  "Maintain a full water pan during the first 4 hours of smoking—soluble smoke compounds (guaiacol & syringol) adhere best to moist surfaces.",
+  "When ambient wind exceeds 15 mph, shield the firebox intake damper to prevent convective cooling and hot spots along the smoker grate.",
+  "Dip unsliced smoked turkey breasts in warm clarified butter before holding in the warming cabinet to preserve natural juices.",
+  "Pork ribs should pass the 'bend test' with a clean surface crack; pulling too early causes chewiness, pulling too late shreds on the block.",
+  "Dino plate ribs are high-ticket impulse sellers—place a fresh bone on the display cutting board at 12:00 PM open to drive add-ons.",
+  "When rain is forecast, pre-pack bulk barbecue sauce cups and pickle/onion sides in the morning to accelerate takeout order assembly.",
+  "Rotate briskets on the smoker grate at the 6-hour mark: the meat closest to the firebox baffle plate cooks up to 25°F hotter.",
+  "Salt and cure penetration in sausage requires a full 12-hour rest—never rush the overnight cure window or texture turns crumbly.",
+  "High-temp cheddar cubes melt at 400°F—standard grocery cheddar will liquefy in the smokehouse and leak into the sausage casing.",
+  "Hold smoked pork butts whole in foil pans until ordered; pre-shredding pork causes it to lose moisture 4x faster under counter lamps.",
+  "A clean fire smells sweet and peppery; if you smell pungent acrid smoke, your coal bed is starved of oxygen—open the intake damper.",
+  "Check scale tare weights on the counter every morning; a 0.5 oz error on 1/2-lb meat portions equates to over $180/week in lost meat margin.",
+  "Spray apple cider vinegar and Worcestershire spritz only after the bark sets (~150°F internal) to avoid washing away rub spices.",
+  "Cut brisket strictly against the grain: remember the grain direction changes by 90 degrees between the flat muscle and the point muscle.",
+  "On cold mornings (<40°F), pre-heat the smoker pit with weed burners to avoid burning through two hours of prime post oak splits.",
+  "Soak natural hog casings in lukewarm water (85°F) with 1 tbsp of vinegar to maximize casing elasticity and reduce blowout risk.",
+  "Stage extra jalapeño cheddar links for weekend lunch—historical sales show sausage links index 35% higher on Saturdays and Sundays.",
+  "Burn seasoned post oak with 15–20% moisture content; green wood creates bitter black creosote, while bone-dry wood burns too hot.",
+  "Save all brisket trimmings: fat caps render down into golden liquid tallow, and lean trimmings formulate the base for daily sausage.",
+  "When counter lines stretch out the door, offer waiting guests complimentary brisket bark burnt-end samples to boost guest patience.",
+  "Calibrate probe thermometers in an ice-water bath monthly—a 5-degree reading drift can cause overcooked or dry brisket flats.",
+  "During heavy midday lunch traffic, assign one cutter exclusively to brisket slicing while a second crew member portions sides and weighs platters."
+];
+
+const DAY_SPECIFIC_TIPS_MAP = {
+  Mon: {
+    day_name: 'Monday',
+    badge: 'Shop Closed — Maintenance Day',
+    focus: 'Firebox Cleanout & Sausage Cure',
+    rush_window: 'Smokers Cold (No Counter Service)',
+    summary: 'Monday scheduled maintenance. Keep main offset pits cold. Vacuum firebox ash, scrub smoker grates, inspect door gaskets, and grind & cure Day 1 sausage meat blocks for Tuesday\'s reopening smoke.'
+  },
+  Tue: {
+    day_name: 'Tuesday',
+    badge: 'Fresh Week Reopen',
+    focus: 'Corporate Lunch & Fresh Smoke',
+    rush_window: '12:00 PM – 1:30 PM Lunch Rush',
+    summary: 'Tuesday counter service kicks off the operating week with strong corporate lunch traffic. Fire the pits early for morning ribs and sausage. Stage hot brisket flats on the slicing board by 11:30 AM to ensure smooth line flow.'
+  },
+  Wed: {
+    day_name: 'Wednesday',
+    badge: 'Midweek Operating Flow',
+    focus: 'Sausage Stuffing & Pulled Pork Pacing',
+    rush_window: '12:00 PM – 1:30 PM Midweek Lunch',
+    summary: 'Wednesday operations feature steady neighborhood lunch traffic. Monitor pulled pork and turkey portions. Afternoon prep directive: mix, stuff, and link Day 2 sausage batches to hang for pellicle drying in the walk-in.'
+  },
+  Thu: {
+    day_name: 'Thursday',
+    badge: 'Pre-Weekend Catering Ramp',
+    focus: 'Supplier Delivery & Case Checks',
+    rush_window: '12:00 PM – 2:00 PM Extended Lunch',
+    summary: 'Thursday catering and large family orders start ramping up. Check in supplier deliveries for weekend cryovac brisket and pork butt cases. Verify cryovac seal integrity and stage firewood cords near the pit.'
+  },
+  Fri: {
+    day_name: 'Friday',
+    badge: 'Weekend Kickoff Surge',
+    focus: 'Dual Lunch & Dinner Rush Management',
+    rush_window: '12:00–2:00 PM Lunch & 5:30–8:00 PM Dinner',
+    summary: 'Friday high-volume service demands dual-rush preparation. Load smokers to full capacity. Pull Batch 2 spare ribs by 4:15 PM for an evening holding rest, and prepare double takeout packaging stations for evening dinner.'
+  },
+  Sat: {
+    day_name: 'Saturday',
+    badge: 'Peak Smokehouse Volume',
+    focus: 'Dino Rib Sellout & Slicer Speed',
+    rush_window: '12:00 PM – 3:00 PM Peak Saturday Rush',
+    summary: 'Saturday peak volume brings the highest revenue of the week. Full smoker capacity across brisket, dino ribs, and sausage links. Pre-crease butcher paper wraps, stage two slicing blocks, and monitor dino plate rib depletion closely by 1:30 PM.'
+  },
+  Sun: {
+    day_name: 'Sunday',
+    badge: 'Family Platter Sunday',
+    focus: 'Multi-Pound Takeout & Inventory Sellout',
+    rush_window: '12:00 PM – 2:30 PM Sunday Family Rush',
+    summary: 'Sunday family feasts and gameday platters dominate lunch service. Push composed items (Tacos and Rosebuds) to utilize smoked reserves before Monday closure. Aim for clean sellouts of spare ribs and turkey by 7:00 PM.'
+  }
+};
+
+function getTenWatchlistTips(matchedRecord, brief, isNextServicePreview) {
+  let shortDay = matchedRecord?.day_name || (brief?.is_closed ? 'Mon' : (brief?.day_name || 'Tue'));
+  if (isNextServicePreview && brief?.day_name) {
+    shortDay = brief.day_name;
+  }
+  const dayName = DAY_SPECIFIC_TIPS_MAP[shortDay]?.day_name || 'Today';
+  const peakRush = DAY_SPECIFIC_TIPS_MAP[shortDay]?.rush_window || '12:00 PM – 1:30 PM';
+
+  return [
+    // --- 1. WEATHER (3 TIPS) ---
+    {
+      id: 1,
+      cat: 'weather',
+      cat_label: '🌦️ Weather Watch',
+      importance: 'Patio Capacity',
+      title: 'High Temperature & Patio Seating Viability',
+      desc: 'Daily high temperatures between 72°F and 86°F expand walk-in capacity by +18–25% via outdoor patio seating. Above 88°F, patio dwell time drops sharply as guests migrate indoors or opt for carside pickup.',
+      pit_check: 'Pit Check: If temp exceeds 88°F, turn on patio misting fans and stage extra ice water for waiting counter guests.'
+    },
+    {
+      id: 2,
+      cat: 'weather',
+      cat_label: '🌦️ Weather Watch',
+      importance: 'Takeout Revenue Shift',
+      title: 'Precipitation & To-Go Packaging Multiplier',
+      desc: 'Rainfall shifts sales volume into multi-pound family feast packs (historical average +$97.37/mm rain). Counter tray service slows while curbside and delivery orders spike.',
+      pit_check: 'Pit Check: On rainy or wet days, stage +20% butcher paper to-go bags, 16oz sauce containers, and pre-packed side cups by 11:00 AM.'
+    },
+    {
+      id: 3,
+      cat: 'weather',
+      cat_label: '🌦️ Weather Watch',
+      importance: 'Bark Formation',
+      title: 'Ambient Humidity & Smoke Airflow Velocity',
+      desc: 'High ambient humidity slows surface evaporative cooling on raw meats (the stall). To build a crisp mahogany bark without sour creosote buildup, maintain high convective draft.',
+      pit_check: 'Pit Check: Open exhaust stack dampers 10% wider on humid or foggy mornings to keep clean airflow sweeping across briskets.'
+    },
+
+    // --- 2. DAY DYNAMICS & PACING (3 TIPS) ---
+    {
+      id: 4,
+      cat: 'day',
+      cat_label: '⏱️ Day Dynamics',
+      importance: 'Morning Line Handover',
+      title: `Morning Prep Handover: Trevor (2:30 AM), Max (8:00 AM) & Jake (8:30 AM Open)`,
+      desc: `Trevor fires the pits at 2:30 AM and trims briskets (<18% loss). Max arrives at 8:00 AM to control dampers and wrapping. Jake opens the kitchen line sharp at 8:30 AM, with Alyssa opening expo and portioning hot fries and mac & cheese. Allen opens the dish pit for prep washdown.`,
+      pit_check: `Pit Check: Max, Trevor, and Jake confirm 145°F holding cabinet temps and hot side pans 30 minutes before 11:00 AM doors open.`
+    },
+    {
+      id: 5,
+      cat: 'day',
+      cat_label: '⏱️ Day Dynamics',
+      importance: 'Carving & Expo Flow',
+      title: 'Carving Block Slicer Pacing (Freddy & Jake) & Expo Leads (Elly / Alyssa)',
+      desc: 'Slice lean flat strictly to order to avoid rapid moisture evaporation. Elly provides senior leadership across kitchen and expo flow; Alyssa handles lunch expo with hot sides prep; Freddy rotates between slicing board, grill, and expo.',
+      pit_check: 'Pit Check: Never pre-slice lean flat meat ahead of active tickets; keep untrimmed fat cap downward against the carving board.'
+    },
+    {
+      id: 6,
+      cat: 'day',
+      cat_label: '⏱️ Day Dynamics',
+      importance: '7:00 PM Transit Handover',
+      title: '7:00 PM Evening Shift Transition: Nick Bus Departure & Freddy / Elly Close',
+      desc: 'Critical evening bottleneck: Nick departs at 7:00 PM sharp to catch the bus home. The Boss shuts down pit fire coals (~6:00 PM) shifting meat to warm hold. Freddy takes over meat slicing and grill; Elly leads closing expo; Allen returns from mid-shift break to drive dish pit lockup.',
+      pit_check: 'Pit Check: At 6:45 PM, Freddy and Nick conduct station inventory handoff before Nick leaves for the bus; Allen clears prep pans before dinner rush.'
+    },
+
+    // --- 3. THINGS TO KEEP AN EYE ON (4 TIPS) ---
+    {
+      id: 7,
+      cat: 'pit',
+      cat_label: '🔥 Pit Watch',
+      importance: 'Critical Rest Temp',
+      title: 'Holding Cabinet Strict Temperature Window (145°F–150°F)',
+      desc: 'CVap and electric warmer temperatures must stay locked between 145°F and 150°F with tallow-wrapped briskets. Dropping below 140°F breaches food safety; exceeding 160°F turns brisket texture mushy.',
+      pit_check: 'Pit Check: Probe top and bottom cabinet shelves twice daily (11:00 AM & 4:00 PM) with a calibrated digital thermometer.'
+    },
+    {
+      id: 8,
+      cat: 'pit',
+      cat_label: '🔥 Pit Watch',
+      importance: 'Wood & Firebox',
+      title: 'Wood Split Sizing & Clean Thin Blue Smoke',
+      desc: 'Heavy white or billowing gray smoke deposits acrid soot on meat bark. Maintain an active coal bed by feeding seasoned post oak splits sized to forearm thickness (3–4 inches diameter).',
+      pit_check: 'Pit Check: Pre-heat oak splits on top of the firebox lid so they catch fire instantly upon loading without smoldering.'
+    },
+    {
+      id: 9,
+      cat: 'pit',
+      cat_label: '👁️ Inventory Guard',
+      importance: 'Composite Allocation',
+      title: 'Composed Item Draw (Tacos & Rosebuds vs. Sliced Meats)',
+      desc: 'Smoked Brisket Tacos and Rosebuds draw directly from prime brisket point and lean trim reserves. Heavy taco rushes can unexpectedly hollow out sliced brisket inventory before evening service.',
+      pit_check: 'Pit Check: Designate 1 whole point exclusively for composite recipes each morning so counter cutters don\'t run short of sliced point.'
+    },
+    {
+      id: 10,
+      cat: 'pit',
+      cat_label: '👁️ Inventory Guard',
+      importance: 'Food Cost Margin',
+      title: 'Food Cost Guardrail & Scale Tare Integrity (~29.5%)',
+      desc: 'Maintaining the smokehouse target 29.5% wholesale meat cost ratio requires rigorous scale accuracy and clean trimming practices (<18% raw brisket trim loss).',
+      pit_check: 'Pit Check: Zero and test counter scales with standard test weights every morning; ensure butcher paper tare is active on POS scales.'
+    }
+  ];
+}
+
+let _currentRandomInsightIndex = -1;
+let _currentTipsFilter = 'all';
+let _isTipsCollapsed = false;
+let _isGlossaryCollapsed = false;
+let _currentGlossaryFilter = 'all';
+let _isRecentAlertsExpanded = false;
+let _lastMatchedRecord = null;
+let _lastBrief = null;
+let _lastIsNextServicePreview = false;
+
+const BUILTIN_ANALYTIC_GLOSSARY = {
+  "PAR Level": {
+    term: "PAR Level",
+    full_name: "Periodic Automatic Replenishment",
+    category: "pit",
+    category_label: "🔥 Pit & Smoker",
+    definition: "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
+    how_it_helps: "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+  },
+  "AOV": {
+    term: "AOV",
+    full_name: "Average Order Value",
+    category: "volume",
+    category_label: "📊 Volume & Math",
+    definition: "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
+    how_it_helps: "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+  },
+  "Z-Score": {
+    term: "Z-Score",
+    full_name: "Standard Score",
+    category: "volume",
+    category_label: "📊 Volume & Math",
+    definition: "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
+    how_it_helps: "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+  },
+  "Meat Draw": {
+    term: "Meat Draw",
+    full_name: "Burn Rate / Carve Velocity",
+    category: "pit",
+    category_label: "🔥 Pit & Smoker",
+    definition: "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140°F holding cabinet to fulfill guest trays.",
+    how_it_helps: "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+  },
+  "Cooked Yield %": {
+    term: "Cooked Yield %",
+    full_name: "Usable Cooked Yield",
+    category: "pit",
+    category_label: "🔥 Pit & Smoker",
+    definition: "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
+    how_it_helps: "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+  },
+  "Shrinkage": {
+    term: "Shrinkage",
+    full_name: "Smokehouse Cooking Shrinkage",
+    category: "pit",
+    category_label: "🔥 Pit & Smoker",
+    definition: "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
+    how_it_helps: "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+  },
+  "COGS": {
+    term: "COGS",
+    full_name: "Cost of Goods Sold",
+    category: "cost",
+    category_label: "💰 Profit & Costs",
+    definition: "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
+    how_it_helps: "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+  },
+  "Food Cost %": {
+    term: "Food Cost %",
+    full_name: "Food Cost Percentage",
+    category: "cost",
+    category_label: "💰 Profit & Costs",
+    definition: "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
+    how_it_helps: "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+  },
+  "Gross Margin %": {
+    term: "Gross Margin %",
+    full_name: "Gross Profit Margin",
+    category: "cost",
+    category_label: "💰 Profit & Costs",
+    definition: "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
+    how_it_helps: "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
+  }
+};
+
+function getGlossaryData() {
+  const remoteGlossary = window.BBQ_PAYLOADS?.quick_wind_alerts?.glossary_terms;
+  if (remoteGlossary && typeof remoteGlossary === 'object') {
+    const merged = { ...BUILTIN_ANALYTIC_GLOSSARY };
+    Object.keys(remoteGlossary).forEach(key => {
+      merged[key] = {
+        ...merged[key],
+        ...remoteGlossary[key]
+      };
+    });
+    return merged;
+  }
+  return BUILTIN_ANALYTIC_GLOSSARY;
+}
+
+function openTermExplainer(termKey) {
+  const drawer = document.getElementById('term-explainer-drawer');
+  if (!drawer) return;
+
+  const glossary = getGlossaryData();
+  const info = glossary[termKey] || Object.values(glossary).find(g => g.term.toLowerCase() === termKey.toLowerCase());
+
+  if (!info) return;
+
+  const nameEl = document.getElementById('term-drawer-name');
+  const fullEl = document.getElementById('term-drawer-fullname');
+  const defEl = document.getElementById('term-drawer-def');
+  const helpEl = document.getElementById('term-drawer-help-text');
+
+  if (nameEl) nameEl.textContent = info.term;
+  if (fullEl) fullEl.textContent = info.full_name ? `(${info.full_name})` : '';
+  if (defEl) defEl.textContent = info.definition;
+  if (helpEl) helpEl.textContent = info.how_it_helps;
+
+  drawer.style.display = 'block';
+  drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeTermExplainer() {
+  const drawer = document.getElementById('term-explainer-drawer');
+  if (drawer) {
+    drawer.style.display = 'none';
+  }
+}
+
+function renderDailyRandomInsight(forceNewIndex = false) {
+  const textEl = document.getElementById('daily-random-insight-text');
+  const titleEl = document.getElementById('daily-random-insight-title');
+  const catEl = document.getElementById('daily-random-insight-cat');
+  const impactEl = document.getElementById('daily-random-insight-impact');
+  const evidenceEl = document.getElementById('daily-random-insight-evidence');
+  const proofEl = document.getElementById('daily-random-insight-proof');
+  const actionEl = document.getElementById('daily-random-insight-action');
+  const termsGroup = document.getElementById('daily-random-insight-terms');
+  const counterEl = document.getElementById('daily-insight-counter');
+
+  if (!textEl) return;
+
+  const mlInsightsList = window.BBQ_PAYLOADS?.ml_insights?.insights;
+  const hasML = Array.isArray(mlInsightsList) && mlInsightsList.length > 0;
+  const poolLength = hasML ? mlInsightsList.length : RANDOM_SMOKEHOUSE_INSIGHTS.length;
+
+  if (forceNewIndex || _currentRandomInsightIndex === -1) {
+    let nextIdx;
+    do {
+      nextIdx = Math.floor(Math.random() * poolLength);
+    } while (nextIdx === _currentRandomInsightIndex && poolLength > 1);
+    _currentRandomInsightIndex = nextIdx;
+  }
+
+  if (hasML) {
+    const item = mlInsightsList[_currentRandomInsightIndex];
+    if (titleEl) titleEl.textContent = item.title || 'Data-Mined Smokehouse Insight';
+    if (catEl) catEl.textContent = item.category_label || '⭐ Profitability Mining';
+    if (impactEl) {
+      if (item.impact_usd) {
+        impactEl.textContent = `+$${item.impact_usd.toFixed(0)}/wk Impact`;
+        impactEl.style.display = 'inline-block';
+      } else {
+        impactEl.style.display = 'none';
+      }
+    }
+    textEl.textContent = `"${item.insight}"`;
+
+    if (evidenceEl) evidenceEl.textContent = item.evidence || 'Repository Multimodal Intelligence Engine';
+    if (proofEl) proofEl.textContent = item.quantitative_proof || 'Statistically verified against Clover POS & US Foods invoices';
+    if (actionEl) actionEl.textContent = item.actionable_recommendation || 'Maintain standard operating procedures';
+
+    if (termsGroup) {
+      const terms = Array.isArray(item.terms) ? item.terms : ['COGS', 'PAR Level'];
+      termsGroup.innerHTML = terms.map(t => `
+        <button type="button" class="term-pill-btn" data-term="${t}" aria-label="Explain term ${t}">
+          ${t} <span aria-hidden="true">ℹ️</span>
+        </button>
+      `).join('');
+
+      termsGroup.querySelectorAll('.term-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.getAttribute('data-term');
+          if (t) openTermExplainer(t);
+        });
+      });
+    }
+
+    if (counterEl) counterEl.textContent = `Insight ${_currentRandomInsightIndex + 1} of ${poolLength}`;
+  } else {
+    // Clean fallback to offline quotes
+    textEl.textContent = `"${RANDOM_SMOKEHOUSE_INSIGHTS[_currentRandomInsightIndex]}"`;
+    if (titleEl) titleEl.textContent = 'Traditional Smokehouse Wisdom';
+    if (catEl) catEl.textContent = '💡 Pit Guidance';
+    if (impactEl) impactEl.style.display = 'none';
+    if (evidenceEl) evidenceEl.textContent = 'Yellow Rose BBQ Standard Operating Procedures';
+    if (proofEl) proofEl.textContent = 'Daily pitmaster best practices';
+    if (actionEl) actionEl.textContent = 'Apply during shift prep and carving.';
+    if (counterEl) counterEl.textContent = `Insight ${_currentRandomInsightIndex + 1} of ${poolLength}`;
+  }
+}
+
+function renderQuickWindBanner() {
+  const banner = document.getElementById('daily-quick-wind-banner');
+  if (!banner) return;
+
+  const qwPayload = window.BBQ_PAYLOADS?.quick_wind_alerts;
+  if (!qwPayload) return;
+
+  const active = qwPayload.active_alert;
+  if (!active) return;
+
+  const badgeEl = document.getElementById('qw-severity-badge');
+  const timeEl = document.getElementById('qw-timestamp');
+  const headlineEl = document.getElementById('qw-headline');
+  const presentEl = document.getElementById('qw-present-text');
+  const causeEl = document.getElementById('qw-cause-text');
+  const actionEl = document.getElementById('qw-action-text');
+  const metricsBar = document.getElementById('qw-metrics-bar');
+
+  if (badgeEl) {
+    badgeEl.textContent = active.severity_badge || '⚡ Live Clover Scan';
+    badgeEl.className = `qw-badge qw-badge-${active.severity || 'info'}`;
+  }
+
+  if (timeEl) {
+    timeEl.textContent = active.hour_formatted ? `Hour ${active.hour_formatted} Clover Scan` : 'Live Scan Active';
+  }
+
+  if (headlineEl) headlineEl.textContent = active.headline || 'Operating Within Normal Historical Ranges';
+  if (presentEl) presentEl.textContent = active.immediate_present_status || 'Kitchen line and counter are operating nominally.';
+  if (causeEl) causeEl.textContent = active.causal_explanation || 'Foot traffic tracking typical hourly curves.';
+  if (actionEl) actionEl.textContent = active.recommended_pit_action || 'Continue standard holding and carving pacing.';
+
+  if (metricsBar && active.velocity_metrics) {
+    const m = active.velocity_metrics;
+    const pills = [];
+
+    if (m.actual_orders !== undefined && m.expected_orders !== undefined) {
+      pills.push(`
+        <span class="qw-metric-pill">Orders/hr: <strong>${m.actual_orders}</strong> (exp ${m.expected_orders})</span>
+      `);
+    }
+    if (m.actual_sales !== undefined && m.expected_sales !== undefined) {
+      pills.push(`
+        <span class="qw-metric-pill">Sales/hr: <strong>$${m.actual_sales.toFixed(0)}</strong> (exp $${m.expected_sales.toFixed(0)})</span>
+      `);
+    }
+    if (m.aov !== undefined) {
+      pills.push(`
+        <span class="qw-metric-pill">AOV: <strong>$${m.aov.toFixed(2)}</strong></span>
+      `);
+    }
+    if (m.z_score !== undefined) {
+      pills.push(`
+        <span class="qw-metric-pill">Z-Score: <strong>${m.z_score > 0 ? '+' : ''}${m.z_score.toFixed(2)}</strong></span>
+      `);
+    }
+    if (m.temperature_f !== undefined) {
+      pills.push(`
+        <span class="qw-metric-pill">Temp: <strong>${m.temperature_f.toFixed(0)}°F</strong></span>
+      `);
+    }
+    metricsBar.innerHTML = pills.join('');
+  }
+
+  // Populate recent alerts list
+  const recentListEl = document.getElementById('qw-recent-alerts-list');
+  if (recentListEl && Array.isArray(qwPayload.recent_alerts)) {
+    recentListEl.innerHTML = qwPayload.recent_alerts.map(a => `
+      <div class="qw-recent-item">
+        <span class="qw-recent-headline">${a.severity_badge || '⚡'}: ${a.headline}</span>
+        <span class="qw-recent-meta">${a.date || ''} ${a.hour_formatted || ''}</span>
+      </div>
+    `).join('');
+  }
+}
+
+function renderAnalyticsGlossary(filterCat = 'all') {
+  const grid = document.getElementById('glossary-card-grid');
+  if (!grid) return;
+
+  const glossary = getGlossaryData();
+  const entries = Object.values(glossary);
+
+  const filtered = filterCat === 'all'
+    ? entries
+    : entries.filter(e => {
+        if (filterCat === 'cost') return ['cost'].includes(e.category);
+        if (filterCat === 'pit') return ['pit'].includes(e.category);
+        if (filterCat === 'volume') return ['volume'].includes(e.category);
+        return true;
+      });
+
+  grid.innerHTML = filtered.map(item => `
+    <div class="glossary-card" data-cat="${item.category || 'general'}">
+      <div class="glossary-card-top">
+        <div>
+          <h4 class="glossary-term-title">${item.term}</h4>
+          ${item.full_name ? `<span class="glossary-term-full">${item.full_name}</span>` : ''}
+        </div>
+        <span class="glossary-term-badge">${item.category_label || 'Metric'}</span>
+      </div>
+      <div class="glossary-block">
+        <strong>📖 What It Means:</strong>
+        <p>${item.definition}</p>
+      </div>
+      <div class="glossary-block help-block">
+        <strong>💡 How It Helps Your Pit:</strong>
+        <p>${item.how_it_helps}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDaySpecificTipsSummary(matchedRecord, brief, isNextServicePreview) {
+  const titleEl = document.getElementById('daily-day-tips-title');
+  const badgeEl = document.getElementById('daily-day-badge');
+  const summaryEl = document.getElementById('daily-day-tips-summary');
+  const focusTagEl = document.getElementById('daily-day-focus-tag');
+  const rushSubtextEl = document.getElementById('daily-day-rush-subtext');
+
+  if (!summaryEl) return;
+
+  const shortDay = isNextServicePreview
+    ? (brief?.day_name || 'Tue')
+    : (matchedRecord?.day_name || (brief?.is_closed ? 'Mon' : (brief?.day_name || 'Tue')));
+  const info = DAY_SPECIFIC_TIPS_MAP[shortDay] || DAY_SPECIFIC_TIPS_MAP['Tue'];
+
+  if (titleEl) {
+    titleEl.textContent = isNextServicePreview
+      ? `Monday Maintenance (Previewing ${info.day_name}'s Open)`
+      : `${info.day_name} Operational Summary & Tips`;
+  }
+  if (badgeEl) {
+    if (isNextServicePreview) {
+      badgeEl.textContent = `Preview: ${info.day_name} Service`;
+      badgeEl.className = 'day-badge-pill';
+    } else if (shortDay === 'Mon') {
+      badgeEl.textContent = 'Monday Closed';
+      badgeEl.className = 'day-badge-pill';
+    } else {
+      badgeEl.textContent = info.badge;
+      badgeEl.className = 'day-badge-pill';
+    }
+  }
+  if (summaryEl) {
+    if (isNextServicePreview) {
+      summaryEl.innerHTML = `<strong>Today is Monday (Pit Cold &amp; Maintenance).</strong> Previewing opening service for <strong>${info.day_name}</strong>: ${info.summary}`;
+    } else {
+      summaryEl.textContent = info.summary;
+    }
+  }
+  if (focusTagEl) focusTagEl.textContent = info.focus;
+  if (rushSubtextEl) rushSubtextEl.textContent = info.rush_window;
+}
+
+function renderTenWatchlistTips(filterCat = 'all', matchedRecord = null, brief = null, isNextServicePreview = false) {
+  const container = document.getElementById('ten-tips-container');
+  if (!container) return;
+
+  const tips = getTenWatchlistTips(matchedRecord, brief, isNextServicePreview);
+  const filtered = filterCat === 'all' ? tips : tips.filter(t => t.cat === filterCat);
+
+  container.innerHTML = filtered.map(t => {
+    const colonIdx = t.pit_check.indexOf(':');
+    const checkLabel = colonIdx !== -1 ? t.pit_check.substring(0, colonIdx) : 'Pit Check';
+    const checkVal = colonIdx !== -1 ? t.pit_check.substring(colonIdx + 1) : t.pit_check;
+
+    return `
+      <div class="ten-tip-card cat-${t.cat}" data-cat="${t.cat}">
+        <div class="tip-card-top">
+          <div class="tip-meta-wrap">
+            <span class="tip-number-badge">${t.id}</span>
+            <span class="tip-cat-badge cat-${t.cat}">${t.cat_label}</span>
+          </div>
+          <span class="tip-importance-badge">${t.importance}</span>
+        </div>
+        <h4 class="tip-title">${t.title}</h4>
+        <p class="tip-desc">${t.desc}</p>
+        <div class="tip-action-box">
+          <strong>${checkLabel}:</strong>${checkVal}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updateDailyPitIntelligence(matchedRecord, brief, isNextServicePreview) {
+  _lastMatchedRecord = matchedRecord;
+  _lastBrief = brief;
+  _lastIsNextServicePreview = isNextServicePreview;
+
+  renderQuickWindBanner();
+  renderDailyRandomInsight(false);
+  renderDaySpecificTipsSummary(matchedRecord, brief, isNextServicePreview);
+  renderTenWatchlistTips(_currentTipsFilter, matchedRecord, brief, isNextServicePreview);
+  renderAnalyticsGlossary(_currentGlossaryFilter);
+}
+
+function initDailyPitIntelligence() {
+  const rerollBtn = document.getElementById('btn-reroll-insight');
+  if (rerollBtn && !rerollBtn._hasListener) {
+    rerollBtn._hasListener = true;
+    rerollBtn.addEventListener('click', () => {
+      renderDailyRandomInsight(true);
+    });
+  }
+
+  // Quick-Wind Recent Alerts Drawer toggle
+  const toggleRecentBtn = document.getElementById('btn-toggle-recent-alerts');
+  const recentDrawer = document.getElementById('qw-recent-alerts-drawer');
+  const recentArrow = document.getElementById('qw-recent-arrow');
+  if (toggleRecentBtn && !toggleRecentBtn._hasListener) {
+    toggleRecentBtn._hasListener = true;
+    toggleRecentBtn.addEventListener('click', () => {
+      _isRecentAlertsExpanded = !_isRecentAlertsExpanded;
+      if (recentDrawer) recentDrawer.style.display = _isRecentAlertsExpanded ? 'block' : 'none';
+      toggleRecentBtn.setAttribute('aria-expanded', _isRecentAlertsExpanded ? 'true' : 'false');
+      if (recentArrow) recentArrow.textContent = _isRecentAlertsExpanded ? '▲' : '▼';
+    });
+  }
+
+  // 10 Tips Category Filters
+  const filterBtns = document.querySelectorAll('.tip-filter-btn');
+  filterBtns.forEach(btn => {
+    if (!btn._hasListener) {
+      btn._hasListener = true;
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        _currentTipsFilter = btn.getAttribute('data-filter') || 'all';
+        renderTenWatchlistTips(_currentTipsFilter, _lastMatchedRecord, _lastBrief, _lastIsNextServicePreview);
+      });
+    }
+  });
+
+  // 10 Tips Collapse Toggle
+  const toggleBtn = document.getElementById('btn-toggle-tips-collapse');
+  const container = document.getElementById('ten-tips-container');
+  const toggleText = document.getElementById('toggle-tips-text');
+  const toggleArrow = document.getElementById('toggle-tips-arrow');
+
+  if (toggleBtn && !toggleBtn._hasListener) {
+    toggleBtn._hasListener = true;
+    toggleBtn.addEventListener('click', () => {
+      _isTipsCollapsed = !_isTipsCollapsed;
+      if (container) container.classList.toggle('collapsed', _isTipsCollapsed);
+      toggleBtn.setAttribute('aria-expanded', _isTipsCollapsed ? 'false' : 'true');
+      if (toggleText) toggleText.textContent = _isTipsCollapsed ? 'Expand 10 Tips' : 'Collapse Tips';
+      if (toggleArrow) toggleArrow.textContent = _isTipsCollapsed ? '▼' : '▲';
+    });
+  }
+
+  // Glossary Category Filters
+  const glossaryCatBtns = document.querySelectorAll('.glossary-cat-btn');
+  glossaryCatBtns.forEach(btn => {
+    if (!btn._hasListener) {
+      btn._hasListener = true;
+      btn.addEventListener('click', () => {
+        glossaryCatBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        _currentGlossaryFilter = btn.getAttribute('data-cat') || 'all';
+        renderAnalyticsGlossary(_currentGlossaryFilter);
+      });
+    }
+  });
+
+  // Glossary Collapse Toggle
+  const toggleGlossaryBtn = document.getElementById('btn-toggle-glossary');
+  const glossaryGrid = document.getElementById('glossary-card-grid');
+  const toggleGlossaryText = document.getElementById('toggle-glossary-text');
+  const toggleGlossaryArrow = document.getElementById('toggle-glossary-arrow');
+
+  if (toggleGlossaryBtn && !toggleGlossaryBtn._hasListener) {
+    toggleGlossaryBtn._hasListener = true;
+    toggleGlossaryBtn.addEventListener('click', () => {
+      _isGlossaryCollapsed = !_isGlossaryCollapsed;
+      if (glossaryGrid) glossaryGrid.classList.toggle('collapsed', _isGlossaryCollapsed);
+      toggleGlossaryBtn.setAttribute('aria-expanded', _isGlossaryCollapsed ? 'false' : 'true');
+      if (toggleGlossaryText) toggleGlossaryText.textContent = _isGlossaryCollapsed ? 'Expand Guide' : 'Collapse Guide';
+      if (toggleGlossaryArrow) toggleGlossaryArrow.textContent = _isGlossaryCollapsed ? '▼' : '▲';
+    });
+  }
+
+  // Close Term Explainer Drawer
+  const closeTermBtn = document.getElementById('btn-close-term-drawer');
+  if (closeTermBtn && !closeTermBtn._hasListener) {
+    closeTermBtn._hasListener = true;
+    closeTermBtn.addEventListener('click', closeTermExplainer);
+  }
+
+  updateDailyPitIntelligence(_lastMatchedRecord, _lastBrief, _lastIsNextServicePreview);
 }
 
 function renderKPIBulletAndSparklines(slicedRecords, matchedRecord) {

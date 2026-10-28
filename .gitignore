@@ -30,7 +30,9 @@ clover_api/data/*.csv
 # Analytics Artifacts
 clover_api/analytics/*.png
 clover_api/analytics/*.html
+clover_api/analytics/*.log
 !clover_api/analytics/*.json
+clover_api/analytics/telegram_state.json
 
 # Testing & Node
 node_modules/

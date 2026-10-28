@@ -37,6 +37,8 @@ jobs:
         env:
           CLOVER_MERCHANT_ID: ${{ secrets.CLOVER_MERCHANT_ID }}
           CLOVER_API_KEY: ${{ secrets.CLOVER_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           echo "Ingesting POS transactions..."
           python clover_api/ingest.py
@@ -58,9 +60,18 @@ jobs:
           python clover_api/analytics/advanced_analytics.py
           python scripts/update_predictive_cache.py
           
+          echo "Running Multimodal ML Data Intelligence Engine..."
+          python scripts/ml_data_intelligence_engine.py
+          
+          echo "Scanning Hourly Clover Turnover for Quick-Wind Events..."
+          python scripts/hourly_quick_wind_detector.py
+          
           echo "Building javascript payloads and sync status..."
           python clover_api/analytics/build_payloads.py
           python -c "import json, datetime, os; p = json.load(open('clover_api/analytics/predictive_payload.json')) if os.path.exists('clover_api/analytics/predictive_payload.json') else {}; sk = p.get('summary_kpis', {}); cogs = sk.get('estimated_24h_cogs_usd', 0); staff = sk.get('recommended_staff', 0); hours = sk.get('pitmaster_hours', 0); fc = sk.get('estimated_food_cost_pct', 29.5); msg = f'COGS: ${cogs:,.2f} ({fc}%) | Labor: {staff} crew ({hours}h)'; status = {'last_synced_at': datetime.datetime.now().isoformat(), 'status': 'success', 'message': msg, 'next_scheduled_sync': 'Hourly via GitHub Actions'}; os.makedirs('clover_api/analytics', exist_ok=True); os.makedirs('analytics', exist_ok=True); open('clover_api/analytics/sync_status.json', 'w').write(json.dumps(status, indent=2)); open('analytics/sync_status.json', 'w').write(json.dumps(status, indent=2))"
+
+          echo "Dispatching Automated Smokehouse Telegram Intelligence..."
+          python scripts/telegram_dispatcher.py --auto || true
 
       - name: Commit and push changes
         run: |

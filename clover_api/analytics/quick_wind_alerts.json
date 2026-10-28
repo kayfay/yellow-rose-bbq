@@ -1,0 +1,230 @@
+{
+  "generated_at": "2026-10-28T16:00:01.825963-04:00",
+  "total_alerts_detected": 18,
+  "active_alert": {
+    "alert_id": "qw-aov-2026-10-26-8",
+    "date": "2026-10-26",
+    "hour": 8,
+    "hour_formatted": "08:00",
+    "event_type": "ticket_spike",
+    "severity": "surge",
+    "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+    "headline": "Large Group / Catering Ticket Spike (AOV $915.76 vs $28.50 Normal)",
+    "immediate_present_status": "Counter ticket size jumped to $915.76/order (+3113% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+    "causal_explanation": "Large office/family group orders concentrated in the 08:00 window. While ticket volume (1 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+    "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+    "velocity_metrics": {
+      "actual_sales": 915.76,
+      "expected_sales": 500.0,
+      "actual_orders": 1,
+      "expected_orders": 12.0,
+      "aov": 915.76,
+      "baseline_aov": 28.5,
+      "z_score": 2.77
+    },
+    "terms": [
+      "AOV",
+      "Meat Draw",
+      "PAR Level",
+      "Cooked Yield %"
+    ]
+  },
+  "recent_alerts": [
+    {
+      "alert_id": "qw-aov-2026-10-23-18",
+      "date": "2026-10-23",
+      "hour": 18,
+      "hour_formatted": "18:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $79.78 vs $49.88 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $79.78/order (+60% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 18:00 window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 957.42,
+        "expected_sales": 740.56,
+        "actual_orders": 12,
+        "expected_orders": 14.8,
+        "aov": 79.78,
+        "baseline_aov": 49.88,
+        "z_score": 0.93
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-10-24-11",
+      "date": "2026-10-24",
+      "hour": 11,
+      "hour_formatted": "11:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $72.64 vs $53.11 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $72.64/order (+37% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 11:00 window. While ticket volume (8 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 581.08,
+        "expected_sales": 706.73,
+        "actual_orders": 8,
+        "expected_orders": 13.3,
+        "aov": 72.64,
+        "baseline_aov": 53.11,
+        "z_score": -0.39
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-10-24-15",
+      "date": "2026-10-24",
+      "hour": 15,
+      "hour_formatted": "15:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $50.82 vs $63.50 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $50.82/order (+-20% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 15:00 window. While ticket volume (11 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 558.98,
+        "expected_sales": 762.03,
+        "actual_orders": 11,
+        "expected_orders": 12,
+        "aov": 50.82,
+        "baseline_aov": 63.5,
+        "z_score": -0.35
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-10-24-17",
+      "date": "2026-10-24",
+      "hour": 17,
+      "hour_formatted": "17:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $48.99 vs $53.07 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $48.99/order (+-8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 17:00 window. While ticket volume (17 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 832.78,
+        "expected_sales": 779.67,
+        "actual_orders": 17,
+        "expected_orders": 14.7,
+        "aov": 48.99,
+        "baseline_aov": 53.07,
+        "z_score": 0.16
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-10-26-8",
+      "date": "2026-10-26",
+      "hour": 8,
+      "hour_formatted": "08:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $915.76 vs $28.50 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $915.76/order (+3113% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 08:00 window. While ticket volume (1 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 915.76,
+        "expected_sales": 500.0,
+        "actual_orders": 1,
+        "expected_orders": 12.0,
+        "aov": 915.76,
+        "baseline_aov": 28.5,
+        "z_score": 2.77
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    }
+  ],
+  "glossary_terms": {
+    "PAR Level": {
+      "term": "PAR Level",
+      "full_name": "Periodic Automatic Replenishment",
+      "definition": "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
+      "how_it_helps": "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+    },
+    "AOV": {
+      "term": "AOV",
+      "full_name": "Average Order Value",
+      "definition": "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
+      "how_it_helps": "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+    },
+    "Z-Score": {
+      "term": "Z-Score",
+      "full_name": "Standard Score",
+      "definition": "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
+      "how_it_helps": "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+    },
+    "Meat Draw": {
+      "term": "Meat Draw",
+      "full_name": "Burn Rate / Carve Velocity",
+      "definition": "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140\u00b0F holding cabinet to fulfill guest trays.",
+      "how_it_helps": "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+    },
+    "Cooked Yield %": {
+      "term": "Cooked Yield %",
+      "full_name": "Usable Cooked Yield",
+      "definition": "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
+      "how_it_helps": "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+    },
+    "Shrinkage": {
+      "term": "Shrinkage",
+      "full_name": "Smokehouse Cooking Shrinkage",
+      "definition": "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
+      "how_it_helps": "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+    },
+    "COGS": {
+      "term": "COGS",
+      "full_name": "Cost of Goods Sold",
+      "definition": "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
+      "how_it_helps": "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+    },
+    "Food Cost %": {
+      "term": "Food Cost %",
+      "full_name": "Food Cost Percentage",
+      "definition": "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
+      "how_it_helps": "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+    },
+    "Gross Margin %": {
+      "term": "Gross Margin %",
+      "full_name": "Gross Profit Margin",
+      "definition": "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
+      "how_it_helps": "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
+    }
+  }
+}

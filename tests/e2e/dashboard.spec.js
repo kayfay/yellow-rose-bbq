@@ -168,5 +168,164 @@ test.describe('Dashboard Verification', () => {
     expect(demandText.toLowerCase()).toContain('closed');
   });
 
+  test('Daily Pitmaster Intelligence: Random Insight, Day Summary, and 10 Watchlist Tips', async ({ page }) => {
+    await page.goto('/#forecasting');
+    await expect(page.locator('#tab-forecasting-analytics')).toBeVisible();
+
+    // 1. Random Insight of the Day
+    const randomTextLocator = page.locator('#daily-random-insight-text');
+    await expect(randomTextLocator).toBeVisible();
+    const initialInsight = await randomTextLocator.textContent();
+    expect(initialInsight.trim().length).toBeGreaterThan(15);
+
+    // Re-roll button test
+    const rerollBtn = page.locator('#btn-reroll-insight');
+    await expect(rerollBtn).toBeVisible();
+    await rerollBtn.click();
+    await page.waitForTimeout(200);
+    const newInsight = await randomTextLocator.textContent();
+    expect(newInsight.trim().length).toBeGreaterThan(15);
+
+    // 2. Day-Specific Tips Summary
+    const daySummaryLocator = page.locator('#daily-day-tips-summary');
+    await expect(daySummaryLocator).toBeVisible();
+    const daySummaryText = await daySummaryLocator.textContent();
+    expect(daySummaryText.trim().length).toBeGreaterThan(20);
+
+    // Switch to Saturday preset and verify day summary updates
+    await page.click('#btn-preset-saturday');
+    await page.waitForTimeout(300);
+    const satSummary = await daySummaryLocator.textContent();
+    expect(satSummary.toLowerCase()).toContain('saturday');
+
+    // 3. 10 Watchlist Tips (Weather, Day Dynamics, Pit Line)
+    const tipCards = page.locator('#ten-tips-container .ten-tip-card');
+    await expect(tipCards).toHaveCount(10);
+
+    // Filter: Weather (should be 3)
+    await page.click('#btn-filter-tips-weather');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#ten-tips-container .ten-tip-card')).toHaveCount(3);
+
+    // Filter: Day Dynamics (should be 3)
+    await page.click('#btn-filter-tips-day');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#ten-tips-container .ten-tip-card')).toHaveCount(3);
+
+    // Filter: Pit Watchlist (should be 4)
+    await page.click('#btn-filter-tips-pit');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#ten-tips-container .ten-tip-card')).toHaveCount(4);
+
+    // Filter: All (should be 10)
+    await page.click('#btn-filter-tips-all');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#ten-tips-container .ten-tip-card')).toHaveCount(10);
+
+    // Collapse and Expand toggle test
+    const collapseBtn = page.locator('#btn-toggle-tips-collapse');
+    await collapseBtn.click();
+    await expect(page.locator('#ten-tips-container')).toHaveClass(/collapsed/);
+    await collapseBtn.click();
+    await expect(page.locator('#ten-tips-container')).not.toHaveClass(/collapsed/);
+
+    // 4. ML Data Ground Truth Citations & Interactive Term Badges
+    const evidenceLocator = page.locator('#daily-random-insight-evidence');
+    await expect(evidenceLocator).toBeVisible();
+    const evidenceText = await evidenceLocator.textContent();
+    expect(evidenceText.length).toBeGreaterThan(5);
+
+    const proofLocator = page.locator('#daily-random-insight-proof');
+    await expect(proofLocator).toBeVisible();
+
+    const catBadgeLocator = page.locator('#daily-random-insight-cat');
+    await expect(catBadgeLocator).toBeVisible();
+
+    // Click a term pill inside the insight card to open the in-place Term Explainer Drawer
+    const firstTermBtn = page.locator('#daily-random-insight-terms .term-pill-btn').first();
+    if (await firstTermBtn.count() > 0) {
+      await firstTermBtn.click();
+      const termDrawer = page.locator('#term-explainer-drawer');
+      await expect(termDrawer).toBeVisible();
+      const termDef = await page.locator('#term-drawer-def').textContent();
+      expect(termDef.trim().length).toBeGreaterThan(15);
+      const termHelp = await page.locator('#term-drawer-help-text').textContent();
+      expect(termHelp.trim().length).toBeGreaterThan(15);
+
+      // Close drawer
+      await page.click('#btn-close-term-drawer');
+      await expect(termDrawer).not.toBeVisible();
+    }
+
+    // 5. Real-Time Immediate Present Quick-Wind Scan Banner
+    const qwBanner = page.locator('#daily-quick-wind-banner');
+    await expect(qwBanner).toBeVisible();
+    await expect(page.locator('#qw-severity-badge')).toBeVisible();
+    await expect(page.locator('#qw-headline')).toBeVisible();
+
+    const presentStatus = await page.locator('#qw-present-text').textContent();
+    expect(presentStatus.trim().length).toBeGreaterThan(15);
+
+    const causeText = await page.locator('#qw-cause-text').textContent();
+    expect(causeText.trim().length).toBeGreaterThan(15);
+
+    const actionText = await page.locator('#qw-action-text').textContent();
+    expect(actionText.trim().length).toBeGreaterThan(15);
+
+    // Verify velocity metrics bar has pills
+    const metricPills = page.locator('#qw-metrics-bar .qw-metric-pill');
+    expect(await metricPills.count()).toBeGreaterThanOrEqual(2);
+
+    // Toggle recent alerts drawer
+    const recentAlertsToggle = page.locator('#btn-toggle-recent-alerts');
+    await recentAlertsToggle.click();
+    await expect(page.locator('#qw-recent-alerts-drawer')).toBeVisible();
+    await recentAlertsToggle.click();
+    await expect(page.locator('#qw-recent-alerts-drawer')).not.toBeVisible();
+
+    // 6. Pitmaster Analytics Glossary
+    const glossary = page.locator('#pitmaster-analytics-glossary');
+    await expect(glossary).toBeVisible();
+
+    const glossaryCards = page.locator('#glossary-card-grid .glossary-card');
+    await expect(glossaryCards).toHaveCount(9);
+
+    // Verify card content explains "What It Means" and "How It Helps Your Pit"
+    const firstCardText = await glossaryCards.first().textContent();
+    expect(firstCardText).toContain('What It Means');
+    expect(firstCardText).toContain('How It Helps Your Pit');
+
+    // Filter by Profit & Costs
+    await page.click('.glossary-cat-btn[data-cat="cost"]');
+    await page.waitForTimeout(200);
+    const costCards = page.locator('#glossary-card-grid .glossary-card');
+    await expect(costCards).toHaveCount(3); // COGS, Food Cost %, Gross Margin %
+
+    // Filter by Pit & Smoker
+    await page.click('.glossary-cat-btn[data-cat="pit"]');
+    await page.waitForTimeout(200);
+    const pitCards = page.locator('#glossary-card-grid .glossary-card');
+    await expect(pitCards).toHaveCount(4); // PAR Level, Meat Draw, Cooked Yield %, Shrinkage
+
+    // Filter by Volume & Math
+    await page.click('.glossary-cat-btn[data-cat="volume"]');
+    await page.waitForTimeout(200);
+    const volCards = page.locator('#glossary-card-grid .glossary-card');
+    await expect(volCards).toHaveCount(2); // AOV, Z-Score
+
+    // Reset to all
+    await page.click('.glossary-cat-btn[data-cat="all"]');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#glossary-card-grid .glossary-card')).toHaveCount(9);
+
+    // Toggle collapse on glossary
+    const toggleGlossaryBtn = page.locator('#btn-toggle-glossary');
+    await toggleGlossaryBtn.click();
+    await expect(page.locator('#glossary-card-grid')).toHaveClass(/collapsed/);
+    await toggleGlossaryBtn.click();
+    await expect(page.locator('#glossary-card-grid')).not.toHaveClass(/collapsed/);
+  });
+
 });
+
 

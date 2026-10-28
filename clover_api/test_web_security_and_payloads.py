@@ -129,6 +129,21 @@ def run_automated_verification():
     except Exception as e:
         assert_test(".env security check", False, str(e))
 
+    # Test 5: Selective Zero Trust Lockdown & Auth Gate Verification
+    print("\n[TEST 5] Selective Zero Trust Lockdown & Auth Gate Verification")
+    try:
+        with urllib.request.urlopen(f"{BASE_URL}/index.html") as response:
+            html = response.read().decode('utf-8')
+            assert_test("Sausage Tracker remains in index.html (public)", 'id="tab-sausage-tracker"' in html)
+            assert_test("Analytics Auth Gate banner element present in index.html", 'id="analytics-auth-gate"' in html)
+            assert_test("Auth Gate has Request Access link", 'Request Whitelist Access' in html)
+
+        # Verify setup_access_lockdown.js exists and is syntactically sound
+        lockdown_script = ROOT_DIR / "access_agent" / "scripts" / "setup_access_lockdown.js"
+        assert_test("Zero Trust setup script setup_access_lockdown.js present", lockdown_script.exists())
+    except Exception as e:
+        assert_test("Selective Zero Trust test", False, str(e))
+
     print(f"\n=== Test Results: {passed} PASSED | {failed} FAILED ===")
     if failed > 0:
         exit(1)

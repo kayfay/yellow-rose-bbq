@@ -27393,7 +27393,7 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-10-28": {
-      "captured_at": "2026-10-28T14:00:05.942711-04:00",
+      "captured_at": "2026-10-28T17:02:09.444876-04:00",
       "hourly_forecast": [
         {
           "hour": 14,
@@ -27449,9 +27449,9 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-10-26T22:10:36-04:00",
+    "generated_at": "2026-10-27T19:54:53-04:00",
     "timezone": "America/New_York",
-    "today_date": "2026-10-26",
+    "today_date": "2026-10-27",
     "active_service_brief": {
       "date": "2026-10-27",
       "day_name": "Tue",
@@ -29266,6 +29266,431 @@ window.BBQ_PAYLOADS = {
           "estimated_meat_cost_usd": 0,
           "left_after_meat_cost_usd": 0
         }
+      }
+    }
+  },
+  "ml_insights": {
+    "generated_at": "2026-10-26T21:42:20.571855-04:00",
+    "total_insights_mined": 11,
+    "data_sources_analyzed": [
+      "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
+      "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
+      "data/Review order detail_*.csv (Confirmed US Foods Invoices)",
+      "yellow_rose_menu_picture.jpg (Live Restaurant Menu Board)",
+      "strategy_infographic.jpg (Midweek Revenue Playbook)",
+      "OPERATIONAL_QUESTIONNAIRE.md (Pit Limits, Shifts & Composite Weights)",
+      "STAFF_ROSTER.md (Operational Staff Roster & Station Responsibilities)",
+      "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md",
+      "clover_api/analytics/historical_payload.json (89 Days Historical POS)",
+      "clover_api/analytics/hourly_actuals.json (80 Days Verified Turnover)",
+      "clover_api/analytics/weather_payload.json (Open-Meteo Weather Model)"
+    ],
+    "insights": [
+      {
+        "id": 101,
+        "title": "High-Profit Anchor: Banana Pudding Catering Tray (12.9% Food Cost)",
+        "category": "profitability",
+        "category_label": "\u2b50 Profitability Mining",
+        "insight": "Machine learning clustering ranks Banana Pudding Catering Tray in the highest profitability tier ('Super Star'): delivering $39.20 in gross profit on a $45.00 ticket with only 12.9% food cost.",
+        "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier COGS Model",
+        "quantitative_proof": "$39.20 profit (87.1% margin) vs 29.5% kitchen average",
+        "actionable_recommendation": "Train counter staff to actively recommend Banana Pudding Catering Tray and feature it on POS modifier quick-keys; every 10 incremental orders generates +$392.00 pure gross profit.",
+        "impact_usd": 588.0,
+        "terms": [
+          "COGS",
+          "Food Cost %",
+          "Gross Margin %",
+          "PAR Level"
+        ]
+      },
+      {
+        "id": 102,
+        "title": "Clover POS vs Menu Board Pricing Anomaly: Brisket Sandwich Margin Risk",
+        "category": "margin_anomaly",
+        "category_label": "\u26a0\ufe0f Pricing Disparity",
+        "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 portion COGS), severely compressing margin.",
+        "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
+        "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 variance)",
+        "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to restore effective gross margin above 68%.",
+        "impact_usd": 480.0,
+        "terms": [
+          "COGS",
+          "Food Cost %",
+          "AOV"
+        ]
+      },
+      {
+        "id": 103,
+        "title": "Midweek vs Weekend Revenue Gap: $64 Family Feast Playbook",
+        "category": "midweek_revenue",
+        "category_label": "\ud83d\udcc8 Revenue Strategy",
+        "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,773.31/day compared to $6,980.79 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
+        "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Historical Baseline",
+        "quantitative_proof": "Weekend $37,654 vs Midweek $6,719",
+        "actionable_recommendation": "Promote the $64 Family Feast Pack (1 lb brisket, 1/2 rack ribs, 2 sausage links, 3 sides) for early 2:00\u20134:30 PM pickup to capture suburban dinner commuters before evening pit cool-down.",
+        "impact_usd": 1750.0,
+        "terms": [
+          "AOV",
+          "PAR Level",
+          "Baseline"
+        ]
+      },
+      {
+        "id": 104,
+        "title": "Smoker Physical Limit: 24 Packer Briskets Max Capacity Ceiling",
+        "category": "pit_capacity",
+        "category_label": "\ud83d\udd25 Smoker Geometry",
+        "insight": "Physical pit constraints confirm maximum single-session smoker capacity is 24 briskets (14 packers in the big offset pit + 10 packers in the small pit). At nominal 14.0 lbs raw per packer, maximum raw brisket load is ~336 lbs (~134 lbs cooked yield at 40%), capping single-day retail brisket sales at ~$3,830.",
+        "evidence": "OPERATIONAL_QUESTIONNAIRE.md Section 3 (Smoker Constraints)",
+        "quantitative_proof": "14 big pit + 10 small pit = 24 briskets (336 lbs raw / 134.4 lbs cooked max)",
+        "actionable_recommendation": "When Saturday projected sales exceed $7,500, stagger the cook into dual smoking waves: Worker #1 fires wave 1 at 2:00 AM, allowing finished briskets to transfer into 145\u00b0F tallow hold by 2:00 PM while wave 2 loads.",
+        "impact_usd": 1200.0,
+        "terms": [
+          "Cooked Yield %",
+          "PAR Level",
+          "Tallow Rest"
+        ]
+      },
+      {
+        "id": 105,
+        "title": "Composite Recipe Draw: Crispy Quesa Tacos Pull 2.0 oz Brisket Point",
+        "category": "composite_draw",
+        "category_label": "\ud83c\udf2e Inventory Draw",
+        "insight": "Operational specification confirms each Crispy Quesa Taco utilizes exactly 2.0 oz of smoked meat, and each Quesadilla draws 4.0 oz. On peak gameday weekends where taco volume exceeds 45 units, composed items draw ~5.6 lbs of prime cooked brisket point.",
+        "evidence": "OPERATIONAL_QUESTIONNAIRE.md Section 5 (Composite Weights) & yellow_rose_bbq_cogs.csv",
+        "quantitative_proof": "2.0 oz meat/taco; 4.0 oz meat/quesadilla; $1.59 raw meat allocation per taco",
+        "actionable_recommendation": "Carve and shred two whole cooked brisket points into the taco steam-well at 11:30 AM before lunch rush; never carve into sliced flat reserves to fulfill composite taco orders.",
+        "impact_usd": 350.0,
+        "terms": [
+          "Meat Draw",
+          "COGS",
+          "PAR Level"
+        ]
+      },
+      {
+        "id": 106,
+        "title": "Precipitation Elasticity: +$97.37 Takeout Revenue Lift per mm Rain",
+        "category": "weather_elasticity",
+        "category_label": "\ud83c\udf27\ufe0f Weather Sensitivity",
+        "insight": "Multivariate regression analysis across 80 weather-matched operating days proves that moderate rainfall shifts counter volume into multi-pound takeout feasts, generating an average +$97.37/mm rain lift in high-ticket to-go family platters.",
+        "evidence": "weather_payload.json & Open-Meteo API Historical Weather Regression",
+        "quantitative_proof": "Coefficient +$97.37/mm rainfall; 0.5% average sales bump during rain vs clear days",
+        "actionable_recommendation": "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, and side cups by 10:30 AM to prevent packing bottlenecks at the counter.",
+        "impact_usd": 290.0,
+        "terms": [
+          "AOV",
+          "Regression",
+          "Baseline"
+        ]
+      },
+      {
+        "id": 107,
+        "title": "House Sausage Formulation: 70:30 Lean Beef to Fat Yield Economics",
+        "category": "sausage_economics",
+        "category_label": "\ud83c\udf2d Recipe Yield",
+        "insight": "The custom 50 lb sausage block standardizes on 35.0 lbs lean beef trimmings (sourced directly from brisket trim) and 15.0 lbs beef fat at a 70:30 ratio. Utilizing in-house trim yields a base portion link cost of only $1.25 against a $7.00 retail price (17.9% food cost).",
+        "evidence": "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md & wholesale_yields.csv",
+        "quantitative_proof": "$1.25 link cost / $7.00 retail = 82.1% gross margin (Super Star category)",
+        "actionable_recommendation": "Never discard clean brisket fat cap trimmings; freeze in 15-lb labeled lugs to supply daily sausage production without purchasing external commercial fat.",
+        "impact_usd": 420.0,
+        "terms": [
+          "Food Cost %",
+          "COGS",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "id": 108,
+        "title": "Dual-Rush Service Pacing: 12:00 PM Lunch vs 6:00 PM Evening Turnover",
+        "category": "rush_pacing",
+        "category_label": "\u23f1\ufe0f Hourly Velocity",
+        "insight": "Hourly POS turnover analysis reveals that 68% of operating daily revenue occurs in two concentrated 90-minute blocks: 12:00 PM \u2013 1:30 PM (lunch crowd, high sandwich/taco mix) and 5:30 PM \u2013 7:00 PM (dinner rush, high platter/rib mix).",
+        "evidence": "hourly_actuals.json (80 Days of Verified Clover Hourly Turnover)",
+        "quantitative_proof": "Peak lunch velocity averages 12\u201314 orders/hr; dinner rush averages 10\u201312 orders/hr",
+        "actionable_recommendation": "Stage Batch 2 pork spare ribs into the holding cabinet by 4:15 PM so the glaze sets and meats rest at 145\u00b0F prior to the 5:30 PM dinner surge.",
+        "impact_usd": 650.0,
+        "terms": [
+          "Velocity",
+          "PAR Level",
+          "Z-Score"
+        ]
+      },
+      {
+        "id": 109,
+        "title": "Outdoor Patio Capacity Threshold: 72\u00b0F\u201386\u00b0F Temperature Sweet Spot",
+        "category": "temperature_elasticity",
+        "category_label": "\u2600\ufe0f Patio Seating",
+        "insight": "Clover ticket timing correlated with daily high temperatures establishes that ambient temperatures between 72\u00b0F and 86\u00b0F expand restaurant capacity by +18\u201325% via outdoor picnic tables. Once temperatures breach 89\u00b0F, patio volume drops -22%.",
+        "evidence": "weather_payload.json (Regression Model temp_coef = 27.4)",
+        "quantitative_proof": "+$27.40 sales per degree within 72\u00b0F\u201386\u00b0F; sharp drop-off above 88.7\u00b0F",
+        "actionable_recommendation": "When afternoon temperatures are projected between 72\u00b0F and 85\u00b0F, stage outdoor bussing stations and assign one dedicated runner to maximize patio counter turnover.",
+        "impact_usd": 380.0,
+        "terms": [
+          "Baseline",
+          "AOV"
+        ]
+      },
+      {
+        "id": 110,
+        "title": "High-Ticket Texas Trays: King of the Hill ($145) & Pitmaster Platter ($54)",
+        "category": "tray_profitability",
+        "category_label": "\ud83c\udf7d\ufe0f Family Trays",
+        "insight": "Menu board analysis identifies the King of the Hill Platter ($145.00, feeds 6-9) and Bevo Platter ($79.00, feeds 4-6) as the highest dollar-margin items in the restaurant, generating over $55.00 net margin per tray while efficiently clearing mixed cut inventory.",
+        "evidence": "yellow_rose_menu_picture.jpg & yellow_rose_bbq_cogs.csv Category \ud83c\udf7d\ufe0f Combination Platters",
+        "quantitative_proof": "$55.40 gross profit on Bevo Platter (29.9% FC); $33.53 profit on Pitmaster Platter",
+        "actionable_recommendation": "Feature Texas Trays prominently on Friday and Saturday display boards; grouping mixed cuts into preset trays accelerates slicing block speed and guarantees even depletion of ribs, pork, and sausage.",
+        "impact_usd": 850.0,
+        "terms": [
+          "AOV",
+          "Gross Margin %",
+          "COGS"
+        ]
+      },
+      {
+        "id": 111,
+        "title": "Station Handoff Synchronization: Nick 7:00 PM Transit Handoff & Smoker Isolation",
+        "category": "operational_handoffs",
+        "category_label": "\ud83d\udc65 Shift Architecture",
+        "insight": "Ground-truth staffing records establish strict station invariants: Smoker Crew is dedicated strictly to Trevor, Max, and The Boss; neither Nick nor Freddy work on pits. Critical evening bottleneck occurs at 7:00 PM sharp when Nick departs for the bus, requiring Freddy to assume primary meat slicing block and grill lead while Elly commands closing expo.",
+        "evidence": "STAFF_ROSTER.md (Operational Staff Roster & Station Handoff Windows)",
+        "quantitative_proof": "7:00 PM transit departure handoff; 2:30 AM Trevor pit fire (<18% trim loss); 8:30 AM Jake kitchen open",
+        "actionable_recommendation": "Transition evening kitchen line prep to Freddy by 6:45 PM before Nick's 7:00 PM bus departure; ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 50.8% cooked yield.",
+        "impact_usd": 450.0,
+        "terms": [
+          "PAR Level",
+          "Meat Draw",
+          "Cooked Yield %"
+        ]
+      }
+    ]
+  },
+  "quick_wind_alerts": {
+    "generated_at": "2026-10-28T16:00:01.825963-04:00",
+    "total_alerts_detected": 18,
+    "active_alert": {
+      "alert_id": "qw-aov-2026-10-26-8",
+      "date": "2026-10-26",
+      "hour": 8,
+      "hour_formatted": "08:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $915.76 vs $28.50 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $915.76/order (+3113% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 08:00 window. While ticket volume (1 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 915.76,
+        "expected_sales": 500.0,
+        "actual_orders": 1,
+        "expected_orders": 12.0,
+        "aov": 915.76,
+        "baseline_aov": 28.5,
+        "z_score": 2.77
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    "recent_alerts": [
+      {
+        "alert_id": "qw-aov-2026-10-23-18",
+        "date": "2026-10-23",
+        "hour": 18,
+        "hour_formatted": "18:00",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (AOV $79.78 vs $49.88 Normal)",
+        "immediate_present_status": "Counter ticket size jumped to $79.78/order (+60% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 18:00 window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 957.42,
+          "expected_sales": 740.56,
+          "actual_orders": 12,
+          "expected_orders": 14.8,
+          "aov": 79.78,
+          "baseline_aov": 49.88,
+          "z_score": 0.93
+        },
+        "terms": [
+          "AOV",
+          "Meat Draw",
+          "PAR Level",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-10-24-11",
+        "date": "2026-10-24",
+        "hour": 11,
+        "hour_formatted": "11:00",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (AOV $72.64 vs $53.11 Normal)",
+        "immediate_present_status": "Counter ticket size jumped to $72.64/order (+37% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 11:00 window. While ticket volume (8 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 581.08,
+          "expected_sales": 706.73,
+          "actual_orders": 8,
+          "expected_orders": 13.3,
+          "aov": 72.64,
+          "baseline_aov": 53.11,
+          "z_score": -0.39
+        },
+        "terms": [
+          "AOV",
+          "Meat Draw",
+          "PAR Level",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-10-24-15",
+        "date": "2026-10-24",
+        "hour": 15,
+        "hour_formatted": "15:00",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (AOV $50.82 vs $63.50 Normal)",
+        "immediate_present_status": "Counter ticket size jumped to $50.82/order (+-20% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 15:00 window. While ticket volume (11 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 558.98,
+          "expected_sales": 762.03,
+          "actual_orders": 11,
+          "expected_orders": 12,
+          "aov": 50.82,
+          "baseline_aov": 63.5,
+          "z_score": -0.35
+        },
+        "terms": [
+          "AOV",
+          "Meat Draw",
+          "PAR Level",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-10-24-17",
+        "date": "2026-10-24",
+        "hour": 17,
+        "hour_formatted": "17:00",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (AOV $48.99 vs $53.07 Normal)",
+        "immediate_present_status": "Counter ticket size jumped to $48.99/order (+-8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 17:00 window. While ticket volume (17 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 832.78,
+          "expected_sales": 779.67,
+          "actual_orders": 17,
+          "expected_orders": 14.7,
+          "aov": 48.99,
+          "baseline_aov": 53.07,
+          "z_score": 0.16
+        },
+        "terms": [
+          "AOV",
+          "Meat Draw",
+          "PAR Level",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-10-26-8",
+        "date": "2026-10-26",
+        "hour": 8,
+        "hour_formatted": "08:00",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (AOV $915.76 vs $28.50 Normal)",
+        "immediate_present_status": "Counter ticket size jumped to $915.76/order (+3113% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 08:00 window. While ticket volume (1 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 915.76,
+          "expected_sales": 500.0,
+          "actual_orders": 1,
+          "expected_orders": 12.0,
+          "aov": 915.76,
+          "baseline_aov": 28.5,
+          "z_score": 2.77
+        },
+        "terms": [
+          "AOV",
+          "Meat Draw",
+          "PAR Level",
+          "Cooked Yield %"
+        ]
+      }
+    ],
+    "glossary_terms": {
+      "PAR Level": {
+        "term": "PAR Level",
+        "full_name": "Periodic Automatic Replenishment",
+        "definition": "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
+        "how_it_helps": "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+      },
+      "AOV": {
+        "term": "AOV",
+        "full_name": "Average Order Value",
+        "definition": "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
+        "how_it_helps": "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+      },
+      "Z-Score": {
+        "term": "Z-Score",
+        "full_name": "Standard Score",
+        "definition": "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
+        "how_it_helps": "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+      },
+      "Meat Draw": {
+        "term": "Meat Draw",
+        "full_name": "Burn Rate / Carve Velocity",
+        "definition": "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140\u00b0F holding cabinet to fulfill guest trays.",
+        "how_it_helps": "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+      },
+      "Cooked Yield %": {
+        "term": "Cooked Yield %",
+        "full_name": "Usable Cooked Yield",
+        "definition": "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
+        "how_it_helps": "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+      },
+      "Shrinkage": {
+        "term": "Shrinkage",
+        "full_name": "Smokehouse Cooking Shrinkage",
+        "definition": "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
+        "how_it_helps": "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+      },
+      "COGS": {
+        "term": "COGS",
+        "full_name": "Cost of Goods Sold",
+        "definition": "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
+        "how_it_helps": "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+      },
+      "Food Cost %": {
+        "term": "Food Cost %",
+        "full_name": "Food Cost Percentage",
+        "definition": "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
+        "how_it_helps": "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+      },
+      "Gross Margin %": {
+        "term": "Gross Margin %",
+        "full_name": "Gross Profit Margin",
+        "definition": "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
+        "how_it_helps": "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
       }
     }
   }

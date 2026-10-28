@@ -22,10 +22,15 @@ This document captures operational preferences, pitmaster shift schedules, menu 
 
 ## 2. Pitmaster & Prep Cook Shift Schedules
 
-- [x] **Fixed 3-Person Team** (No dynamic staff adjustments needed; team is static):
-  - **Pit Worker #1 (Early Morning / Smoke Watch)**: Arrives ~2:00 AM – 3:00 AM (manages long overnight smoke, wraps briskets/pork, pulls hot meat for 11 AM lunch rush).
-  - **Pit Worker #2 (Morning Trim & Fresh Prep)**: Arrives ~6:00 AM – 7:00 AM (fires Batch 2 ribs & sausage, fresh sides prep, trims tomorrow's meat).
-  - **Owner / Pitmaster (Afternoon & Service)**: Arrives ~1:00 PM (manages lunch-to-dinner transition, service rush, 9 PM station breakdown/close, evening pit coals).
+- [x] **Smokehouse & Kitchen Line Roster** (See `STAFF_ROSTER.md` for full breakdown):
+  - **Trevor (Overnight Pitmaster)**: Arrives 2:00 AM – 3:00 AM. Fires pit, trims all briskets, rubs & seasons meats, loads smokers.
+  - **Max (Day Pitmaster)**: Arrives 8:00 AM, departs ~6:00 PM. Takes over active pit fire, wraps, probes, and transfers to 140°F rest.
+  - **The Boss (Owner / Relief)**: Relieves pit staff early as needed; oversees pit shutdown around ~6:00 PM.
+  - **Jake (Chef)**: Midday and service lead, kitchen hot line and sides prep.
+  - **Nick (Night Chef)**: Arrives ~2:00 PM; leaves at ~7:00 PM sharp to catch the bus home.
+  - **Freddy (Kitchen Closer / Lead)**: Covers meat slicing, grill, expo, and closes out kitchen service.
+  - **Elly & Alyssa (Expo)**: Order fulfillment, tray staging, and carryout pacing.
+  - **Allen (Kitchen Help & Dish)**: Dish pit sanitation, pan rotation, and utility support.
 
 ---
 
