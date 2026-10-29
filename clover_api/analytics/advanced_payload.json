@@ -52,10 +52,10 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4208.14,
+    "normal": 4151.71,
     "game_only": 4245.02,
-    "rain_only": 4597.14,
-    "game_and_rain": 11782.8
+    "rain_only": 4725.65,
+    "game_and_rain": 11624.78
   },
   "order_type_segmentation": [
     {
@@ -483,9 +483,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.2,
-    "pork_ribs_avg_with_dino": 3.1,
-    "impact_pct": -40.0
+    "pork_ribs_avg_without_dino": 5.0,
+    "pork_ribs_avg_with_dino": 3.5,
+    "impact_pct": -28.9
   },
   "payday_effect": {
     "payday_avg_ticket": 45.8,
