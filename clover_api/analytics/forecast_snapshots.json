@@ -350,28 +350,8 @@
     ]
   },
   "2026-10-28": {
-    "captured_at": "2026-10-28T18:30:07.024215-04:00",
+    "captured_at": "2026-10-28T22:11:55.403488-04:00",
     "hourly_forecast": [
-      {
-        "hour": 18,
-        "predicted_orders": 5.2,
-        "predicted_revenue": 252.2
-      },
-      {
-        "hour": 19,
-        "predicted_orders": 2.6,
-        "predicted_revenue": 126.1
-      },
-      {
-        "hour": 20,
-        "predicted_orders": 0.7,
-        "predicted_revenue": 33.95
-      },
-      {
-        "hour": 21,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
       {
         "hour": 22,
         "predicted_orders": 0.0,
