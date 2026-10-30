@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-10-29T21:38:53.971348-04:00",
+  "generated_at": "2026-10-30T04:12:39.328916-04:00",
   "days": {
     "2026-07-31": {
       "buckets": [
@@ -116,8 +116,8 @@
         },
         {
           "hour": 22,
-          "sales_usd": 318.47,
-          "orders": 1
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 23,
@@ -125,8 +125,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 434.57,
-      "total_orders": 2
+      "total_sales_usd": 116.1,
+      "total_orders": 1
     },
     "2026-08-01": {
       "buckets": [
@@ -10455,7 +10455,7 @@
         6797.02,
         1939.01,
         0.0,
-        318.47,
+        0.0,
         0.0
       ],
       "orders_sum": [
@@ -10481,7 +10481,7 @@
         146,
         42,
         0,
-        1,
+        0,
         0
       ]
     },
