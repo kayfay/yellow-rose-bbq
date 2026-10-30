@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-30T11:39:24.519318-04:00",
-  "total_alerts_detected": 15,
+  "generated_at": "2026-10-30T16:29:59.545247-04:00",
+  "total_alerts_detected": 11,
   "active_alert": {
     "alert_id": "qw-surge-2026-10-29-12",
     "date": "2026-10-29",

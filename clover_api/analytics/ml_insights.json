@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T11:39:24.372393-04:00",
+  "generated_at": "2026-10-30T16:29:59.390107-04:00",
   "total_insights_mined": 9,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -20,7 +20,7 @@
       "title": "Midweek vs Weekend Revenue Gap: $64 Family Feast Playbook",
       "category": "midweek_revenue",
       "category_label": "\ud83d\udcc8 Revenue Strategy",
-      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,902.22/day compared to $6,895.38 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
+      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,902.22/day compared to $6,591.27 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
       "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Historical Baseline",
       "quantitative_proof": "Weekend $37,654 vs Midweek $6,719",
       "actionable_recommendation": "Promote the $64 Family Feast Pack (1 lb brisket, 1/2 rack ribs, 2 sausage links, 3 sides) for early 2:00\u20134:30 PM pickup to capture suburban dinner commuters before evening pit cool-down.",
