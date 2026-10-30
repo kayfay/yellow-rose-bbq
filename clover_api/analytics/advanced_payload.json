@@ -2,48 +2,48 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 314,
-      "confidence": 21.1
+      "count": 308,
+      "confidence": 20.7
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 284,
-      "confidence": 22.9
+      "count": 281,
+      "confidence": 22.8
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 242,
+      "count": 240,
       "confidence": 19.5
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 144,
-      "confidence": 21.5
+      "count": 141,
+      "confidence": 21.1
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 113,
-      "confidence": 17.3
-    },
-    {
-      "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-      "count": 110,
-      "confidence": 22.4
+      "count": 112,
+      "confidence": 17.2
     },
     {
       "pair": "Brisket + Turkey",
       "count": 109,
-      "confidence": 49.5
+      "confidence": 49.3
     },
     {
-      "pair": "2 meat plate + Taco Plate W/2 Sides",
-      "count": 105,
-      "confidence": 16.1
+      "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
+      "count": 108,
+      "confidence": 22.1
     },
     {
       "pair": "Brisket + Mac & Cheese",
-      "count": 103,
+      "count": 102,
       "confidence": 22.2
+    },
+    {
+      "pair": "2 meat plate + Taco Plate W/2 Sides",
+      "count": 101,
+      "confidence": 15.5
     },
     {
       "pair": "BBQ plate + Taco Plate W/2 Sides",
@@ -52,29 +52,29 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4150.63,
+    "normal": 4065.09,
     "game_only": 4245.02,
     "rain_only": 4725.65,
-    "game_and_rain": 11621.77
+    "game_and_rain": 11382.25
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4911,
-      "total_revenue": 213412.66,
-      "avg_ticket": 43.456049684382
+      "order_count": 4897,
+      "total_revenue": 212510.35,
+      "avg_ticket": 43.396028180518684
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 393,
-      "total_revenue": 23707.89,
-      "avg_ticket": 60.32541984732824
+      "order_count": 390,
+      "total_revenue": 23554.7,
+      "avg_ticket": 60.39666666666667
     },
     {
       "order_type": "To-Go",
-      "order_count": 2438,
-      "total_revenue": 147109.05,
-      "avg_ticket": 60.3400533223954
+      "order_count": 2434,
+      "total_revenue": 146739.25,
+      "avg_ticket": 60.28728430566968
     }
   ],
   "sell_out_prediction_chart": {
@@ -104,7 +104,7 @@
           152.0,
           175.0,
           198.0,
-          231.0
+          233.0
         ],
         "name": "1/2 Rack Pork Spare Ribs",
         "type": "scatter",
@@ -135,7 +135,7 @@
           391.39,
           543.28,
           600.27,
-          656.75
+          652.75
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -166,7 +166,7 @@
           766.0,
           871.0,
           949.0,
-          1066.0
+          1065.0
         ],
         "name": "Crispy Quesa Taco Brisket",
         "type": "scatter",
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.4,
-    "pork_ribs_avg_with_dino": 2.5,
-    "impact_pct": -53.4
+    "pork_ribs_avg_without_dino": 5.3,
+    "pork_ribs_avg_with_dino": 3.1,
+    "impact_pct": -41.3
   },
   "payday_effect": {
-    "payday_avg_ticket": 45.8,
-    "normal_avg_ticket": 46.36
+    "payday_avg_ticket": 45.76,
+    "normal_avg_ticket": 46.28
   }
 }
