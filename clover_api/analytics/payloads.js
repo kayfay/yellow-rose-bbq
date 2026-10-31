@@ -647,7 +647,7 @@ window.BBQ_PAYLOADS = {
             75.92,
             74.48,
             74.84,
-            78.8
+            79.16
           ],
           "y": [
             3950.5099999999998,
@@ -715,7 +715,7 @@ window.BBQ_PAYLOADS = {
             "<b>Wednesday, 2026-10-28</b><br>Revenue: $3,804.94<br>Weather: 75.92\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Thursday, 2026-10-29</b><br>Revenue: $4,838.91<br>Weather: 74.48\u00b0F, 0.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
             "<b>Friday, 2026-10-30</b><br>Revenue: $4,232.70<br>Weather: 74.84\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-            "<b>Saturday, 2026-10-31</b><br>Revenue: $208.04<br>Weather: 78.8\u00b0F, 0.0mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+            "<b>Saturday, 2026-10-31</b><br>Revenue: $208.04<br>Weather: 79.16\u00b0F, 0.4mm rain<br><br><b>\ud83c\udf1f YESTERDAY'S SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
           ],
           "hovertemplate": "%{text}<extra></extra>",
           "mode": "markers",
@@ -753,7 +753,7 @@ window.BBQ_PAYLOADS = {
               10,
               10.8,
               10,
-              10
+              10.8
             ],
             "color": "#27ae60",
             "opacity": 0.8,
@@ -1164,8 +1164,8 @@ window.BBQ_PAYLOADS = {
       "rain_drop_pct": 3.7,
       "heat_avg_usd": 4602.58,
       "heat_drop_pct": 2.7,
-      "rain_coef": 6.0,
-      "temp_coef": 23.42
+      "rain_coef": 5.92,
+      "temp_coef": 23.13
     }
   },
   "event_payload": {
@@ -2715,9 +2715,9 @@ window.BBQ_PAYLOADS = {
       }
     },
     "cannibalization": {
-      "pork_ribs_avg_without_dino": 4.8,
-      "pork_ribs_avg_with_dino": 3.5,
-      "impact_pct": -27.5
+      "pork_ribs_avg_without_dino": 5.2,
+      "pork_ribs_avg_with_dino": 2.9,
+      "impact_pct": -44.9
     },
     "payday_effect": {
       "payday_avg_ticket": 45.65,
@@ -2725,7 +2725,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-10-31T02:44:23.253214-04:00",
+    "generated_at": "2026-10-31T09:24:18.138422-04:00",
     "summary_kpis": {
       "projected_24h_revenue_usd": 5485.35,
       "estimated_24h_cogs_usd": 1618.17,
@@ -2734,103 +2734,12 @@ window.BBQ_PAYLOADS = {
       "recommended_staff": 5,
       "pitmaster_hours": 42.5,
       "peak_rush_window": "12:00 PM (Sat)",
-      "current_sales_velocity": "0.0 orders/hr",
+      "current_sales_velocity": "0.2 orders/hr",
       "pacing_status": "Normal Pacing",
       "total_brisket_draw_lbs": 90.6,
       "total_pork_draw_lbs": 23.4
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-10-31T02:00:00",
-        "hour_display": "2:00 AM",
-        "day_name": "Sat",
-        "hour": 2,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T03:00:00",
-        "hour_display": "3:00 AM",
-        "day_name": "Sat",
-        "hour": 3,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T04:00:00",
-        "hour_display": "4:00 AM",
-        "day_name": "Sat",
-        "hour": 4,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T05:00:00",
-        "hour_display": "5:00 AM",
-        "day_name": "Sat",
-        "hour": 5,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T06:00:00",
-        "hour_display": "6:00 AM",
-        "day_name": "Sat",
-        "hour": 6,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T07:00:00",
-        "hour_display": "7:00 AM",
-        "day_name": "Sat",
-        "hour": 7,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-10-31T08:00:00",
-        "hour_display": "8:00 AM",
-        "day_name": "Sat",
-        "hour": 8,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
       {
         "timestamp": "2026-10-31T09:00:00",
         "hour_display": "9:00 AM",
@@ -3044,6 +2953,97 @@ window.BBQ_PAYLOADS = {
         "hour_display": "1:00 AM",
         "day_name": "Sun",
         "hour": 1,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T02:00:00",
+        "hour_display": "2:00 AM",
+        "day_name": "Sun",
+        "hour": 2,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T03:00:00",
+        "hour_display": "3:00 AM",
+        "day_name": "Sun",
+        "hour": 3,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T04:00:00",
+        "hour_display": "4:00 AM",
+        "day_name": "Sun",
+        "hour": 4,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T05:00:00",
+        "hour_display": "5:00 AM",
+        "day_name": "Sun",
+        "hour": 5,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T06:00:00",
+        "hour_display": "6:00 AM",
+        "day_name": "Sun",
+        "hour": 6,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T07:00:00",
+        "hour_display": "7:00 AM",
+        "day_name": "Sun",
+        "hour": 7,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-01T08:00:00",
+        "hour_display": "8:00 AM",
+        "day_name": "Sun",
+        "hour": 8,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -16582,7 +16582,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-31T02:44:23.489166-04:00",
+    "generated_at": "2026-10-31T09:24:18.375842-04:00",
     "days": {
       "2026-08-02": {
         "buckets": [
@@ -27591,43 +27591,8 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-10-31": {
-      "captured_at": "2026-10-31T02:44:23.498215-04:00",
+      "captured_at": "2026-10-31T09:24:18.387655-04:00",
       "hourly_forecast": [
-        {
-          "hour": 2,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 3,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 4,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 5,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 6,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 7,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 8,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
         {
           "hour": 9,
           "predicted_orders": 0.2,
@@ -29528,7 +29493,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-10-31T02:44:23.253214-04:00",
+    "generated_at": "2026-10-31T09:24:18.138422-04:00",
     "total_insights_mined": 9,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -29690,7 +29655,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-10-31T02:44:23.407831-04:00",
+    "generated_at": "2026-10-31T09:24:18.271968-04:00",
     "total_alerts_detected": 15,
     "active_alert": {
       "alert_id": "qw-aov-2026-10-30-19",
