@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-10-30T16:29:59.545247-04:00",
-  "total_alerts_detected": 11,
+  "generated_at": "2026-10-30T20:29:53.787487-04:00",
+  "total_alerts_detected": 13,
   "active_alert": {
-    "alert_id": "qw-surge-2026-10-29-12",
-    "date": "2026-10-29",
-    "hour": 12,
-    "hour_formatted": "12:00",
+    "alert_id": "qw-surge-2026-10-30-13",
+    "date": "2026-10-30",
+    "hour": 13,
+    "hour_formatted": "13:00",
     "event_type": "rush_acceleration",
     "severity": "surge",
     "severity_badge": "\ud83d\ude80 Rush Acceleration",
-    "headline": "Customer Rush Acceleration (+59% Order Velocity, Z=+1.76)",
-    "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 24 tickets/hr (expected 15.1), generating $834.84/hr with a statistical Z-Score of +1.76.",
+    "headline": "Customer Rush Acceleration (+45% Order Velocity, Z=+1.24)",
+    "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 18 tickets/hr (expected 12.4), generating $669.48/hr with a statistical Z-Score of +1.24.",
     "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
     "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
     "velocity_metrics": {
-      "actual_sales": 834.84,
-      "expected_sales": 548.23,
-      "actual_orders": 24,
-      "expected_orders": 15.1,
-      "aov": 34.79,
-      "baseline_aov": 36.36,
-      "z_score": 1.76
+      "actual_sales": 669.48,
+      "expected_sales": 445.44,
+      "actual_orders": 18,
+      "expected_orders": 12.4,
+      "aov": 37.19,
+      "baseline_aov": 35.97,
+      "z_score": 1.24
     },
     "terms": [
       "Z-Score",
@@ -30,62 +30,6 @@
     ]
   },
   "recent_alerts": [
-    {
-      "alert_id": "qw-surge-2026-10-27-13",
-      "date": "2026-10-27",
-      "hour": 13,
-      "hour_formatted": "13:00",
-      "event_type": "rush_acceleration",
-      "severity": "surge",
-      "severity_badge": "\ud83d\ude80 Rush Acceleration",
-      "headline": "Customer Rush Acceleration (+71% Order Velocity, Z=+1.58)",
-      "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 18 tickets/hr (expected 10.5), generating $565.42/hr with a statistical Z-Score of +1.58.",
-      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
-      "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
-      "velocity_metrics": {
-        "actual_sales": 565.42,
-        "expected_sales": 372.58,
-        "actual_orders": 18,
-        "expected_orders": 10.5,
-        "aov": 31.41,
-        "baseline_aov": 35.48,
-        "z_score": 1.58
-      },
-      "terms": [
-        "Z-Score",
-        "PAR Level",
-        "Meat Draw",
-        "Gross Margin %"
-      ]
-    },
-    {
-      "alert_id": "qw-aov-2026-10-28-11",
-      "date": "2026-10-28",
-      "hour": 11,
-      "hour_formatted": "11:00",
-      "event_type": "ticket_spike",
-      "severity": "surge",
-      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (AOV $60.43 vs $37.75 Normal)",
-      "immediate_present_status": "Counter ticket size jumped to $60.43/order (+60% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 11:00 window. While ticket volume (11 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-      "velocity_metrics": {
-        "actual_sales": 664.78,
-        "expected_sales": 630.19,
-        "actual_orders": 11,
-        "expected_orders": 16.7,
-        "aov": 60.43,
-        "baseline_aov": 37.75,
-        "z_score": 0.15
-      },
-      "terms": [
-        "AOV",
-        "Meat Draw",
-        "PAR Level",
-        "Cooked Yield %"
-      ]
-    },
     {
       "alert_id": "qw-surge-2026-10-28-13",
       "date": "2026-10-28",
@@ -162,6 +106,62 @@
         "aov": 34.79,
         "baseline_aov": 36.36,
         "z_score": 1.76
+      },
+      "terms": [
+        "Z-Score",
+        "PAR Level",
+        "Meat Draw",
+        "Gross Margin %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-10-29-13",
+      "date": "2026-10-29",
+      "hour": 13,
+      "hour_formatted": "13:00",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (AOV $65.02 vs $39.75 Normal)",
+      "immediate_present_status": "Counter ticket size jumped to $65.02/order (+64% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 13:00 window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 780.29,
+        "expected_sales": 397.55,
+        "actual_orders": 12,
+        "expected_orders": 10,
+        "aov": 65.02,
+        "baseline_aov": 39.75,
+        "z_score": 2.53
+      },
+      "terms": [
+        "AOV",
+        "Meat Draw",
+        "PAR Level",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-surge-2026-10-30-13",
+      "date": "2026-10-30",
+      "hour": 13,
+      "hour_formatted": "13:00",
+      "event_type": "rush_acceleration",
+      "severity": "surge",
+      "severity_badge": "\ud83d\ude80 Rush Acceleration",
+      "headline": "Customer Rush Acceleration (+45% Order Velocity, Z=+1.24)",
+      "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 18 tickets/hr (expected 12.4), generating $669.48/hr with a statistical Z-Score of +1.24.",
+      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
+      "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
+      "velocity_metrics": {
+        "actual_sales": 669.48,
+        "expected_sales": 445.44,
+        "actual_orders": 18,
+        "expected_orders": 12.4,
+        "aov": 37.19,
+        "baseline_aov": 35.97,
+        "z_score": 1.24
       },
       "terms": [
         "Z-Score",
