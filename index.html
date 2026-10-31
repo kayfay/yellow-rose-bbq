@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.1.0">
+  <link rel="stylesheet" href="style.css?v=2.1.1">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -320,301 +320,9 @@
         </div>
       </section>
 
-      <!-- TOP-OF-DASHBOARD PLAIN-ENGLISH DAILY SHOP BRIEF BANNER -->
-      <section id="daily-executive-brief-banner" class="control-card executive-brief-banner" aria-label="Daily Pit and Sales Brief">
-        <div class="exec-brief-header">
-          <div class="exec-brief-title-group">
-            <span id="daily-brief-kicker" class="exec-brief-kicker">📋 TODAY'S PIT &amp; SALES BRIEF</span>
-            <span id="daily-brief-status-pill" class="exec-brief-pill">Daily Brief Ready</span>
-          </div>
-          <div class="exec-brief-actions">
-            <button type="button" id="btn-print-daily-brief" class="exec-print-btn">🖨️ Print 1-Page Daily Sheet</button>
-          </div>
-        </div>
-
-        <div class="exec-brief-grid">
-          <div class="exec-brief-box exec-brief-insight-box">
-            <span class="exec-box-label">1. What's Happening Today (Sales &amp; Meat Cost)</span>
-            <p id="daily-brief-insight" class="exec-box-text">
-              Loading daily actionable briefing...
-            </p>
-          </div>
-          <div class="exec-brief-box exec-brief-action-box">
-            <span class="exec-box-label">2. Recommended Next Step (Pit &amp; Counter Action)</span>
-            <p id="daily-brief-action" class="exec-box-text">
-              Loading pitmaster production action...
-            </p>
-          </div>
-        </div>
-
-        <!-- Plain-English Sales & Meat Cost Breakdown Strip -->
-        <div id="daily-sales-bridge-container" class="exec-sales-bridge">
-          <div class="bridge-step">
-            <span class="bridge-step-label" id="bridge-typical-label">Typical Day Sales</span>
-            <strong class="bridge-step-val" id="bridge-typical-val">$0</strong>
-          </div>
-          <span class="bridge-operator">+</span>
-          <div class="bridge-step">
-            <span class="bridge-step-label" id="bridge-rush-label">Rush Hour &amp; Crowd Difference</span>
-            <strong class="bridge-step-val bridge-pos" id="bridge-rush-val">+$0</strong>
-          </div>
-          <span class="bridge-operator">=</span>
-          <div class="bridge-step bridge-step-highlight">
-            <span class="bridge-step-label" id="bridge-expected-label">Expected Sales Today</span>
-            <strong class="bridge-step-val" id="bridge-expected-val">$0</strong>
-          </div>
-          <span class="bridge-operator">&minus;</span>
-          <div class="bridge-step">
-            <span class="bridge-step-label">Est. Meat Cost (~29.5%)</span>
-            <strong class="bridge-step-val bridge-cost" id="bridge-meat-cost-val">$0</strong>
-          </div>
-          <span class="bridge-operator">=</span>
-          <div class="bridge-step bridge-step-profit">
-            <span class="bridge-step-label">Left After Meat Cost (~70.5%)</span>
-            <strong class="bridge-step-val bridge-profit" id="bridge-leftover-val">$0</strong>
-          </div>
-        </div>
-
-        <!-- Plain-English Daily Pitmaster Intelligence & 10 Watchlist Tips -->
-        <div id="daily-pit-intel-container" class="pit-intel-container" aria-label="Daily Pitmaster Intelligence and Tips Watchlist">
-          
-          <!-- Real-Time Immediate Present Quick-Wind Scan Banner -->
-          <div id="daily-quick-wind-banner" class="quick-wind-banner" aria-label="Live Clover Quick-Wind Velocity Scan">
-            <div class="qw-header">
-              <div class="qw-title-group">
-                <span class="qw-kicker">⚡ LIVE CLOVER HOURLY SCAN &amp; IMMEDIATE PRESENT WIND</span>
-                <span id="qw-severity-badge" class="qw-badge qw-badge-surge">🚀 Rush Acceleration</span>
-              </div>
-              <div class="qw-controls">
-                <span id="qw-timestamp" class="qw-timestamp">Live Clover Scan Active</span>
-                <button type="button" id="btn-toggle-recent-alerts" class="qw-toggle-btn" aria-expanded="false">
-                  Recent Scans <span id="qw-recent-arrow">▼</span>
-                </button>
-              </div>
-            </div>
-
-            <h3 id="qw-headline" class="qw-headline">Customer Rush Acceleration (+42% Order Velocity, Z=+1.85)</h3>
-
-            <div class="qw-grid">
-              <!-- Immediate Present Status -->
-              <div class="qw-col qw-col-present">
-                <span class="qw-col-label">⏱️ What Is Occurring Right Now (Immediate Present)</span>
-                <p id="qw-present-text" class="qw-col-text">Front-of-house line compression is accelerating. Order throughput reached 22 tickets/hr...</p>
-              </div>
-
-              <!-- Causal Attribution -->
-              <div class="qw-col qw-col-cause">
-                <span class="qw-col-label">🔍 Why This Happened (Root Cause)</span>
-                <p id="qw-cause-text" class="qw-col-text">Peak lunch compression window coincided with favorable weather...</p>
-              </div>
-
-              <!-- Recommended Pit Action -->
-              <div class="qw-col qw-col-action">
-                <span class="qw-col-label">🔥 Actionable Pitmaster Steps</span>
-                <p id="qw-action-text" class="qw-col-text">Open secondary carving station; stage next rested briskets...</p>
-              </div>
-            </div>
-
-            <!-- Real-Time Velocity Metric Pills -->
-            <div id="qw-metrics-bar" class="qw-metrics-bar">
-              <!-- Populated by app.js: Orders/hr, Sales/hr, AOV, Z-Score -->
-            </div>
-
-            <!-- Collapsible Drawer of Recent Alerts -->
-            <div id="qw-recent-alerts-drawer" class="qw-recent-drawer" style="display: none;">
-              <h4 class="qw-drawer-title">Recent Hourly Alerts &amp; Operational Events</h4>
-              <div id="qw-recent-alerts-list" class="qw-drawer-list"></div>
-            </div>
-          </div>
-
-          <!-- Top Grid: Random Insight of the Day & Day-Specific Summary -->
-          <div class="pit-intel-grid">
-            <!-- Random Insight Card (Mined by ML across all repo data) -->
-            <div class="pit-intel-card random-insight-card" id="pit-intel-random-card">
-              <div class="intel-card-header">
-                <div class="intel-title-wrap">
-                  <span class="intel-icon" aria-hidden="true">💡</span>
-                  <div class="intel-title-col">
-                    <strong class="intel-title">Machine Learning Smokehouse Intelligence</strong>
-                    <div class="intel-badge-row">
-                      <span id="daily-random-insight-cat" class="intel-cat-pill">⭐ Profitability Mining</span>
-                      <span id="daily-random-insight-impact" class="intel-impact-pill">+$588 Gross Profit</span>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" id="btn-reroll-insight" class="intel-reroll-btn" aria-label="Get another random insight">
-                  🎲 Re-roll Insight
-                </button>
-              </div>
-
-              <h4 id="daily-random-insight-title" class="random-insight-heading">Loading Data-Mined Insight...</h4>
-              <p id="daily-random-insight-text" class="random-insight-text">
-                Loading daily random insight...
-              </p>
-
-              <!-- Data Provenance & Citations Container -->
-              <div class="insight-evidence-box" id="daily-random-insight-evidence-box">
-                <div class="evidence-row">
-                  <span class="evidence-label">📁 Data Ground Truth:</span>
-                  <span id="daily-random-insight-evidence" class="evidence-val">Analyzing repo datasets...</span>
-                </div>
-                <div class="evidence-row">
-                  <span class="evidence-label">📊 Quantitative Proof:</span>
-                  <span id="daily-random-insight-proof" class="evidence-val">Calculating variance...</span>
-                </div>
-                <div class="evidence-row">
-                  <span class="evidence-label">🎯 Actionable Recommendation:</span>
-                  <span id="daily-random-insight-action" class="evidence-val">Formulating pit recommendation...</span>
-                </div>
-              </div>
-
-              <div class="intel-card-footer">
-                <div class="insight-terms-wrap">
-                  <span class="terms-label">Analytic Terms:</span>
-                  <div id="daily-random-insight-terms" class="terms-pill-group">
-                    <!-- Term pills clickable to explain definitions -->
-                  </div>
-                </div>
-                <span id="daily-insight-counter" class="intel-subtext">Insight 1 of 10</span>
-              </div>
-            </div>
-
-            <!-- Day-Specific Tips Summary -->
-            <div class="pit-intel-card day-summary-card" id="pit-intel-day-card">
-              <div class="intel-card-header">
-                <div class="intel-title-wrap">
-                  <span class="intel-icon" aria-hidden="true">📅</span>
-                  <strong id="daily-day-tips-title" class="intel-title">Today's Day-Specific Tips</strong>
-                </div>
-                <span id="daily-day-badge" class="day-badge-pill">Operating Day</span>
-              </div>
-              <p id="daily-day-tips-summary" class="day-summary-text">
-                Loading day-specific operational summary...
-              </p>
-              <div class="intel-card-footer">
-                <span class="intel-tag" id="daily-day-focus-tag">Day Focus</span>
-                <span class="intel-subtext" id="daily-day-rush-subtext">Pacing &amp; Service Window</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom: 10 Key Things to Watch Today (Weather, Day Dynamics, Pit Line) -->
-          <div id="daily-ten-tips-section" class="ten-tips-section">
-            <div class="ten-tips-header">
-              <div class="ten-tips-title-group">
-                <span class="ten-tips-kicker">👁️ 10 THINGS TO KEEP AN EYE ON TODAY</span>
-                <span class="ten-tips-subtitle">Weather, Day Dynamics &amp; Kitchen Line Watchlist</span>
-              </div>
-              <div class="ten-tips-controls">
-                <div class="tips-filter-bar" role="group" aria-label="Filter 10 Tips">
-                  <button type="button" class="tip-filter-btn active" id="btn-filter-tips-all" data-filter="all">All 10 Tips (10)</button>
-                  <button type="button" class="tip-filter-btn" id="btn-filter-tips-weather" data-filter="weather">🌦️ Weather (3)</button>
-                  <button type="button" class="tip-filter-btn" id="btn-filter-tips-day" data-filter="day">⏱️ Day Dynamics (3)</button>
-                  <button type="button" class="tip-filter-btn" id="btn-filter-tips-pit" data-filter="pit">🔥 Pit &amp; Watchlist (4)</button>
-                </div>
-                <button type="button" id="btn-toggle-tips-collapse" class="tip-collapse-btn" aria-expanded="true" aria-controls="ten-tips-container">
-                  <span id="toggle-tips-text">Collapse Tips</span> <span id="toggle-tips-arrow">▲</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 10 Tips Container Grid -->
-            <div id="ten-tips-container" class="ten-tips-grid">
-              <!-- Dynamically populated with 10 cards by app.js -->
-            </div>
-          </div>
-
-          <!-- Plain-English Pitmaster Analytics Terminology Guide & Glossary -->
-          <div id="pitmaster-analytics-glossary" class="glossary-section" aria-label="Pitmaster Analytics Glossary">
-            <div class="glossary-header">
-              <div class="glossary-title-group">
-                <span class="glossary-kicker">📚 PITMASTER ANALYTICS GUIDE</span>
-                <h3 class="glossary-heading">Smokehouse Analytics Terms Explained in Plain English</h3>
-                <span class="glossary-subtext">Learn what each operational metric means and exactly how it protects your pit margins and inventory</span>
-              </div>
-              <button type="button" id="btn-toggle-glossary" class="glossary-toggle-btn" aria-expanded="true" aria-controls="glossary-card-grid">
-                <span id="toggle-glossary-text">Collapse Guide</span> <span id="toggle-glossary-arrow">▲</span>
-              </button>
-            </div>
-
-            <!-- Category Filter for Glossary -->
-            <div class="glossary-toolbar">
-              <div class="glossary-filter-group" role="group" aria-label="Filter Glossary Terms">
-                <button type="button" class="glossary-cat-btn active" data-cat="all">All Terms (9)</button>
-                <button type="button" class="glossary-cat-btn" data-cat="cost">💰 Profit &amp; Costs</button>
-                <button type="button" class="glossary-cat-btn" data-cat="pit">🔥 Pit &amp; Smoker</button>
-                <button type="button" class="glossary-cat-btn" data-cat="volume">📊 Volume &amp; Math</button>
-              </div>
-            </div>
-
-            <!-- Grid of Plain-English Explainer Cards -->
-            <div id="glossary-card-grid" class="glossary-grid">
-              <!-- Populated by app.js -->
-            </div>
-          </div>
-
-          <!-- In-Place Term Explainer Drawer (No focus-trapping modal, adheres to CODING_STANDARDS.md) -->
-          <div id="term-explainer-drawer" class="term-drawer" style="display: none;" aria-live="polite">
-            <div class="term-drawer-content">
-              <div class="term-drawer-header">
-                <div class="term-drawer-title-group">
-                  <span class="term-drawer-badge">Analytic Term Explainer</span>
-                  <h4 id="term-drawer-name" class="term-drawer-name">PAR Level</h4>
-                  <span id="term-drawer-fullname" class="term-drawer-fullname">(Periodic Automatic Replenishment)</span>
-                </div>
-                <button type="button" id="btn-close-term-drawer" class="term-drawer-close" aria-label="Close Term Explainer">✕ Close</button>
-              </div>
-              <div class="term-drawer-body">
-                <div class="term-drawer-section">
-                  <strong>📖 What It Means:</strong>
-                  <p id="term-drawer-def">The target amount of meat or prepped sides...</p>
-                </div>
-                <div class="term-drawer-section term-drawer-help">
-                  <strong>💡 How It Helps Your Pit &amp; Bottom Line:</strong>
-                  <p id="term-drawer-help-text">Prevents running out during peak lunch...</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
       
       <!-- Sub-Tab Navigation for Analytical Phases -->
       <div id="forecasting-operational-tools">
-        <!-- Meat Delivery & Case Pack Reference -->
-      <section class="control-card">
-        <details>
-          <summary>
-            🚚 Supplier Delivery Schedule &amp; Cryovac Case Specs
-          </summary>
-          <div>
-            <div style="margin-top: 8px;">
-              <strong>🚚 Next-Day Supplier Cutoff Windows:</strong>
-              <div style="font-size: 13px; color: #94a3b8; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 8px;">
-                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                  <strong style="color: #38bdf8;">Saturday Order</strong> &rarr; Sunday Delivery
-                </div>
-                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                  <strong style="color: #38bdf8;">Monday Order</strong> &rarr; Tuesday Delivery
-                </div>
-                <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
-                  <strong style="color: #38bdf8;">Thursday Order</strong> &rarr; Friday Delivery
-                </div>
-              </div>
-            </div>
-            <div style="margin-top: 10px;">
-              <strong>📦 Standard Case Pack &amp; Yield Specs:</strong>
-              <ul style="margin-top: 4px;">
-                <li><strong>Brisket:</strong> 5 packers/case (~70 lbs raw; 40% cooked yield).</li>
-                <li><strong>Pork Shoulder:</strong> 4 bone-in butts/case (~32 lbs raw; 44% cooked yield).</li>
-                <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~30 lbs raw at 5 lbs/rack; 60% cooked yield).</li>
-                <li><strong>Beef Dino Ribs:</strong> 12 plate ribs/case (3 cryovac bags).</li>
-              </ul>
-            </div>
-          </div>
-        </details>
-      </section>
         <section class="control-card forecasting-header-card">
 
         <!-- Target Date Purpose & Explanation Banner -->
@@ -879,6 +587,7 @@
           <button type="button" class="preset-btn" id="btn-subtab-weather">🌧️ Today's Weather Impact</button>
           <button type="button" class="preset-btn" id="btn-subtab-event">🏈 Local Game Day Boost</button>
           <button type="button" class="preset-btn" id="btn-subtab-advanced">📋 Menu Mix &amp; Rush Patterns</button>
+          <button type="button" class="preset-btn" id="btn-subtab-reports">📝 Shop Reports</button>
         </div>
       </section>
 
@@ -1148,6 +857,302 @@
         </section>
       </div>
 
+      <!-- Shop Reports: daily brief, pit tips, glossary, supplier reference -->
+      <div id="subtab-view-reports" style="display: none;">
+        <!-- TOP-OF-DASHBOARD PLAIN-ENGLISH DAILY SHOP BRIEF BANNER -->
+        <section id="daily-executive-brief-banner" class="control-card executive-brief-banner" aria-label="Daily Pit and Sales Brief">
+          <div class="exec-brief-header">
+            <div class="exec-brief-title-group">
+              <span id="daily-brief-kicker" class="exec-brief-kicker">📋 TODAY'S PIT &amp; SALES BRIEF</span>
+              <span id="daily-brief-status-pill" class="exec-brief-pill">Daily Brief Ready</span>
+            </div>
+            <div class="exec-brief-actions">
+              <button type="button" id="btn-print-daily-brief" class="exec-print-btn">🖨️ Print 1-Page Daily Sheet</button>
+            </div>
+          </div>
+
+          <div class="exec-brief-grid">
+            <div class="exec-brief-box exec-brief-insight-box">
+              <span class="exec-box-label">1. What's Happening Today (Sales &amp; Meat Cost)</span>
+              <p id="daily-brief-insight" class="exec-box-text">
+                Loading daily actionable briefing...
+              </p>
+            </div>
+            <div class="exec-brief-box exec-brief-action-box">
+              <span class="exec-box-label">2. Recommended Next Step (Pit &amp; Counter Action)</span>
+              <p id="daily-brief-action" class="exec-box-text">
+                Loading pitmaster production action...
+              </p>
+            </div>
+          </div>
+
+          <!-- Plain-English Sales & Meat Cost Breakdown Strip -->
+          <div id="daily-sales-bridge-container" class="exec-sales-bridge">
+            <div class="bridge-step">
+              <span class="bridge-step-label" id="bridge-typical-label">Typical Day Sales</span>
+              <strong class="bridge-step-val" id="bridge-typical-val">$0</strong>
+            </div>
+            <span class="bridge-operator">+</span>
+            <div class="bridge-step">
+              <span class="bridge-step-label" id="bridge-rush-label">Rush Hour &amp; Crowd Difference</span>
+              <strong class="bridge-step-val bridge-pos" id="bridge-rush-val">+$0</strong>
+            </div>
+            <span class="bridge-operator">=</span>
+            <div class="bridge-step bridge-step-highlight">
+              <span class="bridge-step-label" id="bridge-expected-label">Expected Sales Today</span>
+              <strong class="bridge-step-val" id="bridge-expected-val">$0</strong>
+            </div>
+            <span class="bridge-operator">&minus;</span>
+            <div class="bridge-step">
+              <span class="bridge-step-label">Est. Meat Cost (~29.5%)</span>
+              <strong class="bridge-step-val bridge-cost" id="bridge-meat-cost-val">$0</strong>
+            </div>
+            <span class="bridge-operator">=</span>
+            <div class="bridge-step bridge-step-profit">
+              <span class="bridge-step-label">Left After Meat Cost (~70.5%)</span>
+              <strong class="bridge-step-val bridge-profit" id="bridge-leftover-val">$0</strong>
+            </div>
+          </div>
+
+          <!-- Plain-English Daily Pitmaster Intelligence & 10 Watchlist Tips -->
+          <div id="daily-pit-intel-container" class="pit-intel-container" aria-label="Daily Pitmaster Intelligence and Tips Watchlist">
+          
+            <!-- Real-Time Immediate Present Quick-Wind Scan Banner -->
+            <div id="daily-quick-wind-banner" class="quick-wind-banner" aria-label="Live Clover Quick-Wind Velocity Scan">
+              <div class="qw-header">
+                <div class="qw-title-group">
+                  <span class="qw-kicker">⚡ LIVE CLOVER HOURLY SCAN &amp; IMMEDIATE PRESENT WIND</span>
+                  <span id="qw-severity-badge" class="qw-badge qw-badge-surge">🚀 Rush Acceleration</span>
+                </div>
+                <div class="qw-controls">
+                  <span id="qw-timestamp" class="qw-timestamp">Live Clover Scan Active</span>
+                  <button type="button" id="btn-toggle-recent-alerts" class="qw-toggle-btn" aria-expanded="false">
+                    Recent Scans <span id="qw-recent-arrow">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <h3 id="qw-headline" class="qw-headline">Customer Rush Acceleration (+42% Order Velocity, Z=+1.85)</h3>
+
+              <div class="qw-grid">
+                <!-- Immediate Present Status -->
+                <div class="qw-col qw-col-present">
+                  <span class="qw-col-label">⏱️ What Is Occurring Right Now (Immediate Present)</span>
+                  <p id="qw-present-text" class="qw-col-text">Front-of-house line compression is accelerating. Order throughput reached 22 tickets/hr...</p>
+                </div>
+
+                <!-- Causal Attribution -->
+                <div class="qw-col qw-col-cause">
+                  <span class="qw-col-label">🔍 Why This Happened (Root Cause)</span>
+                  <p id="qw-cause-text" class="qw-col-text">Peak lunch compression window coincided with favorable weather...</p>
+                </div>
+
+                <!-- Recommended Pit Action -->
+                <div class="qw-col qw-col-action">
+                  <span class="qw-col-label">🔥 Actionable Pitmaster Steps</span>
+                  <p id="qw-action-text" class="qw-col-text">Open secondary carving station; stage next rested briskets...</p>
+                </div>
+              </div>
+
+              <!-- Real-Time Velocity Metric Pills -->
+              <div id="qw-metrics-bar" class="qw-metrics-bar">
+                <!-- Populated by app.js: Orders/hr, Sales/hr, AOV, Z-Score -->
+              </div>
+
+              <!-- Collapsible Drawer of Recent Alerts -->
+              <div id="qw-recent-alerts-drawer" class="qw-recent-drawer" style="display: none;">
+                <h4 class="qw-drawer-title">Recent Hourly Alerts &amp; Operational Events</h4>
+                <div id="qw-recent-alerts-list" class="qw-drawer-list"></div>
+              </div>
+            </div>
+
+            <!-- Top Grid: Random Insight of the Day & Day-Specific Summary -->
+            <div class="pit-intel-grid">
+              <!-- Random Insight Card (Mined by ML across all repo data) -->
+              <div class="pit-intel-card random-insight-card" id="pit-intel-random-card">
+                <div class="intel-card-header">
+                  <div class="intel-title-wrap">
+                    <span class="intel-icon" aria-hidden="true">💡</span>
+                    <div class="intel-title-col">
+                      <strong class="intel-title">Machine Learning Smokehouse Intelligence</strong>
+                      <div class="intel-badge-row">
+                        <span id="daily-random-insight-cat" class="intel-cat-pill">⭐ Profitability Mining</span>
+                        <span id="daily-random-insight-impact" class="intel-impact-pill">+$588 Gross Profit</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" id="btn-reroll-insight" class="intel-reroll-btn" aria-label="Get another random insight">
+                    🎲 Re-roll Insight
+                  </button>
+                </div>
+
+                <h4 id="daily-random-insight-title" class="random-insight-heading">Loading Data-Mined Insight...</h4>
+                <p id="daily-random-insight-text" class="random-insight-text">
+                  Loading daily random insight...
+                </p>
+
+                <!-- Data Provenance & Citations Container -->
+                <div class="insight-evidence-box" id="daily-random-insight-evidence-box">
+                  <div class="evidence-row">
+                    <span class="evidence-label">📁 Data Ground Truth:</span>
+                    <span id="daily-random-insight-evidence" class="evidence-val">Analyzing repo datasets...</span>
+                  </div>
+                  <div class="evidence-row">
+                    <span class="evidence-label">📊 Quantitative Proof:</span>
+                    <span id="daily-random-insight-proof" class="evidence-val">Calculating variance...</span>
+                  </div>
+                  <div class="evidence-row">
+                    <span class="evidence-label">🎯 Actionable Recommendation:</span>
+                    <span id="daily-random-insight-action" class="evidence-val">Formulating pit recommendation...</span>
+                  </div>
+                </div>
+
+                <div class="intel-card-footer">
+                  <div class="insight-terms-wrap">
+                    <span class="terms-label">Analytic Terms:</span>
+                    <div id="daily-random-insight-terms" class="terms-pill-group">
+                      <!-- Term pills clickable to explain definitions -->
+                    </div>
+                  </div>
+                  <span id="daily-insight-counter" class="intel-subtext">Insight 1 of 10</span>
+                </div>
+              </div>
+
+              <!-- Day-Specific Tips Summary -->
+              <div class="pit-intel-card day-summary-card" id="pit-intel-day-card">
+                <div class="intel-card-header">
+                  <div class="intel-title-wrap">
+                    <span class="intel-icon" aria-hidden="true">📅</span>
+                    <strong id="daily-day-tips-title" class="intel-title">Today's Day-Specific Tips</strong>
+                  </div>
+                  <span id="daily-day-badge" class="day-badge-pill">Operating Day</span>
+                </div>
+                <p id="daily-day-tips-summary" class="day-summary-text">
+                  Loading day-specific operational summary...
+                </p>
+                <div class="intel-card-footer">
+                  <span class="intel-tag" id="daily-day-focus-tag">Day Focus</span>
+                  <span class="intel-subtext" id="daily-day-rush-subtext">Pacing &amp; Service Window</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom: 10 Key Things to Watch Today (Weather, Day Dynamics, Pit Line) -->
+            <div id="daily-ten-tips-section" class="ten-tips-section">
+              <div class="ten-tips-header">
+                <div class="ten-tips-title-group">
+                  <span class="ten-tips-kicker">👁️ 10 THINGS TO KEEP AN EYE ON TODAY</span>
+                  <span class="ten-tips-subtitle">Weather, Day Dynamics &amp; Kitchen Line Watchlist</span>
+                </div>
+                <div class="ten-tips-controls">
+                  <div class="tips-filter-bar" role="group" aria-label="Filter 10 Tips">
+                    <button type="button" class="tip-filter-btn active" id="btn-filter-tips-all" data-filter="all">All 10 Tips (10)</button>
+                    <button type="button" class="tip-filter-btn" id="btn-filter-tips-weather" data-filter="weather">🌦️ Weather (3)</button>
+                    <button type="button" class="tip-filter-btn" id="btn-filter-tips-day" data-filter="day">⏱️ Day Dynamics (3)</button>
+                    <button type="button" class="tip-filter-btn" id="btn-filter-tips-pit" data-filter="pit">🔥 Pit &amp; Watchlist (4)</button>
+                  </div>
+                  <button type="button" id="btn-toggle-tips-collapse" class="tip-collapse-btn" aria-expanded="true" aria-controls="ten-tips-container">
+                    <span id="toggle-tips-text">Collapse Tips</span> <span id="toggle-tips-arrow">▲</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 10 Tips Container Grid -->
+              <div id="ten-tips-container" class="ten-tips-grid">
+                <!-- Dynamically populated with 10 cards by app.js -->
+              </div>
+            </div>
+
+            <!-- Plain-English Pitmaster Analytics Terminology Guide & Glossary -->
+            <div id="pitmaster-analytics-glossary" class="glossary-section" aria-label="Pitmaster Analytics Glossary">
+              <div class="glossary-header">
+                <div class="glossary-title-group">
+                  <span class="glossary-kicker">📚 PITMASTER ANALYTICS GUIDE</span>
+                  <h3 class="glossary-heading">Smokehouse Analytics Terms Explained in Plain English</h3>
+                  <span class="glossary-subtext">Learn what each operational metric means and exactly how it protects your pit margins and inventory</span>
+                </div>
+                <button type="button" id="btn-toggle-glossary" class="glossary-toggle-btn" aria-expanded="true" aria-controls="glossary-card-grid">
+                  <span id="toggle-glossary-text">Collapse Guide</span> <span id="toggle-glossary-arrow">▲</span>
+                </button>
+              </div>
+
+              <!-- Category Filter for Glossary -->
+              <div class="glossary-toolbar">
+                <div class="glossary-filter-group" role="group" aria-label="Filter Glossary Terms">
+                  <button type="button" class="glossary-cat-btn active" data-cat="all">All Terms (9)</button>
+                  <button type="button" class="glossary-cat-btn" data-cat="cost">💰 Profit &amp; Costs</button>
+                  <button type="button" class="glossary-cat-btn" data-cat="pit">🔥 Pit &amp; Smoker</button>
+                  <button type="button" class="glossary-cat-btn" data-cat="volume">📊 Volume &amp; Math</button>
+                </div>
+              </div>
+
+              <!-- Grid of Plain-English Explainer Cards -->
+              <div id="glossary-card-grid" class="glossary-grid">
+                <!-- Populated by app.js -->
+              </div>
+            </div>
+
+            <!-- In-Place Term Explainer Drawer (No focus-trapping modal, adheres to CODING_STANDARDS.md) -->
+            <div id="term-explainer-drawer" class="term-drawer" style="display: none;" aria-live="polite">
+              <div class="term-drawer-content">
+                <div class="term-drawer-header">
+                  <div class="term-drawer-title-group">
+                    <span class="term-drawer-badge">Analytic Term Explainer</span>
+                    <h4 id="term-drawer-name" class="term-drawer-name">PAR Level</h4>
+                    <span id="term-drawer-fullname" class="term-drawer-fullname">(Periodic Automatic Replenishment)</span>
+                  </div>
+                  <button type="button" id="btn-close-term-drawer" class="term-drawer-close" aria-label="Close Term Explainer">✕ Close</button>
+                </div>
+                <div class="term-drawer-body">
+                  <div class="term-drawer-section">
+                    <strong>📖 What It Means:</strong>
+                    <p id="term-drawer-def">The target amount of meat or prepped sides...</p>
+                  </div>
+                  <div class="term-drawer-section term-drawer-help">
+                    <strong>💡 How It Helps Your Pit &amp; Bottom Line:</strong>
+                    <p id="term-drawer-help-text">Prevents running out during peak lunch...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+          <!-- Meat Delivery & Case Pack Reference -->
+        <section class="control-card">
+          <details>
+            <summary>
+              🚚 Supplier Delivery Schedule &amp; Cryovac Case Specs
+            </summary>
+            <div>
+              <div style="margin-top: 8px;">
+                <strong>🚚 Next-Day Supplier Cutoff Windows:</strong>
+                <div style="font-size: 13px; color: #94a3b8; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 8px;">
+                  <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                    <strong style="color: #38bdf8;">Saturday Order</strong> &rarr; Sunday Delivery
+                  </div>
+                  <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                    <strong style="color: #38bdf8;">Monday Order</strong> &rarr; Tuesday Delivery
+                  </div>
+                  <div style="background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                    <strong style="color: #38bdf8;">Thursday Order</strong> &rarr; Friday Delivery
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 10px;">
+                <strong>📦 Standard Case Pack &amp; Yield Specs:</strong>
+                <ul style="margin-top: 4px;">
+                  <li><strong>Brisket:</strong> 5 packers/case (~70 lbs raw; 40% cooked yield).</li>
+                  <li><strong>Pork Shoulder:</strong> 4 bone-in butts/case (~32 lbs raw; 44% cooked yield).</li>
+                  <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~30 lbs raw at 5 lbs/rack; 60% cooked yield).</li>
+                  <li><strong>Beef Dino Ribs:</strong> 12 plate ribs/case (3 cryovac bags).</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </section>
+      </div>
 
       <!-- Bottom Refresh Frame -->
       <section class="control-card refresh-frame" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
@@ -1159,7 +1164,9 @@
           <span class="btn-text">Refresh Data</span>
         </button>
       </section>
+      </div>
     </div>
+
   </main>
 
   <!-- Sticky Mobile Bottom Thumb-Zone Navigation (<768px) -->
@@ -1177,7 +1184,7 @@
   <script src="clover_api/analytics/payloads.js?v=2.1.0"></script>
   <script src="d3_charts.js?v=2.1.0"></script>
   <script src="tz_utils.js?v=2.1.0"></script>
-  <script src="app.js?v=2.1.0" defer></script>
+  <script src="app.js?v=2.1.1" defer></script>
 </body>
 </html>
 

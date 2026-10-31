@@ -106,3 +106,9 @@
     - Playwright Full E2E Suite (`./run_tests.sh`): 15/15 PASS (13.2s, Exit Code 0)
     - Independent Adversarial Critic Subagent (`7dc121b1-304f-47b2-843b-b58b2088b4b4`): **9.6 / 10 (PASS)** (all 3 minor non-blocking nits also polished immediately).
   - Marked Tasks 19–22 `passes: true` in `.loop/prd.json`.
+
+## 2026-10-31 · Shop Reports subtab
+- User feedback: the daily brief, pit tips, glossary and supplier schedule were cluttering the forecasting view. Restore the v2.0 order: date picker → projections → hourly → insight buttons. No pinned date bar and no extra main-nav tab.
+- Moved #daily-executive-brief-banner (sales/rush summary, pit intel, 10 tips, glossary, term drawer) and the supplier/case-spec panel into #subtab-view-reports, opened by #btn-subtab-reports at the end of the forecasting subtab row.
+- Fixed unclosed #forecasting-operational-tools div in index.html. Bumped app.js/style.css cache-busters to v=2.1.1.
+- Tests: brief/tips specs open the Reports subtab; new tests/e2e/layout_order.spec.js. npm test: 18 pass + 1 known flake (Horizon Presets, also fails on untouched HEAD).

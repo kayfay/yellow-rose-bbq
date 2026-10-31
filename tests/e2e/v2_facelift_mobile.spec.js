@@ -109,6 +109,7 @@ test.describe('v2.0.0 & v2.1.0 Facelift: Mobile-First Ergonomics, Touch-Safe Cha
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/');
     await page.click('#tab-btn-forecasting');
+    await page.click('#btn-subtab-reports');
 
     await expect(page.locator('#daily-executive-brief-banner')).toBeVisible();
     await expect(page.locator('#btn-print-daily-brief')).toBeVisible();

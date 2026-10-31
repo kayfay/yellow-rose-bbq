@@ -837,7 +837,6 @@ function switchMainTab(targetTab) {
       if (authGate) authGate.style.display = 'none';
     }
 
-    initDailyPitIntelligence();
     renderPlotlyForecastingChart(getActiveDaysCount());
     if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
     renderPlotlyEventChart();
@@ -2028,6 +2027,7 @@ function initForecastingControls() {
   const btnSubtabEvent = document.getElementById('btn-subtab-event');
   const btnSubtabShift = document.getElementById('btn-subtab-shift');
   const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
+  const btnSubtabReports = document.getElementById('btn-subtab-reports');
 
   const viewPredictive = document.getElementById('subtab-view-predictive');
   const viewArima = document.getElementById('subtab-view-arima');
@@ -2035,9 +2035,10 @@ function initForecastingControls() {
   const viewEvent = document.getElementById('subtab-view-event');
   const viewShift = document.getElementById('subtab-view-shift');
   const viewAdvanced = document.getElementById('subtab-view-advanced');
+  const viewReports = document.getElementById('subtab-view-reports');
 
-  const allSubtabBtns = [btnSubtabPredictive, btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced].filter(Boolean);
-  const allSubtabViews = [viewPredictive, viewArima, viewWeather, viewEvent, viewShift, viewAdvanced].filter(Boolean);
+  const allSubtabBtns = [btnSubtabPredictive, btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced, btnSubtabReports].filter(Boolean);
+  const allSubtabViews = [viewPredictive, viewArima, viewWeather, viewEvent, viewShift, viewAdvanced, viewReports].filter(Boolean);
 
   function activateSubtab(btn, view) {
     allSubtabBtns.forEach(b => b.classList.remove('active'));
@@ -2099,6 +2100,13 @@ function initForecastingControls() {
     btnSubtabAdvanced.addEventListener('click', () => {
       activateSubtab(btnSubtabAdvanced, viewAdvanced);
       if (typeof renderAdvancedAnalytics === 'function') renderAdvancedAnalytics();
+    });
+  }
+
+  if (btnSubtabReports) {
+    btnSubtabReports.addEventListener('click', () => {
+      activateSubtab(btnSubtabReports, viewReports);
+      initDailyPitIntelligence();
     });
   }
 

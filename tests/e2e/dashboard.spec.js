@@ -171,6 +171,8 @@ test.describe('Dashboard Verification', () => {
   test('Daily Pitmaster Intelligence: Random Insight, Day Summary, and 10 Watchlist Tips', async ({ page }) => {
     await page.goto('/#forecasting');
     await expect(page.locator('#tab-forecasting-analytics')).toBeVisible();
+    await page.click('#btn-subtab-reports');
+    await expect(page.locator('#subtab-view-reports')).toBeVisible();
 
     // 1. Random Insight of the Day
     const randomTextLocator = page.locator('#daily-random-insight-text');

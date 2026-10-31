@@ -10,7 +10,7 @@
 ## 2. Plain-English Daily Insight Engine (PAL Rules & Zero-Jargon Mandate)
 - Anomaly Math (Backend Only): `z = (x_t - mu_dow) / max(sigma_dow, 1e-6)`; Variance: `pct_var = ((x_t - mu_dow) / mu_dow) * 100`.
 - Zero-Jargon UI Rule: Never display `"DOW Base"`, `"Z-Score"`, `"Sigma"`, `"COGS"`, `"Velocity"`, `"Elasticity"`, or `"Stadium Lift"`. Use plain English: `"Typical [Day]"`, `"Est. Meat Cost"`, `"Left After Meat Cost"`, `"Hourly Sales Pace"`, `"Today's Weather Impact"`, `"Local Game Day Boost"`.
-- Executive Brief Invariant: Top-of-dashboard banner + 1-click Printable 1-Page Sheet + `daily_executive_brief.json` with: (1) **What's Happening Today (The Insight)** and (2) **Recommended Next Step (The Action)**.
+- Executive Brief Invariant: lives in the "Shop Reports" subtab (#subtab-view-reports), NEVER above the date picker or projections, + 1-click Printable 1-Page Sheet + `daily_executive_brief.json` with: (1) **What's Happening Today (The Insight)** and (2) **Recommended Next Step (The Action)**.
 
 ## 3. Executive Data Visualization & Okabe-Ito Colorblind-Safe Tokens
 - Tufte Data-Ink Ratio: Zero 3D effects, zero heavy vertical gridlines, muted horizontal reference lines (`rgba(148,163,184,0.10)`), direct units on axes/callouts.
