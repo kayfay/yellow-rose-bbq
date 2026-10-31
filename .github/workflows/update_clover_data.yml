@@ -2,9 +2,16 @@ name: Update Clover Data
 
 on:
   schedule:
-    # Run every hour at minute 0
-    - cron: '0 * * * *'
-  workflow_dispatch: # Allow manual trigger from the GitHub Actions tab
+    # Fallback only. The hourly trigger is the Cloudflare cron Worker in
+    # sync_trigger/ (fires workflow_dispatch at :05). GitHub drops many
+    # top-of-hour schedules, so this one runs off-peak at :37.
+    - cron: '37 * * * *'
+  workflow_dispatch: # Hourly from sync_trigger Worker; also manual from the Actions tab
+
+# Never run two syncs at once; a queued run waits and checks out the latest data.
+concurrency:
+  group: update-clover-data
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -84,5 +91,6 @@ jobs:
             echo "No new data to commit."
           else
             git commit -m "chore(data): auto-update clover api analytics data (hourly)"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
