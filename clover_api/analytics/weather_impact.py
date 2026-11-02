@@ -216,8 +216,8 @@ def run_weather_impact_analysis():
 
     # Dummy trace for legend entry - Top 3
     traces.append({
-        "x": [None],
-        "y": [None],
+        "x": [],
+        "y": [],
         "mode": "markers",
         "name": "Top 3 Recent Sales (Neon Green Halo)",
         "marker": {
@@ -230,8 +230,8 @@ def run_weather_impact_analysis():
     
     # Dummy trace for legend entry - Yesterday
     traces.append({
-        "x": [None],
-        "y": [None],
+        "x": [],
+        "y": [],
         "mode": "markers",
         "name": "Yesterday's Sales (Neon Pink Halo)",
         "marker": {

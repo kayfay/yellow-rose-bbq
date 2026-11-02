@@ -30,6 +30,7 @@ def build_payloads():
                     if filename == "dashboard_payload":
                         today = datetime.now(ZoneInfo("America/New_York"))
                         if "forecast" in data:
+                            data["forecast"]["generated_at"] = today.isoformat()
                             if "forecast_records" in data["forecast"]:
                                 day_map = {}
                                 for r in data["forecast"]["forecast_records"]:
@@ -75,6 +76,32 @@ def build_payloads():
         f.write(js_content)
         
     print(f"Successfully generated {outpath}")
+
+    # Generate sync_status.json so payload and sync status are always in sync
+    now_ny = datetime.now(ZoneInfo("America/New_York"))
+    p_data = payloads.get("predictive_payload", {})
+    sk = p_data.get("summary_kpis", {})
+    cogs = sk.get("estimated_24h_cogs_usd", 0)
+    staff = sk.get("recommended_staff", 0)
+    hours = sk.get("pitmaster_hours", 0)
+    fc = sk.get("estimated_food_cost_pct", 29.5)
+    msg = f"COGS: ${cogs:,.2f} ({fc}%) | Labor: {staff} crew ({hours}h)" if cogs else "Live POS & Analytics Data Synchronized"
+
+    status = {
+        "last_synced_at": now_ny.isoformat(),
+        "status": "success",
+        "message": msg,
+        "next_scheduled_sync": "Hourly via GitHub Actions"
+    }
+
+    for target_dir in [analytics_dir, analytics_dir.parent.parent / "analytics"]:
+        try:
+            target_dir.mkdir(parents=True, exist_ok=True)
+            with open(target_dir / "sync_status.json", "w") as sf:
+                json.dump(status, sf, indent=2)
+            print(f"Successfully generated {target_dir / 'sync_status.json'}")
+        except Exception as e:
+            print(f"[WARN] Failed to write sync_status.json to {target_dir}: {e}")
 
 if __name__ == "__main__":
     build_payloads()

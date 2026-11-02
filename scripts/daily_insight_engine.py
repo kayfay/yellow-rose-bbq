@@ -149,11 +149,11 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
             "peak_rush_window": PEAK_RUSH_BY_DOW["Mon"],
             "the_insight": (
                 f"The shop is closed on {full_day} ({date_str}) with $0 in counter sales "
-                f"and 0 lbs of hot-holding barbecue required."
+                f"(typical {full_day} baseline) and 0 lbs of hot-holding barbecue required."
             ),
             "the_action": (
-                "Keep main offset smokers cold, deep-clean the firebox, and grind/cure "
-                "Day 1 sausage batches for Tuesday's opening smoke."
+                "Keep main offset smokers cold, deep-clean the firebox, inspect Tuesday opening "
+                "Brisket trims, and grind/cure Day 1 sausage batches for Tuesday's opening smoke."
             ),
             "sales_bridge": {
                 "typical_day_label": f"Typical {full_day}",

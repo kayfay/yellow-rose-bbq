@@ -33,59 +33,70 @@ WEATHER_PAYLOAD_PATH = ANALYTICS_DIR / "weather_payload.json"
 OUTPUT_ALERTS_PATH = ANALYTICS_DIR / "quick_wind_alerts.json"
 
 ANALYTIC_TERMS_GLOSSARY = {
-    "PAR Level": {
-        "term": "PAR Level",
-        "full_name": "Periodic Automatic Replenishment",
-        "definition": "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
-        "how_it_helps": "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+    "Prep Target": {
+        "term": "Prep Target",
+        "definition": "How much cooked meat, sides and raw stock should be ready at each shift change so we don't run out or over-prep.",
+        "how_it_helps": "Keeps us from 86ing meat at lunch and cuts end-of-day waste by setting clear morning and afternoon slicing amounts."
     },
-    "AOV": {
-        "term": "AOV",
-        "full_name": "Average Order Value",
-        "definition": "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
-        "how_it_helps": "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+    "Average Ticket": {
+        "term": "Average Ticket",
+        "definition": "The average dollar amount per order: total sales divided by number of orders.",
+        "how_it_helps": "Shows whether a busy hour is lots of small sandwich orders or a few big platters ($145 King of the Hill), so the cutting board can pace whole-brisket slicing."
     },
-    "Z-Score": {
-        "term": "Z-Score",
-        "full_name": "Standard Score",
-        "definition": "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
-        "how_it_helps": "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+    "Rush Signal": {
+        "term": "Rush Signal",
+        "definition": "How far this hour's orders are above what we usually see at this hour on this day of the week. The bigger the number, the more unusual the rush.",
+        "how_it_helps": "Ignores normal small ups and downs, so an alert means a real rush that needs the pitmaster's attention."
     },
-    "Meat Draw": {
-        "term": "Meat Draw",
-        "full_name": "Burn Rate / Carve Velocity",
-        "definition": "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140°F holding cabinet to fulfill guest trays.",
-        "how_it_helps": "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+    "Meat Used Per Hour": {
+        "term": "Meat Used Per Hour",
+        "definition": "How many pounds of finished meat get carved and pulled from the 140°F holding cabinet each hour.",
+        "how_it_helps": "Warns the pitmaster hours ahead if we'll sell out before dinner, leaving time to adjust portions or push sausage combos."
     },
     "Cooked Yield %": {
         "term": "Cooked Yield %",
-        "full_name": "Usable Cooked Yield",
-        "definition": "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
-        "how_it_helps": "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+        "definition": "How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.",
+        "how_it_helps": "Shows the real cost of meat on the board. Choice packer brisket yields about 50–52%, so $5.08/lb raw costs about $10.00/lb sliced."
     },
     "Shrinkage": {
         "term": "Shrinkage",
-        "full_name": "Smokehouse Cooking Shrinkage",
-        "definition": "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
-        "how_it_helps": "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+        "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 48–50% for brisket, 40–42% for pork butt).",
+        "how_it_helps": "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
     },
-    "COGS": {
-        "term": "COGS",
-        "full_name": "Cost of Goods Sold",
-        "definition": "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
-        "how_it_helps": "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+    "Tallow Rest": {
+        "term": "Tallow Rest",
+        "definition": "Holding finished brisket wrapped with warm beef tallow at about 145°F until it's sliced.",
+        "how_it_helps": "Keeps brisket juicy and hot for hours, so an early cook can still be sold at dinner."
     },
-    "Food Cost %": {
-        "term": "Food Cost %",
-        "full_name": "Food Cost Percentage",
-        "definition": "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
-        "how_it_helps": "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+    "Est. Meat Cost": {
+        "term": "Est. Meat Cost",
+        "definition": "What we pay for the meat in a menu item, plus rub, sauce, butcher paper and to-go containers.",
+        "how_it_helps": "Shows the real cost per serving so prices still work when beef prices move."
     },
-    "Gross Margin %": {
-        "term": "Gross Margin %",
-        "full_name": "Gross Profit Margin",
-        "definition": "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
-        "how_it_helps": "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
+    "Meat Cost %": {
+        "term": "Meat Cost %",
+        "definition": "Est. Meat Cost divided by the menu price, as a percentage.",
+        "how_it_helps": "Texas BBQ usually aims for 28–32%. Items over 40% (like a brisket sandwich sold alone) need a price or portion fix."
+    },
+    "Left After Meat Cost": {
+        "term": "Left After Meat Cost",
+        "definition": "The share of each sale left after paying for the meat: (menu price − Est. Meat Cost) ÷ menu price × 100.",
+        "how_it_helps": "This is the money that pays the crew, post oak deliveries, rent and smoker upkeep."
+    },
+    "Typical Day": {
+        "term": "Typical Day",
+        "definition": "What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).",
+        "how_it_helps": "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
+    },
+    "Hourly Sales Pace": {
+        "term": "Hourly Sales Pace",
+        "definition": "Orders or dollars coming in per hour right now.",
+        "how_it_helps": "Shows when the lunch and dinner rushes start building, so the cutting board can get ahead of the line."
+    },
+    "Sales Trend": {
+        "term": "Sales Trend",
+        "definition": "How sales move with something else, like temperature or rain, measured across many past days.",
+        "how_it_helps": "Turns 'rainy days feel slow' into a number you can plan prep around."
     }
 }
 
@@ -208,7 +219,7 @@ def run_quick_wind_detection() -> dict:
                     "event_type": "ticket_spike",
                     "severity": "surge",
                     "severity_badge": "🥩 High-Ticket Surge",
-                    "headline": f"Large Group / Catering Ticket Spike (AOV ${aov:.2f} vs ${base['avg_aov']:.2f} Normal)",
+                    "headline": f"Large Group / Catering Ticket Spike (Average Ticket ${aov:.2f} vs ${base['avg_aov']:.2f} Usual)",
                     "immediate_present_status": f"Counter ticket size jumped to ${aov:.2f}/order (+{(aov - base['avg_aov'])/base['avg_aov']*100:.0f}% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
                     "causal_explanation": f"Large office/family group orders concentrated in the {h:02d}:00 window. While ticket volume ({orders} orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
                     "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
@@ -221,7 +232,7 @@ def run_quick_wind_detection() -> dict:
                         "baseline_aov": base["avg_aov"],
                         "z_score": z_score
                     },
-                    "terms": ["AOV", "Meat Draw", "PAR Level", "Cooked Yield %"]
+                    "terms": ["Average Ticket", "Meat Used Per Hour", "Prep Target", "Cooked Yield %"]
                 })
 
             # Rule 2: Rush Acceleration Surge (Orders and Sales Velocity Outpacing Baseline)
@@ -234,9 +245,9 @@ def run_quick_wind_detection() -> dict:
                     "event_type": "rush_acceleration",
                     "severity": "surge",
                     "severity_badge": "🚀 Rush Acceleration",
-                    "headline": f"Customer Rush Acceleration (+{orders_diff_pct:.0f}% Order Velocity, Z={z_score:+.2f})",
-                    "immediate_present_status": f"Front-of-house line compression is accelerating. Order throughput reached {orders} tickets/hr (expected {base['mean_orders']:.1f}), generating ${sales:.2f}/hr with a statistical Z-Score of {z_score:+.2f}.",
-                    "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
+                    "headline": f"Customer Rush Building (+{orders_diff_pct:.0f}% More Orders Than Usual)",
+                    "immediate_present_status": f"The line is getting longer. Orders hit {orders} tickets/hr (usual: {base['mean_orders']:.1f}), bringing in ${sales:.2f}/hr.",
+                    "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
                     "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140°F); deploy dedicated expediter to box sides and bag orders.",
                     "velocity_metrics": {
                         "actual_sales": sales,
@@ -247,7 +258,7 @@ def run_quick_wind_detection() -> dict:
                         "baseline_aov": base["avg_aov"],
                         "z_score": z_score
                     },
-                    "terms": ["Z-Score", "PAR Level", "Meat Draw", "Gross Margin %"]
+                    "terms": ["Rush Signal", "Prep Target", "Meat Used Per Hour", "Left After Meat Cost"]
                 })
 
             # Rule 3: Premature Meat Depletion Risk (Burn rate outpacing schedule)
@@ -260,8 +271,8 @@ def run_quick_wind_detection() -> dict:
                     "event_type": "depletion_risk",
                     "severity": "warning",
                     "severity_badge": "⚠️ Premature Depletion Risk",
-                    "headline": f"High Meat Draw Velocity: 70% of Daily PAR Consumed by {h:02d}:00",
-                    "immediate_present_status": f"Cumulative meat draw has reached {cumulative_meat_lbs:.1f} lbs ({cumulative_meat_lbs/daily_par_lbs*100:.0f}% of morning PAR) before 3:30 PM. At this burn rate, prime brisket and ribs will 86 by 5:30 PM.",
+                    "headline": f"Meat Going Fast: 70% of Today's Prep Target Used by {h:02d}:00",
+                    "immediate_present_status": f"We've used {cumulative_meat_lbs:.1f} lbs of meat ({cumulative_meat_lbs/daily_par_lbs*100:.0f}% of the morning prep target) before 3:30 PM. At this pace, prime brisket and ribs will 86 by 5:30 PM.",
                     "causal_explanation": "Accelerated lunchtime carryout orders and high meat portion ratios drained holding stock faster than the evening transition target.",
                     "recommended_pit_action": "Throttle bulk to-go brisket orders to 1.5 lbs max per guest; prompt cashier to recommend Texas hot links ($5/link) and pulled pork combos; update website social banner with evening sellout warning.",
                     "velocity_metrics": {
@@ -273,7 +284,7 @@ def run_quick_wind_detection() -> dict:
                         "baseline_aov": base["avg_aov"],
                         "z_score": z_score
                     },
-                    "terms": ["Meat Draw", "PAR Level", "Food Cost %", "Cooked Yield %"]
+                    "terms": ["Meat Used Per Hour", "Prep Target", "Meat Cost %", "Cooked Yield %"]
                 })
 
     # Weather quick-wind alert synthesis
@@ -301,7 +312,7 @@ def run_quick_wind_detection() -> dict:
                     "precipitation_in": precip,
                     "wind_speed_mph": wind_mph
                 },
-                "terms": ["Shrinkage", "PAR Level", "COGS"]
+                "terms": ["Shrinkage", "Prep Target", "Est. Meat Cost"]
             })
 
     # Select the primary active quick-wind alert
@@ -316,8 +327,8 @@ def run_quick_wind_detection() -> dict:
             "hour_formatted": f"{datetime.now().hour:02d}:00",
             "event_type": "nominal_tracking",
             "severity": "info",
-            "severity_badge": "⚡ Live Pit Velocity Normal",
-            "headline": "Counter Velocity Tracking Historical Baseline Within ±5%",
+            "severity_badge": "⚡ Normal Pace",
+            "headline": "Sales Pace Within 5% of a Typical Day",
             "immediate_present_status": "Current orders and meat draw are closely aligned with historical day-of-week expectations. Pit airflow and warming cabinet inventory are balanced.",
             "causal_explanation": "Steady foot traffic without sudden catering spikes or line stalls.",
             "recommended_pit_action": "Maintain 140°F holding cabinet temperature; keep 2 briskets resting ahead of lunch rush; monitor post oak coal bed.",
@@ -325,7 +336,7 @@ def run_quick_wind_detection() -> dict:
                 "z_score": 0.05,
                 "variance_pct": "+2.1%"
             },
-            "terms": ["PAR Level", "Meat Draw", "Gross Margin %"]
+            "terms": ["Prep Target", "Meat Used Per Hour", "Left After Meat Cost"]
         }
 
     output_payload = {

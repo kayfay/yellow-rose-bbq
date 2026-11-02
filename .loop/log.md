@@ -112,3 +112,33 @@
 - Moved #daily-executive-brief-banner (sales/rush summary, pit intel, 10 tips, glossary, term drawer) and the supplier/case-spec panel into #subtab-view-reports, opened by #btn-subtab-reports at the end of the forecasting subtab row.
 - Fixed unclosed #forecasting-operational-tools div in index.html. Bumped app.js/style.css cache-busters to v=2.1.1.
 - Tests: brief/tips specs open the Reports subtab; new tests/e2e/layout_order.spec.js. npm test: 18 pass + 1 known flake (Horizon Presets, also fails on untouched HEAD).
+
+## 2026-11-02 · AGENTS.md harness baseline
+- Rewrote AGENTS.md (old copy archived at archive/AGENTS.md.2026-10-07.orig); CLAUDE.md -> AGENTS.md symlink.
+- Corrected venv: `.venv` (py3.13), not `.venv4`. No Docker. Python tests use unittest (pytest not installed).
+- Baseline: npm run check OK; unittest 5/5 OK; npm test 16 pass / 2 fail / 1 flaky against uncommitted app.js/index.html (console_cleanliness NaN SVG path, dashboard Pitmaster Intelligence, v2_facelift Executive BI brief).
+
+## 2026-11-02 · Analytics Timestamp Harmonization & Pipeline Guardrails
+- Discrepancy resolved: Top header displayed stale "Data Last Pulled: Oct 30..." from frozen `generated_at` in `dashboard_payload.json`, while bottom footer showed "Last Updated: 10/31..." from `sync_status.json` formatted via browser local time.
+- Standardized UI copy in `index.html`: changed `#data-last-pulled` prefix to "Data Last Synced:" and bottom footer label to "Last Synced:".
+- Unified timestamp resolution in `app.js` (`updateSyncStatusTime`): inspects latest timestamp across all loaded payloads (`dashboard_payload`, `predictive_payload`, `hourly_actuals`, `quick_wind_alerts`, and `sync_status.json`) and formats both top and bottom with `window.ShopTime.formatShopTimestamp()`.
+- Pipeline enhancements in `clover_api/analytics/build_payloads.py` and `dashboard.py`: automatically updates `sync_status.json` (in both `clover_api/analytics/` and `analytics/`) and `forecast.generated_at` with current shop time (America/New_York) upon payload build.
+- Fixed Plotly SVG `NaN` path rendering errors in `weather_impact.py` (empty traces instead of `[None]`) and `advanced_analytics.py` (fallback benchmark traces and `length > 0` guard in `app.js`).
+- Resolved closed-day copy in `app.js` and `scripts/daily_insight_engine.py` for Monday shop closure.
+- Backed up `Harness_Engineering_AI_Agents.docx` into `backups/`.
+- Tests: `npm run check` (0 errors), `node --check tz_utils.js` (0 errors), `python -m unittest discover -s clover_api/tests` (5/5 PASS), `verify_bi_insight_engine.py` (100% PASS), `verify_v2_facelift_pal.py` (100% PASS), `npm test` Playwright E2E: 19 passed / 0 failed (14.7s).
+
+## 2026-11-02 · Dead term pills in Daily Insight card
+- .env chmod 600.
+- After the timestamp/NaN agent finished: npm test 18 pass / 1 flaky (dashboard.spec.js "Daily Pitmaster Intelligence", line 251: #term-explainer-drawer stayed hidden; 6/15 fails on repeat).
+- Cause: ml_insights.json terms `Baseline`, `Velocity`, `Regression`, `Tallow Rest` have no glossary entry (builtin or quick_wind_alerts.glossary_terms); openTermExplainer returned silently, so the pill was a dead button. Test failed whenever the random insight's first pill was one of these.
+- Fix (app.js): added lookupGlossaryTerm(); insight card renders only pills that resolve to a glossary entry. Bumped app.js?v=2.1.2.
+- Tests: npm run check OK; Pitmaster test 30/30 on --repeat-each; npm test 19/19 pass.
+- Open: ml_data_intelligence_engine.py still emits jargon terms ("Velocity", "Z-Score") that patterns.md bans from UI.
+
+## 2026-11-02 · Plain-English term pills & glossary
+- Renamed: PAR Level→Prep Target, AOV→Average Ticket, Z-Score→Rush Signal, Meat Draw→Meat Used Per Hour, COGS→Est. Meat Cost, Food Cost %→Meat Cost %, Gross Margin %→Left After Meat Cost, Baseline→Typical Day, Velocity→Hourly Sales Pace, Regression→Sales Trend. Kept kitchen terms Cooked Yield %, Shrinkage, Tallow Rest.
+- Rewrote all 13 glossary definitions without jargon (app.js + hourly_quick_wind_detector.py), added the 4 that were missing; removed jargon full_name subtitles.
+- De-jargoned user-facing strings in hourly_quick_wind_detector.py (8 headlines/status) and ml_data_intelligence_engine.py (10 evidence/proof/labels). Regenerated ml_insights.json, quick_wind_alerts.json, payloads.js.
+- dashboard.spec.js glossary counts: 9→13 total, pit 4→5, volume 2→5.
+- Tests: npm run check OK; unittest 5/5; verify_bi_insight_engine + verify_v2_facelift_pal exit 0; Pitmaster test 15/15 repeated; npm test 19/19.

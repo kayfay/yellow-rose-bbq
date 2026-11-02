@@ -290,7 +290,7 @@ test.describe('Dashboard Verification', () => {
     await expect(glossary).toBeVisible();
 
     const glossaryCards = page.locator('#glossary-card-grid .glossary-card');
-    await expect(glossaryCards).toHaveCount(9);
+    await expect(glossaryCards).toHaveCount(13);
 
     // Verify card content explains "What It Means" and "How It Helps Your Pit"
     const firstCardText = await glossaryCards.first().textContent();
@@ -301,24 +301,24 @@ test.describe('Dashboard Verification', () => {
     await page.click('.glossary-cat-btn[data-cat="cost"]');
     await page.waitForTimeout(200);
     const costCards = page.locator('#glossary-card-grid .glossary-card');
-    await expect(costCards).toHaveCount(3); // COGS, Food Cost %, Gross Margin %
+    await expect(costCards).toHaveCount(3); // Est. Meat Cost, Meat Cost %, Left After Meat Cost
 
     // Filter by Pit & Smoker
     await page.click('.glossary-cat-btn[data-cat="pit"]');
     await page.waitForTimeout(200);
     const pitCards = page.locator('#glossary-card-grid .glossary-card');
-    await expect(pitCards).toHaveCount(4); // PAR Level, Meat Draw, Cooked Yield %, Shrinkage
+    await expect(pitCards).toHaveCount(5); // Prep Target, Meat Used Per Hour, Cooked Yield %, Shrinkage, Tallow Rest
 
     // Filter by Volume & Math
     await page.click('.glossary-cat-btn[data-cat="volume"]');
     await page.waitForTimeout(200);
     const volCards = page.locator('#glossary-card-grid .glossary-card');
-    await expect(volCards).toHaveCount(2); // AOV, Z-Score
+    await expect(volCards).toHaveCount(5); // Average Ticket, Rush Signal, Typical Day, Hourly Sales Pace, Sales Trend
 
     // Reset to all
     await page.click('.glossary-cat-btn[data-cat="all"]');
     await page.waitForTimeout(200);
-    await expect(page.locator('#glossary-card-grid .glossary-card')).toHaveCount(9);
+    await expect(page.locator('#glossary-card-grid .glossary-card')).toHaveCount(13);
 
     // Toggle collapse on glossary
     const toggleGlossaryBtn = page.locator('#btn-toggle-glossary');

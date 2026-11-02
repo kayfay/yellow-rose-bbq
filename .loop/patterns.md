@@ -10,6 +10,7 @@
 ## 2. Plain-English Daily Insight Engine (PAL Rules & Zero-Jargon Mandate)
 - Anomaly Math (Backend Only): `z = (x_t - mu_dow) / max(sigma_dow, 1e-6)`; Variance: `pct_var = ((x_t - mu_dow) / mu_dow) * 100`.
 - Zero-Jargon UI Rule: Never display `"DOW Base"`, `"Z-Score"`, `"Sigma"`, `"COGS"`, `"Velocity"`, `"Elasticity"`, or `"Stadium Lift"`. Use plain English: `"Typical [Day]"`, `"Est. Meat Cost"`, `"Left After Meat Cost"`, `"Hourly Sales Pace"`, `"Today's Weather Impact"`, `"Local Game Day Boost"`.
+- Term Pills/Glossary (13, one list in app.js BUILTIN_ANALYTIC_GLOSSARY + hourly_quick_wind_detector.py): Prep Target, Average Ticket, Rush Signal, Meat Used Per Hour, Cooked Yield %, Shrinkage, Tallow Rest, Est. Meat Cost, Meat Cost %, Left After Meat Cost, Typical Day, Hourly Sales Pace, Sales Trend. Any new insight term needs a glossary entry in both.
 - Executive Brief Invariant: lives in the "Shop Reports" subtab (#subtab-view-reports), NEVER above the date picker or projections, + 1-click Printable 1-Page Sheet + `daily_executive_brief.json` with: (1) **What's Happening Today (The Insight)** and (2) **Recommended Next Step (The Action)**.
 
 ## 3. Executive Data Visualization & Okabe-Ito Colorblind-Safe Tokens

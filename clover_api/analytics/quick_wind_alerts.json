@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T09:24:18.271968-04:00",
+  "generated_at": "2026-11-02T16:21:11.071947-05:00",
   "total_alerts_detected": 15,
   "active_alert": {
     "alert_id": "qw-aov-2026-10-30-19",
@@ -9,7 +9,7 @@
     "event_type": "ticket_spike",
     "severity": "surge",
     "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-    "headline": "Large Group / Catering Ticket Spike (AOV $50.34 vs $46.80 Normal)",
+    "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.34 vs $46.80 Usual)",
     "immediate_present_status": "Counter ticket size jumped to $50.34/order (+8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
     "causal_explanation": "Large office/family group orders concentrated in the 19:00 window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
     "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
@@ -23,9 +23,9 @@
       "z_score": -0.34
     },
     "terms": [
-      "AOV",
-      "Meat Draw",
-      "PAR Level",
+      "Average Ticket",
+      "Meat Used Per Hour",
+      "Prep Target",
       "Cooked Yield %"
     ]
   },
@@ -38,9 +38,9 @@
       "event_type": "rush_acceleration",
       "severity": "surge",
       "severity_badge": "\ud83d\ude80 Rush Acceleration",
-      "headline": "Customer Rush Acceleration (+59% Order Velocity, Z=+1.76)",
-      "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 24 tickets/hr (expected 15.1), generating $834.84/hr with a statistical Z-Score of +1.76.",
-      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
+      "headline": "Customer Rush Building (+59% More Orders Than Usual)",
+      "immediate_present_status": "The line is getting longer. Orders hit 24 tickets/hr (usual: 15.1), bringing in $834.84/hr.",
+      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
       "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
       "velocity_metrics": {
         "actual_sales": 834.84,
@@ -52,10 +52,10 @@
         "z_score": 1.76
       },
       "terms": [
-        "Z-Score",
-        "PAR Level",
-        "Meat Draw",
-        "Gross Margin %"
+        "Rush Signal",
+        "Prep Target",
+        "Meat Used Per Hour",
+        "Left After Meat Cost"
       ]
     },
     {
@@ -66,7 +66,7 @@
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (AOV $65.02 vs $39.75 Normal)",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $65.02 vs $39.75 Usual)",
       "immediate_present_status": "Counter ticket size jumped to $65.02/order (+64% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
       "causal_explanation": "Large office/family group orders concentrated in the 13:00 window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
@@ -80,9 +80,9 @@
         "z_score": 2.53
       },
       "terms": [
-        "AOV",
-        "Meat Draw",
-        "PAR Level",
+        "Average Ticket",
+        "Meat Used Per Hour",
+        "Prep Target",
         "Cooked Yield %"
       ]
     },
@@ -94,9 +94,9 @@
       "event_type": "rush_acceleration",
       "severity": "surge",
       "severity_badge": "\ud83d\ude80 Rush Acceleration",
-      "headline": "Customer Rush Acceleration (+45% Order Velocity, Z=+1.24)",
-      "immediate_present_status": "Front-of-house line compression is accelerating. Order throughput reached 18 tickets/hr (expected 12.4), generating $669.48/hr with a statistical Z-Score of +1.24.",
-      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, creating rapid counter queue accumulation faster than baseline.",
+      "headline": "Customer Rush Building (+45% More Orders Than Usual)",
+      "immediate_present_status": "The line is getting longer. Orders hit 18 tickets/hr (usual: 12.4), bringing in $669.48/hr.",
+      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
       "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
       "velocity_metrics": {
         "actual_sales": 669.48,
@@ -108,10 +108,10 @@
         "z_score": 1.24
       },
       "terms": [
-        "Z-Score",
-        "PAR Level",
-        "Meat Draw",
-        "Gross Margin %"
+        "Rush Signal",
+        "Prep Target",
+        "Meat Used Per Hour",
+        "Left After Meat Cost"
       ]
     },
     {
@@ -122,7 +122,7 @@
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (AOV $50.45 vs $52.88 Normal)",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.45 vs $52.88 Usual)",
       "immediate_present_status": "Counter ticket size jumped to $50.45/order (+-5% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
       "causal_explanation": "Large office/family group orders concentrated in the 17:00 window. While ticket volume (14 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
@@ -136,9 +136,9 @@
         "z_score": 0.27
       },
       "terms": [
-        "AOV",
-        "Meat Draw",
-        "PAR Level",
+        "Average Ticket",
+        "Meat Used Per Hour",
+        "Prep Target",
         "Cooked Yield %"
       ]
     },
@@ -150,7 +150,7 @@
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (AOV $50.34 vs $46.80 Normal)",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.34 vs $46.80 Usual)",
       "immediate_present_status": "Counter ticket size jumped to $50.34/order (+8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
       "causal_explanation": "Large office/family group orders concentrated in the 19:00 window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
@@ -164,67 +164,78 @@
         "z_score": -0.34
       },
       "terms": [
-        "AOV",
-        "Meat Draw",
-        "PAR Level",
+        "Average Ticket",
+        "Meat Used Per Hour",
+        "Prep Target",
         "Cooked Yield %"
       ]
     }
   ],
   "glossary_terms": {
-    "PAR Level": {
-      "term": "PAR Level",
-      "full_name": "Periodic Automatic Replenishment",
-      "definition": "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
-      "how_it_helps": "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+    "Prep Target": {
+      "term": "Prep Target",
+      "definition": "How much cooked meat, sides and raw stock should be ready at each shift change so we don't run out or over-prep.",
+      "how_it_helps": "Keeps us from 86ing meat at lunch and cuts end-of-day waste by setting clear morning and afternoon slicing amounts."
     },
-    "AOV": {
-      "term": "AOV",
-      "full_name": "Average Order Value",
-      "definition": "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
-      "how_it_helps": "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+    "Average Ticket": {
+      "term": "Average Ticket",
+      "definition": "The average dollar amount per order: total sales divided by number of orders.",
+      "how_it_helps": "Shows whether a busy hour is lots of small sandwich orders or a few big platters ($145 King of the Hill), so the cutting board can pace whole-brisket slicing."
     },
-    "Z-Score": {
-      "term": "Z-Score",
-      "full_name": "Standard Score",
-      "definition": "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
-      "how_it_helps": "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+    "Rush Signal": {
+      "term": "Rush Signal",
+      "definition": "How far this hour's orders are above what we usually see at this hour on this day of the week. The bigger the number, the more unusual the rush.",
+      "how_it_helps": "Ignores normal small ups and downs, so an alert means a real rush that needs the pitmaster's attention."
     },
-    "Meat Draw": {
-      "term": "Meat Draw",
-      "full_name": "Burn Rate / Carve Velocity",
-      "definition": "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140\u00b0F holding cabinet to fulfill guest trays.",
-      "how_it_helps": "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+    "Meat Used Per Hour": {
+      "term": "Meat Used Per Hour",
+      "definition": "How many pounds of finished meat get carved and pulled from the 140\u00b0F holding cabinet each hour.",
+      "how_it_helps": "Warns the pitmaster hours ahead if we'll sell out before dinner, leaving time to adjust portions or push sausage combos."
     },
     "Cooked Yield %": {
       "term": "Cooked Yield %",
-      "full_name": "Usable Cooked Yield",
-      "definition": "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
-      "how_it_helps": "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+      "definition": "How much sellable meat is left after trimming and smoking: finished sliced weight \u00f7 raw weight \u00d7 100.",
+      "how_it_helps": "Shows the real cost of meat on the board. Choice packer brisket yields about 50\u201352%, so $5.08/lb raw costs about $10.00/lb sliced."
     },
     "Shrinkage": {
       "term": "Shrinkage",
-      "full_name": "Smokehouse Cooking Shrinkage",
-      "definition": "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
-      "how_it_helps": "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+      "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 48\u201350% for brisket, 40\u201342% for pork butt).",
+      "how_it_helps": "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
     },
-    "COGS": {
-      "term": "COGS",
-      "full_name": "Cost of Goods Sold",
-      "definition": "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
-      "how_it_helps": "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+    "Tallow Rest": {
+      "term": "Tallow Rest",
+      "definition": "Holding finished brisket wrapped with warm beef tallow at about 145\u00b0F until it's sliced.",
+      "how_it_helps": "Keeps brisket juicy and hot for hours, so an early cook can still be sold at dinner."
     },
-    "Food Cost %": {
-      "term": "Food Cost %",
-      "full_name": "Food Cost Percentage",
-      "definition": "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
-      "how_it_helps": "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+    "Est. Meat Cost": {
+      "term": "Est. Meat Cost",
+      "definition": "What we pay for the meat in a menu item, plus rub, sauce, butcher paper and to-go containers.",
+      "how_it_helps": "Shows the real cost per serving so prices still work when beef prices move."
     },
-    "Gross Margin %": {
-      "term": "Gross Margin %",
-      "full_name": "Gross Profit Margin",
-      "definition": "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
-      "how_it_helps": "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
+    "Meat Cost %": {
+      "term": "Meat Cost %",
+      "definition": "Est. Meat Cost divided by the menu price, as a percentage.",
+      "how_it_helps": "Texas BBQ usually aims for 28\u201332%. Items over 40% (like a brisket sandwich sold alone) need a price or portion fix."
+    },
+    "Left After Meat Cost": {
+      "term": "Left After Meat Cost",
+      "definition": "The share of each sale left after paying for the meat: (menu price \u2212 Est. Meat Cost) \u00f7 menu price \u00d7 100.",
+      "how_it_helps": "This is the money that pays the crew, post oak deliveries, rent and smoker upkeep."
+    },
+    "Typical Day": {
+      "term": "Typical Day",
+      "definition": "What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).",
+      "how_it_helps": "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
+    },
+    "Hourly Sales Pace": {
+      "term": "Hourly Sales Pace",
+      "definition": "Orders or dollars coming in per hour right now.",
+      "how_it_helps": "Shows when the lunch and dinner rushes start building, so the cutting board can get ahead of the line."
+    },
+    "Sales Trend": {
+      "term": "Sales Trend",
+      "definition": "How sales move with something else, like temperature or rain, measured across many past days.",
+      "how_it_helps": "Turns 'rainy days feel slow' into a number you can plan prep around."
     }
   }
 }

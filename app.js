@@ -1103,10 +1103,10 @@ function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
       status_badge: expSales === 0 ? `Closed Monday — Pit Cold` : `${labelStr} (${pct >= 0 ? '+' : ''}${pct}% vs. Usual)`,
       status_tone: pct >= 10 ? 'surge' : (pct <= -10 ? 'lull' : 'steady'),
       the_insight: expSales === 0
-        ? `The shop is closed on Monday with $0 in counter sales and 0 lbs of hot-holding barbecue required.`
+        ? `The shop is closed on Monday with $0 in counter sales (typical Monday baseline) and 0 lbs of hot-holding barbecue required.`
         : `${labelStr} sales ($${expSales.toLocaleString()}) are tracking ${Math.abs(pct)}% ($${Math.abs(diffUsd).toLocaleString()}) ${diffWord} the usual $${typSales.toLocaleString()} pace, leaving ~$${leftover.toLocaleString()} for the shop after ~$${meatCost.toLocaleString()} in estimated meat cost.`,
       the_action: expSales === 0
-        ? `Keep main offset smokers cold, deep-clean the firebox, and grind/cure Day 1 sausage batches for Tuesday's opening smoke.`
+        ? `Keep main offset smokers cold, deep-clean the firebox, inspect Tuesday opening Brisket trims, and grind/cure Day 1 sausage batches.`
         : `Prep ${Math.round(bRaw)} lbs raw Brisket (~${Math.round(bRaw * 0.40)} lbs cooked), ${Math.round(pRaw)} lbs raw Pulled Pork (~${Math.round(pRaw * 0.44)} lbs cooked), ${Math.round(rRacks)} racks of Spare Ribs, and ${Math.round(tCooked / 0.70)} lbs raw Turkey (~${Math.round(tCooked)} lbs cooked) ahead of peak rush.`,
       sales_bridge: {
         typical_day_label: `Usual ${labelStr}`,
@@ -1378,77 +1378,96 @@ let _lastBrief = null;
 let _lastIsNextServicePreview = false;
 
 const BUILTIN_ANALYTIC_GLOSSARY = {
-  "PAR Level": {
-    term: "PAR Level",
-    full_name: "Periodic Automatic Replenishment",
+  "Prep Target": {
+    term: "Prep Target",
     category: "pit",
     category_label: "🔥 Pit & Smoker",
-    definition: "The exact target quantity of cooked meat, prepped sides, or raw stock that must be on hand at each shift change to satisfy anticipated demand without running out or over-prepping.",
-    how_it_helps: "Prevents 86ing meat during peak lunch and stops costly end-of-day waste by establishing strict morning and afternoon slicing thresholds."
+    definition: "How much cooked meat, sides and raw stock should be ready at each shift change so we don't run out or over-prep.",
+    how_it_helps: "Keeps us from 86ing meat at lunch and cuts end-of-day waste by setting clear morning and afternoon slicing amounts."
   },
-  "AOV": {
-    term: "AOV",
-    full_name: "Average Order Value",
+  "Average Ticket": {
+    term: "Average Ticket",
     category: "volume",
     category_label: "📊 Volume & Math",
-    definition: "The average dollar amount spent per customer transaction, calculated as Total Revenue divided by Total Order Count.",
-    how_it_helps: "Detects whether high volume is driven by hundreds of small individual sandwiches or a few high-dollar Texas feast platters ($145 King of the Hill), allowing the cutting board to pace whole-muscle slicing."
+    definition: "The average dollar amount per order: total sales divided by number of orders.",
+    how_it_helps: "Shows whether a busy hour is lots of small sandwich orders or a few big platters ($145 King of the Hill), so the cutting board can pace whole-brisket slicing."
   },
-  "Z-Score": {
-    term: "Z-Score",
-    full_name: "Standard Score",
+  "Rush Signal": {
+    term: "Rush Signal",
     category: "volume",
     category_label: "📊 Volume & Math",
-    definition: "A statistical measure indicating how many standard deviations current hourly sales or order velocity deviate from the historical average for that specific hour and day of week.",
-    how_it_helps: "Filters out normal small fluctuations: a Z-score above +1.5 immediately flags a statistically significant rush requiring urgent pitmaster intervention."
+    definition: "How far this hour's orders are above what we usually see at this hour on this day of the week. The bigger the number, the more unusual the rush.",
+    how_it_helps: "Ignores normal small ups and downs, so an alert means a real rush that needs the pitmaster's attention."
   },
-  "Meat Draw": {
-    term: "Meat Draw",
-    full_name: "Burn Rate / Carve Velocity",
+  "Meat Used Per Hour": {
+    term: "Meat Used Per Hour",
     category: "pit",
     category_label: "🔥 Pit & Smoker",
-    definition: "The velocity (in pounds per hour) at which finished meat is carved and removed from the 140°F holding cabinet to fulfill guest trays.",
-    how_it_helps: "Alerts the pitmaster hours in advance if current carve velocity will cause an early sellout before dinner, giving time to throttle portion sizes or push combo sausages."
+    definition: "How many pounds of finished meat get carved and pulled from the 140°F holding cabinet each hour.",
+    how_it_helps: "Warns the pitmaster hours ahead if we'll sell out before dinner, leaving time to adjust portions or push sausage combos."
   },
   "Cooked Yield %": {
     term: "Cooked Yield %",
-    full_name: "Usable Cooked Yield",
     category: "pit",
     category_label: "🔥 Pit & Smoker",
-    definition: "The percentage of usable, saleable meat remaining after trimming and smoking, calculated as (Finished Sliced Weight / Raw Untrimmed Weight) * 100.",
-    how_it_helps: "Ensures true wholesale meat costs are accounted for. Choice packer brisket yields ~50-52%, meaning a $5.08/lb raw brisket actually costs ~$10.00/lb on the cutting board."
+    definition: "How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.",
+    how_it_helps: "Shows the real cost of meat on the board. Choice packer brisket yields about 50–52%, so $5.08/lb raw costs about $10.00/lb sliced."
   },
   "Shrinkage": {
     term: "Shrinkage",
-    full_name: "Smokehouse Cooking Shrinkage",
     category: "pit",
     category_label: "🔥 Pit & Smoker",
-    definition: "The loss of raw meat weight during smoking caused by moisture evaporation and fat rendering (typically 48-50% for brisket, 40-42% for pork butt).",
-    how_it_helps: "Calibrates pitmaster smoker humidity and wrapping timing; excessive shrinkage means dry meat and lost profit per rack or packer."
+    definition: "Weight lost during smoking as moisture cooks off and fat renders (about 48–50% for brisket, 40–42% for pork butt).",
+    how_it_helps: "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
   },
-  "COGS": {
-    term: "COGS",
-    full_name: "Cost of Goods Sold",
+  "Tallow Rest": {
+    term: "Tallow Rest",
+    category: "pit",
+    category_label: "🔥 Pit & Smoker",
+    definition: "Holding finished brisket wrapped with warm beef tallow at about 145°F until it's sliced.",
+    how_it_helps: "Keeps brisket juicy and hot for hours, so an early cook can still be sold at dinner."
+  },
+  "Est. Meat Cost": {
+    term: "Est. Meat Cost",
     category: "cost",
     category_label: "💰 Profit & Costs",
-    definition: "The direct expenditure for raw meat, spices, peach paper, sauce, and takeout containers required to produce a menu item.",
-    how_it_helps: "Reveals the exact cost per serving so menu prices ensure sustainable margins even when raw beef prices fluctuate."
+    definition: "What we pay for the meat in a menu item, plus rub, sauce, butcher paper and to-go containers.",
+    how_it_helps: "Shows the real cost per serving so prices still work when beef prices move."
   },
-  "Food Cost %": {
-    term: "Food Cost %",
-    full_name: "Food Cost Percentage",
+  "Meat Cost %": {
+    term: "Meat Cost %",
     category: "cost",
     category_label: "💰 Profit & Costs",
-    definition: "Portion Cost of Goods Sold divided by the Retail Selling Price, expressed as a percentage.",
-    how_it_helps: "Industry target for Texas BBQ is 28-32%. Identifying items above 40% (like unbundled brisket sandwiches) guides pricing corrections and portion controls."
+    definition: "Est. Meat Cost divided by the menu price, as a percentage.",
+    how_it_helps: "Texas BBQ usually aims for 28–32%. Items over 40% (like a brisket sandwich sold alone) need a price or portion fix."
   },
-  "Gross Margin %": {
-    term: "Gross Margin %",
-    full_name: "Gross Profit Margin",
+  "Left After Meat Cost": {
+    term: "Left After Meat Cost",
     category: "cost",
     category_label: "💰 Profit & Costs",
-    definition: "The percentage of revenue remaining after subtracting COGS: (Retail Price - COGS) / Retail Price * 100.",
-    how_it_helps: "Provides the cash necessary to pay pitmasters, seasoned post oak wood deliveries, kitchen rent, and smoker equipment upkeep."
+    definition: "The share of each sale left after paying for the meat: (menu price − Est. Meat Cost) ÷ menu price × 100.",
+    how_it_helps: "This is the money that pays the crew, post oak deliveries, rent and smoker upkeep."
+  },
+  "Typical Day": {
+    term: "Typical Day",
+    category: "volume",
+    category_label: "📊 Volume & Math",
+    definition: "What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).",
+    how_it_helps: "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
+  },
+  "Hourly Sales Pace": {
+    term: "Hourly Sales Pace",
+    category: "volume",
+    category_label: "📊 Volume & Math",
+    definition: "Orders or dollars coming in per hour right now.",
+    how_it_helps: "Shows when the lunch and dinner rushes start building, so the cutting board can get ahead of the line."
+  },
+  "Sales Trend": {
+    term: "Sales Trend",
+    category: "volume",
+    category_label: "📊 Volume & Math",
+    definition: "How sales move with something else, like temperature or rain, measured across many past days.",
+    how_it_helps: "Turns 'rainy days feel slow' into a number you can plan prep around."
   }
 };
 
@@ -1467,13 +1486,16 @@ function getGlossaryData() {
   return BUILTIN_ANALYTIC_GLOSSARY;
 }
 
+function lookupGlossaryTerm(termKey, glossary = getGlossaryData()) {
+  const key = String(termKey).toLowerCase();
+  return glossary[termKey] || Object.values(glossary).find(g => String(g.term || '').toLowerCase() === key) || null;
+}
+
 function openTermExplainer(termKey) {
   const drawer = document.getElementById('term-explainer-drawer');
   if (!drawer) return;
 
-  const glossary = getGlossaryData();
-  const info = glossary[termKey] || Object.values(glossary).find(g => g.term.toLowerCase() === termKey.toLowerCase());
-
+  const info = lookupGlossaryTerm(termKey);
   if (!info) return;
 
   const nameEl = document.getElementById('term-drawer-name');
@@ -1541,7 +1563,10 @@ function renderDailyRandomInsight(forceNewIndex = false) {
     if (actionEl) actionEl.textContent = item.actionable_recommendation || 'Maintain standard operating procedures';
 
     if (termsGroup) {
-      const terms = Array.isArray(item.terms) ? item.terms : ['COGS', 'PAR Level'];
+      // Only show pills we can explain; a pill with no glossary entry is a dead button.
+      const glossary = getGlossaryData();
+      const terms = (Array.isArray(item.terms) ? item.terms : ['Est. Meat Cost', 'Prep Target'])
+        .filter(t => lookupGlossaryTerm(t, glossary));
       termsGroup.innerHTML = terms.map(t => `
         <button type="button" class="term-pill-btn" data-term="${t}" aria-label="Explain term ${t}">
           ${t} <span aria-hidden="true">ℹ️</span>
@@ -2126,14 +2151,33 @@ function initForecastingControls() {
 
   function updateSyncStatusTime() {
     const timeElem = document.getElementById('last-updated-time');
-    if (!timeElem) return;
+    const lastPulledElem = document.getElementById('data-last-pulled');
+    if (!timeElem && !lastPulledElem) return;
 
     const getPayloadTime = () => {
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
-        const d = new Date(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at);
-        if (!isNaN(d.getTime())) return d;
+      const candidates = [];
+      if (window.BBQ_PAYLOADS) {
+        if (window.BBQ_PAYLOADS.dashboard_payload && window.BBQ_PAYLOADS.dashboard_payload.forecast && window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at) {
+          candidates.push(window.BBQ_PAYLOADS.dashboard_payload.forecast.generated_at);
+        }
+        if (window.BBQ_PAYLOADS.predictive_payload && window.BBQ_PAYLOADS.predictive_payload.generated_at) {
+          candidates.push(window.BBQ_PAYLOADS.predictive_payload.generated_at);
+        }
+        if (window.BBQ_PAYLOADS.hourly_actuals && window.BBQ_PAYLOADS.hourly_actuals.generated_at) {
+          candidates.push(window.BBQ_PAYLOADS.hourly_actuals.generated_at);
+        }
+        if (window.BBQ_PAYLOADS.quick_wind_alerts && window.BBQ_PAYLOADS.quick_wind_alerts.generated_at) {
+          candidates.push(window.BBQ_PAYLOADS.quick_wind_alerts.generated_at);
+        }
       }
-      return null;
+      let latest = null;
+      for (const c of candidates) {
+        const d = new Date(c);
+        if (!isNaN(d.getTime())) {
+          if (!latest || d > latest) latest = d;
+        }
+      }
+      return latest;
     };
 
     const setTimeText = (syncDate) => {
@@ -2142,10 +2186,15 @@ function initForecastingControls() {
       if (!bestDate || (payloadDate && payloadDate > bestDate)) {
         bestDate = payloadDate;
       }
-      if (bestDate && !isNaN(bestDate.getTime())) {
-        timeElem.textContent = bestDate.toLocaleString();
-      } else {
-        timeElem.textContent = new Date().toLocaleTimeString();
+      const formatted = (bestDate && window.ShopTime && typeof window.ShopTime.formatShopTimestamp === 'function')
+        ? window.ShopTime.formatShopTimestamp(bestDate.toISOString())
+        : (bestDate ? bestDate.toLocaleString() : 'Live');
+
+      if (timeElem) {
+        timeElem.textContent = formatted;
+      }
+      if (lastPulledElem) {
+        lastPulledElem.textContent = `Data Last Synced: ${formatted}`;
       }
     };
     
@@ -2156,7 +2205,7 @@ function initForecastingControls() {
     
     fetch('clover_api/analytics/sync_status.json?v=' + Date.now())
       .catch(() => fetch('analytics/sync_status.json?v=' + Date.now()))
-      .then(res => res.json())
+      .then(res => (res && res.ok) ? res.json() : null)
       .then(data => {
         const syncDate = (data && data.last_synced_at) ? new Date(data.last_synced_at) : null;
         setTimeText(syncDate);
@@ -2165,6 +2214,7 @@ function initForecastingControls() {
         setTimeText(null);
       });
   }
+  window.updateSyncStatusTime = updateSyncStatusTime;
 
   const btnRefreshAnalytics = document.getElementById('btn-refresh-analytics');
   if (btnRefreshAnalytics) {
@@ -2412,13 +2462,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       console.log("Using embedded dashboard dataset fallback:", e);
     }
     
-    if (dashPayload && dashPayload.forecast && dashPayload.forecast.generated_at) {
-      const pulledStr = window.ShopTime ? window.ShopTime.formatShopTimestamp(dashPayload.forecast.generated_at) : null;
-      const lastPulledElem = document.getElementById('data-last-pulled');
-      if (pulledStr && lastPulledElem) {
-        lastPulledElem.textContent = `Data Last Pulled: ${pulledStr}`;
-      }
-    }
+    updateSyncStatusTime();
 
     let histPayload = null;
     try {
@@ -4044,7 +4088,7 @@ window.renderAdvancedAnalytics = function() {
 
   // 4. Sell-Out Chart
   const selloutChartElem = document.getElementById('plotly-sellout-chart');
-  if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data) {
+  if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data && payload.sell_out_prediction_chart.data.length > 0) {
     const sLayout = payload.sell_out_prediction_chart.layout || {};
     if (sLayout.xaxis) sLayout.xaxis.showgrid = false;
     if (isMobileViewport()) {

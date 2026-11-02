@@ -131,6 +131,12 @@
       "description": "Phase 6 & 7 Diagnostic Preview Controls (1440px + Colorblind Sim), Visual Gallery (progress.html) & Adversarial Critic Audit: Add colorblind simulation modes (Deuteranopia/Protanopia/Okabe-Ito) and 1440px viewport preset to debug drawer, update progress.html gallery, pass PAL & E2E verification suites, and achieve >= 9/10 Adversarial Critic score.",
       "acceptance_criteria": "All Tier 1/2 PAL & Playwright E2E suites exit 0; progress.html updated with desktop interactive vs mobile annotated static cards; Adversarial Critic rates legibility and insight actionability >= 9/10.",
       "passes": true
+    },
+    {
+      "id": 23,
+      "description": "Harmonize data synchronization timestamps and labels across header banner and footer frame: standardize copy ('Data Last Synced' / 'Last Synced'), update build pipeline to refresh sync_status.json and forecast timestamps to latest ISO in shop timezone (America/New_York), and unify app.js timestamp resolution with window.ShopTime.",
+      "acceptance_criteria": "Top header (#data-last-pulled) and bottom footer (#last-updated-time) read the latest payload sync timestamp and format consistently with shop timezone (ET); build_payloads.py automatically updates sync_status.json in both clover_api/analytics and analytics; Playwright E2E and PAL verifiers pass 100%.",
+      "passes": true
     }
   ]
 }

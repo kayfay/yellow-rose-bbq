@@ -306,14 +306,14 @@ def run_ml_intelligence_engine() -> dict:
                     f"delivering ${top_star['profit_usd']:.2f} in gross profit on a ${top_star['retail_usd']:.2f} ticket "
                     f"with only {top_star['food_cost_pct']}% food cost."
                 ),
-                "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier COGS Model",
+                "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier Meat Cost Model",
                 "quantitative_proof": f"${top_star['profit_usd']:.2f} profit ({top_star['margin_pct']}% margin) vs 29.5% kitchen average",
                 "actionable_recommendation": (
                     f"Train counter staff to actively recommend {top_star['item']} and feature it on POS modifier quick-keys; "
                     f"every 10 incremental orders generates +${top_star['profit_usd'] * 10:.2f} pure gross profit."
                 ),
                 "impact_usd": round(top_star['profit_usd'] * 15, 2),
-                "terms": ["COGS", "Food Cost %", "Gross Margin %", "PAR Level"]
+                "terms": ["Est. Meat Cost", "Meat Cost %", "Left After Meat Cost", "Prep Target"]
             })
 
         # Watch margin outlier insight (Brisket Sandwich)
@@ -326,16 +326,16 @@ def run_ml_intelligence_engine() -> dict:
                 "category_label": "⚠️ Pricing Disparity",
                 "insight": (
                     f"Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, "
-                    f"the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 portion COGS), severely compressing margin."
+                    f"the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 meat cost per portion), severely compressing margin."
                 ),
                 "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
                 "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 variance)",
                 "actionable_recommendation": (
                     "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted "
-                    "as add-on bundles to restore effective gross margin above 68%."
+                    "as add-on bundles to keep more than 68% of each sale after meat cost."
                 ),
                 "impact_usd": 480.0,
-                "terms": ["COGS", "Food Cost %", "AOV"]
+                "terms": ["Est. Meat Cost", "Meat Cost %", "Average Ticket"]
             })
 
     # 2. MIDWEEK REVENUE PLAYBOOK MINING (Image Infographic + Historical POS)
@@ -357,14 +357,14 @@ def run_ml_intelligence_engine() -> dict:
                 f"${avg_sat:,.2f} on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity "
                 f"by activating the $64 Midweek Family Feast Pack."
             ),
-            "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Historical Baseline",
+            "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Sales History",
             "quantitative_proof": f"Weekend ${infographic.get('weekend_revenue_usd', 37654):,.0f} vs Midweek ${infographic.get('midweek_revenue_usd', 6719):,.0f}",
             "actionable_recommendation": (
                 "Promote the $64 Family Feast Pack (1 lb brisket, 1/2 rack ribs, 2 sausage links, 3 sides) for early 2:00–4:30 PM pickup "
                 "to capture suburban dinner commuters before evening pit cool-down."
             ),
             "impact_usd": 1750.0,
-            "terms": ["AOV", "PAR Level", "Baseline"]
+            "terms": ["Average Ticket", "Prep Target", "Typical Day"]
         })
 
     # 3. SMOKER CAPACITY & PIT LIMIT CONSTRAINTS (OPERATIONAL_QUESTIONNAIRE.md)
@@ -386,7 +386,7 @@ def run_ml_intelligence_engine() -> dict:
             "allowing finished briskets to transfer into 145°F tallow hold by 2:00 PM while wave 2 loads."
         ),
         "impact_usd": 1200.0,
-        "terms": ["Cooked Yield %", "PAR Level", "Tallow Rest"]
+        "terms": ["Cooked Yield %", "Prep Target", "Tallow Rest"]
     })
 
     # 4. COMPOSITE MEAT ALLOCATION (Tacos & Rosebuds Draw from Brisket Point)
@@ -406,7 +406,7 @@ def run_ml_intelligence_engine() -> dict:
             "never carve into sliced flat reserves to fulfill composite taco orders."
         ),
         "impact_usd": 350.0,
-        "terms": ["Meat Draw", "COGS", "PAR Level"]
+        "terms": ["Meat Used Per Hour", "Est. Meat Cost", "Prep Target"]
     })
 
     # 5. WEATHER SENSITIVITY REGRESSION (Open-Meteo & Clover POS)
@@ -418,17 +418,17 @@ def run_ml_intelligence_engine() -> dict:
         "category": "weather_elasticity",
         "category_label": "🌧️ Weather Sensitivity",
         "insight": (
-            "Multivariate regression analysis across 80 weather-matched operating days proves that moderate rainfall shifts "
+            "Comparing 80 operating days by weather shows that moderate rainfall shifts "
             "counter volume into multi-pound takeout feasts, generating an average +$97.37/mm rain lift in high-ticket to-go family platters."
         ),
-        "evidence": "weather_payload.json & Open-Meteo API Historical Weather Regression",
+        "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
         "quantitative_proof": "Coefficient +$97.37/mm rainfall; 0.5% average sales bump during rain vs clear days",
         "actionable_recommendation": (
             "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, "
             "and side cups by 10:30 AM to prevent packing bottlenecks at the counter."
         ),
         "impact_usd": 290.0,
-        "terms": ["AOV", "Regression", "Baseline"]
+        "terms": ["Average Ticket", "Sales Trend", "Typical Day"]
     })
 
     # 6. SAUSAGE EMULSIFICATION & COLD BLEND ECONOMICS
@@ -443,13 +443,13 @@ def run_ml_intelligence_engine() -> dict:
             f"Utilizing in-house trim yields a base portion link cost of only $1.25 against a $7.00 retail price (17.9% food cost)."
         ),
         "evidence": "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md & wholesale_yields.csv",
-        "quantitative_proof": "$1.25 link cost / $7.00 retail = 82.1% gross margin (Super Star category)",
+        "quantitative_proof": "$1.25 link cost / $7.00 retail = 82.1% left after meat cost (Super Star category)",
         "actionable_recommendation": (
             "Never discard clean brisket fat cap trimmings; freeze in 15-lb labeled lugs to supply daily sausage production "
             "without purchasing external commercial fat."
         ),
         "impact_usd": 420.0,
-        "terms": ["Food Cost %", "COGS", "Cooked Yield %"]
+        "terms": ["Meat Cost %", "Est. Meat Cost", "Cooked Yield %"]
     })
 
     # 7. HOURLY TURNOVER & DINNER RUSH CONCENTRATION
@@ -459,19 +459,19 @@ def run_ml_intelligence_engine() -> dict:
             "id": 108,
             "title": "Dual-Rush Service Pacing: 12:00 PM Lunch vs 6:00 PM Evening Turnover",
             "category": "rush_pacing",
-            "category_label": "⏱️ Hourly Velocity",
+            "category_label": "⏱️ Hourly Sales Pace",
             "insight": (
                 "Hourly POS turnover analysis reveals that 68% of operating daily revenue occurs in two concentrated 90-minute blocks: "
                 "12:00 PM – 1:30 PM (lunch crowd, high sandwich/taco mix) and 5:30 PM – 7:00 PM (dinner rush, high platter/rib mix)."
             ),
             "evidence": "hourly_actuals.json (80 Days of Verified Clover Hourly Turnover)",
-            "quantitative_proof": "Peak lunch velocity averages 12–14 orders/hr; dinner rush averages 10–12 orders/hr",
+            "quantitative_proof": "Peak lunch pace averages 12–14 orders/hr; dinner rush averages 10–12 orders/hr",
             "actionable_recommendation": (
                 "Stage Batch 2 pork spare ribs into the holding cabinet by 4:15 PM so the glaze sets and meats rest at 145°F "
                 "prior to the 5:30 PM dinner surge."
             ),
             "impact_usd": 650.0,
-            "terms": ["Velocity", "PAR Level", "Z-Score"]
+            "terms": ["Hourly Sales Pace", "Prep Target", "Rush Signal"]
         })
 
     # 8. TEMPERATURE PATIO THRESHOLD (72°F–86°F SWEET SPOT)
@@ -484,14 +484,14 @@ def run_ml_intelligence_engine() -> dict:
             "Clover ticket timing correlated with daily high temperatures establishes that ambient temperatures between 72°F and 86°F "
             "expand restaurant capacity by +18–25% via outdoor picnic tables. Once temperatures breach 89°F, patio volume drops -22%."
         ),
-        "evidence": "weather_payload.json (Regression Model temp_coef = 27.4)",
+        "evidence": "weather_payload.json (temperature effect: 27.4)",
         "quantitative_proof": "+$27.40 sales per degree within 72°F–86°F; sharp drop-off above 88.7°F",
         "actionable_recommendation": (
             "When afternoon temperatures are projected between 72°F and 85°F, stage outdoor bussing stations and assign one dedicated runner "
             "to maximize patio counter turnover."
         ),
         "impact_usd": 380.0,
-        "terms": ["Baseline", "AOV"]
+        "terms": ["Typical Day", "Average Ticket"]
     })
 
     # 9. TEXAS TRAY MARGINS (King of the Hill vs Pitmaster Platter)
@@ -511,7 +511,7 @@ def run_ml_intelligence_engine() -> dict:
             "slicing block speed and guarantees even depletion of ribs, pork, and sausage."
         ),
         "impact_usd": 850.0,
-        "terms": ["AOV", "Gross Margin %", "COGS"]
+        "terms": ["Average Ticket", "Left After Meat Cost", "Est. Meat Cost"]
     })
 
     # 10. OPERATIONAL ROSTER & STATION HANDOFF INVARIANTS (STAFF_ROSTER.md)
@@ -532,7 +532,7 @@ def run_ml_intelligence_engine() -> dict:
             "ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 50.8% cooked yield."
         ),
         "impact_usd": 450.0,
-        "terms": ["PAR Level", "Meat Draw", "Cooked Yield %"]
+        "terms": ["Prep Target", "Meat Used Per Hour", "Cooked Yield %"]
     })
 
     payload = {
