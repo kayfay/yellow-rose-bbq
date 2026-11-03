@@ -126,6 +126,7 @@ function switchMainTab(targetTab) {
     if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
     if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
     if (typeof renderPlotlyShiftHeatmap === 'function') renderPlotlyShiftHeatmap();
+    if (typeof renderAdvancedAnalytics === 'function') renderAdvancedAnalytics();
     [
       'plotly-meat-sales-chart',
       'plotly-predictive-velocity-chart',
@@ -179,10 +180,30 @@ function initDesignDebugPanel() {
   const vpBtns = document.querySelectorAll('.debug-vp-btn');
   const cbBtns = document.querySelectorAll('.debug-cb-btn');
   const themeBtn = document.getElementById('btn-debug-contrast');
+  const unitModeBtn = document.getElementById('btn-debug-unit-mode');
   const rollupAllBtn = document.getElementById('btn-debug-rollup-toggle');
   const copyBtn = document.getElementById('btn-copy-debug-tokens');
   const statusEl = document.getElementById('debug-token-status');
   const printBtn = document.getElementById('btn-print-daily-brief');
+
+  if (typeof getUnitDisplayMode === 'function' && typeof setUnitDisplayMode === 'function') {
+    setUnitDisplayMode(getUnitDisplayMode());
+  }
+  if (unitModeBtn) {
+    unitModeBtn.addEventListener('click', () => {
+      const currentMode = typeof getUnitDisplayMode === 'function' ? getUnitDisplayMode() : 'case';
+      const nextMode = currentMode === 'case' ? 'lbs' : 'case';
+      if (typeof setUnitDisplayMode === 'function') {
+        setUnitDisplayMode(nextMode);
+      }
+      renderPlotlyForecastingChart(getActiveDaysCount());
+      if (statusEl) {
+        statusEl.textContent = nextMode === 'case'
+          ? 'Unit display: Case & Cut View (Default)'
+          : 'Unit display: Raw Lbs View';
+      }
+    });
+  }
 
   if (printBtn) {
     printBtn.addEventListener('click', () => {
@@ -262,11 +283,13 @@ function initDesignDebugPanel() {
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const styles = getComputedStyle(document.documentElement);
+      const activeUnitMode = typeof getUnitDisplayMode === 'function' ? getUnitDisplayMode() : 'case';
       const tokenPayload = {
         version: '2.1.0',
         activeViewportPreset: activePreviewWidth,
         windowInnerWidth: window.innerWidth,
         mobileTouchSafeCharts: isMobileViewport(),
+        unitDisplayMode: activeUnitMode,
         colorblindMode: activeColorblindMode,
         contrastMode: document.body.classList.contains('pit-high-contrast') ? 'pit-high-contrast' : 'smokehouse-dark',
         breakpoints: { mobileMax: 767, tabletMin: 768, desktopMin: 1280, executiveWide: 1440 },
@@ -290,7 +313,7 @@ function initDesignDebugPanel() {
       const jsonStr = JSON.stringify(tokenPayload, null, 2);
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(jsonStr).then(() => {
-          if (statusEl) statusEl.textContent = 'Copied v2.1.0 JSON tokens to clipboard';
+          if (statusEl) statusEl.textContent = 'Copied v2.2.0 JSON tokens to clipboard';
         }).catch(() => {
           if (statusEl) statusEl.textContent = 'Tokens serialized (clipboard unavailable)';
         });
@@ -975,6 +998,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         (matchedRecord?.predicted_revenue !== undefined && matchedRecord.predicted_revenue <= 0 && !matchedRecord.is_historical)
       )
     );
+    const closedDayLabel = targetDateInput.endsWith('-12-25') ? 'Christmas' : (['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][targetDateObj.getDay()] || 'Today');
 
     let bRaw = 0, pRaw = 0, sVal = 0, rVal = 0, drVal = 0, totalTacos = 0, totalRosebuds = 0, totalRev = 0, tVal = 0;
     let totalCogs = 0, totalStaff = 0, totalLaborHours = 0;
@@ -987,7 +1011,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const benchmark = ['Fri', 'Sat', 'Sun'].includes(r.day_name) ? 3500 : 2800;
       const revMultiplier = rev > 0 ? Math.min(1.10, Math.max(0.90, rev / benchmark)) : 1.0;
       const cookedDemand = baseCooked * revMultiplier;
-      const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // +10% safety buffer
+      const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // +10% Extra Prep / Cushion
       const rawTarget = Math.round((cookedTarget / 0.70) * 10) / 10;   // 70% nominal yield
       return { cooked: cookedTarget, raw: rawTarget };
     }
@@ -1213,7 +1237,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           <span class="compare-num num-act">${actStr}</span>
         </div>
         <div class="compare-delta-line">
-          <span style="color:#94a3b8; font-size:9px; text-transform:uppercase; font-weight:700;">Variance:</span>
+          <span style="color:#94a3b8; font-size:9px; text-transform:uppercase; font-weight:700;">Difference from Target:</span>
           <span class="delta-pill ${deltaClass}">${deltaText}</span>
         </div>
         ${descHTML}
@@ -1303,6 +1327,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         evalPillElem.className = 'eval-pill eval-pill-closed';
         evalPillElem.textContent = 'Closed Day';
         evalBodyElem.innerHTML = `
+          <div class="audit-plain-takeaway">
+            <strong>Takeaway:</strong> Smokehouse is closed on Monday for scheduled pit maintenance (0 briskets, 0 butts, and 0 racks needed today).
+          </div>
           <div class="model-eval-narrative">
             <strong>Smokehouse Closed (Pit Maintenance Window)</strong>: Scheduled non-operating Monday reserved for pit cleaning and wood restocking. Targets and labor are calibrated to zero.
           </div>
@@ -1523,8 +1550,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const actBPortions = Math.round(actCookedBrisket * 2.3);
       const estBPortions = Math.round(blendedCookedBrisket * 2.3);
       setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
-        'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)',
-        'Measured Yield', '~' + Math.round(actCookedBrisket) + '# ck sold (~' + blendedRawBrisket + '# raw)',
+        'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + ' lbs cooked)',
+        'Measured Yield', '~' + Math.round(actCookedBrisket) + ' lbs cooked sold (~' + blendedRawBrisket + ' lbs raw)',
         bDiff, 'lbs', bPct, null,
         `Plain English: ~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ~${estBPortions} day-end portions (~${blendedRawBrisket} lbs raw prep).`
       ));
@@ -1534,8 +1561,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const actPPortions = Math.round(actCookedPork * 2.0);
       const estPPortions = Math.round(blendedCookedPork * 2.0);
       setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
-        'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)',
-        'Measured Yield', '~' + Math.round(actCookedPork) + '# ck sold (~' + blendedRawPork + '# raw)',
+        'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + ' lbs cooked)',
+        'Measured Yield', '~' + Math.round(actCookedPork) + ' lbs cooked sold (~' + blendedRawPork + ' lbs raw)',
         pDiff, 'lbs', pPct, null,
         `Plain English: ~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ~${estPPortions} day-end sandwiches.`
       ));
@@ -1572,8 +1599,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const actTPortions = Math.round(actTurkeyCooked * 3.2);
       const estTPortions = Math.round(blendedTurkeyCooked * 3.2);
       setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
-        'Predicted Total', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)',
-        'Measured Yield', '~' + Math.round(actTurkeyCooked) + '# sold (~' + Math.round(blendedTurkeyCooked) + '# ck)',
+        'Predicted Total', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + ' lbs raw)',
+        'Measured Yield', '~' + Math.round(actTurkeyCooked) + ' lbs sold (~' + Math.round(blendedTurkeyCooked) + ' lbs cooked)',
         tDiff, 'lbs', tPct, null,
         `Plain English: ~${actTPortions} carved plates sold so far; tracking toward ~${estTPortions} day-end portions (~${blendedTurkeyRaw} lbs raw prep).`
       ));
@@ -1599,8 +1626,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const tcDiff = blendedTotalCooked - totalCooked;
       const tcPct = totalCooked > 0 ? Math.round((tcDiff / totalCooked) * 1000) / 10 : 0;
       setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML(
-        'Predicted Total', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)',
-        'Measured Yield', '~' + actTotalCooked + '# sold (~' + blendedTotalCooked + '# ck)',
+        'Predicted Total', '~' + totalCooked + ' lbs ck (~' + totalRaw + ' lbs raw)',
+        'Measured Yield', '~' + actTotalCooked + ' lbs sold (~' + blendedTotalCooked + ' lbs cooked)',
         tcDiff, 'lbs', tcPct, null,
         `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far; tracking toward ~${blendedTotalCooked} lbs total hot-holding yield.`
       ));
@@ -1626,7 +1653,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
         evalPillElem.className = `eval-pill ${statusClass}`;
         evalPillElem.textContent = statusTitle;
+        const liveBrisketPackersDiff = Math.round(bDiff / 14.0);
+        const liveTakeawayText = Math.abs(bDiff) < 7
+          ? `We are pacing right on our Pitmaster Daily Forecast target (~${Math.ceil(blendedRawBrisket / 14.0)} briskets / ~${blendedRawBrisket} lbs raw).`
+          : (bDiff > 0
+            ? `Customer demand is running ahead of target by ~${Math.max(1, Math.abs(liveBrisketPackersDiff))} brisket${Math.abs(liveBrisketPackersDiff) === 1 ? '' : 's'} (+${Math.abs(bDiff)} lbs over target).`
+            : `We have ~${Math.max(1, Math.abs(liveBrisketPackersDiff))} extra brisket${Math.abs(liveBrisketPackersDiff) === 1 ? '' : 's'} in hot-holding cushion (${Math.abs(bDiff)} lbs difference from target).`);
         evalBodyElem.innerHTML = `
+          <div class="audit-plain-takeaway">
+            <strong>Takeaway:</strong> ${liveTakeawayText}
+          </div>
           <div class="model-eval-grid">
             <div class="model-eval-stat-box">
               <span class="model-eval-stat-label">Actual POS to Date</span>
@@ -1637,7 +1673,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
               <span class="model-eval-stat-val" style="color:#38bdf8;">$${blendedTotalRev.toLocaleString()}</span>
             </div>
             <div class="model-eval-stat-box">
-              <span class="model-eval-stat-label">Model Variance Pacing</span>
+              <span class="model-eval-stat-label">Pace vs. Target</span>
               <span class="model-eval-stat-val" style="color:${pColor};">${pSign}${bSum.pacingPct}%</span>
             </div>
             <div class="model-eval-stat-box">
@@ -1743,8 +1779,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const pBPortions = Math.round(pBCooked * 2.3);
         const aBPortions = Math.round(aBCooked * 2.3);
         setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
-          'Predicted Target', '~' + pBRawRound + ' lbs raw (~' + pBCooked + '# ck)',
-          'Actual Measured', '~' + aBRawRound + ' lbs raw (~' + aBCooked + '# ck)',
+          'Predicted Target', '~' + pBRawRound + ' lbs raw (~' + pBCooked + ' lbs cooked)',
+          'Actual Measured', '~' + aBRawRound + ' lbs raw (~' + aBCooked + ' lbs cooked)',
           bDiff, 'lbs', bPct, null,
           `Plain English: Model targeted ~${pBPortions} sliced servings (~${pBRawRound} lbs raw) vs ~${aBPortions} actual portions served (~${aBCooked} lbs cooked).`
         ));
@@ -1758,8 +1794,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const pPPortions = Math.round(pPCooked * 2.0);
         const aPPortions = Math.round(aPCooked * 2.0);
         setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
-          'Predicted Target', '~' + pPRawRound + ' lbs raw (~' + pPCooked + '# ck)',
-          'Actual Measured', '~' + aPRawRound + ' lbs raw (~' + aPCooked + '# ck)',
+          'Predicted Target', '~' + pPRawRound + ' lbs raw (~' + pPCooked + ' lbs cooked)',
+          'Actual Measured', '~' + aPRawRound + ' lbs raw (~' + aPCooked + ' lbs cooked)',
           pDiff, 'lbs', pPct, null,
           `Plain English: Model targeted ~${pPPortions} pork sandwiches (~${pPRawRound} lbs raw) vs ~${aPPortions} actual sandwiches served (~${aPCooked} lbs cooked).`
         ));
@@ -1804,8 +1840,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const pTPortions = Math.round(pTCooked * 3.2);
         const aTPortions = Math.round(aTCooked * 3.2);
         setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
-          'Predicted Target', pTCooked + ' lbs ck (~' + Math.round(pTCooked / 0.70) + '# raw)',
-          'Actual Measured', aTCooked + ' lbs ck (~' + Math.round(aTCooked / 0.70) + '# raw)',
+          'Predicted Target', pTCooked + ' lbs ck (~' + Math.round(pTCooked / 0.70) + ' lbs raw)',
+          'Actual Measured', aTCooked + ' lbs ck (~' + Math.round(aTCooked / 0.70) + ' lbs raw)',
           tDiff, 'lbs', tPct, null,
           `Plain English: Target ~${pTPortions} carved plates (~${pTCooked} lbs cooked) vs ~${aTPortions} actual plates served (~${aTCooked} lbs cooked).`
         ));
@@ -1837,8 +1873,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const tcDiff = aTotCooked - pTotCooked;
         const tcPct = pTotCooked > 0 ? Math.round((tcDiff / pTotCooked) * 1000) / 10 : 0;
         setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML(
-          'Predicted Target', '~' + pTotCooked + ' lbs ck (~' + (pBRawRound + pPRawRound) + '# raw)',
-          'Actual Measured', '~' + aTotCooked + ' lbs ck (~' + (aBRawRound + aPRawRound) + '# raw)',
+          'Predicted Target', '~' + pTotCooked + ' lbs ck (~' + (pBRawRound + pPRawRound) + ' lbs raw)',
+          'Actual Measured', '~' + aTotCooked + ' lbs ck (~' + (aBRawRound + aPRawRound) + ' lbs raw)',
           tcDiff, 'lbs', tcPct, null,
           `Plain English: Target ~${pTotCooked} lbs cooked meat yield vs ~${aTotCooked} lbs actual cooked barbecue sliced.`
         ));
@@ -1855,8 +1891,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
           if (absRevPct <= 5.0) {
             statusClass = 'eval-pill-accurate';
-            statusText = `Model Accurate (${revPct >= 0 ? '+' : ''}${revPct}%)`;
-            narrativeVerdict = `Forecast tracked within <strong>${absRevPct}% variance</strong> ($${aRevRound.toLocaleString()} actual vs $${pRevRound.toLocaleString()} predicted), covering service with minimal waste.`;
+            statusText = `Cook Target Accurate (${revPct >= 0 ? '+' : ''}${revPct}%)`;
+            narrativeVerdict = `Pitmaster Daily Forecast tracked within <strong>${absRevPct}% difference from target</strong> ($${aRevRound.toLocaleString()} actual vs $${pRevRound.toLocaleString()} predicted), covering service with minimal waste.`;
           } else if (revDiff > 0) {
             statusClass = 'eval-pill-drift';
             statusText = `Under-Projected (+${revPct}%)`;
@@ -1867,12 +1903,26 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
             narrativeVerdict = `Targets ran <strong>${absRevPct}% above</strong> actual POS sales (-$${Math.abs(revDiff).toLocaleString()}); actual meat cost finished at $${aFoodCost.toLocaleString()} vs $${pFoodCost.toLocaleString()} target.`;
           }
 
+          const histBrisketDiffLbs = pBRawRound - aBRawRound;
+          const histBrisketCount = Math.max(1, Math.round(Math.abs(histBrisketDiffLbs) / 14.0));
+          let histTakeaway = '';
+          if (Math.abs(histBrisketDiffLbs) <= 6) {
+            histTakeaway = `We cooked right on our Pitmaster Daily Forecast target today (${aBRawRound} lbs raw brisket / ~${Math.ceil(aBRawRound / 14.0)} briskets vs ${pBRawRound} lbs target).`;
+          } else if (histBrisketDiffLbs > 0) {
+            histTakeaway = `We cooked ${histBrisketCount} extra brisket${histBrisketCount === 1 ? '' : 's'} than needed today (+${histBrisketDiffLbs} lbs over target).`;
+          } else {
+            histTakeaway = `Customer demand drew ${histBrisketCount} more brisket${histBrisketCount === 1 ? '' : 's'} than baseline target today (+${Math.abs(histBrisketDiffLbs)} lbs above target).`;
+          }
+
           evalPillElem.className = `eval-pill ${statusClass}`;
           evalPillElem.textContent = statusText;
           evalBodyElem.innerHTML = `
+            <div class="audit-plain-takeaway">
+              <strong>Takeaway:</strong> ${histTakeaway}
+            </div>
             <div class="model-eval-grid">
               <div class="model-eval-stat-box">
-                <span class="model-eval-stat-label">Model Predicted Revenue</span>
+                <span class="model-eval-stat-label">Daily Cook Target Revenue</span>
                 <span class="model-eval-stat-val" style="color:#38bdf8;">$${pRevRound.toLocaleString()}</span>
               </div>
               <div class="model-eval-stat-box">
@@ -1880,7 +1930,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
                 <span class="model-eval-stat-val" style="color:#f1c40f;">$${aRevRound.toLocaleString()}</span>
               </div>
               <div class="model-eval-stat-box">
-                <span class="model-eval-stat-label">Total Day Variance</span>
+                <span class="model-eval-stat-label">Difference from Target</span>
                 <span class="model-eval-stat-val" style="color:${revDiff >= 0 ? '#34d399' : '#f87171'};">${revDiff >= 0 ? '+' : ''}${revDiff.toLocaleString()} (${revPct >= 0 ? '+' : ''}${revPct}%)</span>
               </div>
               <div class="model-eval-stat-box">
@@ -1895,15 +1945,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         }
       } else {
         setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target $${Math.round(totalRev).toLocaleString()} sales across service (~${Math.round(totalRev / 48.50)} orders at $48.50 avg check).`));
-        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
-        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + '# ck)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
+        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + ' lbs cooked)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
+        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + ' lbs cooked)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
         setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Mix & stuff ${sausageBatches} batches (~${sausageLinks} links, 1/3-lb each).`));
         setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${rVal} whole spare rib racks (~${rVal * 12} individual bones from ~${(rVal / 6.0).toFixed(1)} cases).`));
         setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted Target', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${drVal} plate short ribs (~${(drVal / 12.0).toFixed(1)} cases). Pull in small batches to preserve bark.`));
-        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ~${tVal} lbs cooked breast (~${Math.round(tVal / 0.70)} lbs raw prep) yielding ~${Math.round(tVal * 3.2)} 5-oz sliced plates.`));
+        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ~${tVal} lbs cooked breast (~${Math.round(tVal / 0.70)} lbs raw prep) yielding ~${Math.round(tVal * 3.2)} 5-oz sliced plates.`));
         setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted Target', rbVal + ' units', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Prep ${rbVal} bacon-wrapped brisket bites (~${Math.round(rbVal / 4)} orders of 4). Trims drawn from brisket burnt ends.`));
         setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted Target', tacoVal + ' tacos', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${tacoVal} tacos across daily service. Portions pulled from hot-holding brisket and pork bins.`));
-        setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Total kitchen yield: ~${totalCooked} lbs hot-holding barbecue ready to carve from ~${totalRaw} lbs raw butcher trim.`));
+        setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs ck (~' + totalRaw + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Total kitchen yield: ~${totalCooked} lbs hot-holding barbecue ready to carve from ~${totalRaw} lbs raw butcher trim.`));
 
         const evalBannerElem = document.getElementById('kpi-model-eval-banner');
         const evalPillElem = document.getElementById('model-eval-status-pill');
@@ -1912,9 +1962,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           evalBannerElem.style.display = 'block';
           evalPillElem.className = 'eval-pill eval-pill-match';
           evalPillElem.textContent = 'Upcoming Horizon';
+          const upPackers = Math.max(1, Math.ceil(bVal / 14.0));
+          const upCases = (bVal / 70.0).toFixed(1);
+          const upButts = Math.max(1, Math.ceil(pVal / 8.0));
           evalBodyElem.innerHTML = `
+            <div class="audit-plain-takeaway">
+              <strong>Takeaway:</strong> Stage ${upCases} Cases (~${upPackers} Briskets), ~${upButts} Pork Butts, and ${rVal} Racks of Spare Ribs — includes a +10% Extra Prep / Cushion.
+            </div>
             <div class="model-eval-narrative">
-              <strong>Future Operational Horizon</strong>: MultiMeatForecaster targets include a 10% safety buffer; live POS variance audits populate automatically during service.
+              <strong>Future Operational Horizon</strong>: Pitmaster Daily Forecast targets include a 10% Extra Prep / Cushion; live POS Cook Accuracy Audits populate automatically during service.
             </div>
           `;
         }
@@ -1967,6 +2023,80 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       renderKPIBulletAndSparklines(slicedRecords, matchedRecord);
     }
 
+    // Hydrate KitchenQuantityDisplay badges across meat KPI cards (Case & Cut View vs Raw Lbs View)
+    if (typeof KitchenQuantityDisplay === 'function' && typeof formatKitchenQuantity === 'function') {
+      const unitMode = typeof getUnitDisplayMode === 'function' ? getUnitDisplayMode() : 'case';
+      const activeBrisketVal = isTargetClosed ? 0 : (hasBlended ? (Number(brisketElem?.textContent) || bVal) : bVal);
+      const activePorkVal = isTargetClosed ? 0 : (hasBlended ? (Number(porkElem?.textContent) || pVal) : pVal);
+      const activeRibsVal = isTargetClosed ? 0 : (hasBlended ? (Number(ribsElem?.textContent) || rVal) : rVal);
+      const activeDinoVal = isTargetClosed ? 0 : (hasBlended ? (Number(dinoElem?.textContent) || drVal) : drVal);
+      const activeTurkeyVal = isTargetClosed ? 0 : (hasBlended ? (Number(turkeyElem?.textContent) || tVal) : tVal);
+      const activeSausageLbs = isTargetClosed ? 0 : sVal;
+
+      const qtyCardSpecs = [
+        { cardId: 'kpi-card-brisket-container', meatKey: 'brisket', val: activeBrisketVal, subEl: bCasesElem },
+        { cardId: 'kpi-card-pork-container', meatKey: 'pork', val: activePorkVal, subEl: pCasesElem },
+        { cardId: 'kpi-card-sausage-container', meatKey: 'sausage', val: activeSausageLbs, subEl: null },
+        { cardId: 'kpi-card-ribs-container', meatKey: 'pork_ribs', val: activeRibsVal, subEl: rCasesElem },
+        { cardId: 'kpi-card-dino-container', meatKey: 'dino_ribs', val: activeDinoVal, subEl: drCasesElem },
+        { cardId: 'kpi-card-turkey-container', meatKey: 'turkey', val: activeTurkeyVal, subEl: null }
+      ];
+
+      qtyCardSpecs.forEach(item => {
+        const cardEl = document.getElementById(item.cardId);
+        if (!cardEl) return;
+        let slotEl = cardEl.querySelector('.kitchen-qty-slot');
+        if (!slotEl) {
+          slotEl = document.createElement('div');
+          slotEl.className = 'kitchen-qty-slot';
+          cardEl.insertBefore(slotEl, cardEl.firstChild);
+        }
+        slotEl.innerHTML = KitchenQuantityDisplay(item.meatKey, item.val, unitMode);
+        if (item.subEl && !isTargetClosed && !hasBlended) {
+          const fmt = formatKitchenQuantity(item.meatKey, item.val, unitMode);
+          item.subEl.textContent = fmt.caseSummaryText;
+        }
+      });
+    }
+
+    // Hydrate Simplified Prep Safety Margin / Cushion Status Strip
+    const marginStripEl = document.getElementById('prep-safety-margin-strip');
+    const marginTextEl = document.getElementById('prep-safety-margin-text');
+    const marginPillEl = document.getElementById('prep-safety-status-pill');
+    const marginSubEl = document.getElementById('prep-safety-subtext');
+    if (marginStripEl && marginTextEl && marginPillEl && marginSubEl) {
+      if (isTargetClosed) {
+        marginStripEl.className = 'prep-safety-margin-strip status-safe';
+        marginTextEl.textContent = `Extra Prep / Cushion: +0 Racks / +0 Butts / +0 Briskets (Closed ${closedDayLabel})`;
+        marginPillEl.className = 'prep-status-pill status-safe';
+        marginPillEl.textContent = `● Closed ${closedDayLabel} (0 Prep Required)`;
+        marginSubEl.textContent = 'Scheduled pit maintenance & firebox cleanout — reopens Tuesday 11:00 AM';
+      } else {
+        const extraRibsRacks = Math.max(0, Math.ceil((rVal || 0) * 0.15));
+        const extraPorkButts = Math.max(0, Math.ceil(((pVal || 0) * 0.12) / 8.0));
+        const extraBrisketPackers = Math.max(0, Math.ceil(((bVal || 0) * 0.10) / 14.0));
+        marginTextEl.textContent = `Extra Prep / Cushion: +${extraRibsRacks} Rack${extraRibsRacks === 1 ? '' : 's'} / +${extraPorkButts} Butt${extraPorkButts === 1 ? '' : 's'} / +${extraBrisketPackers} Brisket${extraBrisketPackers === 1 ? '' : 's'}`;
+
+        let marginStatus = 'safe';
+        if (hasBlended && blendedMetrics && blendedMetrics.summary && (blendedMetrics.summary.actualSalesSoFar || 0) > 0) {
+          if (blendedMetrics.summary.pacingPct > 18) marginStatus = 'under';
+          else if (blendedMetrics.summary.pacingPct > 8) marginStatus = 'tight';
+        }
+        marginStripEl.className = `prep-safety-margin-strip status-${marginStatus}`;
+        marginPillEl.className = `prep-status-pill status-${marginStatus}`;
+        if (marginStatus === 'under') {
+          marginPillEl.textContent = '▲ Under Par (High Rush Draw)';
+          marginSubEl.textContent = 'Live counter pace exceeds cushion — pull reserve brisket & sausage links from walk-in';
+        } else if (marginStatus === 'tight') {
+          marginPillEl.textContent = '◆ Tight Prep (Active Rush)';
+          marginSubEl.textContent = 'Drawing into +10% Extra Prep / Cushion — monitor slicing board portions closely';
+        } else {
+          marginPillEl.textContent = '● Safe Cushion (+10% Extra Prep)';
+          marginSubEl.textContent = 'Covers peak lunch and dinner rush through 9:00 PM close without premature sell-outs';
+        }
+      }
+    }
+
     if (!chartContainer) return;
 
     if (typeof Plotly !== 'undefined') {
@@ -1981,14 +2111,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const isMobile = isMobileViewport();
       let traces = [];
       let layout = {
+        height: isMobile ? 300 : 340,
         title: isMobile ? "Pit Targets: Core Meats" : "Pit Production Targets: Raw vs. Cooked Yield Projections",
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(15,23,42,0.45)",
         font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: isMobile ? 10 : 12 },
         xaxis: { showgrid: false, zeroline: false, tickangle: -45, automargin: true },
         yaxis: { title: "Target Volume", gridcolor: "rgba(148,163,184,0.12)", zeroline: false, rangemode: "tozero" },
-        margin: isMobile ? { l: 40, r: 20, t: 40, b: 60 } : { l: 60, r: 40, t: 80, b: 80 },
-        legend: { orientation: "h", y: -0.4, x: 0 },
+        margin: isMobile ? { l: 40, r: 20, t: 38, b: 56 } : { l: 56, r: 36, t: 48, b: 64 },
+        legend: { orientation: "h", y: -0.24, x: 0 },
         hovermode: "x unified",
         hoverlabel: { bgcolor: "rgba(15, 23, 42, 0.95)", font: { family: "Inter, system-ui, sans-serif" } }
       };

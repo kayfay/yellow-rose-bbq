@@ -10,6 +10,9 @@ This directory preserves historical prototypes, legacy v1 scripts, and pre-refac
 | `dashboard_demo.html` | Standalone static HTML prototype of the initial analytics dashboard prior to SPA integration. | 2026-08-13 |
 | `test.js`, `test_app.js`, `test_http.js`, `test_playwright.js`, `test_playwright_tab.js` | Early ad-hoc Playwright/HTTP smoke test scripts superseded by the structured `tests/e2e/*.spec.js` suite. | 2026-08-13 |
 | `legacy_v1/` | Subdirectory containing v1 one-off repair scripts (`fix_*.py`, `patch*.js`), historical CSV/XLSX COGS audits, and v1 screenshots. | 2026-10-26 |
+| `app.js.2026-11-02.orig`, `index.html.2026-11-02.orig`, `style.css.2026-11-02.orig` | Pre-modularization snapshots of core SPA files prior to extracting `modules/` in v2.1.3. | 2026-11-02 |
+| `app.js.2026-11-02-pre-rollup.orig`, `index.html.2026-11-02-pre-rollup.orig`, `style.css.2026-11-02-pre-rollup.orig` | Pre-rollup accordion snapshots prior to v2.1.4 subtab de-slop and stat strip integration. | 2026-11-02 |
+| `app.js.2026-11-03.orig`, `index.html.2026-11-03.orig`, `style.css.2026-11-03.orig` | Pre-Smokehouse UX overhaul snapshots prior to plain-English copywriting pass, `KitchenQuantityDisplay` case/cut formatting, 24h velocity gap fix, and simplified prep buffer UI. | 2026-11-03 |
 
 ## `archive/legacy_v1/` Contents
 - **One-Off Repair & Migration Scripts**: `add_yesterday.py`, `check_dates.py`, `check_weather.py`, `fix_app_js.py`, `fix_arima_dates.py`, `fix_date_init.py`, `fix_html.py`, `fix_kpi_sum.py`, `fix_logic.py`, `fix_security.py`, `fix_weather.py`, `parameterize.py`, `patch.js`, `patch_fix.js`, `update_halo.py`, `update_recipe.py`, `get-pip.py`.

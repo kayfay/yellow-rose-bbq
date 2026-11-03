@@ -1,26 +1,27 @@
-# Multi-Meat Forecasting, Executive BI & Daily Insight Distillate (<= 40 Lines)
+# Multi-Meat Forecasting, Executive BI & Smokehouse UX Distillate (<= 40 Lines)
 
-## 1. Culinary Yield & Forecasting Invariants
-- Turkey (No-Trim): Y_trim=1.0, Y_cook=0.70 (Cooked = Raw * 0.70). Brisket: Y_net=0.40 (~14# packer).
-- Pulled Pork: Y_net=0.44 (~8# butt). Spare Ribs: ~5#/rack (12 bones). Dino: 3 bones/plate. Sausage: 60#/batch, 3 links/lb (85% yield).
-- Portions/Cooked lb: Turkey 3.2 (5oz), Pork 2.0 (8oz), Brisket 2.3 (7oz). Target Cooked = F_t * 1.10 safety buffer.
-- Revenue Scale: M_rev = clamp(0.90, Rev/Base, 1.10) [2800 Tue-Thu, 3500 Fri-Sun] + 0.20 * Huber(e_{t-1}, 1.5).
-- Drift Rule: (|P - A|/A > 0.25 AND |P - A| >= Deadband) OR |TS| > 4.0. Closed Mon = 0 prep, $0 rev, no alert.
+## 1. Culinary Yield, Case Pack & Unit Conversion Invariants
+- **Brisket**: `Y_net = 0.40` (`~14 lb` raw packer; `5 packers/case = 70 lbs raw`; `2.3` 7-oz portions/cooked lb).
+- **Pork Butt (Shoulder)**: `Y_net = 0.44` (`~8 lb` bone-in butt; `4 butts/case = 32 lbs raw`; `2.0` 8-oz portions/cooked lb).
+- **Pork Spare Ribs**: `~5 lbs/rack` (12 bones); `6 racks/case = 30 lbs raw` (`2 racks/cryovac bag`; `Y_cook = 0.60`).
+- **Beef Dino Ribs**: `3 bones/plate`; `4 lbs/rack`; `12 ribs/case` (`3 cryovac bags`).
+- **Smoked Turkey (No-Trim)**: `Y_trim = 1.0`, `Y_cook = 0.70` (`20 lbs/case raw`; `3.2` 5-oz portions/cooked lb).
+- **Sausage**: `50 lb` base block (`~55.5–63 lb` stuffed; `60 lb` nominal batch), `3.0 links/lb` (`85%` smoke yield).
+- **Prep Cushion**: `Target Cooked = F_t * 1.10` (+10% Extra Prep / Cushion). Closed Mon = `0` prep, `$0 (Closed)`, no alert.
 
-## 2. Plain-English Daily Insight Engine (PAL Rules & Zero-Jargon Mandate)
-- Anomaly Math (Backend Only): `z = (x_t - mu_dow) / max(sigma_dow, 1e-6)`; Variance: `pct_var = ((x_t - mu_dow) / mu_dow) * 100`.
-- Zero-Jargon UI Rule: Never display `"DOW Base"`, `"Z-Score"`, `"Sigma"`, `"COGS"`, `"Velocity"`, `"Elasticity"`, or `"Stadium Lift"`. Use plain English: `"Typical [Day]"`, `"Est. Meat Cost"`, `"Left After Meat Cost"`, `"Hourly Sales Pace"`, `"Today's Weather Impact"`, `"Local Game Day Boost"`.
-- Term Pills/Glossary (13, one list in app.js BUILTIN_ANALYTIC_GLOSSARY + hourly_quick_wind_detector.py): Prep Target, Average Ticket, Rush Signal, Meat Used Per Hour, Cooked Yield %, Shrinkage, Tallow Rest, Est. Meat Cost, Meat Cost %, Left After Meat Cost, Typical Day, Hourly Sales Pace, Sales Trend. Any new insight term needs a glossary entry in both.
-- Executive Brief Invariant: lives in the "Shop Reports" subtab (#subtab-view-reports), NEVER above the date picker or projections, + 1-click Printable 1-Page Sheet + `daily_executive_brief.json` with: (1) **What's Happening Today (The Insight)** and (2) **Recommended Next Step (The Action)**.
+## 2. Plain-English Smokehouse Copywriting & Zero-Jargon Mandate
+- **Banned UI Jargon**: Never show `"MultiMeatForecaster"`, `"variance"`, `"safety buffer"`, `"model evaluation"`, `"DOW Base"`, `"Z-Score"`, `"Sigma"`, `"COGS"`, `"Velocity"`, `"Elasticity"`, or `"Stadium Lift"`.
+- **Approved Smokehouse Terms**: `"Pitmaster Daily Forecast"`, `"Difference from Target"`, `"Extra Prep / Cushion"`, `"Cook Accuracy Audit"`, `"Typical [Day]"`, `"Est. Meat Cost"`, `"Left After Meat Cost"`, `"Hourly Sales Pace"`.
+- **Audit Takeaway Rule**: Every Cook Accuracy Audit view starts with a 1-line plain-English takeaway in practical cuts & lbs.
+- **Glossary Invariant**: 13 terms in `modules/reports/shop_reports.js` + `hourly_quick_wind_detector.py`. Brief lives in `#subtab-view-reports`.
 
-## 3. Executive Data Visualization & Okabe-Ito Colorblind-Safe Tokens
-- Tufte Data-Ink Ratio: Zero 3D effects, zero heavy vertical gridlines, muted horizontal reference lines (`rgba(148,163,184,0.10)`), direct units on axes/callouts.
-- Chart Selection: Target Progress Bars (Bullet Bars) + 7-Day Mini-Trends (Sparklines) inside KPI cards; Plain-English Sales Breakdown Bar/Bridge; Hourly Sales Pace & Heatmaps.
-- Okabe-Ito Palette (WCAG AAA / Colorblind-Safe): Orange `#E69F00`, Sky Blue `#56B4E9`, Bluish Green `#009E73`, Amber `#F0E442`, Deep Blue `#0072B2`, Vermillion `#D55E00`, Reddish Purple `#CC79A7`, Slate `#64748B`.
-- Viewport Invariant: Desktop (`>= 768px`, `1440px` preset) = interactive plain-English tooltips; Mobile (`< 768px`, `375px`/`414px`) = 100% static (`staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`) with **pre-baked Peak/Low/Now face annotations** and `>= 16px` (`1rem`) legibility.
+## 3. Executive Data Visualization, Layout & Okabe-Ito Tokens
+- **Tufte & Few**: Zero 3D/heavy gridlines; Bullet Bars (`.kpi-bullet-track`) + 7-Day Sparklines (`.kpi-sparkline-svg`) on KPI cards.
+- **24h Pace Layout**: Tight vertical flow between `#plotly-predictive-velocity-chart` and `#hourly-turnover-deck` (zero blank dark gap).
+- **Okabe-Ito Palette**: Orange `#E69F00`, Sky `#56B4E9`, Green `#009E73`, Amber `#F0E442`, Blue `#0072B2`, Vermillion `#D55E00`, Purple `#CC79A7`.
+- **Viewport Invariant**: Desktop (`>= 768px`) = tooltips; Mobile (`< 768px`) = static (`staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`) with Peak/Low/Now face badges and `>= 16px` body text.
 
 ## 4. Zero-Trust Security, Modular Architecture & Roll-Up Invariants
-- Modules (`<script defer>`): `modules/shared/core_utils.js`, `modules/recipes/sausage_calc.js`, `modules/reports/shop_reports.js`, `modules/forecaster/analytics_subtabs.js` -> `app.js`.
-- Subtab Roll-Up & Stat Strips: All 7 subtabs start with `.subtab-stat-strip` (3 cards) and wrap secondary sections in `.rollup-section` (`min-height: 48px` `.rollup-header`, `yr_rollup_state_v1` storage, `#btn-debug-rollup-toggle`).
-- Permissions: Directories `0755`, files `0644`, scripts `0755`, secrets `.env` `0600` (zero world-writable files).
-- DOM & Queries: No `document.write()`; sanitize dynamic HTML (`escapeHTML`); parameterized SQL (`?`); zero leaked wholesale COGS breakdowns.
+- **Modules (`<script defer>`)**: `core_utils.js`, `sausage_calc.js`, `shop_reports.js`, `analytics_subtabs.js` -> `app.js`.
+- **Subtab Roll-Ups**: All 7 subtabs start with `.subtab-stat-strip` (3 cards) and `.rollup-section` (`min-height: 48px` `.rollup-header`).
+- **Security**: Files `0644`, dirs/scripts `0755`, `.env` `0600`; no `document.write()`; `escapeHTML`; parameterized SQL (`?`); zero wholesale COGS leaks.

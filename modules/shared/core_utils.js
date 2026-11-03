@@ -261,6 +261,294 @@
     });
   }
 
+  /**
+   * Reusable Kitchen Quantity Display Component (`KitchenQuantityDisplay`)
+   * Converts raw protein weights/counts into practical smokehouse case and individual
+   * cut counts (Packers, Butts, Racks, Ribs, Breasts, Batches/Links) while preserving
+   * raw/cooked weight subtext and backend calculations.
+   */
+  const UNIT_MODE_STORAGE_KEY = 'yr_unit_display_mode_v1';
+
+  const KITCHEN_UNIT_SPECS = {
+    brisket: {
+      name: 'Brisket',
+      lbsPerCase: 70.0,
+      cutsPerCase: 5,
+      lbsPerCut: 14.0,
+      cutLabelSingular: 'Brisket',
+      cutLabelPlural: 'Briskets',
+      yieldRatio: 0.40,
+      portionsPerCookedLb: 2.3
+    },
+    pork: {
+      name: 'Pork Butt',
+      lbsPerCase: 32.0,
+      cutsPerCase: 4,
+      lbsPerCut: 8.0,
+      cutLabelSingular: 'Butt',
+      cutLabelPlural: 'Butts',
+      yieldRatio: 0.44,
+      portionsPerCookedLb: 2.0
+    },
+    pork_ribs: {
+      name: 'Pork Spare Ribs',
+      racksPerCase: 6,
+      racksPerBag: 2,
+      lbsPerRack: 5.0,
+      lbsPerCase: 30.0,
+      cutLabelSingular: 'Rack',
+      cutLabelPlural: 'Racks',
+      yieldRatio: 0.60,
+      bonesPerRack: 12
+    },
+    dino_ribs: {
+      name: 'Beef Dino Ribs',
+      ribsPerCase: 12,
+      bagsPerCase: 3,
+      lbsPerRib: 4.0,
+      lbsPerCase: 48.0,
+      cutLabelSingular: 'Rib',
+      cutLabelPlural: 'Ribs',
+      yieldRatio: 0.50
+    },
+    turkey: {
+      name: 'Smoked Turkey Breast',
+      lbsPerCase: 20.0,
+      cutsPerCase: 2,
+      lbsPerCut: 10.0,
+      cutLabelSingular: 'Breast',
+      cutLabelPlural: 'Breasts',
+      yieldRatio: 0.70,
+      portionsPerCookedLb: 3.2
+    },
+    sausage: {
+      name: 'House Sausage',
+      lbsPerBatch: 60.0,
+      linksPerLb: 3.0,
+      linksPerBatch: 180,
+      cutLabelSingular: 'Link',
+      cutLabelPlural: 'Links'
+    }
+  };
+
+  function getUnitDisplayMode() {
+    if (typeof document !== 'undefined' && document.body && document.body.dataset.unitMode) {
+      return document.body.dataset.unitMode === 'lbs' ? 'lbs' : 'case';
+    }
+    try {
+      const saved = global.localStorage ? global.localStorage.getItem(UNIT_MODE_STORAGE_KEY) : null;
+      return saved === 'lbs' ? 'lbs' : 'case';
+    } catch (_e) {
+      return 'case';
+    }
+  }
+
+  function setUnitDisplayMode(mode) {
+    const cleanMode = mode === 'lbs' ? 'lbs' : 'case';
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.dataset.unitMode = cleanMode;
+    }
+    try {
+      if (global.localStorage) {
+        global.localStorage.setItem(UNIT_MODE_STORAGE_KEY, cleanMode);
+      }
+    } catch (_e) {}
+    const btn = typeof document !== 'undefined' ? document.getElementById('btn-debug-unit-mode') : null;
+    if (btn) {
+      btn.textContent = cleanMode === 'case' ? 'Units: Case & Cut View' : 'Units: Raw Lbs View';
+      btn.setAttribute('data-unit-mode', cleanMode);
+    }
+    return cleanMode;
+  }
+
+  function formatKitchenQuantity(meatKey, rawVal, mode) {
+    const activeMode = mode || getUnitDisplayMode();
+    const val = Math.max(0, Number(rawVal) || 0);
+
+    if (val <= 0) {
+      return {
+        meatKey,
+        mode: activeMode,
+        cases: 0,
+        cuts: 0,
+        rawLbs: 0,
+        cookedLbs: 0,
+        primaryText: 'Closed • 0 Cases / 0 Cuts',
+        secondaryText: '0 lbs raw • 0 lbs cooked',
+        caseSummaryText: '(Closed / 0 Cases)'
+      };
+    }
+
+    if (meatKey === 'brisket') {
+      const spec = KITCHEN_UNIT_SPECS.brisket;
+      const cases = Number((val / spec.lbsPerCase).toFixed(1));
+      const packers = Math.max(1, Math.ceil(val / spec.lbsPerCut));
+      const cookedLbs = Math.round(val * spec.yieldRatio);
+      const cutWord = packers === 1 ? spec.cutLabelSingular : spec.cutLabelPlural;
+      const caseWord = cases === 1 ? 'Case' : 'Cases';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases,
+        cuts: packers,
+        rawLbs: Math.round(val),
+        cookedLbs,
+        primaryText: activeMode === 'lbs'
+          ? `${Math.round(val)} lbs Raw (~${cookedLbs} lbs Cooked)`
+          : `${cases} ${caseWord} • ~${packers} ${cutWord}`,
+        secondaryText: activeMode === 'lbs'
+          ? `${cases} ${caseWord} • ~${packers} ${cutWord}`
+          : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+        caseSummaryText: `(${cases} ${caseWord} / ~${packers} ${cutWord})`
+      };
+    }
+
+    if (meatKey === 'pork') {
+      const spec = KITCHEN_UNIT_SPECS.pork;
+      const cases = Number((val / spec.lbsPerCase).toFixed(1));
+      const butts = Math.max(1, Math.ceil(val / spec.lbsPerCut));
+      const cookedLbs = Math.round(val * spec.yieldRatio);
+      const cutWord = butts === 1 ? spec.cutLabelSingular : spec.cutLabelPlural;
+      const caseWord = cases === 1 ? 'Case' : 'Cases';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases,
+        cuts: butts,
+        rawLbs: Math.round(val),
+        cookedLbs,
+        primaryText: activeMode === 'lbs'
+          ? `${Math.round(val)} lbs Raw (~${cookedLbs} lbs Cooked)`
+          : `${cases} ${caseWord} / ~${butts} ${cutWord}`,
+        secondaryText: activeMode === 'lbs'
+          ? `${cases} ${caseWord} / ~${butts} ${cutWord}`
+          : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+        caseSummaryText: `(${cases} ${caseWord} / ~${butts} ${cutWord})`
+      };
+    }
+
+    if (meatKey === 'pork_ribs') {
+      const spec = KITCHEN_UNIT_SPECS.pork_ribs;
+      const racks = Math.round(val);
+      const cases = Number((racks / spec.racksPerCase).toFixed(1));
+      const bags = Math.max(1, Math.ceil(racks / spec.racksPerBag));
+      const rawLbs = Math.round(racks * spec.lbsPerRack);
+      const cookedLbs = Math.round(rawLbs * spec.yieldRatio);
+      const cutWord = racks === 1 ? spec.cutLabelSingular : spec.cutLabelPlural;
+      const caseWord = cases === 1 ? 'Case' : 'Cases';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases,
+        cuts: racks,
+        bags,
+        rawLbs,
+        cookedLbs,
+        primaryText: activeMode === 'lbs'
+          ? `~${rawLbs} lbs Raw (${racks} ${cutWord})`
+          : `${racks} ${cutWord} • ${cases} ${caseWord}`,
+        secondaryText: activeMode === 'lbs'
+          ? `${racks} ${cutWord} • ${cases} ${caseWord} (~${bags} Bags)`
+          : `~${rawLbs} lbs raw • ~${bags} Cryovac Bags`,
+        caseSummaryText: `(${racks} ${cutWord} / ${cases} ${caseWord})`
+      };
+    }
+
+    if (meatKey === 'dino_ribs') {
+      const spec = KITCHEN_UNIT_SPECS.dino_ribs;
+      const ribs = Math.round(val);
+      const cases = Number((ribs / spec.ribsPerCase).toFixed(1));
+      const rawLbs = Math.round(ribs * spec.lbsPerRib);
+      const cookedLbs = Math.round(rawLbs * spec.yieldRatio);
+      const cutWord = ribs === 1 ? spec.cutLabelSingular : spec.cutLabelPlural;
+      const caseWord = cases === 1 ? 'Case' : 'Cases';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases,
+        cuts: ribs,
+        rawLbs,
+        cookedLbs,
+        primaryText: activeMode === 'lbs'
+          ? `~${rawLbs} lbs Raw (${ribs} ${cutWord})`
+          : `${ribs} ${cutWord} • ${cases} ${caseWord}`,
+        secondaryText: activeMode === 'lbs'
+          ? `${ribs} ${cutWord} • ${cases} ${caseWord}`
+          : `~${rawLbs} lbs raw • ~${cookedLbs} lbs cooked`,
+        caseSummaryText: `(${ribs} ${cutWord} / ${cases} ${caseWord})`
+      };
+    }
+
+    if (meatKey === 'turkey') {
+      const spec = KITCHEN_UNIT_SPECS.turkey;
+      // rawVal passed for turkey is cooked usable lbs
+      const cookedLbs = Math.round(val);
+      const rawLbs = Math.round(val / spec.yieldRatio);
+      const cases = Number((rawLbs / spec.lbsPerCase).toFixed(1));
+      const breasts = Math.max(1, Math.ceil(rawLbs / spec.lbsPerCut));
+      const cutWord = breasts === 1 ? spec.cutLabelSingular : spec.cutLabelPlural;
+      const caseWord = cases === 1 ? 'Case' : 'Cases';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases,
+        cuts: breasts,
+        rawLbs,
+        cookedLbs,
+        primaryText: activeMode === 'lbs'
+          ? `${cookedLbs} lbs Cooked (~${rawLbs} lbs Raw)`
+          : `${cases} ${caseWord} • ~${breasts} ${cutWord}`,
+        secondaryText: activeMode === 'lbs'
+          ? `${cases} ${caseWord} • ~${breasts} ${cutWord}`
+          : `~${rawLbs} lbs raw • ~${cookedLbs} lbs cooked`,
+        caseSummaryText: `(${cases} ${caseWord} / ~${breasts} ${cutWord})`
+      };
+    }
+
+    if (meatKey === 'sausage') {
+      const spec = KITCHEN_UNIT_SPECS.sausage;
+      const rawLbs = Math.round(val);
+      const batches = Math.max(1, Math.ceil(rawLbs / spec.lbsPerBatch));
+      const links = Math.round(rawLbs * spec.linksPerLb);
+      const batchWord = batches === 1 ? 'Batch' : 'Batches';
+      return {
+        meatKey,
+        mode: activeMode,
+        cases: batches,
+        cuts: links,
+        rawLbs,
+        cookedLbs: rawLbs,
+        primaryText: activeMode === 'lbs'
+          ? `${rawLbs} lbs Stuffed (~${links} Links)`
+          : `${batches} ${batchWord} • ~${links} Links`,
+        secondaryText: activeMode === 'lbs'
+          ? `${batches} ${batchWord} • ~${links} Links`
+          : `~${rawLbs} lbs stuffed weight (50 lb block)`,
+        caseSummaryText: `(${batches} ${batchWord} / ~${links} Links)`
+      };
+    }
+
+    return {
+      meatKey,
+      mode: activeMode,
+      cases: 0,
+      cuts: Math.round(val),
+      rawLbs: Math.round(val),
+      cookedLbs: Math.round(val),
+      primaryText: `${Math.round(val)} Units`,
+      secondaryText: '',
+      caseSummaryText: `(${Math.round(val)} Units)`
+    };
+  }
+
+  function KitchenQuantityDisplay(meatKey, rawVal, mode) {
+    const q = formatKitchenQuantity(meatKey, rawVal, mode);
+    return `<div class="kitchen-qty-display" data-meat="${escapeHTML(meatKey)}" data-unit-mode="${escapeHTML(q.mode)}">` +
+      `<span class="kitchen-qty-primary">${escapeHTML(q.primaryText)}</span>` +
+      (q.secondaryText ? `<span class="kitchen-qty-secondary">${escapeHTML(q.secondaryText)}</span>` : '') +
+      `</div>`;
+  }
+
   // Expose on global namespace and BBQModules.shared
   global.escapeHTML = escapeHTML;
   global.isMobileViewport = isMobileViewport;
@@ -273,6 +561,11 @@
   global.resolveOpenMeteoWeatherImpact = resolveOpenMeteoWeatherImpact;
   global.initRollUpAccordions = initRollUpAccordions;
   global.setAllRollUpSections = setAllRollUpSections;
+  global.KITCHEN_UNIT_SPECS = KITCHEN_UNIT_SPECS;
+  global.getUnitDisplayMode = getUnitDisplayMode;
+  global.setUnitDisplayMode = setUnitDisplayMode;
+  global.formatKitchenQuantity = formatKitchenQuantity;
+  global.KitchenQuantityDisplay = KitchenQuantityDisplay;
 
   global.BBQModules.shared = {
     escapeHTML,
@@ -285,6 +578,11 @@
     resolveDateEventImpact,
     resolveOpenMeteoWeatherImpact,
     initRollUpAccordions,
-    setAllRollUpSections
+    setAllRollUpSections,
+    KITCHEN_UNIT_SPECS,
+    getUnitDisplayMode,
+    setUnitDisplayMode,
+    formatKitchenQuantity,
+    KitchenQuantityDisplay
   };
 })(typeof window !== 'undefined' ? window : globalThis);

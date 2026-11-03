@@ -179,6 +179,30 @@
       "description": "Subtab De-Slop & Verification Gate: prune verbose narrative paragraphs across all subtabs into <=3-line scannable bullets/badges without breaking existing DOM IDs, add deterministic Playwright/PAL tests for RollUpSection accordions and <=3-line copy density, update progress.html, and pass Adversarial Critic (>=9/10).",
       "acceptance_criteria": "npm run check, PAL scripts, and all Playwright E2E specs (including new rollup & de-slop assertions) pass 100%; Adversarial Critic rates subtab cleanliness >=9/10.",
       "passes": true
+    },
+    {
+      "id": 31,
+      "description": "Plain-English Smokehouse Copywriting ('De-Jargon Pass'): Purge remaining statistical/academic terms ('MultiMeatForecaster', 'variance', 'safety buffer', 'model evaluation') across index.html, app.js, and modules, replacing with intuitive pitmaster terminology ('Pitmaster Daily Forecast', 'Difference from Target', 'Extra Prep / Cushion', 'Cook Accuracy Audit') and adding a 1-line plain-English takeaway at the top of every audit view.",
+      "acceptance_criteria": "Zero occurrences of 'multimeatforecaster', 'variance', 'safety buffer', or 'model evaluation' in rendered DOM text; every audit view starts with a 1-line plain-English takeaway; all existing E2E and PAL tests pass.",
+      "passes": true
+    },
+    {
+      "id": 32,
+      "description": "Practical Unit Display (Cases, Cuts & Counts vs. Raw Lbs) & Reusable KitchenQuantityDisplay: Engineer reusable KitchenQuantityDisplay component and debug-drawer 'Case View vs. Lbs View' toggle so Brisket, Pork Butt, and Ribs prominently surface Cases and Individual Cut Counts (e.g., Cases / Packers, Cases / Butts, Racks / Cases) while preserving raw/cooked weight accessibility and backward-compatible E2E test hooks.",
+      "acceptance_criteria": "KitchenQuantityDisplay component renders primary Case & Cut Counts with raw/cooked lbs subtext across KPI cards; debug drawer includes Case View / Lbs View toggle exported in Copy Settings as JSON; unit conversion math passes 100% of deterministic tests.",
+      "passes": true
+    },
+    {
+      "id": 33,
+      "description": "UI Patch (24-Hour Velocity Black Space Fix) & Simplified Prep Cushion UX: Eliminate the dark rendering gap beneath #plotly-predictive-velocity-chart across mobile and desktop viewports, and redesign the Prep Cushion / Buffer Margin indicator with clear item counts (e.g., '+2 Racks / +1 Butt') and semantic status colors (Green = Safe Cushion, Yellow = Tight Prep, Red = Under Target).",
+      "acceptance_criteria": "Zero blank black space or orphan gap under #plotly-predictive-velocity-chart on 375px and 1440px viewports; Prep Cushion badge displays concrete cut counts and color-coded status indicator.",
+      "passes": true
+    },
+    {
+      "id": 34,
+      "description": "Deterministic Smokehouse UX Tests, Visual Progress Gallery (progress.html) & Adversarial Critic Gate: Author deterministic unit conversion and jargon-purge verification tests, update progress.html with mobile/desktop screenshots, pass all Tier 1/2 suites, and achieve >= 9/10 from the independent Adversarial Critic.",
+      "acceptance_criteria": "npm run check, python unittest, all PAL verifiers, and Playwright E2E specs pass with exit code 0; progress.html updated; Adversarial Critic scores smokehouse usability >= 9/10.",
+      "passes": true
     }
   ]
 }

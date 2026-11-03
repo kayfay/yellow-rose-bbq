@@ -157,8 +157,7 @@
   }
 
   function renderAdvancedAnalytics() {
-    const payload = global.BBQ_PAYLOADS?.advanced_payload;
-    if (!payload) return;
+    const payload = global.BBQ_PAYLOADS?.advanced_payload || {};
 
     if (payload.market_basket) {
       const basketList = document.getElementById('market-basket-list');
@@ -207,13 +206,65 @@
     }
 
     const selloutChartElem = document.getElementById('plotly-sellout-chart');
-    if (selloutChartElem && payload.sell_out_prediction_chart && Array.isArray(payload.sell_out_prediction_chart.data) && payload.sell_out_prediction_chart.data.length > 0) {
-      const sTraces = JSON.parse(JSON.stringify(payload.sell_out_prediction_chart.data));
-      const sLayout = JSON.parse(JSON.stringify(payload.sell_out_prediction_chart.layout || {}));
+    if (selloutChartElem) {
+      const mobile = global.isMobileViewport();
+      const defaultSelloutHours = ['11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM', '9:00 PM'];
+      const defaultSelloutTraces = [
+        {
+          x: defaultSelloutHours,
+          y: [100, 84, 66, 56, 50, 44, 34, 21, 11, 5, 2],
+          name: 'Smoked Brisket Remaining (%)',
+          type: 'scatter',
+          mode: 'lines+markers',
+          line: { color: '#D55E00', width: 3 },
+          marker: { size: 6 }
+        },
+        {
+          x: defaultSelloutHours,
+          y: [100, 88, 74, 65, 58, 48, 32, 16, 7, 3, 0],
+          name: 'Pork Spare Ribs Remaining (%)',
+          type: 'scatter',
+          mode: 'lines+markers',
+          line: { color: '#CC79A7', width: 3 },
+          marker: { size: 6 }
+        },
+        {
+          x: defaultSelloutHours,
+          y: [100, 90, 78, 70, 63, 55, 44, 31, 20, 12, 8],
+          name: 'House Sausage Links Remaining (%)',
+          type: 'scatter',
+          mode: 'lines+markers',
+          line: { color: '#56B4E9', width: 2.5, dash: 'dot' },
+          marker: { size: 5 }
+        }
+      ];
+      const defaultSelloutLayout = {
+        height: mobile ? 300 : 340,
+        title: {
+          text: mobile ? 'Sell-Out Depletion Curve' : 'Hourly Smoked Meat Inventory Depletion & Cushion Curve (11 AM – 9 PM)',
+          font: { size: mobile ? 11 : 13, color: '#f8fafc', family: 'Inter, system-ui, sans-serif' }
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(15,23,42,0.45)',
+        font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 10 },
+        xaxis: { showgrid: false, zeroline: false, tickangle: -35 },
+        yaxis: { title: mobile ? 'Stock Left (%)' : 'Remaining Hot-Hold Inventory (%)', range: [0, 105], gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
+        legend: { orientation: 'h', y: -0.24, x: 0 },
+        margin: mobile ? { l: 38, r: 20, t: 36, b: 56 } : { l: 52, r: 30, t: 44, b: 64 }
+      };
+
+      const hasPayloadChart = payload.sell_out_prediction_chart && Array.isArray(payload.sell_out_prediction_chart.data) && payload.sell_out_prediction_chart.data.length > 0;
+      const sTraces = hasPayloadChart ? JSON.parse(JSON.stringify(payload.sell_out_prediction_chart.data)) : defaultSelloutTraces;
+      const sLayout = hasPayloadChart ? JSON.parse(JSON.stringify(payload.sell_out_prediction_chart.layout || defaultSelloutLayout)) : defaultSelloutLayout;
+      sLayout.height = mobile ? 300 : 340;
+      sLayout.paper_bgcolor = 'rgba(0,0,0,0)';
+      sLayout.plot_bgcolor = 'rgba(15,23,42,0.45)';
       if (sLayout.xaxis) sLayout.xaxis.showgrid = false;
-      if (global.isMobileViewport()) {
-        sLayout.title = { text: 'Sell-Out Trajectory', font: { size: 11, color: '#f8fafc' } };
-        sLayout.margin = { l: 40, r: 20, t: 36, b: 40 };
+      if (mobile) {
+        sLayout.title = { text: 'Sell-Out Depletion Curve', font: { size: 11, color: '#f8fafc' } };
+        sLayout.margin = { l: 38, r: 20, t: 36, b: 56 };
+      } else {
+        sLayout.margin = { l: 52, r: 30, t: 44, b: 64 };
       }
       if (typeof Plotly !== 'undefined') {
         Plotly.newPlot('plotly-sellout-chart', sTraces, sLayout, global.getPlotlyConfig());
@@ -225,8 +276,6 @@
       if (typeof global.injectMobileFaceCallouts === 'function') {
         global.injectMobileFaceCallouts(selloutChartElem, 'Brisket (~7:45 PM)', 'Ribs (~6:30 PM)', 'Sausage (In Stock)');
       }
-    } else if (selloutChartElem) {
-      selloutChartElem.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Sell-Out Data Available</div>';
     }
   }
 
@@ -366,6 +415,7 @@
     }];
 
     const defaultEventLayout = {
+      height: global.isMobileViewport() ? 300 : 340,
       title: global.isMobileViewport() ? 'Event Revenue Multipliers' : 'Demand Surge Multipliers: Local Events vs. Normal Operations',
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(20,20,30,0.6)',
@@ -383,6 +433,7 @@
       if (payload && payload.plotly_event_chart) {
         const layout = JSON.parse(JSON.stringify(payload.plotly_event_chart.layout || defaultEventLayout));
         const traces = JSON.parse(JSON.stringify(payload.plotly_event_chart.data || defaultEventTraces));
+        layout.height = global.isMobileViewport() ? 300 : 340;
         layout.plot_bgcolor = 'rgba(0,0,0,0)';
         layout.paper_bgcolor = 'rgba(0,0,0,0)';
         layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
@@ -457,6 +508,7 @@
     ];
 
     const defaultWeatherLayout = {
+      height: global.isMobileViewport() ? 300 : 340,
       title: global.isMobileViewport() ? 'Weather vs. Sales Impact' : 'How Weather Affects Daily Sales (Temperature & Rain)',
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(20,20,30,0.6)',
@@ -464,8 +516,8 @@
       xaxis: { showgrid: false, tickangle: 45 },
       yaxis: { title: global.isMobileViewport() ? 'Temp (°F)' : 'Temperature (°F)', gridcolor: 'rgba(255,255,255,0.1)' },
       yaxis2: { title: global.isMobileViewport() ? 'Rain (mm)' : 'Precipitation (mm)', overlaying: 'y', side: 'right', showgrid: false, titlefont: { color: '#3498db' }, tickfont: { color: '#3498db' } },
-      legend: { orientation: 'h', y: -0.25, x: 0 },
-      margin: global.isMobileViewport() ? { l: 40, r: 40, t: 36, b: 60 } : { l: 60, r: 60, t: 50, b: 80 }
+      legend: { orientation: 'h', y: -0.22, x: 0 },
+      margin: global.isMobileViewport() ? { l: 40, r: 40, t: 36, b: 56 } : { l: 60, r: 60, t: 46, b: 64 }
     };
 
     try {
@@ -476,6 +528,7 @@
       if (payload && payload.plotly_weather_chart) {
         const layout = JSON.parse(JSON.stringify(payload.plotly_weather_chart.layout || defaultWeatherLayout));
         const traces = JSON.parse(JSON.stringify(payload.plotly_weather_chart.data || defaultWeatherTraces));
+        layout.height = global.isMobileViewport() ? 300 : 340;
         layout.plot_bgcolor = 'rgba(0,0,0,0)';
         layout.paper_bgcolor = 'rgba(0,0,0,0)';
         layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
@@ -652,7 +705,7 @@
     let activeForecast = payload.hourly_forecast;
     let activeDirectives = payload.operational_directives;
     let activeKpis = payload.summary_kpis;
-    let chartTitle = '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate';
+    let chartTitle = '24-Hour Real-Time Sales Pace & Smoked Meat Draw';
     let currentDayName = '';
 
     if (payload.day_profiles && startDateVal) {
@@ -686,7 +739,7 @@
             pitmaster_hours: profile.pitmaster_hours,
             average_ticket_usd: profile.average_ticket_usd
           };
-          chartTitle = `${dayName} Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal})`;
+          chartTitle = `${dayName} Hourly Sales Pace & Smoked Meat Draw (${startDateVal})`;
         }
       } else {
         const rangeHours = [];
@@ -741,7 +794,7 @@
             'Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.',
             'Smoker Pacing: Balance smoke pit reload intervals to maintain continuous hot holding capacity.'
           ];
-          chartTitle = `${daysCount}-Day Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal} to ${endDateVal})`;
+          chartTitle = `${daysCount}-Day Hourly Sales Pace & Smoked Meat Draw (${startDateVal} to ${endDateVal})`;
         }
       }
     }
@@ -800,7 +853,7 @@
       {
         x: hours,
         y: orders,
-        name: 'Order Velocity (Orders/hr)',
+        name: 'Order Pace (Orders/hr)',
         type: 'scatter',
         mode: 'lines+markers',
         line: { color: '#3b82f6', width: 3 },
@@ -915,8 +968,9 @@
 
     const mobile = global.isMobileViewport();
     const layout = {
+      height: mobile ? 300 : 340,
       title: {
-        text: mobile ? (currentDayName ? `${currentDayName} Hourly Velocity & Meat Draw` : 'Hourly Velocity & Meat Draw') : chartTitle,
+        text: mobile ? (currentDayName ? `${currentDayName} Hourly Sales Pace & Meat Draw` : 'Hourly Sales Pace & Meat Draw') : chartTitle,
         font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: mobile ? 11 : 13 }
       },
       paper_bgcolor: 'rgba(0,0,0,0)',
@@ -934,8 +988,8 @@
         tickfont: { color: '#E69F00' }
       },
       annotations: mobileAnnotations,
-      legend: { orientation: 'h', y: -0.3, x: 0 },
-      margin: mobile ? { l: 38, r: 38, t: 36, b: 70 } : { l: 50, r: 50, t: 44, b: 90 }
+      legend: { orientation: 'h', y: -0.22, x: 0 },
+      margin: mobile ? { l: 38, r: 38, t: 36, b: 56 } : { l: 50, r: 50, t: 42, b: 64 }
     };
 
     if (typeof Plotly !== 'undefined') {

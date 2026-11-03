@@ -1,29 +1,10 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-02T16:21:20.266730-05:00",
+      "generated_at": "2026-11-03T12:00:01.306220-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~217.8 lbs raw brisket (~87.1 lbs cooked yield) and ~30.3 lbs raw pork shoulder (~12.1 lbs cooked yield) [~248.1 lbs total raw / ~99.2 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (48 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
-        {
-          "date": "2026-11-02",
-          "day_name": "Mon",
-          "is_closed": true,
-          "predicted_revenue": 0.0,
-          "brisket_raw_lbs": 0.0,
-          "pork_shoulder_raw_lbs": 0.0,
-          "sausage_lbs": 0.0,
-          "turkey_lbs": 0.0,
-          "turkey_cooked_lbs": 0.0,
-          "turkey_raw_lbs": 0.0,
-          "tacos_sold": 0,
-          "rosebuds_sold": 0,
-          "pork_ribs_racks": 0,
-          "beef_dino_ribs": 0,
-          "recommended_staff": 0,
-          "pitmaster_hours": 0.0,
-          "data_type": "PREDICTED"
-        },
         {
           "date": "2026-11-03",
           "day_name": "Tue",
@@ -269,6 +250,25 @@ window.BBQ_PAYLOADS = {
           "beef_dino_ribs": 4,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
+          "data_type": "PREDICTED"
+        },
+        {
+          "date": "2026-11-16",
+          "day_name": "Mon",
+          "is_closed": true,
+          "predicted_revenue": 0.0,
+          "brisket_raw_lbs": 0.0,
+          "pork_shoulder_raw_lbs": 0.0,
+          "sausage_lbs": 0.0,
+          "turkey_lbs": 0.0,
+          "turkey_cooked_lbs": 0.0,
+          "turkey_raw_lbs": 0.0,
+          "tacos_sold": 0,
+          "rosebuds_sold": 0,
+          "pork_ribs_racks": 0,
+          "beef_dino_ribs": 0,
+          "recommended_staff": 0,
+          "pitmaster_hours": 0.0,
           "data_type": "PREDICTED"
         }
       ]
@@ -27376,6 +27376,86 @@ window.BBQ_PAYLOADS = {
           "predicted_revenue": 0.0
         }
       ]
+    },
+    "2026-11-03": {
+      "captured_at": "2026-11-03T12:00:01.303261-05:00",
+      "hourly_forecast": [
+        {
+          "hour": 0,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 1,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 2,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 3,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 4,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 5,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 6,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 7,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 8,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 9,
+          "predicted_orders": 0.1,
+          "predicted_revenue": 4.85
+        },
+        {
+          "hour": 10,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 11,
+          "predicted_orders": 7.5,
+          "predicted_revenue": 363.75
+        },
+        {
+          "hour": 12,
+          "predicted_orders": 7.2,
+          "predicted_revenue": 349.2
+        },
+        {
+          "hour": 13,
+          "predicted_orders": 4.6,
+          "predicted_revenue": 223.1
+        },
+        {
+          "hour": 14,
+          "predicted_orders": 2.4,
+          "predicted_revenue": 116.4
+        }
+      ]
     }
   },
   "daily_executive_brief": {
@@ -29208,7 +29288,7 @@ window.BBQ_PAYLOADS = {
         "category_label": "\u26a0\ufe0f Pricing Disparity",
         "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 meat cost per portion), severely compressing margin.",
         "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
-        "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 variance)",
+        "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 difference from target)",
         "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to keep more than 68% of each sale after meat cost.",
         "impact_usd": 480.0,
         "terms": [
@@ -29363,7 +29443,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-02T16:21:11.071947-05:00",
+    "generated_at": "2026-11-03T12:00:01.267909-05:00",
     "total_alerts_detected": 15,
     "active_alert": {
       "alert_id": "qw-aov-2026-10-30-19",

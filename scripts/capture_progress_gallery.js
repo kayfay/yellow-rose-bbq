@@ -55,6 +55,13 @@ function startStaticServer(port = 8124) {
     await desktopPage.waitForTimeout(1200);
     await desktopPage.screenshot({ path: path.join(OUT_DIR, 'v2_desktop_analytics.png'), fullPage: false });
 
+    const velocitySection = desktopPage.locator('#plotly-predictive-velocity-chart');
+    if (await velocitySection.count() > 0) {
+      await velocitySection.scrollIntoViewIfNeeded();
+      await desktopPage.waitForTimeout(400);
+      await desktopPage.screenshot({ path: path.join(OUT_DIR, 'v2_desktop_smokehouse_velocity.png'), fullPage: false });
+    }
+
     await desktopPage.click('#btn-toggle-debug-drawer');
     await desktopPage.waitForTimeout(400);
     await desktopPage.screenshot({ path: path.join(OUT_DIR, 'v2_desktop_debug_drawer.png'), fullPage: false });
@@ -70,9 +77,16 @@ function startStaticServer(port = 8124) {
     await mobilePage.click('.mobile-bottom-nav-btn[data-tab="forecasting-analytics"]');
     await mobilePage.waitForTimeout(1200);
     await mobilePage.screenshot({ path: path.join(OUT_DIR, 'v2_mobile_analytics.png'), fullPage: false });
+
+    const mobileVelocitySection = mobilePage.locator('#plotly-predictive-velocity-chart');
+    if (await mobileVelocitySection.count() > 0) {
+      await mobileVelocitySection.scrollIntoViewIfNeeded();
+      await mobilePage.waitForTimeout(400);
+      await mobilePage.screenshot({ path: path.join(OUT_DIR, 'v2_mobile_smokehouse_velocity.png'), fullPage: false });
+    }
     await mobileCtx.close();
 
-    console.log('Captured 5 v2.0.0 progress gallery screenshots in assets/screenshots/');
+    console.log('Captured 7 progress gallery screenshots in assets/screenshots/');
   } finally {
     await browser.close();
     server.close();

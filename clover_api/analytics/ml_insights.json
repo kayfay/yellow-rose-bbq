@@ -39,7 +39,7 @@
       "category_label": "\u26a0\ufe0f Pricing Disparity",
       "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 meat cost per portion), severely compressing margin.",
       "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
-      "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 variance)",
+      "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 difference from target)",
       "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to keep more than 68% of each sale after meat cost.",
       "impact_usd": 480.0,
       "terms": [

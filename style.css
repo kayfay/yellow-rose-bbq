@@ -540,13 +540,25 @@ img {
   height: auto;
 }
 
+/* Hide offscreen Plotly 9000x9000 black-fill tester SVG */
+#js-plotly-tester {
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
 /* Charts */
 .chart-card {
-  background: var(--bg-base);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.78) 100%);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
-  padding: 6px;
+  padding: 10px 12px;
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -568,8 +580,18 @@ svg.main-svg {
   overflow: hidden;
 }
 
-#plotly-meat-sales-chart, #plotly-weather-impact-chart, #plotly-event-impact-chart, #plotly-shift-heatmap {
-  width: 100% !important; height: 350px !important;
+#plotly-meat-sales-chart,
+#plotly-weather-impact-chart,
+#plotly-event-impact-chart {
+  width: 100% !important;
+  min-height: 300px;
+  height: auto !important;
+}
+
+#plotly-shift-heatmap {
+  width: 100% !important;
+  min-height: 280px;
+  height: auto !important;
 }
 
 /* Sticky Footer (Large Tactile Action Buttons) */
@@ -1578,7 +1600,8 @@ body.pit-high-contrast {
 #plotly-predictive-velocity-chart,
 #plotly-sellout-chart {
   width: 100% !important;
-  min-height: 340px;
+  min-height: 300px;
+  height: auto !important;
 }
 
 /* Sticky Mobile Bottom Thumb-Zone Navigation (< 768px) */
@@ -3548,5 +3571,152 @@ body[data-cb-mode="protanopia"] {
   display: none !important;
 }
 
+/* ==========================================================================
+   Smokehouse UX Overhaul (v2.2.0):
+   - KitchenQuantityDisplay (Cases & Individual Cuts vs Raw Lbs)
+   - Plain-English Audit Takeaway Banner
+   - Simplified Prep Safety Margin / Cushion Status Strip
+   ========================================================================== */
+
+.kitchen-qty-slot {
+  margin-bottom: 8px;
+}
+
+.kitchen-qty-display {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(230, 159, 0, 0.38);
+  border-left: 3px solid #E69F00;
+}
+
+.kitchen-qty-primary {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.kitchen-qty-secondary {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #56B4E9;
+  font-variant-numeric: tabular-nums;
+}
+
+body[data-unit-mode="lbs"] .kitchen-qty-display {
+  border-color: rgba(86, 180, 233, 0.45);
+  border-left-color: #56B4E9;
+}
+
+.audit-plain-takeaway {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: rgba(0, 158, 115, 0.14);
+  border: 1px solid rgba(0, 158, 115, 0.42);
+  border-left: 4px solid #009E73;
+  color: #f8fafc;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.audit-plain-takeaway strong {
+  color: #F0E442;
+}
+
+.prep-safety-margin-strip {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(0, 158, 115, 0.45);
+  border-left: 4px solid #009E73;
+}
+
+.prep-safety-margin-strip.status-tight {
+  border-color: rgba(230, 159, 0, 0.5);
+  border-left-color: #E69F00;
+}
+
+.prep-safety-margin-strip.status-under {
+  border-color: rgba(213, 94, 0, 0.55);
+  border-left-color: #D55E00;
+}
+
+.prep-margin-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prep-margin-kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+}
+
+.prep-margin-text {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #f8fafc;
+  font-variant-numeric: tabular-nums;
+}
+
+.prep-margin-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.prep-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.prep-status-pill.status-safe {
+  background: rgba(0, 158, 115, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(0, 158, 115, 0.45);
+}
+
+.prep-status-pill.status-tight {
+  background: rgba(230, 159, 0, 0.2);
+  color: #F0E442;
+  border: 1px solid rgba(230, 159, 0, 0.5);
+}
+
+.prep-status-pill.status-under {
+  background: rgba(213, 94, 0, 0.22);
+  color: #fca5a5;
+  border: 1px solid rgba(213, 94, 0, 0.55);
+}
+
+.prep-margin-subtext {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+}
 
 
+
+
+/* Smokehouse UX: when case/cut display is present, demote legacy lbs number to secondary */
+.est-card:has(.kitchen-qty-display) .est-number { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
