@@ -128,6 +128,11 @@
 - Backed up `Harness_Engineering_AI_Agents.docx` into `backups/`.
 - Tests: `npm run check` (0 errors), `node --check tz_utils.js` (0 errors), `python -m unittest discover -s clover_api/tests` (5/5 PASS), `verify_bi_insight_engine.py` (100% PASS), `verify_v2_facelift_pal.py` (100% PASS), `npm test` Playwright E2E: 19 passed / 0 failed (14.7s).
 
+## 2026-11-02 · Phase 2–3 Full-Stack Code Audit Baseline & Harness Init
+- Created full pre-audit repository archive at `backups/archive_pre_audit_20261102.tar.gz` (7.1 MB) and moved stray `.swp` to `backups/root_vim.swp`.
+- Authored `archive/README.md` cataloging all archived v1 scripts, prototypes, and historical COGS audits.
+- Completed static audit of `app.js` (4,944 lines), `d3_charts.js` (972 lines), `tz_utils.js` (351 lines), `index.html` (1,190 lines), and `style.css` (3,294 lines). Pausing at Phase 9 Gateway for `/grill-me` alignment.
+
 ## 2026-11-02 · Dead term pills in Daily Insight card
 - .env chmod 600.
 - After the timestamp/NaN agent finished: npm test 18 pass / 1 flaky (dashboard.spec.js "Daily Pitmaster Intelligence", line 251: #term-explainer-drawer stayed hidden; 6/15 fails on repeat).
@@ -142,3 +147,46 @@
 - De-jargoned user-facing strings in hourly_quick_wind_detector.py (8 headlines/status) and ml_data_intelligence_engine.py (10 evidence/proof/labels). Regenerated ml_insights.json, quick_wind_alerts.json, payloads.js.
 - dashboard.spec.js glossary counts: 9→13 total, pit 4→5, volume 2→5.
 - Tests: npm run check OK; unittest 5/5; verify_bi_insight_engine + verify_v2_facelift_pal exit 0; Pitmaster test 15/15 repeated; npm test 19/19.
+- **2026-11-02 18:54:48 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+## 2026-11-02 · Phase 4–7 Full-Stack Modularization, 5 Runtime Bug Fixes, Mobile Kitchen Ergonomics & Adversarial Audit
+- **Modular Decoupling (Tasks 24–28)**:
+  - Extracted `modules/shared/core_utils.js`, `modules/recipes/sausage_calc.js`, `modules/reports/shop_reports.js`, and `modules/forecaster/analytics_subtabs.js` loaded via `<script defer>` in `index.html?v=2.1.3`.
+  - Reduced `app.js` by 56% (from 4,944 lines to 1,182 lines) into a clean orchestrator and updated `npm run check` in `package.json` to syntax-check all 7 frontend JS files.
+  - Preserved pre-refactor snapshots in `archive/app.js.2026-11-02.orig`, `archive/index.html.2026-11-02.orig`, `archive/style.css.2026-11-02.orig`, and `backups/archive_pre_audit_20261102.tar.gz`.
+- **5 Concrete Runtime Bugs Fixed**:
+  1. Restored interactive click/keyboard (`Enter`/`Space`) listeners and `role="checkbox"` / `aria-checked` state on `.task-row[data-step="1..15"]` plus `#btn-sausage-shortcut` and `#btn-sausage-reset` in `modules/recipes/sausage_calc.js`.
+  2. Fixed `ReferenceError: traces is not defined` in `renderPlotlyShiftHeatmap` (`modules/forecaster/analytics_subtabs.js`) by extracting and deep-cloning `payload.plotly_heatmap.data`.
+  3. Fixed Open-Meteo Celsius/Fahrenheit unit bug (`&temperature_unit=fahrenheit`), rain headwind multiplier (`0.85` instead of `1.21`), and added `AbortController` timeout circuit breaker (`fetchJsonSafe`) in `modules/shared/core_utils.js`.
+  4. Added monotonic `_forecastRenderSeq` async sequence guard in `renderPlotlyForecastingChart` (`app.js`) to prevent out-of-order date/preset overwrites.
+  5. Deep-cloned `window.BBQ_PAYLOADS` layouts and trace arrays before mutating in `modules/forecaster/analytics_subtabs.js`.
+  6. Restored `db_time` / `existing_time` candidate check in `clover_api/analytics/dashboard.py:get_last_updated_time()` so fixture DB tests in `verify_timezone_and_actuals.py` pass 26/26.
+- **Mobile Kitchen Sausage Ergonomics & Executive BI Streamlining (`index.html`, `style.css`)**:
+  - Added `.sausage-checklist-toolbar` with live `#sausage-checklist-progress` (`0 / 15 Steps Complete`) and glove-safe (`>= 48px`) `Mark Day 1–2 Prep Done` and `Reset Steps` buttons; enforced `min-height: 56px` on `.task-row` and `font-variant-numeric: tabular-nums` across `#tab-forecasting-analytics`.
+- **Verification & Adversarial Critic Sign-Off**:
+  - `npm run check`: 0 errors across all 7 JS files.
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: 5/5 PASS (0.58s).
+  - PAL Verifiers (`verify_v2_facelift_pal.py` 27/27, `verify_bi_insight_engine.py` 100%, `verify_recipe_integration.py` 10/10, `verify_ml_analytics.py` 5/5, `verify_all_forecasts.py` 5/5, `verify_timezone_and_actuals.py` 26/26): 100% PASS (Exit Code 0).
+  - Playwright E2E (`npm test`): **19 passed / 0 failed (14.7s)**.
+  - Independent Adversarial Critic Subagent (`7a91f1d4-7ddd-4888-83bc-c051a75e58cc`): **9.4 / 10 (APPROVED)** (and the single `fetchJsonSafe` 2nd-arg signature nit noted by the Critic was immediately fixed in `app.js`).
+  - Marked Tasks 24–28 `passes: true` in `.loop/prd.json`.
+
+## 2026-11-02 · Phase 2–3 Subtab Cleanup & Roll-Up Accordion Baseline Init
+- Created pre-subtab-cleanup baseline archive `backups/archive_pre_subtab_cleanup_20261102.tar.gz` (7.2 MB).
+- Audited all 7 analytics subtabs (`#subtab-view-predictive`, `#subtab-view-arima`, `#subtab-view-shift`, `#subtab-view-weather`, `#subtab-view-event`, `#subtab-view-advanced`, `#subtab-view-reports`) and added Tasks 29–30 (`passes: false`) to `.loop/prd.json`. Pausing at Phase 9 Gateway for `/grill-me` alignment.
+
+
+## 2026-11-02 · Subtab De-Slop, 7-Subtab Executive Stat Strips & Reusable Roll-Up Accordions (Tasks 29–30 Complete)
+- **Files Modified / Created**:
+  - `modules/shared/core_utils.js`: Added `initRollUpAccordions()` and `setAllRollUpSections(expanded)` with `localStorage` (`yr_rollup_state_v1`) persistence, `aria-expanded` / chevron (`▼`/`▶`) updates, `<details open>` sync, and automatic `Plotly.Plots.resize()` on expand.
+  - `index.html`: Added 3-card `.subtab-stat-strip` executive summary badges at the top of all 7 analytics subtabs (`#subtab-view-predictive`, `#subtab-view-arima`, `#subtab-view-weather`, `#subtab-view-event`, `#subtab-view-shift`, `#subtab-view-advanced`, `#subtab-view-reports`), wrapped 10 deep-dive sections in `.rollup-section` accordions, added `#btn-debug-rollup-toggle` in `#design-debug-drawer`, pruned verbose static copy to <= 240 chars per item, and bumped cache-busters to `?v=2.1.4`.
+  - `app.js`: Wired `initRollUpAccordions()` on `DOMContentLoaded`, wired `#btn-debug-rollup-toggle` in `initDesignDebugPanel()`, and shortened dynamic narrative strings (`#dynamic-baseline-trend`, `#dynamic-insight-string`, `#model-eval-body`) to concise 1-2 line summaries.
+  - `style.css`: Added `.subtab-stat-strip`, `.subtab-stat-card`, `.rollup-section`, `.rollup-header` (`min-height: 48px`), `.rollup-summary-pill`, `.rollup-chevron`, and `.rollup-section.collapsed .rollup-body`.
+  - `scripts/verify_subtab_rollup_pal.py`: Created deterministic PAL verifier checking all 7 stat strips (21 cards), 10 `RollUpSection` containers, `min-height: 48px` touch targets, `<= 240`-char bullet density, and all 21 required E2E DOM IDs.
+- **Verification Results**:
+  - `npm run check`: PASS (0 syntax errors across all 7 JS modules).
+  - `.venv/bin/python scripts/verify_subtab_rollup_pal.py`: PASS (7 stat strips, 21 stat cards, 10 RollUpSections, 21/21 E2E IDs intact).
+  - `.venv/bin/python scripts/verify_v2_facelift_pal.py` & `verify_bi_insight_engine.py`: PASS (100%).
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: PASS (5/5 tests in 0.142s).
+  - `npm test` (Playwright E2E): PASS (19/19 tests passed in 14.3s).
+  - Independent Adversarial Code Critic: **9.5 / 10 (PASS)**. Marked Tasks 29 and 30 `passes: true` in `.loop/prd.json`.

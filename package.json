@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "bash run_tests.sh",
-    "check": "node --check app.js d3_charts.js"
+    "check": "node --check app.js d3_charts.js tz_utils.js modules/shared/core_utils.js modules/recipes/sausage_calc.js modules/reports/shop_reports.js modules/forecaster/analytics_subtabs.js"
   },
   "repository": {
     "type": "git",

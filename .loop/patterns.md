@@ -19,6 +19,8 @@
 - Okabe-Ito Palette (WCAG AAA / Colorblind-Safe): Orange `#E69F00`, Sky Blue `#56B4E9`, Bluish Green `#009E73`, Amber `#F0E442`, Deep Blue `#0072B2`, Vermillion `#D55E00`, Reddish Purple `#CC79A7`, Slate `#64748B`.
 - Viewport Invariant: Desktop (`>= 768px`, `1440px` preset) = interactive plain-English tooltips; Mobile (`< 768px`, `375px`/`414px`) = 100% static (`staticPlot: true`, `pointer-events: none`, `touch-action: pan-y`) with **pre-baked Peak/Low/Now face annotations** and `>= 16px` (`1rem`) legibility.
 
-## 4. Zero-Trust Security & Code Hygiene Rules
+## 4. Zero-Trust Security, Modular Architecture & Roll-Up Invariants
+- Modules (`<script defer>`): `modules/shared/core_utils.js`, `modules/recipes/sausage_calc.js`, `modules/reports/shop_reports.js`, `modules/forecaster/analytics_subtabs.js` -> `app.js`.
+- Subtab Roll-Up & Stat Strips: All 7 subtabs start with `.subtab-stat-strip` (3 cards) and wrap secondary sections in `.rollup-section` (`min-height: 48px` `.rollup-header`, `yr_rollup_state_v1` storage, `#btn-debug-rollup-toggle`).
 - Permissions: Directories `0755`, files `0644`, scripts `0755`, secrets `.env` `0600` (zero world-writable files).
 - DOM & Queries: No `document.write()`; sanitize dynamic HTML (`escapeHTML`); parameterized SQL (`?`); zero leaked wholesale COGS breakdowns.

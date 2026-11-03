@@ -137,6 +137,48 @@
       "description": "Harmonize data synchronization timestamps and labels across header banner and footer frame: standardize copy ('Data Last Synced' / 'Last Synced'), update build pipeline to refresh sync_status.json and forecast timestamps to latest ISO in shop timezone (America/New_York), and unify app.js timestamp resolution with window.ShopTime.",
       "acceptance_criteria": "Top header (#data-last-pulled) and bottom footer (#last-updated-time) read the latest payload sync timestamp and format consistently with shop timezone (ET); build_payloads.py automatically updates sync_status.json in both clover_api/analytics and analytics; Playwright E2E and PAL verifiers pass 100%.",
       "passes": true
+    },
+    {
+      "id": 24,
+      "description": "Extract modules/shared/core_utils.js containing DOM sanitization (escapeHTML), mobile viewport & touch-safety helpers (isMobileViewport, getPlotlyConfig, applyChartTouchSafety), date parsing, dynamic calendar event resolver (resolveDateEventImpact), and AbortController timeout circuit-breaker fetch wrapper (fetchJsonSafe).",
+      "acceptance_criteria": "modules/shared/core_utils.js created and syntax-checked; all shared utilities exposed on window and window.BBQModules.shared with zero breaking changes.",
+      "passes": true
+    },
+    {
+      "id": 25,
+      "description": "Extract modules/recipes/sausage_calc.js containing all 10 sausage formulations (RECIPES), 50 lb batch state management, 3.0 links/lb yield math, Day 2 checklist hydration, and URL/localStorage persistence.",
+      "acceptance_criteria": "modules/recipes/sausage_calc.js created and syntax-checked; all 10 recipes and Day 2 checklist steps pass verify_v2_facelift_pal.py and Playwright E2E recipe tests.",
+      "passes": true
+    },
+    {
+      "id": 26,
+      "description": "Extract modules/reports/shop_reports.js containing Daily Executive Brief renderer, 7-day SVG sparkline builder, 10 Pitmaster Watchlist Tips, Quick Wind Alert banner, and Plain-English Glossary & Term Explainer drawer.",
+      "acceptance_criteria": "modules/reports/shop_reports.js created and syntax-checked; Shop Reports subtab (#subtab-view-reports) renders brief, sales bridge, tips, and glossary with 100% E2E pass rate.",
+      "passes": true
+    },
+    {
+      "id": 27,
+      "description": "Extract modules/forecaster/analytics_subtabs.js (Shift Heatmap, Event Impact & Calendar Drawer, Weather Impact, Advanced Analytics, Predictive Velocity, Hourly Turnover Deck & Time-Travel Simulator) and fix Open-Meteo Fahrenheit/rain bug, timeout circuit breaker, and async render-sequence race guard in app.js.",
+      "acceptance_criteria": "modules/forecaster/analytics_subtabs.js extracted; app.js reduced by >50% into clean orchestrator; Open-Meteo uses temperature_unit=fahrenheit + timeout circuit breaker; async sequence guard prevents stale date overwrites.",
+      "passes": true
+    },
+    {
+      "id": 28,
+      "description": "Wire <script defer> module tags in index.html, update npm run check to validate all modules/**/*.js, verify >=48px touch safety & progress.html, run deterministic PAL + Playwright E2E suites (19/19), and pass independent Adversarial Critic audit (>=9/10).",
+      "acceptance_criteria": "npm run check, python unittest (5/5), PAL verifiers, and Playwright E2E (19/19) exit 0; Adversarial Critic rates refactoring cleanliness and stability >=9/10.",
+      "passes": true
+    },
+    {
+      "id": 29,
+      "description": "Engineer reusable RollUpSection accordion component & top-of-subtab Executive Stat Badge Strips across all 7 analytics subtabs (Predictive, ARIMA, Shift, Weather, Event, Advanced, Reports) with >=48px touch headers, localStorage state persistence, and debug-drawer Collapse All / Expand All toggle.",
+      "acceptance_criteria": "All 7 subtabs display 3-4 scannable executive stat badges at top and wrap deep-dive sections in RollUpSection accordions with >=48px headers, chevron indicators, summary pills, and ResizeObserver/Plotly resize triggers on expand.",
+      "passes": true
+    },
+    {
+      "id": 30,
+      "description": "Subtab De-Slop & Verification Gate: prune verbose narrative paragraphs across all subtabs into <=3-line scannable bullets/badges without breaking existing DOM IDs, add deterministic Playwright/PAL tests for RollUpSection accordions and <=3-line copy density, update progress.html, and pass Adversarial Critic (>=9/10).",
+      "acceptance_criteria": "npm run check, PAL scripts, and all Playwright E2E specs (including new rollup & de-slop assertions) pass 100%; Adversarial Critic rates subtab cleanliness >=9/10.",
+      "passes": true
     }
   ]
 }

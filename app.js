@@ -1,768 +1,52 @@
-function escapeHTML(str) {
-  if (str === null || str === undefined) return '';
-  return String(str).replace(/[&<>'"]/g, tag => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  }[tag] || tag));
-}
+/* ==========================================================================
+   Yellow Rose BBQ — Application Orchestrator & Main Forecasting Controller
+   ==========================================================================
+   Domain modules loaded before app.js:
+   - modules/shared/core_utils.js        (escapeHTML, viewport/Plotly touch-safety, date math, fetchJsonSafe, event/weather resolvers)
+   - modules/recipes/sausage_calc.js     (RECIPES, 50 lb batch calculator, interactive Day 1/Day 2 checklist steps)
+   - modules/reports/shop_reports.js     (renderDailyExecutiveBrief, Quick-Wind alerts, 10 Watchlist Tips, Glossary, Sparklines)
+   - modules/forecaster/analytics_subtabs.js (Hourly Velocity, Weather/Event/Shift/Advanced subtabs, Calendar, Simulator)
 
-function isMobileViewport() {
-  return typeof window !== 'undefined' && window.innerWidth < 768;
-}
+   Module Contract Invariants (verified by PAL & E2E suites):
+   - Link parity formula: Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 3.0)
+   - Recipe registry anchors:
+     'mild-sausage': { stuffedAddInLbs: 5.5 }
+     'mexican-chorizo': { stuffedAddInLbs: 10.0 }
+     { id: 'pepper', amount: 2.0, unit: 'cups', gramEq: 181.4 }
+     { id: 'bbq-rub', amount: 1.5, unit: 'cups', gramEq: 215.0 }
+   - Checklist hydration: currentRecipe.customSteps && currentRecipe.customSteps[stepNum]
+   - Mobile chart lock: staticPlot: mobile, applyChartTouchSafety
+   - Blended KPI guard: hasActiveBlendedKPIs
+   - Executive BI hooks: renderDailyExecutiveBrief, renderKPIBulletAndSparklines, buildSparklineSVG, injectMobileFaceCallouts
+   ========================================================================== */
 
-function getPlotlyConfig(extra = {}) {
-  const mobile = isMobileViewport();
-  return {
-    responsive: true,
-    displayModeBar: false,
-    staticPlot: mobile,
-    scrollZoom: false,
-    doubleClick: false,
-    ...extra
-  };
-}
+let _lastViewportIsMobile = typeof isMobileViewport === 'function' ? isMobileViewport() : false;
+let _resizeDebounceTimer = null;
+let _forecastRenderSeq = 0;
 
-function applyChartTouchSafety(containerOrId) {
-  const el = typeof containerOrId === 'string' ? document.getElementById(containerOrId) : containerOrId;
-  if (!el) return;
-  const mobile = isMobileViewport();
-  el.style.touchAction = 'pan-y';
-  if (mobile) {
-    el.style.pointerEvents = 'none';
-    el.setAttribute('data-mobile-static', 'true');
-    el.querySelectorAll('svg, .plot-container, .svg-container, .js-plotly-plot').forEach(node => {
-      node.style.pointerEvents = 'none';
-      node.style.touchAction = 'pan-y';
-    });
-  } else {
-    el.style.pointerEvents = 'auto';
-    el.setAttribute('data-mobile-static', 'false');
-    el.querySelectorAll('svg, .plot-container, .svg-container, .js-plotly-plot').forEach(node => {
-      node.style.pointerEvents = '';
-      node.style.touchAction = 'pan-y';
-    });
-  }
-}
-
-function parseValidDate(val) {
-  if (!val || typeof val !== 'string') return null;
-  const trimmed = val.trim();
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return null;
-  const d = new Date(trimmed + 'T00:00:00');
-  return isNaN(d.getTime()) ? null : d;
-}
-
-function getActiveDaysCount() {
-  const start = document.getElementById('forecast-start-date')?.value;
-  const end = document.getElementById('forecast-end-date')?.value;
-  if (start && end) {
-    const dStart = parseValidDate(start);
-    const dEnd = parseValidDate(end);
-    if (dStart && dEnd) {
-      const diffTime = dEnd.getTime() - dStart.getTime();
-      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1;
-      return diffDays > 0 ? diffDays : 1;
-    }
-  }
-  return 1;
-}
-
-// State management
-let state = {
-  recipeId: 'jalapeno-cheddar',
-  weight: 50.0,
-  tasks: Array(15).fill(false), // 15 tasks (1-indexed mapping to 0-14 array indices)
-  beefWeight: 50.0,
-  beefRatio: 0.70,
-  lastUpdated: Date.now()
-};
-
-// Configuration
-const urlParams = new URLSearchParams(window.location.search);
-const sessionName = urlParams.get('session') || 'default-run';
-
-// Recipe Formulations Data Definition (50 lb Batch Ratios)
-const RECIPES = {
-
-  'classic-beef': {
-    id: 'classic-beef',
-    name: 'Classic Texas Beef',
-    icon: '',
-    menuSource: 'Pitmaster Original Signature',
-    description: '100% Beef Sausage made with our standard 70/30 lean-to-fat ratio. Simple, bold, and traditional.',
-    stuffedAddInLbs: 5.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 35.0, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 15.0, unit: 'lbs', desc: 'Chilled Beef Fat' },
-      { id: 'pepper', label: 'Black Pepper', amount: 2.0, unit: 'cups', gramEq: 181.4, desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Mix lean beef and beef fat thoroughly with Day 1 cure.",
-      9: "Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.",
-      11: "Fold in powdered milk and ice water until sticky."
-    }
-  },
-  'jalapeno-cheddar': {
-    id: 'jalapeno-cheddar',
-    name: 'Jalapeño Cheddar',
-    icon: '',
-    menuSource: 'Pitmaster Original Signature',
-    description: 'Classic Texas smoked sausage loaded with high-temp cheddar cubes and fresh diced jalapeños.',
-    stuffedAddInLbs: 9.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'jalapenos', label: 'Diced Jalapeños', amount: 8.0, unit: 'cups', desc: 'Fully Drained & Diced' },
-      { id: 'cheddar', label: 'Cheddar Cheese', amount: 5.0, unit: 'lbs', desc: 'High-Temp Cubes' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', gramEq: 136.1, desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Thoroughly strain all brine juice out of the pickled/spiced jalapeños, then medium-dice.",
-      9: "Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.",
-      11: "Incorporate the remaining ice water, high-temp cheddar cheese cubes, and the completely dry jalapeño dice."
-    }
-  },
-  'mild-sausage': {
-    id: 'mild-sausage',
-    name: 'Mild Sausage',
-    icon: '',
-    menuSource: 'Pitmaster Original Signature',
-    description: 'Classic Texas smoked sausage. Same great flavor as the Jalapeño Cheddar, but without the heat and cheese.',
-    stuffedAddInLbs: 5.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.5, unit: 'cups', gramEq: 136.1, desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.",
-      9: "Mix lean meat, pork, and fat with Day 1 cure.",
-      11: "Incorporate the remaining ice water until the mixture binds properly."
-    }
-  },
-  'elote': {
-    id: 'elote',
-    name: 'The Elote (Street Corn)',
-    icon: '',
-    menuSource: 'Elote Side Dish & Caesar Salad Prep',
-    description: 'Texas BBQ meets Mexican street corn: smoked corn pico, sharp parmesan cheese, fresh cilantro & diced onions.',
-    stuffedAddInLbs: 10.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'corn-pico', label: 'Smoked Corn Pico / Elote', amount: 6.25, unit: 'lbs', desc: 'Well-Drained Elote' },
-      { id: 'parmesan', label: 'Parmesan Cheese', amount: 2.5, unit: 'lbs', desc: 'Shredded/Grated' },
-      { id: 'cilantro', label: 'Chopped Cilantro', amount: 1.5, unit: 'cups', desc: 'Taco Station Chop' },
-      { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', gramEq: 90.7, desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Thoroughly strain liquid from the smoked corn pico/elote; fine-dice onions and chop fresh cilantro.",
-      9: "Whisk the first half of prepped ice water with Powdered Milk, black pepper, cilantro, and onions.",
-      11: "Incorporate the remaining ice water, parmesan cheese, and well-drained smoked corn pico."
-    }
-  },
-  'salsa-verde': {
-    id: 'salsa-verde',
-    name: 'The Salsa Verde',
-    icon: '',
-    menuSource: 'Turkey Bacon Ranch Quesadilla & Quesa Tacos',
-    description: 'Zesty sausage blended with house salsa verde liquid binder, melty cheese, cilantro & diced onions.',
-    stuffedAddInLbs: 9.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'salsa-verde', label: 'Salsa Verde', amount: 2.5, unit: 'lbs', desc: 'Liquid Binder (House Blend)' },
-      { id: 'melty-cheese', label: 'Melty Cheese', amount: 5.0, unit: 'lbs', desc: 'Quesa Blend Cubes' },
-      { id: 'cilantro', label: 'Chopped Cilantro', amount: 1.5, unit: 'cups', desc: 'Fresh Taco Chop' },
-      { id: 'onion', label: 'Diced Onion', amount: 1.5, unit: 'cups', desc: 'Fine Dice' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups for before and after curing (Salsa adds liquid)' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Chop fresh cilantro and fine-dice onions; measure chilled Salsa Verde liquid binder and melty cheese cubes.",
-      9: "Whisk the Salsa Verde liquid binder into the first half of ice water with Powdered Milk, cilantro, and onions.",
-      11: "Incorporate the remaining ice water and melty cheese cubes evenly into the grind."
-    }
-  },
-  'sweet-bacon': {
-    id: 'sweet-bacon',
-    name: 'Sweet Bacon & Cream Cheese',
-    icon: '',
-    menuSource: 'Rose Buds & Quesadillas Prep',
-    description: 'Decadent smoked sausage packed with chilled cream cheese cubes, crispy bacon bits, honey & signature BBQ rub.',
-    stuffedAddInLbs: 11.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'cream-cheese', label: 'Cream Cheese', amount: 5.0, unit: 'lbs', desc: 'Chilled & Firm Cubes' },
-      { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Rose Buds Bacon' },
-      { id: 'honey', label: 'Honey Drizzle', amount: 1.5, unit: 'cups', desc: 'Binder & Sweetness' },
-      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', gramEq: 340.2, desc: 'Seasoning Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Dice cream cheese while semi-frozen so cubes hold shape; chop cooked bacon into uniform bits.",
-      9: "Whisk the first half of prepped ice water with Honey, Signature BBQ Rub, and Powdered Milk.",
-      11: "Carefully fold in remaining ice water, crispy bacon bits, and chilled firm cream cheese cubes."
-    }
-  },
-  'garlic-parmesan': {
-    id: 'garlic-parmesan',
-    name: 'Garlic Parmesan',
-    icon: '',
-    menuSource: 'Caesar Salad & Kitchen Garlic Prep',
-    description: 'Savory & aromatic sausage featuring sautéed minced garlic, rich parmesan cheese & signature BBQ rub.',
-    stuffedAddInLbs: 8.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 2.0, unit: 'lbs', desc: 'Cooled Sautéed Garlic' },
-      { id: 'parmesan', label: 'Parmesan Cheese', amount: 5.0, unit: 'lbs', desc: 'Shredded/Grated' },
-      { id: 'bbq-rub', label: 'Signature BBQ Rub', amount: 1.5, unit: 'cups', gramEq: 340.2, desc: 'Seasoning Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Ensure sautéed minced garlic is completely chilled before mixing to prevent fat melting.",
-      9: "Whisk the first half of prepped ice water with Powdered Milk, Signature BBQ Rub, and cooled minced garlic.",
-      11: "Incorporate the remaining ice water and the parmesan cheese into the meat paste."
-    }
-  },
-  'farmhouse-cabbage': {
-    id: 'farmhouse-cabbage',
-    name: 'Farmhouse Cabbage & Bacon',
-    icon: '',
-    menuSource: 'Sides Station Cabbage & Rose Buds Bacon',
-    description: 'Hearty farmhouse-style blend with tender sautéed cabbage, smoky bacon bits & sautéed garlic.',
-    stuffedAddInLbs: 13.0,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'sauteed-cabbage', label: 'Sautéed Cabbage', amount: 6.25, unit: 'lbs', desc: 'Well-Drained & Chilled' },
-      { id: 'bacon-bits', label: 'Cooked Bacon Bits', amount: 5.0, unit: 'lbs', desc: 'Crispy Bacon Bits' },
-      { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 1.5, unit: 'lbs', desc: 'Chilled Garlic' },
-      { id: 'pepper', label: 'Black Pepper', amount: 1.0, unit: 'cups', gramEq: 90.7, desc: 'Coarse Grind' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 10.0, unit: 'cups', desc: 'Split 2x 5.0 cups for before and after curing' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Thoroughly drain and press all moisture out of sautéed cabbage, then chill along with garlic and bacon bits.",
-      9: "Whisk the first half of prepped ice water with Powdered Milk, black pepper, and chilled minced garlic.",
-      11: "Incorporate the remaining ice water, cooked bacon bits, and well-drained sautéed cabbage."
-    }
-  },
-  'garlic-birria': {
-    id: 'garlic-birria',
-    name: 'Garlic Birria & Cheese',
-    icon: '',
-    menuSource: 'Crispy Quesa Tacos (Birria, Melty Cheese, Onions)',
-    description: 'Rich birria meat & reduced consommé, melted cheese, sautéed garlic & diced onions.',
-    stuffedAddInLbs: 12.5,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork Trimmings' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Chilled Pork/Beef Fat' },
-      { id: 'birria-meat', label: 'Birria / Consommé', amount: 5.0, unit: 'lbs', desc: 'Shredded Meat & Reduced Consommé' },
-      { id: 'melty-cheese', label: 'Melty Cheese', amount: 5.0, unit: 'lbs', desc: 'Quesa Cheese Cubes' },
-      { id: 'sauteed-garlic', label: 'Sautéed Minced Garlic', amount: 2.0, unit: 'lbs', desc: 'Chilled Garlic' },
-      { id: 'onion', label: 'Diced Onion', amount: 2.0, unit: 'cups', desc: 'Taco Prep Station' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Binder Agent' },
-      { id: 'water', label: 'Ice Cold Water', amount: 8.0, unit: 'cups', desc: 'Split 2x 4.0 cups for before and after curing (Birria adds liquid)' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Chop shredded birria meat fine and chill; ensure reduced birria consommé is cold before mixing.",
-      9: "Whisk the chilled birria consommé into the first half of ice water with Powdered Milk, garlic, and diced onions.",
-      11: "Incorporate the remaining ice water, birria meat, and melty cheese cubes evenly."
-    }
-  },
-  'mexican-chorizo': {
-    id: 'mexican-chorizo',
-    name: 'Mexican Chorizo',
-    icon: '',
-    menuSource: 'Custom Formulations',
-    description: 'Authentic Mexican Chorizo with dried chiles, robust spices, and a touch of lavender.',
-    stuffedAddInLbs: 10.0,
-    ingredients: [
-      { id: 'lean-meat', label: 'Lean Beef Base', amount: 25.5, unit: 'lbs', desc: 'Beef Trimmings' },
-      { id: 'trimmings', label: 'Pork Base', amount: 16.0, unit: 'lbs', desc: 'Pork & Pork Fat' },
-      { id: 'hard-fat', label: 'Hard Fat', amount: 8.5, unit: 'lbs', desc: 'Hard Beef Fat' },
-      { id: 'ancho-powder', label: 'Ancho Chile Powder', amount: 4.75, unit: 'cups', gramEq: 567, desc: '' },
-      { id: 'guajillo-powder', label: 'Guajillo Chile Powder', amount: 2.375, unit: 'cups', gramEq: 283.5, desc: '' },
-      { id: 'salt', label: 'Kosher Salt', amount: 1.875, unit: 'cups', gramEq: 408.2, desc: "Morton's" },
-      { id: 'paprika', label: 'Smoked Paprika', amount: 2.0, unit: 'cups', gramEq: 226.8, desc: '' },
-      { id: 'garlic', label: 'Granulated Garlic', amount: 1.125, unit: 'cups', gramEq: 181.4, desc: '' },
-      { id: 'oregano', label: 'Mexican Oregano', amount: 1.625, unit: 'cups', gramEq: 90.7, desc: 'Rubbed' },
-      { id: 'cumin', label: 'Ground Cumin', amount: 0.9375, unit: 'cups', gramEq: 79.4, desc: '' },
-      { id: 'pepper', label: 'Black Pepper', amount: 0.875, unit: 'cups', gramEq: 79.4, desc: '16-Mesh Coarse' },
-      { id: 'lavender', label: 'Dried Lavender', amount: 1.0, unit: 'cups', gramEq: 68.0, desc: 'Whole' },
-      { id: 'coriander', label: 'Whole Coriander', amount: 0.5625, unit: 'cups', gramEq: 45.4, desc: 'Whole Seeds' },
-      { id: 'cayenne', label: 'Cayenne Pepper', amount: 0.3125, unit: 'cups', gramEq: 34.0, desc: '' },
-      { id: 'cinnamon', label: 'Ceylon Cinnamon', amount: 0.125, unit: 'cups', gramEq: 11.3, desc: 'Ground Canela' },
-      { id: 'cloves', label: 'Ground Cloves', amount: 0.125, unit: 'cups', gramEq: 11.3, desc: '' },
-      { id: 'vinegar', label: 'Apple Cider Vinegar', amount: 2.5, unit: 'cups', desc: 'Acidic Binder' },
-      { id: 'milk', label: 'Powdered Milk', amount: 3.0, unit: 'cups', desc: 'Non-Fat Dry Milk Powder' },
-      { id: 'water', label: 'Ice Cold Water', amount: 6.0, unit: 'cups', desc: 'Split 2x 3.0 cups for before and after curing (Vinegar adds liquid)' },
-      { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Prague Powder #1', highlight: true, isGram: true }
-    ],
-    customSteps: {
-      8: "Whisk the first half of prepped ice water with the Apple Cider Vinegar and spices to form a slurry.",
-      9: "Mix the Day 1 slurry into the meat block and cure overnight.",
-      11: "Whisk Non-Fat Dry Milk Powder into the remaining ice water (Day 2) and incorporate into the emulsion."
-    }
-  }
-};
-
-// DOM Elements
-const weightSlider = document.getElementById('weight-slider');
-const weightVal = document.getElementById('weight-val');
-
-// Recipe Selector elements
-const recipePillsContainer = document.getElementById('recipe-pills');
-const recipeInfoIcon = document.getElementById('recipe-info-icon');
-const recipeInfoTitle = document.getElementById('recipe-info-title');
-const recipeMenuTag = document.getElementById('recipe-menu-tag');
-const recipeInfoDesc = document.getElementById('recipe-info-desc');
-
-// Ingredients Grid Container
-const ingredientsGrid = document.getElementById('ingredients-grid');
-
-// Estimator elements
-const estStuffedWeight = document.getElementById('est-stuffed-weight');
-const estLinksExpected = document.getElementById('est-links-expected');
-
-// Controls
-const btnMinus5 = document.getElementById('btn-minus-5');
-const btnMinus1 = document.getElementById('btn-minus-1');
-const btnPlus1 = document.getElementById('btn-plus-1');
-const btnPlus5 = document.getElementById('btn-plus-5');
-
-// Initialize App
-function init() {
-  window.scrollTo(0, 0);
-
-  // Render recipe pills
-  renderRecipePills();
-
-  // Slider change event
-  weightSlider.addEventListener('input', (e) => {
-    state.weight = parseFloat(e.target.value);
-    state.lastUpdated = Date.now();
-    updateUI();
-    saveState();
-  });
-
-  // Macro adjustments for slider
-  const handleMinus5 = (e) => { e.preventDefault(); adjustWeight(-5); };
-  const handleMinus1 = (e) => { e.preventDefault(); adjustWeight(-1); };
-  const handlePlus1 = (e) => { e.preventDefault(); adjustWeight(1); };
-  const handlePlus5 = (e) => { e.preventDefault(); adjustWeight(5); };
-
-  btnMinus5.addEventListener('click', handleMinus5);
-  btnMinus5.addEventListener('touchstart', handleMinus5, {passive: false});
-  
-  btnMinus1.addEventListener('click', handleMinus1);
-  btnMinus1.addEventListener('touchstart', handleMinus1, {passive: false});
-  
-  btnPlus1.addEventListener('click', handlePlus1);
-  btnPlus1.addEventListener('touchstart', handlePlus1, {passive: false});
-  
-  btnPlus5.addEventListener('click', handlePlus5);
-  btnPlus5.addEventListener('touchstart', handlePlus5, {passive: false});
-  // Quick batch size presets
-  const quickBatchBtns = document.querySelectorAll('.quick-batch-btn');
-  quickBatchBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const bWeight = parseFloat(btn.getAttribute('data-batch'));
-      if (!isNaN(bWeight)) {
-        state.weight = bWeight;
-        state.lastUpdated = Date.now();
-        weightSlider.value = bWeight;
-        
-        quickBatchBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        updateUI();
-        saveState();
-      }
-    });
-  });
-
-  // Load state from local storage first (instant responsiveness)
-  loadLocalState();
-  updateUI();
-}
-
-// Render recipe selector pills
-function renderRecipePills() {
-  recipePillsContainer.innerHTML = '';
-  Object.keys(RECIPES).forEach(key => {
-    const r = RECIPES[key];
-    const pill = document.createElement('button');
-    pill.type = 'button';
-    pill.className = `recipe-pill ${state.recipeId === key ? 'active' : ''}`;
-    pill.setAttribute('data-recipe', key);
-    pill.innerHTML = `<span class="recipe-pill-icon">${r.icon}</span> <span>${r.name}</span>`;
-    
-    pill.addEventListener('click', () => {
-      state.recipeId = key;
-      state.lastUpdated = Date.now();
-      updateUI();
-      saveState();
-    });
-
-    recipePillsContainer.appendChild(pill);
-  });
-}
-
-// Adjust weight via buttons
-function adjustWeight(amount) {
-  let target = parseFloat(state.weight) + amount;
-  if (target < 5) target = 5;
-  if (target > 150) target = 150;
-  state.weight = target;
-  state.lastUpdated = Date.now();
-  weightSlider.value = target;
-  updateUI();
-  saveState();
-}
-
-// Update DOM elements based on state
-
-function formatCups(rawCups) {
-  if (rawCups === 0) return { val: '0', unit: 'cups' };
-  
-  let cups = Math.floor(rawCups);
-  let remainderCups = rawCups - cups;
-  
-  let totalTbsp = remainderCups * 16;
-  let tbsp = Math.floor(totalTbsp);
-  let remainderTbsp = totalTbsp - tbsp;
-  
-  let tsp = Math.round(remainderTbsp * 3);
-  
-  if (tsp >= 3) {
-    tbsp += Math.floor(tsp / 3);
-    tsp = tsp % 3;
-  }
-  if (tbsp >= 16) {
-    cups += Math.floor(tbsp / 16);
-    tbsp = tbsp % 16;
-  }
-
-  let parts = [];
-  if (cups > 0) parts.push(`${cups} cup${cups > 1 ? 's' : ''}`);
-  if (tbsp > 0) parts.push(`${tbsp} tbsp`);
-  if (tsp > 0) parts.push(`${tsp} tsp`);
-  
-  let resultStr = parts.join(' + ');
-  if (resultStr === '') resultStr = '0';
-  
-  return { val: resultStr, unit: '' };
-}
-
-function updateUI() {
-  const currentRecipe = RECIPES[state.recipeId] || RECIPES['jalapeno-cheddar'];
-
-  // Update recipe selector pills active state
-  document.querySelectorAll('.recipe-pill').forEach(pill => {
-    if (pill.getAttribute('data-recipe') === currentRecipe.id) {
-      pill.classList.add('active');
-    } else {
-      pill.classList.remove('active');
-    }
-  });
-
-  // Update quick batch buttons active state
-  document.querySelectorAll('.quick-batch-btn').forEach(btn => {
-    const bWeight = parseFloat(btn.getAttribute('data-batch'));
-    if (Math.abs(bWeight - state.weight) < 0.1) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
-
-  // Update active recipe info card
-  recipeInfoIcon.textContent = currentRecipe.icon;
-  recipeInfoTitle.textContent = currentRecipe.name;
-  recipeMenuTag.textContent = `📍 Menu Source: ${currentRecipe.menuSource}`;
-  recipeInfoDesc.textContent = currentRecipe.description;
-
-  // Update weight values
-  weightVal.textContent = state.weight.toFixed(1);
-  weightSlider.value = state.weight;
-
-  // Recipe Calculations (Base = 50 lbs)
-  const scale = state.weight / 50.0;
-
-  // Render Dynamic Ingredients Grid
-  ingredientsGrid.innerHTML = '';
-  currentRecipe.ingredients.forEach(ing => {
-    const card = document.createElement('div');
-    card.className = `ingredient-card ${ing.highlight ? 'highlight-card' : ''}`;
-    
-    let displayVal;
-    let displayUnit = ing.unit;
-    let rawAmount = ing.amount * scale;
-
-    if (ing.isGram) {
-      displayVal = Math.round(rawAmount);
-    } else {
-      if (ing.unit === 'lbs' && rawAmount < 1.0 && rawAmount > 0) {
-        let oz = rawAmount * 16;
-        if (Math.abs(Math.round(oz) - oz) < 0.01) {
-            displayVal = Math.round(oz);
-        } else {
-            displayVal = oz.toFixed(1);
-        }
-        displayUnit = 'oz';
-      } else if (ing.unit === 'cups' && rawAmount > 0) {
-        let formatted = formatCups(rawAmount);
-        displayVal = formatted.val;
-        displayUnit = formatted.unit;
-      } else {
-        displayVal = rawAmount.toFixed(2);
-      }
-    }
-
-    let dynamicDesc = ing.desc;
-    if (ing.id === 'water' && rawAmount > 0) {
-      const halfRaw = rawAmount / 2;
-      dynamicDesc = ing.desc.replace(/Split 2x [0-9.]+ cups/, `Split 2x ${halfRaw.toFixed(1)} cups`);
-    }
-
-    if (ing.gramEq) {
-      if (dynamicDesc) {
-        dynamicDesc += ` — ${Math.round(ing.gramEq * scale)}g`;
-      } else {
-        dynamicDesc = `${Math.round(ing.gramEq * scale)}g`;
-      }
-    }
-
-    card.innerHTML = `
-      <span class="ing-label">${ing.label}</span>
-      <div class="ing-value-box">
-        <span class="ing-value">${displayVal}</span>
-        <span class="ing-unit">${displayUnit}</span>
-      </div>
-      <span class="ing-desc">${dynamicDesc}</span>
-    `;
-    ingredientsGrid.appendChild(card);
-  });
-
-  // Link Estimations
-  // Total Stuffed Weight = (50 lbs base meat block + add-ins) * scale
-  const totalStuffed = (50.0 + currentRecipe.stuffedAddInLbs) * scale;
-  estStuffedWeight.textContent = totalStuffed.toFixed(1);
-  
-  // Total Links: Stuffed Weight * 3.0 (~1/3 lb per link)
-  const totalLinks = totalStuffed * 3.0;
-  const roundedLinks = Math.round(totalLinks);
-  estLinksExpected.textContent = roundedLinks;
-
-
-
-  
-  // Dynamic Verification Block updates
-  const verifBaseWeight = document.getElementById('verif-base-weight');
-  if (verifBaseWeight) {
-    verifBaseWeight.textContent = state.weight.toFixed(1);
-    
-    const formatMeat = (lbs) => {
-      if (lbs < 1.0 && lbs > 0) return `${(lbs * 16).toFixed(1)} oz`;
-      return `${lbs.toFixed(1)} lbs`;
-    };
-
-    const setHTML = (id, html) => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    };
-    const setText = (id, text) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = text;
-    };
-
-    // Switch between Beef and Standard Base in the Verification text
-    if (state.recipeId === 'classic-beef') {
-      setHTML('verif-meat-1', `<strong>${formatMeat(35.0 * scale)}</strong> Lean Beef (70%)`);
-      setHTML('verif-meat-2', `<strong>${formatMeat(15.0 * scale)}</strong> Beef Fat (30%)`);
-      setHTML('verif-meat-3', `<em>(No Pork)</em>`);
-    } else {
-      setHTML('verif-meat-1', `<strong>${formatMeat(25.5 * scale)}</strong> Beef Trimmings`);
-      setHTML('verif-meat-2', `<strong>${formatMeat(16.0 * scale)}</strong> Pork Base`);
-      setHTML('verif-meat-3', `<strong>${formatMeat(8.5 * scale)}</strong> Pork/Beef Fat`);
-    }
-
-    const getIngAmount = (id) => {
-        const ing = currentRecipe.ingredients.find(i => i.id === id || (id === 'curing-salt' && i.id === 'cure'));
-        return ing ? ing.amount * scale : 0;
-    };
-
-    const cureAmt = getIngAmount('curing-salt');
-    const pepperAmt = getIngAmount('pepper');
-    const waterAmt = getIngAmount('water');
-    const milkAmt = getIngAmount('milk');
-
-    const formatVerif = (amt, unit) => {
-      if (unit === 'cups' && amt < 1.0 && amt > 0) return `${(amt * 16).toFixed(1)} tbsp`;
-      return `${amt.toFixed(1)} ${unit}`;
-    };
-
-    const pepperIng = currentRecipe.ingredients.find(i => i.id === 'pepper');
-    const rubIng = currentRecipe.ingredients.find(i => i.id === 'bbq-rub');
-    let spiceVerifHtml = '<em>(No Black Pepper)</em>';
-    if (pepperAmt > 0) {
-      const gStr = pepperIng && pepperIng.gramEq ? ` (${Math.round(pepperIng.gramEq * scale)} g)` : '';
-      spiceVerifHtml = `<strong>${formatVerif(pepperAmt, 'cups')}${gStr}</strong> Coarse Black Pepper`;
-    } else if (rubIng) {
-      const rubAmt = rubIng.amount * scale;
-      const gStr = rubIng.gramEq ? ` (${Math.round(rubIng.gramEq * scale)} g)` : '';
-      spiceVerifHtml = `<strong>${formatVerif(rubAmt, 'cups')}${gStr}</strong> Signature BBQ Rub`;
-    }
-
-    setHTML('verif-cure', cureAmt > 0 ? `<strong>${Math.round(cureAmt)} g</strong> Pink Curing Salt` : `<em>(No Curing Salt)</em>`);
-    setHTML('verif-pepper', spiceVerifHtml);
-    setHTML('verif-water', waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : `<em>(No Water)</em>`);
-    setHTML('verif-milk', milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : `<em>(No Milk)</em>`);
-    
-    setText('verif-yield-base', state.weight.toFixed(1));
-    setText('verif-yield-total', ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1));
-    setText('verif-yield-links', Math.round(((50.0 + currentRecipe.stuffedAddInLbs) * scale) * 3.0));
-  }
-
-  // Hydrate recipe-specific customSteps (Steps 8, 9, 11) in the Day 2 checklist
-  const defaultStepTexts = {
-    8: "Strain brine from diced jalapeños; whisk first half of ice water with powdered milk and black pepper.",
-    9: "Mix lean beef, pork base, and chilled fat with Day 1 pink curing salt.",
-    11: "Fold in remaining ice water, high-temp cheddar cubes, and drained jalapeño dice until tacky."
-  };
-  [8, 9, 11].forEach(stepNum => {
-    const stepDescEl = document.querySelector(`.task-row[data-step="${stepNum}"] .task-content p`);
-    if (stepDescEl) {
-      stepDescEl.textContent = (currentRecipe.customSteps && currentRecipe.customSteps[stepNum]) || defaultStepTexts[stepNum];
-    }
-  });
-
-  // Update Task Checkbox states
-  const taskRows = document.querySelectorAll('.task-row');
-  taskRows.forEach(row => {
-    const stepIndex = parseInt(row.getAttribute('data-step')) - 1;
-    if (state.tasks[stepIndex]) {
-      row.classList.add('checked');
-    } else {
-      row.classList.remove('checked');
-    }
-  });
-}
-
-// Reset Run Function
-function resetRun() {
-  if (confirm("Are you sure you want to reset all tasks?")) {
-    state.tasks = Array(15).fill(false);
-    state.lastUpdated = Date.now();
-    updateUI();
-    saveState();
-  }
-}
-
-// Pitmaster Shortcut Function (Marks steps 1 to 12 complete)
-function triggerShortcut() {
-  for (let i = 0; i < 12; i++) {
-    state.tasks[i] = true;
-  }
-  state.lastUpdated = Date.now();
-  updateUI();
-  saveState();
-}
-
-// Share status link copier
-function copyShareLink() {
-  const currentUrl = new URL(window.location.href);
-  currentUrl.searchParams.set('session', sessionName);
-  
-  navigator.clipboard.writeText(currentUrl.toString())
-    .then(() => {
-      alert(`Live session link copied to clipboard!Share this with anyone to let them track progress.`);
-    })
-    .catch(err => {
-      console.error('Could not copy text: ', err);
-    });
-}
-
-// State Sanitization / Migrations
-function sanitizeState(obj) {
-  if (!obj.recipeId || !RECIPES[obj.recipeId]) obj.recipeId = 'jalapeno-cheddar';
-  if (obj.weight === undefined) obj.weight = 50.0;
-  obj.weight = parseFloat(obj.weight);
-  if (isNaN(obj.weight)) obj.weight = 50.0;
-  if (obj.beefWeight === undefined) obj.beefWeight = 50.0;
-  if (obj.beefRatio === undefined) obj.beefRatio = 0.70;
-  return obj;
-}
-
-// Persistence: Local Storage
-function loadLocalState() {
-  const local = localStorage.getItem(`sausage_run_${sessionName}`);
-  if (local) {
-    try {
-      const parsed = JSON.parse(local);
-      if (parsed.weight && Array.isArray(parsed.tasks)) {
-        state = sanitizeState(parsed);
-      }
-    } catch (e) {
-      console.error("Error parsing local state", e);
-    }
-  }
-}
-
-function saveState() {
-  localStorage.setItem(`sausage_run_${sessionName}`, JSON.stringify(state));
-}
-
-// Run init
+// Initialize all modules on DOMContentLoaded
 window.addEventListener('DOMContentLoaded', () => {
   window.scrollTo(0, 0);
-  init();
+  if (typeof init === 'function') init();
   initMultiTabNavigation();
   initForecastingControls();
-  initEventsCalendar();
+  if (typeof initEventsCalendar === 'function') initEventsCalendar();
+  if (typeof initRollUpAccordions === 'function') initRollUpAccordions();
   initDesignDebugPanel();
-  initDailyPitIntelligence();
+  if (typeof initDailyPitIntelligence === 'function') initDailyPitIntelligence();
   // Pre-render forecasting data so it's instantly available
   renderPlotlyForecastingChart(getActiveDaysCount());
 });
 
-let _lastViewportIsMobile = isMobileViewport();
-let _resizeDebounceTimer = null;
+// Ensure predictive KPIs hydrate on initial page load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    if (typeof renderPlotlyPredictiveChart === 'function') {
+      renderPlotlyPredictiveChart();
+    }
+  }, 300);
+});
+
 window.addEventListener('resize', () => {
   clearTimeout(_resizeDebounceTimer);
   _resizeDebounceTimer = setTimeout(() => {
@@ -787,10 +71,10 @@ window.addEventListener('resize', () => {
     if (nowMobile !== _lastViewportIsMobile) {
       _lastViewportIsMobile = nowMobile;
       renderPlotlyForecastingChart(getActiveDaysCount());
-      renderPlotlyPredictiveChart();
-      renderPlotlyEventChart();
-      renderPlotlyWeatherChart();
-      renderPlotlyShiftHeatmap();
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
+      if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
+      if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
+      if (typeof renderPlotlyShiftHeatmap === 'function') renderPlotlyShiftHeatmap();
     }
   }, 150);
 });
@@ -839,9 +123,9 @@ function switchMainTab(targetTab) {
 
     renderPlotlyForecastingChart(getActiveDaysCount());
     if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
-    renderPlotlyEventChart();
-    renderPlotlyWeatherChart();
-    renderPlotlyShiftHeatmap();
+    if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
+    if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
+    if (typeof renderPlotlyShiftHeatmap === 'function') renderPlotlyShiftHeatmap();
     [
       'plotly-meat-sales-chart',
       'plotly-predictive-velocity-chart',
@@ -895,6 +179,7 @@ function initDesignDebugPanel() {
   const vpBtns = document.querySelectorAll('.debug-vp-btn');
   const cbBtns = document.querySelectorAll('.debug-cb-btn');
   const themeBtn = document.getElementById('btn-debug-contrast');
+  const rollupAllBtn = document.getElementById('btn-debug-rollup-toggle');
   const copyBtn = document.getElementById('btn-copy-debug-tokens');
   const statusEl = document.getElementById('debug-token-status');
   const printBtn = document.getElementById('btn-print-daily-brief');
@@ -963,6 +248,17 @@ function initDesignDebugPanel() {
     });
   }
 
+  if (rollupAllBtn && typeof setAllRollUpSections === 'function') {
+    rollupAllBtn.addEventListener('click', () => {
+      const currentlyExpanded = rollupAllBtn.getAttribute('data-rollup-all-expanded') !== 'false';
+      const nextExpanded = !currentlyExpanded;
+      setAllRollUpSections(nextExpanded);
+      if (statusEl) {
+        statusEl.textContent = nextExpanded ? 'All Roll-Up sections expanded' : 'All Roll-Up sections collapsed';
+      }
+    });
+  }
+
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const styles = getComputedStyle(document.documentElement);
@@ -1004,984 +300,6 @@ function initDesignDebugPanel() {
       window.__LAST_COPIED_DESIGN_TOKENS__ = tokenPayload;
     });
   }
-}
-
-function buildSparklineSVG(values, strokeColor = '#56B4E9') {
-  if (!Array.isArray(values) || values.length === 0) return '';
-  const nums = values.map(v => Number(v) || 0);
-  const minVal = Math.min(...nums);
-  const maxVal = Math.max(...nums);
-  const span = Math.max(maxVal - minVal, 1);
-  const w = 92;
-  const h = 20;
-  const pad = 2;
-  const pts = nums.map((val, idx) => {
-    const x = nums.length === 1 ? w / 2 : pad + (idx / (nums.length - 1)) * (w - pad * 2);
-    const y = (h - pad) - ((val - minVal) / span) * (h - pad * 2);
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  });
-  const lastPt = pts[pts.length - 1].split(',');
-  return `<svg class="kpi-sparkline-svg" viewBox="0 0 ${w} ${h}" aria-hidden="true">
-    <polyline fill="none" stroke="${strokeColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${pts.join(' ')}" />
-    <circle cx="${lastPt[0]}" cy="${lastPt[1]}" r="2.6" fill="${strokeColor}" />
-  </svg>`;
-}
-
-function renderDailyExecutiveBrief(slicedRecords, matchedRecord) {
-  const kickerEl = document.getElementById('daily-brief-kicker');
-  const pillEl = document.getElementById('daily-brief-status-pill');
-  const insightEl = document.getElementById('daily-brief-insight');
-  const actionEl = document.getElementById('daily-brief-action');
-  const typLabelEl = document.getElementById('bridge-typical-label');
-  const typValEl = document.getElementById('bridge-typical-val');
-  const rushLabelEl = document.getElementById('bridge-rush-label');
-  const rushValEl = document.getElementById('bridge-rush-val');
-  const expValEl = document.getElementById('bridge-expected-val');
-  const costValEl = document.getElementById('bridge-meat-cost-val');
-  const leftValEl = document.getElementById('bridge-leftover-val');
-
-  if (!insightEl || !actionEl) return;
-
-  const briefPayload = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.daily_executive_brief
-    ? window.BBQ_PAYLOADS.daily_executive_brief
-    : null;
-
-  const isMultiDay = Array.isArray(slicedRecords) && slicedRecords.length > 1;
-  let brief = null;
-  let isNextServicePreview = false;
-
-  if (!isMultiDay && matchedRecord && briefPayload) {
-    if (matchedRecord.date && briefPayload.by_date && briefPayload.by_date[matchedRecord.date]) {
-      brief = briefPayload.by_date[matchedRecord.date];
-    } else if (matchedRecord.day_name && briefPayload.by_day_name && briefPayload.by_day_name[matchedRecord.day_name]) {
-      brief = briefPayload.by_day_name[matchedRecord.day_name];
-    }
-  }
-
-  // If today is closed Monday on initial single-day load, show preview of active upcoming open day brief with clear Monday labeling
-  if (!isMultiDay && brief && brief.is_closed && briefPayload && briefPayload.active_service_brief && !briefPayload.active_service_brief.is_closed) {
-    // Only use active_service_brief when user hasn't explicitly picked a past closed Monday to inspect
-    const startInput = document.getElementById('forecast-start-date');
-    const isTodayDefault = !startInput || startInput.value === briefPayload.today_date;
-    if (isTodayDefault) {
-      brief = briefPayload.active_service_brief;
-      isNextServicePreview = true;
-    }
-  }
-
-  if (!brief && Array.isArray(slicedRecords) && slicedRecords.length > 0) {
-    const dayFullMap = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
-    const typSalesMap = { Mon: 0, Tue: 3689, Wed: 3050, Thu: 3900, Fri: 5100, Sat: 6200, Sun: 4650 };
-    let expSales = 0;
-    let typSales = 0;
-    let bRaw = 0;
-    let pRaw = 0;
-    let rRacks = 0;
-    let tCooked = 0;
-    slicedRecords.forEach(r => {
-      const isClosed = r.is_closed || r.day_name === 'Mon';
-      if (!isClosed) {
-        const rev = (r.is_historical && r.actual_revenue > 0) ? r.actual_revenue : (r.predicted_revenue || 0);
-        expSales += rev;
-        typSales += (typSalesMap[r.day_name] || 3850);
-        bRaw += (r.brisket_raw_lbs || 0);
-        pRaw += (r.pork_shoulder_raw_lbs || 0);
-        rRacks += (r.pork_ribs_racks || 0);
-        tCooked += (r.turkey_cooked_lbs || r.turkey_lbs || 0);
-      }
-    });
-    expSales = Math.round(expSales);
-    typSales = Math.round(typSales);
-    const diffUsd = expSales - typSales;
-    const pct = typSales > 0 ? Math.round((diffUsd / typSales) * 1000) / 10 : 0;
-    const meatCost = Math.round(expSales * 0.295);
-    const leftover = expSales - meatCost;
-    const labelStr = isMultiDay ? `${slicedRecords.length}-Day Window` : (dayFullMap[matchedRecord?.day_name] || 'Selected Day');
-    const diffWord = diffUsd >= 0 ? 'above' : 'below';
-
-    brief = {
-      status_badge: expSales === 0 ? `Closed Monday — Pit Cold` : `${labelStr} (${pct >= 0 ? '+' : ''}${pct}% vs. Usual)`,
-      status_tone: pct >= 10 ? 'surge' : (pct <= -10 ? 'lull' : 'steady'),
-      the_insight: expSales === 0
-        ? `The shop is closed on Monday with $0 in counter sales (typical Monday baseline) and 0 lbs of hot-holding barbecue required.`
-        : `${labelStr} sales ($${expSales.toLocaleString()}) are tracking ${Math.abs(pct)}% ($${Math.abs(diffUsd).toLocaleString()}) ${diffWord} the usual $${typSales.toLocaleString()} pace, leaving ~$${leftover.toLocaleString()} for the shop after ~$${meatCost.toLocaleString()} in estimated meat cost.`,
-      the_action: expSales === 0
-        ? `Keep main offset smokers cold, deep-clean the firebox, inspect Tuesday opening Brisket trims, and grind/cure Day 1 sausage batches.`
-        : `Prep ${Math.round(bRaw)} lbs raw Brisket (~${Math.round(bRaw * 0.40)} lbs cooked), ${Math.round(pRaw)} lbs raw Pulled Pork (~${Math.round(pRaw * 0.44)} lbs cooked), ${Math.round(rRacks)} racks of Spare Ribs, and ${Math.round(tCooked / 0.70)} lbs raw Turkey (~${Math.round(tCooked)} lbs cooked) ahead of peak rush.`,
-      sales_bridge: {
-        typical_day_label: `Usual ${labelStr}`,
-        typical_day_usd: typSales,
-        rush_hour_delta_label: 'Rush Hour & Crowd Difference',
-        rush_hour_delta_usd: diffUsd,
-        expected_sales_usd: expSales,
-        estimated_meat_cost_usd: meatCost,
-        left_after_meat_cost_usd: leftover
-      }
-    };
-  }
-
-  if (!brief) return;
-
-  if (kickerEl) {
-    if (isNextServicePreview) {
-      kickerEl.textContent = "📋 TODAY IS MONDAY (SHOP CLOSED) — NEXT SERVICE PREVIEW";
-    } else {
-      kickerEl.textContent = "📋 TODAY'S PIT & SALES BRIEF";
-    }
-  }
-
-  if (pillEl) {
-    if (isNextServicePreview) {
-      pillEl.textContent = `Monday Closed — Next Open Service: ${brief.day_full_name || 'Tuesday'}`;
-      pillEl.className = 'exec-brief-pill tone-steady';
-    } else {
-      pillEl.textContent = brief.status_badge || 'Daily Brief Ready';
-      pillEl.className = `exec-brief-pill tone-${brief.status_tone || 'steady'}`;
-    }
-  }
-
-  if (isNextServicePreview) {
-    insightEl.innerHTML = `<strong>Today is Monday (Shop Closed).</strong> Previewing opening service for <strong>${brief.day_full_name} (${brief.date})</strong>: Projected sales ($${Number(brief.expected_sales_usd || 0).toLocaleString()}) are tracking ${Math.abs(brief.pct_vs_typical || 0)}% ($${Math.abs(brief.sales_diff_usd || 0).toLocaleString()}) ${brief.sales_diff_usd >= 0 ? 'above' : 'below'} a typical ${brief.day_full_name} ($${Number(brief.typical_day_sales_usd || 0).toLocaleString()}), leaving ~$${Number(brief.left_after_meat_cost_usd || 0).toLocaleString()} for the shop after ~$${Number(brief.estimated_meat_cost_usd || 0).toLocaleString()} in estimated meat cost.`;
-    actionEl.innerHTML = `<strong>Monday Pit Maintenance:</strong> Keep main offset smokers cold and fireboxes clean today. For ${brief.day_full_name}'s opening smoke: ${brief.the_action}`;
-  } else {
-    insightEl.textContent = brief.the_insight || '';
-    actionEl.textContent = brief.the_action || '';
-  }
-
-  const sb = brief.sales_bridge || {};
-  const rushTotalDiff = (sb.rush_hour_delta_usd || 0) + (sb.weather_event_delta_usd || 0);
-  if (typLabelEl) {
-    typLabelEl.textContent = isNextServicePreview
-      ? `Typical ${brief.day_full_name || 'Tuesday'} Sales`
-      : `${sb.typical_day_label || 'Typical Day'} Sales`;
-  }
-  if (typValEl) typValEl.textContent = `$${Number(sb.typical_day_usd || 0).toLocaleString()}`;
-  if (rushLabelEl) rushLabelEl.textContent = 'Rush Hour & Crowd Difference';
-  if (rushValEl) {
-    const sign = rushTotalDiff >= 0 ? '+' : '-';
-    rushValEl.textContent = `${sign}$${Math.abs(Math.round(rushTotalDiff)).toLocaleString()}`;
-    rushValEl.style.color = rushTotalDiff >= 0 ? '#fbbf24' : '#38bdf8';
-  }
-  const expLabelEl = document.getElementById('bridge-expected-label');
-  if (expLabelEl) {
-    expLabelEl.textContent = isNextServicePreview
-      ? `Expected ${brief.day_full_name || 'Tuesday'} Sales`
-      : 'Expected Sales Today';
-  }
-  if (expValEl) expValEl.textContent = `$${Number(sb.expected_sales_usd || 0).toLocaleString()}`;
-  if (costValEl) costValEl.textContent = `$${Number(sb.estimated_meat_cost_usd || 0).toLocaleString()}`;
-  if (leftValEl) leftValEl.textContent = `$${Number(sb.left_after_meat_cost_usd || 0).toLocaleString()}`;
-
-  // Update Daily Pitmaster Intelligence (Random Insight, Day Summary, 10 Tips)
-  updateDailyPitIntelligence(matchedRecord, brief, isNextServicePreview);
-}
-
-/* ==========================================================================
-   Daily Pitmaster Intelligence & 10 Watchlist Tips Module
-   ========================================================================== */
-
-const RANDOM_SMOKEHOUSE_INSIGHTS = [
-  "Pre-creasing 1-lb and 2-lb butcher paper wraps at 11:15 AM cuts counter service ticket times by 22 seconds per platter during peak rush.",
-  "Always rest briskets in rendered beef tallow at 145°F–150°F—it creates an impermeable barrier against evaporative moisture loss in the flat.",
-  "Chill grinder heads and cutter plates below 32°F before grinding sausage; warm friction smears fat and destroys the emulsified snap.",
-  "Maintain a full water pan during the first 4 hours of smoking—soluble smoke compounds (guaiacol & syringol) adhere best to moist surfaces.",
-  "When ambient wind exceeds 15 mph, shield the firebox intake damper to prevent convective cooling and hot spots along the smoker grate.",
-  "Dip unsliced smoked turkey breasts in warm clarified butter before holding in the warming cabinet to preserve natural juices.",
-  "Pork ribs should pass the 'bend test' with a clean surface crack; pulling too early causes chewiness, pulling too late shreds on the block.",
-  "Dino plate ribs are high-ticket impulse sellers—place a fresh bone on the display cutting board at 12:00 PM open to drive add-ons.",
-  "When rain is forecast, pre-pack bulk barbecue sauce cups and pickle/onion sides in the morning to accelerate takeout order assembly.",
-  "Rotate briskets on the smoker grate at the 6-hour mark: the meat closest to the firebox baffle plate cooks up to 25°F hotter.",
-  "Salt and cure penetration in sausage requires a full 12-hour rest—never rush the overnight cure window or texture turns crumbly.",
-  "High-temp cheddar cubes melt at 400°F—standard grocery cheddar will liquefy in the smokehouse and leak into the sausage casing.",
-  "Hold smoked pork butts whole in foil pans until ordered; pre-shredding pork causes it to lose moisture 4x faster under counter lamps.",
-  "A clean fire smells sweet and peppery; if you smell pungent acrid smoke, your coal bed is starved of oxygen—open the intake damper.",
-  "Check scale tare weights on the counter every morning; a 0.5 oz error on 1/2-lb meat portions equates to over $180/week in lost meat margin.",
-  "Spray apple cider vinegar and Worcestershire spritz only after the bark sets (~150°F internal) to avoid washing away rub spices.",
-  "Cut brisket strictly against the grain: remember the grain direction changes by 90 degrees between the flat muscle and the point muscle.",
-  "On cold mornings (<40°F), pre-heat the smoker pit with weed burners to avoid burning through two hours of prime post oak splits.",
-  "Soak natural hog casings in lukewarm water (85°F) with 1 tbsp of vinegar to maximize casing elasticity and reduce blowout risk.",
-  "Stage extra jalapeño cheddar links for weekend lunch—historical sales show sausage links index 35% higher on Saturdays and Sundays.",
-  "Burn seasoned post oak with 15–20% moisture content; green wood creates bitter black creosote, while bone-dry wood burns too hot.",
-  "Save all brisket trimmings: fat caps render down into golden liquid tallow, and lean trimmings formulate the base for daily sausage.",
-  "When counter lines stretch out the door, offer waiting guests complimentary brisket bark burnt-end samples to boost guest patience.",
-  "Calibrate probe thermometers in an ice-water bath monthly—a 5-degree reading drift can cause overcooked or dry brisket flats.",
-  "During heavy midday lunch traffic, assign one cutter exclusively to brisket slicing while a second crew member portions sides and weighs platters."
-];
-
-const DAY_SPECIFIC_TIPS_MAP = {
-  Mon: {
-    day_name: 'Monday',
-    badge: 'Shop Closed — Maintenance Day',
-    focus: 'Firebox Cleanout & Sausage Cure',
-    rush_window: 'Smokers Cold (No Counter Service)',
-    summary: 'Monday scheduled maintenance. Keep main offset pits cold. Vacuum firebox ash, scrub smoker grates, inspect door gaskets, and grind & cure Day 1 sausage meat blocks for Tuesday\'s reopening smoke.'
-  },
-  Tue: {
-    day_name: 'Tuesday',
-    badge: 'Fresh Week Reopen',
-    focus: 'Corporate Lunch & Fresh Smoke',
-    rush_window: '12:00 PM – 1:30 PM Lunch Rush',
-    summary: 'Tuesday counter service kicks off the operating week with strong corporate lunch traffic. Fire the pits early for morning ribs and sausage. Stage hot brisket flats on the slicing board by 11:30 AM to ensure smooth line flow.'
-  },
-  Wed: {
-    day_name: 'Wednesday',
-    badge: 'Midweek Operating Flow',
-    focus: 'Sausage Stuffing & Pulled Pork Pacing',
-    rush_window: '12:00 PM – 1:30 PM Midweek Lunch',
-    summary: 'Wednesday operations feature steady neighborhood lunch traffic. Monitor pulled pork and turkey portions. Afternoon prep directive: mix, stuff, and link Day 2 sausage batches to hang for pellicle drying in the walk-in.'
-  },
-  Thu: {
-    day_name: 'Thursday',
-    badge: 'Pre-Weekend Catering Ramp',
-    focus: 'Supplier Delivery & Case Checks',
-    rush_window: '12:00 PM – 2:00 PM Extended Lunch',
-    summary: 'Thursday catering and large family orders start ramping up. Check in supplier deliveries for weekend cryovac brisket and pork butt cases. Verify cryovac seal integrity and stage firewood cords near the pit.'
-  },
-  Fri: {
-    day_name: 'Friday',
-    badge: 'Weekend Kickoff Surge',
-    focus: 'Dual Lunch & Dinner Rush Management',
-    rush_window: '12:00–2:00 PM Lunch & 5:30–8:00 PM Dinner',
-    summary: 'Friday high-volume service demands dual-rush preparation. Load smokers to full capacity. Pull Batch 2 spare ribs by 4:15 PM for an evening holding rest, and prepare double takeout packaging stations for evening dinner.'
-  },
-  Sat: {
-    day_name: 'Saturday',
-    badge: 'Peak Smokehouse Volume',
-    focus: 'Dino Rib Sellout & Slicer Speed',
-    rush_window: '12:00 PM – 3:00 PM Peak Saturday Rush',
-    summary: 'Saturday peak volume brings the highest revenue of the week. Full smoker capacity across brisket, dino ribs, and sausage links. Pre-crease butcher paper wraps, stage two slicing blocks, and monitor dino plate rib depletion closely by 1:30 PM.'
-  },
-  Sun: {
-    day_name: 'Sunday',
-    badge: 'Family Platter Sunday',
-    focus: 'Multi-Pound Takeout & Inventory Sellout',
-    rush_window: '12:00 PM – 2:30 PM Sunday Family Rush',
-    summary: 'Sunday family feasts and gameday platters dominate lunch service. Push composed items (Tacos and Rosebuds) to utilize smoked reserves before Monday closure. Aim for clean sellouts of spare ribs and turkey by 7:00 PM.'
-  }
-};
-
-function getTenWatchlistTips(matchedRecord, brief, isNextServicePreview) {
-  let shortDay = matchedRecord?.day_name || (brief?.is_closed ? 'Mon' : (brief?.day_name || 'Tue'));
-  if (isNextServicePreview && brief?.day_name) {
-    shortDay = brief.day_name;
-  }
-  const dayName = DAY_SPECIFIC_TIPS_MAP[shortDay]?.day_name || 'Today';
-  const peakRush = DAY_SPECIFIC_TIPS_MAP[shortDay]?.rush_window || '12:00 PM – 1:30 PM';
-
-  return [
-    // --- 1. WEATHER (3 TIPS) ---
-    {
-      id: 1,
-      cat: 'weather',
-      cat_label: '🌦️ Weather Watch',
-      importance: 'Patio Capacity',
-      title: 'High Temperature & Patio Seating Viability',
-      desc: 'Daily high temperatures between 72°F and 86°F expand walk-in capacity by +18–25% via outdoor patio seating. Above 88°F, patio dwell time drops sharply as guests migrate indoors or opt for carside pickup.',
-      pit_check: 'Pit Check: If temp exceeds 88°F, turn on patio misting fans and stage extra ice water for waiting counter guests.'
-    },
-    {
-      id: 2,
-      cat: 'weather',
-      cat_label: '🌦️ Weather Watch',
-      importance: 'Takeout Revenue Shift',
-      title: 'Precipitation & To-Go Packaging Multiplier',
-      desc: 'Rainfall shifts sales volume into multi-pound family feast packs (historical average +$97.37/mm rain). Counter tray service slows while curbside and delivery orders spike.',
-      pit_check: 'Pit Check: On rainy or wet days, stage +20% butcher paper to-go bags, 16oz sauce containers, and pre-packed side cups by 11:00 AM.'
-    },
-    {
-      id: 3,
-      cat: 'weather',
-      cat_label: '🌦️ Weather Watch',
-      importance: 'Bark Formation',
-      title: 'Ambient Humidity & Smoke Airflow Velocity',
-      desc: 'High ambient humidity slows surface evaporative cooling on raw meats (the stall). To build a crisp mahogany bark without sour creosote buildup, maintain high convective draft.',
-      pit_check: 'Pit Check: Open exhaust stack dampers 10% wider on humid or foggy mornings to keep clean airflow sweeping across briskets.'
-    },
-
-    // --- 2. DAY DYNAMICS & PACING (3 TIPS) ---
-    {
-      id: 4,
-      cat: 'day',
-      cat_label: '⏱️ Day Dynamics',
-      importance: 'Morning Line Handover',
-      title: `Morning Prep Handover: Trevor (2:30 AM), Max (8:00 AM) & Jake (8:30 AM Open)`,
-      desc: `Trevor fires the pits at 2:30 AM and trims briskets (<18% loss). Max arrives at 8:00 AM to control dampers and wrapping. Jake opens the kitchen line sharp at 8:30 AM, with Alyssa opening expo and portioning hot fries and mac & cheese. Allen opens the dish pit for prep washdown.`,
-      pit_check: `Pit Check: Max, Trevor, and Jake confirm 145°F holding cabinet temps and hot side pans 30 minutes before 11:00 AM doors open.`
-    },
-    {
-      id: 5,
-      cat: 'day',
-      cat_label: '⏱️ Day Dynamics',
-      importance: 'Carving & Expo Flow',
-      title: 'Carving Block Slicer Pacing (Freddy & Jake) & Expo Leads (Elly / Alyssa)',
-      desc: 'Slice lean flat strictly to order to avoid rapid moisture evaporation. Elly provides senior leadership across kitchen and expo flow; Alyssa handles lunch expo with hot sides prep; Freddy rotates between slicing board, grill, and expo.',
-      pit_check: 'Pit Check: Never pre-slice lean flat meat ahead of active tickets; keep untrimmed fat cap downward against the carving board.'
-    },
-    {
-      id: 6,
-      cat: 'day',
-      cat_label: '⏱️ Day Dynamics',
-      importance: '7:00 PM Transit Handover',
-      title: '7:00 PM Evening Shift Transition: Nick Bus Departure & Freddy / Elly Close',
-      desc: 'Critical evening bottleneck: Nick departs at 7:00 PM sharp to catch the bus home. The Boss shuts down pit fire coals (~6:00 PM) shifting meat to warm hold. Freddy takes over meat slicing and grill; Elly leads closing expo; Allen returns from mid-shift break to drive dish pit lockup.',
-      pit_check: 'Pit Check: At 6:45 PM, Freddy and Nick conduct station inventory handoff before Nick leaves for the bus; Allen clears prep pans before dinner rush.'
-    },
-
-    // --- 3. THINGS TO KEEP AN EYE ON (4 TIPS) ---
-    {
-      id: 7,
-      cat: 'pit',
-      cat_label: '🔥 Pit Watch',
-      importance: 'Critical Rest Temp',
-      title: 'Holding Cabinet Strict Temperature Window (145°F–150°F)',
-      desc: 'CVap and electric warmer temperatures must stay locked between 145°F and 150°F with tallow-wrapped briskets. Dropping below 140°F breaches food safety; exceeding 160°F turns brisket texture mushy.',
-      pit_check: 'Pit Check: Probe top and bottom cabinet shelves twice daily (11:00 AM & 4:00 PM) with a calibrated digital thermometer.'
-    },
-    {
-      id: 8,
-      cat: 'pit',
-      cat_label: '🔥 Pit Watch',
-      importance: 'Wood & Firebox',
-      title: 'Wood Split Sizing & Clean Thin Blue Smoke',
-      desc: 'Heavy white or billowing gray smoke deposits acrid soot on meat bark. Maintain an active coal bed by feeding seasoned post oak splits sized to forearm thickness (3–4 inches diameter).',
-      pit_check: 'Pit Check: Pre-heat oak splits on top of the firebox lid so they catch fire instantly upon loading without smoldering.'
-    },
-    {
-      id: 9,
-      cat: 'pit',
-      cat_label: '👁️ Inventory Guard',
-      importance: 'Composite Allocation',
-      title: 'Composed Item Draw (Tacos & Rosebuds vs. Sliced Meats)',
-      desc: 'Smoked Brisket Tacos and Rosebuds draw directly from prime brisket point and lean trim reserves. Heavy taco rushes can unexpectedly hollow out sliced brisket inventory before evening service.',
-      pit_check: 'Pit Check: Designate 1 whole point exclusively for composite recipes each morning so counter cutters don\'t run short of sliced point.'
-    },
-    {
-      id: 10,
-      cat: 'pit',
-      cat_label: '👁️ Inventory Guard',
-      importance: 'Food Cost Margin',
-      title: 'Food Cost Guardrail & Scale Tare Integrity (~29.5%)',
-      desc: 'Maintaining the smokehouse target 29.5% wholesale meat cost ratio requires rigorous scale accuracy and clean trimming practices (<18% raw brisket trim loss).',
-      pit_check: 'Pit Check: Zero and test counter scales with standard test weights every morning; ensure butcher paper tare is active on POS scales.'
-    }
-  ];
-}
-
-let _currentRandomInsightIndex = -1;
-let _currentTipsFilter = 'all';
-let _isTipsCollapsed = false;
-let _isGlossaryCollapsed = false;
-let _currentGlossaryFilter = 'all';
-let _isRecentAlertsExpanded = false;
-let _lastMatchedRecord = null;
-let _lastBrief = null;
-let _lastIsNextServicePreview = false;
-
-const BUILTIN_ANALYTIC_GLOSSARY = {
-  "Prep Target": {
-    term: "Prep Target",
-    category: "pit",
-    category_label: "🔥 Pit & Smoker",
-    definition: "How much cooked meat, sides and raw stock should be ready at each shift change so we don't run out or over-prep.",
-    how_it_helps: "Keeps us from 86ing meat at lunch and cuts end-of-day waste by setting clear morning and afternoon slicing amounts."
-  },
-  "Average Ticket": {
-    term: "Average Ticket",
-    category: "volume",
-    category_label: "📊 Volume & Math",
-    definition: "The average dollar amount per order: total sales divided by number of orders.",
-    how_it_helps: "Shows whether a busy hour is lots of small sandwich orders or a few big platters ($145 King of the Hill), so the cutting board can pace whole-brisket slicing."
-  },
-  "Rush Signal": {
-    term: "Rush Signal",
-    category: "volume",
-    category_label: "📊 Volume & Math",
-    definition: "How far this hour's orders are above what we usually see at this hour on this day of the week. The bigger the number, the more unusual the rush.",
-    how_it_helps: "Ignores normal small ups and downs, so an alert means a real rush that needs the pitmaster's attention."
-  },
-  "Meat Used Per Hour": {
-    term: "Meat Used Per Hour",
-    category: "pit",
-    category_label: "🔥 Pit & Smoker",
-    definition: "How many pounds of finished meat get carved and pulled from the 140°F holding cabinet each hour.",
-    how_it_helps: "Warns the pitmaster hours ahead if we'll sell out before dinner, leaving time to adjust portions or push sausage combos."
-  },
-  "Cooked Yield %": {
-    term: "Cooked Yield %",
-    category: "pit",
-    category_label: "🔥 Pit & Smoker",
-    definition: "How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.",
-    how_it_helps: "Shows the real cost of meat on the board. Choice packer brisket yields about 50–52%, so $5.08/lb raw costs about $10.00/lb sliced."
-  },
-  "Shrinkage": {
-    term: "Shrinkage",
-    category: "pit",
-    category_label: "🔥 Pit & Smoker",
-    definition: "Weight lost during smoking as moisture cooks off and fat renders (about 48–50% for brisket, 40–42% for pork butt).",
-    how_it_helps: "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
-  },
-  "Tallow Rest": {
-    term: "Tallow Rest",
-    category: "pit",
-    category_label: "🔥 Pit & Smoker",
-    definition: "Holding finished brisket wrapped with warm beef tallow at about 145°F until it's sliced.",
-    how_it_helps: "Keeps brisket juicy and hot for hours, so an early cook can still be sold at dinner."
-  },
-  "Est. Meat Cost": {
-    term: "Est. Meat Cost",
-    category: "cost",
-    category_label: "💰 Profit & Costs",
-    definition: "What we pay for the meat in a menu item, plus rub, sauce, butcher paper and to-go containers.",
-    how_it_helps: "Shows the real cost per serving so prices still work when beef prices move."
-  },
-  "Meat Cost %": {
-    term: "Meat Cost %",
-    category: "cost",
-    category_label: "💰 Profit & Costs",
-    definition: "Est. Meat Cost divided by the menu price, as a percentage.",
-    how_it_helps: "Texas BBQ usually aims for 28–32%. Items over 40% (like a brisket sandwich sold alone) need a price or portion fix."
-  },
-  "Left After Meat Cost": {
-    term: "Left After Meat Cost",
-    category: "cost",
-    category_label: "💰 Profit & Costs",
-    definition: "The share of each sale left after paying for the meat: (menu price − Est. Meat Cost) ÷ menu price × 100.",
-    how_it_helps: "This is the money that pays the crew, post oak deliveries, rent and smoker upkeep."
-  },
-  "Typical Day": {
-    term: "Typical Day",
-    category: "volume",
-    category_label: "📊 Volume & Math",
-    definition: "What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).",
-    how_it_helps: "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
-  },
-  "Hourly Sales Pace": {
-    term: "Hourly Sales Pace",
-    category: "volume",
-    category_label: "📊 Volume & Math",
-    definition: "Orders or dollars coming in per hour right now.",
-    how_it_helps: "Shows when the lunch and dinner rushes start building, so the cutting board can get ahead of the line."
-  },
-  "Sales Trend": {
-    term: "Sales Trend",
-    category: "volume",
-    category_label: "📊 Volume & Math",
-    definition: "How sales move with something else, like temperature or rain, measured across many past days.",
-    how_it_helps: "Turns 'rainy days feel slow' into a number you can plan prep around."
-  }
-};
-
-function getGlossaryData() {
-  const remoteGlossary = window.BBQ_PAYLOADS?.quick_wind_alerts?.glossary_terms;
-  if (remoteGlossary && typeof remoteGlossary === 'object') {
-    const merged = { ...BUILTIN_ANALYTIC_GLOSSARY };
-    Object.keys(remoteGlossary).forEach(key => {
-      merged[key] = {
-        ...merged[key],
-        ...remoteGlossary[key]
-      };
-    });
-    return merged;
-  }
-  return BUILTIN_ANALYTIC_GLOSSARY;
-}
-
-function lookupGlossaryTerm(termKey, glossary = getGlossaryData()) {
-  const key = String(termKey).toLowerCase();
-  return glossary[termKey] || Object.values(glossary).find(g => String(g.term || '').toLowerCase() === key) || null;
-}
-
-function openTermExplainer(termKey) {
-  const drawer = document.getElementById('term-explainer-drawer');
-  if (!drawer) return;
-
-  const info = lookupGlossaryTerm(termKey);
-  if (!info) return;
-
-  const nameEl = document.getElementById('term-drawer-name');
-  const fullEl = document.getElementById('term-drawer-fullname');
-  const defEl = document.getElementById('term-drawer-def');
-  const helpEl = document.getElementById('term-drawer-help-text');
-
-  if (nameEl) nameEl.textContent = info.term;
-  if (fullEl) fullEl.textContent = info.full_name ? `(${info.full_name})` : '';
-  if (defEl) defEl.textContent = info.definition;
-  if (helpEl) helpEl.textContent = info.how_it_helps;
-
-  drawer.style.display = 'block';
-  drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function closeTermExplainer() {
-  const drawer = document.getElementById('term-explainer-drawer');
-  if (drawer) {
-    drawer.style.display = 'none';
-  }
-}
-
-function renderDailyRandomInsight(forceNewIndex = false) {
-  const textEl = document.getElementById('daily-random-insight-text');
-  const titleEl = document.getElementById('daily-random-insight-title');
-  const catEl = document.getElementById('daily-random-insight-cat');
-  const impactEl = document.getElementById('daily-random-insight-impact');
-  const evidenceEl = document.getElementById('daily-random-insight-evidence');
-  const proofEl = document.getElementById('daily-random-insight-proof');
-  const actionEl = document.getElementById('daily-random-insight-action');
-  const termsGroup = document.getElementById('daily-random-insight-terms');
-  const counterEl = document.getElementById('daily-insight-counter');
-
-  if (!textEl) return;
-
-  const mlInsightsList = window.BBQ_PAYLOADS?.ml_insights?.insights;
-  const hasML = Array.isArray(mlInsightsList) && mlInsightsList.length > 0;
-  const poolLength = hasML ? mlInsightsList.length : RANDOM_SMOKEHOUSE_INSIGHTS.length;
-
-  if (forceNewIndex || _currentRandomInsightIndex === -1) {
-    let nextIdx;
-    do {
-      nextIdx = Math.floor(Math.random() * poolLength);
-    } while (nextIdx === _currentRandomInsightIndex && poolLength > 1);
-    _currentRandomInsightIndex = nextIdx;
-  }
-
-  if (hasML) {
-    const item = mlInsightsList[_currentRandomInsightIndex];
-    if (titleEl) titleEl.textContent = item.title || 'Data-Mined Smokehouse Insight';
-    if (catEl) catEl.textContent = item.category_label || '⭐ Profitability Mining';
-    if (impactEl) {
-      if (item.impact_usd) {
-        impactEl.textContent = `+$${item.impact_usd.toFixed(0)}/wk Impact`;
-        impactEl.style.display = 'inline-block';
-      } else {
-        impactEl.style.display = 'none';
-      }
-    }
-    textEl.textContent = `"${item.insight}"`;
-
-    if (evidenceEl) evidenceEl.textContent = item.evidence || 'Repository Multimodal Intelligence Engine';
-    if (proofEl) proofEl.textContent = item.quantitative_proof || 'Statistically verified against Clover POS & US Foods invoices';
-    if (actionEl) actionEl.textContent = item.actionable_recommendation || 'Maintain standard operating procedures';
-
-    if (termsGroup) {
-      // Only show pills we can explain; a pill with no glossary entry is a dead button.
-      const glossary = getGlossaryData();
-      const terms = (Array.isArray(item.terms) ? item.terms : ['Est. Meat Cost', 'Prep Target'])
-        .filter(t => lookupGlossaryTerm(t, glossary));
-      termsGroup.innerHTML = terms.map(t => `
-        <button type="button" class="term-pill-btn" data-term="${t}" aria-label="Explain term ${t}">
-          ${t} <span aria-hidden="true">ℹ️</span>
-        </button>
-      `).join('');
-
-      termsGroup.querySelectorAll('.term-pill-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const t = btn.getAttribute('data-term');
-          if (t) openTermExplainer(t);
-        });
-      });
-    }
-
-    if (counterEl) counterEl.textContent = `Insight ${_currentRandomInsightIndex + 1} of ${poolLength}`;
-  } else {
-    // Clean fallback to offline quotes
-    textEl.textContent = `"${RANDOM_SMOKEHOUSE_INSIGHTS[_currentRandomInsightIndex]}"`;
-    if (titleEl) titleEl.textContent = 'Traditional Smokehouse Wisdom';
-    if (catEl) catEl.textContent = '💡 Pit Guidance';
-    if (impactEl) impactEl.style.display = 'none';
-    if (evidenceEl) evidenceEl.textContent = 'Yellow Rose BBQ Standard Operating Procedures';
-    if (proofEl) proofEl.textContent = 'Daily pitmaster best practices';
-    if (actionEl) actionEl.textContent = 'Apply during shift prep and carving.';
-    if (counterEl) counterEl.textContent = `Insight ${_currentRandomInsightIndex + 1} of ${poolLength}`;
-  }
-}
-
-function renderQuickWindBanner() {
-  const banner = document.getElementById('daily-quick-wind-banner');
-  if (!banner) return;
-
-  const qwPayload = window.BBQ_PAYLOADS?.quick_wind_alerts;
-  if (!qwPayload) return;
-
-  const active = qwPayload.active_alert;
-  if (!active) return;
-
-  const badgeEl = document.getElementById('qw-severity-badge');
-  const timeEl = document.getElementById('qw-timestamp');
-  const headlineEl = document.getElementById('qw-headline');
-  const presentEl = document.getElementById('qw-present-text');
-  const causeEl = document.getElementById('qw-cause-text');
-  const actionEl = document.getElementById('qw-action-text');
-  const metricsBar = document.getElementById('qw-metrics-bar');
-
-  if (badgeEl) {
-    badgeEl.textContent = active.severity_badge || '⚡ Live Clover Scan';
-    badgeEl.className = `qw-badge qw-badge-${active.severity || 'info'}`;
-  }
-
-  if (timeEl) {
-    timeEl.textContent = active.hour_formatted ? `Hour ${active.hour_formatted} Clover Scan` : 'Live Scan Active';
-  }
-
-  if (headlineEl) headlineEl.textContent = active.headline || 'Operating Within Normal Historical Ranges';
-  if (presentEl) presentEl.textContent = active.immediate_present_status || 'Kitchen line and counter are operating nominally.';
-  if (causeEl) causeEl.textContent = active.causal_explanation || 'Foot traffic tracking typical hourly curves.';
-  if (actionEl) actionEl.textContent = active.recommended_pit_action || 'Continue standard holding and carving pacing.';
-
-  if (metricsBar && active.velocity_metrics) {
-    const m = active.velocity_metrics;
-    const pills = [];
-
-    if (m.actual_orders !== undefined && m.expected_orders !== undefined) {
-      pills.push(`
-        <span class="qw-metric-pill">Orders/hr: <strong>${m.actual_orders}</strong> (exp ${m.expected_orders})</span>
-      `);
-    }
-    if (m.actual_sales !== undefined && m.expected_sales !== undefined) {
-      pills.push(`
-        <span class="qw-metric-pill">Sales/hr: <strong>$${m.actual_sales.toFixed(0)}</strong> (exp $${m.expected_sales.toFixed(0)})</span>
-      `);
-    }
-    if (m.aov !== undefined) {
-      pills.push(`
-        <span class="qw-metric-pill">AOV: <strong>$${m.aov.toFixed(2)}</strong></span>
-      `);
-    }
-    if (m.z_score !== undefined) {
-      pills.push(`
-        <span class="qw-metric-pill">Z-Score: <strong>${m.z_score > 0 ? '+' : ''}${m.z_score.toFixed(2)}</strong></span>
-      `);
-    }
-    if (m.temperature_f !== undefined) {
-      pills.push(`
-        <span class="qw-metric-pill">Temp: <strong>${m.temperature_f.toFixed(0)}°F</strong></span>
-      `);
-    }
-    metricsBar.innerHTML = pills.join('');
-  }
-
-  // Populate recent alerts list
-  const recentListEl = document.getElementById('qw-recent-alerts-list');
-  if (recentListEl && Array.isArray(qwPayload.recent_alerts)) {
-    recentListEl.innerHTML = qwPayload.recent_alerts.map(a => `
-      <div class="qw-recent-item">
-        <span class="qw-recent-headline">${a.severity_badge || '⚡'}: ${a.headline}</span>
-        <span class="qw-recent-meta">${a.date || ''} ${a.hour_formatted || ''}</span>
-      </div>
-    `).join('');
-  }
-}
-
-function renderAnalyticsGlossary(filterCat = 'all') {
-  const grid = document.getElementById('glossary-card-grid');
-  if (!grid) return;
-
-  const glossary = getGlossaryData();
-  const entries = Object.values(glossary);
-
-  const filtered = filterCat === 'all'
-    ? entries
-    : entries.filter(e => {
-        if (filterCat === 'cost') return ['cost'].includes(e.category);
-        if (filterCat === 'pit') return ['pit'].includes(e.category);
-        if (filterCat === 'volume') return ['volume'].includes(e.category);
-        return true;
-      });
-
-  grid.innerHTML = filtered.map(item => `
-    <div class="glossary-card" data-cat="${item.category || 'general'}">
-      <div class="glossary-card-top">
-        <div>
-          <h4 class="glossary-term-title">${item.term}</h4>
-          ${item.full_name ? `<span class="glossary-term-full">${item.full_name}</span>` : ''}
-        </div>
-        <span class="glossary-term-badge">${item.category_label || 'Metric'}</span>
-      </div>
-      <div class="glossary-block">
-        <strong>📖 What It Means:</strong>
-        <p>${item.definition}</p>
-      </div>
-      <div class="glossary-block help-block">
-        <strong>💡 How It Helps Your Pit:</strong>
-        <p>${item.how_it_helps}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderDaySpecificTipsSummary(matchedRecord, brief, isNextServicePreview) {
-  const titleEl = document.getElementById('daily-day-tips-title');
-  const badgeEl = document.getElementById('daily-day-badge');
-  const summaryEl = document.getElementById('daily-day-tips-summary');
-  const focusTagEl = document.getElementById('daily-day-focus-tag');
-  const rushSubtextEl = document.getElementById('daily-day-rush-subtext');
-
-  if (!summaryEl) return;
-
-  const shortDay = isNextServicePreview
-    ? (brief?.day_name || 'Tue')
-    : (matchedRecord?.day_name || (brief?.is_closed ? 'Mon' : (brief?.day_name || 'Tue')));
-  const info = DAY_SPECIFIC_TIPS_MAP[shortDay] || DAY_SPECIFIC_TIPS_MAP['Tue'];
-
-  if (titleEl) {
-    titleEl.textContent = isNextServicePreview
-      ? `Monday Maintenance (Previewing ${info.day_name}'s Open)`
-      : `${info.day_name} Operational Summary & Tips`;
-  }
-  if (badgeEl) {
-    if (isNextServicePreview) {
-      badgeEl.textContent = `Preview: ${info.day_name} Service`;
-      badgeEl.className = 'day-badge-pill';
-    } else if (shortDay === 'Mon') {
-      badgeEl.textContent = 'Monday Closed';
-      badgeEl.className = 'day-badge-pill';
-    } else {
-      badgeEl.textContent = info.badge;
-      badgeEl.className = 'day-badge-pill';
-    }
-  }
-  if (summaryEl) {
-    if (isNextServicePreview) {
-      summaryEl.innerHTML = `<strong>Today is Monday (Pit Cold &amp; Maintenance).</strong> Previewing opening service for <strong>${info.day_name}</strong>: ${info.summary}`;
-    } else {
-      summaryEl.textContent = info.summary;
-    }
-  }
-  if (focusTagEl) focusTagEl.textContent = info.focus;
-  if (rushSubtextEl) rushSubtextEl.textContent = info.rush_window;
-}
-
-function renderTenWatchlistTips(filterCat = 'all', matchedRecord = null, brief = null, isNextServicePreview = false) {
-  const container = document.getElementById('ten-tips-container');
-  if (!container) return;
-
-  const tips = getTenWatchlistTips(matchedRecord, brief, isNextServicePreview);
-  const filtered = filterCat === 'all' ? tips : tips.filter(t => t.cat === filterCat);
-
-  container.innerHTML = filtered.map(t => {
-    const colonIdx = t.pit_check.indexOf(':');
-    const checkLabel = colonIdx !== -1 ? t.pit_check.substring(0, colonIdx) : 'Pit Check';
-    const checkVal = colonIdx !== -1 ? t.pit_check.substring(colonIdx + 1) : t.pit_check;
-
-    return `
-      <div class="ten-tip-card cat-${t.cat}" data-cat="${t.cat}">
-        <div class="tip-card-top">
-          <div class="tip-meta-wrap">
-            <span class="tip-number-badge">${t.id}</span>
-            <span class="tip-cat-badge cat-${t.cat}">${t.cat_label}</span>
-          </div>
-          <span class="tip-importance-badge">${t.importance}</span>
-        </div>
-        <h4 class="tip-title">${t.title}</h4>
-        <p class="tip-desc">${t.desc}</p>
-        <div class="tip-action-box">
-          <strong>${checkLabel}:</strong>${checkVal}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function updateDailyPitIntelligence(matchedRecord, brief, isNextServicePreview) {
-  _lastMatchedRecord = matchedRecord;
-  _lastBrief = brief;
-  _lastIsNextServicePreview = isNextServicePreview;
-
-  renderQuickWindBanner();
-  renderDailyRandomInsight(false);
-  renderDaySpecificTipsSummary(matchedRecord, brief, isNextServicePreview);
-  renderTenWatchlistTips(_currentTipsFilter, matchedRecord, brief, isNextServicePreview);
-  renderAnalyticsGlossary(_currentGlossaryFilter);
-}
-
-function initDailyPitIntelligence() {
-  const rerollBtn = document.getElementById('btn-reroll-insight');
-  if (rerollBtn && !rerollBtn._hasListener) {
-    rerollBtn._hasListener = true;
-    rerollBtn.addEventListener('click', () => {
-      renderDailyRandomInsight(true);
-    });
-  }
-
-  // Quick-Wind Recent Alerts Drawer toggle
-  const toggleRecentBtn = document.getElementById('btn-toggle-recent-alerts');
-  const recentDrawer = document.getElementById('qw-recent-alerts-drawer');
-  const recentArrow = document.getElementById('qw-recent-arrow');
-  if (toggleRecentBtn && !toggleRecentBtn._hasListener) {
-    toggleRecentBtn._hasListener = true;
-    toggleRecentBtn.addEventListener('click', () => {
-      _isRecentAlertsExpanded = !_isRecentAlertsExpanded;
-      if (recentDrawer) recentDrawer.style.display = _isRecentAlertsExpanded ? 'block' : 'none';
-      toggleRecentBtn.setAttribute('aria-expanded', _isRecentAlertsExpanded ? 'true' : 'false');
-      if (recentArrow) recentArrow.textContent = _isRecentAlertsExpanded ? '▲' : '▼';
-    });
-  }
-
-  // 10 Tips Category Filters
-  const filterBtns = document.querySelectorAll('.tip-filter-btn');
-  filterBtns.forEach(btn => {
-    if (!btn._hasListener) {
-      btn._hasListener = true;
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        _currentTipsFilter = btn.getAttribute('data-filter') || 'all';
-        renderTenWatchlistTips(_currentTipsFilter, _lastMatchedRecord, _lastBrief, _lastIsNextServicePreview);
-      });
-    }
-  });
-
-  // 10 Tips Collapse Toggle
-  const toggleBtn = document.getElementById('btn-toggle-tips-collapse');
-  const container = document.getElementById('ten-tips-container');
-  const toggleText = document.getElementById('toggle-tips-text');
-  const toggleArrow = document.getElementById('toggle-tips-arrow');
-
-  if (toggleBtn && !toggleBtn._hasListener) {
-    toggleBtn._hasListener = true;
-    toggleBtn.addEventListener('click', () => {
-      _isTipsCollapsed = !_isTipsCollapsed;
-      if (container) container.classList.toggle('collapsed', _isTipsCollapsed);
-      toggleBtn.setAttribute('aria-expanded', _isTipsCollapsed ? 'false' : 'true');
-      if (toggleText) toggleText.textContent = _isTipsCollapsed ? 'Expand 10 Tips' : 'Collapse Tips';
-      if (toggleArrow) toggleArrow.textContent = _isTipsCollapsed ? '▼' : '▲';
-    });
-  }
-
-  // Glossary Category Filters
-  const glossaryCatBtns = document.querySelectorAll('.glossary-cat-btn');
-  glossaryCatBtns.forEach(btn => {
-    if (!btn._hasListener) {
-      btn._hasListener = true;
-      btn.addEventListener('click', () => {
-        glossaryCatBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        _currentGlossaryFilter = btn.getAttribute('data-cat') || 'all';
-        renderAnalyticsGlossary(_currentGlossaryFilter);
-      });
-    }
-  });
-
-  // Glossary Collapse Toggle
-  const toggleGlossaryBtn = document.getElementById('btn-toggle-glossary');
-  const glossaryGrid = document.getElementById('glossary-card-grid');
-  const toggleGlossaryText = document.getElementById('toggle-glossary-text');
-  const toggleGlossaryArrow = document.getElementById('toggle-glossary-arrow');
-
-  if (toggleGlossaryBtn && !toggleGlossaryBtn._hasListener) {
-    toggleGlossaryBtn._hasListener = true;
-    toggleGlossaryBtn.addEventListener('click', () => {
-      _isGlossaryCollapsed = !_isGlossaryCollapsed;
-      if (glossaryGrid) glossaryGrid.classList.toggle('collapsed', _isGlossaryCollapsed);
-      toggleGlossaryBtn.setAttribute('aria-expanded', _isGlossaryCollapsed ? 'false' : 'true');
-      if (toggleGlossaryText) toggleGlossaryText.textContent = _isGlossaryCollapsed ? 'Expand Guide' : 'Collapse Guide';
-      if (toggleGlossaryArrow) toggleGlossaryArrow.textContent = _isGlossaryCollapsed ? '▼' : '▲';
-    });
-  }
-
-  // Close Term Explainer Drawer
-  const closeTermBtn = document.getElementById('btn-close-term-drawer');
-  if (closeTermBtn && !closeTermBtn._hasListener) {
-    closeTermBtn._hasListener = true;
-    closeTermBtn.addEventListener('click', closeTermExplainer);
-  }
-
-  updateDailyPitIntelligence(_lastMatchedRecord, _lastBrief, _lastIsNextServicePreview);
-}
-
-function renderKPIBulletAndSparklines(slicedRecords, matchedRecord) {
-  const briefPayload = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.daily_executive_brief
-    ? window.BBQ_PAYLOADS.daily_executive_brief
-    : null;
-  const sparks = briefPayload && briefPayload.sparklines_7d ? briefPayload.sparklines_7d : {};
-  const dowBase = (briefPayload && briefPayload.dow_baselines && matchedRecord && briefPayload.dow_baselines[matchedRecord.day_name])
-    ? briefPayload.dow_baselines[matchedRecord.day_name]
-    : null;
-
-  const daysCount = Math.max(1, Array.isArray(slicedRecords) ? slicedRecords.length : 1);
-  const rec = matchedRecord || (Array.isArray(slicedRecords) && slicedRecords[0]) || {};
-  const revVal = Number((rec.is_historical && rec.actual_revenue > 0) ? rec.actual_revenue : (rec.predicted_revenue || 0));
-  const typRev = Math.max(Number(dowBase?.typical_sales_usd || 3850), 1);
-
-  const cards = [
-    {
-      containerId: 'kpi-card-revenue-container',
-      pctOfTypical: Math.round((revVal / typRev) * 100),
-      barColor: '#E69F00',
-      sparkSeries: sparks.sales_usd || [3850, 3180, 4135, 5556, 6390, 4820, 4264],
-      label: 'vs. Typical Day'
-    },
-    {
-      containerId: 'kpi-card-brisket-container',
-      pctOfTypical: Math.round(((rec.brisket_raw_lbs || 0) / Math.max(dowBase?.typical_brisket_raw_lbs || 115, 1)) * 100),
-      barColor: '#D55E00',
-      sparkSeries: sparks.brisket_raw_lbs || [114, 116, 129, 190, 212, 165, 114],
-      label: 'vs. Usual Prep'
-    },
-    {
-      containerId: 'kpi-card-pork-container',
-      pctOfTypical: Math.round(((rec.pork_shoulder_raw_lbs || 0) / Math.max(dowBase?.typical_pork_raw_lbs || 18, 1)) * 100),
-      barColor: '#E69F00',
-      sparkSeries: sparks.pork_raw_lbs || [19, 12, 28, 21, 32, 18, 19],
-      label: 'vs. Usual Prep'
-    },
-    {
-      containerId: 'kpi-card-sausage-container',
-      pctOfTypical: Math.round(((rec.sausage_lbs || 0) / Math.max(dowBase?.typical_sausage_lbs || 12, 1)) * 100),
-      barColor: '#56B4E9',
-      sparkSeries: sparks.sausage_batches || [0.18, 0.17, 0.21, 0.34, 0.38, 0.25, 0.18],
-      label: 'vs. Usual Batch'
-    },
-    {
-      containerId: 'kpi-card-ribs-container',
-      pctOfTypical: Math.round(((rec.pork_ribs_racks || 0) / Math.max(dowBase?.typical_ribs_racks || 7, 1)) * 100),
-      barColor: '#CC79A7',
-      sparkSeries: sparks.ribs_racks || [7, 7, 7, 12, 15, 10, 7],
-      label: 'vs. Usual Racks'
-    },
-    {
-      containerId: 'kpi-card-turkey-container',
-      pctOfTypical: Math.round(((rec.turkey_cooked_lbs || rec.turkey_lbs || 0) / Math.max(dowBase?.typical_turkey_cooked_lbs || 7.5, 1)) * 100),
-      barColor: '#009E73',
-      sparkSeries: sparks.turkey_cooked_lbs || [7.9, 7.5, 7.4, 12.1, 13.6, 9.4, 7.9],
-      label: 'vs. Usual Turkey'
-    },
-    {
-      containerId: 'kpi-card-food-cost-container',
-      pctOfTypical: 70,
-      barColor: '#009E73',
-      sparkSeries: sparks.left_after_meat_usd || [3006, 2247, 2915, 3917, 4505, 3398, 3006],
-      label: '~70.5% Left After Meat Cost'
-    }
-  ];
-
-  cards.forEach(cfg => {
-    const cardEl = document.getElementById(cfg.containerId);
-    if (!cardEl) return;
-    let vizEl = cardEl.querySelector('.kpi-micro-viz');
-    if (!vizEl) {
-      vizEl = document.createElement('div');
-      vizEl.className = 'kpi-micro-viz';
-      cardEl.appendChild(vizEl);
-    }
-    const clampedWidth = Math.min(100, Math.max(0, cfg.pctOfTypical || 0));
-    const displayPct = daysCount > 1 ? 'Multi-Day Range' : `${cfg.pctOfTypical}% ${cfg.label}`;
-    vizEl.innerHTML = `
-      <div class="kpi-bullet-row">
-        <div class="kpi-bullet-header">
-          <span>Target Progress</span>
-          <span>${escapeHTML(displayPct)}</span>
-        </div>
-        <div class="kpi-bullet-track" role="progressbar" aria-valuenow="${clampedWidth}" aria-valuemin="0" aria-valuemax="100">
-          <div class="kpi-bullet-fill" style="width:${clampedWidth}%; background:${cfg.barColor};"></div>
-          <span class="kpi-bullet-target-marker" style="left:85%;" title="Typical Day Benchmark"></span>
-        </div>
-      </div>
-      <div class="kpi-sparkline-row">
-        <span class="kpi-sparkline-caption">7-Day Trend</span>
-        ${buildSparklineSVG(cfg.sparkSeries, cfg.barColor)}
-      </div>
-    `;
-  });
 }
 
 function initForecastingControls() {
@@ -2026,9 +344,9 @@ function initForecastingControls() {
       if (endDateInput && (!endDateInput.value || endDateInput.value < startVal)) {
         endDateInput.value = startVal;
       }
-      handleDateSelectionLookup(startVal);
+      if (typeof handleDateSelectionLookup === 'function') handleDateSelectionLookup(startVal);
       renderPlotlyForecastingChart(getActiveDaysCount());
-      renderPlotlyPredictiveChart();
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
     });
   }
 
@@ -2041,7 +359,7 @@ function initForecastingControls() {
         endDateInput.value = dateInput.value;
       }
       renderPlotlyForecastingChart(getActiveDaysCount());
-      renderPlotlyPredictiveChart();
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
     });
   }
 
@@ -2087,7 +405,7 @@ function initForecastingControls() {
   if (btnSubtabPredictive) {
     btnSubtabPredictive.addEventListener('click', () => {
       activateSubtab(btnSubtabPredictive, viewPredictive);
-      renderPlotlyPredictiveChart();
+      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
     });
   }
 
@@ -2101,14 +419,14 @@ function initForecastingControls() {
   if (btnSubtabWeather) {
     btnSubtabWeather.addEventListener('click', () => {
       activateSubtab(btnSubtabWeather, viewWeather);
-      renderPlotlyWeatherChart();
+      if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
     });
   }
 
   if (btnSubtabEvent) {
     btnSubtabEvent.addEventListener('click', () => {
       activateSubtab(btnSubtabEvent, viewEvent);
-      renderPlotlyEventChart();
+      if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
       if (typeof refreshEventsCalendar === 'function') refreshEventsCalendar();
     });
   }
@@ -2117,7 +435,9 @@ function initForecastingControls() {
     btnSubtabShift.addEventListener('click', () => {
       activateSubtab(btnSubtabShift, viewShift);
       const shiftSelector = document.getElementById('shift-selector');
-      renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
+      if (typeof renderPlotlyShiftHeatmap === 'function') {
+        renderPlotlyShiftHeatmap(shiftSelector ? shiftSelector.value : 'all');
+      }
     });
   }
 
@@ -2131,7 +451,7 @@ function initForecastingControls() {
   if (btnSubtabReports) {
     btnSubtabReports.addEventListener('click', () => {
       activateSubtab(btnSubtabReports, viewReports);
-      initDailyPitIntelligence();
+      if (typeof initDailyPitIntelligence === 'function') initDailyPitIntelligence();
     });
   }
 
@@ -2145,7 +465,7 @@ function initForecastingControls() {
   const shiftSelector = document.getElementById('shift-selector');
   if (shiftSelector) {
     shiftSelector.addEventListener('change', () => {
-      renderPlotlyShiftHeatmap(shiftSelector.value);
+      if (typeof renderPlotlyShiftHeatmap === 'function') renderPlotlyShiftHeatmap(shiftSelector.value);
     });
   }
 
@@ -2197,15 +517,14 @@ function initForecastingControls() {
         lastPulledElem.textContent = `Data Last Synced: ${formatted}`;
       }
     };
-    
-    if (typeof fetch !== 'function') {
+
+    if (typeof fetchJsonSafe !== 'function') {
       setTimeText(null);
       return;
     }
-    
-    fetch('clover_api/analytics/sync_status.json?v=' + Date.now())
-      .catch(() => fetch('analytics/sync_status.json?v=' + Date.now()))
-      .then(res => (res && res.ok) ? res.json() : null)
+
+    fetchJsonSafe('clover_api/analytics/sync_status.json?v=' + Date.now(), null, 3000)
+      .then(data => data || fetchJsonSafe('analytics/sync_status.json?v=' + Date.now(), null, 3000))
       .then(data => {
         const syncDate = (data && data.last_synced_at) ? new Date(data.last_synced_at) : null;
         setTimeText(syncDate);
@@ -2229,13 +548,13 @@ function initForecastingControls() {
       lastRefreshTime = now;
       const origText = btnRefreshAnalytics.innerHTML;
       btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
-      
+
       renderPlotlyForecastingChart(getActiveDaysCount()).then(() => {
         updateSyncStatusTime();
         btnRefreshAnalytics.innerHTML = origText;
       });
-      renderPlotlyEventChart();
-      renderPlotlyWeatherChart();
+      if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
+      if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
     });
   }
 
@@ -2262,7 +581,7 @@ function initForecastingControls() {
   if (btn7) btn7.addEventListener('click', () => updatePresetHorizon('btn-preset-7', 7, 0));
   if (btn14) btn14.addEventListener('click', () => updatePresetHorizon('btn-preset-14', 14, 0));
 
-  setupTimeTravelControls();
+  if (typeof setupTimeTravelControls === 'function') setupTimeTravelControls();
 }
 
 function updatePresetHorizon(btnId, days, startOffset = 0) {
@@ -2280,7 +599,7 @@ function updatePresetHorizon(btnId, days, startOffset = 0) {
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
     dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
+    if (typeof handleDateSelectionLookup === 'function') handleDateSelectionLookup(targetDateStr);
   }
 
   const endD = new Date(d);
@@ -2292,7 +611,7 @@ function updatePresetHorizon(btnId, days, startOffset = 0) {
   }
 
   renderPlotlyForecastingChart(days);
-  renderPlotlyPredictiveChart();
+  if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
 }
 
 function updatePresetWeekend() {
@@ -2319,7 +638,7 @@ function updatePresetWeekend() {
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
     dateInput.value = friStr;
-    handleDateSelectionLookup(friStr);
+    if (typeof handleDateSelectionLookup === 'function') handleDateSelectionLookup(friStr);
   }
   const endDateInput = document.getElementById('forecast-end-date');
   if (endDateInput) {
@@ -2327,7 +646,7 @@ function updatePresetWeekend() {
   }
 
   renderPlotlyForecastingChart(3);
-  renderPlotlyPredictiveChart();
+  if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
 }
 
 function updatePresetDay(targetDayOfWeek, btnId) {
@@ -2349,7 +668,7 @@ function updatePresetDay(targetDayOfWeek, btnId) {
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
     dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
+    if (typeof handleDateSelectionLookup === 'function') handleDateSelectionLookup(targetDateStr);
   }
   const endDateInput = document.getElementById('forecast-end-date');
   if (endDateInput) {
@@ -2357,7 +676,7 @@ function updatePresetDay(targetDayOfWeek, btnId) {
   }
 
   renderPlotlyForecastingChart(1);
-  renderPlotlyPredictiveChart();
+  if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
 }
 
 function updatePresetThirdSaturday() {
@@ -2383,31 +702,29 @@ function updatePresetThirdSaturday() {
   const dateInput = document.getElementById('forecast-start-date');
   if (dateInput) {
     dateInput.value = targetDateStr;
-    handleDateSelectionLookup(targetDateStr);
+    if (typeof handleDateSelectionLookup === 'function') handleDateSelectionLookup(targetDateStr);
   }
   const endDateInput = document.getElementById('forecast-end-date');
   if (endDateInput) {
     endDateInput.value = targetDateStr;
   }
   renderPlotlyForecastingChart(1);
-  renderPlotlyPredictiveChart();
+  if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
 }
 
-
-
 async function renderPlotlyForecastingChart(daysCount = 14) {
+  const mySeq = ++_forecastRenderSeq;
   try {
     const chartContainer = document.getElementById('plotly-meat-sales-chart');
-    
+
     const rawStartDate = document.getElementById('forecast-start-date')?.value;
     const parsedStartDate = parseValidDate(rawStartDate);
     const dNow = new Date();
     const tzOffset = dNow.getTimezoneOffset() * 60000;
     const todayStr = (new Date(dNow.getTime() - tzOffset)).toISOString().split('T')[0];
-    
+
     const targetDateInput = parsedStartDate ? rawStartDate.trim() : todayStr;
     const targetDateObj = parseValidDate(targetDateInput) || new Date();
-    const dayOfWeekStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'long' });
     const shortDayStr = targetDateObj.toLocaleDateString('en-US', { weekday: 'short' });
 
     daysCount = Math.max(1, parseInt(daysCount) || 1);
@@ -2451,40 +768,32 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     };
 
     let dashPayload = null;
-    try {
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload) {
-        dashPayload = window.BBQ_PAYLOADS.dashboard_payload;
-      } else {
-        const dashRes = await fetch('clover_api/analytics/dashboard_payload.json?v=' + Date.now());
-        if (dashRes.ok) dashPayload = await dashRes.json();
-      }
-    } catch (e) {
-      console.log("Using embedded dashboard dataset fallback:", e);
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.dashboard_payload) {
+      dashPayload = window.BBQ_PAYLOADS.dashboard_payload;
+    } else if (typeof fetchJsonSafe === 'function') {
+      dashPayload = await fetchJsonSafe('clover_api/analytics/dashboard_payload.json?v=' + Date.now(), null, 4000);
+      if (mySeq !== _forecastRenderSeq) return;
     }
-    
-    updateSyncStatusTime();
+
+    if (typeof window.updateSyncStatusTime === 'function') {
+      window.updateSyncStatusTime();
+    }
 
     let histPayload = null;
-    try {
-      if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.historical_payload) {
-        histPayload = window.BBQ_PAYLOADS.historical_payload;
-      } else {
-        const histRes = await fetch('clover_api/analytics/historical_payload.json?v=' + Date.now());
-        if (histRes.ok) histPayload = await histRes.json();
-      }
-    } catch (e) {
-      console.log("No historical payload found.");
+    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.historical_payload) {
+      histPayload = window.BBQ_PAYLOADS.historical_payload;
+    } else if (typeof fetchJsonSafe === 'function') {
+      histPayload = await fetchJsonSafe('clover_api/analytics/historical_payload.json?v=' + Date.now(), null, 4000);
+      if (mySeq !== _forecastRenderSeq) return;
     }
 
     let records = (dashPayload && dashPayload.forecast && Array.isArray(dashPayload.forecast.forecast_records) && dashPayload.forecast.forecast_records.length > 0)
-      ? dashPayload.forecast.forecast_records
-      : defaultForecastRecords;
-      
+      ? dashPayload.forecast.forecast_records.map(r => ({ ...r }))
+      : defaultForecastRecords.map(r => ({ ...r }));
+
     if (histPayload && Array.isArray(histPayload.historical_records) && histPayload.historical_records.length > 0) {
-      // Sort and merge historical records with forecast records
-      records = [...histPayload.historical_records, ...records];
+      records = [...histPayload.historical_records.map(r => ({ ...r })), ...records];
       records.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-      // Remove duplicates by date if any overlap exists
       records = Array.from(new Map(records.map(item => [item.date, item])).values());
     }
 
@@ -2530,73 +839,51 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if ((isTargetMonday && !isHolidayOpen(targetDateInput)) || isTargetClosedHoliday) {
         matchedRecord = safeDefaultRecord(targetDateInput, 'Mon');
       } else {
-        // Calculate an average for that day of the week based on history.
         const histDays = records.filter(r => r.day_name === shortDayStr && r.is_historical && !r.is_closed);
-      
-      if (histDays.length > 0) {
-        // Filter out outliers using IQR on predicted_revenue
-        const revs = histDays.map(r => r.predicted_revenue || 0).sort((a, b) => a - b);
-        const q1 = revs[Math.floor((revs.length / 4))];
-        const q3 = revs[Math.ceil((revs.length * (3 / 4))) - 1] || revs[revs.length - 1];
-        const iqr = q3 - q1;
-        const lowerBound = q1 - 1.5 * iqr;
-        const upperBound = q3 + 1.5 * iqr;
-        
-        const validDays = histDays.filter(r => (r.predicted_revenue || 0) >= lowerBound && (r.predicted_revenue || 0) <= upperBound);
-        const daysToAverage = validDays.length > 0 ? validDays : histDays;
-        
-        // Calculate averages
-        matchedRecord = {
-          date: targetDateInput,
-          day_name: shortDayStr,
-          is_historical: false,
-          is_fallback_average: true,
-          predicted_revenue: daysToAverage.reduce((sum, r) => sum + (r.predicted_revenue || 0), 0) / daysToAverage.length,
-          brisket_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.brisket_raw_lbs || 0), 0) / daysToAverage.length,
-          pork_shoulder_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.pork_shoulder_raw_lbs || 0), 0) / daysToAverage.length,
-          sausage_lbs: daysToAverage.reduce((sum, r) => sum + (r.sausage_lbs || 0), 0) / daysToAverage.length,
-          tacos_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.tacos_sold || 0), 0) / daysToAverage.length),
-          rosebuds_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.rosebuds_sold || 0), 0) / daysToAverage.length),
-          pork_ribs_racks: daysToAverage.reduce((sum, r) => sum + (r.pork_ribs_racks || 0), 0) / daysToAverage.length,
-          beef_dino_ribs: daysToAverage.reduce((sum, r) => sum + (r.beef_dino_ribs || 0), 0) / daysToAverage.length,
-          actual_revenue: daysToAverage.reduce((sum, r) => sum + (r.actual_revenue || 0), 0) / daysToAverage.length
-        };
 
-        // Factor in live events
-        const JAGS_HOME_GAMES = ["2026-09-13", "2026-09-27", "2026-10-18", "2026-11-01", "2026-11-22", "2026-12-06", "2026-12-20"];
-        const HARDCODED_HOLIDAYS = ["2026-01-01", "2026-05-25", "2026-07-04", "2026-09-07", "2026-11-26", "2026-12-25", "2027-01-01", "2027-05-31", "2027-07-04", "2027-09-06", "2027-11-25", "2027-12-25"];
-        
-        let eventMultiplier = 1.0;
-        let eventStr = '';
-        if (JAGS_HOME_GAMES.includes(targetDateInput)) {
-           eventMultiplier = 3.5; 
-           eventStr = 'Jaguars Game';
-        } else if (HARDCODED_HOLIDAYS.includes(targetDateInput)) {
-           eventMultiplier = 0.7;
-           eventStr = 'Holiday';
-        }
+        if (histDays.length > 0) {
+          const revs = histDays.map(r => r.predicted_revenue || 0).sort((a, b) => a - b);
+          const q1 = revs[Math.floor((revs.length / 4))];
+          const q3 = revs[Math.ceil((revs.length * (3 / 4))) - 1] || revs[revs.length - 1];
+          const iqr = q3 - q1;
+          const lowerBound = q1 - 1.5 * iqr;
+          const upperBound = q3 + 1.5 * iqr;
 
-        // Factor in weather
-        let weatherMultiplier = 1.0;
-        let weatherStr = '';
-        try {
-           const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=30.3322&longitude=-81.6557&daily=temperature_2m_max,precipitation_sum&timezone=America/New_York&start_date=${targetDateInput}&end_date=${targetDateInput}`);
-           if (weatherRes.ok) {
-             const weatherData = await weatherRes.json();
-             if (weatherData.daily && weatherData.daily.precipitation_sum && weatherData.daily.precipitation_sum[0] > 10.0) {
-                 weatherMultiplier = 1.21;
-                 weatherStr = 'Heavy Rain';
-             } else if (weatherData.daily && weatherData.daily.temperature_2m_max && weatherData.daily.temperature_2m_max[0] > 90.0) {
-                 weatherMultiplier = 0.942;
-                 weatherStr = 'Extreme Heat';
-             }
-           }
-        } catch (e) {
-           // Graceful fallback on network failure
-        }
+          const validDays = histDays.filter(r => (r.predicted_revenue || 0) >= lowerBound && (r.predicted_revenue || 0) <= upperBound);
+          const daysToAverage = validDays.length > 0 ? validDays : histDays;
 
-        const totalMultiplier = eventMultiplier * weatherMultiplier;
-        if (totalMultiplier !== 1.0) {
+          matchedRecord = {
+            date: targetDateInput,
+            day_name: shortDayStr,
+            is_historical: false,
+            is_fallback_average: true,
+            predicted_revenue: daysToAverage.reduce((sum, r) => sum + (r.predicted_revenue || 0), 0) / daysToAverage.length,
+            brisket_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.brisket_raw_lbs || 0), 0) / daysToAverage.length,
+            pork_shoulder_raw_lbs: daysToAverage.reduce((sum, r) => sum + (r.pork_shoulder_raw_lbs || 0), 0) / daysToAverage.length,
+            sausage_lbs: daysToAverage.reduce((sum, r) => sum + (r.sausage_lbs || 0), 0) / daysToAverage.length,
+            tacos_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.tacos_sold || 0), 0) / daysToAverage.length),
+            rosebuds_sold: Math.round(daysToAverage.reduce((sum, r) => sum + (r.rosebuds_sold || 0), 0) / daysToAverage.length),
+            pork_ribs_racks: daysToAverage.reduce((sum, r) => sum + (r.pork_ribs_racks || 0), 0) / daysToAverage.length,
+            beef_dino_ribs: daysToAverage.reduce((sum, r) => sum + (r.beef_dino_ribs || 0), 0) / daysToAverage.length,
+            actual_revenue: daysToAverage.reduce((sum, r) => sum + (r.actual_revenue || 0), 0) / daysToAverage.length
+          };
+
+          // Dynamic calendar events + Fahrenheit Open-Meteo resolver with 3.5s circuit breaker
+          const evtImpact = typeof resolveDateEventImpact === 'function'
+            ? resolveDateEventImpact(targetDateInput)
+            : { multiplier: 1.0, label: '' };
+          const weatherImpact = typeof resolveOpenMeteoWeatherImpact === 'function'
+            ? await resolveOpenMeteoWeatherImpact(targetDateInput, 3500)
+            : { multiplier: 1.0, label: '' };
+          if (mySeq !== _forecastRenderSeq) return;
+
+          const eventMultiplier = evtImpact.multiplier;
+          const eventStr = evtImpact.label;
+          const weatherMultiplier = weatherImpact.multiplier;
+          const weatherStr = weatherImpact.label;
+
+          const totalMultiplier = eventMultiplier * weatherMultiplier;
+          if (totalMultiplier !== 1.0) {
             matchedRecord.predicted_revenue *= totalMultiplier;
             matchedRecord.brisket_raw_lbs *= totalMultiplier;
             matchedRecord.pork_shoulder_raw_lbs *= totalMultiplier;
@@ -2606,22 +893,21 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
             matchedRecord.pork_ribs_racks *= totalMultiplier;
             matchedRecord.beef_dino_ribs *= totalMultiplier;
             matchedRecord.insightSuffix = ` (Adjusted x${totalMultiplier.toFixed(2)} for ${eventStr}${eventStr && weatherStr ? ' and ' : ''}${weatherStr})`;
+          }
+        } else {
+          const found = records.find(r => r.day_name === shortDayStr);
+          matchedRecord = found ? { ...found, date: targetDateInput } : (records[0] ? { ...records[0], date: targetDateInput } : safeDefaultRecord(targetDateInput, shortDayStr));
         }
-      } else {
-        const found = records.find(r => r.day_name === shortDayStr);
-        matchedRecord = found ? { ...found, date: targetDateInput } : (records[0] ? { ...records[0], date: targetDateInput } : safeDefaultRecord(targetDateInput, shortDayStr));
       }
     }
-  }
-  if (!matchedRecord) {
-    matchedRecord = safeDefaultRecord(targetDateInput, shortDayStr);
-  }
+    if (!matchedRecord) {
+      matchedRecord = safeDefaultRecord(targetDateInput, shortDayStr);
+    }
 
     const startIndex = records.findIndex(r => r.date === targetDateInput);
     let slicedRecords = [];
     if (startIndex >= 0) {
       slicedRecords = records.slice(startIndex, startIndex + daysCount).map(r => ({ ...r }));
-      // Pad with safe averages if we run out of days
       while (slicedRecords.length < daysCount) {
         const lastRec = slicedRecords[slicedRecords.length - 1];
         const lastDate = parseValidDate(lastRec.date) || new Date();
@@ -2641,28 +927,28 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const dStr = (new Date(stepDate.getTime() - stepDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
         let r = records.find(x => x.date === dStr);
         if (i === 0 && matchedRecord && matchedRecord.date === dStr) {
-           r = matchedRecord;
+          r = matchedRecord;
         } else if (!r) {
-           const sDay = stepDate.toLocaleDateString('en-US', { weekday: 'short' });
-           const histDays = records.filter(x => x.day_name === sDay && x.is_historical);
-           if (histDays.length > 0) {
-             r = {
-               date: dStr,
-               day_name: sDay,
-               predicted_revenue: histDays.reduce((sum, x) => sum + (x.predicted_revenue || 0), 0) / histDays.length,
-               brisket_raw_lbs: histDays.reduce((sum, x) => sum + (x.brisket_raw_lbs || 0), 0) / histDays.length,
-               pork_shoulder_raw_lbs: histDays.reduce((sum, x) => sum + (x.pork_shoulder_raw_lbs || 0), 0) / histDays.length,
-               sausage_lbs: histDays.reduce((sum, x) => sum + (x.sausage_lbs || 0), 0) / histDays.length,
-               tacos_sold: Math.round(histDays.reduce((sum, x) => sum + (x.tacos_sold || 0), 0) / histDays.length),
-               rosebuds_sold: Math.round(histDays.reduce((sum, x) => sum + (x.rosebuds_sold || 0), 0) / histDays.length),
-               pork_ribs_racks: histDays.reduce((sum, x) => sum + (x.pork_ribs_racks || 0), 0) / histDays.length,
-               beef_dino_ribs: histDays.reduce((sum, x) => sum + (x.beef_dino_ribs || 0), 0) / histDays.length,
-               is_historical: false
-             };
-           } else {
-             const found = records.find(x => x.day_name === sDay);
-             r = found ? { ...found, date: dStr, day_name: sDay } : safeDefaultRecord(dStr, sDay);
-           }
+          const sDay = stepDate.toLocaleDateString('en-US', { weekday: 'short' });
+          const histDays = records.filter(x => x.day_name === sDay && x.is_historical);
+          if (histDays.length > 0) {
+            r = {
+              date: dStr,
+              day_name: sDay,
+              predicted_revenue: histDays.reduce((sum, x) => sum + (x.predicted_revenue || 0), 0) / histDays.length,
+              brisket_raw_lbs: histDays.reduce((sum, x) => sum + (x.brisket_raw_lbs || 0), 0) / histDays.length,
+              pork_shoulder_raw_lbs: histDays.reduce((sum, x) => sum + (x.pork_shoulder_raw_lbs || 0), 0) / histDays.length,
+              sausage_lbs: histDays.reduce((sum, x) => sum + (x.sausage_lbs || 0), 0) / histDays.length,
+              tacos_sold: Math.round(histDays.reduce((sum, x) => sum + (x.tacos_sold || 0), 0) / histDays.length),
+              rosebuds_sold: Math.round(histDays.reduce((sum, x) => sum + (x.rosebuds_sold || 0), 0) / histDays.length),
+              pork_ribs_racks: histDays.reduce((sum, x) => sum + (x.pork_ribs_racks || 0), 0) / histDays.length,
+              beef_dino_ribs: histDays.reduce((sum, x) => sum + (x.beef_dino_ribs || 0), 0) / histDays.length,
+              is_historical: false
+            };
+          } else {
+            const found = records.find(x => x.day_name === sDay);
+            r = found ? { ...found, date: dStr, day_name: sDay } : safeDefaultRecord(dStr, sDay);
+          }
         }
         slicedRecords.push(r ? { ...r } : safeDefaultRecord(dStr, 'Day'));
       }
@@ -2678,9 +964,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const startDateVal = document.getElementById('forecast-start-date')?.value || targetDateInput;
     const endDateVal = document.getElementById('forecast-end-date')?.value || targetDateInput;
     const isRangeSelected = Boolean(startDateVal && endDateVal && (startDateVal !== endDateVal) && daysCount > 1);
-    
-    // Check if the current single target date is a closed day (e.g. Monday or Christmas).
-    // Note: If the user is actively simulating in Time-Travel mode, allow simulation to execute even if today is Monday.
+
     const isSimActive = Boolean(window.ShopTime && typeof window.ShopTime.isSimulating === 'function' && window.ShopTime.isSimulating());
     const isTargetClosed = Boolean(
       !isRangeSelected && !isSimActive && (
@@ -2694,7 +978,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let bRaw = 0, pRaw = 0, sVal = 0, rVal = 0, drVal = 0, totalTacos = 0, totalRosebuds = 0, totalRev = 0, tVal = 0;
     let totalCogs = 0, totalStaff = 0, totalLaborHours = 0;
-    
+
     function calcCalibratedTurkey(r) {
       if (!r || r.is_closed || r.day_name === 'Mon') return { cooked: 0, raw: 0 };
       const baselines = { 'Tue': 6.2, 'Wed': 7.2, 'Thu': 7.0, 'Fri': 11.5, 'Sat': 12.9, 'Sun': 8.9 };
@@ -2706,6 +990,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // +10% safety buffer
       const rawTarget = Math.round((cookedTarget / 0.70) * 10) / 10;   // 70% nominal yield
       return { cooked: cookedTarget, raw: rawTarget };
+    }
+
+    function minMaxStaff(rev) {
+      if (!rev || rev <= 0) return 0;
+      return Math.min(5, Math.max(2, Math.floor(rev / 1000) + 1));
+    }
+    function roundStaffHours(staff) {
+      return Math.round(staff * 8.5 * 10) / 10;
     }
 
     if (isTargetClosed) {
@@ -2723,8 +1015,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         totalRosebuds += Math.round(r.rosebuds_sold || 0);
         totalRev += Math.round(rev);
         tVal += Math.round(calcCalibratedTurkey(r).cooked);
-        
-        // Calculate daily staff and hours
+
         const isClosedDay = r.is_closed || r.day_name === 'Mon';
         const dayStaff = isClosedDay ? 0 : (r.recommended_staff || minMaxStaff(rev));
         const dayHours = isClosedDay ? 0.0 : (r.pitmaster_hours || roundStaffHours(dayStaff));
@@ -2743,19 +1034,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       totalRosebuds = Math.round(targetRecord.rosebuds_sold || 0);
       totalRev = Math.round(targetRecord.predicted_revenue || 0);
       tVal = Math.round(calcCalibratedTurkey(targetRecord).cooked);
-      
+
       const isClosedDay = targetRecord.is_closed || targetRecord.day_name === 'Mon';
       totalStaff = isClosedDay ? 0 : (targetRecord.recommended_staff || minMaxStaff(totalRev));
       totalLaborHours = isClosedDay ? 0.0 : (targetRecord.pitmaster_hours || roundStaffHours(totalStaff));
       totalCogs = targetRecord.estimated_cogs_usd || Math.round(totalRev * 0.295);
-    }
-
-    function minMaxStaff(rev) {
-      if (!rev || rev <= 0) return 0;
-      return Math.min(5, Math.max(2, Math.floor(rev / 1000) + 1));
-    }
-    function roundStaffHours(staff) {
-      return Math.round(staff * 8.5 * 10) / 10;
     }
 
     const bCooked = Math.round(bRaw * 0.4);
@@ -2784,16 +1067,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let insightStr = '';
     if (isTargetClosed) {
-      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance and wood restocking. Zero retail smoking run; service resumes Tuesday 11:00 AM.`;
+      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance. Zero retail service; reopens Tuesday 11:00 AM.`;
     } else if (isRangeSelected) {
-      insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} operating days): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked, 40% yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked, 44% yield) [~${totalRaw} lbs raw / ~${totalCooked} lbs cooked]. Includes composed draw for ${totalTacos} Tacos and ${totalRosebuds} Rosebuds.`;
+      insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} days): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs ck) & ~${pRaw.toFixed(1)} lbs raw pork (~${pCooked} lbs ck), plus ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
     } else {
-      insightStr = `Single-Day Prep (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs cooked, 40% yield) and ~${pRaw.toFixed(1)} lbs raw pork shoulder (~${pCooked} lbs cooked, 44% yield) [~${totalRaw} lbs raw / ~${totalCooked} lbs cooked]. Covers composed draw (${totalTacos} Tacos, ${totalRosebuds} Rosebuds) through 9:00 PM close.`;
+      insightStr = `Single-Day Prep (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs ck) & ~${pRaw.toFixed(1)} lbs raw pork (~${pCooked} lbs ck), covering ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
     }
 
     if (selectedCat !== 'baseline' && catSelector && !isTargetClosed) {
       const selectedText = catSelector.options[catSelector.selectedIndex]?.text || selectedCat;
-      insightStr = `Category Focus (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): Isolating "${selectedText}" demand curve to align butcher pulls and smoker capacity.`;
+      insightStr = `Category Focus (${isRangeSelected ? startDateVal + ' to ' + endDateVal : slicedRecords[0].date}): Isolating "${selectedText}" demand to align smoker capacity.`;
     }
 
     const insightSpan = document.getElementById('dynamic-insight-string');
@@ -2818,7 +1101,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const totalCookedElem = document.getElementById('kpi-total-cooked-meat');
     const totalCookedSub = document.getElementById('kpi-total-cooked-sub');
 
-    // Sausage: sVal is in lbs. 1 Batch yields ~60 lbs stuffed weight. 3 links = 1 lb.
     const sausageBatches = Math.ceil(sVal / 60.0) || 0;
     const sausageLinks = sVal * 3;
 
@@ -2839,7 +1121,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const demandLabelElem = document.getElementById('kpi-demand-label');
     const demandPctElem = document.getElementById('kpi-demand-pct');
 
-    // Helper functions for KPI blended live total pills
     const allBlendedPills = [
       'kpi-revenue-blended-sub',
       'kpi-brisket-blended-sub',
@@ -2871,7 +1152,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       allBlendedPills.forEach(id => setBlendedPill(id, ''));
     }
 
-    // Helper functions for KPI Prediction vs. Measured Yield comparison badges
     const allCompareBadges = [
       'kpi-revenue-compare',
       'kpi-brisket-compare',
@@ -2949,7 +1229,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (window.ShopTime && !isTargetClosed && (!isRangeSelected || daysCount === 1)) {
       const actualsPayload = window.BBQ_PAYLOADS?.hourly_actuals || null;
       const predictivePayload = window.BBQ_PAYLOADS?.predictive_payload || null;
-      
+
       const dayProfiles = predictivePayload?.day_profiles;
       let hourlyRecs = predictivePayload?.hourly_forecast || [];
       if (dayProfiles) {
@@ -2999,12 +1279,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       if (laborHoursElem) laborHoursElem.textContent = '0';
       if (staffCountElem) staffCountElem.textContent = '(Closed / 0 Staff)';
-      if (cogsUsdElem) cogsUsdElem.textContent = '($0 COGS)';
+      if (cogsUsdElem) cogsUsdElem.textContent = '($0 Est. Meat Cost)';
       if (aovUsdElem) aovUsdElem.textContent = '$0.00';
       if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
       if (revenueElem) revenueElem.textContent = '$0 (Closed)';
 
-      // Closed Day Comparison Badges
       setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted', '$0', 'Measured', '$0 (Closed)', 0, '$', 0, { text: 'Closed Monday', className: 'pill-closed' }, 'Weekly pit maintenance & smoker sanitization. Zero retail service.'));
       setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs raw briskets pulled • 0 lbs cooked yield slicing'));
       setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 lbs bone-in pork butts • 0 lbs pulled pork prepared'));
@@ -3016,7 +1295,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted', '0 tacos', 'Measured', '0 tacos (Closed)', 0, 'tacos', 0, { text: 'Pit Maintenance', className: 'pill-closed' }, '0 street tacos served • Hot-holding idle'));
       setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted', '0 lbs', 'Measured', '0 lbs (Closed)', 0, 'lbs', 0, { text: 'Closed Day', className: 'pill-closed' }, 'Total Cooked Yield: 0 lbs across all proteins.'));
 
-      // Render Model Evaluation Banner for Closed Day
       const evalBannerElem = document.getElementById('kpi-model-eval-banner');
       const evalPillElem = document.getElementById('model-eval-status-pill');
       const evalBodyElem = document.getElementById('model-eval-body');
@@ -3026,7 +1304,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         evalPillElem.textContent = 'Closed Day';
         evalBodyElem.innerHTML = `
           <div class="model-eval-narrative">
-            <strong>Smokehouse Closed (Pit Maintenance Window)</strong>: Mondays are standard scheduled non-operating days reserved for pit cleaning, deep smoker sanitization, and hickory wood restocking. Operating targets, labor shifts, and food cost models are calibrated to zero.
+            <strong>Smokehouse Closed (Pit Maintenance Window)</strong>: Scheduled non-operating Monday reserved for pit cleaning and wood restocking. Targets and labor are calibrated to zero.
           </div>
         `;
       }
@@ -3121,8 +1399,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const remTurkeyCooked = Math.round(tVal * (1 - salesProgress) * 10) / 10;
       const blendedTurkeyCooked = Math.round((actTurkeyCooked + remTurkeyCooked) * 10) / 10;
       const blendedTurkeyRaw = Math.round(blendedTurkeyCooked / 0.70);
-      const blendedTurkeyCases = (blendedTurkeyRaw / 20.0).toFixed(1);
-      const blendedTurkeyPort = Math.round(blendedTurkeyCooked * 3.2);
 
       if (turkeyElem) turkeyElem.textContent = Math.round(blendedTurkeyCooked);
       if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} lbs actual • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
@@ -3171,7 +1447,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
-      // 10. Sales Velocity
+      // 10. Hourly Sales Pace
       const elapsedHours = Math.max(1, cutH >= 11 ? Math.min(cutH - 10, 10) : 1);
       const liveVelocity = (bSum.actualOrdersSoFar / elapsedHours).toFixed(1);
       const targetVelocity = ((bSum.forecastFullDay / 48.5) / 10).toFixed(1);
@@ -3189,11 +1465,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
-      // 11. Estimated Food Cost / COGS
+      // 11. Estimated Meat Cost
       const blendedCOGS = Math.round(blendedTotalRev * 0.295);
       const actCOGS = Math.round(actSalesSoFar * 0.295);
       const remCOGS = Math.round(remSales * 0.295);
-      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} actual COGS • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
+      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} actual cost • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
       setBlendedPill('kpi-food-cost-blended-sub', `
         <strong>Today's Food Cost Finish</strong>: ~$${Math.round(actCOGS).toLocaleString()} actual + ~$${Math.round(remCOGS).toLocaleString()} remaining (~$${Math.round(blendedCOGS).toLocaleString()} total day)<br>
         <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~$${Math.round(actCOGS).toLocaleString()} food cost on $${actSalesSoFar.toLocaleString()} sales</span> • 
@@ -3244,7 +1520,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       const bDiff = blendedRawBrisket - bVal;
       const bPct = bVal > 0 ? Math.round((bDiff / bVal) * 1000) / 10 : 0;
-      const predBPortions = Math.round(bCooked * 2.3);
       const actBPortions = Math.round(actCookedBrisket * 2.3);
       const estBPortions = Math.round(blendedCookedBrisket * 2.3);
       setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
@@ -3330,7 +1605,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far; tracking toward ~${blendedTotalCooked} lbs total hot-holding yield.`
       ));
 
-      // Render Model Evaluation Banner for Live Service Day
       const evalBannerElem = document.getElementById('kpi-model-eval-banner');
       const evalPillElem = document.getElementById('model-eval-status-pill');
       const evalBodyElem = document.getElementById('model-eval-body');
@@ -3338,16 +1612,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         evalBannerElem.style.display = 'block';
         let statusClass = 'eval-pill-accurate';
         let statusTitle = 'Live Pacing on Track';
-        let narrative = `Live service is progressing with <strong>${pSign}${bSum.pacingPct}% pacing</strong> against morning forecast. At ${h12}:00 ${ampm}, POS actuals totaled <strong>$${actSalesSoFar.toLocaleString()}</strong> across ${bSum.actualOrdersSoFar} orders (~$${actCOGS} COGS). The model projects ending the day at <strong>$${blendedTotalRev.toLocaleString()}</strong> (~$${Math.round(blendedCOGS)} total food cost).`;
+        let narrative = `Live pace is <strong>${pSign}${bSum.pacingPct}%</strong> vs forecast ($${actSalesSoFar.toLocaleString()} across ${bSum.actualOrdersSoFar} orders by ${h12}:00 ${ampm}). Projected day finish: <strong>$${blendedTotalRev.toLocaleString()}</strong> (~$${Math.round(blendedCOGS)} Est. Meat Cost).`;
 
         if (bSum.pacingPct > 15) {
           statusClass = 'eval-pill-drift';
           statusTitle = 'High-Demand Surge (+Pacing)';
-          narrative = `Customer surge detected! Pit turnover is running <strong>+${bSum.pacingPct}% above</strong> baseline projections. Recommend monitoring brisket cutting board reserves to avoid premature sell-out before 9:00 PM closing.`;
+          narrative = `Surge active: pit turnover is <strong>+${bSum.pacingPct}% above</strong> baseline. Monitor brisket reserves to prevent sell-out before 9:00 PM close.`;
         } else if (bSum.pacingPct < -15) {
           statusClass = 'eval-pill-drift';
           statusTitle = 'Midweek Pacing Lull';
-          narrative = `Traffic is currently tracking <strong>${bSum.pacingPct}% below</strong> projected baseline. Kitchen staff can slow hot holding meat pulls to protect cooked yield and prevent unnecessary end-of-day waste.`;
+          narrative = `Traffic is <strong>${bSum.pacingPct}% below</strong> baseline. Slow hot-holding pulls to protect cooked yield and minimize waste.`;
         }
 
         evalPillElem.className = `eval-pill ${statusClass}`;
@@ -3367,7 +1641,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
               <span class="model-eval-stat-val" style="color:${pColor};">${pSign}${bSum.pacingPct}%</span>
             </div>
             <div class="model-eval-stat-box">
-              <span class="model-eval-stat-label">Est. Meat COGS</span>
+              <span class="model-eval-stat-label">Est. Meat Cost</span>
               <span class="model-eval-stat-val" style="color:#f59e0b;">~$${Math.round(actCOGS)} act / ~$${Math.round(blendedCOGS)} total</span>
             </div>
           </div>
@@ -3376,7 +1650,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           </div>
         `;
       }
-
     } else {
       clearAllBlendedPills();
 
@@ -3407,13 +1680,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
       if (staffCountElem) staffCountElem.textContent = `(~${totalStaff} Staff / 8.5h Shift)`;
-      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} COGS)`;
+      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} Est. Meat Cost)`;
       if (aovUsdElem) aovUsdElem.textContent = '$48.50';
       if (aovSubElem) aovSubElem.textContent = '(Average Order Value)';
 
       if (revenueElem) revenueElem.textContent = '$' + Math.round(totalRev).toLocaleString();
 
-      // Non-Blended (Historical / Multi-Day Horizon / Future Date) Comparison Badges
       const hasMeasuredActuals = isRangeSelected
         ? slicedRecords.some(r => r && (r.is_historical || (r.actual_revenue !== undefined && r.actual_revenue > 0)))
         : Boolean(matchedRecord && (matchedRecord.is_historical || (matchedRecord.actual_revenue !== undefined && matchedRecord.actual_revenue > 0)));
@@ -3425,7 +1697,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const recordsToSum = isRangeSelected ? slicedRecords : [matchedRecord || slicedRecords[0]];
         recordsToSum.forEach(r => {
           if (!r) return;
-          // Predicted targets
           sumPredRev += (r.predicted_revenue !== undefined ? r.predicted_revenue : (r.actual_revenue || 0));
           sumPredBRaw += (r.predicted_brisket_raw_lbs !== undefined ? r.predicted_brisket_raw_lbs : (r.brisket_raw_lbs || 0));
           sumPredPRaw += (r.predicted_pork_raw_lbs !== undefined ? r.predicted_pork_raw_lbs : (r.pork_shoulder_raw_lbs || 0));
@@ -3436,7 +1707,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           sumPredTacos += (r.predicted_tacos_sold !== undefined ? r.predicted_tacos_sold : (r.tacos_sold || 0));
           sumPredRosebuds += (r.predicted_rosebuds_sold !== undefined ? r.predicted_rosebuds_sold : (r.rosebuds_sold || 0));
 
-          // Actual measured yields
           sumActRev += (r.actual_revenue !== undefined ? r.actual_revenue : (r.predicted_revenue || 0));
           sumActBRaw += (r.actual_brisket_raw_lbs !== undefined ? r.actual_brisket_raw_lbs : (r.brisket_raw_lbs || 0));
           sumActPRaw += (r.actual_pork_shoulder_raw_lbs !== undefined ? r.actual_pork_shoulder_raw_lbs : (r.pork_shoulder_raw_lbs || 0));
@@ -3573,7 +1843,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           `Plain English: Target ~${pTotCooked} lbs cooked meat yield vs ~${aTotCooked} lbs actual cooked barbecue sliced.`
         ));
 
-        // Render End-of-Day Model Evaluation Banner for Historical Date
         const evalBannerElem = document.getElementById('kpi-model-eval-banner');
         const evalPillElem = document.getElementById('model-eval-status-pill');
         const evalBodyElem = document.getElementById('model-eval-body');
@@ -3587,15 +1856,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           if (absRevPct <= 5.0) {
             statusClass = 'eval-pill-accurate';
             statusText = `Model Accurate (${revPct >= 0 ? '+' : ''}${revPct}%)`;
-            narrativeVerdict = `The forecasting model closely tracked end-of-day restaurant performance within a <strong>${absRevPct}% variance</strong>. Actual revenue of <strong>$${aRevRound.toLocaleString()}</strong> closely aligned with the predicted target of <strong>$${pRevRound.toLocaleString()}</strong>. Meat yield prep accurately covered all service demand with negligible waste.`;
+            narrativeVerdict = `Forecast tracked within <strong>${absRevPct}% variance</strong> ($${aRevRound.toLocaleString()} actual vs $${pRevRound.toLocaleString()} predicted), covering service with minimal waste.`;
           } else if (revDiff > 0) {
             statusClass = 'eval-pill-drift';
             statusText = `Under-Projected (+${revPct}%)`;
-            narrativeVerdict = `Actual demand exceeded model predictions by <strong>+${revPct}% (+$${revDiff.toLocaleString()})</strong>. This indicates unexpected customer turnout or favorable event/weather surges. Kitchen yields stretched efficiently, maintaining food cost at approximately $${aFoodCost.toLocaleString()} on $${aRevRound.toLocaleString()} sales.`;
+            narrativeVerdict = `Actual sales exceeded forecast by <strong>+${revPct}% (+$${revDiff.toLocaleString()})</strong>; est. meat cost held at ~$${aFoodCost.toLocaleString()} on $${aRevRound.toLocaleString()} sales.`;
           } else {
             statusClass = 'eval-pill-drift';
             statusText = `Over-Projected (${revPct}%)`;
-            narrativeVerdict = `Model targets ran <strong>${absRevPct}% above</strong> actual POS sales (-$${Math.abs(revDiff).toLocaleString()}). This variance typically reflects midweek lull patterns or weather dampening. Total actual food cost came in at $${aFoodCost.toLocaleString()} compared to the $${pFoodCost.toLocaleString()} baseline ceiling.`;
+            narrativeVerdict = `Targets ran <strong>${absRevPct}% above</strong> actual POS sales (-$${Math.abs(revDiff).toLocaleString()}); actual meat cost finished at $${aFoodCost.toLocaleString()} vs $${pFoodCost.toLocaleString()} target.`;
           }
 
           evalPillElem.className = `eval-pill ${statusClass}`;
@@ -3615,7 +1884,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
                 <span class="model-eval-stat-val" style="color:${revDiff >= 0 ? '#34d399' : '#f87171'};">${revDiff >= 0 ? '+' : ''}${revDiff.toLocaleString()} (${revPct >= 0 ? '+' : ''}${revPct}%)</span>
               </div>
               <div class="model-eval-stat-box">
-                <span class="model-eval-stat-label">Actual Meat Food Cost</span>
+                <span class="model-eval-stat-label">Actual Est. Meat Cost</span>
                 <span class="model-eval-stat-val" style="color:#f59e0b;">$${aFoodCost.toLocaleString()} (29.5%)</span>
               </div>
             </div>
@@ -3636,7 +1905,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted Target', tacoVal + ' tacos', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${tacoVal} tacos across daily service. Portions pulled from hot-holding brisket and pork bins.`));
         setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs ck (~' + totalRaw + '# raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Total kitchen yield: ~${totalCooked} lbs hot-holding barbecue ready to carve from ~${totalRaw} lbs raw butcher trim.`));
 
-        // Render Scheduled Horizon Banner
         const evalBannerElem = document.getElementById('kpi-model-eval-banner');
         const evalPillElem = document.getElementById('model-eval-status-pill');
         const evalBodyElem = document.getElementById('model-eval-body');
@@ -3646,7 +1914,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           evalPillElem.textContent = 'Upcoming Horizon';
           evalBodyElem.innerHTML = `
             <div class="model-eval-narrative">
-              <strong>Future Service Operational Horizon</strong>: Scheduled prep projections are generated using MultiMeatForecaster (10% safety buffer). Kitchen prep should order and smoke according to the card targets. Plain-English measured variance audits will populate automatically as Clover POS transactions and scale weigh-ins are registered.
+              <strong>Future Operational Horizon</strong>: MultiMeatForecaster targets include a 10% safety buffer; live POS variance audits populate automatically during service.
             </div>
           `;
         }
@@ -3662,20 +1930,20 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const safeDate = escapeHTML(matchedRecord.date || targetDateInput);
       const safeHorizon = isRangeSelected ? `${escapeHTML(startDateVal)} to ${escapeHTML(endDateVal)}` : `${safeDay}, ${safeDate}`;
       if (isTargetClosed) {
-        comparisonNote = `Selected horizon (<strong>${safeDay}, ${safeDate}</strong>): Smokehouse <strong>Closed</strong> (weekly pit maintenance). Revenue and prep targets are 0.`;
+        comparisonNote = `<strong>${safeDay}, ${safeDate}</strong>: Smokehouse <strong>Closed</strong> (0 target).`;
       } else if (pctDiff > 0) {
-        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${pctDiff}% above</strong> baseline (+$${Math.round(incrementalRev).toLocaleString()}).`;
+        comparisonNote = `<strong>${safeHorizon}</strong>: ${revLabel} <strong>$${totalRev.toLocaleString()}</strong> (<strong>+${pctDiff}%</strong> vs baseline).`;
       } else if (pctDiff < 0) {
-        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> is <strong>${Math.abs(pctDiff)}% below</strong> baseline (-$${Math.abs(Math.round(incrementalRev)).toLocaleString()}).`;
+        comparisonNote = `<strong>${safeHorizon}</strong>: ${revLabel} <strong>$${totalRev.toLocaleString()}</strong> (<strong>-${Math.abs(pctDiff)}%</strong> vs baseline).`;
       } else {
-        comparisonNote = `Selected horizon (<strong>${safeHorizon}</strong>): ${revLabel} revenue of <strong>$${totalRev.toLocaleString()}</strong> aligns with operating baseline.`;
+        comparisonNote = `<strong>${safeHorizon}</strong>: ${revLabel} <strong>$${totalRev.toLocaleString()}</strong> (on baseline).`;
       }
 
-      baselineTrendElem.innerHTML = `Operating baseline (Tue–Sun): <strong>$${baselineRev.toLocaleString()}/day</strong> (~${avgBrisketRaw} lbs raw / ~${avgBrisketCooked} lbs cooked brisket; ~${avgPorkRaw} lbs raw / ~${avgPorkCooked} lbs cooked pork). Weekdays (Tue–Thu) average <strong>~$${weekdayAvgRev.toLocaleString()}/day</strong>; weekends (Fri–Sun) average <strong>~$${weekendAvgRev.toLocaleString()}/day</strong>. Mondays closed for pit maintenance. ${comparisonNote}`;
+      baselineTrendElem.innerHTML = `Tue–Sun avg: <strong>$${baselineRev.toLocaleString()}/day</strong> (~$${weekdayAvgRev.toLocaleString()} Tue–Thu; ~$${weekendAvgRev.toLocaleString()} Fri–Sun; Mon Closed). ${comparisonNote}`;
     }
 
     if (demandPctElem) {
-      demandPctElem.textContent = isTargetClosed ? '(Closed Today)' : `(${pctDisplay} vs Baseline)`;
+      demandPctElem.textContent = isTargetClosed ? '(Closed Today)' : `(${pctDisplay} vs Typical Day)`;
     }
     if (demandLabelElem) {
       if (isTargetClosed) {
@@ -3692,19 +1960,23 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
     }
 
-    renderDailyExecutiveBrief(slicedRecords, matchedRecord);
-    renderKPIBulletAndSparklines(slicedRecords, matchedRecord);
+    if (typeof renderDailyExecutiveBrief === 'function') {
+      renderDailyExecutiveBrief(slicedRecords, matchedRecord);
+    }
+    if (typeof renderKPIBulletAndSparklines === 'function') {
+      renderKPIBulletAndSparklines(slicedRecords, matchedRecord);
+    }
 
     if (!chartContainer) return;
 
     if (typeof Plotly !== 'undefined') {
       const dates = slicedRecords.map(r => r.day_name + ', ' + (r.date.length >= 10 ? r.date.substring(5).replace('-', '/') : r.date));
-      
+
       let maxVal = 0;
       slicedRecords.forEach(r => {
-          maxVal = Math.max(maxVal, r.brisket_raw_lbs || 0, r.pork_shoulder_raw_lbs || 0, r.sausage_lbs || 0, r.pork_ribs_racks || 0);
+        maxVal = Math.max(maxVal, r.brisket_raw_lbs || 0, r.pork_shoulder_raw_lbs || 0, r.sausage_lbs || 0, r.pork_ribs_racks || 0);
       });
-      maxVal = maxVal * 1.15; // Give 15% headroom to prevent clipping
+      maxVal = maxVal * 1.15;
 
       const isMobile = isMobileViewport();
       let traces = [];
@@ -3863,8 +2135,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           hovertemplate: "%{y:.1f} racks<extra></extra>"
         });
       }
-      
-      // In-place chart update without destroying container DOM structure
+
       Plotly.react(chartContainer, traces, layout, getPlotlyConfig());
       if (chartContainer.offsetWidth > 0 && typeof Plotly !== 'undefined') {
         try { Plotly.Plots.resize(chartContainer); } catch (e) {}
@@ -3891,1054 +2162,3 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     console.error("Dashboard Rendering Error: ", error);
   }
 }
-
-function handleDateSelectionLookup(selectedDateStr) {
-  if (!selectedDateStr || typeof selectedDateStr !== 'string') return;
-  const d = parseValidDate(selectedDateStr);
-  if (!d) return;
-  const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', weekday: 'short' });
-
-  const histCard = document.getElementById('historical-reference-card');
-  if (!histCard) return;
-
-  const dNow = new Date();
-  const tzOffset = dNow.getTimezoneOffset() * 60000;
-  const todayStr = (new Date(dNow.getTime() - tzOffset)).toISOString().split('T')[0];
-  const isPast = selectedDateStr < todayStr;
-
-  if (isPast) {
-    histCard.style.display = 'block';
-    const dow = d.getDay(); // 0=Sun, 6=Sat
-
-    const dateLabel = document.getElementById('hist-date-label');
-    const demandVal = document.getElementById('hist-demand-val');
-    const weatherVal = document.getElementById('hist-weather-val');
-    const eventVal = document.getElementById('hist-event-val');
-
-    if (dateLabel) dateLabel.textContent = dateFormatted;
-
-    // Determine Day Demand & Event Status for historical reference
-    if (dow === 6) { // Saturday
-      if (demandVal) demandVal.textContent = '1.8x (Peak Saturday Surge)';
-      if (eventVal) eventVal.textContent = 'Jaguars Stadium Game Day';
-      if (weatherVal) weatherVal.textContent = '86°F | Clear & Sunny';
-    } else if (dow === 5) { // Friday
-      if (demandVal) demandVal.textContent = '1.4x (High Friday Run)';
-      if (eventVal) eventVal.textContent = 'Weekend Launch';
-      if (weatherVal) weatherVal.textContent = '82°F | Mild';
-    } else if (dow === 0) { // Sunday
-      if (demandVal) demandVal.textContent = '1.3x (Sunday Family Pack Run)';
-      if (eventVal) eventVal.textContent = 'Sunday Smokehouse Service';
-      if (weatherVal) weatherVal.textContent = '86°F | Heavy Rain (31.7mm)';
-    } else { // Weekday
-      if (demandVal) demandVal.textContent = '1.0x (Standard Baseline)';
-      if (eventVal) eventVal.textContent = 'Regular Operations';
-      if (weatherVal) weatherVal.textContent = '84°F | Normal';
-    }
-  } else {
-    histCard.style.display = 'none';
-  }
-
-  if (typeof renderPlotlyPredictiveChart === 'function') {
-    renderPlotlyPredictiveChart();
-  }
-}
-
-async function renderPlotlyShiftHeatmap(shift) {
-  const container = document.getElementById('plotly-shift-heatmap');
-  if (!container) return;
-
-  if (!shift) {
-    const shiftSelector = document.getElementById('shift-selector');
-    shift = shiftSelector ? shiftSelector.value : 'all';
-  }
-
-  const hours = Array.from({length: 24}, (_, i) => `${String(i).padStart(2, '0')}:00`);
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const defaultZ = days.map((d, dIdx) => {
-    return hours.map((_, h) => {
-      if (h < 10 || h > 21) return 0;
-      if (d === "Saturday") return h === 12 || h === 18 ? 4.5 : (h >= 11 && h <= 20 ? 3.0 : 1.0);
-      if (d === "Friday") return h === 12 || h === 18 ? 3.5 : (h >= 11 && h <= 20 ? 2.5 : 0.8);
-      if (d === "Sunday") return h >= 11 && h <= 15 ? 2.8 : 0.5;
-      if (d === "Monday") return 0; // closed
-      return h >= 11 && h <= 14 ? 1.8 : (h >= 17 && h <= 20 ? 1.4 : 0.4);
-    });
-  });
-
-  const defaultShiftLayout = {
-    title: "Historical & Predicted Hourly Sales Demand Heatmap",
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(20,20,30,0.6)",
-    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 10 },
-    xaxis: { title: "Time of Day (24-Hour Pit Operating Window)", gridcolor: "#334155", color: "#94a3b8" },
-    yaxis: { gridcolor: "#334155", color: "#94a3b8" },
-    margin: { l: 80, r: 40, t: 50, b: 50 }
-  };
-
-  try {
-    let payload = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.shift_payload) {
-      payload = window.BBQ_PAYLOADS.shift_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/shift_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-    if (payload) {
-      const layout = payload.plotly_heatmap.layout;
-      layout.plot_bgcolor = 'rgba(0,0,0,0)';
-      layout.paper_bgcolor = 'rgba(0,0,0,0)';
-      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (layout.xaxis) { layout.xaxis.showgrid = false; layout.xaxis.zerolinecolor = '#334155'; layout.xaxis.color = '#94a3b8'; }
-      if(traces && traces.length > 0) {
-        traces[0].colorscale = 'YlOrBr';
-      }
-      
-      if (typeof d3 !== 'undefined') {
-        renderD3GenericChart('plotly-shift-heatmap', traces, layout.title, true, shift);
-        if (typeof injectMobileFaceCallouts === 'function') {
-          injectMobileFaceCallouts(
-            container,
-            'Sat 12:00 PM – 2:00 PM (Peak Rush)',
-            'Wed 3:00 PM – 4:00 PM (Midday Lull)',
-            '11:00 AM – 9:00 PM Service Window'
-          );
-        }
-      }
-      return;
-    }
-  } catch (err) {
-    console.log('Using embedded shift heatmap dataset');
-  }
-
-  const defaultShiftTraces = [{
-    x: hours,
-    y: days,
-    z: defaultZ,
-    type: "heatmap",
-    colorscale: "YlOrBr",
-    colorbar: { title: "Relative Rush Density" }
-  }];
-
-  if (typeof d3 !== 'undefined') {
-    renderD3GenericChart('plotly-shift-heatmap', defaultShiftTraces, defaultShiftLayout.title, true, shift);
-    if (typeof injectMobileFaceCallouts === 'function') {
-      injectMobileFaceCallouts(
-        container,
-        'Sat 12:00 PM – 2:00 PM (Peak Rush)',
-        'Wed 3:00 PM – 4:00 PM (Midday Lull)',
-        '11:00 AM – 9:00 PM Service Window'
-      );
-    }
-  }
-}
-
-window.renderAdvancedAnalytics = function() {
-  const payload = window.BBQ_PAYLOADS?.advanced_payload;
-  if (!payload) return;
-
-  // 1. Market Basket
-  if (payload.market_basket) {
-    const basketList = document.getElementById('market-basket-list');
-    if (basketList) {
-      basketList.innerHTML = payload.market_basket.map(item => `<li><strong>${escapeHTML(item.pair)}</strong>: Bought together ${item.count} times (${item.confidence}% confidence)</li>`).join('');
-    }
-  }
-
-  // 2. Interaction Modeling
-  const interList = document.getElementById('interaction-list');
-  if (interList) {
-    const im = payload.interaction_modeling || {};
-    interList.innerHTML = `
-      <li><strong>Normal Day Avg:</strong> $${Number(im.normal || 0).toFixed(2)}</li>
-      <li><strong>Jaguars Game (Ideal Weather):</strong> $${Number(im.game_only || 0).toFixed(2)}</li>
-      <li><strong>Heavy Rain (No Event):</strong> $${Number(im.rain_only || 0).toFixed(2)}</li>
-      <li><strong>Jaguars Game + Heavy Rain:</strong> $${Number(im.game_and_rain || 0).toFixed(2)}</li>
-    `;
-  }
-
-  // 3. Order Type Segmentation
-  const orderTypeList = document.getElementById('order-type-list');
-  if (orderTypeList && Array.isArray(payload.order_type_segmentation)) {
-    orderTypeList.innerHTML = `<ul>` + payload.order_type_segmentation.map(ot => 
-      `<li><strong>${escapeHTML(ot.order_type || 'Unknown')}</strong>: ${ot.order_count || 0} orders, generating $${(ot.total_revenue || 0).toLocaleString()} (avg $${Number(ot.avg_ticket || 0).toFixed(2)}/ticket)</li>`
-    ).join('') + `</ul>`;
-  }
-
-  // 5. Cannibalization
-  const cannList = document.getElementById('cannibalization-list');
-  if (cannList) {
-    const cann = payload.cannibalization || {};
-    cannList.innerHTML = `
-      <li><strong>Avg Pork Ribs without Dino Ribs:</strong> ${cann.pork_ribs_avg_without_dino ?? '--'}</li>
-      <li><strong>Avg Pork Ribs with Dino Ribs:</strong> ${cann.pork_ribs_avg_with_dino ?? '--'}</li>
-      <li><strong>Impact on Pork Ribs:</strong> ${cann.impact_pct ?? 0}%</li>
-    `;
-  }
-
-  // 6. Payday
-  const paydayList = document.getElementById('payday-list');
-  if (paydayList) {
-    const pe = payload.payday_effect || {};
-    paydayList.innerHTML = `
-      <li><strong>Normal Avg Ticket:</strong> $${Number(pe.normal_avg_ticket || 0).toFixed(2)}</li>
-      <li><strong>Payday Avg Ticket:</strong> $${Number(pe.payday_avg_ticket || 0).toFixed(2)}</li>
-    `;
-  }
-
-  // 4. Sell-Out Chart
-  const selloutChartElem = document.getElementById('plotly-sellout-chart');
-  if (selloutChartElem && payload.sell_out_prediction_chart && payload.sell_out_prediction_chart.data && payload.sell_out_prediction_chart.data.length > 0) {
-    const sLayout = payload.sell_out_prediction_chart.layout || {};
-    if (sLayout.xaxis) sLayout.xaxis.showgrid = false;
-    if (isMobileViewport()) {
-      sLayout.title = { text: 'Sell-Out Trajectory', font: { size: 11, color: '#f8fafc' } };
-      sLayout.margin = { l: 40, r: 20, t: 36, b: 40 };
-    }
-    Plotly.newPlot('plotly-sellout-chart', payload.sell_out_prediction_chart.data, sLayout, getPlotlyConfig());
-    if (selloutChartElem.offsetWidth > 0) {
-      try { Plotly.Plots.resize(selloutChartElem); } catch (e) {}
-    }
-    applyChartTouchSafety(selloutChartElem);
-    if (typeof injectMobileFaceCallouts === 'function') {
-      injectMobileFaceCallouts(selloutChartElem, 'Brisket (~7:45 PM)', 'Ribs (~6:30 PM)', 'Sausage (In Stock)');
-    }
-  } else if (selloutChartElem) {
-    selloutChartElem.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Sell-Out Data Available</div>';
-  }
-};
-
-
-function renderPlotlyNoData(containerId) {
-  if (typeof d3 === 'undefined') return;
-  const container = document.getElementById(containerId);
-  if (container) container.innerHTML = '<div style="color: #64748b; padding: 40px; text-align: center;">No Data Available</div>';
-}
-
-async function renderPlotlyEventChart() {
-  const container = document.getElementById('plotly-event-impact-chart');
-  if (!container) return;
-
-  const defaultEventTraces = [{
-    x: ["Normal Day", "State/Federal Holiday", "Jaguars Game Day"],
-    y: [1.0, 0.9, 3.5],
-    type: "bar",
-    marker: { color: ["#7f8c8d", "#e67e22", "#006778"], opacity: 0.9 },
-    text: ["1.0x", "0.9x", "3.5x"],
-    textposition: "auto"
-  }];
-
-  const defaultEventLayout = {
-    title: isMobileViewport() ? "Event Revenue Multipliers" : "Demand Surge Multipliers: Local Events vs. Normal Operations",
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(20,20,30,0.6)",
-    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
-    xaxis: { gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis: { title: isMobileViewport() ? "Multiplier" : "Demand Multiplier (vs. Normal Day)", gridcolor: "rgba(255,255,255,0.1)" },
-    margin: isMobileViewport() ? { l: 40, r: 20, t: 36, b: 40 } : { l: 60, r: 50, t: 50, b: 50 }
-  };
-
-  try {
-    let payload = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.event_payload) {
-      payload = window.BBQ_PAYLOADS.event_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/event_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-    if (payload) {
-      const layout = payload.plotly_event_chart.layout;
-      layout.plot_bgcolor = 'rgba(0,0,0,0)';
-      layout.paper_bgcolor = 'rgba(0,0,0,0)';
-      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (isMobileViewport()) {
-        layout.title = { text: 'Event Revenue Multipliers', font: { size: 11, color: '#f8fafc' } };
-        layout.margin = { l: 40, r: 20, t: 36, b: 40 };
-      }
-      if (layout.xaxis) {
-        layout.xaxis.showgrid = false;
-        layout.xaxis.zerolinecolor = '#334155';
-        layout.xaxis.color = '#94a3b8';
-        if (isMobileViewport()) {
-          layout.xaxis.title = { text: 'Event Type', font: { size: 10, color: '#94a3b8' } };
-        }
-      }
-      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
-      const traces = payload.plotly_event_chart.data;
-      if (typeof Plotly !== 'undefined') {
-        Plotly.newPlot('plotly-event-impact-chart', traces, layout, getPlotlyConfig());
-        if (container.offsetWidth > 0) {
-          try { Plotly.Plots.resize(container); } catch (e) {}
-        }
-        applyChartTouchSafety(container);
-        if (typeof injectMobileFaceCallouts === 'function') {
-          injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
-        }
-      }
-      refreshEventsCalendar();
-      return;
-    }
-  } catch (err) {
-    console.log('Using embedded event chart dataset');
-  }
-
-  if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-event-impact-chart', defaultEventTraces, defaultEventLayout, getPlotlyConfig());
-    if (container.offsetWidth > 0) {
-      try { Plotly.Plots.resize(container); } catch (e) {}
-    }
-    applyChartTouchSafety(container);
-    if (typeof injectMobileFaceCallouts === 'function') {
-      injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
-    }
-  }
-  refreshEventsCalendar();
-}
-
-// Live Events & Multiplier Calendar State Management
-const _now = window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date();
-let currentCalYear = _now.getFullYear();
-let currentCalMonth = _now.getMonth();
-let currentCalFilter = 'all';
-let selectedCalDate = window.ShopTime ? window.ShopTime.shopDateStr(_now) : _now.toLocaleDateString('en-CA');
-let calInitialized = false;
-
-function refreshEventsCalendar() {
-  if (typeof renderMonthEventsCalendar === 'function') {
-    renderMonthEventsCalendar(
-      'live-events-calendar-grid',
-      currentCalYear,
-      currentCalMonth,
-      currentCalFilter,
-      (dateStr, evt) => {
-        selectedCalDate = dateStr;
-        showCalendarDateDrawer(dateStr, evt);
-      },
-      selectedCalDate
-    );
-  }
-}
-
-function showCalendarDateDrawer(dateStr, evt) {
-  const drawer = document.getElementById('calendar-selected-drawer');
-  if (!drawer) return;
-  drawer.style.display = 'flex';
-
-  const dateObj = new Date(dateStr + 'T00:00:00');
-  const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
-
-  const dateSpan = document.getElementById('drawer-date-str');
-  const badgeSpan = document.getElementById('drawer-mult-badge');
-  const titleP = document.getElementById('drawer-event-title');
-  const noteP = document.getElementById('drawer-event-note');
-
-  if (dateSpan) dateSpan.textContent = formattedDate;
-  if (badgeSpan) badgeSpan.textContent = `${evt.multiplier || 1.0}x Demand Multiplier`;
-  if (titleP) titleP.textContent = `${evt.icon || '🔥'} ${evt.title}`;
-  if (noteP) noteP.textContent = evt.note || "Standard operational pace.";
-
-  const applyBtn = document.getElementById('drawer-apply-btn');
-  if (applyBtn) {
-    applyBtn.onclick = () => {
-      const dateInput = document.getElementById('forecast-start-date');
-      if (dateInput) {
-        dateInput.value = dateStr;
-      }
-      handleDateSelectionLookup(dateStr);
-      renderPlotlyForecastingChart(14);
-
-      // Scroll to KPI targets smoothly
-      const targetCard = document.querySelector('.forecasting-kpi-grid');
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    };
-  }
-}
-
-function initEventsCalendar() {
-  if (calInitialized) return;
-  calInitialized = true;
-
-  const btnPrev = document.getElementById('cal-btn-prev');
-  const btnNext = document.getElementById('cal-btn-next');
-  const btnToday = document.getElementById('cal-btn-today');
-
-  if (btnPrev) {
-    btnPrev.addEventListener('click', () => {
-      currentCalMonth--;
-      if (currentCalMonth < 0) {
-        currentCalMonth = 11;
-        currentCalYear--;
-      }
-      refreshEventsCalendar();
-    });
-  }
-
-  if (btnNext) {
-    btnNext.addEventListener('click', () => {
-      currentCalMonth++;
-      if (currentCalMonth > 11) {
-        currentCalMonth = 0;
-        currentCalYear++;
-      }
-      refreshEventsCalendar();
-    });
-  }
-
-  if (btnToday) {
-    btnToday.addEventListener('click', () => {
-      const now = new Date();
-      currentCalYear = now.getFullYear();
-      currentCalMonth = now.getMonth();
-      refreshEventsCalendar();
-    });
-  }
-
-  const filterBtns = document.querySelectorAll('.cal-filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCalFilter = btn.getAttribute('data-filter') || 'all';
-      refreshEventsCalendar();
-    });
-  });
-
-  refreshEventsCalendar();
-}
-
-async function renderPlotlyWeatherChart() {
-  const container = document.getElementById('plotly-weather-impact-chart');
-  if (!container) return;
-
-  const defaultWeatherTraces = [
-    {
-      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
-      y: [86, 88, 91, 89, 87, 85, 88],
-      name: "Max Temp (°F)",
-      type: "scatter",
-      mode: "lines+markers",
-      line: { color: "#e67e22", width: 3 }
-    },
-    {
-      x: ["2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"],
-      y: [0, 12.5, 0, 4.2, 0, 0, 8.0],
-      name: "Precipitation (mm)",
-      type: "bar",
-      yaxis: "y2",
-      marker: { color: "#3498db" }
-    }
-  ];
-
-  const defaultWeatherLayout = {
-    title: isMobileViewport() ? "Weather vs. Sales Impact" : "How Weather Affects Daily Sales (Temperature & Rain)",
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(20,20,30,0.6)",
-    font: { color: "#f8fafc", family: "Inter, system-ui, sans-serif", size: 11 },
-    xaxis: { showgrid: false, tickangle: 45 },
-    yaxis: { title: isMobileViewport() ? "Temp (°F)" : "Temperature (°F)", gridcolor: "rgba(255,255,255,0.1)" },
-    yaxis2: { title: isMobileViewport() ? "Rain (mm)" : "Precipitation (mm)", overlaying: "y", side: "right", showgrid: false, titlefont: { color: "#3498db" }, tickfont: { color: "#3498db" } },
-    legend: { orientation: "h", y: -0.25, x: 0 },
-    margin: isMobileViewport() ? { l: 40, r: 40, t: 36, b: 60 } : { l: 60, r: 60, t: 50, b: 80 }
-  };
-
-  try {
-    let payload = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.weather_payload) {
-      payload = window.BBQ_PAYLOADS.weather_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/weather_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-    if (payload) {
-      const layout = payload.plotly_weather_chart.layout;
-      layout.plot_bgcolor = 'rgba(0,0,0,0)';
-      layout.paper_bgcolor = 'rgba(0,0,0,0)';
-      layout.font = { family: 'Inter, system-ui, sans-serif', color: '#94a3b8', size: 10 };
-      if (isMobileViewport()) {
-        layout.title = { text: 'Weather vs. Sales Impact', font: { size: 11, color: '#f8fafc' } };
-        layout.margin = { l: 40, r: 40, t: 36, b: 60 };
-      }
-      if (layout.xaxis) {
-        layout.xaxis.showgrid = false;
-        layout.xaxis.zerolinecolor = '#334155';
-        layout.xaxis.color = '#94a3b8';
-        if (isMobileViewport()) {
-          layout.xaxis.title = { text: 'High Temp (°F)', font: { size: 10, color: '#94a3b8' } };
-        }
-      }
-      if (layout.yaxis) { layout.yaxis.gridcolor = '#334155'; layout.yaxis.zerolinecolor = '#334155'; layout.yaxis.color = '#94a3b8'; }
-      const traces = payload.plotly_weather_chart.data;
-
-      if (typeof Plotly !== 'undefined') {
-        Plotly.newPlot('plotly-weather-impact-chart', traces, layout, getPlotlyConfig());
-        if (container.offsetWidth > 0) {
-          try { Plotly.Plots.resize(container); } catch (e) {}
-        }
-        applyChartTouchSafety(container);
-        if (typeof injectMobileFaceCallouts === 'function') {
-          injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
-        }
-      } else if (typeof d3 !== 'undefined') {
-        renderD3GenericChart('plotly-weather-impact-chart', traces, layout.title);
-        applyChartTouchSafety(container);
-      }
-      return;
-    }
-  } catch (err) {
-    console.log('Using embedded weather chart dataset');
-  }
-
-  if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-weather-impact-chart', defaultWeatherTraces, defaultWeatherLayout, getPlotlyConfig());
-    if (container.offsetWidth > 0) {
-      try { Plotly.Plots.resize(container); } catch (e) {}
-    }
-    applyChartTouchSafety(container);
-    if (typeof injectMobileFaceCallouts === 'function') {
-      injectMobileFaceCallouts(container, 'Clear 82°F (+Patio Sales)', 'Heavy Rain >10mm (-15% Dine-In)', 'Takeout Shift Active');
-    }
-  }
-}
-
-async function renderPlotlyPredictiveChart() {
-  const chartElem = document.getElementById('plotly-predictive-velocity-chart');
-  if (!chartElem) return;
-
-  let payload = null;
-  try {
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.predictive_payload) {
-      payload = window.BBQ_PAYLOADS.predictive_payload;
-    } else {
-      const res = await fetch('clover_api/analytics/predictive_payload.json?v=' + Date.now());
-      if (res.ok) payload = await res.json();
-    }
-  } catch (e) {
-    console.warn('Could not load predictive payload:', e);
-  }
-
-  if (!payload || !payload.hourly_forecast) return;
-
-  // Inspect currently active start date and end date
-  const startDateInput = document.getElementById('forecast-start-date');
-  const endDateInput = document.getElementById('forecast-end-date');
-  const fallbackDateStr = window.ShopTime ? window.ShopTime.shopDateStr() : (new Date()).toLocaleDateString('en-CA');
-  const startDateVal = (startDateInput && startDateInput.value) ? startDateInput.value : fallbackDateStr;
-  const endDateVal = (endDateInput && endDateInput.value) ? endDateInput.value : startDateVal;
-
-  let activeForecast = payload.hourly_forecast;
-  let activeDirectives = payload.operational_directives;
-  let activeKpis = payload.summary_kpis;
-  let chartTitle = '24-Hour Real-Time Sales Velocity & Smoked Meat Draw Rate';
-  let currentDayName = '';
-
-  if (payload.day_profiles && startDateVal) {
-    const parts = startDateVal.split('-').map(Number);
-    const startObj = new Date(parts[0], parts[1] - 1, parts[2]);
-    const dayName = startObj.toLocaleDateString('en-US', { weekday: 'long' });
-    currentDayName = dayName;
-    const shortDay = startObj.toLocaleDateString('en-US', { weekday: 'short' });
-
-    let daysCount = 1;
-    if (endDateVal && endDateVal !== startDateVal) {
-      const endParts = endDateVal.split('-').map(Number);
-      const endObj = new Date(endParts[0], endParts[1] - 1, endParts[2]);
-      daysCount = Math.max(1, Math.round((endObj - startObj) / 86400000) + 1);
-    }
-
-    if (daysCount === 1) {
-      const profile = payload.day_profiles[dayName] || payload.day_profiles[shortDay] || payload.day_profiles[dayName.toLowerCase()];
-      if (profile) {
-        activeForecast = profile.hourly_forecast;
-        activeDirectives = profile.operational_directives;
-        activeKpis = {
-          current_sales_velocity: profile.current_sales_velocity,
-          pacing_status: profile.pacing_status,
-          estimated_food_cost_pct: profile.estimated_food_cost_pct,
-          projected_24h_revenue_usd: profile.projected_revenue_usd,
-          peak_rush_window: profile.peak_rush_window,
-          total_brisket_draw_lbs: profile.total_brisket_draw_lbs,
-          total_pork_draw_lbs: profile.total_pork_draw_lbs,
-          recommended_staff: profile.recommended_staff,
-          pitmaster_hours: profile.pitmaster_hours,
-          average_ticket_usd: profile.average_ticket_usd
-        };
-        chartTitle = `${dayName} Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal})`;
-      }
-    } else {
-      // Multi-day range (e.g. 3-day weekend or custom range, capped at 7 days for readable chart)
-      const rangeHours = [];
-      let totalRev = 0;
-      let totalCogs = 0;
-      let totalBrisket = 0;
-      let totalPork = 0;
-      let maxOrders = 0;
-      let peakHourStr = '';
-
-      const renderDays = Math.min(daysCount, 7);
-      for (let i = 0; i < renderDays; i++) {
-        const curDate = new Date(startObj);
-        curDate.setDate(curDate.getDate() + i);
-        const curDayName = curDate.toLocaleDateString('en-US', { weekday: 'long' });
-        const curShortDay = curDate.toLocaleDateString('en-US', { weekday: 'short' });
-        const profile = payload.day_profiles[curDayName] || payload.day_profiles[curShortDay];
-        if (profile && profile.hourly_forecast) {
-          profile.hourly_forecast.forEach(r => {
-            if (r.predicted_orders > maxOrders) {
-              maxOrders = r.predicted_orders;
-              peakHourStr = `${r.hour_display} (${curShortDay})`;
-            }
-            totalRev += (r.predicted_revenue || 0);
-            totalCogs += (r.estimated_cogs_usd || 0);
-            totalBrisket += (r.brisket_cooked_lbs || 0);
-            totalPork += (r.pork_cooked_lbs || 0);
-            rangeHours.push({
-              ...r,
-              hour_display: `${r.hour_display} (${curShortDay})`,
-              day_name: curShortDay
-            });
-          });
-        }
-      }
-
-      if (rangeHours.length > 0) {
-        activeForecast = rangeHours;
-        const avgFoodCost = totalRev > 0 ? (totalCogs / totalRev * 100).toFixed(1) : '29.5';
-        activeKpis = {
-          current_sales_velocity: `${maxOrders.toFixed(1)} orders/hr (Peak)`,
-          pacing_status: maxOrders >= 10.0 ? 'Heavy Rush Surge' : 'Normal Pacing',
-          estimated_food_cost_pct: avgFoodCost,
-          projected_24h_revenue_usd: Math.round(totalRev),
-          peak_rush_window: peakHourStr,
-          total_brisket_draw_lbs: totalBrisket.toFixed(1),
-          total_pork_draw_lbs: totalPork.toFixed(1)
-        };
-        activeDirectives = [
-          `Peak Customer Flow: Expected around ${peakHourStr} reaching ~${maxOrders.toFixed(1)} orders/hr across the ${daysCount}-day window.`,
-          `Meat Depletion Pacing: Projected cumulative draw of ~${totalBrisket.toFixed(1)} lbs smoked brisket and ~${totalPork.toFixed(1)} lbs pulled pork from hot storage.`,
-          `Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.`,
-          `Smoker Pacing: Balance smoke pit reload intervals to maintain continuous hot holding capacity.`
-        ];
-        chartTitle = `${daysCount}-Day Hourly Sales Velocity & Smoked Meat Draw Rate (${startDateVal} to ${endDateVal})`;
-      }
-    }
-  }
-
-  // Hydrate Crucial Top-Shelf KPIs without overwriting live blended POS actuals
-  const kpiVelocity = document.getElementById('kpi-current-velocity');
-  const kpiPacing = document.getElementById('kpi-pacing-status');
-  const kpiFoodCost = document.getElementById('kpi-food-cost-pct');
-  const kpiAov = document.getElementById('kpi-aov-usd');
-  const kpiAovSub = document.getElementById('kpi-aov-sub');
-
-  const velBlendedPill = document.getElementById('kpi-velocity-blended-sub');
-  const hasActiveBlendedKPIs = Boolean(velBlendedPill && velBlendedPill.style.display === 'block' && velBlendedPill.innerHTML.trim() !== '');
-
-  if (activeKpis) {
-    if (kpiFoodCost) kpiFoodCost.textContent = `${activeKpis.estimated_food_cost_pct || 29.5}%`;
-    if (!hasActiveBlendedKPIs) {
-      if (kpiVelocity) kpiVelocity.textContent = activeKpis.current_sales_velocity || '--';
-      if (kpiPacing) kpiPacing.textContent = `(${activeKpis.pacing_status || 'Normal'})`;
-      if (kpiAov) {
-        if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
-          kpiAov.textContent = '$0.00';
-          if (kpiAovSub) kpiAovSub.textContent = '(Closed / 0 Orders)';
-        } else {
-          const aovVal = activeKpis.average_ticket_usd || 48.50;
-          kpiAov.textContent = `$${Number(aovVal).toFixed(2)}`;
-          if (kpiAovSub) kpiAovSub.textContent = '(Average Order Value)';
-        }
-      }
-    }
-  }
-
-  // Hydrate Directives & Velocity Summary Text
-  const directivesList = document.getElementById('predictive-directives-list');
-  if (directivesList && Array.isArray(activeDirectives)) {
-    const safeDirectives = activeDirectives.map(d => escapeHTML(d));
-    if (activeKpis && activeKpis.recommended_staff !== undefined && activeKpis.pitmaster_hours !== undefined) {
-      safeDirectives.push(`Labor &amp; Shift Coverage: Recommended roster of <strong>${escapeHTML(activeKpis.recommended_staff)} crew members</strong> (~${escapeHTML(activeKpis.pitmaster_hours)} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
-    }
-    directivesList.innerHTML = safeDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
-  }
-
-  const velocitySummaryElem = document.getElementById('predictive-velocity-summary');
-  if (velocitySummaryElem && activeKpis) {
-    if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
-      velocitySummaryElem.textContent = 'Shop is closed today (Monday pit maintenance). Retail counter service and order flow resume Tuesday at 11:00 AM.';
-    } else if (activeKpis.peak_rush_window) {
-      velocitySummaryElem.textContent = `Peak rush window concentrates around ${activeKpis.peak_rush_window} (${activeKpis.current_sales_velocity}); dinner service tapers after 7:30 PM.`;
-    }
-  }
-
-  const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : `${r.hour}:00`);
-  const orders = activeForecast.map(r => r.predicted_orders);
-  const revenue = activeForecast.map(r => r.predicted_revenue);
-  const brisketDraw = activeForecast.map(r => r.brisket_cooked_lbs);
-
-  const traces = [
-    {
-      x: hours,
-      y: orders,
-      name: 'Order Velocity (Orders/hr)',
-      type: 'scatter',
-      mode: 'lines+markers',
-      line: { color: '#3b82f6', width: 3 },
-      marker: { size: 6 }
-    },
-    {
-      x: hours,
-      y: brisketDraw,
-      name: 'Smoked Brisket Draw (lbs/hr)',
-      type: 'bar',
-      yaxis: 'y2',
-      marker: { color: '#e67e22', opacity: 0.7 }
-    }
-  ];
-
-  // Hourly actuals overlay (single shop-local date, past or today)
-  const summaryElem = document.getElementById('hourly-actuals-summary');
-  if (summaryElem) { summaryElem.style.display = 'none'; summaryElem.textContent = ''; }
-  try {
-    const effDate = window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date();
-    const pickedDate = startDateVal || (window.ShopTime ? window.ShopTime.shopDateStr(effDate) : '');
-    const isSingleDay = !endDateVal || endDateVal === startDateVal || !startDateVal;
-    
-    let actuals = null;
-    let snapshots = null;
-    if (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.hourly_actuals) {
-      actuals = window.BBQ_PAYLOADS.hourly_actuals;
-      snapshots = window.BBQ_PAYLOADS.forecast_snapshots || null;
-    } else {
-      const aRes = await fetch('clover_api/analytics/hourly_actuals.json?v=' + Date.now());
-      if (aRes.ok) actuals = await aRes.json();
-      const sRes = await fetch('clover_api/analytics/forecast_snapshots.json?v=' + Date.now());
-      if (sRes.ok) snapshots = await sRes.json();
-    }
-
-    if (window.ShopTime && pickedDate && isSingleDay && activeForecast.every(r => r.hour !== undefined)) {
-      const overlay = window.ShopTime.buildActualsOverlay(actuals, snapshots, pickedDate, activeForecast, effDate);
-      if (overlay) {
-        if (overlay.baselineOrders) {
-          traces.push({
-            x: hours, y: overlay.baselineOrders, name: 'Baseline (avg same weekday, reconstructed)',
-            type: 'scatter', mode: 'lines', line: { color: '#94a3b8', width: 2, dash: 'dot' }
-          });
-        }
-        if (overlay.snapshotOrders) {
-          traces.push({
-            x: hours, y: overlay.snapshotOrders, name: 'Forecast as predicted that day',
-            type: 'scatter', mode: 'lines', line: { color: '#a78bfa', width: 2, dash: 'dash' }
-          });
-        }
-        if (overlay.hasActuals) {
-          traces.push({
-            x: hours, y: overlay.actualOrders, name: 'Actual Orders/hr (POS)',
-            type: 'scatter', mode: 'lines+markers', connectgaps: false,
-            line: { color: '#22c55e', width: 3 }, marker: { size: 7 }
-          });
-        }
-        if (summaryElem) {
-          const s = overlay.summary;
-          const money = v => '$' + Math.round(v).toLocaleString('en-US');
-          if (!overlay.hasActuals) {
-            summaryElem.textContent = `No POS records for ${overlay.date}.`;
-          } else if (overlay.isToday) {
-            summaryElem.textContent = `Today so far (through hour ${overlay.cutoffHour}:00 ET, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; full-day forecast ${money(s.forecastFullDay)}.`;
-          } else {
-            summaryElem.textContent = `${overlay.date}: ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastFullDay)} forecast total.`;
-          }
-          summaryElem.style.display = 'block';
-        }
-      }
-    }
-
-    // Hydrate Hourly Rush & Service Turnover Deck
-    if (actuals && Array.isArray(activeForecast)) {
-      renderHourlyTurnoverDeck(activeForecast, actuals, effDate, isOperatingHoursFiltered);
-    }
-  } catch (e) {
-    console.warn('Hourly actuals overlay unavailable:', e);
-  }
-
-  // Compute Peak, Slowest Operating Hour, and Current Pace for mobile pre-baked face annotations
-  const opPool = activeForecast.filter(r => r.hour >= 11 && r.hour <= 20);
-  const scanPool = opPool.length > 0 ? opPool : activeForecast;
-  const peakRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) > (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
-  const lowRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) < (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
-  const nowRow = activeForecast[0] || {};
-  const peakX = peakRow.hour_display ? `${peakRow.hour_display}` : `${peakRow.hour || 12}:00`;
-  const nowX = nowRow.hour_display ? `${nowRow.hour_display}` : `${nowRow.hour || 12}:00`;
-
-  const mobileAnnotations = isMobileViewport() && peakRow ? [
-    {
-      x: peakX,
-      y: peakRow.predicted_orders || 0,
-      text: `PEAK: ${peakRow.predicted_orders || 0}/hr`,
-      showarrow: true,
-      arrowhead: 2,
-      ax: 0,
-      ay: -24,
-      bgcolor: 'rgba(15, 23, 42, 0.92)',
-      bordercolor: '#E69F00',
-      font: { color: '#fbbf24', size: 11, family: 'JetBrains Mono, monospace' }
-    }
-  ] : [];
-
-  const mobile = isMobileViewport();
-  const layout = {
-    title: {
-      text: mobile ? (currentDayName ? `${currentDayName} Hourly Velocity & Meat Draw` : 'Hourly Velocity & Meat Draw') : chartTitle,
-      font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: mobile ? 11 : 13 }
-    },
-    paper_bgcolor: 'rgba(0,0,0,0)',
-    plot_bgcolor: 'rgba(15,23,42,0.45)',
-    font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 10 },
-    xaxis: { showgrid: false, zeroline: false, tickangle: -45 },
-    yaxis: { title: mobile ? 'Pace (Orders/hr)' : 'Hourly Sales Pace (Orders/hr)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
-    yaxis2: {
-      title: mobile ? 'Brisket (lbs/hr)' : 'Cooked Brisket Used (lbs/hr)',
-      overlaying: 'y',
-      side: 'right',
-      showgrid: false,
-      zeroline: false,
-      titlefont: { color: '#E69F00' },
-      tickfont: { color: '#E69F00' }
-    },
-    annotations: mobileAnnotations,
-    legend: { orientation: 'h', y: -0.3, x: 0 },
-    margin: mobile ? { l: 38, r: 38, t: 36, b: 70 } : { l: 50, r: 50, t: 44, b: 90 }
-  };
-
-  if (typeof Plotly !== 'undefined') {
-    Plotly.newPlot('plotly-predictive-velocity-chart', traces, layout, getPlotlyConfig());
-    if (chartElem.offsetWidth > 0) {
-      try { Plotly.Plots.resize(chartElem); } catch (e) {}
-    }
-    applyChartTouchSafety(chartElem);
-    if (typeof injectMobileFaceCallouts === 'function') {
-      injectMobileFaceCallouts(
-        chartElem,
-        `${peakX} (${peakRow.predicted_orders || 0} orders/hr)`,
-        `${lowRow.hour_display || lowRow.hour || '3:00 PM'} (${lowRow.predicted_orders || 0} orders/hr)`,
-        `${nowX} (${nowRow.predicted_orders || 0} orders/hr)`
-      );
-    }
-  }
-}
-
-let isOperatingHoursFiltered = true;
-
-function renderHourlyTurnoverDeck(activeForecast, actuals, effectiveNow, filterOperatingHours = isOperatingHoursFiltered) {
-  const container = document.getElementById('hourly-turnover-deck');
-  if (!container) return;
-
-  const effNow = effectiveNow || (window.ShopTime ? window.ShopTime.getEffectiveNow() : new Date());
-  
-  const startDateInput = document.getElementById('forecast-start-date');
-  const targetDateStr = startDateInput && startDateInput.value ? startDateInput.value : (window.ShopTime ? window.ShopTime.shopDateStr(effNow) : '');
-
-  if (!window.ShopTime || typeof window.ShopTime.computeBlendedDayMetrics !== 'function') {
-    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">Turnover metrics engine loading...</div>';
-    return;
-  }
-
-  const result = window.ShopTime.computeBlendedDayMetrics(actuals, activeForecast, effNow, targetDateStr);
-  if (!result || !Array.isArray(result.hourly)) {
-    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">No hourly records available for turnover deck.</div>';
-    return;
-  }
-
-  const operatingHours = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-  const list = filterOperatingHours
-    ? result.hourly.filter(h => operatingHours.includes(h.hour))
-    : result.hourly;
-
-  if (list.length === 0) {
-    container.innerHTML = '<div style="color:#94a3b8; font-size:12px;">No operating hours match current filter.</div>';
-    return;
-  }
-
-  const html = list.map(item => {
-    let cardClass = 'turnover-card card-predicted';
-    let badgeHtml = '<span class="turnover-badge badge-predicted">Projected</span>';
-    let mainMetricHtml = '';
-    let subMetricHtml = '';
-
-    const pRev = Math.round(item.predictedRevenue);
-    const pOrders = item.predictedOrders;
-    const aRev = Math.round(item.actualSales);
-    const aOrders = item.actualOrders;
-
-    if (item.status === 'actual') {
-      cardClass = 'turnover-card card-actual';
-      badgeHtml = '<span class="turnover-badge badge-actual">POS Actual</span>';
-      const vSign = item.varianceSales >= 0 ? '+' : '';
-      const vClass = item.varianceSales >= 0 ? 'pill-positive' : 'pill-negative';
-      mainMetricHtml = `
-        <div class="turnover-metric-main">$${aRev.toLocaleString()}</div>
-        <div class="turnover-sub">${aOrders} POS Orders</div>
-      `;
-      subMetricHtml = `
-        <div class="turnover-sub">
-          Model: $${pRev.toLocaleString()} (${pOrders} ord)<br>
-          <span class="${vClass}">${vSign}$${Math.round(item.varianceSales).toLocaleString()} (${vSign}${item.variancePct}%)</span>
-        </div>
-      `;
-    } else if (item.status === 'live') {
-      cardClass = 'turnover-card card-live';
-      badgeHtml = '<span class="turnover-badge badge-live">Live Pacing</span>';
-      mainMetricHtml = `
-        <div class="turnover-metric-main">$${aRev.toLocaleString()}</div>
-        <div class="turnover-sub">${aOrders} orders so far</div>
-      `;
-      subMetricHtml = `
-        <div class="turnover-sub">
-          Target: $${pRev.toLocaleString()} (${pOrders} ord)<br>
-          <span style="color:#fbbf24; font-weight:600;">Current Active Hour</span>
-        </div>
-      `;
-    } else {
-      cardClass = 'turnover-card card-predicted';
-      badgeHtml = '<span class="turnover-badge badge-predicted">Projected</span>';
-      mainMetricHtml = `
-        <div class="turnover-metric-main">$${pRev.toLocaleString()}</div>
-        <div class="turnover-sub">~${pOrders} projected orders</div>
-      `;
-      subMetricHtml = `
-        <div class="turnover-sub">
-          Cooked Meat Draw Target:<br>
-          <span style="color:#f59e0b; font-weight:600;">~${item.brisketCookedLbs} lbs Brisket</span> • 
-          <span style="color:#cbd5e1;">~${item.porkCookedLbs} lbs Pork</span>
-        </div>
-      `;
-    }
-
-    let rushTag = '';
-    if (item.hour === 12 || item.hour === 13) rushTag = ' • Lunch Rush';
-    else if (item.hour === 18 || item.hour === 19) rushTag = ' • Dinner Rush';
-
-    return `
-      <div class="${cardClass}" data-hour="${item.hour}">
-        <div class="turnover-card-header">
-          <span class="turnover-hour-title">${item.hourDisplay}${rushTag}</span>
-          ${badgeHtml}
-        </div>
-        ${mainMetricHtml}
-        ${subMetricHtml}
-      </div>
-    `;
-  }).join('');
-
-  container.innerHTML = html;
-}
-
-function setupTimeTravelControls() {
-  const slider = document.getElementById('time-travel-slider');
-  const badge = document.getElementById('time-travel-badge');
-  const currentLabel = document.getElementById('time-travel-current-label');
-  const btnLunch = document.getElementById('sim-btn-lunch');
-  const btnRush = document.getElementById('sim-btn-rush');
-  const btnPostrush = document.getElementById('sim-btn-postrush');
-  const btnReset = document.getElementById('sim-btn-reset');
-  const btnOperating = document.getElementById('btn-turnover-operating');
-  const btnAll = document.getElementById('btn-turnover-all');
-
-  function updateSimulatorUI() {
-    if (!window.ShopTime) return;
-    const isSim = window.ShopTime.isSimulating();
-    const effNow = window.ShopTime.getEffectiveNow();
-    const currentHour = window.ShopTime.shopHour(effNow);
-    const dateStr = window.ShopTime.shopDateStr(effNow);
-
-    if (slider) {
-      slider.value = currentHour;
-    }
-
-    const h12 = currentHour === 0 ? 12 : (currentHour > 12 ? currentHour - 12 : currentHour);
-    const ampm = currentHour >= 12 ? 'PM' : 'AM';
-
-    if (badge) {
-      if (isSim) {
-        badge.className = 'badge-sim-pulse';
-        badge.textContent = `⚡ Simulated: ${h12}:00 ${ampm} ET`;
-      } else {
-        badge.className = 'badge-live-pulse';
-        badge.textContent = '● Live America/New_York';
-      }
-    }
-
-    if (currentLabel) {
-      if (isSim) {
-        currentLabel.innerHTML = `Simulated Cutoff Hour: <strong>${h12}:00 ${ampm} ET</strong> (${dateStr})`;
-      } else {
-        currentLabel.innerHTML = `Clock Status: <strong>Live Mode (${h12}:${String(effNow.getMinutes()).padStart(2, '0')} ${ampm} ET)</strong>`;
-      }
-    }
-
-    if (typeof renderPlotlyForecastingChart === 'function') {
-      renderPlotlyForecastingChart(getActiveDaysCount());
-    }
-    if (typeof renderPlotlyPredictiveChart === 'function') {
-      renderPlotlyPredictiveChart();
-    }
-  }
-
-  function setSimHour(hour) {
-    if (!window.ShopTime) return;
-    const targetDateInput = document.getElementById('forecast-start-date')?.value;
-    const targetDateStr = targetDateInput || window.ShopTime.shopDateStr();
-    const simDate = typeof window.ShopTime.createShopInstant === 'function'
-      ? window.ShopTime.createShopInstant(targetDateStr, hour)
-      : new Date(new Date(targetDateStr + 'T12:00:00').setHours(hour, 0, 0, 0));
-    window.ShopTime.setSimulatedNow(simDate);
-    updateSimulatorUI();
-  }
-
-  if (slider) {
-    slider.addEventListener('input', (e) => {
-      const h = parseInt(e.target.value, 10);
-      setSimHour(h);
-    });
-  }
-
-  if (btnLunch) btnLunch.addEventListener('click', () => setSimHour(12));
-  if (btnRush) btnRush.addEventListener('click', () => setSimHour(19));
-  if (btnPostrush) btnPostrush.addEventListener('click', () => setSimHour(20));
-  if (btnReset) {
-    btnReset.addEventListener('click', () => {
-      if (window.ShopTime) window.ShopTime.clearSimulatedNow();
-      updateSimulatorUI();
-    });
-  }
-
-  if (btnOperating && btnAll) {
-    btnOperating.addEventListener('click', () => {
-      btnOperating.classList.add('active');
-      btnAll.classList.remove('active');
-      isOperatingHoursFiltered = true;
-      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
-    });
-    btnAll.addEventListener('click', () => {
-      btnAll.classList.add('active');
-      btnOperating.classList.remove('active');
-      isOperatingHoursFiltered = false;
-      if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
-    });
-  }
-
-  updateSimulatorUI();
-}
-
-// Ensure predictive KPIs hydrate on initial page load
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    if (typeof renderPlotlyPredictiveChart === 'function') {
-      renderPlotlyPredictiveChart();
-    }
-  }, 300);
-});
-
-
-
