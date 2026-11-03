@@ -169,14 +169,24 @@ def export_hourly_actuals(db_path: Path = DEFAULT_DB_PATH, out_file: Path = OUT_
         payload = build_payload(conn)
     finally:
         conn.close()
-    if not payload.get("days") and out_file.exists():
-        print(f"[SAFETY GUARD] No locked orders found in DB. Preserving existing {out_file}")
+    
+    # Merge with existing historical days so past saved records are permanently preserved
+    if out_file.exists():
         try:
-            payload = json.loads(out_file.read_text())
-        except Exception:
-            pass
-    else:
-        out_file.write_text(json.dumps(payload, indent=2))
+            existing = json.loads(out_file.read_text())
+            existing_days = existing.get("days", {})
+            for d_str, d_val in existing_days.items():
+                if d_str not in payload["days"]:
+                    payload["days"][d_str] = d_val
+            payload["days"] = dict(sorted(payload["days"].items()))
+            if payload["days"]:
+                payload["weekday_baseline"] = build_weekday_baseline(
+                    {k: v["buckets"] for k, v in payload["days"].items()}
+                )
+        except Exception as e:
+            print(f"[WARN] Failed to merge existing records in {out_file}: {e}")
+
+    out_file.write_text(json.dumps(payload, indent=2))
     snapshot_forecast(ANALYTICS_DIR / "predictive_payload.json", SNAPSHOT_FILE)
     print(f"[HOURLY ACTUALS] {len(payload.get('days', {}))} days written to {out_file}")
     return payload

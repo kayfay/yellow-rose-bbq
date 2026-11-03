@@ -595,8 +595,23 @@
       badgeEl.textContent = active.severity_badge || 'Live Clover Scan';
       badgeEl.className = `qw-badge qw-badge-${active.severity || 'info'}`;
     }
+    const formatAlertHour12 = (hf, h) => {
+      if (!hf && h === undefined) return '';
+      if (hf && /AM|PM/i.test(hf)) {
+        return hf.includes('EST') ? hf : `${hf} EST`;
+      }
+      const hourNum = h !== undefined ? h : parseInt(hf, 10);
+      if (!isNaN(hourNum)) {
+        const h12 = hourNum === 0 ? 12 : (hourNum > 12 ? hourNum - 12 : hourNum);
+        const ampm = hourNum >= 12 ? 'PM' : 'AM';
+        return `${h12}:00 ${ampm} EST`;
+      }
+      return hf || '';
+    };
+
     if (timeEl) {
-      timeEl.textContent = active.hour_formatted ? `Hour ${active.hour_formatted} Clover Scan` : 'Live Scan Active';
+      const formattedTime = formatAlertHour12(active.hour_formatted, active.hour);
+      timeEl.textContent = formattedTime ? `${formattedTime} Clover Scan` : 'Live Scan Active';
     }
     if (headlineEl) headlineEl.textContent = active.headline || 'Operating Within Normal Historical Ranges';
     if (presentEl) presentEl.textContent = active.immediate_present_status || 'Kitchen line and counter are operating nominally.';
@@ -626,7 +641,7 @@
       recentListEl.innerHTML = qwPayload.recent_alerts.map(a => `
         <div class="qw-recent-item">
           <span class="qw-recent-headline">${global.escapeHTML(a.severity_badge || '')}: ${global.escapeHTML(a.headline || '')}</span>
-          <span class="qw-recent-meta">${global.escapeHTML(a.date || '')} ${global.escapeHTML(a.hour_formatted || '')}</span>
+          <span class="qw-recent-meta">${global.escapeHTML(a.date || '')} ${global.escapeHTML(formatAlertHour12(a.hour_formatted, a.hour))}</span>
         </div>
       `).join('');
     }

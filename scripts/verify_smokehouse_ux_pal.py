@@ -124,8 +124,8 @@ def main() -> None:
         fail("Missing embedded fallback traces (defaultSelloutTraces) for #plotly-sellout-chart in analytics_subtabs.js")
     if "height: mobile ? 300 : 340" not in subtabs_js:
         fail("Missing explicit compact height on 24-hour predictive velocity chart in analytics_subtabs.js")
-    if "?v=2.2.2" not in index_html:
-        fail("Cache-buster ?v=2.2.2 not applied in index.html")
+    if not re.search(r"\?v=2\.2\.[2-9]", index_html):
+        fail("Cache-buster >= ?v=2.2.2 not applied in index.html")
 
     print("[PAL PASS] Smokehouse UX v2.2.2 verification passed (De-Jargon, Case/Cut Units, Black Square Fix, Prep Cushion Strip).")
 

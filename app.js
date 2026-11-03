@@ -1091,7 +1091,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
     let insightStr = '';
     if (isTargetClosed) {
-      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance. Zero retail service; reopens Tuesday 11:00 AM.`;
+      insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance. Zero retail service; reopens Tuesday 11:00 AM EST.`;
     } else if (isRangeSelected) {
       insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} days): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs ck) & ~${pRaw.toFixed(1)} lbs raw pork (~${pCooked} lbs ck), plus ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
     } else {
@@ -1360,7 +1360,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (bCookedElem) bCookedElem.textContent = `(~${Math.round(actCookedBrisket)} lbs actual sold • ~${Math.round(remCookedBrisket)} lbs remaining)`;
       setBlendedPill('kpi-brisket-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedBrisket)} lbs sold so far + ~${Math.round(remCookedBrisket)} lbs needed to close (~${Math.round(blendedCookedBrisket)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.4)} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.4)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1375,7 +1375,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} lbs actual sold • ~${Math.round(remCookedPork)} lbs remaining)`;
       setBlendedPill('kpi-pork-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedPork)} lbs sold so far + ~${Math.round(remCookedPork)} lbs needed to close (~${Math.round(blendedCookedPork)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1391,7 +1391,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (sausageLinksSub) sausageLinksSub.textContent = `(${actSausageLinks} actual links sold • ${remSausageLinks} remaining)`;
       setBlendedPill('kpi-sausage-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${actSausageLinks} links sold so far + ~${remSausageLinks} needed to close (~${blendedSausageLinks} total links)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actSausageLinks} links sold (~${actSausageLbs} lbs)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actSausageLinks} links sold (~${actSausageLbs} lbs)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1404,7 +1404,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (rCasesElem) rCasesElem.textContent = `(${actRibsRacks} actual racks sold • ${remRibsRacks} remaining)`;
       setBlendedPill('kpi-pork-ribs-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actRibsRacks} racks sold so far + ${remRibsRacks} needed to close (${blendedRibsRacks} total racks)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actRibsRacks} racks sold (~${(actRibsRacks / 6.0).toFixed(1)} cs)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actRibsRacks} racks sold (~${(actRibsRacks / 6.0).toFixed(1)} cs)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1417,7 +1417,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (drCasesElem) drCasesElem.textContent = `(${actDinoRibs} actual ribs sold • ${remDinoRibs} remaining)`;
       setBlendedPill('kpi-beef-dino-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actDinoRibs} ribs sold so far + ${remDinoRibs} needed to close (${blendedDinoRibs} total ribs)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actDinoRibs} ribs sold (~${(blendedDinoRibs / 12.0).toFixed(1)} Cases)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actDinoRibs} ribs sold (~${(blendedDinoRibs / 12.0).toFixed(1)} Cases)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1431,7 +1431,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} lbs actual • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
       setBlendedPill('kpi-turkey-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actTurkeyCooked)} lbs sold so far + ~${Math.round(remTurkeyCooked)} lbs needed to close (~${Math.round(blendedTurkeyCooked)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1444,7 +1444,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (rosebudsSubElem) rosebudsSubElem.textContent = `(${actRosebuds} actual sold • ${remRosebuds} remaining)`;
       setBlendedPill('kpi-rosebuds-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actRosebuds} bites sold so far + ${remRosebuds} needed to close (${blendedRosebuds} total bites)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actRosebuds} units (~${(actRosebuds * 0.25).toFixed(1)} lbs brisket draw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actRosebuds} units (~${(actRosebuds * 0.25).toFixed(1)} lbs brisket draw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1457,7 +1457,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (tacosSubElem) tacosSubElem.textContent = `(${actTacos} actual sold • ${remTacos} remaining)`;
       setBlendedPill('kpi-tacos-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actTacos} tacos sold so far + ${remTacos} needed to close (${blendedTacos} total tacos)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${actTacos} tacos (~${(actTacos * 0.15).toFixed(1)} lbs meat draw)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actTacos} tacos (~${(actTacos * 0.15).toFixed(1)} lbs meat draw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1470,7 +1470,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (totalCookedSub) totalCookedSub.textContent = `(~${actTotalCooked} lbs actual sold • ~${remTotalCooked} lbs remaining)`;
       setBlendedPill('kpi-total-cooked-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${actTotalCooked} lbs pulled so far + ~${remTotalCooked} lbs needed to close (~${blendedTotalCooked} lbs total cooked)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actTotalCooked} lbs cooked (~${Math.round(actTotalCooked / 0.4)} lbs raw trim)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actTotalCooked} lbs cooked (~${Math.round(actTotalCooked / 0.4)} lbs raw trim)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1488,7 +1488,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       }
       setBlendedPill('kpi-velocity-blended-sub', `
         <strong>Current Pace</strong>: ${liveVelocity} orders/hr actual pace<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ${bSum.actualOrdersSoFar} orders in ${elapsedHours}h (Target: ${targetVelocity} ord/hr)</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${bSum.actualOrdersSoFar} orders in ${elapsedHours}h (Target: ${targetVelocity} ord/hr)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1499,7 +1499,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} actual cost • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
       setBlendedPill('kpi-food-cost-blended-sub', `
         <strong>Today's Food Cost Finish</strong>: ~$${Math.round(actCOGS).toLocaleString()} actual + ~$${Math.round(remCOGS).toLocaleString()} remaining (~$${Math.round(blendedCOGS).toLocaleString()} total day)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~$${Math.round(actCOGS).toLocaleString()} food cost on $${actSalesSoFar.toLocaleString()} sales</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~$${Math.round(actCOGS).toLocaleString()} food cost on $${actSalesSoFar.toLocaleString()} sales</span> • 
         <span style="color:#10b981; font-weight:700;">29.5% Target Met</span>
       `);
 
@@ -1509,7 +1509,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (aovSubElem) aovSubElem.textContent = `($${actSalesSoFar.toLocaleString()} actual POS • ${bSum.actualOrdersSoFar} orders)`;
       setBlendedPill('kpi-aov-blended-sub', `
         <strong>Average Ticket So Far</strong>: $${liveAOV} per customer check<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: $${actSalesSoFar.toLocaleString()} POS revenue across ${bSum.actualOrdersSoFar} orders</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} POS revenue across ${bSum.actualOrdersSoFar} orders</span> • 
         <span style="color:${pColor}; font-weight:700;">Target: $48.50</span>
       `);
 
@@ -1521,7 +1521,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (staffCountElem) staffCountElem.textContent = `(~${actLaborHours.toFixed(1)}h actual clocked • ~${remLaborHours.toFixed(1)}h remaining)`;
       setBlendedPill('kpi-labor-blended-sub', `
         <strong>Shift Labor Hours</strong>: ~${actLaborHours.toFixed(1)}h clocked so far + ~${remLaborHours.toFixed(1)}h remaining (${blendedLaborHours.toFixed(1)}h total roster)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm}: ~${actLaborHours.toFixed(1)} pit hours logged across ${totalStaff} crew</span> • 
+        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actLaborHours.toFixed(1)} pit hours logged across ${totalStaff} crew</span> • 
         <span style="color:#a855f7; font-weight:700;">On Schedule</span>
       `);
 
@@ -1529,7 +1529,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (revenueElem) revenueElem.textContent = '$' + blendedTotalRev.toLocaleString();
       setBlendedPill('kpi-revenue-blended-sub', `
         <strong>Today's Projected Finish</strong>: $${actSalesSoFar.toLocaleString()} sold so far + $${remSales.toLocaleString()} needed to close<br>
-        <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm}: $${actSalesSoFar.toLocaleString()} (${bSum.actualOrdersSoFar} orders)</span> • 
+        <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} (${bSum.actualOrdersSoFar} orders)</span> • 
         <span style="color: ${pColor}; font-weight: 700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1639,12 +1639,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         evalBannerElem.style.display = 'block';
         let statusClass = 'eval-pill-accurate';
         let statusTitle = 'Live Pacing on Track';
-        let narrative = `Live pace is <strong>${pSign}${bSum.pacingPct}%</strong> vs forecast ($${actSalesSoFar.toLocaleString()} across ${bSum.actualOrdersSoFar} orders by ${h12}:00 ${ampm}). Projected day finish: <strong>$${blendedTotalRev.toLocaleString()}</strong> (~$${Math.round(blendedCOGS)} Est. Meat Cost).`;
+        let narrative = `Live pace is <strong>${pSign}${bSum.pacingPct}%</strong> vs forecast ($${actSalesSoFar.toLocaleString()} across ${bSum.actualOrdersSoFar} orders by ${h12}:00 ${ampm} EST). Projected day finish: <strong>$${blendedTotalRev.toLocaleString()}</strong> (~$${Math.round(blendedCOGS)} Est. Meat Cost).`;
 
         if (bSum.pacingPct > 15) {
           statusClass = 'eval-pill-drift';
           statusTitle = 'High-Demand Surge (+Pacing)';
-          narrative = `Surge active: pit turnover is <strong>+${bSum.pacingPct}% above</strong> baseline. Monitor brisket reserves to prevent sell-out before 9:00 PM close.`;
+          narrative = `Surge active: pit turnover is <strong>+${bSum.pacingPct}% above</strong> baseline. Monitor brisket reserves to prevent sell-out before 9:00 PM EST close.`;
         } else if (bSum.pacingPct < -15) {
           statusClass = 'eval-pill-drift';
           statusTitle = 'Midweek Pacing Lull';
@@ -2070,7 +2070,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         marginTextEl.textContent = `Extra Prep / Cushion: +0 Racks / +0 Butts / +0 Briskets (Closed ${closedDayLabel})`;
         marginPillEl.className = 'prep-status-pill status-safe';
         marginPillEl.textContent = `● Closed ${closedDayLabel} (0 Prep Required)`;
-        marginSubEl.textContent = 'Scheduled pit maintenance & firebox cleanout — reopens Tuesday 11:00 AM';
+        marginSubEl.textContent = 'Scheduled pit maintenance & firebox cleanout — reopens Tuesday 11:00 AM EST';
       } else {
         const extraRibsRacks = Math.max(0, Math.ceil((rVal || 0) * 0.15));
         const extraPorkButts = Math.max(0, Math.ceil(((pVal || 0) * 0.12) / 8.0));
@@ -2092,7 +2092,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           marginSubEl.textContent = 'Drawing into +10% Extra Prep / Cushion — monitor slicing board portions closely';
         } else {
           marginPillEl.textContent = '● Safe Cushion (+10% Extra Prep)';
-          marginSubEl.textContent = 'Covers peak lunch and dinner rush through 9:00 PM close without premature sell-outs';
+          marginSubEl.textContent = 'Covers peak lunch and dinner rush through 9:00 PM EST close without premature sell-outs';
         }
       }
     }

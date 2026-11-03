@@ -50,7 +50,7 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     await page.waitForTimeout(400);
 
     // Badge should now indicate simulation mode at 8:00 PM
-    await expect(simBadge).toContainText('Simulated: 8:00 PM ET');
+    await expect(simBadge).toContainText('Simulated: 8:00 PM EST');
 
     // Hour 19 (7:00 PM) must have flipped to 'POS Actual'
     const card7pm = page.locator('#hourly-turnover-deck .turnover-card[data-hour="19"]');

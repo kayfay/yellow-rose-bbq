@@ -91,6 +91,11 @@ def build_shift_forecast():
         target_peak = CALIBRATED_TARGET_PEAKS.get(day, raw_peak)
         scale = (target_peak / raw_peak) if raw_peak > 0 else 1.0
         
+        def hour_to_12_est(h: int) -> str:
+            h12 = 12 if (h % 12 == 0) else (h % 12)
+            ampm = "AM" if h < 12 else "PM"
+            return f"{h12}:00 {ampm} EST"
+
         text_row = []
         for hour in hours:
             if day == 'Monday':
@@ -100,21 +105,22 @@ def build_shift_forecast():
             day_data.append(orders)
             
             # Actionable insights based on volume
+            hour_str = hour_to_12_est(hour)
             if day == 'Monday':
-                text_row.append(f"Monday {hour:02d}:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>")
+                text_row.append(f"Monday {hour_str}<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>")
             elif orders < 3:
-                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>")
+                text_row.append(f"{day} {hour_str}<br>{orders} Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>")
             elif orders < 8:
-                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>")
+                text_row.append(f"{day} {hour_str}<br>{orders} Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>")
             else:
-                text_row.append(f"{day} {hour:02d}:00<br>{orders} Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>")
+                text_row.append(f"{day} {hour_str}<br>{orders} Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>")
         z_data.append(day_data)
         text_data.append(text_row)
         
     payload = {
         "plotly_heatmap": {
             "data": [{
-                "x": [f"{h:02d}:00" for h in hours],
+                "x": [hour_to_12_est(h) for h in hours],
                 "y": days,
                 "z": z_data,
                 "text": text_data,
@@ -125,7 +131,7 @@ def build_shift_forecast():
             }],
             "layout": {
                 "title": "Labor Optimization: Hourly Foot Traffic by Shift",
-                "xaxis": {"title": "Hour of Day (Eastern Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
+                "xaxis": {"title": "Hour of Day (12-Hour Eastern Standard Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
                 "yaxis": {"title": "Day of Week — Identifies Required Staffing Levels", "gridcolor": "rgba(255,255,255,0.1)"},
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",

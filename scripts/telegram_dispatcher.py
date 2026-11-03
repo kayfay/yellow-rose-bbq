@@ -342,7 +342,9 @@ def build_quick_wind_message(alert: dict) -> str:
     present = alert.get("immediate_present_status", "Activity detected on Clover POS.")
     cause = alert.get("causal_explanation", "Normal volume tracking.")
     action = alert.get("recommended_pit_action", "Maintain standard pit operations.")
-    time_str = alert.get("hour_formatted", datetime.now().strftime("%H:00"))
+    now_dt = datetime.now()
+    default_time = f"{now_dt.strftime('%I:00 %p').lstrip('0')} EST"
+    time_str = alert.get("hour_formatted", default_time)
     metrics = alert.get("velocity_metrics", {})
 
     metrics_text = ""
@@ -356,7 +358,7 @@ def build_quick_wind_message(alert: dict) -> str:
         metrics_text += f"\n📈 <b>Z-Score:</b> {metrics.get('z_score', 0):+.2f}"
 
     msg = f"""🚨 <b>YELLOW ROSE BBQ — REAL-TIME HOURLY ALERT</b>
-⏰ <b>Hour {time_str} Live Scan</b> | {badge}
+⏰ <b>{time_str} Live Scan</b> | {badge}
 
 <b>{headline}</b>
 {metrics_text}

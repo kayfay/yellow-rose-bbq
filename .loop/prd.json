@@ -203,6 +203,18 @@
       "description": "Deterministic Smokehouse UX Tests, Visual Progress Gallery (progress.html) & Adversarial Critic Gate: Author deterministic unit conversion and jargon-purge verification tests, update progress.html with mobile/desktop screenshots, pass all Tier 1/2 suites, and achieve >= 9/10 from the independent Adversarial Critic.",
       "acceptance_criteria": "npm run check, python unittest, all PAL verifiers, and Playwright E2E specs pass with exit code 0; progress.html updated; Adversarial Critic scores smokehouse usability >= 9/10.",
       "passes": true
+    },
+    {
+      "id": 35,
+      "description": "Fix GitHub Actions hourly Clover data update workflow (update_clover_data.yml) and archive saved records: resolve unstaged changes error on git pull --rebase by staging api/analytics/*.json alongside clover_api/analytics/*.json and analytics/*.json, discarding stray unstaged modifications with clean worktree guarantee, adding fetch-depth: 0, git pull --rebase --autostash retry loop, removing redundant naive UTC sync_status clobber, wiring daily_insight_engine.py, merging historical days in hourly_actuals.py, and archiving saved records in backups/.",
+      "acceptance_criteria": "Workflow update_clover_data.yml stages api/analytics/*.json, uses fetch-depth: 0 and git pull --rebase --autostash with clean worktree guarantee; remove redundant naive UTC sync_status.json clobber; wire daily_insight_engine.py; hourly_actuals.py merges existing historical days; archive of saved records verified in backups/; all mandatory verifiers (npm run check, python unittest, npm test, PAL scripts) pass exit code 0.",
+      "passes": true
+    },
+    {
+      "id": 36,
+      "description": "Standardize all time displays to 12-hour Eastern Standard Time (EST) format across dashboard, turnover deck, shift heatmap, quick-wind alerts, hourly actuals summary, and d3 tooltips, eliminating all 24-hour military timestamps.",
+      "acceptance_criteria": "Zero 24-hour military timestamps in UI or payloads (through hour 15:00 ET, 14:00, x: [00:00..23:00] replaced by 12-hour EST); all KPI cards and summaries show 12-hour EST with explicit timezone; all mandatory verifiers (npm run check, python unittest, npm test, PAL scripts) pass exit code 0.",
+      "passes": true
     }
   ]
 }

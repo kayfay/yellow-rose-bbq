@@ -90,7 +90,7 @@
     const timePart = wall.toLocaleTimeString('en-US', {
       timeZone: 'UTC', hour: 'numeric', minute: '2-digit'
     });
-    return `${datePart} at ${timePart} ET`;
+    return `${datePart} at ${timePart} EST`;
   }
 
   function weekdayIndexMon0(dateStr) {
@@ -273,10 +273,10 @@
       const varOrders = actOrders - predOrders;
       const varPct = predRev > 0 ? Math.round(((actSales - predRev) / predRev) * 1000) / 10 : 0;
 
-      // Format 12-hour display string
+      // Format 12-hour display string (Eastern Standard Time)
       const hour12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
       const ampm = h >= 12 ? 'PM' : 'AM';
-      const hourDisplay = `${hour12}:00 ${ampm}`;
+      const hourDisplay = `${hour12}:00 ${ampm} EST`;
 
       hourly.push({
         hour: h,

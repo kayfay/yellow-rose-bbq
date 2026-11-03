@@ -608,12 +608,12 @@ function renderD3GenericChart(containerId, traces, title, isBar = false, shift =
 function formatHourAMPM(hrStr, includeMinutes = false) {
     const h = parseInt(hrStr, 10);
     if (isNaN(h)) return hrStr;
-    const ampm = (h % 24) >= 12 ? 'pm' : 'am';
+    const ampm = (h % 24) >= 12 ? 'PM' : 'AM';
     const h12 = h % 12 === 0 ? 12 : h % 12;
     if (includeMinutes) {
-        return `${h12}:00 ${ampm}`;
+        return `${h12}:00 ${ampm} EST`;
     }
-    return `${h12} ${ampm}`;
+    return `${h12} ${ampm} EST`;
 }
 
 function renderD3Heatmap(containerId, trace, title, shift = 'all') {
@@ -646,26 +646,26 @@ function renderD3Heatmap(containerId, trace, title, shift = 'all') {
 
     let hourStart = 0;
     let hourEnd = 23;
-    let shiftTitle = title || "Hourly Sales Demand Heatmap";
+    let shiftTitle = title || "Hourly Sales Demand Heatmap (EST)";
 
     if (shift === 'prep') {
         hourStart = 4;
         hourEnd = 13;
-        shiftTitle = "Morning Prep Heatmap (4:00 AM – 1:00 PM)";
+        shiftTitle = "Morning Prep Heatmap (4:00 AM – 1:00 PM EST)";
     } else if (shift === 'lunch') {
         hourStart = 10;
         hourEnd = 16;
-        shiftTitle = "Lunch Window Heatmap (10:00 AM – 4:00 PM)";
+        shiftTitle = "Lunch Window Heatmap (10:00 AM – 4:00 PM EST)";
     } else if (shift === 'dinner') {
         hourStart = 16;
         hourEnd = 22;
-        shiftTitle = "Dinner Rush Heatmap (4:00 PM – 10:00 PM)";
+        shiftTitle = "Dinner Rush Heatmap (4:00 PM – 10:00 PM EST)";
     } else if (shift === 'custom') {
         hourStart = 2;
         hourEnd = 22;
-        shiftTitle = "Cook & Service Shifts (2:00 AM – 10:00 PM)";
+        shiftTitle = "Cook & Service Shifts (2:00 AM – 10:00 PM EST)";
     } else {
-        shiftTitle = "Hourly Demand Heatmap (All Hours: 12 AM – 11 PM)";
+        shiftTitle = "Hourly Demand Heatmap (All Hours: 12 AM – 11 PM EST)";
     }
 
     const selectedIndices = [];

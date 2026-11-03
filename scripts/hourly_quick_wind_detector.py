@@ -32,6 +32,11 @@ HOURLY_ACTUALS_PATH = ANALYTICS_DIR / "hourly_actuals.json"
 WEATHER_PAYLOAD_PATH = ANALYTICS_DIR / "weather_payload.json"
 OUTPUT_ALERTS_PATH = ANALYTICS_DIR / "quick_wind_alerts.json"
 
+def format_hour_12_est(h: int) -> str:
+    h12 = 12 if (h % 12 == 0) else (h % 12)
+    ampm = "AM" if h < 12 else "PM"
+    return f"{h12}:00 {ampm} EST"
+
 ANALYTIC_TERMS_GLOSSARY = {
     "Prep Target": {
         "term": "Prep Target",
@@ -215,13 +220,13 @@ def run_quick_wind_detection() -> dict:
                     "alert_id": f"qw-aov-{date_str}-{h}",
                     "date": date_str,
                     "hour": h,
-                    "hour_formatted": f"{h:02d}:00",
+                    "hour_formatted": format_hour_12_est(h),
                     "event_type": "ticket_spike",
                     "severity": "surge",
                     "severity_badge": "🥩 High-Ticket Surge",
                     "headline": f"Large Group / Catering Ticket Spike (Average Ticket ${aov:.2f} vs ${base['avg_aov']:.2f} Usual)",
                     "immediate_present_status": f"Counter ticket size jumped to ${aov:.2f}/order (+{(aov - base['avg_aov'])/base['avg_aov']*100:.0f}% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-                    "causal_explanation": f"Large office/family group orders concentrated in the {h:02d}:00 window. While ticket volume ({orders} orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+                    "causal_explanation": f"Large office/family group orders concentrated in the {format_hour_12_est(h)} window. While ticket volume ({orders} orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
                     "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
                     "velocity_metrics": {
                         "actual_sales": sales,
@@ -241,7 +246,7 @@ def run_quick_wind_detection() -> dict:
                     "alert_id": f"qw-surge-{date_str}-{h}",
                     "date": date_str,
                     "hour": h,
-                    "hour_formatted": f"{h:02d}:00",
+                    "hour_formatted": format_hour_12_est(h),
                     "event_type": "rush_acceleration",
                     "severity": "surge",
                     "severity_badge": "🚀 Rush Acceleration",
@@ -267,11 +272,11 @@ def run_quick_wind_detection() -> dict:
                     "alert_id": f"qw-deplete-{date_str}-{h}",
                     "date": date_str,
                     "hour": h,
-                    "hour_formatted": f"{h:02d}:00",
+                    "hour_formatted": format_hour_12_est(h),
                     "event_type": "depletion_risk",
                     "severity": "warning",
                     "severity_badge": "⚠️ Premature Depletion Risk",
-                    "headline": f"Meat Going Fast: 70% of Today's Prep Target Used by {h:02d}:00",
+                    "headline": f"Meat Going Fast: 70% of Today's Prep Target Used by {format_hour_12_est(h)}",
                     "immediate_present_status": f"We've used {cumulative_meat_lbs:.1f} lbs of meat ({cumulative_meat_lbs/daily_par_lbs*100:.0f}% of the morning prep target) before 3:30 PM. At this pace, prime brisket and ribs will 86 by 5:30 PM.",
                     "causal_explanation": "Accelerated lunchtime carryout orders and high meat portion ratios drained holding stock faster than the evening transition target.",
                     "recommended_pit_action": "Throttle bulk to-go brisket orders to 1.5 lbs max per guest; prompt cashier to recommend Texas hot links ($5/link) and pulled pork combos; update website social banner with evening sellout warning.",
@@ -299,7 +304,7 @@ def run_quick_wind_detection() -> dict:
                 "alert_id": "qw-weather-rain-live",
                 "date": datetime.now().strftime("%Y-%m-%d"),
                 "hour": datetime.now().hour,
-                "hour_formatted": f"{datetime.now().hour:02d}:00",
+                "hour_formatted": format_hour_12_est(datetime.now().hour),
                 "event_type": "weather_shift",
                 "severity": "weather",
                 "severity_badge": "🌧️ Weather Shift & Draft Warning",
@@ -324,7 +329,7 @@ def run_quick_wind_detection() -> dict:
             "alert_id": "qw-baseline-optimal",
             "date": datetime.now().strftime("%Y-%m-%d"),
             "hour": datetime.now().hour,
-            "hour_formatted": f"{datetime.now().hour:02d}:00",
+            "hour_formatted": format_hour_12_est(datetime.now().hour),
             "event_type": "nominal_tracking",
             "severity": "info",
             "severity_badge": "⚡ Normal Pace",

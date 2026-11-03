@@ -74,7 +74,11 @@
       shift = shiftSelector ? shiftSelector.value : 'all';
     }
 
-    const hours = Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, '0')}:00`);
+    const hours = Array.from({ length: 24 }, (_, i) => {
+      const h12 = i === 0 ? 12 : (i > 12 ? i - 12 : i);
+      const ampm = i >= 12 ? 'PM' : 'AM';
+      return `${h12}:00 ${ampm} EST`;
+    });
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const defaultZ = days.map((d) => {
       return hours.map((_, h) => {
@@ -92,7 +96,7 @@
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(20,20,30,0.6)',
       font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 10 },
-      xaxis: { title: 'Time of Day (24-Hour Pit Operating Window)', gridcolor: '#334155', color: '#94a3b8' },
+      xaxis: { title: 'Time of Day (Pit Operating Window - 12-Hour EST)', gridcolor: '#334155', color: '#94a3b8' },
       yaxis: { gridcolor: '#334155', color: '#94a3b8' },
       margin: { l: 80, r: 40, t: 50, b: 50 }
     };
@@ -839,13 +843,20 @@
     const velocitySummaryElem = document.getElementById('predictive-velocity-summary');
     if (velocitySummaryElem && activeKpis) {
       if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
-        velocitySummaryElem.textContent = 'Shop is closed today (Monday pit maintenance). Retail counter service and order flow resume Tuesday at 11:00 AM.';
+        velocitySummaryElem.textContent = 'Shop is closed today (Monday pit maintenance). Retail counter service and order flow resume Tuesday at 11:00 AM EST.';
       } else if (activeKpis.peak_rush_window) {
-        velocitySummaryElem.textContent = `Peak rush window concentrates around ${activeKpis.peak_rush_window} (${activeKpis.current_sales_velocity}); dinner service tapers after 7:30 PM.`;
+        velocitySummaryElem.textContent = `Peak rush window concentrates around ${activeKpis.peak_rush_window} (${activeKpis.current_sales_velocity}); dinner service tapers after 7:30 PM EST.`;
       }
     }
 
-    const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : `${r.hour}:00`);
+    const formatHour12EST = (h) => {
+      const num = parseInt(h, 10) || 0;
+      const h12 = num === 0 ? 12 : (num > 12 ? num - 12 : num);
+      const ampm = num >= 12 ? 'PM' : 'AM';
+      return `${h12}:00 ${ampm} EST`;
+    };
+
+    const hours = activeForecast.map(r => r.hour_display ? `${r.hour_display}` : formatHour12EST(r.hour));
     const orders = activeForecast.map(r => r.predicted_orders);
     const brisketDraw = activeForecast.map(r => r.brisket_cooked_lbs);
 
@@ -927,7 +938,10 @@
             if (!overlay.hasActuals) {
               summaryElem.textContent = `No POS records for ${overlay.date}.`;
             } else if (overlay.isToday) {
-              summaryElem.textContent = `Today so far (through hour ${overlay.cutoffHour}:00 ET, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; full-day forecast ${money(s.forecastFullDay)}.`;
+              const cutH = overlay.cutoffHour;
+              const cutH12 = cutH === 0 ? 12 : (cutH > 12 ? cutH - 12 : cutH);
+              const cutAmpm = cutH >= 12 ? 'PM' : 'AM';
+              summaryElem.textContent = `Today so far (through ${cutH12}:00 ${cutAmpm} EST, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; full-day forecast ${money(s.forecastFullDay)}.`;
             } else {
               summaryElem.textContent = `${overlay.date}: ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastFullDay)} forecast total.`;
             }
@@ -948,8 +962,8 @@
     const peakRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) > (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
     const lowRow = scanPool.reduce((a, b) => ((b.predicted_orders || 0) < (a.predicted_orders || 0) ? b : a), scanPool[0] || {});
     const nowRow = activeForecast[0] || {};
-    const peakX = peakRow.hour_display ? `${peakRow.hour_display}` : `${peakRow.hour || 12}:00`;
-    const nowX = nowRow.hour_display ? `${nowRow.hour_display}` : `${nowRow.hour || 12}:00`;
+    const peakX = peakRow.hour_display ? `${peakRow.hour_display}` : formatHour12EST(peakRow.hour || 12);
+    const nowX = nowRow.hour_display ? `${nowRow.hour_display}` : formatHour12EST(nowRow.hour || 12);
 
     const mobileAnnotations = global.isMobileViewport() && peakRow ? [
       {
@@ -1035,7 +1049,7 @@
       if (badge) {
         if (isSim) {
           badge.className = 'badge-sim-pulse';
-          badge.textContent = `Simulated: ${h12}:00 ${ampm} ET`;
+          badge.textContent = `Simulated: ${h12}:00 ${ampm} EST`;
         } else {
           badge.className = 'badge-live-pulse';
           badge.textContent = '● Live America/New_York';
@@ -1044,9 +1058,9 @@
 
       if (currentLabel) {
         if (isSim) {
-          currentLabel.innerHTML = `Simulated Cutoff Hour: <strong>${h12}:00 ${ampm} ET</strong> (${dateStr})`;
+          currentLabel.innerHTML = `Simulated Cutoff Hour: <strong>${h12}:00 ${ampm} EST</strong> (${dateStr})`;
         } else {
-          currentLabel.innerHTML = `Clock Status: <strong>Live Mode (${h12}:${String(effNow.getMinutes()).padStart(2, '0')} ${ampm} ET)</strong>`;
+          currentLabel.innerHTML = `Clock Status: <strong>Live Mode (${h12}:${String(effNow.getMinutes()).padStart(2, '0')} ${ampm} EST)</strong>`;
         }
       }
 

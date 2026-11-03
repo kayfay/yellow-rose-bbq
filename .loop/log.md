@@ -214,3 +214,48 @@
 - Final Polish: Demoted legacy lbs numbers in `.est-card:has(.kitchen-qty-display)` to secondary size, purged all `#` shorthand, calibrated cushion count bounds (`Math.max(0, ...)`), added no-sales `status-safe` test assertion, refreshed all 7 progress gallery screenshots.
 - Subagent status: 429 quota limit encountered for Round 3; Task 34 marked passed based on 8/10 critic clearance of all blockers + 100% completion of all non-blocking suggestions.
 - Tests: Playwright 20 passed / 0 failed / 0 flaky (14.6s); PAL verifier PASS; npm run check exit 0.
+- **2026-11-03 15:39:34 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+## 2026-11-03 · GitHub Actions update_clover_data.yml Fix (#177) & Record Archiving (Task 35)
+- **Root Cause Analysis**: GitHub Action #177 failed with `error: cannot pull with rebase: You have unstaged changes`. Root cause: `scripts/update_predictive_cache.py` writes to `api/analytics/predictive_hourly.json` (a tracked repository file). Because `git add` in the workflow only targeted `clover_api/analytics/*.json` and `analytics/*.json`, `predictive_hourly.json` remained modified and unstaged. Git rebase aborted immediately.
+- **CI/CD Hardening in `.github/workflows/update_clover_data.yml`**:
+  1. Staged `api/analytics/*.json` alongside `clover_api/analytics/*.json`, `analytics/*.json`, `clover_api/analytics/payloads.js`, and `WEBSITE_MENU.md`.
+  2. Added clean worktree guarantee (`git checkout -- .` after staging) and `git pull --rebase --autostash origin "${GITHUB_REF_NAME}"` with a 3-attempt retry loop.
+  3. Added `fetch-depth: 0` to `actions/checkout@v4` to provide full commit history for git rebases.
+  4. Removed legacy redundant inline script clobbering `sync_status.json` with naive UTC, preserving `build_payloads.py`'s tz-aware Eastern Time timestamp.
+  5. Added `python scripts/daily_insight_engine.py` to the hourly workflow before payload generation.
+- **Historical Record Archiving & Retention**:
+  1. Hardened `clover_api/analytics/hourly_actuals.py` (`export_hourly_actuals`) to merge existing historical days from `hourly_actuals.json` so past saved records (81 days) are permanently retained across runs.
+  2. Created full snapshot archive `backups/archive_saved_records_20261103.tar.gz` (104 KB, mode `0644`) capturing all current JSON payloads (historical 94 days, hourly 81 days, 18 forecast snapshots), US Foods invoices, COGS models, chorizo recipe, and menu catalogs.
+  3. Restored `db_time`/`existing_time` candidate resolution in `clover_api/analytics/dashboard.py:get_last_updated_time()` for exact test parity.
+- **Verification Results**:
+  - `npm run check`: 0 errors across all 7 frontend JS modules.
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: 5/5 PASS (0.167s).
+  - PAL verifiers (`verify_v2_facelift_pal.py`, `verify_bi_insight_engine.py`, `verify_smokehouse_ux_pal.py`, `verify_subtab_rollup_pal.py`, `verify_timezone_and_actuals.py` 26/26, `verify_ml_analytics.py` 5/5, `verify_all_forecasts.py` 5/5): 100% PASS.
+  - Playwright E2E (`npm test`): **20 passed / 0 failed / 0 flaky (17.3s)**. Task 35 marked `passes: true` in `.loop/prd.json`.
+
+## 2026-11-03 · 12-Hour Eastern Standard Time (EST) Standardization Everywhere (Task 36)
+- **Problem & Scope**: The user identified that 24-hour military timestamps and missing/inconsistent timezone tags existed across the UI (e.g. `Today so far (through hour 15:00 ET, as of last sync): ...`, shift heatmap x-axis `[00:00..23:00]` and tooltips `Monday 14:00`, Quick-Wind alerts `Hour 19:00 Clover Scan`, and KPI cards missing `EST`).
+- **Standard Applied**: Always use 12-hour format with uppercase AM/PM and explicit `EST` suffix (`h:00 AM/PM EST`), eliminating all military timestamps.
+- **Files Touched**:
+  - `tz_utils.js`: Standardized naive fallback and blended day hourly display to 12-hour EST.
+  - `modules/forecaster/analytics_subtabs.js`: Converted shift heatmap fallback bins, x-axis label, Tuesday reopening copy, `formatHour12EST` helper for hourly actuals summary (`Today so far (through ${cutH12}:00 ${cutAmpm} EST, as of last sync): ...`), and time travel simulator badges to 12-hour EST.
+  - `modules/reports/shop_reports.js`: Formatted active and recent Quick-Wind alert scans and descriptions to 12-hour EST (`formatAlertHour12`).
+  - `app.js`: Updated all 14 KPI card subtitle timestamps to `Actual to ${h12}:00 ${ampm} EST:`, plus narrative and cushion Tuesday reopening and closing copy.
+  - `d3_charts.js`: Formatted all D3 chart ticks and tooltips to 12-hour EST (`formatHourAMPM`).
+  - `clover_api/analytics/shift_forecast.py`: Formatted x-axis buckets and hover text to 12-hour EST (`hour_to_12_est`).
+  - `scripts/hourly_quick_wind_detector.py`: Formatted `hour_formatted` and causal explanations to 12-hour EST (`format_hour_12_est`).
+  - `scripts/update_predictive_cache.py`: Formatted `hour_display` and peak hours to 12-hour EST.
+  - `scripts/telegram_dispatcher.py`: Updated scan headline and fallback timestamp to 12-hour EST.
+  - `scripts/verify_smokehouse_ux_pal.py`: Updated cache-buster regex check to accept `>= 2.2.2`.
+  - `tests/e2e/turnover_cards.spec.js`: Updated time-travel badge test assertion to `Simulated: 8:00 PM EST`.
+  - `index.html`: Bumped cache-busters from `?v=2.2.2` to `?v=2.2.3` across all stylesheet and script tags.
+  - Precomputed payloads (`shift_payload.json`, `quick_wind_alerts.json`, `predictive_payload.json`, `hourly_actuals.json`, `payloads.js`) regenerated.
+- **Verification Results**:
+  - `npm run check` & `node --check tz_utils.js`: 0 syntax errors.
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: 5/5 PASS (0.164s).
+  - PAL verifiers (`verify_timezone_and_actuals.py`, `verify_turnover_engine.py`, `verify_v2_facelift_pal.py`, `verify_bi_insight_engine.py`, `verify_smokehouse_ux_pal.py`, `verify_subtab_rollup_pal.py`, `verify_ml_analytics.py`): 100% PASS.
+  - Playwright E2E (`npm test`): **20 passed / 0 failed / 0 flaky (19.2s)**.
+  - Task 36 marked `passes: true` in `.loop/prd.json`.
+
+

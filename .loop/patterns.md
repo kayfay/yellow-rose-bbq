@@ -14,6 +14,7 @@
 - **Approved Smokehouse Terms**: `"Pitmaster Daily Forecast"`, `"Difference from Target"`, `"Extra Prep / Cushion"`, `"Cook Accuracy Audit"`, `"Typical [Day]"`, `"Est. Meat Cost"`, `"Left After Meat Cost"`, `"Hourly Sales Pace"`.
 - **Audit Takeaway Rule**: Every Cook Accuracy Audit view starts with a 1-line plain-English takeaway in practical cuts & lbs.
 - **Glossary Invariant**: 13 terms in `modules/reports/shop_reports.js` + `hourly_quick_wind_detector.py`. Brief lives in `#subtab-view-reports`.
+- **Time Display Standard**: Always 12-hour Eastern Standard Time (`h:00 AM/PM EST`) with uppercase AM/PM and explicit `EST`. Never 24-hour military time (`14:00`, `through hour 15:00`).
 
 ## 3. Executive Data Visualization, Layout & Okabe-Ito Tokens
 - **Tufte & Few**: Zero 3D/heavy gridlines; Bullet Bars (`.kpi-bullet-track`) + 7-Day Sparklines (`.kpi-sparkline-svg`) on KPI cards.
@@ -25,3 +26,5 @@
 - **Modules (`<script defer>`)**: `core_utils.js`, `sausage_calc.js`, `shop_reports.js`, `analytics_subtabs.js` -> `app.js`.
 - **Subtab Roll-Ups**: All 7 subtabs start with `.subtab-stat-strip` (3 cards) and `.rollup-section` (`min-height: 48px` `.rollup-header`).
 - **Security**: Files `0644`, dirs/scripts `0755`, `.env` `0600`; no `document.write()`; `escapeHTML`; parameterized SQL (`?`); zero wholesale COGS leaks.
+- **CI & Records**: Ingestion stages 4 paths (`clover_api/analytics/*.json`, `analytics/*.json`, `api/analytics/*.json`, `payloads.js`, `WEBSITE_MENU.md`); clean worktree + autostash rebase; historical days merge/accumulate.
+

@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-03T12:00:01.306220-05:00",
+      "generated_at": "2026-11-03T16:09:40.438364-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~217.8 lbs raw brisket (~87.1 lbs cooked yield) and ~30.3 lbs raw pork shoulder (~12.1 lbs cooked yield) [~248.1 lbs total raw / ~99.2 lbs total cooked meat] for Saturday. Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like Tacos (48 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -1263,30 +1263,30 @@ window.BBQ_PAYLOADS = {
       "data": [
         {
           "x": [
-            "00:00",
-            "01:00",
-            "02:00",
-            "03:00",
-            "04:00",
-            "05:00",
-            "06:00",
-            "07:00",
-            "08:00",
-            "09:00",
-            "10:00",
-            "11:00",
-            "12:00",
-            "13:00",
-            "14:00",
-            "15:00",
-            "16:00",
-            "17:00",
-            "18:00",
-            "19:00",
-            "20:00",
-            "21:00",
-            "22:00",
-            "23:00"
+            "12:00 AM EST",
+            "1:00 AM EST",
+            "2:00 AM EST",
+            "3:00 AM EST",
+            "4:00 AM EST",
+            "5:00 AM EST",
+            "6:00 AM EST",
+            "7:00 AM EST",
+            "8:00 AM EST",
+            "9:00 AM EST",
+            "10:00 AM EST",
+            "11:00 AM EST",
+            "12:00 PM EST",
+            "1:00 PM EST",
+            "2:00 PM EST",
+            "3:00 PM EST",
+            "4:00 PM EST",
+            "5:00 PM EST",
+            "6:00 PM EST",
+            "7:00 PM EST",
+            "8:00 PM EST",
+            "9:00 PM EST",
+            "10:00 PM EST",
+            "11:00 PM EST"
           ],
           "y": [
             "Monday",
@@ -1483,186 +1483,186 @@ window.BBQ_PAYLOADS = {
           ],
           "text": [
             [
-              "Monday 00:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 01:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 02:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 03:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 04:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 05:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 06:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 07:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 08:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 09:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 10:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 11:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 12:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 13:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 14:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 15:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 16:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 17:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 18:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 19:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 20:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 21:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 22:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
-              "Monday 23:00<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>"
+              "Monday 12:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 1:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 2:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 3:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 4:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 5:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 6:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 7:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 8:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 9:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 10:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 11:00 AM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 12:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 1:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 2:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 3:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 4:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 5:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 6:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 7:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 8:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 9:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 10:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>",
+              "Monday 11:00 PM EST<br>Closed<br><i>Pit maintenance & smokehouse sanitization.</i>"
             ],
             [
-              "Tuesday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 08:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 09:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 10:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 11:00<br>7.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 12:00<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 13:00<br>4.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 14:00<br>2.4 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 15:00<br>2.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 16:00<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 17:00<br>3.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 18:00<br>4.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 19:00<br>3.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Tuesday 20:00<br>0.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 21:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Tuesday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Tuesday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 7:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 8:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 9:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 10:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 11:00 AM EST<br>7.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 12:00 PM EST<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 1:00 PM EST<br>4.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 2:00 PM EST<br>2.4 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 3:00 PM EST<br>2.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 4:00 PM EST<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 5:00 PM EST<br>3.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 6:00 PM EST<br>4.6 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 7:00 PM EST<br>3.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Tuesday 8:00 PM EST<br>0.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 9:00 PM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Tuesday 11:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ],
             [
-              "Wednesday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 08:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 09:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 10:00<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 11:00<br>7.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Wednesday 12:00<br>8.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Wednesday 13:00<br>3.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Wednesday 14:00<br>2.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 15:00<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 16:00<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 17:00<br>4.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Wednesday 18:00<br>5.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Wednesday 19:00<br>2.9 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 20:00<br>0.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Wednesday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Wednesday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 7:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 8:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 9:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 10:00 AM EST<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 11:00 AM EST<br>7.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Wednesday 12:00 PM EST<br>8.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Wednesday 1:00 PM EST<br>3.8 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Wednesday 2:00 PM EST<br>2.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 3:00 PM EST<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 4:00 PM EST<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 5:00 PM EST<br>4.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Wednesday 6:00 PM EST<br>5.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Wednesday 7:00 PM EST<br>2.9 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 8:00 PM EST<br>0.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 9:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Wednesday 11:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ],
             [
-              "Thursday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 08:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 09:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 10:00<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 11:00<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Thursday 12:00<br>7.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 13:00<br>5.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 14:00<br>2.9 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 15:00<br>2.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 16:00<br>3.3 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 17:00<br>3.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 18:00<br>5.7 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 19:00<br>4.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Thursday 20:00<br>1.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Thursday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Thursday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 7:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 8:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 9:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 10:00 AM EST<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 11:00 AM EST<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Thursday 12:00 PM EST<br>7.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 1:00 PM EST<br>5.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 2:00 PM EST<br>2.9 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 3:00 PM EST<br>2.3 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 4:00 PM EST<br>3.3 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 5:00 PM EST<br>3.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 6:00 PM EST<br>5.7 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 7:00 PM EST<br>4.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Thursday 8:00 PM EST<br>1.6 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 9:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Thursday 11:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ],
             [
-              "Friday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 07:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 08:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 09:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 10:00<br>0.4 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 11:00<br>14.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 12:00<br>14.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 13:00<br>8.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 14:00<br>6.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 15:00<br>3.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 16:00<br>5.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Friday 17:00<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 18:00<br>10.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 19:00<br>8.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Friday 20:00<br>2.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Friday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Friday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 7:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 8:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 9:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 10:00 AM EST<br>0.4 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 11:00 AM EST<br>14.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 12:00 PM EST<br>14.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 1:00 PM EST<br>8.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 2:00 PM EST<br>6.5 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 3:00 PM EST<br>3.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 4:00 PM EST<br>5.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Friday 5:00 PM EST<br>8.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 6:00 PM EST<br>10.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 7:00 PM EST<br>8.4 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Friday 8:00 PM EST<br>2.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 9:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Friday 11:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ],
             [
-              "Saturday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 08:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 09:00<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 10:00<br>1.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 11:00<br>12.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 12:00<br>17.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 13:00<br>17.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 14:00<br>11.7 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 15:00<br>10.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 16:00<br>9.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 17:00<br>13.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 18:00<br>12.2 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Saturday 19:00<br>6.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Saturday 20:00<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 21:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Saturday 23:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Saturday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 7:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 8:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 9:00 AM EST<br>0.2 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 10:00 AM EST<br>1.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 11:00 AM EST<br>12.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 12:00 PM EST<br>17.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 1:00 PM EST<br>17.1 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 2:00 PM EST<br>11.7 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 3:00 PM EST<br>10.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 4:00 PM EST<br>9.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 5:00 PM EST<br>13.0 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 6:00 PM EST<br>12.2 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Saturday 7:00 PM EST<br>6.9 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Saturday 8:00 PM EST<br>1.8 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 9:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Saturday 11:00 PM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ],
             [
-              "Sunday 00:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 01:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 02:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 03:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 04:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 05:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 06:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 07:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 08:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 09:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 10:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 11:00<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 12:00<br>12.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Sunday 13:00<br>9.8 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
-              "Sunday 14:00<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 15:00<br>4.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 16:00<br>5.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 17:00<br>6.3 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 18:00<br>7.0 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-              "Sunday 19:00<br>2.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 20:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 21:00<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 22:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-              "Sunday 23:00<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
+              "Sunday 12:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 1:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 2:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 3:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 4:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 5:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 6:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 7:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 8:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 9:00 AM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 10:00 AM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 11:00 AM EST<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 12:00 PM EST<br>12.5 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Sunday 1:00 PM EST<br>9.8 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
+              "Sunday 2:00 PM EST<br>7.2 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 3:00 PM EST<br>4.4 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 4:00 PM EST<br>5.1 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 5:00 PM EST<br>6.3 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 6:00 PM EST<br>7.0 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
+              "Sunday 7:00 PM EST<br>2.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 8:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 9:00 PM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+              "Sunday 11:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
             ]
           ],
           "hovertemplate": "%{text}<extra></extra>",
@@ -1674,7 +1674,7 @@ window.BBQ_PAYLOADS = {
       "layout": {
         "title": "Labor Optimization: Hourly Foot Traffic by Shift",
         "xaxis": {
-          "title": "Hour of Day (Eastern Time)",
+          "title": "Hour of Day (12-Hour Eastern Standard Time)",
           "gridcolor": "rgba(255,255,255,0.1)",
           "tickangle": -45
         },
@@ -2332,116 +2332,103 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-11-02T15:57:42.356575-05:00",
+    "generated_at": "2026-11-03T16:09:40.404022-05:00",
     "summary_kpis": {
-      "projected_24h_revenue_usd": 1057.3,
-      "estimated_24h_cogs_usd": 311.9,
+      "projected_24h_revenue_usd": 1818.75,
+      "estimated_24h_cogs_usd": 536.53,
       "estimated_food_cost_pct": 29.5,
       "average_ticket_usd": 48.5,
-      "recommended_staff": 0,
-      "pitmaster_hours": 0.0,
-      "peak_rush_window": "11:00 AM (Tue)",
-      "current_sales_velocity": "0.0 orders/hr",
-      "pacing_status": "Slow Period",
-      "total_brisket_draw_lbs": 23.8,
-      "total_pork_draw_lbs": 7.9
+      "recommended_staff": 2,
+      "pitmaster_hours": 17.0,
+      "peak_rush_window": "12:00 PM EST (Wed)",
+      "current_sales_velocity": "1.8 orders/hr",
+      "pacing_status": "Normal Pacing",
+      "total_brisket_draw_lbs": 42.3,
+      "total_pork_draw_lbs": 9.4
     },
     "hourly_forecast": [
       {
-        "timestamp": "2026-11-02T15:00:00",
-        "hour_display": "3:00 PM",
-        "day_name": "Mon",
-        "hour": 15,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
-        "is_peak": false
-      },
-      {
-        "timestamp": "2026-11-02T16:00:00",
-        "hour_display": "4:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T16:00:00",
+        "hour_display": "4:00 PM EST",
+        "day_name": "Tue",
         "hour": 16,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
+        "predicted_orders": 1.8,
+        "predicted_revenue": 87.3,
+        "estimated_cogs_usd": 25.75,
+        "brisket_cooked_lbs": 2.0,
+        "pork_cooked_lbs": 0.7,
+        "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T17:00:00",
-        "hour_display": "5:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T17:00:00",
+        "hour_display": "5:00 PM EST",
+        "day_name": "Tue",
         "hour": 17,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
+        "predicted_orders": 3.5,
+        "predicted_revenue": 169.75,
+        "estimated_cogs_usd": 50.08,
+        "brisket_cooked_lbs": 3.8,
+        "pork_cooked_lbs": 1.3,
+        "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T18:00:00",
-        "hour_display": "6:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T18:00:00",
+        "hour_display": "6:00 PM EST",
+        "day_name": "Tue",
         "hour": 18,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
+        "predicted_orders": 4.6,
+        "predicted_revenue": 223.1,
+        "estimated_cogs_usd": 65.81,
+        "brisket_cooked_lbs": 5.0,
+        "pork_cooked_lbs": 1.7,
+        "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T19:00:00",
-        "hour_display": "7:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T19:00:00",
+        "hour_display": "7:00 PM EST",
+        "day_name": "Tue",
         "hour": 19,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
+        "predicted_orders": 3.1,
+        "predicted_revenue": 150.35,
+        "estimated_cogs_usd": 44.35,
+        "brisket_cooked_lbs": 3.4,
+        "pork_cooked_lbs": 1.1,
+        "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T20:00:00",
-        "hour_display": "8:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T20:00:00",
+        "hour_display": "8:00 PM EST",
+        "day_name": "Tue",
         "hour": 20,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Slow Period",
+        "predicted_orders": 0.8,
+        "predicted_revenue": 38.8,
+        "estimated_cogs_usd": 11.45,
+        "brisket_cooked_lbs": 0.9,
+        "pork_cooked_lbs": 0.3,
+        "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T21:00:00",
-        "hour_display": "9:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T21:00:00",
+        "hour_display": "9:00 PM EST",
+        "day_name": "Tue",
         "hour": 21,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
+        "predicted_orders": 0.1,
+        "predicted_revenue": 4.85,
+        "estimated_cogs_usd": 1.43,
+        "brisket_cooked_lbs": 0.1,
         "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T22:00:00",
-        "hour_display": "10:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T22:00:00",
+        "hour_display": "10:00 PM EST",
+        "day_name": "Tue",
         "hour": 22,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2452,9 +2439,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-02T23:00:00",
-        "hour_display": "11:00 PM",
-        "day_name": "Mon",
+        "timestamp": "2026-11-03T23:00:00",
+        "hour_display": "11:00 PM EST",
+        "day_name": "Tue",
         "hour": 23,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2465,9 +2452,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T00:00:00",
-        "hour_display": "12:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T00:00:00",
+        "hour_display": "12:00 AM EST",
+        "day_name": "Wed",
         "hour": 0,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2478,9 +2465,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T01:00:00",
-        "hour_display": "1:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T01:00:00",
+        "hour_display": "1:00 AM EST",
+        "day_name": "Wed",
         "hour": 1,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2491,9 +2478,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T02:00:00",
-        "hour_display": "2:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T02:00:00",
+        "hour_display": "2:00 AM EST",
+        "day_name": "Wed",
         "hour": 2,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2504,9 +2491,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T03:00:00",
-        "hour_display": "3:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T03:00:00",
+        "hour_display": "3:00 AM EST",
+        "day_name": "Wed",
         "hour": 3,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2517,9 +2504,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T04:00:00",
-        "hour_display": "4:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T04:00:00",
+        "hour_display": "4:00 AM EST",
+        "day_name": "Wed",
         "hour": 4,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2530,9 +2517,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T05:00:00",
-        "hour_display": "5:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T05:00:00",
+        "hour_display": "5:00 AM EST",
+        "day_name": "Wed",
         "hour": 5,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2543,9 +2530,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T06:00:00",
-        "hour_display": "6:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T06:00:00",
+        "hour_display": "6:00 AM EST",
+        "day_name": "Wed",
         "hour": 6,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2556,9 +2543,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T07:00:00",
-        "hour_display": "7:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T07:00:00",
+        "hour_display": "7:00 AM EST",
+        "day_name": "Wed",
         "hour": 7,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2569,9 +2556,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T08:00:00",
-        "hour_display": "8:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T08:00:00",
+        "hour_display": "8:00 AM EST",
+        "day_name": "Wed",
         "hour": 8,
         "predicted_orders": 0.0,
         "predicted_revenue": 0.0,
@@ -2582,9 +2569,9 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T09:00:00",
-        "hour_display": "9:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T09:00:00",
+        "hour_display": "9:00 AM EST",
+        "day_name": "Wed",
         "hour": 9,
         "predicted_orders": 0.1,
         "predicted_revenue": 4.85,
@@ -2595,74 +2582,87 @@ window.BBQ_PAYLOADS = {
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T10:00:00",
-        "hour_display": "10:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T10:00:00",
+        "hour_display": "10:00 AM EST",
+        "day_name": "Wed",
         "hour": 10,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
+        "predicted_orders": 0.2,
+        "predicted_revenue": 9.7,
+        "estimated_cogs_usd": 2.86,
+        "brisket_cooked_lbs": 0.2,
         "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T11:00:00",
-        "hour_display": "11:00 AM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T11:00:00",
+        "hour_display": "11:00 AM EST",
+        "day_name": "Wed",
         "hour": 11,
-        "predicted_orders": 7.5,
-        "predicted_revenue": 363.75,
-        "estimated_cogs_usd": 107.31,
-        "brisket_cooked_lbs": 8.2,
-        "pork_cooked_lbs": 2.7,
+        "predicted_orders": 7.4,
+        "predicted_revenue": 358.9,
+        "estimated_cogs_usd": 105.88,
+        "brisket_cooked_lbs": 8.5,
+        "pork_cooked_lbs": 1.4,
         "pacing_status": "Normal Pacing",
         "is_peak": true
       },
       {
-        "timestamp": "2026-11-03T12:00:00",
-        "hour_display": "12:00 PM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T12:00:00",
+        "hour_display": "12:00 PM EST",
+        "day_name": "Wed",
         "hour": 12,
-        "predicted_orders": 7.2,
-        "predicted_revenue": 349.2,
-        "estimated_cogs_usd": 103.01,
-        "brisket_cooked_lbs": 7.9,
-        "pork_cooked_lbs": 2.6,
+        "predicted_orders": 8.0,
+        "predicted_revenue": 388.0,
+        "estimated_cogs_usd": 114.46,
+        "brisket_cooked_lbs": 9.2,
+        "pork_cooked_lbs": 1.5,
         "pacing_status": "Normal Pacing",
         "is_peak": true
       },
       {
-        "timestamp": "2026-11-03T13:00:00",
-        "hour_display": "1:00 PM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T13:00:00",
+        "hour_display": "1:00 PM EST",
+        "day_name": "Wed",
         "hour": 13,
-        "predicted_orders": 4.6,
-        "predicted_revenue": 223.1,
-        "estimated_cogs_usd": 65.81,
-        "brisket_cooked_lbs": 5.0,
-        "pork_cooked_lbs": 1.7,
+        "predicted_orders": 3.8,
+        "predicted_revenue": 184.3,
+        "estimated_cogs_usd": 54.37,
+        "brisket_cooked_lbs": 4.4,
+        "pork_cooked_lbs": 0.7,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       },
       {
-        "timestamp": "2026-11-03T14:00:00",
-        "hour_display": "2:00 PM",
-        "day_name": "Tue",
+        "timestamp": "2026-11-04T14:00:00",
+        "hour_display": "2:00 PM EST",
+        "day_name": "Wed",
         "hour": 14,
-        "predicted_orders": 2.4,
-        "predicted_revenue": 116.4,
-        "estimated_cogs_usd": 34.34,
+        "predicted_orders": 2.3,
+        "predicted_revenue": 111.55,
+        "estimated_cogs_usd": 32.91,
         "brisket_cooked_lbs": 2.6,
-        "pork_cooked_lbs": 0.9,
+        "pork_cooked_lbs": 0.4,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-04T15:00:00",
+        "hour_display": "3:00 PM EST",
+        "day_name": "Wed",
+        "hour": 15,
+        "predicted_orders": 1.8,
+        "predicted_revenue": 87.3,
+        "estimated_cogs_usd": 25.75,
+        "brisket_cooked_lbs": 2.1,
+        "pork_cooked_lbs": 0.3,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       }
     ],
     "operational_directives": [
-      "Peak Window: 11:00 AM (Tue) (~7.5 orders/hr).",
-      "24h Meat Draw: ~23.8 lbs cooked brisket & ~7.9 lbs pulled pork.",
+      "Peak Window: 12:00 PM EST (Wed) (~8.0 orders/hr).",
+      "24h Meat Draw: ~42.3 lbs cooked brisket & ~9.4 lbs pulled pork.",
       "Rain / Humidity (>85%): Stage +20% takeout packaging as dine-in shifts to family packs.",
       "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM for a 45-min rest before the 5:00 PM rush."
     ],
@@ -2673,7 +2673,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": true,
         "peak_orders": 0.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Mon)",
+        "peak_rush_window": "12:00 PM EST (Mon)",
         "total_orders": 0.0,
         "projected_revenue_usd": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -2688,7 +2688,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-05T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Mon",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -2701,7 +2701,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Mon",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -2714,7 +2714,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Mon",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -2727,7 +2727,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Mon",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -2740,7 +2740,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Mon",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -2753,7 +2753,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Mon",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -2766,7 +2766,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Mon",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -2779,7 +2779,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Mon",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -2792,7 +2792,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Mon",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -2805,7 +2805,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Mon",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -2818,7 +2818,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Mon",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -2831,7 +2831,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Mon",
             "hour": 11,
             "predicted_orders": 0.0,
@@ -2844,7 +2844,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Mon",
             "hour": 12,
             "predicted_orders": 0.0,
@@ -2857,7 +2857,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Mon",
             "hour": 13,
             "predicted_orders": 0.0,
@@ -2870,7 +2870,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Mon",
             "hour": 14,
             "predicted_orders": 0.0,
@@ -2883,7 +2883,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Mon",
             "hour": 15,
             "predicted_orders": 0.0,
@@ -2896,7 +2896,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Mon",
             "hour": 16,
             "predicted_orders": 0.0,
@@ -2909,7 +2909,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Mon",
             "hour": 17,
             "predicted_orders": 0.0,
@@ -2922,7 +2922,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Mon",
             "hour": 18,
             "predicted_orders": 0.0,
@@ -2935,7 +2935,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Mon",
             "hour": 19,
             "predicted_orders": 0.0,
@@ -2948,7 +2948,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Mon",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -2961,7 +2961,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Mon",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -2974,7 +2974,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Mon",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -2987,7 +2987,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Mon",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -3011,7 +3011,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": true,
         "peak_orders": 0.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Mon)",
+        "peak_rush_window": "12:00 PM EST (Mon)",
         "total_orders": 0.0,
         "projected_revenue_usd": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -3026,7 +3026,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-05T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Mon",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -3039,7 +3039,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Mon",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -3052,7 +3052,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Mon",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -3065,7 +3065,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Mon",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -3078,7 +3078,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Mon",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -3091,7 +3091,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Mon",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -3104,7 +3104,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Mon",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -3117,7 +3117,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Mon",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -3130,7 +3130,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Mon",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -3143,7 +3143,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Mon",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -3156,7 +3156,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Mon",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -3169,7 +3169,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Mon",
             "hour": 11,
             "predicted_orders": 0.0,
@@ -3182,7 +3182,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Mon",
             "hour": 12,
             "predicted_orders": 0.0,
@@ -3195,7 +3195,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Mon",
             "hour": 13,
             "predicted_orders": 0.0,
@@ -3208,7 +3208,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Mon",
             "hour": 14,
             "predicted_orders": 0.0,
@@ -3221,7 +3221,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Mon",
             "hour": 15,
             "predicted_orders": 0.0,
@@ -3234,7 +3234,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Mon",
             "hour": 16,
             "predicted_orders": 0.0,
@@ -3247,7 +3247,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Mon",
             "hour": 17,
             "predicted_orders": 0.0,
@@ -3260,7 +3260,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Mon",
             "hour": 18,
             "predicted_orders": 0.0,
@@ -3273,7 +3273,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Mon",
             "hour": 19,
             "predicted_orders": 0.0,
@@ -3286,7 +3286,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Mon",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -3299,7 +3299,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Mon",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -3312,7 +3312,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Mon",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -3325,7 +3325,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Mon",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -3349,7 +3349,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": true,
         "peak_orders": 0.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Mon)",
+        "peak_rush_window": "12:00 PM EST (Mon)",
         "total_orders": 0.0,
         "projected_revenue_usd": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -3364,7 +3364,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-05T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Mon",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -3377,7 +3377,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Mon",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -3390,7 +3390,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Mon",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -3403,7 +3403,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Mon",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -3416,7 +3416,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Mon",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -3429,7 +3429,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Mon",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -3442,7 +3442,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Mon",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -3455,7 +3455,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Mon",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -3468,7 +3468,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Mon",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -3481,7 +3481,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Mon",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -3494,7 +3494,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Mon",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -3507,7 +3507,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Mon",
             "hour": 11,
             "predicted_orders": 0.0,
@@ -3520,7 +3520,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Mon",
             "hour": 12,
             "predicted_orders": 0.0,
@@ -3533,7 +3533,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Mon",
             "hour": 13,
             "predicted_orders": 0.0,
@@ -3546,7 +3546,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Mon",
             "hour": 14,
             "predicted_orders": 0.0,
@@ -3559,7 +3559,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Mon",
             "hour": 15,
             "predicted_orders": 0.0,
@@ -3572,7 +3572,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Mon",
             "hour": 16,
             "predicted_orders": 0.0,
@@ -3585,7 +3585,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Mon",
             "hour": 17,
             "predicted_orders": 0.0,
@@ -3598,7 +3598,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Mon",
             "hour": 18,
             "predicted_orders": 0.0,
@@ -3611,7 +3611,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Mon",
             "hour": 19,
             "predicted_orders": 0.0,
@@ -3624,7 +3624,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Mon",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -3637,7 +3637,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Mon",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -3650,7 +3650,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Mon",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -3663,7 +3663,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Mon",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -3687,7 +3687,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": true,
         "peak_orders": 0.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Mon)",
+        "peak_rush_window": "12:00 PM EST (Mon)",
         "total_orders": 0.0,
         "projected_revenue_usd": 0.0,
         "estimated_cogs_usd": 0.0,
@@ -3702,7 +3702,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-05T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Mon",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -3715,7 +3715,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Mon",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -3728,7 +3728,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Mon",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -3741,7 +3741,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Mon",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -3754,7 +3754,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Mon",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -3767,7 +3767,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Mon",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -3780,7 +3780,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Mon",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -3793,7 +3793,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Mon",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -3806,7 +3806,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Mon",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -3819,7 +3819,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Mon",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -3832,7 +3832,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Mon",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -3845,7 +3845,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Mon",
             "hour": 11,
             "predicted_orders": 0.0,
@@ -3858,7 +3858,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Mon",
             "hour": 12,
             "predicted_orders": 0.0,
@@ -3871,7 +3871,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Mon",
             "hour": 13,
             "predicted_orders": 0.0,
@@ -3884,7 +3884,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Mon",
             "hour": 14,
             "predicted_orders": 0.0,
@@ -3897,7 +3897,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Mon",
             "hour": 15,
             "predicted_orders": 0.0,
@@ -3910,7 +3910,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Mon",
             "hour": 16,
             "predicted_orders": 0.0,
@@ -3923,7 +3923,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Mon",
             "hour": 17,
             "predicted_orders": 0.0,
@@ -3936,7 +3936,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Mon",
             "hour": 18,
             "predicted_orders": 0.0,
@@ -3949,7 +3949,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Mon",
             "hour": 19,
             "predicted_orders": 0.0,
@@ -3962,7 +3962,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Mon",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -3975,7 +3975,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Mon",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -3988,7 +3988,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Mon",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -4001,7 +4001,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-05T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Mon",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -4025,7 +4025,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 7.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Tue)",
+        "peak_rush_window": "11:00 AM EST (Tue)",
         "total_orders": 37.8,
         "projected_revenue_usd": 1833.3,
         "estimated_cogs_usd": 540.82,
@@ -4040,7 +4040,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-06T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Tue",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -4053,7 +4053,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Tue",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -4066,7 +4066,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Tue",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -4079,7 +4079,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Tue",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -4092,7 +4092,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Tue",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -4105,7 +4105,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Tue",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -4118,7 +4118,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Tue",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -4131,7 +4131,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Tue",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -4144,7 +4144,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Tue",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -4157,7 +4157,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Tue",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -4170,7 +4170,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Tue",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -4183,7 +4183,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Tue",
             "hour": 11,
             "predicted_orders": 7.5,
@@ -4196,7 +4196,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Tue",
             "hour": 12,
             "predicted_orders": 7.2,
@@ -4209,7 +4209,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Tue",
             "hour": 13,
             "predicted_orders": 4.6,
@@ -4222,7 +4222,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Tue",
             "hour": 14,
             "predicted_orders": 2.4,
@@ -4235,7 +4235,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Tue",
             "hour": 15,
             "predicted_orders": 2.1,
@@ -4248,7 +4248,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Tue",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -4261,7 +4261,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Tue",
             "hour": 17,
             "predicted_orders": 3.5,
@@ -4274,7 +4274,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Tue",
             "hour": 18,
             "predicted_orders": 4.6,
@@ -4287,7 +4287,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Tue",
             "hour": 19,
             "predicted_orders": 3.1,
@@ -4300,7 +4300,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Tue",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -4313,7 +4313,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Tue",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -4326,7 +4326,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Tue",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -4339,7 +4339,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Tue",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -4352,7 +4352,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~41.3 lbs smoked brisket and ~13.8 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage lean and moist brisket cuts for 11:30 AM initial opening rush."
@@ -4364,7 +4364,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 7.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Tue)",
+        "peak_rush_window": "11:00 AM EST (Tue)",
         "total_orders": 37.8,
         "projected_revenue_usd": 1833.3,
         "estimated_cogs_usd": 540.82,
@@ -4379,7 +4379,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-06T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Tue",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -4392,7 +4392,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Tue",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -4405,7 +4405,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Tue",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -4418,7 +4418,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Tue",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -4431,7 +4431,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Tue",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -4444,7 +4444,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Tue",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -4457,7 +4457,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Tue",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -4470,7 +4470,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Tue",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -4483,7 +4483,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Tue",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -4496,7 +4496,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Tue",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -4509,7 +4509,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Tue",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -4522,7 +4522,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Tue",
             "hour": 11,
             "predicted_orders": 7.5,
@@ -4535,7 +4535,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Tue",
             "hour": 12,
             "predicted_orders": 7.2,
@@ -4548,7 +4548,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Tue",
             "hour": 13,
             "predicted_orders": 4.6,
@@ -4561,7 +4561,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Tue",
             "hour": 14,
             "predicted_orders": 2.4,
@@ -4574,7 +4574,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Tue",
             "hour": 15,
             "predicted_orders": 2.1,
@@ -4587,7 +4587,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Tue",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -4600,7 +4600,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Tue",
             "hour": 17,
             "predicted_orders": 3.5,
@@ -4613,7 +4613,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Tue",
             "hour": 18,
             "predicted_orders": 4.6,
@@ -4626,7 +4626,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Tue",
             "hour": 19,
             "predicted_orders": 3.1,
@@ -4639,7 +4639,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Tue",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -4652,7 +4652,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Tue",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -4665,7 +4665,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Tue",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -4678,7 +4678,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Tue",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -4691,7 +4691,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~41.3 lbs smoked brisket and ~13.8 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage lean and moist brisket cuts for 11:30 AM initial opening rush."
@@ -4703,7 +4703,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 7.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Tue)",
+        "peak_rush_window": "11:00 AM EST (Tue)",
         "total_orders": 37.8,
         "projected_revenue_usd": 1833.3,
         "estimated_cogs_usd": 540.82,
@@ -4718,7 +4718,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-06T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Tue",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -4731,7 +4731,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Tue",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -4744,7 +4744,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Tue",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -4757,7 +4757,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Tue",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -4770,7 +4770,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Tue",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -4783,7 +4783,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Tue",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -4796,7 +4796,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Tue",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -4809,7 +4809,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Tue",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -4822,7 +4822,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Tue",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -4835,7 +4835,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Tue",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -4848,7 +4848,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Tue",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -4861,7 +4861,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Tue",
             "hour": 11,
             "predicted_orders": 7.5,
@@ -4874,7 +4874,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Tue",
             "hour": 12,
             "predicted_orders": 7.2,
@@ -4887,7 +4887,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Tue",
             "hour": 13,
             "predicted_orders": 4.6,
@@ -4900,7 +4900,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Tue",
             "hour": 14,
             "predicted_orders": 2.4,
@@ -4913,7 +4913,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Tue",
             "hour": 15,
             "predicted_orders": 2.1,
@@ -4926,7 +4926,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Tue",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -4939,7 +4939,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Tue",
             "hour": 17,
             "predicted_orders": 3.5,
@@ -4952,7 +4952,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Tue",
             "hour": 18,
             "predicted_orders": 4.6,
@@ -4965,7 +4965,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Tue",
             "hour": 19,
             "predicted_orders": 3.1,
@@ -4978,7 +4978,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Tue",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -4991,7 +4991,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Tue",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -5004,7 +5004,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Tue",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -5017,7 +5017,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Tue",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -5030,7 +5030,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~41.3 lbs smoked brisket and ~13.8 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage lean and moist brisket cuts for 11:30 AM initial opening rush."
@@ -5042,7 +5042,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 7.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Tue)",
+        "peak_rush_window": "11:00 AM EST (Tue)",
         "total_orders": 37.8,
         "projected_revenue_usd": 1833.3,
         "estimated_cogs_usd": 540.82,
@@ -5057,7 +5057,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-06T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Tue",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -5070,7 +5070,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Tue",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -5083,7 +5083,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Tue",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -5096,7 +5096,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Tue",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -5109,7 +5109,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Tue",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -5122,7 +5122,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Tue",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -5135,7 +5135,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Tue",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -5148,7 +5148,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Tue",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -5161,7 +5161,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Tue",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -5174,7 +5174,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Tue",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -5187,7 +5187,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Tue",
             "hour": 10,
             "predicted_orders": 0.0,
@@ -5200,7 +5200,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Tue",
             "hour": 11,
             "predicted_orders": 7.5,
@@ -5213,7 +5213,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Tue",
             "hour": 12,
             "predicted_orders": 7.2,
@@ -5226,7 +5226,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Tue",
             "hour": 13,
             "predicted_orders": 4.6,
@@ -5239,7 +5239,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Tue",
             "hour": 14,
             "predicted_orders": 2.4,
@@ -5252,7 +5252,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Tue",
             "hour": 15,
             "predicted_orders": 2.1,
@@ -5265,7 +5265,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Tue",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -5278,7 +5278,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Tue",
             "hour": 17,
             "predicted_orders": 3.5,
@@ -5291,7 +5291,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Tue",
             "hour": 18,
             "predicted_orders": 4.6,
@@ -5304,7 +5304,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Tue",
             "hour": 19,
             "predicted_orders": 3.1,
@@ -5317,7 +5317,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Tue",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -5330,7 +5330,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Tue",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -5343,7 +5343,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Tue",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -5356,7 +5356,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-06T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Tue",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -5369,7 +5369,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Tue) reaching ~7.5 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~41.3 lbs smoked brisket and ~13.8 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage lean and moist brisket cuts for 11:30 AM initial opening rush."
@@ -5381,7 +5381,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Wed)",
+        "peak_rush_window": "12:00 PM EST (Wed)",
         "total_orders": 38.6,
         "projected_revenue_usd": 1872.1,
         "estimated_cogs_usd": 552.27,
@@ -5396,7 +5396,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-07T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Wed",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -5409,7 +5409,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Wed",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -5422,7 +5422,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Wed",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -5435,7 +5435,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Wed",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -5448,7 +5448,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Wed",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -5461,7 +5461,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Wed",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -5474,7 +5474,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Wed",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -5487,7 +5487,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Wed",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -5500,7 +5500,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Wed",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -5513,7 +5513,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Wed",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -5526,7 +5526,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Wed",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -5539,7 +5539,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Wed",
             "hour": 11,
             "predicted_orders": 7.4,
@@ -5552,7 +5552,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Wed",
             "hour": 12,
             "predicted_orders": 8.0,
@@ -5565,7 +5565,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Wed",
             "hour": 13,
             "predicted_orders": 3.8,
@@ -5578,7 +5578,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Wed",
             "hour": 14,
             "predicted_orders": 2.3,
@@ -5591,7 +5591,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Wed",
             "hour": 15,
             "predicted_orders": 1.8,
@@ -5604,7 +5604,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Wed",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -5617,7 +5617,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Wed",
             "hour": 17,
             "predicted_orders": 4.1,
@@ -5630,7 +5630,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Wed",
             "hour": 18,
             "predicted_orders": 5.4,
@@ -5643,7 +5643,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Wed",
             "hour": 19,
             "predicted_orders": 2.9,
@@ -5656,7 +5656,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Wed",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -5669,7 +5669,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Wed",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -5682,7 +5682,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Wed",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -5695,7 +5695,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Wed",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -5708,7 +5708,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~44.3 lbs smoked brisket and ~7.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 1 meats by 10:30 AM to rest ahead of 11:00 AM opening."
@@ -5720,7 +5720,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Wed)",
+        "peak_rush_window": "12:00 PM EST (Wed)",
         "total_orders": 38.6,
         "projected_revenue_usd": 1872.1,
         "estimated_cogs_usd": 552.27,
@@ -5735,7 +5735,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-07T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Wed",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -5748,7 +5748,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Wed",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -5761,7 +5761,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Wed",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -5774,7 +5774,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Wed",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -5787,7 +5787,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Wed",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -5800,7 +5800,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Wed",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -5813,7 +5813,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Wed",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -5826,7 +5826,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Wed",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -5839,7 +5839,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Wed",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -5852,7 +5852,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Wed",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -5865,7 +5865,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Wed",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -5878,7 +5878,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Wed",
             "hour": 11,
             "predicted_orders": 7.4,
@@ -5891,7 +5891,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Wed",
             "hour": 12,
             "predicted_orders": 8.0,
@@ -5904,7 +5904,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Wed",
             "hour": 13,
             "predicted_orders": 3.8,
@@ -5917,7 +5917,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Wed",
             "hour": 14,
             "predicted_orders": 2.3,
@@ -5930,7 +5930,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Wed",
             "hour": 15,
             "predicted_orders": 1.8,
@@ -5943,7 +5943,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Wed",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -5956,7 +5956,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Wed",
             "hour": 17,
             "predicted_orders": 4.1,
@@ -5969,7 +5969,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Wed",
             "hour": 18,
             "predicted_orders": 5.4,
@@ -5982,7 +5982,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Wed",
             "hour": 19,
             "predicted_orders": 2.9,
@@ -5995,7 +5995,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Wed",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -6008,7 +6008,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Wed",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -6021,7 +6021,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Wed",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -6034,7 +6034,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Wed",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -6047,7 +6047,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~44.3 lbs smoked brisket and ~7.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 1 meats by 10:30 AM to rest ahead of 11:00 AM opening."
@@ -6059,7 +6059,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Wed)",
+        "peak_rush_window": "12:00 PM EST (Wed)",
         "total_orders": 38.6,
         "projected_revenue_usd": 1872.1,
         "estimated_cogs_usd": 552.27,
@@ -6074,7 +6074,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-07T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Wed",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -6087,7 +6087,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Wed",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -6100,7 +6100,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Wed",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -6113,7 +6113,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Wed",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -6126,7 +6126,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Wed",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -6139,7 +6139,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Wed",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -6152,7 +6152,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Wed",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -6165,7 +6165,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Wed",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -6178,7 +6178,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Wed",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -6191,7 +6191,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Wed",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -6204,7 +6204,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Wed",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -6217,7 +6217,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Wed",
             "hour": 11,
             "predicted_orders": 7.4,
@@ -6230,7 +6230,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Wed",
             "hour": 12,
             "predicted_orders": 8.0,
@@ -6243,7 +6243,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Wed",
             "hour": 13,
             "predicted_orders": 3.8,
@@ -6256,7 +6256,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Wed",
             "hour": 14,
             "predicted_orders": 2.3,
@@ -6269,7 +6269,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Wed",
             "hour": 15,
             "predicted_orders": 1.8,
@@ -6282,7 +6282,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Wed",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -6295,7 +6295,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Wed",
             "hour": 17,
             "predicted_orders": 4.1,
@@ -6308,7 +6308,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Wed",
             "hour": 18,
             "predicted_orders": 5.4,
@@ -6321,7 +6321,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Wed",
             "hour": 19,
             "predicted_orders": 2.9,
@@ -6334,7 +6334,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Wed",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -6347,7 +6347,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Wed",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -6360,7 +6360,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Wed",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -6373,7 +6373,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Wed",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -6386,7 +6386,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~44.3 lbs smoked brisket and ~7.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 1 meats by 10:30 AM to rest ahead of 11:00 AM opening."
@@ -6398,7 +6398,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.0,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Wed)",
+        "peak_rush_window": "12:00 PM EST (Wed)",
         "total_orders": 38.6,
         "projected_revenue_usd": 1872.1,
         "estimated_cogs_usd": 552.27,
@@ -6413,7 +6413,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-07T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Wed",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -6426,7 +6426,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Wed",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -6439,7 +6439,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Wed",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -6452,7 +6452,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Wed",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -6465,7 +6465,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Wed",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -6478,7 +6478,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Wed",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -6491,7 +6491,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Wed",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -6504,7 +6504,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Wed",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -6517,7 +6517,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Wed",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -6530,7 +6530,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Wed",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -6543,7 +6543,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Wed",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -6556,7 +6556,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Wed",
             "hour": 11,
             "predicted_orders": 7.4,
@@ -6569,7 +6569,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Wed",
             "hour": 12,
             "predicted_orders": 8.0,
@@ -6582,7 +6582,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Wed",
             "hour": 13,
             "predicted_orders": 3.8,
@@ -6595,7 +6595,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Wed",
             "hour": 14,
             "predicted_orders": 2.3,
@@ -6608,7 +6608,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Wed",
             "hour": 15,
             "predicted_orders": 1.8,
@@ -6621,7 +6621,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Wed",
             "hour": 16,
             "predicted_orders": 1.8,
@@ -6634,7 +6634,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Wed",
             "hour": 17,
             "predicted_orders": 4.1,
@@ -6647,7 +6647,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Wed",
             "hour": 18,
             "predicted_orders": 5.4,
@@ -6660,7 +6660,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Wed",
             "hour": 19,
             "predicted_orders": 2.9,
@@ -6673,7 +6673,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Wed",
             "hour": 20,
             "predicted_orders": 0.8,
@@ -6686,7 +6686,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Wed",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -6699,7 +6699,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Wed",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -6712,7 +6712,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-07T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Wed",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -6725,7 +6725,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Wed) reaching ~8.0 orders/hr; steady weekday lunch flow.",
           "Meat Depletion Pacing: Day projected to draw ~44.3 lbs smoked brisket and ~7.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 1 meats by 10:30 AM to rest ahead of 11:00 AM opening."
@@ -6737,7 +6737,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Thu)",
+        "peak_rush_window": "11:00 AM EST (Thu)",
         "total_orders": 45.7,
         "projected_revenue_usd": 2216.45,
         "estimated_cogs_usd": 653.84,
@@ -6752,7 +6752,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-08T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Thu",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -6765,7 +6765,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Thu",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -6778,7 +6778,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Thu",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -6791,7 +6791,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Thu",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -6804,7 +6804,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Thu",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -6817,7 +6817,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Thu",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -6830,7 +6830,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Thu",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -6843,7 +6843,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Thu",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -6856,7 +6856,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Thu",
             "hour": 8,
             "predicted_orders": 0.1,
@@ -6869,7 +6869,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Thu",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -6882,7 +6882,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Thu",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -6895,7 +6895,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Thu",
             "hour": 11,
             "predicted_orders": 8.5,
@@ -6908,7 +6908,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Thu",
             "hour": 12,
             "predicted_orders": 7.9,
@@ -6921,7 +6921,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Thu",
             "hour": 13,
             "predicted_orders": 5.2,
@@ -6934,7 +6934,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Thu",
             "hour": 14,
             "predicted_orders": 2.9,
@@ -6947,7 +6947,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Thu",
             "hour": 15,
             "predicted_orders": 2.3,
@@ -6960,7 +6960,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Thu",
             "hour": 16,
             "predicted_orders": 3.3,
@@ -6973,7 +6973,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Thu",
             "hour": 17,
             "predicted_orders": 3.9,
@@ -6986,7 +6986,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Thu",
             "hour": 18,
             "predicted_orders": 5.7,
@@ -6999,7 +6999,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Thu",
             "hour": 19,
             "predicted_orders": 4.1,
@@ -7012,7 +7012,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Thu",
             "hour": 20,
             "predicted_orders": 1.6,
@@ -7025,7 +7025,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Thu",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -7038,7 +7038,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Thu",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -7051,7 +7051,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Thu",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -7064,7 +7064,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
           "Meat Depletion Pacing: Day projected to draw ~48.2 lbs smoked brisket and ~6.9 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Prep smoker racks for Friday high-capacity smoke."
@@ -7076,7 +7076,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Thu)",
+        "peak_rush_window": "11:00 AM EST (Thu)",
         "total_orders": 45.7,
         "projected_revenue_usd": 2216.45,
         "estimated_cogs_usd": 653.84,
@@ -7091,7 +7091,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-08T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Thu",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -7104,7 +7104,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Thu",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -7117,7 +7117,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Thu",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -7130,7 +7130,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Thu",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -7143,7 +7143,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Thu",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -7156,7 +7156,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Thu",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -7169,7 +7169,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Thu",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -7182,7 +7182,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Thu",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -7195,7 +7195,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Thu",
             "hour": 8,
             "predicted_orders": 0.1,
@@ -7208,7 +7208,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Thu",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -7221,7 +7221,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Thu",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -7234,7 +7234,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Thu",
             "hour": 11,
             "predicted_orders": 8.5,
@@ -7247,7 +7247,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Thu",
             "hour": 12,
             "predicted_orders": 7.9,
@@ -7260,7 +7260,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Thu",
             "hour": 13,
             "predicted_orders": 5.2,
@@ -7273,7 +7273,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Thu",
             "hour": 14,
             "predicted_orders": 2.9,
@@ -7286,7 +7286,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Thu",
             "hour": 15,
             "predicted_orders": 2.3,
@@ -7299,7 +7299,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Thu",
             "hour": 16,
             "predicted_orders": 3.3,
@@ -7312,7 +7312,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Thu",
             "hour": 17,
             "predicted_orders": 3.9,
@@ -7325,7 +7325,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Thu",
             "hour": 18,
             "predicted_orders": 5.7,
@@ -7338,7 +7338,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Thu",
             "hour": 19,
             "predicted_orders": 4.1,
@@ -7351,7 +7351,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Thu",
             "hour": 20,
             "predicted_orders": 1.6,
@@ -7364,7 +7364,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Thu",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -7377,7 +7377,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Thu",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -7390,7 +7390,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Thu",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -7403,7 +7403,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
           "Meat Depletion Pacing: Day projected to draw ~48.2 lbs smoked brisket and ~6.9 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Prep smoker racks for Friday high-capacity smoke."
@@ -7415,7 +7415,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Thu)",
+        "peak_rush_window": "11:00 AM EST (Thu)",
         "total_orders": 45.7,
         "projected_revenue_usd": 2216.45,
         "estimated_cogs_usd": 653.84,
@@ -7430,7 +7430,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-08T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Thu",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -7443,7 +7443,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Thu",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -7456,7 +7456,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Thu",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -7469,7 +7469,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Thu",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -7482,7 +7482,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Thu",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -7495,7 +7495,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Thu",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -7508,7 +7508,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Thu",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -7521,7 +7521,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Thu",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -7534,7 +7534,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Thu",
             "hour": 8,
             "predicted_orders": 0.1,
@@ -7547,7 +7547,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Thu",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -7560,7 +7560,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Thu",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -7573,7 +7573,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Thu",
             "hour": 11,
             "predicted_orders": 8.5,
@@ -7586,7 +7586,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Thu",
             "hour": 12,
             "predicted_orders": 7.9,
@@ -7599,7 +7599,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Thu",
             "hour": 13,
             "predicted_orders": 5.2,
@@ -7612,7 +7612,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Thu",
             "hour": 14,
             "predicted_orders": 2.9,
@@ -7625,7 +7625,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Thu",
             "hour": 15,
             "predicted_orders": 2.3,
@@ -7638,7 +7638,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Thu",
             "hour": 16,
             "predicted_orders": 3.3,
@@ -7651,7 +7651,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Thu",
             "hour": 17,
             "predicted_orders": 3.9,
@@ -7664,7 +7664,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Thu",
             "hour": 18,
             "predicted_orders": 5.7,
@@ -7677,7 +7677,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Thu",
             "hour": 19,
             "predicted_orders": 4.1,
@@ -7690,7 +7690,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Thu",
             "hour": 20,
             "predicted_orders": 1.6,
@@ -7703,7 +7703,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Thu",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -7716,7 +7716,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Thu",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -7729,7 +7729,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Thu",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -7742,7 +7742,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
           "Meat Depletion Pacing: Day projected to draw ~48.2 lbs smoked brisket and ~6.9 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Prep smoker racks for Friday high-capacity smoke."
@@ -7754,7 +7754,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 8.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Thu)",
+        "peak_rush_window": "11:00 AM EST (Thu)",
         "total_orders": 45.7,
         "projected_revenue_usd": 2216.45,
         "estimated_cogs_usd": 653.84,
@@ -7769,7 +7769,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-08T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Thu",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -7782,7 +7782,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Thu",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -7795,7 +7795,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Thu",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -7808,7 +7808,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Thu",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -7821,7 +7821,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Thu",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -7834,7 +7834,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Thu",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -7847,7 +7847,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Thu",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -7860,7 +7860,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Thu",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -7873,7 +7873,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Thu",
             "hour": 8,
             "predicted_orders": 0.1,
@@ -7886,7 +7886,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Thu",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -7899,7 +7899,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Thu",
             "hour": 10,
             "predicted_orders": 0.2,
@@ -7912,7 +7912,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Thu",
             "hour": 11,
             "predicted_orders": 8.5,
@@ -7925,7 +7925,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Thu",
             "hour": 12,
             "predicted_orders": 7.9,
@@ -7938,7 +7938,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Thu",
             "hour": 13,
             "predicted_orders": 5.2,
@@ -7951,7 +7951,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Thu",
             "hour": 14,
             "predicted_orders": 2.9,
@@ -7964,7 +7964,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Thu",
             "hour": 15,
             "predicted_orders": 2.3,
@@ -7977,7 +7977,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Thu",
             "hour": 16,
             "predicted_orders": 3.3,
@@ -7990,7 +7990,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Thu",
             "hour": 17,
             "predicted_orders": 3.9,
@@ -8003,7 +8003,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Thu",
             "hour": 18,
             "predicted_orders": 5.7,
@@ -8016,7 +8016,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Thu",
             "hour": 19,
             "predicted_orders": 4.1,
@@ -8029,7 +8029,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Thu",
             "hour": 20,
             "predicted_orders": 1.6,
@@ -8042,7 +8042,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Thu",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -8055,7 +8055,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Thu",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -8068,7 +8068,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-08T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Thu",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -8081,7 +8081,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Thu) reaching ~8.5 orders/hr; lunch rush into early afternoon.",
           "Meat Depletion Pacing: Day projected to draw ~48.2 lbs smoked brisket and ~6.9 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Prep smoker racks for Friday high-capacity smoke."
@@ -8093,7 +8093,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 14.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Fri)",
+        "peak_rush_window": "11:00 AM EST (Fri)",
         "total_orders": 82.6,
         "projected_revenue_usd": 4006.1,
         "estimated_cogs_usd": 1181.8,
@@ -8108,7 +8108,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-09T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Fri",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -8121,7 +8121,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Fri",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -8134,7 +8134,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Fri",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -8147,7 +8147,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Fri",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -8160,7 +8160,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Fri",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -8173,7 +8173,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Fri",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -8186,7 +8186,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Fri",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -8199,7 +8199,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Fri",
             "hour": 7,
             "predicted_orders": 0.1,
@@ -8212,7 +8212,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Fri",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -8225,7 +8225,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Fri",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -8238,7 +8238,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Fri",
             "hour": 10,
             "predicted_orders": 0.4,
@@ -8251,7 +8251,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Fri",
             "hour": 11,
             "predicted_orders": 14.5,
@@ -8264,7 +8264,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Fri",
             "hour": 12,
             "predicted_orders": 14.1,
@@ -8277,7 +8277,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Fri",
             "hour": 13,
             "predicted_orders": 8.6,
@@ -8290,7 +8290,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Fri",
             "hour": 14,
             "predicted_orders": 6.5,
@@ -8303,7 +8303,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Fri",
             "hour": 15,
             "predicted_orders": 3.4,
@@ -8316,7 +8316,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Fri",
             "hour": 16,
             "predicted_orders": 5.2,
@@ -8329,7 +8329,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Fri",
             "hour": 17,
             "predicted_orders": 8.5,
@@ -8342,7 +8342,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Fri",
             "hour": 18,
             "predicted_orders": 10.1,
@@ -8355,7 +8355,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Fri",
             "hour": 19,
             "predicted_orders": 8.4,
@@ -8368,7 +8368,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Fri",
             "hour": 20,
             "predicted_orders": 2.7,
@@ -8381,7 +8381,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Fri",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -8394,7 +8394,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Fri",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -8407,7 +8407,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Fri",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -8420,7 +8420,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
           "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
@@ -8432,7 +8432,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 14.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Fri)",
+        "peak_rush_window": "11:00 AM EST (Fri)",
         "total_orders": 82.6,
         "projected_revenue_usd": 4006.1,
         "estimated_cogs_usd": 1181.8,
@@ -8447,7 +8447,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-09T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Fri",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -8460,7 +8460,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Fri",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -8473,7 +8473,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Fri",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -8486,7 +8486,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Fri",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -8499,7 +8499,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Fri",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -8512,7 +8512,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Fri",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -8525,7 +8525,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Fri",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -8538,7 +8538,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Fri",
             "hour": 7,
             "predicted_orders": 0.1,
@@ -8551,7 +8551,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Fri",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -8564,7 +8564,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Fri",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -8577,7 +8577,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Fri",
             "hour": 10,
             "predicted_orders": 0.4,
@@ -8590,7 +8590,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Fri",
             "hour": 11,
             "predicted_orders": 14.5,
@@ -8603,7 +8603,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Fri",
             "hour": 12,
             "predicted_orders": 14.1,
@@ -8616,7 +8616,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Fri",
             "hour": 13,
             "predicted_orders": 8.6,
@@ -8629,7 +8629,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Fri",
             "hour": 14,
             "predicted_orders": 6.5,
@@ -8642,7 +8642,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Fri",
             "hour": 15,
             "predicted_orders": 3.4,
@@ -8655,7 +8655,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Fri",
             "hour": 16,
             "predicted_orders": 5.2,
@@ -8668,7 +8668,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Fri",
             "hour": 17,
             "predicted_orders": 8.5,
@@ -8681,7 +8681,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Fri",
             "hour": 18,
             "predicted_orders": 10.1,
@@ -8694,7 +8694,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Fri",
             "hour": 19,
             "predicted_orders": 8.4,
@@ -8707,7 +8707,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Fri",
             "hour": 20,
             "predicted_orders": 2.7,
@@ -8720,7 +8720,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Fri",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -8733,7 +8733,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Fri",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -8746,7 +8746,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Fri",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -8759,7 +8759,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
           "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
@@ -8771,7 +8771,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 14.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Fri)",
+        "peak_rush_window": "11:00 AM EST (Fri)",
         "total_orders": 82.6,
         "projected_revenue_usd": 4006.1,
         "estimated_cogs_usd": 1181.8,
@@ -8786,7 +8786,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-09T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Fri",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -8799,7 +8799,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Fri",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -8812,7 +8812,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Fri",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -8825,7 +8825,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Fri",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -8838,7 +8838,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Fri",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -8851,7 +8851,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Fri",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -8864,7 +8864,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Fri",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -8877,7 +8877,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Fri",
             "hour": 7,
             "predicted_orders": 0.1,
@@ -8890,7 +8890,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Fri",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -8903,7 +8903,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Fri",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -8916,7 +8916,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Fri",
             "hour": 10,
             "predicted_orders": 0.4,
@@ -8929,7 +8929,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Fri",
             "hour": 11,
             "predicted_orders": 14.5,
@@ -8942,7 +8942,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Fri",
             "hour": 12,
             "predicted_orders": 14.1,
@@ -8955,7 +8955,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Fri",
             "hour": 13,
             "predicted_orders": 8.6,
@@ -8968,7 +8968,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Fri",
             "hour": 14,
             "predicted_orders": 6.5,
@@ -8981,7 +8981,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Fri",
             "hour": 15,
             "predicted_orders": 3.4,
@@ -8994,7 +8994,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Fri",
             "hour": 16,
             "predicted_orders": 5.2,
@@ -9007,7 +9007,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Fri",
             "hour": 17,
             "predicted_orders": 8.5,
@@ -9020,7 +9020,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Fri",
             "hour": 18,
             "predicted_orders": 10.1,
@@ -9033,7 +9033,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Fri",
             "hour": 19,
             "predicted_orders": 8.4,
@@ -9046,7 +9046,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Fri",
             "hour": 20,
             "predicted_orders": 2.7,
@@ -9059,7 +9059,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Fri",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -9072,7 +9072,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Fri",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -9085,7 +9085,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Fri",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -9098,7 +9098,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
           "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
@@ -9110,7 +9110,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 14.5,
         "peak_hour": 11,
-        "peak_rush_window": "11:00 AM (Fri)",
+        "peak_rush_window": "11:00 AM EST (Fri)",
         "total_orders": 82.6,
         "projected_revenue_usd": 4006.1,
         "estimated_cogs_usd": 1181.8,
@@ -9125,7 +9125,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-09T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Fri",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -9138,7 +9138,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Fri",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -9151,7 +9151,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Fri",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -9164,7 +9164,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Fri",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -9177,7 +9177,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Fri",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -9190,7 +9190,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Fri",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -9203,7 +9203,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Fri",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -9216,7 +9216,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Fri",
             "hour": 7,
             "predicted_orders": 0.1,
@@ -9229,7 +9229,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Fri",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -9242,7 +9242,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Fri",
             "hour": 9,
             "predicted_orders": 0.1,
@@ -9255,7 +9255,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Fri",
             "hour": 10,
             "predicted_orders": 0.4,
@@ -9268,7 +9268,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Fri",
             "hour": 11,
             "predicted_orders": 14.5,
@@ -9281,7 +9281,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Fri",
             "hour": 12,
             "predicted_orders": 14.1,
@@ -9294,7 +9294,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Fri",
             "hour": 13,
             "predicted_orders": 8.6,
@@ -9307,7 +9307,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Fri",
             "hour": 14,
             "predicted_orders": 6.5,
@@ -9320,7 +9320,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Fri",
             "hour": 15,
             "predicted_orders": 3.4,
@@ -9333,7 +9333,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Fri",
             "hour": 16,
             "predicted_orders": 5.2,
@@ -9346,7 +9346,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Fri",
             "hour": 17,
             "predicted_orders": 8.5,
@@ -9359,7 +9359,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Fri",
             "hour": 18,
             "predicted_orders": 10.1,
@@ -9372,7 +9372,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Fri",
             "hour": 19,
             "predicted_orders": 8.4,
@@ -9385,7 +9385,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Fri",
             "hour": 20,
             "predicted_orders": 2.7,
@@ -9398,7 +9398,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Fri",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -9411,7 +9411,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Fri",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -9424,7 +9424,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-09T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Fri",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -9437,7 +9437,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 11:00 AM (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
+          "Peak Customer Flow: Expected around 11:00 AM EST (Fri) reaching ~14.5 orders/hr; dinner rush sustains ~12.5 orders/hr through 7:00 PM.",
           "Meat Depletion Pacing: Day projected to draw ~79.5 lbs smoked brisket and ~21.7 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM to rest 45 minutes ahead of the 5:00 PM dinner rush."
@@ -9449,7 +9449,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 17.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
+        "peak_rush_window": "12:00 PM EST (Sat)",
         "total_orders": 113.1,
         "projected_revenue_usd": 5485.35,
         "estimated_cogs_usd": 1618.17,
@@ -9464,7 +9464,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-010T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sat",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -9477,7 +9477,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sat",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -9490,7 +9490,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sat",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -9503,7 +9503,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sat",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -9516,7 +9516,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sat",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -9529,7 +9529,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sat",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -9542,7 +9542,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sat",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -9555,7 +9555,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sat",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -9568,7 +9568,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sat",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -9581,7 +9581,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sat",
             "hour": 9,
             "predicted_orders": 0.2,
@@ -9594,7 +9594,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sat",
             "hour": 10,
             "predicted_orders": 1.0,
@@ -9607,7 +9607,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sat",
             "hour": 11,
             "predicted_orders": 12.0,
@@ -9620,7 +9620,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sat",
             "hour": 12,
             "predicted_orders": 17.5,
@@ -9633,7 +9633,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sat",
             "hour": 13,
             "predicted_orders": 17.1,
@@ -9646,7 +9646,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sat",
             "hour": 14,
             "predicted_orders": 11.7,
@@ -9659,7 +9659,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sat",
             "hour": 15,
             "predicted_orders": 10.0,
@@ -9672,7 +9672,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sat",
             "hour": 16,
             "predicted_orders": 9.6,
@@ -9685,7 +9685,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sat",
             "hour": 17,
             "predicted_orders": 13.0,
@@ -9698,7 +9698,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sat",
             "hour": 18,
             "predicted_orders": 12.2,
@@ -9711,7 +9711,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sat",
             "hour": 19,
             "predicted_orders": 6.9,
@@ -9724,7 +9724,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sat",
             "hour": 20,
             "predicted_orders": 1.8,
@@ -9737,7 +9737,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sat",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -9750,7 +9750,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sat",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -9763,7 +9763,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sat",
             "hour": 23,
             "predicted_orders": 0.1,
@@ -9776,7 +9776,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.6 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -9788,7 +9788,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 17.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
+        "peak_rush_window": "12:00 PM EST (Sat)",
         "total_orders": 113.1,
         "projected_revenue_usd": 5485.35,
         "estimated_cogs_usd": 1618.17,
@@ -9803,7 +9803,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-010T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sat",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -9816,7 +9816,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sat",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -9829,7 +9829,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sat",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -9842,7 +9842,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sat",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -9855,7 +9855,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sat",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -9868,7 +9868,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sat",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -9881,7 +9881,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sat",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -9894,7 +9894,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sat",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -9907,7 +9907,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sat",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -9920,7 +9920,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sat",
             "hour": 9,
             "predicted_orders": 0.2,
@@ -9933,7 +9933,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sat",
             "hour": 10,
             "predicted_orders": 1.0,
@@ -9946,7 +9946,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sat",
             "hour": 11,
             "predicted_orders": 12.0,
@@ -9959,7 +9959,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sat",
             "hour": 12,
             "predicted_orders": 17.5,
@@ -9972,7 +9972,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sat",
             "hour": 13,
             "predicted_orders": 17.1,
@@ -9985,7 +9985,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sat",
             "hour": 14,
             "predicted_orders": 11.7,
@@ -9998,7 +9998,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sat",
             "hour": 15,
             "predicted_orders": 10.0,
@@ -10011,7 +10011,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sat",
             "hour": 16,
             "predicted_orders": 9.6,
@@ -10024,7 +10024,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sat",
             "hour": 17,
             "predicted_orders": 13.0,
@@ -10037,7 +10037,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sat",
             "hour": 18,
             "predicted_orders": 12.2,
@@ -10050,7 +10050,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sat",
             "hour": 19,
             "predicted_orders": 6.9,
@@ -10063,7 +10063,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sat",
             "hour": 20,
             "predicted_orders": 1.8,
@@ -10076,7 +10076,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sat",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -10089,7 +10089,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sat",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -10102,7 +10102,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sat",
             "hour": 23,
             "predicted_orders": 0.1,
@@ -10115,7 +10115,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.6 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10127,7 +10127,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 17.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
+        "peak_rush_window": "12:00 PM EST (Sat)",
         "total_orders": 113.1,
         "projected_revenue_usd": 5485.35,
         "estimated_cogs_usd": 1618.17,
@@ -10142,7 +10142,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-010T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sat",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -10155,7 +10155,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sat",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -10168,7 +10168,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sat",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -10181,7 +10181,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sat",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -10194,7 +10194,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sat",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -10207,7 +10207,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sat",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -10220,7 +10220,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sat",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -10233,7 +10233,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sat",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -10246,7 +10246,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sat",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -10259,7 +10259,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sat",
             "hour": 9,
             "predicted_orders": 0.2,
@@ -10272,7 +10272,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sat",
             "hour": 10,
             "predicted_orders": 1.0,
@@ -10285,7 +10285,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sat",
             "hour": 11,
             "predicted_orders": 12.0,
@@ -10298,7 +10298,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sat",
             "hour": 12,
             "predicted_orders": 17.5,
@@ -10311,7 +10311,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sat",
             "hour": 13,
             "predicted_orders": 17.1,
@@ -10324,7 +10324,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sat",
             "hour": 14,
             "predicted_orders": 11.7,
@@ -10337,7 +10337,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sat",
             "hour": 15,
             "predicted_orders": 10.0,
@@ -10350,7 +10350,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sat",
             "hour": 16,
             "predicted_orders": 9.6,
@@ -10363,7 +10363,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sat",
             "hour": 17,
             "predicted_orders": 13.0,
@@ -10376,7 +10376,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sat",
             "hour": 18,
             "predicted_orders": 12.2,
@@ -10389,7 +10389,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sat",
             "hour": 19,
             "predicted_orders": 6.9,
@@ -10402,7 +10402,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sat",
             "hour": 20,
             "predicted_orders": 1.8,
@@ -10415,7 +10415,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sat",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -10428,7 +10428,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sat",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -10441,7 +10441,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sat",
             "hour": 23,
             "predicted_orders": 0.1,
@@ -10454,7 +10454,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.6 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10466,7 +10466,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 17.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sat)",
+        "peak_rush_window": "12:00 PM EST (Sat)",
         "total_orders": 113.1,
         "projected_revenue_usd": 5485.35,
         "estimated_cogs_usd": 1618.17,
@@ -10481,7 +10481,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-010T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sat",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -10494,7 +10494,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sat",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -10507,7 +10507,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sat",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -10520,7 +10520,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sat",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -10533,7 +10533,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sat",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -10546,7 +10546,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sat",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -10559,7 +10559,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sat",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -10572,7 +10572,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sat",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -10585,7 +10585,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sat",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -10598,7 +10598,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sat",
             "hour": 9,
             "predicted_orders": 0.2,
@@ -10611,7 +10611,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sat",
             "hour": 10,
             "predicted_orders": 1.0,
@@ -10624,7 +10624,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sat",
             "hour": 11,
             "predicted_orders": 12.0,
@@ -10637,7 +10637,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sat",
             "hour": 12,
             "predicted_orders": 17.5,
@@ -10650,7 +10650,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sat",
             "hour": 13,
             "predicted_orders": 17.1,
@@ -10663,7 +10663,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sat",
             "hour": 14,
             "predicted_orders": 11.7,
@@ -10676,7 +10676,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sat",
             "hour": 15,
             "predicted_orders": 10.0,
@@ -10689,7 +10689,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sat",
             "hour": 16,
             "predicted_orders": 9.6,
@@ -10702,7 +10702,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sat",
             "hour": 17,
             "predicted_orders": 13.0,
@@ -10715,7 +10715,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sat",
             "hour": 18,
             "predicted_orders": 12.2,
@@ -10728,7 +10728,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sat",
             "hour": 19,
             "predicted_orders": 6.9,
@@ -10741,7 +10741,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sat",
             "hour": 20,
             "predicted_orders": 1.8,
@@ -10754,7 +10754,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sat",
             "hour": 21,
             "predicted_orders": 0.0,
@@ -10767,7 +10767,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sat",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -10780,7 +10780,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-010T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sat",
             "hour": 23,
             "predicted_orders": 0.1,
@@ -10793,7 +10793,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sat) reaching ~17.5 orders/hr; heavy continuous service across lunch and dinner.",
           "Meat Depletion Pacing: Day projected to draw ~90.6 lbs smoked brisket and ~23.4 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Stage double cutting stations by 11:30 AM for brisket board rush."
@@ -10805,7 +10805,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 12.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sun)",
+        "peak_rush_window": "12:00 PM EST (Sun)",
         "total_orders": 62.4,
         "projected_revenue_usd": 3026.4,
         "estimated_cogs_usd": 892.77,
@@ -10820,7 +10820,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-011T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sun",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -10833,7 +10833,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sun",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -10846,7 +10846,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sun",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -10859,7 +10859,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sun",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -10872,7 +10872,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sun",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -10885,7 +10885,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sun",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -10898,7 +10898,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sun",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -10911,7 +10911,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sun",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -10924,7 +10924,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sun",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -10937,7 +10937,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sun",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -10950,7 +10950,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sun",
             "hour": 10,
             "predicted_orders": 0.1,
@@ -10963,7 +10963,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sun",
             "hour": 11,
             "predicted_orders": 7.2,
@@ -10976,7 +10976,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sun",
             "hour": 12,
             "predicted_orders": 12.5,
@@ -10989,7 +10989,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sun",
             "hour": 13,
             "predicted_orders": 9.8,
@@ -11002,7 +11002,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sun",
             "hour": 14,
             "predicted_orders": 7.2,
@@ -11015,7 +11015,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sun",
             "hour": 15,
             "predicted_orders": 4.4,
@@ -11028,7 +11028,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sun",
             "hour": 16,
             "predicted_orders": 5.1,
@@ -11041,7 +11041,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sun",
             "hour": 17,
             "predicted_orders": 6.3,
@@ -11054,7 +11054,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sun",
             "hour": 18,
             "predicted_orders": 7.0,
@@ -11067,7 +11067,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sun",
             "hour": 19,
             "predicted_orders": 2.7,
@@ -11080,7 +11080,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sun",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -11093,7 +11093,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sun",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -11106,7 +11106,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sun",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -11119,7 +11119,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sun",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -11132,7 +11132,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
           "Meat Depletion Pacing: Day projected to draw ~69.0 lbs smoked brisket and ~10.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Monitor hot hold levels closely by 4:00 PM to avoid leftover waste before Monday closure."
@@ -11144,7 +11144,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 12.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sun)",
+        "peak_rush_window": "12:00 PM EST (Sun)",
         "total_orders": 62.4,
         "projected_revenue_usd": 3026.4,
         "estimated_cogs_usd": 892.77,
@@ -11159,7 +11159,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-011T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sun",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -11172,7 +11172,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sun",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -11185,7 +11185,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sun",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -11198,7 +11198,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sun",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -11211,7 +11211,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sun",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -11224,7 +11224,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sun",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -11237,7 +11237,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sun",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -11250,7 +11250,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sun",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -11263,7 +11263,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sun",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -11276,7 +11276,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sun",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -11289,7 +11289,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sun",
             "hour": 10,
             "predicted_orders": 0.1,
@@ -11302,7 +11302,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sun",
             "hour": 11,
             "predicted_orders": 7.2,
@@ -11315,7 +11315,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sun",
             "hour": 12,
             "predicted_orders": 12.5,
@@ -11328,7 +11328,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sun",
             "hour": 13,
             "predicted_orders": 9.8,
@@ -11341,7 +11341,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sun",
             "hour": 14,
             "predicted_orders": 7.2,
@@ -11354,7 +11354,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sun",
             "hour": 15,
             "predicted_orders": 4.4,
@@ -11367,7 +11367,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sun",
             "hour": 16,
             "predicted_orders": 5.1,
@@ -11380,7 +11380,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sun",
             "hour": 17,
             "predicted_orders": 6.3,
@@ -11393,7 +11393,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sun",
             "hour": 18,
             "predicted_orders": 7.0,
@@ -11406,7 +11406,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sun",
             "hour": 19,
             "predicted_orders": 2.7,
@@ -11419,7 +11419,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sun",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -11432,7 +11432,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sun",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -11445,7 +11445,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sun",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -11458,7 +11458,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sun",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -11471,7 +11471,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
           "Meat Depletion Pacing: Day projected to draw ~69.0 lbs smoked brisket and ~10.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Monitor hot hold levels closely by 4:00 PM to avoid leftover waste before Monday closure."
@@ -11483,7 +11483,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 12.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sun)",
+        "peak_rush_window": "12:00 PM EST (Sun)",
         "total_orders": 62.4,
         "projected_revenue_usd": 3026.4,
         "estimated_cogs_usd": 892.77,
@@ -11498,7 +11498,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-011T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sun",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -11511,7 +11511,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sun",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -11524,7 +11524,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sun",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -11537,7 +11537,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sun",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -11550,7 +11550,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sun",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -11563,7 +11563,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sun",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -11576,7 +11576,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sun",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -11589,7 +11589,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sun",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -11602,7 +11602,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sun",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -11615,7 +11615,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sun",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -11628,7 +11628,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sun",
             "hour": 10,
             "predicted_orders": 0.1,
@@ -11641,7 +11641,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sun",
             "hour": 11,
             "predicted_orders": 7.2,
@@ -11654,7 +11654,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sun",
             "hour": 12,
             "predicted_orders": 12.5,
@@ -11667,7 +11667,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sun",
             "hour": 13,
             "predicted_orders": 9.8,
@@ -11680,7 +11680,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sun",
             "hour": 14,
             "predicted_orders": 7.2,
@@ -11693,7 +11693,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sun",
             "hour": 15,
             "predicted_orders": 4.4,
@@ -11706,7 +11706,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sun",
             "hour": 16,
             "predicted_orders": 5.1,
@@ -11719,7 +11719,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sun",
             "hour": 17,
             "predicted_orders": 6.3,
@@ -11732,7 +11732,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sun",
             "hour": 18,
             "predicted_orders": 7.0,
@@ -11745,7 +11745,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sun",
             "hour": 19,
             "predicted_orders": 2.7,
@@ -11758,7 +11758,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sun",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -11771,7 +11771,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sun",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -11784,7 +11784,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sun",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -11797,7 +11797,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sun",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -11810,7 +11810,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
           "Meat Depletion Pacing: Day projected to draw ~69.0 lbs smoked brisket and ~10.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Monitor hot hold levels closely by 4:00 PM to avoid leftover waste before Monday closure."
@@ -11822,7 +11822,7 @@ window.BBQ_PAYLOADS = {
         "is_closed": false,
         "peak_orders": 12.5,
         "peak_hour": 12,
-        "peak_rush_window": "12:00 PM (Sun)",
+        "peak_rush_window": "12:00 PM EST (Sun)",
         "total_orders": 62.4,
         "projected_revenue_usd": 3026.4,
         "estimated_cogs_usd": 892.77,
@@ -11837,7 +11837,7 @@ window.BBQ_PAYLOADS = {
         "hourly_forecast": [
           {
             "timestamp": "2026-10-011T00:00:00",
-            "hour_display": "12:00 AM",
+            "hour_display": "12:00 AM EST",
             "day_name": "Sun",
             "hour": 0,
             "predicted_orders": 0.0,
@@ -11850,7 +11850,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T01:00:00",
-            "hour_display": "1:00 AM",
+            "hour_display": "1:00 AM EST",
             "day_name": "Sun",
             "hour": 1,
             "predicted_orders": 0.0,
@@ -11863,7 +11863,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T02:00:00",
-            "hour_display": "2:00 AM",
+            "hour_display": "2:00 AM EST",
             "day_name": "Sun",
             "hour": 2,
             "predicted_orders": 0.0,
@@ -11876,7 +11876,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T03:00:00",
-            "hour_display": "3:00 AM",
+            "hour_display": "3:00 AM EST",
             "day_name": "Sun",
             "hour": 3,
             "predicted_orders": 0.0,
@@ -11889,7 +11889,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T04:00:00",
-            "hour_display": "4:00 AM",
+            "hour_display": "4:00 AM EST",
             "day_name": "Sun",
             "hour": 4,
             "predicted_orders": 0.0,
@@ -11902,7 +11902,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T05:00:00",
-            "hour_display": "5:00 AM",
+            "hour_display": "5:00 AM EST",
             "day_name": "Sun",
             "hour": 5,
             "predicted_orders": 0.0,
@@ -11915,7 +11915,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T06:00:00",
-            "hour_display": "6:00 AM",
+            "hour_display": "6:00 AM EST",
             "day_name": "Sun",
             "hour": 6,
             "predicted_orders": 0.0,
@@ -11928,7 +11928,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T07:00:00",
-            "hour_display": "7:00 AM",
+            "hour_display": "7:00 AM EST",
             "day_name": "Sun",
             "hour": 7,
             "predicted_orders": 0.0,
@@ -11941,7 +11941,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T08:00:00",
-            "hour_display": "8:00 AM",
+            "hour_display": "8:00 AM EST",
             "day_name": "Sun",
             "hour": 8,
             "predicted_orders": 0.0,
@@ -11954,7 +11954,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T09:00:00",
-            "hour_display": "9:00 AM",
+            "hour_display": "9:00 AM EST",
             "day_name": "Sun",
             "hour": 9,
             "predicted_orders": 0.0,
@@ -11967,7 +11967,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T10:00:00",
-            "hour_display": "10:00 AM",
+            "hour_display": "10:00 AM EST",
             "day_name": "Sun",
             "hour": 10,
             "predicted_orders": 0.1,
@@ -11980,7 +11980,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T11:00:00",
-            "hour_display": "11:00 AM",
+            "hour_display": "11:00 AM EST",
             "day_name": "Sun",
             "hour": 11,
             "predicted_orders": 7.2,
@@ -11993,7 +11993,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T12:00:00",
-            "hour_display": "12:00 PM",
+            "hour_display": "12:00 PM EST",
             "day_name": "Sun",
             "hour": 12,
             "predicted_orders": 12.5,
@@ -12006,7 +12006,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T13:00:00",
-            "hour_display": "1:00 PM",
+            "hour_display": "1:00 PM EST",
             "day_name": "Sun",
             "hour": 13,
             "predicted_orders": 9.8,
@@ -12019,7 +12019,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T14:00:00",
-            "hour_display": "2:00 PM",
+            "hour_display": "2:00 PM EST",
             "day_name": "Sun",
             "hour": 14,
             "predicted_orders": 7.2,
@@ -12032,7 +12032,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T15:00:00",
-            "hour_display": "3:00 PM",
+            "hour_display": "3:00 PM EST",
             "day_name": "Sun",
             "hour": 15,
             "predicted_orders": 4.4,
@@ -12045,7 +12045,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T16:00:00",
-            "hour_display": "4:00 PM",
+            "hour_display": "4:00 PM EST",
             "day_name": "Sun",
             "hour": 16,
             "predicted_orders": 5.1,
@@ -12058,7 +12058,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T17:00:00",
-            "hour_display": "5:00 PM",
+            "hour_display": "5:00 PM EST",
             "day_name": "Sun",
             "hour": 17,
             "predicted_orders": 6.3,
@@ -12071,7 +12071,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T18:00:00",
-            "hour_display": "6:00 PM",
+            "hour_display": "6:00 PM EST",
             "day_name": "Sun",
             "hour": 18,
             "predicted_orders": 7.0,
@@ -12084,7 +12084,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T19:00:00",
-            "hour_display": "7:00 PM",
+            "hour_display": "7:00 PM EST",
             "day_name": "Sun",
             "hour": 19,
             "predicted_orders": 2.7,
@@ -12097,7 +12097,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T20:00:00",
-            "hour_display": "8:00 PM",
+            "hour_display": "8:00 PM EST",
             "day_name": "Sun",
             "hour": 20,
             "predicted_orders": 0.0,
@@ -12110,7 +12110,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T21:00:00",
-            "hour_display": "9:00 PM",
+            "hour_display": "9:00 PM EST",
             "day_name": "Sun",
             "hour": 21,
             "predicted_orders": 0.1,
@@ -12123,7 +12123,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T22:00:00",
-            "hour_display": "10:00 PM",
+            "hour_display": "10:00 PM EST",
             "day_name": "Sun",
             "hour": 22,
             "predicted_orders": 0.0,
@@ -12136,7 +12136,7 @@ window.BBQ_PAYLOADS = {
           },
           {
             "timestamp": "2026-10-011T23:00:00",
-            "hour_display": "11:00 PM",
+            "hour_display": "11:00 PM EST",
             "day_name": "Sun",
             "hour": 23,
             "predicted_orders": 0.0,
@@ -12149,7 +12149,7 @@ window.BBQ_PAYLOADS = {
           }
         ],
         "operational_directives": [
-          "Peak Customer Flow: Expected around 12:00 PM (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
+          "Peak Customer Flow: Expected around 12:00 PM EST (Sun) reaching ~12.5 orders/hr; steady family pack and lunch crowd.",
           "Meat Depletion Pacing: Day projected to draw ~69.0 lbs smoked brisket and ~10.0 lbs pulled pork from hot storage.",
           "Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.",
           "Smoker Pacing: Monitor hot hold levels closely by 4:00 PM to avoid leftover waste before Monday closure."
@@ -16189,7 +16189,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-10-31T09:24:18.375842-04:00",
+    "generated_at": "2026-11-03T16:09:40.429181-05:00",
     "days": {
       "2026-08-02": {
         "buckets": [
@@ -27378,90 +27378,55 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-03": {
-      "captured_at": "2026-11-03T12:00:01.303261-05:00",
+      "captured_at": "2026-11-03T16:09:40.435087-05:00",
       "hourly_forecast": [
         {
-          "hour": 0,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
+          "hour": 16,
+          "predicted_orders": 1.8,
+          "predicted_revenue": 87.3
         },
         {
-          "hour": 1,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
+          "hour": 17,
+          "predicted_orders": 3.5,
+          "predicted_revenue": 169.75
         },
         {
-          "hour": 2,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 3,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 4,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 5,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 6,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 7,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 8,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 9,
-          "predicted_orders": 0.1,
-          "predicted_revenue": 4.85
-        },
-        {
-          "hour": 10,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
-        {
-          "hour": 11,
-          "predicted_orders": 7.5,
-          "predicted_revenue": 363.75
-        },
-        {
-          "hour": 12,
-          "predicted_orders": 7.2,
-          "predicted_revenue": 349.2
-        },
-        {
-          "hour": 13,
+          "hour": 18,
           "predicted_orders": 4.6,
           "predicted_revenue": 223.1
         },
         {
-          "hour": 14,
-          "predicted_orders": 2.4,
-          "predicted_revenue": 116.4
+          "hour": 19,
+          "predicted_orders": 3.1,
+          "predicted_revenue": 150.35
+        },
+        {
+          "hour": 20,
+          "predicted_orders": 0.8,
+          "predicted_revenue": 38.8
+        },
+        {
+          "hour": 21,
+          "predicted_orders": 0.1,
+          "predicted_revenue": 4.85
+        },
+        {
+          "hour": 22,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
+        },
+        {
+          "hour": 23,
+          "predicted_orders": 0.0,
+          "predicted_revenue": 0.0
         }
       ]
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-11-02T16:21:20-05:00",
+    "generated_at": "2026-11-03T16:09:40-05:00",
     "timezone": "America/New_York",
-    "today_date": "2026-11-02",
+    "today_date": "2026-11-03",
     "active_service_brief": {
       "date": "2026-10-31",
       "day_name": "Sat",
@@ -29248,7 +29213,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-11-02T15:57:42.356575-05:00",
+    "generated_at": "2026-11-03T15:39:34.362470-05:00",
     "total_insights_mined": 11,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -29443,19 +29408,19 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-03T12:00:01.267909-05:00",
+    "generated_at": "2026-11-03T16:08:44.190866-05:00",
     "total_alerts_detected": 15,
     "active_alert": {
       "alert_id": "qw-aov-2026-10-30-19",
       "date": "2026-10-30",
       "hour": 19,
-      "hour_formatted": "19:00",
+      "hour_formatted": "7:00 PM EST",
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
       "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.34 vs $46.80 Usual)",
       "immediate_present_status": "Counter ticket size jumped to $50.34/order (+8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 19:00 window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "causal_explanation": "Large office/family group orders concentrated in the 7:00 PM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
       "velocity_metrics": {
         "actual_sales": 503.37,
@@ -29478,7 +29443,7 @@ window.BBQ_PAYLOADS = {
         "alert_id": "qw-surge-2026-10-29-12",
         "date": "2026-10-29",
         "hour": 12,
-        "hour_formatted": "12:00",
+        "hour_formatted": "12:00 PM EST",
         "event_type": "rush_acceleration",
         "severity": "surge",
         "severity_badge": "\ud83d\ude80 Rush Acceleration",
@@ -29506,13 +29471,13 @@ window.BBQ_PAYLOADS = {
         "alert_id": "qw-aov-2026-10-29-13",
         "date": "2026-10-29",
         "hour": 13,
-        "hour_formatted": "13:00",
+        "hour_formatted": "1:00 PM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
         "headline": "Large Group / Catering Ticket Spike (Average Ticket $65.02 vs $39.75 Usual)",
         "immediate_present_status": "Counter ticket size jumped to $65.02/order (+64% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 13:00 window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "causal_explanation": "Large office/family group orders concentrated in the 1:00 PM EST window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
           "actual_sales": 780.29,
@@ -29534,7 +29499,7 @@ window.BBQ_PAYLOADS = {
         "alert_id": "qw-surge-2026-10-30-13",
         "date": "2026-10-30",
         "hour": 13,
-        "hour_formatted": "13:00",
+        "hour_formatted": "1:00 PM EST",
         "event_type": "rush_acceleration",
         "severity": "surge",
         "severity_badge": "\ud83d\ude80 Rush Acceleration",
@@ -29562,13 +29527,13 @@ window.BBQ_PAYLOADS = {
         "alert_id": "qw-aov-2026-10-30-17",
         "date": "2026-10-30",
         "hour": 17,
-        "hour_formatted": "17:00",
+        "hour_formatted": "5:00 PM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
         "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.45 vs $52.88 Usual)",
         "immediate_present_status": "Counter ticket size jumped to $50.45/order (+-5% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 17:00 window. While ticket volume (14 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "causal_explanation": "Large office/family group orders concentrated in the 5:00 PM EST window. While ticket volume (14 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
           "actual_sales": 706.28,
@@ -29590,13 +29555,13 @@ window.BBQ_PAYLOADS = {
         "alert_id": "qw-aov-2026-10-30-19",
         "date": "2026-10-30",
         "hour": 19,
-        "hour_formatted": "19:00",
+        "hour_formatted": "7:00 PM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
         "headline": "Large Group / Catering Ticket Spike (Average Ticket $50.34 vs $46.80 Usual)",
         "immediate_present_status": "Counter ticket size jumped to $50.34/order (+8% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 19:00 window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "causal_explanation": "Large office/family group orders concentrated in the 7:00 PM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
           "actual_sales": 503.37,

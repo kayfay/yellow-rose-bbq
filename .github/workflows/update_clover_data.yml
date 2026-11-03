@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -66,6 +68,7 @@ jobs:
           python clover_api/analytics/dashboard.py
           python clover_api/analytics/advanced_analytics.py
           python scripts/update_predictive_cache.py
+          python scripts/daily_insight_engine.py
           
           echo "Running Multimodal ML Data Intelligence Engine..."
           python scripts/ml_data_intelligence_engine.py
@@ -75,7 +78,6 @@ jobs:
           
           echo "Building javascript payloads and sync status..."
           python clover_api/analytics/build_payloads.py
-          python -c "import json, datetime, os; p = json.load(open('clover_api/analytics/predictive_payload.json')) if os.path.exists('clover_api/analytics/predictive_payload.json') else {}; sk = p.get('summary_kpis', {}); cogs = sk.get('estimated_24h_cogs_usd', 0); staff = sk.get('recommended_staff', 0); hours = sk.get('pitmaster_hours', 0); fc = sk.get('estimated_food_cost_pct', 29.5); msg = f'COGS: ${cogs:,.2f} ({fc}%) | Labor: {staff} crew ({hours}h)'; status = {'last_synced_at': datetime.datetime.now().isoformat(), 'status': 'success', 'message': msg, 'next_scheduled_sync': 'Hourly via GitHub Actions'}; os.makedirs('clover_api/analytics', exist_ok=True); os.makedirs('analytics', exist_ok=True); open('clover_api/analytics/sync_status.json', 'w').write(json.dumps(status, indent=2)); open('analytics/sync_status.json', 'w').write(json.dumps(status, indent=2))"
 
           echo "Dispatching Automated Smokehouse Telegram Intelligence..."
           python scripts/telegram_dispatcher.py --auto || true
@@ -84,13 +86,23 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add clover_api/analytics/*.json analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
+          git add clover_api/analytics/*.json analytics/*.json api/analytics/*.json clover_api/analytics/payloads.js WEBSITE_MENU.md
           
           # Only commit if there are changes
-          if git diff-index --quiet HEAD --; then
+          if git diff --staged --quiet; then
             echo "No new data to commit."
           else
+            # Discard any stray unstaged modifications to other tracked files so worktree is clean for rebase
+            git checkout -- .
             git commit -m "chore(data): auto-update clover api analytics data (hourly)"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push
+            
+            for attempt in 1 2 3; do
+              if git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push; then
+                echo "Successfully rebased and pushed data update."
+                break
+              fi
+              echo "Push failed (attempt $attempt/3), retrying in 2s..."
+              sleep 2
+            done
           fi
+

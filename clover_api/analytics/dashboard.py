@@ -49,7 +49,35 @@ def _parse_to_local(value: str, naive_is_utc: bool) -> Optional[datetime]:
 
 
 def get_last_updated_time() -> str:
-    """Latest generation timestamp as a tz-aware America/New_York ISO string."""
+    """Latest data timestamp as a tz-aware America/New_York ISO string."""
+    import sqlite3
+    db_time = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("SELECT MAX(created_time) FROM orders")
+        res = cur.fetchone()[0]
+        conn.close()
+        if res:
+            db_time = _parse_to_local(res, naive_is_utc=True)
+    except Exception:
+        pass
+
+    existing_time = None
+    try:
+        dash_json = ANALYTICS_DIR / "dashboard_payload.json"
+        if dash_json.exists():
+            with open(dash_json, 'r') as f:
+                data = json.load(f)
+                raw = data.get("forecast", {}).get("generated_at")
+                if raw:
+                    existing_time = _parse_to_local(raw, naive_is_utc=False)
+    except Exception:
+        pass
+
+    candidates = [t for t in [db_time, existing_time] if t]
+    if candidates:
+        return max(candidates).isoformat()
     return datetime.now(LOCAL_TZ).isoformat()
 
 def load_arima_forecast() -> Dict[str, Any]:

@@ -63,7 +63,7 @@ def generate_predictive_cache():
         
         target_dt = now + datetime.timedelta(hours=step)
         hour_val = target_dt.hour
-        hour_display = target_dt.strftime("%I:00 %p").lstrip("0")
+        hour_display = f"{target_dt.strftime('%I:00 %p').lstrip('0')} EST"
         day_str = target_dt.strftime("%a")
         
         predicted_orders = rec["avg_orders"]
@@ -132,13 +132,13 @@ def generate_predictive_cache():
         d_cum_pork = 0.0
         d_peak_orders = 0.0
         d_peak_hour = 12
-        d_peak_hour_str = f"12:00 PM ({short_name})"
+        d_peak_hour_str = f"12:00 PM EST ({short_name})"
         
         day_hourly = []
         for r in day_recs:
             h_val = r["hour"]
             h_dt = datetime.datetime(2026, 1, 1, h_val, 0)
-            h_disp = h_dt.strftime("%I:00 %p").lstrip("0")
+            h_disp = f"{h_dt.strftime('%I:00 %p').lstrip('0')} EST"
             
             p_orders = r["avg_orders"]
             p_rev = r["est_revenue_usd"]
