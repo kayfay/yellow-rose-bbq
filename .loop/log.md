@@ -258,4 +258,22 @@
   - Playwright E2E (`npm test`): **20 passed / 0 failed / 0 flaky (19.2s)**.
   - Task 36 marked `passes: true` in `.loop/prd.json`.
 
+## 2026-11-03 · Semantic Version Synchronization to v2.2.3 Everywhere (Task 37)
+- **Problem & Scope**: The user noticed that the version number displayed across the application was not accurately updated (header badge displayed `v2.1.0`, debug drawer displayed `Ready (v2.2.0 Tokens)`, `package.json` had `"version": "2.0.0"`, `package-lock.json` had `"version": "1.0.0"`, `README.md` was at `v2.0.0`, and `CHANGELOG.md` had stopped at `v2.1.0` despite releases through `v2.2.3`).
+- **Standard Applied**: Synchronized semantic version `v2.2.3` across all application UI badges, debug token drawer status, exported design tokens payload, package manifests, documentation, and E2E test assertions.
+- **Files Touched**:
+  - `index.html`: Updated header `.version-badge` to `v2.2.3` and debug panel `#debug-token-status` to `Ready (v2.2.3 Tokens)`.
+  - `app.js`: Updated exported design tokens `version` to `'2.2.3'` and clipboard toast status to `'Copied v2.2.3 JSON tokens to clipboard'`.
+  - `package.json` & `package-lock.json`: Bumped version to `"2.2.3"`.
+  - `README.md`: Updated title and directory structure headers to `(v2.2.3)`.
+  - `CHANGELOG.md`: Added release documentation for `[2.1.3]`, `[2.1.4]`, `[2.2.0]`, `[2.2.2]`, and `[2.2.3]`.
+  - `tests/e2e/v2_facelift_mobile.spec.js`: Updated version badge expectation to `'v2.2.3'` and exported token version assertion to `'2.2.3'`.
+- **Verification Results**:
+  - `npm run check`: 0 errors across all JS files.
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: 5/5 PASS.
+  - All 7 PAL verifier scripts: 100% PASS.
+  - Playwright E2E (`npm test`): **20 passed / 0 failed / 0 flaky (20.4s)**.
+  - Task 37 marked `passes: true` in `.loop/prd.json`.
+
+
 

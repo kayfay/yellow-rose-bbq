@@ -5,6 +5,68 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [2.2.3] — 2026-11-03
+
+### Changed
+- **12-Hour Eastern Standard Time (EST) Everywhere:**
+  - Standardized all time displays to 12-hour EST (`h:00 AM/PM EST`) with explicit `EST` timezone suffix across dashboard KPI cards, progress summary, turnover deck, quick-wind alerts, shift heatmap, and D3 tooltips.
+  - Replaced all 24-hour military hour buckets (`00:00` ... `23:00`) on the shift heatmap x-axis with 12-hour EST (`12:00 AM EST`, ..., `11:00 PM EST`).
+  - Replaced military timestamp in hourly actuals summary (`Today so far through 3:00 PM EST, as of last sync`).
+  - Standardized time travel simulation badges to `Simulated: 8:00 PM EST` and live mode badge to `Live Mode (3:00 PM EST)`.
+- **System Version Synchronization:**
+  - Synchronized header `.version-badge` and debug token drawer to `v2.2.3`.
+  - Bumped `package.json`, `package-lock.json`, and `README.md` to `2.2.3`.
+
+### Fixed
+- **GitHub Actions Ingestion Workflow (#177) & Clean Worktree Guarantee:**
+  - Resolved `error: cannot pull with rebase: You have unstaged changes` by staging `api/analytics/*.json` alongside other payload paths and discarding unstaged modifications with `git checkout -- .`.
+  - Added full commit history checkout (`fetch-depth: 0`) and a 3-attempt `--autostash` rebase retry loop to resolve git push conflicts against concurrent commits.
+  - Removed redundant naive UTC timestamp clobber in `update_clover_data.yml`.
+  - Hardened `hourly_actuals.py` to merge existing historical days from `hourly_actuals.json` so past saved records (81 days) are permanently retained.
+
+---
+
+## [2.2.2] — 2026-11-03
+
+### Changed
+- **Smokehouse UX Overhaul & Plain-English De-Jargon Pass:**
+  - Purged remaining statistical jargon (`MultiMeatForecaster`, `Variance`, `Safety Buffer`, `Model Evaluation`) from UI copy and replaced with plain-English smokehouse terms (`Pitmaster Daily Forecast`, `Difference from Target`, `Extra Prep / Cushion`, `Cook Accuracy Audit`).
+  - Introduced `KitchenQuantityDisplay` component to prominently display US Foods Cases and Individual Cut Counts (Packers, Butts, Racks, Breasts) with raw/cooked lbs subtext.
+  - Added on-screen `Case View vs. Lbs View` toggle in the debug drawer and exported in JSON settings.
+- **24-Hour Pace Layout & Prep Cushion Status Strip:**
+  - Eliminated the dark vertical rendering gap under `#plotly-predictive-velocity-chart`.
+  - Docked a color-coded Prep Cushion Status Strip (`Buffer Margin: +2 Racks / +1 Butt`) with semantic status indicators (Green = Safe Cushion, Yellow = Tight Prep, Red = Under Target).
+
+---
+
+## [2.2.0] — 2026-11-03
+
+### Added
+- **Real-Time Quick-Wind Alerts & Clover Hourly Scanner (`scripts/hourly_quick_wind_detector.py`):**
+  - Automated anomaly scanning across hourly Clover transactions detecting rush acceleration, ticket size spikes, and weather pacing shifts.
+  - Push intelligence dispatcher via Telegram (`scripts/telegram_dispatcher.py`).
+- **Multimodal ML Data Intelligence Engine (`scripts/ml_data_intelligence_engine.py`):**
+  - Synthesized feature engineering, cyclical encoding, and lag models for multi-meat forecasting.
+
+---
+
+## [2.1.4] — 2026-11-02
+
+### Added
+- **Subtab Executive Stat Strips & Reusable Roll-Up Accordions:**
+  - Added 3-card summary stat strips across all 7 analytics subtabs (`#subtab-stat-strip`).
+  - Added reusable collapsible accordion sections with touch-friendly `min-height: 48px` headers.
+
+---
+
+## [2.1.3] — 2026-11-02
+
+### Changed
+- **Modular Frontend Architecture:**
+  - Extracted monolithic client scripts into focused ES modules: `core_utils.js`, `sausage_calc.js`, `shop_reports.js`, and `analytics_subtabs.js`.
+
+---
+
 ## [2.1.0] — 2026-10-26
 
 ### Added

@@ -215,6 +215,12 @@
       "description": "Standardize all time displays to 12-hour Eastern Standard Time (EST) format across dashboard, turnover deck, shift heatmap, quick-wind alerts, hourly actuals summary, and d3 tooltips, eliminating all 24-hour military timestamps.",
       "acceptance_criteria": "Zero 24-hour military timestamps in UI or payloads (through hour 15:00 ET, 14:00, x: [00:00..23:00] replaced by 12-hour EST); all KPI cards and summaries show 12-hour EST with explicit timezone; all mandatory verifiers (npm run check, python unittest, npm test, PAL scripts) pass exit code 0.",
       "passes": true
+    },
+    {
+      "id": 37,
+      "description": "Accurately synchronize semantic versioning to v2.2.3 across index.html header badge, debug drawer token status, app.js design token export, package.json, package-lock.json, README.md, CHANGELOG.md, and E2E test specs.",
+      "acceptance_criteria": "index.html displays v2.2.3 in .version-badge and Ready (v2.2.3 Tokens); app.js exports version 2.2.3; package.json version bumped to 2.2.3; CHANGELOG.md updated through v2.2.3; all tests and verifiers pass with exit code 0.",
+      "passes": true
     }
   ]
 }

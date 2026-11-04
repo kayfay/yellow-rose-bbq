@@ -1,6 +1,6 @@
 {
   "name": "yellow-rose-bbq",
-  "version": "2.0.0",
+  "version": "2.2.3",
   "description": "Executive BI & mobile-first kitchen-line command center, recipe calculator, and multi-meat POS forecasting platform for Yellow Rose BBQ.",
   "main": "app.js",
   "scripts": {
