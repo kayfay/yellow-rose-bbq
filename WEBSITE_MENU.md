@@ -110,6 +110,7 @@ This document is automatically generated from live POS API metadata.
 | **16 ounce ranch** |  |
 | **16 ounce spicy BBQ sauce** |  |
 | **16 oz original BBQ sauce** |  |
+| **2oz Cheese Sauce** |  |
 | **8 ounce Ranch** |  |
 | **8 ounce mustard sauce** |  |
 | **8 ounce original BBQ sauce** |  |
