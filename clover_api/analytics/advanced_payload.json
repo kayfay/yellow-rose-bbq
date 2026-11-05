@@ -7,7 +7,7 @@
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 286,
+      "count": 287,
       "confidence": 22.9
     },
     {
@@ -33,7 +33,7 @@
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
       "count": 110,
-      "confidence": 22.9
+      "confidence": 22.8
     },
     {
       "pair": "Brisket + Mac & Cheese",
@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4225.3,
+    "normal": 4138.12,
     "game_only": 4245.02,
-    "rain_only": 4128.27,
+    "rain_only": 4490.19,
     "game_and_rain": 4610.73
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4917,
-      "total_revenue": 213473.01,
-      "avg_ticket": 43.41529591214155
+      "order_count": 4924,
+      "total_revenue": 213731.72,
+      "avg_ticket": 43.40611697806661
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2475,
-      "total_revenue": 151318.57,
-      "avg_ticket": 61.13881616161616
+      "order_count": 2473,
+      "total_revenue": 151235.1,
+      "avg_ticket": 61.15450869389406
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.1,
-    "pork_ribs_avg_with_dino": 2.9,
-    "impact_pct": -44.4
+    "pork_ribs_avg_without_dino": 4.5,
+    "pork_ribs_avg_with_dino": 4.2,
+    "impact_pct": -6.9
   },
   "payday_effect": {
-    "payday_avg_ticket": 45.68,
-    "normal_avg_ticket": 46.27
+    "payday_avg_ticket": 45.69,
+    "normal_avg_ticket": 46.26
   }
 }
