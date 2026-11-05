@@ -18,6 +18,7 @@ This document is automatically generated from live POS API metadata.
 | **Bevo Platter** |  |
 | **Brisket** | Pound |
 | **Burnt Ends** |  |
+| **Cheese Quesadilla** |  |
 | **Chopped lean sandwich** |  |
 | **Chopped moist Sandwich** |  |
 | **Crispy Quesa Taco Barbacoa** |  |
