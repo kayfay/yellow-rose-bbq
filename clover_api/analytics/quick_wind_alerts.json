@@ -1,91 +1,35 @@
 {
-  "generated_at": "2026-11-05T10:47:10.887407-05:00",
-  "total_alerts_detected": 19,
+  "generated_at": "2026-11-05T17:15:04.178193-05:00",
+  "total_alerts_detected": 18,
   "active_alert": {
-    "alert_id": "qw-aov-2026-11-04-17",
-    "date": "2026-11-04",
-    "hour": 17,
-    "hour_formatted": "5:00 PM EST",
-    "event_type": "ticket_spike",
+    "alert_id": "qw-surge-2026-11-05-13",
+    "date": "2026-11-05",
+    "hour": 13,
+    "hour_formatted": "1:00 PM EST",
+    "event_type": "rush_acceleration",
     "severity": "surge",
-    "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-    "headline": "Large Group / Catering Ticket Spike (Average Ticket $89.94 vs $45.76 Usual)",
-    "immediate_present_status": "Counter ticket size jumped to $89.94/order (+97% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-    "causal_explanation": "Large office/family group orders concentrated in the 5:00 PM EST window. While ticket volume (11 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-    "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+    "severity_badge": "\ud83d\ude80 Rush Acceleration",
+    "headline": "Customer Rush Building (+119% More Orders Than Usual)",
+    "immediate_present_status": "The line is getting longer. Orders hit 23 tickets/hr (usual: 10.5), bringing in $793.93/hr.",
+    "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
+    "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
     "velocity_metrics": {
-      "actual_sales": 989.38,
-      "expected_sales": 408.57,
-      "actual_orders": 11,
-      "expected_orders": 8.9,
-      "aov": 89.94,
-      "baseline_aov": 45.76,
-      "z_score": 2.57
+      "actual_sales": 793.93,
+      "expected_sales": 394.32,
+      "actual_orders": 23,
+      "expected_orders": 10.5,
+      "aov": 34.52,
+      "baseline_aov": 37.55,
+      "z_score": 1.88
     },
     "terms": [
-      "Average Ticket",
-      "Meat Used Per Hour",
+      "Rush Signal",
       "Prep Target",
-      "Cooked Yield %"
+      "Meat Used Per Hour",
+      "Left After Meat Cost"
     ]
   },
   "recent_alerts": [
-    {
-      "alert_id": "qw-aov-2026-11-01-11",
-      "date": "2026-11-01",
-      "hour": 11,
-      "hour_formatted": "11:00 AM EST",
-      "event_type": "ticket_spike",
-      "severity": "surge",
-      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (Average Ticket $63.08 vs $63.88 Usual)",
-      "immediate_present_status": "Counter ticket size jumped to $63.08/order (+-1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 11:00 AM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-      "velocity_metrics": {
-        "actual_sales": 630.75,
-        "expected_sales": 679.92,
-        "actual_orders": 10,
-        "expected_orders": 10.6,
-        "aov": 63.08,
-        "baseline_aov": 63.88,
-        "z_score": -0.14
-      },
-      "terms": [
-        "Average Ticket",
-        "Meat Used Per Hour",
-        "Prep Target",
-        "Cooked Yield %"
-      ]
-    },
-    {
-      "alert_id": "qw-aov-2026-11-01-12",
-      "date": "2026-11-01",
-      "hour": 12,
-      "hour_formatted": "12:00 PM EST",
-      "event_type": "ticket_spike",
-      "severity": "surge",
-      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (Average Ticket $49.12 vs $48.65 Usual)",
-      "immediate_present_status": "Counter ticket size jumped to $49.12/order (+1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (24 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-      "velocity_metrics": {
-        "actual_sales": 1178.96,
-        "expected_sales": 920.82,
-        "actual_orders": 24,
-        "expected_orders": 18.9,
-        "aov": 49.12,
-        "baseline_aov": 48.65,
-        "z_score": 0.77
-      },
-      "terms": [
-        "Average Ticket",
-        "Meat Used Per Hour",
-        "Prep Target",
-        "Cooked Yield %"
-      ]
-    },
     {
       "alert_id": "qw-aov-2026-11-01-17",
       "date": "2026-11-01",
@@ -168,6 +112,62 @@
         "Meat Used Per Hour",
         "Prep Target",
         "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-aov-2026-11-05-12",
+      "date": "2026-11-05",
+      "hour": 12,
+      "hour_formatted": "12:00 PM EST",
+      "event_type": "ticket_spike",
+      "severity": "surge",
+      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $49.96 vs $37.97 Usual)",
+      "immediate_present_status": "Counter ticket size jumped to $49.96/order (+32% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (17 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+      "velocity_metrics": {
+        "actual_sales": 849.32,
+        "expected_sales": 534.34,
+        "actual_orders": 17,
+        "expected_orders": 14.1,
+        "aov": 49.96,
+        "baseline_aov": 37.97,
+        "z_score": 1.35
+      },
+      "terms": [
+        "Average Ticket",
+        "Meat Used Per Hour",
+        "Prep Target",
+        "Cooked Yield %"
+      ]
+    },
+    {
+      "alert_id": "qw-surge-2026-11-05-13",
+      "date": "2026-11-05",
+      "hour": 13,
+      "hour_formatted": "1:00 PM EST",
+      "event_type": "rush_acceleration",
+      "severity": "surge",
+      "severity_badge": "\ud83d\ude80 Rush Acceleration",
+      "headline": "Customer Rush Building (+119% More Orders Than Usual)",
+      "immediate_present_status": "The line is getting longer. Orders hit 23 tickets/hr (usual: 10.5), bringing in $793.93/hr.",
+      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
+      "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
+      "velocity_metrics": {
+        "actual_sales": 793.93,
+        "expected_sales": 394.32,
+        "actual_orders": 23,
+        "expected_orders": 10.5,
+        "aov": 34.52,
+        "baseline_aov": 37.55,
+        "z_score": 1.88
+      },
+      "terms": [
+        "Rush Signal",
+        "Prep Target",
+        "Meat Used Per Hour",
+        "Left After Meat Cost"
       ]
     }
   ],
