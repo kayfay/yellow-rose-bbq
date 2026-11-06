@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-11-05T17:15:04.178193-05:00",
-  "total_alerts_detected": 18,
+  "generated_at": "2026-11-05T21:48:58.139164-05:00",
+  "total_alerts_detected": 19,
   "active_alert": {
-    "alert_id": "qw-surge-2026-11-05-13",
+    "alert_id": "qw-surge-2026-11-05-18",
     "date": "2026-11-05",
-    "hour": 13,
-    "hour_formatted": "1:00 PM EST",
+    "hour": 18,
+    "hour_formatted": "6:00 PM EST",
     "event_type": "rush_acceleration",
     "severity": "surge",
     "severity_badge": "\ud83d\ude80 Rush Acceleration",
-    "headline": "Customer Rush Building (+119% More Orders Than Usual)",
-    "immediate_present_status": "The line is getting longer. Orders hit 23 tickets/hr (usual: 10.5), bringing in $793.93/hr.",
+    "headline": "Customer Rush Building (+73% More Orders Than Usual)",
+    "immediate_present_status": "The line is getting longer. Orders hit 18 tickets/hr (usual: 10.4), bringing in $822.21/hr.",
     "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
     "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
     "velocity_metrics": {
-      "actual_sales": 793.93,
-      "expected_sales": 394.32,
-      "actual_orders": 23,
-      "expected_orders": 10.5,
-      "aov": 34.52,
-      "baseline_aov": 37.55,
-      "z_score": 1.88
+      "actual_sales": 822.21,
+      "expected_sales": 485.78,
+      "actual_orders": 18,
+      "expected_orders": 10.4,
+      "aov": 45.68,
+      "baseline_aov": 46.58,
+      "z_score": 1.44
     },
     "terms": [
       "Rush Signal",
@@ -30,34 +30,6 @@
     ]
   },
   "recent_alerts": [
-    {
-      "alert_id": "qw-aov-2026-11-01-17",
-      "date": "2026-11-01",
-      "hour": 17,
-      "hour_formatted": "5:00 PM EST",
-      "event_type": "ticket_spike",
-      "severity": "surge",
-      "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (Average Ticket $54.38 vs $53.77 Usual)",
-      "immediate_present_status": "Counter ticket size jumped to $54.38/order (+1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 5:00 PM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-      "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-      "velocity_metrics": {
-        "actual_sales": 543.83,
-        "expected_sales": 503.17,
-        "actual_orders": 10,
-        "expected_orders": 9.4,
-        "aov": 54.38,
-        "baseline_aov": 53.77,
-        "z_score": 0.17
-      },
-      "terms": [
-        "Average Ticket",
-        "Meat Used Per Hour",
-        "Prep Target",
-        "Cooked Yield %"
-      ]
-    },
     {
       "alert_id": "qw-aov-2026-11-03-11",
       "date": "2026-11-03",
@@ -162,6 +134,34 @@
         "aov": 34.52,
         "baseline_aov": 37.55,
         "z_score": 1.88
+      },
+      "terms": [
+        "Rush Signal",
+        "Prep Target",
+        "Meat Used Per Hour",
+        "Left After Meat Cost"
+      ]
+    },
+    {
+      "alert_id": "qw-surge-2026-11-05-18",
+      "date": "2026-11-05",
+      "hour": 18,
+      "hour_formatted": "6:00 PM EST",
+      "event_type": "rush_acceleration",
+      "severity": "surge",
+      "severity_badge": "\ud83d\ude80 Rush Acceleration",
+      "headline": "Customer Rush Building (+73% More Orders Than Usual)",
+      "immediate_present_status": "The line is getting longer. Orders hit 18 tickets/hr (usual: 10.4), bringing in $822.21/hr.",
+      "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
+      "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
+      "velocity_metrics": {
+        "actual_sales": 822.21,
+        "expected_sales": 485.78,
+        "actual_orders": 18,
+        "expected_orders": 10.4,
+        "aov": 45.68,
+        "baseline_aov": 46.58,
+        "z_score": 1.44
       },
       "terms": [
         "Rush Signal",
