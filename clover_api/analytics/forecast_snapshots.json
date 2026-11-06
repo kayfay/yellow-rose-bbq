@@ -655,82 +655,47 @@
     ]
   },
   "2026-11-06": {
-    "captured_at": "2026-11-06T06:27:03.536143-05:00",
+    "captured_at": "2026-11-06T13:23:06.667994-05:00",
     "hourly_forecast": [
       {
-        "hour": 6,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 7,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 8,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0
-      },
-      {
-        "hour": 9,
-        "predicted_orders": 0.1,
-        "predicted_revenue": 4.85
-      },
-      {
-        "hour": 10,
-        "predicted_orders": 0.6,
-        "predicted_revenue": 29.1
-      },
-      {
-        "hour": 11,
-        "predicted_orders": 14.5,
-        "predicted_revenue": 703.25
-      },
-      {
-        "hour": 12,
-        "predicted_orders": 14.3,
-        "predicted_revenue": 693.55
-      },
-      {
         "hour": 13,
-        "predicted_orders": 8.5,
-        "predicted_revenue": 412.25
-      },
-      {
-        "hour": 14,
-        "predicted_orders": 6.5,
-        "predicted_revenue": 315.25
-      },
-      {
-        "hour": 15,
-        "predicted_orders": 3.6,
-        "predicted_revenue": 174.6
-      },
-      {
-        "hour": 16,
-        "predicted_orders": 5.5,
-        "predicted_revenue": 266.75
-      },
-      {
-        "hour": 17,
-        "predicted_orders": 8.4,
-        "predicted_revenue": 407.4
-      },
-      {
-        "hour": 18,
-        "predicted_orders": 10.3,
-        "predicted_revenue": 499.55
-      },
-      {
-        "hour": 19,
         "predicted_orders": 8.6,
         "predicted_revenue": 417.1
       },
       {
+        "hour": 14,
+        "predicted_orders": 6.0,
+        "predicted_revenue": 291.0
+      },
+      {
+        "hour": 15,
+        "predicted_orders": 3.3,
+        "predicted_revenue": 160.05
+      },
+      {
+        "hour": 16,
+        "predicted_orders": 5.0,
+        "predicted_revenue": 242.5
+      },
+      {
+        "hour": 17,
+        "predicted_orders": 7.6,
+        "predicted_revenue": 368.6
+      },
+      {
+        "hour": 18,
+        "predicted_orders": 9.5,
+        "predicted_revenue": 460.75
+      },
+      {
+        "hour": 19,
+        "predicted_orders": 7.9,
+        "predicted_revenue": 383.15
+      },
+      {
         "hour": 20,
-        "predicted_orders": 2.8,
-        "predicted_revenue": 135.8
+        "predicted_orders": 2.5,
+        "predicted_revenue": 121.25
       },
       {
         "hour": 21,
