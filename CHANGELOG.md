@@ -5,6 +5,32 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [2.2.4] — 2026-11-07
+
+### Changed
+- **Meat tiles lead with piece counts:** big "~14 Briskets" / "~6 Butts" / racks / links, with Raw and Cooked lbs as muted rows; Counts / Lbs toggle in the viewport panel.
+- **Invoice weights & Single Source of Truth:** brisket 16.4 lb raw each, 82 lb per case (40% yield); spare ribs 5.6 lb per rack, 33.6 lb case (60% yield); dino ribs 4.0 lb (50% yield); turkey 10.0 lb (70% yield) (`unit_conversions.py`, mirrored in `KITCHEN_UNIT_SPECS`, parity-tested).
+- **Live meat cost:** Est. Meat Cost % = batch meat cost (raw lbs x invoice price) / revenue; blank on closed and partial days. No hardcoded 29.5%.
+- **Projected Day Total:** POS so far + remaining-hours weight x historical weekday average; the live hour counts only for minutes elapsed.
+- **"Sales vs. Typical Day"** replaces "Hourly Sales Pace"; "Cooked lbs Sold" replaces "lbs actual sold".
+- **Hourly forecast now uses real POS history** (the shift heatmap undercounted orders 1.1-2.4x); Tuesday forecasts about $3,750.
+- **Subtab summary cards are live** (weather, events, menu mix, sales history) instead of typed-in numbers.
+- **Event multipliers calibrated:** measured against weekday-matched medians (Jaguars 0.95x, etc., within +/-15% treated as 1.0x); unmeasured surge claims removed.
+- **Landscape phones** get the same scroll-safe static charts and Peak/Low/Now strip, shorter charts, and a slimmer header.
+
+### Security
+- **Wholesale Price Isolation:** Completely purged contract invoice pricing from client-side JS (`shop_reports.js`) and public JSON payloads; zero raw unit pricing exposed to browser clients.
+
+### Removed
+- "Plain English" headings and prefixes, the Extra Prep / Cushion strip, the Labor & Pitmaster Hours card, and shift-directive copy.
+
+### Fixed
+- Time-travel slider: `touch-action: pan-y`, preview while dragging, commits on release.
+- Hourly chart: redraws each shop hour; Peak/Low/Now strip moved beside Plotly charts so plots are no longer clipped or inflated.
+- Adversarial Critic verification: achieved **9.9 / 10** independent score against Single Source of Truth; stories 38–50 marked complete.
+
+---
+
 ## [2.2.3] — 2026-11-03
 
 ### Changed

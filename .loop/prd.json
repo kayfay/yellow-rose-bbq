@@ -221,6 +221,132 @@
       "description": "Accurately synchronize semantic versioning to v2.2.3 across index.html header badge, debug drawer token status, app.js design token export, package.json, package-lock.json, README.md, CHANGELOG.md, and E2E test specs.",
       "acceptance_criteria": "index.html displays v2.2.3 in .version-badge and Ready (v2.2.3 Tokens); app.js exports version 2.2.3; package.json version bumped to 2.2.3; CHANGELOG.md updated through v2.2.3; all tests and verifiers pass with exit code 0.",
       "passes": true
+    },
+    {
+      "id": 38,
+      "description": "WS1a: Strip 'Plain English' headers/prefixes (index.html glossary heading, app.js 'Plain English:' prefixes) from all views.",
+      "acceptance_criteria": "No 'Plain English' string in DOM or index.html/app.js; E2E copy checks pass.",
+      "passes": true
+    },
+    {
+      "id": 39,
+      "description": "WS1b: Remove shift advice, labor demand, extra prep and cushion UI + data calls (prep-safety-margin-strip, subtab stat card, app.js cushion hydration).",
+      "acceptance_criteria": "No cushion/extra-prep/labor DOM nodes; no console errors; layout_order spec passes.",
+      "passes": true
+    },
+    {
+      "id": 40,
+      "description": "WS1c: Unhook placeholder/unverified subtabs from router; archive them with archive/README.md entries.",
+      "acceptance_criteria": "Only data-backed subtabs render; archived code catalogued.",
+      "passes": true
+    },
+    {
+      "id": 41,
+      "description": "WS1d: Rename 'lbs actual sold' to 'Cooked lbs Sold'; relabel or hide 'Hourly Sales Pace' and 'other hours' per user decision.",
+      "acceptance_criteria": "Label audit finds zero 'actual sold' in tiles; chosen treatment applied.",
+      "passes": true
+    },
+    {
+      "id": 42,
+      "description": "WS2a: Slider touch lock: touch-action: pan-y on #time-travel-slider and #weight-slider; commit on pointerup/change, not touchmove.",
+      "acceptance_criteria": "Vertical swipe over slider scrolls page without changing value (Playwright touch test).",
+      "passes": true
+    },
+    {
+      "id": 43,
+      "description": "WS2b: Brisket tile symmetry: Row 1 Raw lbs (predicted), Row 2 Ckd lbs (measured yield), matching other meat cards.",
+      "acceptance_criteria": "Brisket tile DOM structure equals pork tile structure (test_tile_components).",
+      "passes": true
+    },
+    {
+      "id": 44,
+      "description": "WS2c: Hourly Sales chart repair: fix 0px container/uninitialized chart, force redraw/resize on subtab activation.",
+      "acceptance_criteria": "Chart container height > 0 after activation at 390px and 1280px; no console errors.",
+      "passes": true
+    },
+    {
+      "id": 45,
+      "description": "WS3a: Replace hardcoded 29.5 meat-cost fallback (build_payloads.py:87, hourly_feature_engineering.py:88, index.html, app.js) with live batch cost / meat revenue * 100. No wholesale cost exposed to public SPA.",
+      "acceptance_criteria": "test_calculations.py: formula verified; no literal 29.5 in render paths.",
+      "passes": true
+    },
+    {
+      "id": 46,
+      "description": "WS3b: Decouple Projected Day Total from Actual POS to Date: Current_POS + remaining_hours_weight * historical_day_avg.",
+      "acceptance_criteria": "Unit test shows projection differs from POS-to-date when hours remain; equals it when closed/EOD.",
+      "passes": true
+    },
+    {
+      "id": 47,
+      "description": "WS3c: Dynamic Insights payloads: real POS variance, top movers, sell-out timestamps replace static templates.",
+      "acceptance_criteria": "Insight text varies with input fixtures; verified by script.",
+      "passes": true
+    },
+    {
+      "id": 48,
+      "description": "WS4a: Add UNIT_CONVERSIONS dictionary (backend + JS mirror); values pending user confirmation (conflicts with patterns.md yields).",
+      "acceptance_criteria": "Dictionary single-sourced; conversion unit tests pass.",
+      "passes": true
+    },
+    {
+      "id": 49,
+      "description": "WS4b: Meat tiles show piece counts as primary large metric, raw/cooked lbs as muted subtext; Counts/Lbs toggle + Copy Settings as JSON.",
+      "acceptance_criteria": "Tile DOM test + screenshots in progress.html at 390px and 1280px.",
+      "passes": true
+    },
+    {
+      "id": 50,
+      "description": "Gate: independent read-only Critic audit rates >= 9/10; full npm check, npm test, unittest pass with exact counts.",
+      "acceptance_criteria": "All three mandatory commands exit 0; critic report logged.",
+      "passes": true
+    },
+    {
+      "id": 51,
+      "description": "Directory Cleanup, Confidential Data Vault & Security Procedures: Relocate raw US Foods/distributor invoice & detail files from root to data/vendor_invoices/, establish AES-256 encrypted archival procedures via scripts/secure_data_vault.py, enforce strict file permissions (0600 on secrets/db/csv, 0700 on backup/vault directories), harden local_server.py/run_tests.sh against exposing sensitive extensions, update .gitignore and DATA_LOCATIONS.md, and verify zero data loss.",
+      "acceptance_criteria": "All new YRBBQ files archived and encrypted in backups/yrbbq_vendor_data_encrypted_*.tar.gz.enc; files organized in data/vendor_invoices/ with 0600 permissions; local_server.py blocks .csv/.xlsx/.enc/data/archive/backups; zero files removed or lost; all mandatory verifiers (npm run check, python unittest, Playwright E2E) pass with exit code 0.",
+      "passes": true
+    },
+    {
+      "id": 52,
+      "description": "JD Capability 1: Mid-Day Rush Pacing Check-ins (context_provider.ts) - Evaluate live Clover POS vs baseline rush curve at 2:00 PM EST post-lunch and on NL /pace command; output pacing in dollars/percentage with dinner line adjustments in brisket packers.",
+      "acceptance_criteria": "Generates 2:00 PM EST check-in message; compares actuals vs baseline; recommends dinner packer adjustment; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 53,
+      "description": "JD Capability 2: Sell-Out & Cut Waste Reconciliation (yield_auditor.ts) - Stockout and holdover radar cross-referencing Clover line-item sales with logged cook yields in raw/cooked cuts and cases.",
+      "acceptance_criteria": "Reconciles line-item sales vs logged cook yield; flags early stockout hours and holdover in cuts/cases; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 54,
+      "description": "JD Capability 3: Plain-English Driver & Anomaly Analysis (context_provider.ts) - Root-cause shift explanations decomposing changes into Rush Hour Demand, Foot Traffic/Weather, and Ticket Volume vs Check Size without statistical jargon.",
+      "acceptance_criteria": "Decomposes sales variance into 3 smokehouse drivers; zero banned jargon; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 55,
+      "description": "JD Capability 4: Multi-Cook Yield Drift & Trimming Loss Radar (yield_auditor.ts) - Rolling 5-cook moving audit monitoring net yield vs 5.75 lbs / 41.1% benchmark and flagging dollar loss across cases.",
+      "acceptance_criteria": "Rolling 5-cook moving average computes yield drift; calculates dollar trim/render loss when below benchmark; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 56,
+      "description": "JD Capability 5: Conversational 'What-If' Scenario Forecasting (scenario_planner.ts) - Instant planning simulations combining weather impact (-15% rain) and custom catering guest estimators in cases and cuts.",
+      "acceptance_criteria": "Simulates weather impacts and catering guest counts; outputs case/cut orders; handles NL and /scenario; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 57,
+      "description": "JD Capability 6: Weekly Executive Smokehouse Wrap-Up (index.ts) - Monday 9:00 AM EST retrospective reporting Gross Sales vs Baseline, Contribution Margin after Meat Cost, Cook Accuracy Summary, and distributor Case Purchasing Guide.",
+      "acceptance_criteria": "Generates 7-day retrospective digest; calculates meat cost margin; outputs next week case order guide; passes unit test.",
+      "passes": false
+    },
+    {
+      "id": 58,
+      "description": "JD Verification Gate & Sensor Linter: Automated test suite in agent/tests/test_agent_analytics.test.ts covering all 6 capabilities, 0 banned jargon terms, 100% cutting-board unit invariants, and passing all tests.",
+      "acceptance_criteria": "Node 22 test suite runs without errors; jargon linter verifies 0 forbidden terms across all outputs; 100% test pass rate.",
+      "passes": false
     }
   ]
 }

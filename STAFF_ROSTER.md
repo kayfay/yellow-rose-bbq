@@ -45,7 +45,7 @@ This document serves as the ground-truth operational staffing record for Yellow 
 
 | Name | Role | Scheduled Hours | Key Responsibilities |
 | :--- | :--- | :--- | :--- |
-| **Allen (User)** | Sausage Artisan, Rosebuds & Kitchen Utility | **Open to Close** (with mid-shift break) | • **Fresh Sausage Crafting**: Grinds, cures, and seasons 50 lb custom sausage formulations (70:30 lean-to-fat); stuffs natural hog casings, twists 6-inch links, and hangs for pellicle drying in walk-in.<br>• **Fresh Rosebud Production**: Hand-rolls and crafts Rosebuds fresh for service.<br>• **Kitchen Operations & Sanitation**: Dish pit operations, rapid prep pan rotation, cutting block sanitizing, and closing kitchen breakdown alongside Freddy/Elly. |
+| **Allen (User)** | Sausage Artisan, Rosebuds & Kitchen Utility | **Open to Close** (with mid-shift break) | • **Fresh Sausage Crafting**: Grinds, cures, and seasons 50 lb custom sausage formulations (25.5 lb beef, 16 lb pork and 8.5 lb hard fat); stuffs natural hog casings, twists 6-inch links, and hangs for pellicle drying in walk-in.<br>• **Fresh Rosebud Production**: Hand-rolls and crafts Rosebuds fresh for service.<br>• **Kitchen Operations & Sanitation**: Dish pit operations, rapid prep pan rotation, cutting block sanitizing, and closing kitchen breakdown alongside Freddy/Elly. |
 
 ---
 

@@ -10,7 +10,7 @@ Reviewer agents must check PRs and diffs against these standards.
 ## 2. Chart & Analytics Lifecycle
 - **Defensive Container Availability**: Before invoking D3 or Plotly rendering functions, verify the container exists in the DOM and is in the active subtab view to prevent silent rendering into hidden 0x0 boxes.
 - **Safe Data Slicing**: Treat analytical payloads (`dashPayload`, `historicalRecords`) as read-only. Always slice or clone arrays before filtering to prevent mutating global state across date range switches.
-- **Closed Day Degradation**: Closed days (e.g., Monday/Tuesday closures) must gracefully report `$0 (Closed)` with zeroed raw meat prep targets, never throwing `RangeError` or showing `-95%` drop alarms.
+- **Closed Day Degradation**: Closed days (Monday closure) must gracefully report `$0 (Closed)` with zeroed raw meat prep targets, never throwing `RangeError` or showing `-95%` drop alarms.
 
 ## 3. Code Cleanliness
 - **No Direct Patch Scripts**: Do not introduce ad-hoc root scripts (`fix_*.py`, `patch*.js`). All business logic belongs in `app.js` or `clover_api/`.

@@ -1,4 +1,4 @@
-# Yellow Rose BBQ — Sausage & BBQ Prep Command Center (`v2.2.3`)
+# Yellow Rose BBQ — Sausage & BBQ Prep Command Center (`v2.2.4`)
 
 An executive Business Intelligence (BI) and mobile-first kitchen-line command center, sausage formulation calculator, and multi-meat Clover POS forecasting platform for Yellow Rose BBQ.
 
@@ -6,7 +6,7 @@ An executive Business Intelligence (BI) and mobile-first kitchen-line command ce
 
 The Yellow Rose BBQ Command Center operates on a decoupled, serverless architecture combining a responsive static frontend hosted on GitHub Pages with an automated Python analytics pipeline executed via GitHub Actions (`.github/workflows/update_clover_data.yml`).
 
-### 1. Repository Directory Structure (`v2.2.3`)
+### 1. Repository Directory Structure (`v2.2.4`)
 ```text
 yellow-rose-bbq/
 ├── index.html                    # Unified responsive Command Center entry point (Desktop BI + Mobile Kitchen Line)
