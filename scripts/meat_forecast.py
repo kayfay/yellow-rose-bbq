@@ -24,15 +24,19 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+import sys
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
 LOG_FILE = BASE_DIR / ".loop" / "log.md"
 
 # YIELD & CONVERSION CONSTANTS
 YIELDS = {
     "turkey": {"trim_yield": 1.00, "cook_yield": 0.70, "net_yield": 0.70, "pack_lbs": 20.0, "portion_per_lb": 3.2},
-    "brisket": {"trim_yield": 0.85, "cook_yield": 0.47, "net_yield": 0.40, "pack_lbs": 70.0, "portion_per_lb": 2.29},
+    "brisket": {"trim_yield": 0.85, "cook_yield": 0.47, "net_yield": 0.40, "pack_lbs": UNIT_CONVERSIONS["brisket"]["lbs_per_case"], "portion_per_lb": 2.29},
     "pork": {"trim_yield": 0.90, "cook_yield": 0.49, "net_yield": 0.44, "pack_lbs": 32.0, "portion_per_lb": 2.0},
     "sausage": {"stuffed_batch_lbs": 60.0, "links_per_lb": 3.0, "yield": 0.85},
-    "pork_ribs": {"lbs_per_rack": 5.0, "bones_per_rack": 12},
+    "pork_ribs": {"lbs_per_rack": UNIT_CONVERSIONS["ribs"]["raw_lbs_per_unit"], "bones_per_rack": 12},
     "beef_dino_ribs": {"lbs_per_plate": 6.0, "bones_per_plate": 3}
 }
 
@@ -136,7 +140,7 @@ class MultiMeatForecaster:
         b_cooked_target = round(b_cooked_demand * (1.0 + buf), 2)
         b_raw_prep = round(b_cooked_target / YIELDS["brisket"]["net_yield"], 1)
         b_cases = round(b_raw_prep / YIELDS["brisket"]["pack_lbs"], 1)
-        b_packers = int(round(b_raw_prep / 14.0))
+        b_packers = int(round(b_raw_prep / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]))
         b_portions = int(round(b_cooked_target * YIELDS["brisket"]["portion_per_lb"]))
 
         # 3. Pork (Net yield 44%)

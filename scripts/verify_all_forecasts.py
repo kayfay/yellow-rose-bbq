@@ -4,7 +4,7 @@ Asserts:
 1. Multi-Meat 30-Day Historical Backtest confirms MAPE < 15.0% across all categories.
 2. Cooked Usable vs. Raw Prep conversion invariants:
    - Turkey: 70% nominal yield (no-trim protocol).
-   - Brisket: 40% net yield (~14 lb whole packer).
+   - Brisket: 40% net yield (~16.4 lb whole packer, invoice weight).
    - Pork: 44% net yield (~8 lb whole butt).
    - Sausage: 85% yield, 3 links/lb.
 3. Paired Drift Detection Method:

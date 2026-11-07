@@ -2,8 +2,15 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import sys
 
 class NoCacheHandler(SimpleHTTPRequestHandler):
+    BLOCKED_EXTENSIONS = (
+        ".env", ".db", ".sqlite", ".csv", ".xlsx", ".xls", ".enc",
+        ".tar.gz", ".zip", ".7z", ".bak", ".orig", ".py", ".sh", ".log"
+    )
+    BLOCKED_DIRS = {"data", "backups", "backup_db", "archive", "agent", ".loop"}
+
     def do_GET(self):
-        if any(seg.startswith(".") for seg in self.path.split("/") if seg) or self.path.endswith((".env", ".db", ".sqlite")):
+        parts = [seg for seg in self.path.split("?")[0].split("/") if seg]
+        if any(seg in self.BLOCKED_DIRS or seg.startswith(".") for seg in parts) or self.path.split("?")[0].lower().endswith(self.BLOCKED_EXTENSIONS):
             self.send_response(403)
             self.end_headers()
             return

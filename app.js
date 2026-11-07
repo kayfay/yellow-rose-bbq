@@ -20,7 +20,14 @@
    - Executive BI hooks: renderDailyExecutiveBrief, renderKPIBulletAndSparklines, buildSparklineSVG, injectMobileFaceCallouts
    ========================================================================== */
 
+// Brisket weights come from the shared kitchen spec (invoice catch weights), not literals.
+const BRISKET_CASE_LBS = (window.KITCHEN_UNIT_SPECS && window.KITCHEN_UNIT_SPECS.brisket.lbsPerCase) || 82.0;
+const DINO_RIB_LBS = (window.KITCHEN_UNIT_SPECS && window.KITCHEN_UNIT_SPECS.dino_ribs.lbsPerRib) || 4.0;
+const RIB_RACK_LBS = (window.KITCHEN_UNIT_SPECS && window.KITCHEN_UNIT_SPECS.pork_ribs.lbsPerRack) || 5.6;
+const BRISKET_PIECE_LBS = (window.KITCHEN_UNIT_SPECS && window.KITCHEN_UNIT_SPECS.brisket.lbsPerCut) || 16.4;
+
 let _lastViewportIsMobile = typeof isMobileViewport === 'function' ? isMobileViewport() : false;
+let _lastViewportIsLandscape = typeof isLandscapePhone === 'function' ? isLandscapePhone() : false;
 let _resizeDebounceTimer = null;
 let _forecastRenderSeq = 0;
 
@@ -68,8 +75,10 @@ window.addEventListener('resize', () => {
       }
     });
 
-    if (nowMobile !== _lastViewportIsMobile) {
+    const nowLandscape = typeof isLandscapePhone === 'function' && isLandscapePhone();
+    if (nowMobile !== _lastViewportIsMobile || nowLandscape !== _lastViewportIsLandscape) {
       _lastViewportIsMobile = nowMobile;
+      _lastViewportIsLandscape = nowLandscape;
       renderPlotlyForecastingChart(getActiveDaysCount());
       if (typeof renderPlotlyPredictiveChart === 'function') renderPlotlyPredictiveChart();
       if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
@@ -199,8 +208,8 @@ function initDesignDebugPanel() {
       renderPlotlyForecastingChart(getActiveDaysCount());
       if (statusEl) {
         statusEl.textContent = nextMode === 'case'
-          ? 'Unit display: Case & Cut View (Default)'
-          : 'Unit display: Raw Lbs View';
+          ? 'Unit display: Counts (Default)'
+          : 'Unit display: Lbs';
       }
     });
   }
@@ -285,7 +294,7 @@ function initDesignDebugPanel() {
       const styles = getComputedStyle(document.documentElement);
       const activeUnitMode = typeof getUnitDisplayMode === 'function' ? getUnitDisplayMode() : 'case';
       const tokenPayload = {
-        version: '2.2.3',
+        version: '2.2.4',
         activeViewportPreset: activePreviewWidth,
         windowInnerWidth: window.innerWidth,
         mobileTouchSafeCharts: isMobileViewport(),
@@ -313,7 +322,7 @@ function initDesignDebugPanel() {
       const jsonStr = JSON.stringify(tokenPayload, null, 2);
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(jsonStr).then(() => {
-          if (statusEl) statusEl.textContent = 'Copied v2.2.3 JSON tokens to clipboard';
+          if (statusEl) statusEl.textContent = 'Copied v2.2.4 JSON tokens to clipboard';
         }).catch(() => {
           if (statusEl) statusEl.textContent = 'Tokens serialized (clipboard unavailable)';
         });
@@ -1011,7 +1020,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const benchmark = ['Fri', 'Sat', 'Sun'].includes(r.day_name) ? 3500 : 2800;
       const revMultiplier = rev > 0 ? Math.min(1.10, Math.max(0.90, rev / benchmark)) : 1.0;
       const cookedDemand = baseCooked * revMultiplier;
-      const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // +10% Extra Prep / Cushion
+      const cookedTarget = Math.round(cookedDemand * 1.10 * 10) / 10; // built-in 10% prep margin (kept in the math on purpose; never shown in the UI)
       const rawTarget = Math.round((cookedTarget / 0.70) * 10) / 10;   // 70% nominal yield
       return { cooked: cookedTarget, raw: rawTarget };
     }
@@ -1045,7 +1054,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const dayHours = isClosedDay ? 0.0 : (r.pitmaster_hours || roundStaffHours(dayStaff));
         totalStaff = Math.max(totalStaff, dayStaff);
         totalLaborHours += dayHours;
-        totalCogs += (r.estimated_cogs_usd || Math.round(rev * 0.295));
+        totalCogs += (r.estimated_cogs_usd || 0);
       });
     } else {
       const targetRecord = slicedRecords[0] || matchedRecord;
@@ -1062,7 +1071,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const isClosedDay = targetRecord.is_closed || targetRecord.day_name === 'Mon';
       totalStaff = isClosedDay ? 0 : (targetRecord.recommended_staff || minMaxStaff(totalRev));
       totalLaborHours = isClosedDay ? 0.0 : (targetRecord.pitmaster_hours || roundStaffHours(totalStaff));
-      totalCogs = targetRecord.estimated_cogs_usd || Math.round(totalRev * 0.295);
+      totalCogs = targetRecord.estimated_cogs_usd || 0;
     }
 
     const bCooked = Math.round(bRaw * 0.4);
@@ -1136,8 +1145,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const drCasesElem = document.getElementById('kpi-beef-dino-ribs-cases');
     const sausageLinksSub = document.getElementById('kpi-sausage-links-sub');
 
-    const laborHoursElem = document.getElementById('kpi-labor-hours');
-    const staffCountElem = document.getElementById('kpi-staff-count');
     const cogsUsdElem = document.getElementById('kpi-cogs-usd');
     const aovUsdElem = document.getElementById('kpi-aov-usd');
     const aovSubElem = document.getElementById('kpi-aov-sub');
@@ -1158,8 +1165,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       'kpi-total-cooked-blended-sub',
       'kpi-velocity-blended-sub',
       'kpi-food-cost-blended-sub',
-      'kpi-aov-blended-sub',
-      'kpi-labor-blended-sub'
+      'kpi-aov-blended-sub'
     ];
     function setBlendedPill(id, html) {
       const el = document.getElementById(id);
@@ -1279,6 +1285,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     if (isTargetClosed) {
       clearAllBlendedPills();
 
+      const foodCostPctClosed = document.getElementById('kpi-food-cost-pct');
+      if (foodCostPctClosed) foodCostPctClosed.textContent = '--';
       if (brisketElem) brisketElem.textContent = '0';
       if (porkElem) porkElem.textContent = '0';
       if (sausageElem) sausageElem.textContent = '0';
@@ -1301,8 +1309,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (rCasesElem) rCasesElem.textContent = '(Closed / 0 Cases)';
       if (drCasesElem) drCasesElem.textContent = '(Closed / 0 Cases)';
 
-      if (laborHoursElem) laborHoursElem.textContent = '0';
-      if (staffCountElem) staffCountElem.textContent = '(Closed / 0 Staff)';
       if (cogsUsdElem) cogsUsdElem.textContent = '($0 Est. Meat Cost)';
       if (aovUsdElem) aovUsdElem.textContent = '$0.00';
       if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
@@ -1331,7 +1337,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
             <strong>Takeaway:</strong> Smokehouse is closed on Monday for scheduled pit maintenance (0 briskets, 0 butts, and 0 racks needed today).
           </div>
           <div class="model-eval-narrative">
-            <strong>Smokehouse Closed (Pit Maintenance Window)</strong>: Scheduled non-operating Monday reserved for pit cleaning and wood restocking. Targets and labor are calibrated to zero.
+            <strong>Smokehouse Closed (Pit Maintenance Window)</strong>: Scheduled non-operating Monday reserved for pit cleaning and wood restocking. Targets are set to zero.
           </div>
         `;
       }
@@ -1356,11 +1362,11 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedRawBrisket = Math.round(blendedCookedBrisket / 0.4);
 
       if (brisketElem) brisketElem.textContent = blendedRawBrisket;
-      if (bCasesElem) bCasesElem.textContent = `(~${blendedRawBrisket} lbs raw / ~${(blendedRawBrisket / 70.0).toFixed(1)} Cases)`;
-      if (bCookedElem) bCookedElem.textContent = `(~${Math.round(actCookedBrisket)} lbs actual sold • ~${Math.round(remCookedBrisket)} lbs remaining)`;
+      if (bCasesElem) bCasesElem.textContent = `(~${blendedRawBrisket} lbs raw / ~${(blendedRawBrisket / BRISKET_CASE_LBS).toFixed(1)} Cases)`;
+      if (bCookedElem) bCookedElem.textContent = `(~${Math.round(actCookedBrisket)} Cooked lbs Sold • ~${Math.round(remCookedBrisket)} lbs remaining)`;
       setBlendedPill('kpi-brisket-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedBrisket)} lbs sold so far + ~${Math.round(remCookedBrisket)} lbs needed to close (~${Math.round(blendedCookedBrisket)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.4)} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.4)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1372,10 +1378,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       if (porkElem) porkElem.textContent = blendedRawPork;
       if (pCasesElem) pCasesElem.textContent = `(~${blendedRawPork} lbs raw / ~${(blendedRawPork / 32.0).toFixed(1)} Cases)`;
-      if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} lbs actual sold • ~${Math.round(remCookedPork)} lbs remaining)`;
+      if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} Cooked lbs Sold • ~${Math.round(remCookedPork)} lbs remaining)`;
       setBlendedPill('kpi-pork-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedPork)} lbs sold so far + ~${Math.round(remCookedPork)} lbs needed to close (~${Math.round(blendedCookedPork)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1388,10 +1394,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedSausageBatches = Math.ceil(blendedSausageLbs / 60.0) || 1;
 
       if (sausageElem) sausageElem.textContent = blendedSausageBatches;
-      if (sausageLinksSub) sausageLinksSub.textContent = `(${actSausageLinks} actual links sold • ${remSausageLinks} remaining)`;
+      if (sausageLinksSub) sausageLinksSub.textContent = `(${actSausageLinks} links sold • ${remSausageLinks} remaining)`;
       setBlendedPill('kpi-sausage-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${actSausageLinks} links sold so far + ~${remSausageLinks} needed to close (~${blendedSausageLinks} total links)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actSausageLinks} links sold (~${actSausageLbs} lbs)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${actSausageLinks} links sold (~${actSausageLbs} lbs)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1401,10 +1407,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedRibsRacks = actRibsRacks + remRibsRacks;
 
       if (ribsElem) ribsElem.textContent = blendedRibsRacks;
-      if (rCasesElem) rCasesElem.textContent = `(${actRibsRacks} actual racks sold • ${remRibsRacks} remaining)`;
+      if (rCasesElem) rCasesElem.textContent = `(${actRibsRacks} racks sold • ${remRibsRacks} remaining)`;
       setBlendedPill('kpi-pork-ribs-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actRibsRacks} racks sold so far + ${remRibsRacks} needed to close (${blendedRibsRacks} total racks)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actRibsRacks} racks sold (~${(actRibsRacks / 6.0).toFixed(1)} cs)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ${actRibsRacks} racks sold (~${(actRibsRacks / 6.0).toFixed(1)} cs)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1414,10 +1420,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedDinoRibs = actDinoRibs + remDinoRibs;
 
       if (dinoElem) dinoElem.textContent = blendedDinoRibs;
-      if (drCasesElem) drCasesElem.textContent = `(${actDinoRibs} actual ribs sold • ${remDinoRibs} remaining)`;
+      if (drCasesElem) drCasesElem.textContent = `(${actDinoRibs} ribs sold • ${remDinoRibs} remaining)`;
       setBlendedPill('kpi-beef-dino-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actDinoRibs} ribs sold so far + ${remDinoRibs} needed to close (${blendedDinoRibs} total ribs)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actDinoRibs} ribs sold (~${(blendedDinoRibs / 12.0).toFixed(1)} Cases)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ${actDinoRibs} ribs sold (~${(blendedDinoRibs / 12.0).toFixed(1)} Cases)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1428,10 +1434,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedTurkeyRaw = Math.round(blendedTurkeyCooked / 0.70);
 
       if (turkeyElem) turkeyElem.textContent = Math.round(blendedTurkeyCooked);
-      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} lbs actual • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
+      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} Cooked lbs Sold • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
       setBlendedPill('kpi-turkey-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${Math.round(actTurkeyCooked)} lbs sold so far + ~${Math.round(remTurkeyCooked)} lbs needed to close (~${Math.round(blendedTurkeyCooked)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1441,10 +1447,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedRosebuds = actRosebuds + remRosebuds;
 
       if (rosebudsElem) rosebudsElem.textContent = blendedRosebuds;
-      if (rosebudsSubElem) rosebudsSubElem.textContent = `(${actRosebuds} actual sold • ${remRosebuds} remaining)`;
+      if (rosebudsSubElem) rosebudsSubElem.textContent = `(${actRosebuds} sold • ${remRosebuds} remaining)`;
       setBlendedPill('kpi-rosebuds-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actRosebuds} bites sold so far + ${remRosebuds} needed to close (${blendedRosebuds} total bites)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actRosebuds} units (~${(actRosebuds * 0.25).toFixed(1)} lbs brisket draw)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ${actRosebuds} units (~${(actRosebuds * 0.25).toFixed(1)} lbs brisket draw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1454,10 +1460,10 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedTacos = actTacos + remTacos;
 
       if (tacosElem) tacosElem.textContent = blendedTacos;
-      if (tacosSubElem) tacosSubElem.textContent = `(${actTacos} actual sold • ${remTacos} remaining)`;
+      if (tacosSubElem) tacosSubElem.textContent = `(${actTacos} sold • ${remTacos} remaining)`;
       setBlendedPill('kpi-tacos-blended-sub', `
         <strong>Today's Projected Finish</strong>: ${actTacos} tacos sold so far + ${remTacos} needed to close (${blendedTacos} total tacos)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${actTacos} tacos (~${(actTacos * 0.15).toFixed(1)} lbs meat draw)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ${actTacos} tacos (~${(actTacos * 0.15).toFixed(1)} lbs meat draw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1467,40 +1473,47 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedTotalCooked = actTotalCooked + remTotalCooked;
 
       if (totalCookedElem) totalCookedElem.textContent = blendedTotalCooked;
-      if (totalCookedSub) totalCookedSub.textContent = `(~${actTotalCooked} lbs actual sold • ~${remTotalCooked} lbs remaining)`;
+      if (totalCookedSub) totalCookedSub.textContent = `(~${actTotalCooked} Cooked lbs Sold • ~${remTotalCooked} lbs remaining)`;
       setBlendedPill('kpi-total-cooked-blended-sub', `
         <strong>Today's Projected Finish</strong>: ~${actTotalCooked} lbs pulled so far + ~${remTotalCooked} lbs needed to close (~${blendedTotalCooked} lbs total cooked)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actTotalCooked} lbs cooked (~${Math.round(actTotalCooked / 0.4)} lbs raw trim)</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${actTotalCooked} lbs cooked (~${Math.round(actTotalCooked / 0.4)} lbs raw trim)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
-      // 10. Hourly Sales Pace
+      // 10. Sales vs. Typical Day (dollar gap against what this weekday usually sells by this hour)
       const elapsedHours = Math.max(1, cutH >= 11 ? Math.min(cutH - 10, 10) : 1);
       const liveVelocity = (bSum.actualOrdersSoFar / elapsedHours).toFixed(1);
-      const targetVelocity = ((bSum.forecastFullDay / 48.5) / 10).toFixed(1);
       const velElem = document.getElementById('kpi-current-velocity');
       const pacingStatusElem = document.getElementById('kpi-pacing-status');
+      const expectedToHour = (bSum.typicalToHour !== null && bSum.typicalToHour !== undefined) ? bSum.typicalToHour : bSum.forecastToHour;
+      const salesGap = Math.round(bSum.actualSalesSoFar - expectedToHour);
+      const gapMoney = (salesGap >= 0 ? '+$' : '-$') + Math.abs(salesGap).toLocaleString();
+      const gapWord = Math.abs(bSum.pacingPct) < 5 ? 'On pace' : (salesGap > 0 ? 'Ahead' : 'Behind');
 
-      if (velElem) velElem.textContent = `${liveVelocity} ord/hr`;
+      if (velElem && Number.isFinite(salesGap)) velElem.textContent = gapMoney;
       if (pacingStatusElem) {
-        pacingStatusElem.textContent = `(${pSign}${bSum.pacingPct}% Pace)`;
+        pacingStatusElem.textContent = `(${gapWord} • ${pSign}${bSum.pacingPct}%)`;
         pacingStatusElem.style.color = pColor;
       }
       setBlendedPill('kpi-velocity-blended-sub', `
-        <strong>Current Pace</strong>: ${liveVelocity} orders/hr actual pace<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ${bSum.actualOrdersSoFar} orders in ${elapsedHours}h (Target: ${targetVelocity} ord/hr)</span> • 
-        <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
+        <strong>Sales vs. Typical Day</strong>: ${gapWord} by ${gapMoney.replace('-', '')} so far<br>
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} sold vs $${Math.round(expectedToHour).toLocaleString()} typical (${liveVelocity} orders/hr)</span>
       `);
 
       // 11. Estimated Meat Cost
-      const blendedCOGS = Math.round(blendedTotalRev * 0.295);
-      const actCOGS = Math.round(actSalesSoFar * 0.295);
-      const remCOGS = Math.round(remSales * 0.295);
-      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} actual cost • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
+      // Meat cost = batch meat cost for the day (from the pipeline) over projected sales; cost so far scales with sales so far.
+      const blendedCOGS = Math.round(totalCogs);
+      const costShare = blendedTotalRev > 0 ? Math.min(1, actSalesSoFar / blendedTotalRev) : 0;
+      const actCOGS = Math.round(blendedCOGS * costShare);
+      const remCOGS = Math.max(0, blendedCOGS - actCOGS);
+      const dayMeatPct = (blendedCOGS > 0 && blendedTotalRev > 0) ? (blendedCOGS / blendedTotalRev * 100).toFixed(1) + '%' : '--';
+      const foodCostPctElem = document.getElementById('kpi-food-cost-pct');
+      if (foodCostPctElem) foodCostPctElem.textContent = dayMeatPct;
+      if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(actCOGS).toLocaleString()} cost so far • ~$${Math.round(remCOGS).toLocaleString()} remaining)`;
       setBlendedPill('kpi-food-cost-blended-sub', `
-        <strong>Today's Food Cost Finish</strong>: ~$${Math.round(actCOGS).toLocaleString()} actual + ~$${Math.round(remCOGS).toLocaleString()} remaining (~$${Math.round(blendedCOGS).toLocaleString()} total day)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~$${Math.round(actCOGS).toLocaleString()} food cost on $${actSalesSoFar.toLocaleString()} sales</span> • 
-        <span style="color:#10b981; font-weight:700;">29.5% Target Met</span>
+        <strong>Today's Meat Cost Finish</strong>: ~$${Math.round(actCOGS).toLocaleString()} so far + ~$${Math.round(remCOGS).toLocaleString()} remaining (~$${Math.round(blendedCOGS).toLocaleString()} total day)<br>
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} sales</span> • 
+        <span style="color:#10b981; font-weight:700;">${dayMeatPct} of sales</span>
       `);
 
       // 12. Average Ticket Revenue
@@ -1509,31 +1522,19 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (aovSubElem) aovSubElem.textContent = `($${actSalesSoFar.toLocaleString()} actual POS • ${bSum.actualOrdersSoFar} orders)`;
       setBlendedPill('kpi-aov-blended-sub', `
         <strong>Average Ticket So Far</strong>: $${liveAOV} per customer check<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} POS revenue across ${bSum.actualOrdersSoFar} orders</span> • 
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} POS revenue across ${bSum.actualOrdersSoFar} orders</span> • 
         <span style="color:${pColor}; font-weight:700;">Target: $48.50</span>
-      `);
-
-      // 13. Labor Hours
-      const actLaborHours = Math.min(totalLaborHours, Math.round(elapsedHours * totalStaff * 10) / 10);
-      const remLaborHours = Math.max(0, Math.round((totalLaborHours - actLaborHours) * 10) / 10);
-      const blendedLaborHours = Math.round((actLaborHours + remLaborHours) * 10) / 10;
-      if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
-      if (staffCountElem) staffCountElem.textContent = `(~${actLaborHours.toFixed(1)}h actual clocked • ~${remLaborHours.toFixed(1)}h remaining)`;
-      setBlendedPill('kpi-labor-blended-sub', `
-        <strong>Shift Labor Hours</strong>: ~${actLaborHours.toFixed(1)}h clocked so far + ~${remLaborHours.toFixed(1)}h remaining (${blendedLaborHours.toFixed(1)}h total roster)<br>
-        <span style="color:#cbd5e1;">Actual to ${h12}:00 ${ampm} EST: ~${actLaborHours.toFixed(1)} pit hours logged across ${totalStaff} crew</span> • 
-        <span style="color:#a855f7; font-weight:700;">On Schedule</span>
       `);
 
       // 14. Revenue Card
       if (revenueElem) revenueElem.textContent = '$' + blendedTotalRev.toLocaleString();
       setBlendedPill('kpi-revenue-blended-sub', `
         <strong>Today's Projected Finish</strong>: $${actSalesSoFar.toLocaleString()} sold so far + $${remSales.toLocaleString()} needed to close<br>
-        <span style="color: #cbd5e1;">Actual to ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} (${bSum.actualOrdersSoFar} orders)</span> • 
+        <span style="color: #cbd5e1;">Through ${h12}:00 ${ampm} EST: $${actSalesSoFar.toLocaleString()} (${bSum.actualOrdersSoFar} orders)</span> • 
         <span style="color: ${pColor}; font-weight: 700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
-      // Real-time vs Target Prediction Comparison Badges with Serving Numbers & Plain English
+      // Real-time vs Target Prediction Comparison Badges with Serving Numbers
       const revDiff = Math.round(blendedTotalRev - bSum.forecastFullDay);
       const revPct = bSum.forecastFullDay > 0 ? Math.round((revDiff / bSum.forecastFullDay) * 1000) / 10 : 0;
       const predOrders = Math.round(bSum.forecastFullDay / 48.50);
@@ -1542,7 +1543,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '$' + Math.round(bSum.forecastFullDay).toLocaleString(),
         'Measured + Proj', '$' + actSalesSoFar.toLocaleString() + ' sold (~$' + blendedTotalRev.toLocaleString() + ')',
         revDiff, '$', revPct, null,
-        `Plain English: Model targeted ~${predOrders} customer orders; currently pacing toward ~${estBlendedOrders} day-end orders ($${actSalesSoFar.toLocaleString()} registered in POS so far).`
+        `Model targeted ~${predOrders} customer orders; currently pacing toward ~${estBlendedOrders} day-end orders ($${actSalesSoFar.toLocaleString()} registered in POS so far).`
       ));
 
       const bDiff = blendedRawBrisket - bVal;
@@ -1553,7 +1554,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + bVal + ' lbs raw (~' + bCooked + ' lbs cooked)',
         'Measured Yield', '~' + Math.round(actCookedBrisket) + ' lbs cooked sold (~' + blendedRawBrisket + ' lbs raw)',
         bDiff, 'lbs', bPct, null,
-        `Plain English: ~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ~${estBPortions} day-end portions (~${blendedRawBrisket} lbs raw prep).`
+        `~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ~${estBPortions} day-end portions (~${blendedRawBrisket} lbs raw prep).`
       ));
 
       const pDiff = blendedRawPork - pVal;
@@ -1564,7 +1565,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + pVal + ' lbs raw (~' + pCooked + ' lbs cooked)',
         'Measured Yield', '~' + Math.round(actCookedPork) + ' lbs cooked sold (~' + blendedRawPork + ' lbs raw)',
         pDiff, 'lbs', pPct, null,
-        `Plain English: ~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ~${estPPortions} day-end sandwiches.`
+        `~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ~${estPPortions} day-end sandwiches.`
       ));
 
       const sDiff = blendedSausageLinks - sausageLinks;
@@ -1573,7 +1574,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', sausageLinks + ' links (~' + sVal + ' lbs)',
         'Measured Yield', actSausageLinks + ' sold (~' + blendedSausageLinks + ' links)',
         sDiff, 'links', sPct, null,
-        `Plain English: ${actSausageLinks} links sold at the counter so far; tracking toward ~${blendedSausageLinks} day-end links (${blendedSausageBatches} mixer batches).`
+        `${actSausageLinks} links sold at the counter so far; tracking toward ~${blendedSausageLinks} day-end links (${blendedSausageBatches} mixer batches).`
       ));
 
       const rDiff = blendedRibsRacks - rVal;
@@ -1582,7 +1583,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)',
         'Measured Yield', actRibsRacks + ' sold (~' + blendedRibsRacks + ' racks)',
         rDiff, 'racks', rPct, null,
-        `Plain English: ${actRibsRacks} racks sold (${actRibsRacks * 12} individual bones) so far; tracking toward ~${blendedRibsRacks} day-end racks (~${(blendedRibsRacks / 6.0).toFixed(1)} cases).`
+        `${actRibsRacks} racks sold (${actRibsRacks * 12} individual bones) so far; tracking toward ~${blendedRibsRacks} day-end racks (~${(blendedRibsRacks / 6.0).toFixed(1)} cases).`
       ));
 
       const drDiff = blendedDinoRibs - drVal;
@@ -1591,7 +1592,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)',
         'Measured Yield', actDinoRibs + ' sold (~' + blendedDinoRibs + ' ribs)',
         drDiff, 'ribs', drPct, null,
-        `Plain English: ${actDinoRibs} jumbo plate ribs sold so far; tracking toward ~${blendedDinoRibs} day-end ribs.`
+        `${actDinoRibs} jumbo plate ribs sold so far; tracking toward ~${blendedDinoRibs} day-end ribs.`
       ));
 
       const tDiff = Math.round(blendedTurkeyCooked - tVal);
@@ -1602,7 +1603,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', tVal + ' lbs ck (~' + Math.round(tVal / 0.70) + ' lbs raw)',
         'Measured Yield', '~' + Math.round(actTurkeyCooked) + ' lbs sold (~' + Math.round(blendedTurkeyCooked) + ' lbs cooked)',
         tDiff, 'lbs', tPct, null,
-        `Plain English: ~${actTPortions} carved plates sold so far; tracking toward ~${estTPortions} day-end portions (~${blendedTurkeyRaw} lbs raw prep).`
+        `~${actTPortions} carved plates sold so far; tracking toward ~${estTPortions} day-end portions (~${blendedTurkeyRaw} lbs raw prep).`
       ));
 
       const rbDiff = blendedRosebuds - rbVal;
@@ -1611,7 +1612,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', rbVal + ' units',
         'Measured Yield', actRosebuds + ' sold (~' + blendedRosebuds + ' units)',
         rbDiff, 'units', rbPct, null,
-        `Plain English: ${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} orders of 4) so far; tracking toward ~${blendedRosebuds} day-end bites from brisket burnt ends.`
+        `${actRosebuds} bites sold (~${Math.round(actRosebuds / 4)} orders of 4) so far; tracking toward ~${blendedRosebuds} day-end bites from brisket burnt ends.`
       ));
 
       const tacoDiff = blendedTacos - tacoVal;
@@ -1620,7 +1621,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', tacoVal + ' tacos',
         'Measured Yield', actTacos + ' sold (~' + blendedTacos + ' tacos)',
         tacoDiff, 'tacos', tacoPct, null,
-        `Plain English: ${actTacos} tacos served so far; tracking toward ~${blendedTacos} day-end orders across shift.`
+        `${actTacos} tacos served so far; tracking toward ~${blendedTacos} day-end orders across shift.`
       ));
 
       const tcDiff = blendedTotalCooked - totalCooked;
@@ -1629,7 +1630,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         'Predicted Total', '~' + totalCooked + ' lbs ck (~' + totalRaw + ' lbs raw)',
         'Measured Yield', '~' + actTotalCooked + ' lbs sold (~' + blendedTotalCooked + ' lbs cooked)',
         tcDiff, 'lbs', tcPct, null,
-        `Plain English: ~${actTotalCooked} lbs cooked barbecue drawn so far; tracking toward ~${blendedTotalCooked} lbs total hot-holding yield.`
+        `~${actTotalCooked} lbs cooked barbecue drawn so far; tracking toward ~${blendedTotalCooked} lbs total hot-holding yield.`
       ));
 
       const evalBannerElem = document.getElementById('kpi-model-eval-banner');
@@ -1653,12 +1654,12 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
         evalPillElem.className = `eval-pill ${statusClass}`;
         evalPillElem.textContent = statusTitle;
-        const liveBrisketPackersDiff = Math.round(bDiff / 14.0);
+        const liveBrisketPackersDiff = Math.round(bDiff / BRISKET_PIECE_LBS);
         const liveTakeawayText = Math.abs(bDiff) < 7
-          ? `We are pacing right on our Pitmaster Daily Forecast target (~${Math.ceil(blendedRawBrisket / 14.0)} briskets / ~${blendedRawBrisket} lbs raw).`
+          ? `We are pacing right on our Pitmaster Daily Forecast target (~${Math.ceil(blendedRawBrisket / BRISKET_PIECE_LBS)} briskets / ~${blendedRawBrisket} lbs raw).`
           : (bDiff > 0
             ? `Customer demand is running ahead of target by ~${Math.max(1, Math.abs(liveBrisketPackersDiff))} brisket${Math.abs(liveBrisketPackersDiff) === 1 ? '' : 's'} (+${Math.abs(bDiff)} lbs over target).`
-            : `We have ~${Math.max(1, Math.abs(liveBrisketPackersDiff))} extra brisket${Math.abs(liveBrisketPackersDiff) === 1 ? '' : 's'} in hot-holding cushion (${Math.abs(bDiff)} lbs difference from target).`);
+            : `We have ~${Math.max(1, Math.abs(liveBrisketPackersDiff))} extra brisket${Math.abs(liveBrisketPackersDiff) === 1 ? '' : 's'} in hot-holding (${Math.abs(bDiff)} lbs difference from target).`);
         evalBodyElem.innerHTML = `
           <div class="audit-plain-takeaway">
             <strong>Takeaway:</strong> ${liveTakeawayText}
@@ -1689,6 +1690,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     } else {
       clearAllBlendedPills();
 
+      const foodCostPctElem2 = document.getElementById('kpi-food-cost-pct');
+      if (foodCostPctElem2) foodCostPctElem2.textContent = (totalCogs > 0 && totalRev > 0) ? (totalCogs / totalRev * 100).toFixed(1) + '%' : '--';
       if (brisketElem) brisketElem.textContent = bVal;
       if (porkElem) porkElem.textContent = pVal;
       if (sausageElem) sausageElem.textContent = sausageBatches;
@@ -1707,15 +1710,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (totalCookedElem) totalCookedElem.textContent = totalCooked;
       if (totalCookedSub) totalCookedSub.textContent = `(~${totalRaw} lbs raw trim)`;
 
-      if (bCasesElem) bCasesElem.textContent = `(~${(bVal / 70.0).toFixed(1)} Cases / ~${Math.ceil(bVal / 14.0)} Packers)`;
+      if (bCasesElem) bCasesElem.textContent = `(~${(bVal / BRISKET_CASE_LBS).toFixed(1)} Cases / ~${Math.ceil(bVal / BRISKET_PIECE_LBS)} Packers)`;
       if (pCasesElem) pCasesElem.textContent = `(~${(pVal / 32.0).toFixed(1)} Cases / ~${Math.ceil(pVal / 8.0)} Butts)`;
-      if (bCookedElem) bCookedElem.textContent = `(~ ${Math.round(bVal * 0.4)} lbs cooked)`;
-      if (pCookedElem) pCookedElem.textContent = `(~ ${Math.round(pVal * 0.44)} lbs cooked)`;
+      if (bCookedElem) bCookedElem.textContent = '';
+      if (pCookedElem) pCookedElem.textContent = '';
       if (rCasesElem) rCasesElem.textContent = `(~${(rVal / 6.0).toFixed(1)} Cases / ~${Math.ceil(rVal / 2.0)} Bags)`;
       if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
-      if (laborHoursElem) laborHoursElem.textContent = totalLaborHours.toFixed(1);
-      if (staffCountElem) staffCountElem.textContent = `(~${totalStaff} Staff / 8.5h Shift)`;
       if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} Est. Meat Cost)`;
       if (aovUsdElem) aovUsdElem.textContent = '$48.50';
       if (aovSubElem) aovSubElem.textContent = '(Average Order Value)';
@@ -1728,11 +1729,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       if (hasMeasuredActuals) {
         let sumPredRev = 0, sumPredBRaw = 0, sumPredPRaw = 0, sumPredSLbs = 0, sumPredRRacks = 0, sumPredDRibs = 0, sumPredTCooked = 0, sumPredTacos = 0, sumPredRosebuds = 0;
+        let sumBatchCogs = 0;
         let sumActRev = 0, sumActBRaw = 0, sumActPRaw = 0, sumActSLbs = 0, sumActRRacks = 0, sumActDRibs = 0, sumActTCooked = 0, sumActTacos = 0, sumActRosebuds = 0;
 
         const recordsToSum = isRangeSelected ? slicedRecords : [matchedRecord || slicedRecords[0]];
         recordsToSum.forEach(r => {
           if (!r) return;
+          sumBatchCogs += (r.estimated_cogs_usd || 0);
           sumPredRev += (r.predicted_revenue !== undefined ? r.predicted_revenue : (r.actual_revenue || 0));
           sumPredBRaw += (r.predicted_brisket_raw_lbs !== undefined ? r.predicted_brisket_raw_lbs : (r.brisket_raw_lbs || 0));
           sumPredPRaw += (r.predicted_pork_raw_lbs !== undefined ? r.predicted_pork_raw_lbs : (r.pork_shoulder_raw_lbs || 0));
@@ -1760,14 +1763,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const revPct = pRevRound > 0 ? Math.round((revDiff / pRevRound) * 1000) / 10 : 0;
         const pOrders = Math.round(pRevRound / 48.50);
         const aOrders = Math.round(aRevRound / 48.50);
-        const aFoodCost = Math.round(aRevRound * 0.295);
-        const pFoodCost = Math.round(pRevRound * 0.295);
+        const aFoodCost = Math.round(sumBatchCogs);
+        const pFoodCost = aFoodCost;
+        const aFoodCostPct = (aFoodCost > 0 && aRevRound > 0) ? (aFoodCost / aRevRound * 100).toFixed(1) + '%' : '--';
+        const aFoodCostText = aFoodCost > 0 ? `$${aFoodCost.toLocaleString()} (${aFoodCostPct})` : '--';
 
         setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML(
           'Predicted Total', '$' + pRevRound.toLocaleString(),
           'Actual POS Total', '$' + aRevRound.toLocaleString(),
           revDiff, '$', revPct, null,
-          `Plain English: Model predicted ${pOrders} customer orders ($${pRevRound.toLocaleString()}) vs ${aOrders} actual register orders ($${aRevRound.toLocaleString()}).`
+          `Model predicted ${pOrders} customer orders ($${pRevRound.toLocaleString()}) vs ${aOrders} register orders ($${aRevRound.toLocaleString()}).`
         ));
 
         const pBRawRound = Math.round(sumPredBRaw);
@@ -1782,7 +1787,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', '~' + pBRawRound + ' lbs raw (~' + pBCooked + ' lbs cooked)',
           'Actual Measured', '~' + aBRawRound + ' lbs raw (~' + aBCooked + ' lbs cooked)',
           bDiff, 'lbs', bPct, null,
-          `Plain English: Model targeted ~${pBPortions} sliced servings (~${pBRawRound} lbs raw) vs ~${aBPortions} actual portions served (~${aBCooked} lbs cooked).`
+          `Model targeted ~${pBPortions} sliced servings (~${pBRawRound} lbs raw) vs ~${aBPortions} portions served (~${aBCooked} lbs cooked).`
         ));
 
         const pPRawRound = Math.round(sumPredPRaw);
@@ -1797,7 +1802,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', '~' + pPRawRound + ' lbs raw (~' + pPCooked + ' lbs cooked)',
           'Actual Measured', '~' + aPRawRound + ' lbs raw (~' + aPCooked + ' lbs cooked)',
           pDiff, 'lbs', pPct, null,
-          `Plain English: Model targeted ~${pPPortions} pork sandwiches (~${pPRawRound} lbs raw) vs ~${aPPortions} actual sandwiches served (~${aPCooked} lbs cooked).`
+          `Model targeted ~${pPPortions} pork sandwiches (~${pPRawRound} lbs raw) vs ~${aPPortions} sandwiches served (~${aPCooked} lbs cooked).`
         ));
 
         const pSLinks = Math.round(sumPredSLbs * 3);
@@ -1808,7 +1813,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pSLinks + ' links (~' + Math.round(sumPredSLbs) + ' lbs)',
           'Actual Measured', aSLinks + ' links (~' + Math.round(sumActSLbs) + ' lbs)',
           sDiff, 'links', sPct, null,
-          `Plain English: Target ${pSLinks} links (${Math.ceil(pSLinks / 180)} batches) vs ${aSLinks} actual links sold at counter.`
+          `Target ${pSLinks} links (${Math.ceil(pSLinks / 180)} batches) vs ${aSLinks} links sold at the counter.`
         ));
 
         const pRRacks = Math.round(sumPredRRacks);
@@ -1819,7 +1824,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pRRacks + ' racks (~' + (pRRacks / 6.0).toFixed(1) + ' cs)',
           'Actual Measured', aRRacks + ' racks (~' + (aRRacks / 6.0).toFixed(1) + ' cs)',
           rDiff, 'racks', rPct, null,
-          `Plain English: Target ${pRRacks} racks (~${pRRacks * 12} bones) vs ${aRRacks} actual racks served (~${aRRacks * 12} bones).`
+          `Target ${pRRacks} racks (~${pRRacks * 12} bones) vs ${aRRacks} racks served (~${aRRacks * 12} bones).`
         ));
 
         const pDRibs = Math.round(sumPredDRibs);
@@ -1830,7 +1835,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pDRibs + ' ribs (~' + (pDRibs / 12.0).toFixed(1) + ' cs)',
           'Actual Measured', aDRibs + ' ribs (~' + (aDRibs / 12.0).toFixed(1) + ' cs)',
           drDiff, 'ribs', drPct, null,
-          `Plain English: Target ${pDRibs} dino plate ribs vs ${aDRibs} actual dino ribs sold.`
+          `Target ${pDRibs} dino plate ribs vs ${aDRibs} dino ribs sold.`
         ));
 
         const pTCooked = Math.round(sumPredTCooked);
@@ -1843,7 +1848,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pTCooked + ' lbs ck (~' + Math.round(pTCooked / 0.70) + ' lbs raw)',
           'Actual Measured', aTCooked + ' lbs ck (~' + Math.round(aTCooked / 0.70) + ' lbs raw)',
           tDiff, 'lbs', tPct, null,
-          `Plain English: Target ~${pTPortions} carved plates (~${pTCooked} lbs cooked) vs ~${aTPortions} actual plates served (~${aTCooked} lbs cooked).`
+          `Target ~${pTPortions} carved plates (~${pTCooked} lbs cooked) vs ~${aTPortions} plates served (~${aTCooked} lbs cooked).`
         ));
 
         const pTacos = Math.round(sumPredTacos);
@@ -1854,7 +1859,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pTacos + ' tacos',
           'Actual Measured', aTacos + ' tacos',
           tacoDiff, 'tacos', tacoPct, null,
-          `Plain English: Target ${pTacos} tacos vs ${aTacos} actual tacos sold across daily service.`
+          `Target ${pTacos} tacos vs ${aTacos} tacos sold across daily service.`
         ));
 
         const pRosebuds = Math.round(sumPredRosebuds);
@@ -1865,7 +1870,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', pRosebuds + ' units',
           'Actual Measured', aRosebuds + ' units',
           rbDiff, 'units', rbPct, null,
-          `Plain English: Target ${pRosebuds} bites (~${Math.round(pRosebuds / 4)} orders of 4) vs ${aRosebuds} actual bites sold.`
+          `Target ${pRosebuds} bites (~${Math.round(pRosebuds / 4)} orders of 4) vs ${aRosebuds} bites sold.`
         ));
 
         const pTotCooked = pBCooked + pPCooked;
@@ -1876,7 +1881,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           'Predicted Target', '~' + pTotCooked + ' lbs ck (~' + (pBRawRound + pPRawRound) + ' lbs raw)',
           'Actual Measured', '~' + aTotCooked + ' lbs ck (~' + (aBRawRound + aPRawRound) + ' lbs raw)',
           tcDiff, 'lbs', tcPct, null,
-          `Plain English: Target ~${pTotCooked} lbs cooked meat yield vs ~${aTotCooked} lbs actual cooked barbecue sliced.`
+          `Target ~${pTotCooked} lbs cooked meat yield vs ~${aTotCooked} Cooked lbs Sold.`
         ));
 
         const evalBannerElem = document.getElementById('kpi-model-eval-banner');
@@ -1896,18 +1901,18 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           } else if (revDiff > 0) {
             statusClass = 'eval-pill-drift';
             statusText = `Under-Projected (+${revPct}%)`;
-            narrativeVerdict = `Actual sales exceeded forecast by <strong>+${revPct}% (+$${revDiff.toLocaleString()})</strong>; est. meat cost held at ~$${aFoodCost.toLocaleString()} on $${aRevRound.toLocaleString()} sales.`;
+            narrativeVerdict = `Actual sales exceeded forecast by <strong>+${revPct}% (+$${revDiff.toLocaleString()})</strong>; batch meat cost was ${aFoodCostText} on $${aRevRound.toLocaleString()} sales.`;
           } else {
             statusClass = 'eval-pill-drift';
             statusText = `Over-Projected (${revPct}%)`;
-            narrativeVerdict = `Targets ran <strong>${absRevPct}% above</strong> actual POS sales (-$${Math.abs(revDiff).toLocaleString()}); actual meat cost finished at $${aFoodCost.toLocaleString()} vs $${pFoodCost.toLocaleString()} target.`;
+            narrativeVerdict = `Targets ran <strong>${absRevPct}% above</strong> actual POS sales (-$${Math.abs(revDiff).toLocaleString()}); batch meat cost was ${aFoodCostText} on $${aRevRound.toLocaleString()} actual sales.`;
           }
 
           const histBrisketDiffLbs = pBRawRound - aBRawRound;
-          const histBrisketCount = Math.max(1, Math.round(Math.abs(histBrisketDiffLbs) / 14.0));
+          const histBrisketCount = Math.max(1, Math.round(Math.abs(histBrisketDiffLbs) / BRISKET_PIECE_LBS));
           let histTakeaway = '';
           if (Math.abs(histBrisketDiffLbs) <= 6) {
-            histTakeaway = `We cooked right on our Pitmaster Daily Forecast target today (${aBRawRound} lbs raw brisket / ~${Math.ceil(aBRawRound / 14.0)} briskets vs ${pBRawRound} lbs target).`;
+            histTakeaway = `We cooked right on our Pitmaster Daily Forecast target today (${aBRawRound} lbs raw brisket / ~${Math.ceil(aBRawRound / BRISKET_PIECE_LBS)} briskets vs ${pBRawRound} lbs target).`;
           } else if (histBrisketDiffLbs > 0) {
             histTakeaway = `We cooked ${histBrisketCount} extra brisket${histBrisketCount === 1 ? '' : 's'} than needed today (+${histBrisketDiffLbs} lbs over target).`;
           } else {
@@ -1934,8 +1939,8 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
                 <span class="model-eval-stat-val" style="color:${revDiff >= 0 ? '#34d399' : '#f87171'};">${revDiff >= 0 ? '+' : ''}${revDiff.toLocaleString()} (${revPct >= 0 ? '+' : ''}${revPct}%)</span>
               </div>
               <div class="model-eval-stat-box">
-                <span class="model-eval-stat-label">Actual Est. Meat Cost</span>
-                <span class="model-eval-stat-val" style="color:#f59e0b;">$${aFoodCost.toLocaleString()} (29.5%)</span>
+                <span class="model-eval-stat-label">Est. Meat Cost</span>
+                <span class="model-eval-stat-val" style="color:#f59e0b;">${aFoodCostText}</span>
               </div>
             </div>
             <div class="model-eval-narrative">
@@ -1945,7 +1950,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         }
       } else {
         setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target $${Math.round(totalRev).toLocaleString()} sales across service (~${Math.round(totalRev / 48.50)} orders at $48.50 avg check).`));
-        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + ' lbs cooked)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / 14.0)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
+        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bVal + ' lbs raw (~' + bCooked + ' lbs cooked)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / BRISKET_PIECE_LBS)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
         setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pVal + ' lbs raw (~' + pCooked + ' lbs cooked)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
         setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Mix & stuff ${sausageBatches} batches (~${sausageLinks} links, 1/3-lb each).`));
         setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${rVal} whole spare rib racks (~${rVal * 12} individual bones from ~${(rVal / 6.0).toFixed(1)} cases).`));
@@ -1962,15 +1967,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           evalBannerElem.style.display = 'block';
           evalPillElem.className = 'eval-pill eval-pill-match';
           evalPillElem.textContent = 'Upcoming Horizon';
-          const upPackers = Math.max(1, Math.ceil(bVal / 14.0));
-          const upCases = (bVal / 70.0).toFixed(1);
+          const upPackers = Math.max(1, Math.ceil(bVal / BRISKET_PIECE_LBS));
+          const upCases = (bVal / BRISKET_CASE_LBS).toFixed(1);
           const upButts = Math.max(1, Math.ceil(pVal / 8.0));
           evalBodyElem.innerHTML = `
             <div class="audit-plain-takeaway">
-              <strong>Takeaway:</strong> Stage ${upCases} Cases (~${upPackers} Briskets), ~${upButts} Pork Butts, and ${rVal} Racks of Spare Ribs — includes a +10% Extra Prep / Cushion.
+              <strong>Takeaway:</strong> Stage ${upCases} Cases (~${upPackers} Briskets), ~${upButts} Pork Butts, and ${rVal} Racks of Spare Ribs — based on the Pitmaster Daily Forecast.
             </div>
             <div class="model-eval-narrative">
-              <strong>Future Operational Horizon</strong>: Pitmaster Daily Forecast targets include a 10% Extra Prep / Cushion; live POS Cook Accuracy Audits populate automatically during service.
+              <strong>Later today</strong>: live POS Cook Accuracy Audits populate automatically during service.
             </div>
           `;
         }
@@ -2059,44 +2064,6 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       });
     }
 
-    // Hydrate Simplified Prep Safety Margin / Cushion Status Strip
-    const marginStripEl = document.getElementById('prep-safety-margin-strip');
-    const marginTextEl = document.getElementById('prep-safety-margin-text');
-    const marginPillEl = document.getElementById('prep-safety-status-pill');
-    const marginSubEl = document.getElementById('prep-safety-subtext');
-    if (marginStripEl && marginTextEl && marginPillEl && marginSubEl) {
-      if (isTargetClosed) {
-        marginStripEl.className = 'prep-safety-margin-strip status-safe';
-        marginTextEl.textContent = `Extra Prep / Cushion: +0 Racks / +0 Butts / +0 Briskets (Closed ${closedDayLabel})`;
-        marginPillEl.className = 'prep-status-pill status-safe';
-        marginPillEl.textContent = `● Closed ${closedDayLabel} (0 Prep Required)`;
-        marginSubEl.textContent = 'Scheduled pit maintenance & firebox cleanout — reopens Tuesday 11:00 AM EST';
-      } else {
-        const extraRibsRacks = Math.max(0, Math.ceil((rVal || 0) * 0.15));
-        const extraPorkButts = Math.max(0, Math.ceil(((pVal || 0) * 0.12) / 8.0));
-        const extraBrisketPackers = Math.max(0, Math.ceil(((bVal || 0) * 0.10) / 14.0));
-        marginTextEl.textContent = `Extra Prep / Cushion: +${extraRibsRacks} Rack${extraRibsRacks === 1 ? '' : 's'} / +${extraPorkButts} Butt${extraPorkButts === 1 ? '' : 's'} / +${extraBrisketPackers} Brisket${extraBrisketPackers === 1 ? '' : 's'}`;
-
-        let marginStatus = 'safe';
-        if (hasBlended && blendedMetrics && blendedMetrics.summary && (blendedMetrics.summary.actualSalesSoFar || 0) > 0) {
-          if (blendedMetrics.summary.pacingPct > 18) marginStatus = 'under';
-          else if (blendedMetrics.summary.pacingPct > 8) marginStatus = 'tight';
-        }
-        marginStripEl.className = `prep-safety-margin-strip status-${marginStatus}`;
-        marginPillEl.className = `prep-status-pill status-${marginStatus}`;
-        if (marginStatus === 'under') {
-          marginPillEl.textContent = '▲ Under Par (High Rush Draw)';
-          marginSubEl.textContent = 'Live counter pace exceeds cushion — pull reserve brisket & sausage links from walk-in';
-        } else if (marginStatus === 'tight') {
-          marginPillEl.textContent = '◆ Tight Prep (Active Rush)';
-          marginSubEl.textContent = 'Drawing into +10% Extra Prep / Cushion — monitor slicing board portions closely';
-        } else {
-          marginPillEl.textContent = '● Safe Cushion (+10% Extra Prep)';
-          marginSubEl.textContent = 'Covers peak lunch and dinner rush through 9:00 PM EST close without premature sell-outs';
-        }
-      }
-    }
-
     if (!chartContainer) return;
 
     if (typeof Plotly !== 'undefined') {
@@ -2160,15 +2127,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.title = "Pit Production Targets: Pork Spare Ribs (Raw vs Cooked)";
         layout.yaxis.title = "Meat Weight (lbs)";
         let ribMax = 0;
-        slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * 5));
+        slicedRecords.forEach(r => ribMax = Math.max(ribMax, (r.pork_ribs_racks || 0) * RIB_RACK_LBS));
         layout.yaxis.range = [0, Math.max(10, ribMax * 1.15)];
         traces.push({
-          x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * 5),
-          type: 'bar', name: 'Raw Weight (5 lbs/rack)', marker: { color: '#9b59b6' },
+          x: dates, y: slicedRecords.map(r => (r.pork_ribs_racks || 0) * RIB_RACK_LBS),
+          type: 'bar', name: `Raw Weight (${RIB_RACK_LBS} lbs/rack)`, marker: { color: '#9b59b6' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
-          x: dates, y: slicedRecords.map(r => ((r.pork_ribs_racks || 0) * 5) * 0.6),
+          x: dates, y: slicedRecords.map(r => ((r.pork_ribs_racks || 0) * RIB_RACK_LBS) * 0.6),
           type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (60%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });
@@ -2176,15 +2143,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         layout.title = "Pit Production Targets: Beef Dino Ribs (Raw vs Cooked)";
         layout.yaxis.title = "Meat Weight (lbs)";
         let dinoMax = 0;
-        slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, (r.beef_dino_ribs || 0) * 4));
+        slicedRecords.forEach(r => dinoMax = Math.max(dinoMax, (r.beef_dino_ribs || 0) * DINO_RIB_LBS));
         layout.yaxis.range = [0, Math.max(10, dinoMax * 1.15)];
         traces.push({
-          x: dates, y: slicedRecords.map(r => (r.beef_dino_ribs || 0) * 4),
-          type: 'bar', name: 'Raw Weight (4 lbs/rack)', marker: { color: '#8e44ad' },
+          x: dates, y: slicedRecords.map(r => (r.beef_dino_ribs || 0) * DINO_RIB_LBS),
+          type: 'bar', name: `Raw Weight (${DINO_RIB_LBS} lbs/rib)`, marker: { color: '#8e44ad' },
           hovertemplate: "%{y:.1f} lbs Raw<extra></extra>"
         });
         traces.push({
-          x: dates, y: slicedRecords.map(r => ((r.beef_dino_ribs || 0) * 4) * 0.5),
+          x: dates, y: slicedRecords.map(r => ((r.beef_dino_ribs || 0) * DINO_RIB_LBS) * 0.5),
           type: 'scatter', mode: 'lines+markers', name: 'Cooked Yield (50%)', line: { color: '#f1c40f', width: 3 }, marker: { size: 6 },
           hovertemplate: "%{y:.1f} lbs Cooked<extra></extra>"
         });

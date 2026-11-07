@@ -131,9 +131,10 @@ def ingest_operational_docs() -> dict:
         "quesa_taco_meat_oz": 2.0,
         "quesadilla_meat_oz": 4.0,
         "sausage_base_block_lbs": 50.0,
-        "sausage_lean_beef_lbs": 35.0,
-        "sausage_beef_fat_lbs": 15.0,
-        "sausage_ratio": "70:30 Lean Beef Trim to Fat",
+        "sausage_lean_beef_lbs": 25.5,   # house recipe (modules/recipes/sausage_calc.js): 25.5 beef + 16 pork + 8.5 hard fat = 50 lb
+        "sausage_pork_lbs": 16.0,
+        "sausage_beef_fat_lbs": 8.5,
+        "sausage_ratio": "25.5 beef : 16 pork : 8.5 hard fat (17% fat)",
         "cure_salt_grams": 60.0,
         "roster": {},
         "sausage_recipes": []
@@ -169,7 +170,7 @@ def ingest_operational_docs() -> dict:
                 "stan": "Alternate expo shifts"
             },
             "utility_and_crafting": {
-                "allen": "50 lb custom sausage formulations (70:30 grind, linking), fresh Rosebuds, dish pit operations open to close"
+                "allen": "50 lb custom sausage formulations (grind and link), fresh Rosebuds, dish pit operations open to close"
             },
             "critical_handoffs": [
                 "02:30 AM: Trevor fires pit, trims briskets (<18% trim loss), rubs meats",
@@ -182,20 +183,7 @@ def ingest_operational_docs() -> dict:
             ]
         }
 
-    # Ingest Sausage Formulations
-    sausage_path = ROOT / "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md"
-    if sausage_path.exists():
-        s_text = sausage_path.read_text(encoding="utf-8", errors="ignore")
-        recipes = []
-        for line in s_text.splitlines():
-            if line.startswith("| **"):
-                parts = [p.strip() for p in line.split("|") if p.strip()]
-                if len(parts) >= 2:
-                    r_name = parts[0].replace("**", "").strip()
-                    r_ing = parts[1].strip()
-                    recipes.append({"name": r_name, "ingredients": r_ing})
-        if recipes:
-            docs["sausage_recipes"] = recipes
+    # Sausage recipes live in modules/recipes/sausage_calc.js (the calculator); the old formulation .md was retired 2026-11-07.
 
     return docs
 
@@ -307,7 +295,7 @@ def run_ml_intelligence_engine() -> dict:
                     f"with only {top_star['food_cost_pct']}% food cost."
                 ),
                 "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier Meat Cost Model",
-                "quantitative_proof": f"${top_star['profit_usd']:.2f} profit ({top_star['margin_pct']}% margin) vs 29.5% kitchen average",
+                "quantitative_proof": f"${top_star['profit_usd']:.2f} profit ({top_star['margin_pct']}% margin) vs the kitchen average",
                 "actionable_recommendation": (
                     f"Train counter staff to actively recommend {top_star['item']} and feature it on POS modifier quick-keys; "
                     f"every 10 incremental orders generates +${top_star['profit_usd'] * 10:.2f} pure gross profit."
@@ -369,6 +357,11 @@ def run_ml_intelligence_engine() -> dict:
 
     # 3. SMOKER CAPACITY & PIT LIMIT CONSTRAINTS (OPERATIONAL_QUESTIONNAIRE.md)
     max_briskets = op_docs.get("max_brisket_capacity", 24)
+    from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS as _UC
+    _each = _UC["brisket"]["raw_lbs_per_unit"]
+    _max_raw = round(max_briskets * _each)
+    _max_cooked = round(max_briskets * _each * _UC["brisket"]["cook_yield"], 1)
+    _max_sales = round(_max_cooked * 28.5, -1)  # ~$28.50 of brisket sales per cooked lb (the earlier $3,830 / 134.4 lb ratio)
     insights.append({
         "id": 104,
         "title": f"Smoker Physical Limit: {max_briskets} Packer Briskets Max Capacity Ceiling",
@@ -376,11 +369,11 @@ def run_ml_intelligence_engine() -> dict:
         "category_label": "🔥 Smoker Geometry",
         "insight": (
             f"Physical pit constraints confirm maximum single-session smoker capacity is 24 briskets "
-            f"(14 packers in the big offset pit + 10 packers in the small pit). At nominal 14.0 lbs raw per packer, "
-            f"maximum raw brisket load is ~336 lbs (~134 lbs cooked yield at 40%), capping single-day retail brisket sales at ~$3,830."
+            f"(14 packers in the big offset pit + 10 packers in the small pit). At {_each:g} lbs raw per packer (invoice weight), "
+            f"maximum raw brisket load is ~{_max_raw} lbs (~{round(_max_cooked)} lbs cooked yield at 40%), capping single-day retail brisket sales at ~${_max_sales:,.0f}."
         ),
         "evidence": "OPERATIONAL_QUESTIONNAIRE.md Section 3 (Smoker Constraints)",
-        "quantitative_proof": "14 big pit + 10 small pit = 24 briskets (336 lbs raw / 134.4 lbs cooked max)",
+        "quantitative_proof": f"14 big pit + 10 small pit = {max_briskets} briskets ({_max_raw} lbs raw / {_max_cooked} lbs cooked max)",
         "actionable_recommendation": (
             "When Saturday projected sales exceed $7,500, stagger the cook into dual smoking waves: Worker #1 fires wave 1 at 2:00 AM, "
             "allowing finished briskets to transfer into 145°F tallow hold by 2:00 PM while wave 2 loads."
@@ -411,38 +404,51 @@ def run_ml_intelligence_engine() -> dict:
 
     # 5. WEATHER SENSITIVITY REGRESSION (Open-Meteo & Clover POS)
     weather_stats = clover_data.get("weather_payload", {}).get("weather_stats", {})
-    rain_coef = weather_stats.get("rain_coef", 5.32)
+    rain_avg = weather_stats.get("rain_avg_usd")
+    normal_avg = weather_stats.get("normal_avg_usd")
+    if rain_avg and normal_avg and normal_avg > 0:
+        rain_pct = (rain_avg - normal_avg) / normal_avg * 100.0
+        rain_lift = rain_avg - normal_avg
+        rain_title = f"Rainy Days Average {rain_pct:+.1f}% vs Normal Days"
+        rain_text = (
+            f"Comparing operating days by weather, rainy days averaged ${rain_avg:,.0f} in sales against ${normal_avg:,.0f} on a normal day. "
+            "Rain moves volume into multi-pound takeout feasts and family platters."
+        )
+        rain_proof = f"${rain_avg:,.0f} rainy-day average vs ${normal_avg:,.0f} normal-day average ({rain_pct:+.1f}%)"
+        rain_impact = round(abs(rain_lift), 2)
+    else:
+        rain_title = "Rainy Days Shift Volume Into Takeout"
+        rain_text = "Not enough weather-matched sales days yet to size the rain effect."
+        rain_proof = "Weather comparison not available yet"
+        rain_impact = 0.0
     insights.append({
         "id": 106,
-        "title": "Precipitation Elasticity: +$97.37 Takeout Revenue Lift per mm Rain",
+        "title": rain_title,
         "category": "weather_elasticity",
         "category_label": "🌧️ Weather Sensitivity",
-        "insight": (
-            "Comparing 80 operating days by weather shows that moderate rainfall shifts "
-            "counter volume into multi-pound takeout feasts, generating an average +$97.37/mm rain lift in high-ticket to-go family platters."
-        ),
+        "insight": rain_text,
         "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
-        "quantitative_proof": "Coefficient +$97.37/mm rainfall; 0.5% average sales bump during rain vs clear days",
+        "quantitative_proof": rain_proof,
         "actionable_recommendation": (
             "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, "
             "and side cups by 10:30 AM to prevent packing bottlenecks at the counter."
         ),
-        "impact_usd": 290.0,
+        "impact_usd": rain_impact,
         "terms": ["Average Ticket", "Sales Trend", "Typical Day"]
     })
 
     # 6. SAUSAGE EMULSIFICATION & COLD BLEND ECONOMICS
     insights.append({
         "id": 107,
-        "title": "House Sausage Formulation: 70:30 Lean Beef to Fat Yield Economics",
+        "title": "House Sausage Formulation: Beef, Pork and Hard Fat Yield Economics",
         "category": "sausage_economics",
         "category_label": "🌭 Recipe Yield",
         "insight": (
-            f"The custom 50 lb sausage block standardizes on {op_docs.get('sausage_lean_beef_lbs', 35)} lbs lean beef trimmings "
-            f"(sourced directly from brisket trim) and {op_docs.get('sausage_beef_fat_lbs', 15)} lbs beef fat at a 70:30 ratio. "
-            f"Utilizing in-house trim yields a base portion link cost of only $1.25 against a $7.00 retail price (17.9% food cost)."
+            f"The house 50 lb sausage base is {op_docs.get('sausage_lean_beef_lbs', 25.5):g} lbs beef, {op_docs.get('sausage_pork_lbs', 16.0):g} lbs pork and "
+            f"{op_docs.get('sausage_beef_fat_lbs', 8.5):g} lbs hard fat ({op_docs.get('sausage_beef_fat_lbs', 8.5) / 50.0 * 100:.0f}% fat), cubed, ground and stuffed with liquids, spices and cure. "
+            f"Making it in-house keeps the cost of a link near $1.25 against a $7.00 retail price (17.9% meat cost)."
         ),
-        "evidence": "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md & wholesale_yields.csv",
+        "evidence": "modules/recipes/sausage_calc.js (house recipe) & wholesale_yields.csv",
         "quantitative_proof": "$1.25 link cost / $7.00 retail = 82.1% left after meat cost (Super Star category)",
         "actionable_recommendation": (
             "Never discard clean brisket fat cap trimmings; freeze in 15-lb labeled lugs to supply daily sausage production "
@@ -459,7 +465,7 @@ def run_ml_intelligence_engine() -> dict:
             "id": 108,
             "title": "Dual-Rush Service Pacing: 12:00 PM Lunch vs 6:00 PM Evening Turnover",
             "category": "rush_pacing",
-            "category_label": "⏱️ Hourly Sales Pace",
+            "category_label": "⏱️ Hourly Orders",
             "insight": (
                 "Hourly POS turnover analysis reveals that 68% of operating daily revenue occurs in two concentrated 90-minute blocks: "
                 "12:00 PM – 1:30 PM (lunch crowd, high sandwich/taco mix) and 5:30 PM – 7:00 PM (dinner rush, high platter/rib mix)."
@@ -471,7 +477,7 @@ def run_ml_intelligence_engine() -> dict:
                 "prior to the 5:30 PM dinner surge."
             ),
             "impact_usd": 650.0,
-            "terms": ["Hourly Sales Pace", "Prep Target", "Rush Signal"]
+            "terms": ["Hourly Orders", "Prep Target", "Rush Signal"]
         })
 
     # 8. TEMPERATURE PATIO THRESHOLD (72°F–86°F SWEET SPOT)
@@ -529,7 +535,7 @@ def run_ml_intelligence_engine() -> dict:
         "quantitative_proof": "7:00 PM transit departure handoff; 2:30 AM Trevor pit fire (<18% trim loss); 8:30 AM Jake kitchen open",
         "actionable_recommendation": (
             "Transition evening kitchen line prep to Freddy by 6:45 PM before Nick's 7:00 PM bus departure; "
-            "ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 50.8% cooked yield."
+            "ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 40.0% cooked yield."
         ),
         "impact_usd": 450.0,
         "terms": ["Prep Target", "Meat Used Per Hour", "Cooked Yield %"]
@@ -546,7 +552,7 @@ def run_ml_intelligence_engine() -> dict:
             "strategy_infographic.jpg (Midweek Revenue Playbook)",
             "OPERATIONAL_QUESTIONNAIRE.md (Pit Limits, Shifts & Composite Weights)",
             "STAFF_ROSTER.md (Operational Staff Roster & Station Responsibilities)",
-            "Yellow Rose BBQ - Custom Sausage Formulations (50 lb Batch).md",
+            "modules/recipes/sausage_calc.js (House Sausage Recipes)",
             "clover_api/analytics/historical_payload.json (89 Days Historical POS)",
             "clover_api/analytics/hourly_actuals.json (80 Days Verified Turnover)",
             "clover_api/analytics/weather_payload.json (Open-Meteo Weather Model)"

@@ -104,10 +104,10 @@ def verify_culinary_yield_and_portion_math() -> None:
         "Portion multipliers calibrated to 2.3 portions/lb (7oz Brisket) and 2.0 portions/lb (8oz Pork)",
     )
     assert_true(
-        "rib_raw * 5.0" in fc_py
-        and "(r.pork_ribs_racks || 0) * 5" in app_js
-        and "(r.pork_ribs_racks || 0) * 5" in d3_js,
-        "Spare Rib 5.0 lbs/rack standard aligned across food_cost_engine.py, app.js, and d3_charts.js",
+        "rib_raw * RIB_RACK_RAW_LBS" in fc_py
+        and "(r.pork_ribs_racks || 0) * RIB_RACK_LBS" in app_js
+        and "(r.pork_ribs_racks || 0) * (((window.KITCHEN_UNIT_SPECS" in d3_js,
+        "Spare Rib lbs/rack (5.6, invoice) single-sourced from UNIT_CONVERSIONS / KITCHEN_UNIT_SPECS across food_cost_engine.py, app.js, and d3_charts.js",
     )
     assert_true(
         "hasActiveBlendedKPIs" in app_js,

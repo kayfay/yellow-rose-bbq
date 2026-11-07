@@ -1,7 +1,7 @@
 """
 Yellow Rose BBQ - Production Predictive Cache Generator
 Generates /api/analytics/predictive_hourly.json and updates clover_api/analytics/predictive_payload.json
-Uses plain-English summary metrics without mathematical formulas or jargon.
+Generates operational summary metrics without mathematical formulas or jargon.
 """
 
 import json
@@ -14,7 +14,8 @@ import sys
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
 
-from clover_api.analytics.food_cost_engine import compute_effective_meat_costs
+from clover_api.analytics.food_cost_engine import compute_effective_meat_costs, batch_meat_cost, meat_cost_pct
+from scripts.meat_forecast import MultiMeatForecaster
 from clover_api.analytics.hourly_feature_engineering import build_feature_engineered_dataset
 
 OUTPUT_JSON = BASE_DIR / "clover_api" / "analytics" / "predictive_payload.json"
@@ -23,20 +24,41 @@ API_OUTPUT_FILE = API_OUTPUT_DIR / "predictive_hourly.json"
 
 LOCAL_TZ = ZoneInfo("America/New_York")
 
+_DAY_COST_CACHE = {}
+
+
+def day_batch_cost(short_dow):
+    """Wholesale meat cost (USD) of the full prep batch for a weekday, from the meat forecaster's raw lbs."""
+    if short_dow not in _DAY_COST_CACHE:
+        pred = MultiMeatForecaster().predict_day(short_dow)
+        if pred.get("is_closed"):
+            _DAY_COST_CACHE[short_dow] = 0.0
+        else:
+            _DAY_COST_CACHE[short_dow] = batch_meat_cost(
+                brisket_raw_lbs=pred["brisket"]["raw_prep_lbs"],
+                pork_raw_lbs=pred["pork"]["raw_prep_lbs"],
+                turkey_raw_lbs=pred["turkey"]["raw_prep_lbs"],
+                sausage_lbs=pred["sausage"]["lbs"],
+                rib_racks=pred["pork_ribs"]["racks"],
+                dino_ribs=pred["beef_dino_ribs"]["ribs"],
+            )
+    return _DAY_COST_CACHE[short_dow]
+
+
 def generate_predictive_cache():
     print("[PREDICTIVE] Loading feature dataset & US Foods economics...")
     dataset = build_feature_engineered_dataset()
     meat_costs = compute_effective_meat_costs()
     
-    DAY_TARGET_COOKED = {
-        'Monday': {'brisket': 0.0, 'pork': 0.0},
-        'Tuesday': {'brisket': 41.4, 'pork': 13.7},
-        'Wednesday': {'brisket': 44.4, 'pork': 7.2},
-        'Thursday': {'brisket': 48.3, 'pork': 7.0},
-        'Friday': {'brisket': 79.4, 'pork': 21.8},
-        'Saturday': {'brisket': 90.8, 'pork': 23.5},
-        'Sunday': {'brisket': 68.9, 'pork': 10.0}
-    }
+    # Cooked-lb draw per weekday comes from the meat forecaster (same source as the batch cost), not a typed table.
+    DAY_TARGET_COOKED = {}
+    for _full, _short in (('Monday', 'Mon'), ('Tuesday', 'Tue'), ('Wednesday', 'Wed'), ('Thursday', 'Thu'),
+                          ('Friday', 'Fri'), ('Saturday', 'Sat'), ('Sunday', 'Sun')):
+        _pred = MultiMeatForecaster().predict_day(_short)
+        DAY_TARGET_COOKED[_full] = {
+            'brisket': float(_pred['brisket']['cooked_usable_lbs']),
+            'pork': float(_pred['pork']['cooked_usable_lbs']),
+        }
 
     now = datetime.datetime.now(LOCAL_TZ)
     current_dow = now.weekday() # 0 = Monday, 6 = Sunday
@@ -72,10 +94,9 @@ def generate_predictive_cache():
             peak_hour_str = f"{hour_display} ({day_str})"
             
         predicted_revenue = rec["est_revenue_usd"]
-        cogs_usd = rec["est_food_cost_usd"]
-        
         d_day_name = rec["day_name"]
         day_total = sum(r["avg_orders"] for r in dataset if r["day_name"] == d_day_name)
+        cogs_usd = day_batch_cost(d_day_name[:3]) * (predicted_orders / day_total) if day_total > 0 else 0.0
         if day_total > 0:
             brisket_lbs = round(DAY_TARGET_COOKED.get(d_day_name, {}).get('brisket', 0.0) * (predicted_orders / day_total), 1)
             pork_lbs = round(DAY_TARGET_COOKED.get(d_day_name, {}).get('pork', 0.0) * (predicted_orders / day_total), 1)
@@ -88,7 +109,7 @@ def generate_predictive_cache():
         cum_brisket += brisket_lbs
         cum_pork += pork_lbs
         
-        # Plain English anomaly status (±2.5 sigma check)
+        # Anomaly pacing status (±2.5 sigma check)
         is_surge = predicted_orders >= 10.0
         status_tag = "Normal Pacing"
         if is_surge:
@@ -110,7 +131,7 @@ def generate_predictive_cache():
             "is_peak": predicted_orders >= 7.0
         })
 
-    food_cost_pct = round((cum_cogs / cum_rev * 100.0), 1) if cum_rev > 0 else 29.5
+    food_cost_pct = meat_cost_pct(cum_cogs, cum_rev)
 
     # Build Day Profiles for all 7 days so frontend date selection can show each day dynamically
     day_profiles = {}
@@ -142,7 +163,7 @@ def generate_predictive_cache():
             
             p_orders = r["avg_orders"]
             p_rev = r["est_revenue_usd"]
-            p_cogs = r["est_food_cost_usd"]
+            p_cogs = day_batch_cost(short_name) * (p_orders / day_total_orders) if day_total_orders > 0 else 0.0
             
             if day_total_orders > 0:
                 b_lbs = round(target_brisket * (p_orders / day_total_orders), 1)
@@ -183,7 +204,7 @@ def generate_predictive_cache():
                 "is_peak": p_orders >= 7.0
             })
             
-        d_food_cost = round((d_cum_cogs / d_cum_rev * 100.0), 1) if d_cum_rev > 0 else 29.5
+        d_food_cost = meat_cost_pct(d_cum_cogs, d_cum_rev)
         
         # Day-specific operational directives
         if is_closed:

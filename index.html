@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.2.3">
+  <link rel="stylesheet" href="style.css?v=2.2.4">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -21,7 +21,7 @@
       <div class="brand">
         <span class="brand-logo">🔥</span>
         <h1>Sausage & BBQ Prep Command</h1>
-        <span class="version-badge">v2.2.3</span>
+        <span class="version-badge">v2.2.4</span>
       </div>
       <button type="button" id="btn-toggle-debug-drawer" class="debug-drawer-toggle-btn" aria-expanded="false" aria-controls="design-debug-drawer">
         ⚙️ UI &amp; Viewport Controls
@@ -47,11 +47,11 @@
           <button type="button" class="debug-cb-btn" data-cb-mode="protanopia">Protanopia</button>
         </div>
         <div class="debug-control-group">
-          <button type="button" id="btn-debug-unit-mode" class="debug-action-btn" data-unit-mode="case">Units: Case &amp; Cut View</button>
+          <button type="button" id="btn-debug-unit-mode" class="debug-action-btn" data-unit-mode="case">Units: Counts</button>
           <button type="button" id="btn-debug-contrast" class="debug-action-btn">Contrast: Smokehouse Dark</button>
           <button type="button" id="btn-debug-rollup-toggle" class="debug-action-btn" data-rollup-all-expanded="true">Roll-Ups: Collapse All</button>
           <button type="button" id="btn-copy-debug-tokens" class="debug-action-btn debug-copy-btn">Copy Settings as JSON</button>
-          <span id="debug-token-status" class="debug-token-status">Ready (v2.2.3 Tokens)</span>
+          <span id="debug-token-status" class="debug-token-status">Ready (v2.2.4 Tokens)</span>
         </div>
       </div>
     </div>
@@ -455,7 +455,7 @@
               <span id="kpi-brisket-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Raw Brisket Target <br><span id="kpi-brisket-cases">(-- Cases)</span><br><span id="kpi-brisket-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
+            <span class="est-label">Brisket <br><span id="kpi-brisket-cases">(-- Cases)</span><br><span id="kpi-brisket-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
             <div id="kpi-brisket-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-brisket-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
@@ -465,7 +465,7 @@
               <span id="kpi-pork-lbs" class="est-number">--</span>
               <span class="est-unit">lbs</span>
             </div>
-            <span class="est-label">Pork Shoulder Target <br><span id="kpi-pork-cases">(-- Cases)</span><br><span id="kpi-pork-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
+            <span class="est-label">Pork Shoulder <br><span id="kpi-pork-cases">(-- Cases)</span><br><span id="kpi-pork-cooked" style="color:#f1c40f">(-- lbs cooked)</span></span>
             <div id="kpi-pork-compare" class="kpi-compare-badge" style="display: none;"></div>
             <div id="kpi-pork-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
@@ -544,13 +544,13 @@
             <div class="est-metric">
               <span id="kpi-current-velocity" class="est-number">--</span>
             </div>
-            <span class="est-label">Hourly Sales Pace <br><span id="kpi-pacing-status" style="color:#10b981; font-weight:600;">(Normal Flow)</span></span>
+            <span class="est-label">Sales vs. Typical Day <br><span id="kpi-pacing-status" style="color:#10b981; font-weight:600;">(No sales yet)</span></span>
             <div id="kpi-velocity-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
           <div class="est-card kpi-card-gold" id="kpi-card-food-cost-container">
             <div class="est-metric">
-              <span id="kpi-food-cost-pct" class="est-number">29.5%</span>
+              <span id="kpi-food-cost-pct" class="est-number">--</span>
             </div>
             <span class="est-label">Est. Meat Cost Share <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- Est. Meat Cost)</span></span>
             <div id="kpi-food-cost-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
@@ -563,15 +563,6 @@
             <span class="est-label">Average Ticket Revenue <br><span id="kpi-aov-sub" style="color:#14b8a6; font-weight:600;">(Average Order Value)</span></span>
             <div id="kpi-aov-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
-
-          <div class="est-card kpi-card-purple" id="kpi-card-labor-container">
-            <div class="est-metric">
-              <span id="kpi-labor-hours" class="est-number">--</span>
-              <span class="est-unit">hrs</span>
-            </div>
-            <span class="est-label">Labor & Pitmaster Hours <br><span id="kpi-staff-count" style="color:#a855f7; font-weight:600;">(-- Staff)</span></span>
-            <div id="kpi-labor-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
-          </div>
         </div>
 
         <!-- End-of-Day Cook Accuracy Audit & Performance Summary -->
@@ -579,7 +570,7 @@
           <div class="model-eval-header">
             <div class="model-eval-title-wrap">
               <span class="model-eval-icon">📊</span>
-              <strong class="model-eval-title">End-of-Day Cook Accuracy Audit &amp; Plain-English Yield Check</strong>
+              <strong class="model-eval-title">End-of-Day Cook Accuracy Audit &amp; Yield Check</strong>
             </div>
             <span id="model-eval-status-pill" class="eval-pill eval-pill-match">Checking...</span>
           </div>
@@ -593,7 +584,7 @@
       <section class="control-card forecasting-header-card">
         <h3>📊 Shop Sales, Busy Hours &amp; Local Demand Breakdown</h3>
         <div>
-          <button type="button" class="preset-btn active" id="btn-subtab-predictive">⚡ Hourly Sales Pace &amp; Meat Draw</button>
+          <button type="button" class="preset-btn active" id="btn-subtab-predictive">⚡ Hourly Sales &amp; Meat Draw</button>
           <button type="button" class="preset-btn" id="btn-subtab-arima">📈 Daily Sales vs. Typical Day</button>
           <button type="button" class="preset-btn" id="btn-subtab-shift">⏱️ Busy Hours Heatmap</button>
           <button type="button" class="preset-btn" id="btn-subtab-weather">🌧️ Today's Weather Impact</button>
@@ -604,21 +595,21 @@
       </section>
 
       <div id="subtab-view-predictive">
-        <div class="subtab-stat-strip" aria-label="Hourly Sales Pace Summary">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Lunch Rush Window</span>
-            <strong class="subtab-stat-val">12:00 – 1:30 PM</strong>
-            <span class="subtab-stat-sub">12–14 orders/hr peak</span>
+        <div class="subtab-stat-strip" aria-label="Sales vs. Typical Day Summary">
+          <div class="subtab-stat-card" data-stat="peak-hour">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Dinner Rush Window</span>
-            <strong class="subtab-stat-val">5:30 – 7:30 PM</strong>
-            <span class="subtab-stat-sub">10–12 orders/hr peak</span>
+          <div class="subtab-stat-card" data-stat="typical-day">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Smoker Yield Benchmark</span>
-            <strong class="subtab-stat-val">40% Brisket • 44% Pork</strong>
-            <span class="subtab-stat-sub">70% Smoked Turkey Breast</span>
+          <div class="subtab-stat-card" data-stat="hourly-avg">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
         </div>
 
@@ -626,8 +617,8 @@
         <section class="control-card marketing-card rollup-section" data-rollup-key="predictive-directives">
           <button type="button" class="rollup-header" aria-expanded="true">
             <span class="rollup-title-wrap">
-              <span class="rollup-title">⚡ Real-Time Hourly Sales Pace &amp; Shift Directives</span>
-              <span class="rollup-summary-pill">3 Pacing Rules</span>
+              <span class="rollup-title">⚡ Pit Pacing</span>
+              <span class="rollup-summary-pill">2 Pacing Notes</span>
             </span>
             <span class="rollup-chevron" aria-hidden="true">▼</span>
           </button>
@@ -636,12 +627,7 @@
             <ul>
               <li><strong>Peak Service Windows:</strong> <span id="predictive-velocity-summary">Lunch rush (12:00 PM – 1:30 PM) averages 12–14 orders/hr; dinner rush (5:30 PM – 7:30 PM) averages 10–12 orders/hr.</span></li>
               <li><strong>Cooked Yield Standards:</strong> Brisket yields <strong>40%</strong> cooked weight; Pork Shoulder <strong>44%</strong>; Turkey Breast <strong>70%</strong>.</li>
-              <li><strong>Active Shift Directives:</strong>
-                <ul id="predictive-directives-list" style="margin-top: 6px; margin-left: 18px;">
-                  <li>Pull Batch 2 Ribs by 4:00 PM for a 45-min rest before dinner rush.</li>
-                  <li>Stage +20% to-go packaging during rain (&gt;5mm) or humidity (&gt;85%).</li>
-                </ul>
-              </li>
+              <li hidden><ul id="predictive-directives-list"></ul></li>
             </ul>
           </div>
         </section>
@@ -651,18 +637,6 @@
           <div class="chart-card">
             <div id="plotly-predictive-velocity-chart"></div>
             <div id="hourly-actuals-summary" style="display: none; margin-top: 8px; font-size: 12px; color: var(--text-secondary);"></div>
-          </div>
-
-          <!-- Simplified Prep Cushion & Cushion Status Strip -->
-          <div id="prep-safety-margin-strip" class="prep-safety-margin-strip status-safe" role="status" aria-label="Extra Prep Cushion">
-            <div class="prep-margin-main">
-              <span class="prep-margin-kicker">Extra Prep / Cushion:</span>
-              <strong id="prep-safety-margin-text" class="prep-margin-text">Extra Prep / Cushion: +2 Racks / +1 Butt / +1 Brisket</strong>
-            </div>
-            <div class="prep-margin-meta">
-              <span id="prep-safety-status-pill" class="prep-status-pill status-safe">● Safe Cushion (+10% Extra Prep)</span>
-              <span id="prep-safety-subtext" class="prep-margin-subtext">Covers peak dinner rush through 9:00 PM close</span>
-            </div>
           </div>
         </section>
 
@@ -697,20 +671,20 @@
 
       <div id="subtab-view-arima" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Daily Baseline Summary Metrics">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Operating Baseline</span>
-            <strong class="subtab-stat-val">~$2,330 / day</strong>
-            <span class="subtab-stat-sub">Tue–Sun Operating Cycle</span>
+          <div class="subtab-stat-card" data-stat="open-day-avg">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
+          </div>
+          <div class="subtab-stat-card" data-stat="midweek-weekend">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
           <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Midweek vs Weekend</span>
-            <strong class="subtab-stat-val">$1.6k vs $4.2k</strong>
-            <span class="subtab-stat-sub">Tue–Thu vs Fri–Sun Avg</span>
-          </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Extra Prep / Cushion</span>
-            <strong class="subtab-stat-val">+2 Racks / +1 Butt</strong>
-            <span class="subtab-stat-sub">Safe Cushion (+10% Extra Prep)</span>
+            <span class="subtab-stat-kicker">Closed Day</span>
+            <strong class="subtab-stat-val">Monday</strong>
+            <span class="subtab-stat-sub">Zero prep, no alerts</span>
           </div>
         </div>
 
@@ -726,7 +700,7 @@
           <div class="rollup-body">
             <h3>Weekly Operating Cycle Baseline</h3>
             <ul>
-              <li><strong>Operating Baseline:</strong> <span id="dynamic-baseline-trend">Tue–Sun avg: <strong>~$2,330/day</strong> (~$1,620 Tue–Thu; ~$4,250 Fri–Sun; Mon Closed).</span></li>
+              <li><strong>Operating Baseline:</strong> <span id="dynamic-baseline-trend">Loading sales history…</span></li>
               <li><strong>Procurement Directive:</strong> <span id="dynamic-insight-string">Stage raw proteins for 40% Brisket &amp; 44% Pork cooked yield plus Tacos and Rosebuds through 9:00 PM.</span></li>
             </ul>
           </div>
@@ -759,20 +733,20 @@
       <!-- TAB 2 VIEW: Weather Impact Integration -->
       <div id="subtab-view-weather" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Weather Impact Summary Metrics">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Rain Takeout Shift</span>
-            <strong class="subtab-stat-val">+$97.37 / mm</strong>
-            <span class="subtab-stat-sub">Higher family-pack checks</span>
+          <div class="subtab-stat-card" data-stat="rain-days">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Extreme Heat (&gt;90&deg;F)</span>
-            <strong class="subtab-stat-val">-5.8% Patio</strong>
-            <span class="subtab-stat-sub">Shifts to indoor &amp; curbside</span>
+          <div class="subtab-stat-card" data-stat="heat-days">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Heavy Rain (&gt;10mm)</span>
-            <strong class="subtab-stat-val">-15% Hot Hold</strong>
-            <span class="subtab-stat-sub">Vacuum-seal chilled retail</span>
+          <div class="subtab-stat-card" data-stat="rain-game">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
         </div>
 
@@ -787,8 +761,8 @@
           <div class="rollup-body">
             <h3>How Rain &amp; Heat Affect Counter Orders</h3>
             <ul>
-              <li><strong>Precipitation (+$97.37/mm):</strong> Moderate rainfall shifts volume into takeout family packs.</li>
-              <li><strong>Extreme Heat (&gt;90&deg;F):</strong> Patio traffic drops -5.8%; volume moves indoors and curbside.</li>
+              <li><strong>Rainy days:</strong> <span id="live-rain-line">Loading sales history…</span></li>
+              <li><strong>Hot days (&gt;90&deg;F):</strong> <span id="live-heat-line">Loading sales history…</span></li>
               <li><strong>Pit &amp; Packaging Protocol:</strong> On &gt;10mm rain days, trim hot-holding brisket by 15%.</li>
             </ul>
           </div>
@@ -805,27 +779,27 @@
       <!-- TAB 3 VIEW: Live Event Correlation -->
       <div id="subtab-view-event" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Event Multiplier Summary Metrics">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Jaguars Home Game</span>
-            <strong class="subtab-stat-val">3.5x (~$17.4k)</strong>
-            <span class="subtab-stat-sub">48h tailgate pre-orders</span>
+          <div class="subtab-stat-card" data-stat="jags">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">FL-GA Weekend</span>
-            <strong class="subtab-stat-val">5.0x Peak Surge</strong>
-            <span class="subtab-stat-sub">Stagger smokers from Tue</span>
+          <div class="subtab-stat-card" data-stat="next-event">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Concerts &amp; Baseball</span>
-            <strong class="subtab-stat-val">1.2x – 1.5x Lift</strong>
-            <span class="subtab-stat-sub">5–7 PM pre-show rush</span>
+          <div class="subtab-stat-card" data-stat="events-ahead">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
         </div>
 
         <section class="control-card marketing-card rollup-section" data-rollup-key="event-surge-playbook">
           <button type="button" class="rollup-header" aria-expanded="true">
             <span class="rollup-title-wrap">
-              <span class="rollup-title">🏈 Downtown Stadium &amp; Arena Surge Playbook</span>
+              <span class="rollup-title">🏈 Downtown Stadium &amp; Arena Event Calendar</span>
               <span class="rollup-summary-pill">4 Event Tiers</span>
             </span>
             <span class="rollup-chevron" aria-hidden="true">▼</span>
@@ -833,10 +807,10 @@
           <div class="rollup-body">
             <h3>Downtown Stadium &amp; Arena Demand Multipliers</h3>
             <ul>
-              <li><strong>Jaguars Home Game (3.5x):</strong> ~$17.4k vs. $4.9k base; stage 48h tailgate bundles.</li>
-              <li><strong>Florida-Georgia Weekend (5.0x):</strong> Multi-day RV City surge; stagger loads from Tuesday.</li>
-              <li><strong>Daily's Place Concerts (1.5x):</strong> 5:00–7:00 PM rush; assign Evening Lead to expediting.</li>
-              <li><strong>Jumbo Shrimp Baseball (1.2x):</strong> Steady pre-game family checks; feature high-margin sides.</li>
+              <li><strong>Jaguars home games:</strong> <span id="live-jags-line">Loading sales history…</span></li>
+              <li><strong>Florida-Georgia Weekend:</strong> <span id="live-flga-line">Loading calendar…</span></li>
+              <li><strong>Daily's Place Concerts:</strong> <span id="live-concert-line">Loading calendar…</span></li>
+              <li><strong>Jumbo Shrimp Baseball:</strong> <span id="live-baseball-line">Loading calendar…</span></li>
             </ul>
           </div>
         </section>
@@ -869,9 +843,9 @@
               
               <div class="calendar-filter-bar">
                 <button type="button" class="cal-filter-btn active" data-filter="all">All Events</button>
-                <button type="button" class="cal-filter-btn" data-filter="jaguars">🏈 Stadium (3.5x–5.0x)</button>
-                <button type="button" class="cal-filter-btn" data-filter="concert">🎸 Concerts (1.5x)</button>
-                <button type="button" class="cal-filter-btn" data-filter="baseball">⚾ Baseball (1.2x)</button>
+                <button type="button" class="cal-filter-btn" data-filter="jaguars">🏈 Stadium</button>
+                <button type="button" class="cal-filter-btn" data-filter="concert">🎸 Concerts</button>
+                <button type="button" class="cal-filter-btn" data-filter="baseball">⚾ Baseball</button>
                 <button type="button" class="cal-filter-btn" data-filter="delivery">🚚 Deliveries</button>
                 <button type="button" class="cal-filter-btn" data-filter="holiday">🇺🇸 Holidays</button>
               </div>
@@ -887,7 +861,7 @@
               <div class="cal-detail-info">
                 <div class="cal-detail-title">
                   <span id="drawer-date-str"></span>
-                  <span id="drawer-mult-badge" class="cal-detail-mult-tag">3.5x Demand</span>
+                  <span id="drawer-mult-badge" class="cal-detail-mult-tag">--</span>
                 </div>
                 <p id="drawer-event-title" style="font-weight: 600; color: #f8fafc; font-size: 13px;"></p>
                 <p id="drawer-event-note" class="cal-detail-note"></p>
@@ -903,20 +877,20 @@
       <!-- TAB 4 VIEW: Hourly Shift Heatmap -->
       <div id="subtab-view-shift" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Shift Heatmap Summary Metrics">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Primary Lunch Peak</span>
-            <strong class="subtab-stat-val">11:00 AM – 1:30 PM</strong>
-            <span class="subtab-stat-sub">Dual carving stations</span>
+          <div class="subtab-stat-card" data-stat="lunch-peak">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Primary Dinner Peak</span>
-            <strong class="subtab-stat-val">5:00 PM – 7:30 PM</strong>
-            <span class="subtab-stat-sub">Family pack &amp; rib draw</span>
+          <div class="subtab-stat-card" data-stat="dinner-peak">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Evening Taper</span>
-            <strong class="subtab-stat-val">8:00 PM Breakdown</strong>
-            <span class="subtab-stat-sub">9:00 PM clean close</span>
+          <div class="subtab-stat-card" data-stat="dropoff">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
         </div>
 
@@ -958,20 +932,20 @@
       <!-- TAB 4 VIEW: Advanced Analytics -->
       <div id="subtab-view-advanced" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Menu Mix Summary Metrics">
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Dino vs Pork Rib Shift</span>
-            <strong class="subtab-stat-val">-37% Pork Ribs</strong>
-            <span class="subtab-stat-sub">6.2 &rarr; 3.9 racks on Dino days</span>
+          <div class="subtab-stat-card" data-stat="dino-shift">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Highest Channel AOV</span>
-            <strong class="subtab-stat-val">~$62 Pickup</strong>
-            <span class="subtab-stat-sub">~$50 To-Go • ~$44 Dine-In</span>
+          <div class="subtab-stat-card" data-stat="channel-aov">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
-          <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Game + Rain Resilience</span>
-            <strong class="subtab-stat-val">~$13.8k Sales</strong>
-            <span class="subtab-stat-sub">Watch-party bulk takeout</span>
+          <div class="subtab-stat-card" data-stat="game-rain">
+            <span class="subtab-stat-kicker">--</span>
+            <strong class="subtab-stat-val">--</strong>
+            <span class="subtab-stat-sub">Loading sales data</span>
           </div>
         </div>
 
@@ -986,10 +960,10 @@
           <div class="rollup-body">
             <ul class="insight-content" style="line-height: 1.5; color: #cbd5e1; padding: 6px 0 6px 18px; margin: 0;">
               <li><strong>1. Stock Depletion:</strong> Quesa Taco Brisket accelerates after 2 PM; Spare Ribs concentrate 4:00–8:30 PM with zero premature 86s.</li>
-              <li><strong>2. Menu Cannibalization:</strong> Serving <strong>Beef Dino Ribs</strong> trims <strong>Pork Spare Rib</strong> demand from <strong>6.2</strong> to <strong>3.9 racks</strong> (-37%).</li>
-              <li><strong>3. Order Channel Mix:</strong> Pickup (~$62) and To-Go (~$50) drive bulk family packs vs. Dine-In (~$44 single plates).</li>
-              <li><strong>4. Weather &amp; Stadium:</strong> Rain dips walk-in sales (~$3.4k), while Jaguars Game Days surge to ~$17.3k (~$13.8k in rain).</li>
-              <li><strong>5. Payday Stability:</strong> Payday weekend checks ($44.92) match standard weekends ($45.91).</li>
+              <li><strong>2. Menu Cannibalization:</strong> <span id="live-dino-line">Loading sales history…</span></li>
+              <li><strong>3. Order Channel Mix:</strong> <span id="live-channel-line">Loading sales history…</span></li>
+              <li><strong>4. Weather &amp; Stadium:</strong> <span id="live-weather-stadium-line">Loading sales history…</span></li>
+              <li><strong>5. Payday Stability:</strong> <span id="live-payday-line">Loading sales history…</span></li>
             </ul>
           </div>
         </section>
@@ -1040,9 +1014,9 @@
       <div id="subtab-view-reports" style="display: none;">
         <div class="subtab-stat-strip" aria-label="Shop Reports Summary Metrics">
           <div class="subtab-stat-card">
-            <span class="subtab-stat-kicker">Target Meat Cost</span>
-            <strong class="subtab-stat-val">~29.5% Share</strong>
-            <span class="subtab-stat-sub">~70.5% left after meat cost</span>
+            <span class="subtab-stat-kicker">Est. Meat Cost</span>
+            <strong class="subtab-stat-val" id="stat-meat-cost-pct">--</strong>
+            <span class="subtab-stat-sub" id="stat-meat-left-pct">Left after meat cost: --</span>
           </div>
           <div class="subtab-stat-card">
             <span class="subtab-stat-kicker">Daily Pit Watchlist</span>
@@ -1100,12 +1074,12 @@
             </div>
             <span class="bridge-operator">&minus;</span>
             <div class="bridge-step">
-              <span class="bridge-step-label">Est. Meat Cost (~29.5%)</span>
+              <span class="bridge-step-label">Est. Meat Cost</span>
               <strong class="bridge-step-val bridge-cost" id="bridge-meat-cost-val">$0</strong>
             </div>
             <span class="bridge-operator">=</span>
             <div class="bridge-step bridge-step-profit">
-              <span class="bridge-step-label">Left After Meat Cost (~70.5%)</span>
+              <span class="bridge-step-label">Left After Meat Cost</span>
               <strong class="bridge-step-val bridge-profit" id="bridge-leftover-val">$0</strong>
             </div>
           </div>
@@ -1259,12 +1233,12 @@
               </div>
             </div>
 
-            <!-- Plain-English Pitmaster Analytics Terminology Guide & Glossary -->
+            <!-- Pitmaster Analytics Terminology Guide & Glossary -->
             <div id="pitmaster-analytics-glossary" class="glossary-section" aria-label="Pitmaster Analytics Glossary">
               <div class="glossary-header">
                 <div class="glossary-title-group">
                   <span class="glossary-kicker">📚 PITMASTER ANALYTICS GUIDE</span>
-                  <h3 class="glossary-heading">Smokehouse Analytics Terms Explained in Plain English</h3>
+                  <h3 class="glossary-heading">Smokehouse Analytics Terms</h3>
                   <span class="glossary-subtext">Learn what each operational metric means and exactly how it protects your pit margins and inventory</span>
                 </div>
                 <button type="button" id="btn-toggle-glossary" class="glossary-toggle-btn" aria-expanded="true" aria-controls="glossary-card-grid">
@@ -1343,9 +1317,9 @@
               <div style="margin-top: 10px;">
                 <strong>📦 Standard Case Pack &amp; Yield Specs:</strong>
                 <ul style="margin-top: 4px;">
-                  <li><strong>Brisket:</strong> 5 packers/case (~70 lbs raw; 40% cooked yield).</li>
+                  <li><strong>Brisket:</strong> 5 packers/case (~82 lbs raw, ~16.4 lbs each; 40% cooked yield).</li>
                   <li><strong>Pork Shoulder:</strong> 4 bone-in butts/case (~32 lbs raw; 44% cooked yield).</li>
-                  <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~30 lbs raw at 5 lbs/rack; 60% cooked yield).</li>
+                  <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~34 lbs raw at 5.6 lbs/rack; 60% cooked yield).</li>
                   <li><strong>Beef Dino Ribs:</strong> 12 plate ribs/case (3 cryovac bags).</li>
                 </ul>
               </div>
@@ -1381,14 +1355,14 @@
     </button>
   </nav>
 
-  <script src="clover_api/analytics/payloads.js?v=2.2.3"></script>
-  <script src="d3_charts.js?v=2.2.3"></script>
-  <script src="tz_utils.js?v=2.2.3"></script>
-  <script src="modules/shared/core_utils.js?v=2.2.3" defer></script>
-  <script src="modules/recipes/sausage_calc.js?v=2.2.3" defer></script>
-  <script src="modules/reports/shop_reports.js?v=2.2.3" defer></script>
-  <script src="modules/forecaster/analytics_subtabs.js?v=2.2.3" defer></script>
-  <script src="app.js?v=2.2.3" defer></script>
+  <script src="clover_api/analytics/payloads.js?v=2.2.4"></script>
+  <script src="d3_charts.js?v=2.2.4"></script>
+  <script src="tz_utils.js?v=2.2.4"></script>
+  <script src="modules/shared/core_utils.js?v=2.2.4" defer></script>
+  <script src="modules/recipes/sausage_calc.js?v=2.2.4" defer></script>
+  <script src="modules/reports/shop_reports.js?v=2.2.4" defer></script>
+  <script src="modules/forecaster/analytics_subtabs.js?v=2.2.4" defer></script>
+  <script src="app.js?v=2.2.4" defer></script>
 </body>
 </html>
 

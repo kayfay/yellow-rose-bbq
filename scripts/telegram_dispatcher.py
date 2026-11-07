@@ -30,6 +30,10 @@ from zoneinfo import ZoneInfo
 os.umask(0o022)
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
+_PIT_MAX_BRISKETS = 24  # 14 big offset pit + 10 small pit
+_PIT_RAW_LBS = round(_PIT_MAX_BRISKETS * UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"])
 ANALYTICS_DIR = ROOT / "clover_api" / "analytics"
 QUICK_WIND_PATH = ANALYTICS_DIR / "quick_wind_alerts.json"
 DAILY_BRIEF_PATH = ANALYTICS_DIR / "daily_executive_brief.json"
@@ -239,7 +243,7 @@ def get_operational_attentions() -> list[str]:
             pass
 
     # 3. Scale Tare & Trim Loss Invariant
-    attentions.append("• <b>⚖️ Scale Tare & Yield Invariant:</b> Zero counter scale with butcher paper tare before slicing flat brisket. Trevor's brisket trim target strictly &lt;18% loss to preserve 50.8% cooked yield.")
+    attentions.append("• <b>⚖️ Scale Tare & Yield Invariant:</b> Zero counter scale with butcher paper tare before slicing flat brisket. Trevor's brisket trim target strictly &lt;18% loss to preserve 40.0% cooked yield.")
 
     # 4. Menu Pricing & Margin Watch
     attentions.append("• <b>🏷️ Menu Board Margin Watch:</b> Audit physical menu board vs Clover terminal ($13 menu photo vs $17 modeled brisket sandwich). Prompt sides ($4.00) and drinks ($2.95) to protect 68%+ gross margin.")
@@ -294,7 +298,7 @@ def build_morning_brief_message() -> str:
         status_line = f"🟢 <b>STATUS: ACTIVE SERVICE DAY</b>"
         sales_section = (
             f"💰 <b>Projected Revenue:</b> ${rev:,.2f}\n"
-            f"🥩 <b>Raw Prep Targets:</b> {brisket_raw:.0f} lbs Brisket (~{brisket_raw/13.5:.1f} packers) | {pork_raw:.0f} lbs Butt | {ribs_racks} Racks Ribs | {sausage_lbs:.0f} lbs Sausage"
+            f"🥩 <b>Raw Prep Targets:</b> {brisket_raw:.0f} lbs Brisket (~{brisket_raw/16.4:.1f} packers) | {pork_raw:.0f} lbs Butt | {ribs_racks} Racks Ribs | {sausage_lbs:.0f} lbs Sausage"
         )
 
     # Previous night wrap-up
@@ -327,7 +331,7 @@ def build_morning_brief_message() -> str:
 • <b>Close:</b> <b>Freddy</b>, <b>Elly</b> &amp; <b>Allen</b> complete kitchen breakdown, dish pit sanitation, and lockup.
 
 💡 <b>KEY SMOKEHOUSE WATCHLIST:</b>
-1. <b>Scale Tare:</b> Zero counter scale with butcher paper tare to protect 29.5% food cost ratio.
+1. <b>Scale Tare:</b> Zero counter scale with butcher paper tare to protect meat cost.
 2. <b>Holding Temp:</b> Ensure warming cabinet holds solid at 145°F–150°F (never below 140°F).
 3. <b>Carving:</b> Slice brisket flat strictly to order to avoid losing 15% moisture in 6 mins.
 
@@ -394,7 +398,7 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
             "• 🥩 <b>'depletion'</b> or <b>'meat draw'</b> — Slicing burn rate & sellout risk\n"
             "• 🪵 <b>'brisket'</b> or <b>'pit'</b> — Smoker capacity, raw target & holding temp\n"
             "• 👥 <b>'crew'</b> or <b>'roster'</b> — Station responsibilities & 7 PM transit handoff\n"
-            "• 🌭 <b>'sausage'</b> or <b>'recipes'</b> — 50 lb 70:30 formulations & Rosebuds\n"
+            "• 🌭 <b>'sausage'</b> or <b>'recipes'</b> — 50 lb house formulations & Rosebuds\n"
             "• 🌦️ <b>'weather'</b> or <b>'draft'</b> — Rain, chimney draft & damper guidance\n"
             "• 🚨 <b>'alert'</b> — Latest Quick-Wind velocity surge status\n\n"
             "<i>You can also ask freeform questions like 'what should we prep if it rains?'</i>"
@@ -426,7 +430,7 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
         return (
             f"💰 <b>SALES &amp; REVENUE INTEL</b>\n"
             f"• <b>Projected Daily Sales:</b> ${proj_rev:,.2f}\n"
-            f"• <b>Operating Target:</b> 29.5% Food Cost ($17 AOV target on individual items, $54-$145 on family trays)\n"
+            f"• <b>Operating Target:</b> $17 AOV target on individual items, $54-$145 on family trays\n"
             f"• <b>High-Margin Stars:</b> Homemade Sausage ($1.25 cost / $7.00 retail = 82% margin) and Rosebuds ($5.00)\n"
             f"• <b>Audit Watch:</b> Zero counter scale with butcher paper tare before slicing flat brisket."
         )
@@ -464,8 +468,8 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
     if any(k in q for k in ("brisket", "pit", "smoker", "holding", "damper", "tallow")):
         return (
             "🪵 <b>PITMASTER &amp; SMOKER GEOMETRY</b>\n"
-            "• <b>Total Smoker Capacity:</b> 24 briskets max (14 big offset pit + 10 small pit = ~336 lbs raw load).\n"
-            "• <b>Trevor's Spec:</b> 2:30 AM pit ignition with post oak coal bed; trim briskets strictly &lt;18% loss to preserve 50.8% cooked yield.\n"
+            f"• <b>Total Smoker Capacity:</b> {_PIT_MAX_BRISKETS} briskets max (14 big offset pit + 10 small pit = ~{_PIT_RAW_LBS} lbs raw load).\n"
+            "• <b>Trevor's Spec:</b> 2:30 AM pit ignition with post oak coal bed; trim briskets strictly &lt;18% loss to preserve 40.0% cooked yield.\n"
             "• <b>Max's Spec:</b> 8:00 AM handoff; manage airflow dampers, spritz, peach paper wrap at 165°F stall; probe tender ~203°F.\n"
             "• <b>Holding Cabinet:</b> Meats rest in 140°F–150°F tallow warming cabinet until carving. Never allow holding temp below 140°F."
         )
@@ -487,14 +491,14 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
             "• <b>Alyssa:</b> Opens expo, preps fries, mac &amp; cheese, and portion cups.\n"
             "• <b>Stan:</b> Alternate expo shifts.\n\n"
             "<b>SPECIALTY CRAFTING &amp; DISH PIT:</b>\n"
-            "• <b>Allen (User):</b> Crafts 50 lb custom sausage formulations (70:30 grind), hand-rolls fresh Rosebuds, runs dish pit open to close (with mid-shift break)."
+            "• <b>Allen (User):</b> Crafts 50 lb custom sausage formulations, hand-rolls fresh Rosebuds, runs dish pit open to close (with mid-shift break)."
         )
 
     # 7. Sausage Formulations & Rosebuds
     if any(k in q for k in ("sausage", "recipe", "formulation", "rosebud", "elote", "verde", "birria", "cabbage")):
         return (
             "🌭 <b>HOUSE SAUSAGE &amp; ROSEBUD CRAFTING SPECS</b>\n"
-            "• <b>50 lb Base Block:</b> 35 lbs beef trimmings (from brisket trim) + 15 lbs beef fat = 70:30 lean-to-fat grind.\n"
+            "• <b>50 lb Base Block:</b> 25.5 lbs beef + 16 lbs pork + 8.5 lbs hard fat = 50 lb base (17% fat), then liquids, spices and cure.\n"
             "• <b>Cure Salt:</b> Exactly 60g Pink Curing Salt #1 per 50 lb batch; mix to emulsified tacky bind, stuff into natural 32-35mm hog casings, twist 6-inch links.\n"
             "• <b>6 Custom Recipes:</b>\n"
             "  1. <i>The Elote:</i> 5-7.5 lbs smoked corn pico, 2.5 lbs parmesan, cilantro/onion, coarse black pepper.\n"
@@ -544,7 +548,7 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
                 f"Answer the following user question concisely (max 3-4 bullet points or short paragraph) using Texas BBQ pitmaster wisdom. "
                 f"Ground facts: We use post oak, offset pits (24 briskets max: 14 big, 10 small), Trevor fires at 2:30 AM (brisket trim <18%), "
                 f"Max works 8 AM-6 PM (dampers/wraps/140F holding), The Boss relieves at 6 PM, Jake opens kitchen line at 8:30 AM, Nick departs sharp at 7:00 PM for the bus, "
-                f"Freddy closes kitchen/cutting block, Elly leads closing expo, Alyssa opens expo, Allen crafts 50 lb custom sausage (70:30 beef-to-fat grind) and Rosebuds and runs dish pit open-to-close. "
+                f"Freddy closes kitchen/cutting block, Elly leads closing expo, Alyssa opens expo, Allen crafts 50 lb custom sausage and Rosebuds and runs dish pit open-to-close. "
                 f"Question: {query}"
             )
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={gemini_key}"

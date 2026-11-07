@@ -281,6 +281,7 @@ body {
 
 .slider-container { flex: 1; min-width: 160px; display: flex; flex-direction: column; gap: 8px; }
 .custom-slider {
+  touch-action: pan-y;
   width: 100%;
   height: 14px;
   -webkit-appearance: none;
@@ -1068,6 +1069,7 @@ svg.main-svg {
 }
 
 .turnover-slider {
+  touch-action: pan-y;
   width: 100%;
   height: 8px;
   border-radius: 4px;
@@ -2119,6 +2121,61 @@ body[data-cb-mode="protanopia"] {
     border-color: var(--okabe-green);
     color: #34d399;
   }
+}
+
+/* Phone held sideways (touch, short and wide): same scroll-safe static charts and Peak/Low/Now strip as portrait,
+   shorter charts, and a slimmer header. Tap targets stay at 48px. */
+@media (pointer: coarse) and (max-height: 500px) and (orientation: landscape) {
+  .chart-card,
+  .chart-card svg,
+  .js-plotly-plot,
+  .plot-container,
+  .svg-container,
+  #plotly-meat-sales-chart,
+  #plotly-predictive-velocity-chart,
+  #plotly-weather-impact-chart,
+  #plotly-event-impact-chart,
+  #plotly-shift-heatmap,
+  #plotly-sellout-chart {
+    pointer-events: none !important;
+    touch-action: pan-y !important;
+    user-select: none !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #plotly-predictive-velocity-chart,
+  #plotly-sellout-chart {
+    min-height: 220px;
+  }
+
+  .app-header { padding-top: 6px; padding-bottom: 6px; }
+  .app-header h1 { font-size: 1.1rem; }
+
+  .mobile-chart-face-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(230, 159, 0, 0.45);
+    pointer-events: none !important;
+  }
+
+  .mobile-face-badge {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(2, 6, 23, 0.9);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+  }
+  .mobile-face-badge.badge-peak { border-color: var(--okabe-orange); color: #fbbf24; }
+  .mobile-face-badge.badge-low { border-color: var(--okabe-sky); color: #38bdf8; }
+  .mobile-face-badge.badge-now { border-color: var(--okabe-green); color: #34d399; }
 }
 
 /* --- Daily Pitmaster Intelligence & 10 Watchlist Tips --- */
@@ -3718,5 +3775,9 @@ body[data-unit-mode="lbs"] .kitchen-qty-display {
 
 
 
-/* Smokehouse UX: when case/cut display is present, demote legacy lbs number to secondary */
+/* Counts view: the piece count is the large number; the old lbs number and case line are folded into the muted rows. */
 .est-card:has(.kitchen-qty-display) .est-number { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
+body:not([data-unit-mode="lbs"]) .est-card:has(.kitchen-qty-counts) .est-metric { display: none; }
+body:not([data-unit-mode="lbs"]) .est-card:has(.kitchen-qty-counts) [id$="-cases"] { display: none; }
+.kitchen-qty-counts .kitchen-qty-primary { font-size: 1.75rem; line-height: 1.15; }
+.kitchen-qty-counts .kitchen-qty-secondary { font-size: 1rem; font-weight: 500; color: var(--text-secondary); }

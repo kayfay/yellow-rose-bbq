@@ -80,11 +80,14 @@
       let pRaw = 0;
       let rRacks = 0;
       let tCooked = 0;
+      let expCogs = 0;
+      let costedSales = 0;
       slicedRecords.forEach(r => {
         const isClosed = r.is_closed || r.day_name === 'Mon';
         if (!isClosed) {
           const rev = (r.is_historical && r.actual_revenue > 0) ? r.actual_revenue : (r.predicted_revenue || 0);
           expSales += rev;
+          if ((r.estimated_cogs_usd || 0) > 0) { expCogs += r.estimated_cogs_usd; costedSales += rev; }
           typSales += (typSalesMap[r.day_name] || 3850);
           bRaw += (r.brisket_raw_lbs || 0);
           pRaw += (r.pork_shoulder_raw_lbs || 0);
@@ -96,7 +99,8 @@
       typSales = Math.round(typSales);
       const diffUsd = expSales - typSales;
       const pct = typSales > 0 ? Math.round((diffUsd / typSales) * 1000) / 10 : 0;
-      const meatCost = Math.round(expSales * 0.295);
+      // Days with no stored cost (partial days) are costed at the same ratio as the days that have one.
+      const meatCost = costedSales > 0 ? Math.round(expSales * (expCogs / costedSales)) : 0;
       const leftover = expSales - meatCost;
       const labelStr = isMultiDay ? `${slicedRecords.length}-Day Window` : (dayFullMap[matchedRecord?.day_name] || 'Selected Day');
       const diffWord = diffUsd >= 0 ? 'above' : 'below';
@@ -123,6 +127,16 @@
     }
 
     if (!brief) return;
+
+    // Reports summary card: meat cost as a share of expected sales, from the brief's own sales bridge.
+    const bridge = brief.sales_bridge || {};
+    const statPctEl = document.getElementById('stat-meat-cost-pct');
+    const statLeftEl = document.getElementById('stat-meat-left-pct');
+    const bridgeSales = Number(bridge.expected_sales_usd) || 0;
+    const bridgeCost = Number(bridge.estimated_meat_cost_usd) || 0;
+    const bridgePct = (bridgeSales > 0 && bridgeCost > 0) ? Math.round(bridgeCost / bridgeSales * 1000) / 10 : null;
+    if (statPctEl) statPctEl.textContent = bridgePct === null ? '--' : bridgePct + '% of sales';
+    if (statLeftEl) statLeftEl.textContent = bridgePct === null ? 'Left after meat cost: --' : 'Left after meat cost: ' + (Math.round((100 - bridgePct) * 10) / 10) + '%';
 
     if (kickerEl) {
       kickerEl.textContent = isNextServicePreview
@@ -272,7 +286,13 @@
         cat_label: 'Weather Watch',
         importance: 'Takeout Revenue Shift',
         title: 'Precipitation & To-Go Packaging Multiplier',
-        desc: 'Rainfall shifts sales volume into multi-pound family feast packs (historical average +$97.37/mm rain). Counter tray service slows while curbside and delivery orders spike.',
+        desc: (function () {
+          const ws = global.BBQ_PAYLOADS && global.BBQ_PAYLOADS.weather_payload && global.BBQ_PAYLOADS.weather_payload.weather_stats;
+          const lead = (ws && ws.normal_avg_usd > 0 && ws.rain_avg_usd > 0)
+            ? `Rainy days average $${Math.round(ws.rain_avg_usd).toLocaleString()} vs $${Math.round(ws.normal_avg_usd).toLocaleString()} on a normal day (${ws.rain_avg_usd >= ws.normal_avg_usd ? '+' : ''}${Math.round((ws.rain_avg_usd - ws.normal_avg_usd) / ws.normal_avg_usd * 1000) / 10}%).`
+            : 'Rain shifts sales volume into multi-pound family feast packs.';
+          return lead + ' Counter tray service slows while curbside and delivery orders spike.';
+        })(),
         pit_check: 'Pit Check: On rainy or wet days, stage +20% butcher paper to-go bags, 16oz sauce containers, and pre-packed side cups by 11:00 AM.'
       },
       {
@@ -343,8 +363,8 @@
         cat: 'pit',
         cat_label: 'Inventory Guard',
         importance: 'Food Cost Margin',
-        title: 'Food Cost Guardrail & Scale Tare Integrity (~29.5%)',
-        desc: 'Maintaining the smokehouse target 29.5% wholesale meat cost ratio requires rigorous scale accuracy and clean trimming practices (<18% raw brisket trim loss).',
+        title: 'Meat Cost Guardrail & Scale Tare Integrity',
+        desc: 'Keeping wholesale meat cost in check requires rigorous scale accuracy and clean trimming practices (<18% raw brisket trim loss).',
         pit_check: 'Pit Check: Zero and test counter scales with standard test weights every morning; ensure butcher paper tare is active on POS scales.'
       }
     ];
@@ -394,13 +414,13 @@
       category: 'pit',
       category_label: 'Pit & Smoker',
       definition: 'How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.',
-      how_it_helps: 'Shows the real cost of meat on the board. Choice packer brisket yields about 50–52%, so $5.08/lb raw costs about $10.00/lb sliced.'
+      how_it_helps: 'Shows the real yield of meat on the board. Whole packer brisket yields about 40% after trimming and smoking to finished sliceable yield.'
     },
     Shrinkage: {
       term: 'Shrinkage',
       category: 'pit',
       category_label: 'Pit & Smoker',
-      definition: 'Weight lost during smoking as moisture cooks off and fat renders (about 48–50% for brisket, 40–42% for pork butt).',
+      definition: 'Weight lost during smoking as moisture cooks off and fat renders (about 60% for brisket, 56% for pork butt).',
       how_it_helps: 'Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell.'
     },
     'Tallow Rest': {
@@ -438,8 +458,8 @@
       definition: 'What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).',
       how_it_helps: "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
     },
-    'Hourly Sales Pace': {
-      term: 'Hourly Sales Pace',
+    'Hourly Orders': {
+      term: 'Hourly Orders',
       category: 'volume',
       category_label: 'Volume & Math',
       definition: 'Orders or dollars coming in per hour right now.',
@@ -871,6 +891,9 @@
     const revVal = Number((rec.is_historical && rec.actual_revenue > 0) ? rec.actual_revenue : (rec.predicted_revenue || 0));
     const typRev = Math.max(Number(dowBase?.typical_sales_usd || 3850), 1);
 
+    const recCogs = Number(rec.estimated_cogs_usd) || 0;
+    const recRev = Number(rec.predicted_revenue) || 0;
+    const leftAfterMeatPct = (recCogs > 0 && recRev > 0) ? Math.round(100 - (recCogs / recRev) * 100) : 0;
     const cards = [
       {
         containerId: 'kpi-card-revenue-container',
@@ -916,10 +939,10 @@
       },
       {
         containerId: 'kpi-card-food-cost-container',
-        pctOfTypical: 70,
+        pctOfTypical: leftAfterMeatPct,
         barColor: '#009E73',
         sparkSeries: sparks.left_after_meat_usd || [3006, 2247, 2915, 3917, 4505, 3398, 3006],
-        label: '~70.5% Left After Meat Cost'
+        label: leftAfterMeatPct > 0 ? `${leftAfterMeatPct}% Left After Meat Cost` : 'Left After Meat Cost'
       }
     ];
 

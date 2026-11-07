@@ -81,7 +81,6 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     const pillFoodCost = page.locator('#kpi-food-cost-blended-sub');
     const pillVelocity = page.locator('#kpi-velocity-blended-sub');
     const pillAov = page.locator('#kpi-aov-blended-sub');
-    const pillLabor = page.locator('#kpi-labor-blended-sub');
     const pillRosebuds = page.locator('#kpi-rosebuds-blended-sub');
     const subBrisket = page.locator('#kpi-brisket-cooked');
     const subRosebuds = page.locator('#kpi-rosebuds-sub');
@@ -90,22 +89,24 @@ test.describe('Real-Time Predictive-to-Historical POS Turnover & Simulation Suit
     await expect(pillRevenue).toContainText("Today's Projected Finish");
     await expect(pillBrisket).toBeVisible();
     await expect(pillBrisket).toContainText('sold so far');
-    await expect(subBrisket).toContainText('actual sold');
+    await expect(subBrisket).toContainText('Cooked lbs Sold');
     await expect(pillPork).toBeVisible();
     await expect(pillPork).toContainText('sold so far');
     await expect(pillSausage).toBeVisible();
     await expect(pillSausage).toContainText('sold so far');
     await expect(pillRosebuds).toBeVisible();
     await expect(pillRosebuds).toContainText('sold so far');
-    await expect(subRosebuds).toContainText('actual sold');
+    await expect(subRosebuds).toContainText(/\d+ sold/);
     await expect(pillFoodCost).toBeVisible();
-    await expect(pillFoodCost).toContainText("Today's Food Cost Finish");
+    await expect(pillFoodCost).toContainText("Today's Meat Cost Finish");
+    await expect(pillFoodCost).not.toContainText('29.5');
     await expect(pillVelocity).toBeVisible();
-    await expect(pillVelocity).toContainText('Current Pace');
+    await expect(pillVelocity).toContainText('Sales vs. Typical Day');
+    await expect(pillVelocity).toContainText(/Ahead|Behind|On pace/);
+    expect(await page.locator('body').innerText()).not.toMatch(/actual sold|Hourly Sales Pace \(Normal Flow\)/i);
     await expect(pillAov).toBeVisible();
     await expect(pillAov).toContainText('Average Ticket So Far');
-    await expect(pillLabor).toBeVisible();
-    await expect(pillLabor).toContainText('Shift Labor Hours');
+    await expect(page.locator('#kpi-labor-blended-sub')).toHaveCount(0);
 
     // 6. Test Quick Preset: Reset to Live (#sim-btn-reset)
     const btnReset = page.locator('#sim-btn-reset');

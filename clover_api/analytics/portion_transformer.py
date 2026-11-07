@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from clover_api.menu_map import classify_item
+from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
 
 # PHASE 2: PORTION-TO-WEIGHT TRANSLATION LAYER (PORTION_MAP)
 # We will translate all menu items into raw meat cooked-weight equivalents.
@@ -206,8 +207,8 @@ def calculate_daily_procurement(df_joined: pl.DataFrame) -> pl.DataFrame:
     if "brisket_lbs" in daily_pivot.columns:
         daily_pivot = daily_pivot.with_columns(
             (pl.col("brisket_lbs") / 0.4).alias("Total Raw Brisket Needed (Lbs)"),
-            ((pl.col("brisket_lbs") / 0.4) / 14.0).ceil().cast(pl.Int32).alias("Total Whole Briskets Needed"),
-            (((pl.col("brisket_lbs") / 0.4) / 14.0) / 5.0).ceil().cast(pl.Int32).alias("Total Cases of Brisket Needed")
+            ((pl.col("brisket_lbs") / 0.4) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]).ceil().cast(pl.Int32).alias("Total Whole Briskets Needed"),
+            (((pl.col("brisket_lbs") / 0.4) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]) / UNIT_CONVERSIONS["brisket"]["units_per_case"]).ceil().cast(pl.Int32).alias("Total Cases of Brisket Needed")
         )
         
     if "sausage_links" in daily_pivot.columns:

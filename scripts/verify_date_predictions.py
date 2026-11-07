@@ -8,7 +8,7 @@ Tests:
   3. Weekend multi-day horizon aggregation (Fri-Sun, 3 days) verifying raw brisket,
      pork shoulder, cooked yield (40%), sausage batches/links, ribs, dino ribs, and case conversions.
   4. Single-day projections (Thursday, Friday, Saturday).
-  5. Multipliers (Jaguars 3.5x, Holiday 0.7x).
+  5. Multipliers (Calibrated measured multipliers from calendar_events.json).
   6. Defensive edge cases (empty strings, malformed dates, zero-division resilience).
 """
 
@@ -19,6 +19,8 @@ import math
 from datetime import datetime, timedelta
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT_DIR)
+from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
 HIST_PATH = os.path.join(ROOT_DIR, 'clover_api', 'analytics', 'historical_payload.json')
 DASH_PATH = os.path.join(ROOT_DIR, 'clover_api', 'analytics', 'dashboard_payload.json')
 
@@ -83,8 +85,8 @@ def simulate_prep_calculations(records, is_range=False):
     sausage_links = s_val * 3
 
     # Cases and packaging conversions
-    brisket_cases = b_val / 70.0
-    brisket_packers = math.ceil(b_val / 14.0)
+    brisket_cases = b_val / UNIT_CONVERSIONS['brisket']['lbs_per_case']
+    brisket_packers = math.ceil(b_val / UNIT_CONVERSIONS['brisket']['raw_lbs_per_unit'])
     pork_cases = p_val / 32.0
     pork_butts = math.ceil(p_val / 8.0)
     ribs_cases = r_val / 6.0
@@ -160,8 +162,8 @@ def test_weekend_aggregation():
     assert calc['sausage_links'] == 558
 
     # Case conversions
-    assert round(calc['brisket_cases'], 1) == round(expected_b_raw / 70.0, 1) # ~4.0 cases
-    assert calc['brisket_packers'] == math.ceil(expected_b_raw / 14.0) # 21 packers
+    assert round(calc['brisket_cases'], 1) == round(expected_b_raw / UNIT_CONVERSIONS['brisket']['lbs_per_case'], 1) # ~4.0 cases
+    assert calc['brisket_packers'] == math.ceil(expected_b_raw / UNIT_CONVERSIONS['brisket']['raw_lbs_per_unit']) # 21 packers
     assert round(calc['pork_cases'], 1) == round(expected_p_raw / 32.0, 1) # ~5.2 cases
     assert calc['pork_butts'] == math.ceil(expected_p_raw / 8.0) # 21 butts
 
@@ -188,20 +190,29 @@ def test_single_day_projections():
 def test_event_multipliers():
     print("--- [TEST 4] Live Event Multipliers ---")
     base = safe_default_record("2026-09-13", "Sun")
+    cal_path = os.path.join(ROOT_DIR, 'clover_api', 'analytics', 'calendar_events.json')
+    with open(cal_path, 'r', encoding='utf-8') as f:
+        events = json.load(f)
+    event_map = {e['date']: e for e in events}
     
-    # Jaguars Home Game multiplier: 3.5x
-    jags_mult = 3.5
+    # Jaguars Home Game multiplier: calibrated to 1.0x (measured 0.95x within +/-15% noise band)
+    jags_event = event_map.get("2026-09-13", {})
+    jags_mult = jags_event.get("multiplier", 1.0)
+    assert jags_mult == 1.0, f"Expected calibrated multiplier 1.0 for Jaguars, got {jags_mult}"
+    assert jags_event.get("measured_multiplier") == 0.95, f"Expected measured multiplier 0.95, got {jags_event.get('measured_multiplier')}"
     jags_rev = base['predicted_revenue'] * jags_mult
     jags_brisket = base['brisket_raw_lbs'] * jags_mult
-    assert jags_rev == 2700.0 * 3.5 # 9450.0
-    assert jags_brisket == 80.0 * 3.5 # 280.0
-    print(f"  ✓ Jaguars Game multiplier: Revenue scaled to ${jags_rev:.2f}, Brisket scaled to {jags_brisket} lbs")
+    assert jags_rev == 2700.0
+    assert jags_brisket == 80.0
+    print(f"  ✓ Jaguars Game multiplier: Calibrated to {jags_mult}x (measured {jags_event.get('measured_multiplier')}x)")
 
-    # Holiday multiplier: 0.7x
-    hol_mult = 0.7
+    # Holiday multiplier: calibrated to 1.0x (not enough event days to measure)
+    hol_event = event_map.get("2026-09-07", {})
+    hol_mult = hol_event.get("multiplier", 1.0)
+    assert hol_mult == 1.0, f"Expected calibrated multiplier 1.0 for Holiday, got {hol_mult}"
     hol_rev = base['predicted_revenue'] * hol_mult
-    assert hol_rev == 2700.0 * 0.7 # 1890.0
-    print(f"  ✓ Holiday multiplier: Revenue scaled to ${hol_rev:.2f}")
+    assert hol_rev == 2700.0
+    print(f"  ✓ Holiday multiplier: Calibrated to {hol_mult}x")
 
 def test_defensive_edge_cases():
     print("--- [TEST 5] Defensive Edge Cases & Zero-Division Resilience ---")

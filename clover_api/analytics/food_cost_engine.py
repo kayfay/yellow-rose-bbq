@@ -8,6 +8,8 @@ import csv
 import json
 from pathlib import Path
 
+from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 INVOICE_1 = (DATA_DIR / "Review order detail_91714857_09042026.csv") if (DATA_DIR / "Review order detail_91714857_09042026.csv").exists() else (BASE_DIR / "Review order detail_91714857_09042026.csv")
@@ -103,9 +105,9 @@ def compute_effective_meat_costs():
                 "expected_yield_pct": "40% - 48% (est. 52% - 60% trim & smoke shrinkage)"
             },
             "pork_spare_ribs": {
-                "nominal_cost_per_rack": round(rib_raw * 5.0, 2), # 5 lb average slab raw
+                "nominal_cost_per_rack": round(rib_raw * RIB_RACK_RAW_LBS, 2), # invoice catch weight per slab
                 "cost_per_lb_raw": rib_raw,
-                "expected_yield_pct": "Approx. 12 bones per 5 lb raw rack"
+                "expected_yield_pct": f"Approx. 12 bones per {RIB_RACK_RAW_LBS:g} lb raw rack"
             },
             "turkey": {
                 "nominal_cost_per_cooked_lb": round(turkey_raw / YIELD_RANGES["turkey"]["nominal_yield"], 2),
@@ -124,15 +126,15 @@ def compute_effective_meat_costs():
             "two_step_sandwich": 5.74,
             "quesadilla_brisket": 3.83,
             "smoked_wings_5pc": 2.25,
-            "full_rack_ribs": round(rib_raw * 5.0, 2),
-            "half_rack_ribs": round((rib_raw * 5.0) / 2.0, 2),
-            "single_bone_rib": round((rib_raw * 5.0) / 12.0, 2),
+            "full_rack_ribs": round(rib_raw * RIB_RACK_RAW_LBS, 2),
+            "half_rack_ribs": round((rib_raw * RIB_RACK_RAW_LBS) / 2.0, 2),
+            "single_bone_rib": round((rib_raw * RIB_RACK_RAW_LBS) / 12.0, 2),
             "beef_dino_rib": 14.50,
             "bbq_plate_brisket": round((brisket_raw / 0.40) * 0.5, 2),
-            "two_meat_plate": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * 5.0) / 12.0) * 2, 2),
-            "pitmaster_platter": round((brisket_raw / 0.40) * 0.5 + (pork_raw / 0.44) * 0.5 + ((rib_raw * 5.0) / 12.0) * 3 + 1.25, 2),
-            "hill_country_trinity": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * 5.0) / 12.0) * 3 + 1.25, 2),
-            "bevo_platter": round((brisket_raw / 0.40) * 1.0 + 2.50 + (rib_raw * 5.0) * 0.5, 2),
+            "two_meat_plate": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 2, 2),
+            "pitmaster_platter": round((brisket_raw / 0.40) * 0.5 + (pork_raw / 0.44) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
+            "hill_country_trinity": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
+            "bevo_platter": round((brisket_raw / 0.40) * 1.0 + 2.50 + (rib_raw * RIB_RACK_RAW_LBS) * 0.5, 2),
             "rose_buds_portion": 1.85,
             "elote_street_corn": 0.85,
             "charro_beans": 0.65,
@@ -169,6 +171,59 @@ def compute_effective_meat_costs():
         }
     }
     return cooked_costs
+
+SAUSAGE_LINKS_PER_LB = 3.0
+SAUSAGE_COST_PER_LINK = 1.25      # wholesale yield sheet: ~$1.25 per 4 oz link
+RIB_RACK_RAW_LBS = UNIT_CONVERSIONS["ribs"]["raw_lbs_per_unit"]  # invoice catch weight
+DINO_RIB_COST_EACH = 14.50        # item_portions_cost.beef_dino_rib
+
+
+def batch_meat_cost(brisket_raw_lbs=0.0, pork_raw_lbs=0.0, turkey_raw_lbs=0.0,
+                    sausage_lbs=0.0, rib_racks=0.0, dino_ribs=0.0, raw_costs=None):
+    """Total wholesale meat cost (USD) for a prep batch, from raw lbs x invoice price.
+
+    Pure function of its inputs plus invoice prices; never derived from revenue.
+    """
+    raw = raw_costs or parse_us_foods_invoices()
+    cost = (
+        float(brisket_raw_lbs) * raw["raw_beef_brisket_per_lb"]
+        + float(pork_raw_lbs) * raw["raw_pork_butt_per_lb"]
+        + float(turkey_raw_lbs) * raw["raw_turkey_breast_per_lb"]
+        + float(sausage_lbs) * SAUSAGE_LINKS_PER_LB * SAUSAGE_COST_PER_LINK
+        + float(rib_racks) * RIB_RACK_RAW_LBS * raw["raw_pork_sparerib_per_lb"]
+        + float(dino_ribs) * DINO_RIB_COST_EACH
+    )
+    return round(cost, 2)
+
+
+def meat_cost_pct(batch_cost_usd, revenue_usd):
+    """Estimated Meat Cost % = batch meat cost / revenue x 100. None when revenue is 0 (closed day)."""
+    try:
+        revenue = float(revenue_usd)
+        cost = float(batch_cost_usd)
+    except (TypeError, ValueError):
+        return None
+    if revenue <= 0:
+        return None
+    return round(cost / revenue * 100.0, 1)
+
+
+def record_batch_cost(rec):
+    """Batch meat cost for a dashboard/historical day record; uses the stored value when present."""
+    if rec.get("estimated_cogs_usd") is not None:
+        return float(rec["estimated_cogs_usd"])
+    turkey_raw = rec.get("turkey_raw_lbs")
+    if turkey_raw is None:
+        turkey_raw = float(rec.get("turkey_cooked_lbs", rec.get("turkey_lbs", 0.0)) or 0.0) / 0.70
+    return batch_meat_cost(
+        brisket_raw_lbs=rec.get("brisket_raw_lbs", 0.0) or 0.0,
+        pork_raw_lbs=rec.get("pork_shoulder_raw_lbs", 0.0) or 0.0,
+        turkey_raw_lbs=turkey_raw or 0.0,
+        sausage_lbs=rec.get("sausage_lbs", 0.0) or 0.0,
+        rib_racks=rec.get("pork_ribs_racks", 0.0) or 0.0,
+        dino_ribs=rec.get("beef_dino_ribs", 0.0) or 0.0,
+    )
+
 
 if __name__ == "__main__":
     costs = compute_effective_meat_costs()

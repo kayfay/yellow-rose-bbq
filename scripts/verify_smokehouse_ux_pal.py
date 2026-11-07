@@ -6,11 +6,11 @@ Deterministic PAL Verification Suite for Smokehouse UX Overhaul (v2.2.2):
      'safety buffer', 'model evaluation', 'variance') in index.html, app.js,
      modules/*.js, and ml_insights.json.
    - Asserts presence of plain-English replacements ('Pitmaster Daily Forecast',
-     'Extra Prep / Cushion', 'Difference from Target', 'Cook Accuracy Audit') and
+     'Difference from Target', 'Cook Accuracy Audit') and
      1-line '.audit-plain-takeaway' banner.
 2. Practical Unit Display (`KitchenQuantityDisplay`):
    - Verifies US Foods case/cut conversion math in modules/shared/core_utils.js
-     (Brisket 70 lbs/case & 5 packers, Pork 32 lbs/case & 4 butts, Pork Ribs 6 racks/case,
+     (Brisket 82 lbs/case & 5 packers, Pork 32 lbs/case & 4 butts, Pork Ribs 6 racks/case,
      Dino Ribs 12 ribs/case, Turkey 20 lbs/case & 2 breasts, Sausage 60 lbs/batch & 180 links).
    - Verifies #btn-debug-unit-mode toggle & unitDisplayMode JSON export.
 3. Blank Black Space / Large Black Square Fix & Prep Cushion Status Strip:
@@ -72,11 +72,9 @@ def main() -> None:
 
     required_plain_terms = [
         ("index.html", "End-of-Day Cook Accuracy Audit"),
-        ("index.html", "Extra Prep / Cushion"),
         ("index.html", "Checking difference from target..."),
         ("app.js", "Difference from Target"),
         ("app.js", "Pitmaster Daily Forecast"),
-        ("app.js", "Extra Prep / Cushion"),
         ("app.js", "Cook Accuracy Audits"),
         ("app.js", "audit-plain-takeaway"),
         ("clover_api/analytics/ml_insights.json", "difference from target"),
@@ -93,8 +91,8 @@ def main() -> None:
 
     # Verify US Foods Case & Cut constants in core_utils.js
     expected_specs = [
-        ("lbsPerCase: 70.0", "Brisket 70 lbs/case"),
-        ("lbsPerCut: 14.0", "Brisket 14 lbs/packer"),
+        ("lbsPerCase: 82.0", "Brisket 82 lbs/case (invoice)"),
+        ("lbsPerCut: 16.4", "Brisket 16.4 lbs/packer (invoice)"),
         ("lbsPerCase: 32.0", "Pork 32 lbs/case"),
         ("lbsPerCut: 8.0", "Pork 8 lbs/butt"),
         ("racksPerCase: 6", "Pork Spare Ribs 6 racks/case"),
@@ -114,8 +112,9 @@ def main() -> None:
     # 3. Black Square / 24-Hour Velocity Gap Fix & Prep Safety Margin Strip Audit
     if "#js-plotly-tester" not in style_css:
         fail("Missing #js-plotly-tester offscreen black SVG suppression rule in style.css")
-    if 'id="prep-safety-margin-strip"' not in index_html:
-        fail("Missing #prep-safety-margin-strip in index.html")
+    # 2026-11-05: owner removed the cushion strip and its copy from the UI (prd 39); assert it stays gone.
+    if 'id="prep-safety-margin-strip"' in index_html or "Extra Prep / Cushion" in index_html or "Extra Prep / Cushion" in app_js:
+        fail("Removed cushion strip / 'Extra Prep / Cushion' copy is back in index.html or app.js")
     for status_cls in [".status-safe", ".status-tight", ".status-under"]:
         if status_cls not in style_css:
             fail(f"Missing {status_cls} color-coding rule in style.css")

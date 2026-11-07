@@ -20,7 +20,17 @@ venv/
 *.sqlite
 *.csv
 *.xlsx
+*.xls
+*.enc
+*.gpg
+*.7z
+*.tar.gz
+*.tgz
 backups/
+data/vendor_invoices/
+data/encrypted/
+YRBBQ*
+*Cust91714857*
 data/*.json
 archive/legacy_v1/*.json
 clover_api/data/*.db

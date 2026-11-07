@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ANALYTICS_DIR = ROOT / "clover_api" / "analytics"
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ANALYTICS_DIR))
+from clover_api.analytics.food_cost_engine import record_batch_cost, meat_cost_pct as calc_meat_cost_pct
 
 DAY_FULL_NAMES = {
     "Mon": "Monday",
@@ -65,7 +66,6 @@ PEAK_RUSH_BY_DOW = {
     "Sun": "12:00 PM – 2:30 PM Sunday Family Platter Rush",
 }
 
-MEAT_COST_RATIO = 0.295  # 29.5% average smokehouse meat cost share of sales
 
 
 def _load_json(path: Path) -> dict:
@@ -73,6 +73,36 @@ def _load_json(path: Path) -> dict:
         return {}
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
+
+
+MOVER_ITEMS = [
+    ("Brisket", "brisket_raw_lbs", "typical_brisket_raw_lbs"),
+    ("Pulled Pork", "pork_shoulder_raw_lbs", "typical_pork_raw_lbs"),
+    ("Sausage", "sausage_lbs", "typical_sausage_lbs"),
+    ("Spare Ribs", "pork_ribs_racks", "typical_ribs_racks"),
+]
+
+
+def top_movers(record: dict, base: dict, limit: int = 2, min_pct: float = 10.0) -> list[tuple[str, float]]:
+    """Items whose volume differs most from a typical day of this weekday, biggest swing first."""
+    moves = []
+    for name, field, base_key in MOVER_ITEMS:
+        typ = float(base.get(base_key, 0) or 0)
+        if typ <= 0:
+            continue
+        val = float(record.get(field, 0) or 0)
+        pct = round((val - typ) / typ * 100.0, 1)
+        if abs(pct) >= min_pct:
+            moves.append((name, pct))
+    moves.sort(key=lambda m: abs(m[1]), reverse=True)
+    return moves[:limit]
+
+
+def describe_movers(movers: list[tuple[str, float]], full_day: str) -> str:
+    if not movers:
+        return f"order volume close to a typical {full_day} across all meats"
+    parts = [f"{name} {'up' if pct > 0 else 'down'} {abs(pct):g}%" for name, pct in movers]
+    return " and ".join(parts) + f" vs a typical {full_day}"
 
 
 def compute_dow_baselines(historical_records: list[dict], forecast_records: list[dict]) -> dict:
@@ -108,13 +138,21 @@ def compute_dow_baselines(historical_records: list[dict], forecast_records: list
             std_rev = TYPICAL_DOW_STD[short_day]
 
         ref_rec = day_fc[0] if day_fc else {}
+
+        def typical(field, fallback, scale=0.94):
+            vals = [float(r.get(f"actual_{field}", r.get(field, 0)) or 0) for r in day_hist]
+            vals = [v for v in vals if v > 0]
+            if len(vals) >= 3:
+                return round(statistics.median(vals), 1)
+            return round(float(ref_rec.get(field, fallback)) * scale, 1)
+
         baselines[short_day] = {
             "typical_sales_usd": mu_rev,
             "std_sales_usd": max(std_rev, 100.0),
-            "typical_brisket_raw_lbs": round(float(ref_rec.get("brisket_raw_lbs", 120.0)) * 0.94, 1),
-            "typical_pork_raw_lbs": round(float(ref_rec.get("pork_shoulder_raw_lbs", 20.0)) * 0.94, 1),
-            "typical_ribs_racks": max(1, round(float(ref_rec.get("pork_ribs_racks", 7)) * 0.94)),
-            "typical_sausage_lbs": round(float(ref_rec.get("sausage_lbs", 12.0)) * 0.94, 1),
+            "typical_brisket_raw_lbs": typical("brisket_raw_lbs", 120.0),
+            "typical_pork_raw_lbs": typical("pork_shoulder_raw_lbs", 20.0),
+            "typical_ribs_racks": max(1, round(typical("pork_ribs_racks", 7))),
+            "typical_sausage_lbs": typical("sausage_lbs", 12.0),
             "typical_turkey_cooked_lbs": round(
                 float(ref_rec.get("turkey_cooked_lbs", ref_rec.get("turkey_lbs", 7.5))) * 0.94, 1
             ),
@@ -143,8 +181,8 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
             "sales_diff_usd": 0,
             "estimated_meat_cost_usd": 0,
             "left_after_meat_cost_usd": 0,
-            "meat_cost_pct": 0.0,
-            "leftover_pct": 0.0,
+            "meat_cost_pct": None,
+            "leftover_pct": None,
             "primary_driver": "Monday scheduled pit cleanout and Day 1 sausage cure prep",
             "peak_rush_window": PEAK_RUSH_BY_DOW["Mon"],
             "the_insight": (
@@ -184,10 +222,10 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
     z_score = round((raw_rev - typical_sales) / max(std_sales, 1.0), 2)
     pct_vs_typical = round(((raw_rev - typical_sales) / max(typical_sales, 1.0)) * 100.0, 1)
 
-    meat_cost_usd = round(expected_sales * MEAT_COST_RATIO)
+    meat_cost_usd = round(record_batch_cost(record))
     leftover_usd = expected_sales - meat_cost_usd
-    meat_cost_pct = round(MEAT_COST_RATIO * 100.0, 1)
-    leftover_pct = round(100.0 - meat_cost_pct, 1)
+    meat_cost_pct = calc_meat_cost_pct(meat_cost_usd, expected_sales)
+    leftover_pct = round(100.0 - meat_cost_pct, 1) if meat_cost_pct is not None else None
 
     brisket_raw = round(float(record.get("brisket_raw_lbs", 0.0)))
     brisket_cooked = round(brisket_raw * 0.40)
@@ -201,23 +239,21 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
     rush_delta = round(diff_usd * 0.62)
     weather_event_delta = diff_usd - rush_delta
 
+    # Movers compare real POS volumes to a typical day, so only days with actuals qualify;
+    # a forecast day would just be comparing the model to history.
+    has_actuals = bool(record.get("is_historical"))
+    movers = top_movers(record, base) if has_actuals else []
+    driver_phrase = describe_movers(movers, full_day) if has_actuals else ""
     if pct_vs_typical >= 10.0:
         status_badge = f"Busy {full_day} Rush (+{pct_vs_typical}% vs. Typical {full_day})"
         status_tone = "surge"
-        driver_phrase = (
-            f"heavy {PEAK_RUSH_BY_DOW[short_day]} Brisket and Spare Rib platters"
-            if short_day in ("Fri", "Sat", "Sun")
-            else f"strong {PEAK_RUSH_BY_DOW[short_day]} orders"
-        )
     elif pct_vs_typical <= -10.0:
         status_badge = f"Lighter {full_day} Pace ({pct_vs_typical}% vs. Typical {full_day})"
         status_tone = "lull"
-        driver_phrase = f"slower mid-afternoon counter traffic outside {PEAK_RUSH_BY_DOW[short_day]}"
     else:
         sign = "+" if pct_vs_typical >= 0 else ""
         status_badge = f"Steady {full_day} Pace ({sign}{pct_vs_typical}% vs. Typical {full_day})"
         status_tone = "steady"
-        driver_phrase = f"steady {PEAK_RUSH_BY_DOW[short_day]} Brisket and Pulled Pork demand"
 
     diff_word = "above" if diff_usd >= 0 else "below"
     abs_pct = abs(pct_vs_typical)
@@ -225,7 +261,7 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
 
     the_insight = (
         f"{full_day} sales (${expected_sales:,}) are tracking {abs_pct}% (${abs_diff:,}) {diff_word} "
-        f"a typical {full_day} (${typical_sales_round:,}), led by {driver_phrase}, leaving "
+        f"a typical {full_day} (${typical_sales_round:,})" + (f"; meat movement: {driver_phrase}" if driver_phrase else "") + ". That leaves "
         f"~${leftover_usd:,} for the shop after ~${meat_cost_usd:,} in estimated meat cost."
     )
 
@@ -311,9 +347,9 @@ def generate_daily_executive_brief() -> dict:
     sparklines_7d = {
         "labels": [f"{r.get('day_name', '')} ({r.get('date', '')[-5:]})" for r in seven_day_window],
         "sales_usd": [round(float(r.get("predicted_revenue", 0))) for r in seven_day_window],
-        "meat_cost_usd": [round(float(r.get("predicted_revenue", 0)) * MEAT_COST_RATIO) for r in seven_day_window],
+        "meat_cost_usd": [round(record_batch_cost(r)) for r in seven_day_window],
         "left_after_meat_usd": [
-            round(float(r.get("predicted_revenue", 0)) * (1.0 - MEAT_COST_RATIO)) for r in seven_day_window
+            round(float(r.get("predicted_revenue", 0)) - record_batch_cost(r)) for r in seven_day_window
         ],
         "brisket_raw_lbs": [round(float(r.get("brisket_raw_lbs", 0)), 1) for r in seven_day_window],
         "pork_raw_lbs": [round(float(r.get("pork_shoulder_raw_lbs", 0)), 1) for r in seven_day_window],

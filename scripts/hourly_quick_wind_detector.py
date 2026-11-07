@@ -61,11 +61,11 @@ ANALYTIC_TERMS_GLOSSARY = {
     "Cooked Yield %": {
         "term": "Cooked Yield %",
         "definition": "How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.",
-        "how_it_helps": "Shows the real cost of meat on the board. Choice packer brisket yields about 50–52%, so $5.08/lb raw costs about $10.00/lb sliced."
+        "how_it_helps": "Shows the real yield of meat on the board. Whole packer brisket yields about 40% after trimming and smoking to finished sliceable yield."
     },
     "Shrinkage": {
         "term": "Shrinkage",
-        "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 48–50% for brisket, 40–42% for pork butt).",
+        "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 60% for brisket, 56% for pork butt).",
         "how_it_helps": "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
     },
     "Tallow Rest": {
@@ -93,8 +93,8 @@ ANALYTIC_TERMS_GLOSSARY = {
         "definition": "What a normal day looks like for that weekday, averaged from past Clover sales (for example, Typical Tuesday).",
         "how_it_helps": "Gives every number a fair comparison, so a slow Tuesday isn't measured against a busy Saturday."
     },
-    "Hourly Sales Pace": {
-        "term": "Hourly Sales Pace",
+    "Hourly Orders": {
+        "term": "Hourly Orders",
         "definition": "Orders or dollars coming in per hour right now.",
         "how_it_helps": "Shows when the lunch and dinner rushes start building, so the cutting board can get ahead of the line."
     },

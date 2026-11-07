@@ -36,18 +36,26 @@ test.describe('Smokehouse UX Overhaul (v2.2.0) — Plain English, Case/Cut Units
     // 2. Verify KitchenQuantityDisplay renders primary Case & Individual Cut Counts
     const brisketPrimary = page.locator('#kpi-card-brisket-container .kitchen-qty-primary');
     await expect(brisketPrimary).toBeVisible();
-    await expect(brisketPrimary).toContainText(/Case/i);
-    await expect(brisketPrimary).toContainText(/Brisket/i);
+    await expect(brisketPrimary).toContainText(/^~\d+ Briskets?$/i);
+    const brisketDisplay = page.locator('#kpi-card-brisket-container .kitchen-qty-display');
+    await expect(brisketDisplay).toContainText(/Raw \d+ lbs/i);
+    await expect(brisketDisplay).toContainText(/Cases?/i);
+    await expect(brisketDisplay).toContainText(/Cooked \d+ lbs/i);
+    // Piece count is the large number: bigger than the muted rows
+    const sizes = await page.evaluate(() => {
+      const d = document.querySelector('#kpi-card-brisket-container .kitchen-qty-display');
+      return [parseFloat(getComputedStyle(d.querySelector('.kitchen-qty-primary')).fontSize), parseFloat(getComputedStyle(d.querySelector('.kitchen-qty-secondary')).fontSize)];
+    });
+    expect(sizes[0]).toBeGreaterThan(sizes[1] * 1.5);
 
     const porkPrimary = page.locator('#kpi-card-pork-container .kitchen-qty-primary');
     await expect(porkPrimary).toBeVisible();
-    await expect(porkPrimary).toContainText(/Case/i);
     await expect(porkPrimary).toContainText(/Butt/i);
 
     const ribsPrimary = page.locator('#kpi-card-ribs-container .kitchen-qty-primary');
     await expect(ribsPrimary).toBeVisible();
     await expect(ribsPrimary).toContainText(/Rack/i);
-    await expect(ribsPrimary).toContainText(/Case/i);
+    await expect(page.locator('#kpi-card-ribs-container .kitchen-qty-display')).toContainText(/Case/i);
 
     // 3. Verify Unit Conversion Math via global formatKitchenQuantity
     const unitMath = await page.evaluate(() => {
@@ -59,8 +67,8 @@ test.describe('Smokehouse UX Overhaul (v2.2.0) — Plain English, Case/Cut Units
         sausage120: window.formatKitchenQuantity('sausage', 120, 'case')
       };
     });
-    expect(unitMath.brisket140.cases).toBe(2);
-    expect(unitMath.brisket140.cuts).toBe(10);
+    expect(unitMath.brisket140.cases).toBe(1.7);   // 140 / 82 lb per invoice case
+    expect(unitMath.brisket140.cuts).toBe(9);      // ceil(140 / 16.4 lb per brisket)
     expect(unitMath.brisket140.cookedLbs).toBe(56);
     expect(unitMath.pork64.cases).toBe(2);
     expect(unitMath.pork64.cuts).toBe(8);
@@ -76,10 +84,10 @@ test.describe('Smokehouse UX Overhaul (v2.2.0) — Plain English, Case/Cut Units
     await page.locator('#btn-toggle-debug-drawer').click();
     const unitModeBtn = page.locator('#btn-debug-unit-mode');
     await expect(unitModeBtn).toBeVisible();
-    await expect(unitModeBtn).toContainText('Units: Case & Cut View');
+    await expect(unitModeBtn).toContainText('Units: Counts');
 
     await unitModeBtn.click();
-    await expect(unitModeBtn).toContainText('Units: Raw Lbs View');
+    await expect(unitModeBtn).toContainText('Units: Lbs');
     await expect(page.locator('body')).toHaveAttribute('data-unit-mode', 'lbs');
     await expect(brisketPrimary).toContainText(/lbs Raw/i);
 
@@ -93,19 +101,12 @@ test.describe('Smokehouse UX Overhaul (v2.2.0) — Plain English, Case/Cut Units
     await expect(page.locator('body')).toHaveAttribute('data-unit-mode', 'case');
     await page.locator('#btn-toggle-debug-drawer').click();
 
-    // 5. Verify Simplified Prep Safety Margin Strip & Zero Black Void under 24-Hour Velocity Chart
-    const marginStrip = page.locator('#prep-safety-margin-strip');
-    await expect(marginStrip).toBeVisible();
-    await expect(page.locator('#prep-safety-margin-text')).toContainText(/Extra Prep \/ Cushion: \+\d+ Rack/i);
-    await expect(page.locator('#prep-safety-status-pill')).toBeVisible();
-    // No live POS sales on the selected preset day: strip must not raise a yellow/red alarm
-    const hasLiveSales = await page.evaluate(() => {
-      const m = window.__LAST_BLENDED_METRICS__;
-      return Boolean(m && m.summary && m.summary.actualSalesSoFar > 0);
-    });
-    if (!hasLiveSales) {
-      await expect(marginStrip).toHaveClass(/status-safe/);
-    }
+    // 5. Cushion strip and labor card are removed; no leftover copy; zero black void under 24-Hour chart
+    await expect(page.locator('#prep-safety-margin-strip')).toHaveCount(0);
+    await expect(page.locator('#kpi-card-labor-container')).toHaveCount(0);
+    const copyText = await page.locator('body').innerText();
+    expect(copyText).not.toMatch(/plain[- ]english/i);
+    expect(copyText).not.toMatch(/extra prep|cushion|shift directives/i);
 
     const predChartBox = await page.locator('#plotly-predictive-velocity-chart').boundingBox();
     const predCardBox = await page.locator('#subtab-view-predictive .chart-card').first().boundingBox();

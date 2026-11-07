@@ -19,8 +19,19 @@
     }[tag] || tag));
   }
 
+  // A phone held sideways is wider than 768px but still a touch screen with little height: charts there stay
+  // static (scroll-safe) with pre-baked labels, and are capped to fit the short screen.
+  function isLandscapePhone() {
+    return typeof window !== 'undefined' && typeof window.matchMedia === 'function' &&
+      window.matchMedia('(pointer: coarse) and (max-height: 500px) and (orientation: landscape)').matches;
+  }
+
   function isMobileViewport() {
-    return typeof window !== 'undefined' && window.innerWidth < 768;
+    return typeof window !== 'undefined' && (window.innerWidth < 768 || isLandscapePhone());
+  }
+
+  function fitChartHeight(h) {
+    return isLandscapePhone() ? Math.max(220, Math.min(h, window.innerHeight - 110)) : h;
   }
 
   function getPlotlyConfig(extra = {}) {
@@ -114,6 +125,12 @@
    * Dynamically resolves event multiplier and label for a target date,
    * consulting window.BBQ_PAYLOADS.calendar_events before baseline schedules.
    */
+  // Event multipliers come only from the calendar (measured, see scripts/calibrate_calendar_multipliers.py); never invented.
+  function validEventMultiplier(m) {
+    const n = Number(m);
+    return Number.isFinite(n) && n > 0 ? n : 1.0;
+  }
+
   function resolveDateEventImpact(dateStr) {
     if (!dateStr) return { multiplier: 1.0, label: '' };
     const calPayload = global.BBQ_PAYLOADS?.calendar_events;
@@ -122,10 +139,10 @@
       if (matched) {
         const title = String(matched.title || matched.name || '');
         if (/jaguars|stadium|game/i.test(title)) {
-          return { multiplier: Number(matched.multiplier) || 3.5, label: title || 'Jaguars Game' };
+          return { multiplier: validEventMultiplier(matched.multiplier), label: title || 'Jaguars Game' };
         }
         if (/holiday|thanksgiving|christmas|new year/i.test(title)) {
-          return { multiplier: Number(matched.multiplier) || 0.7, label: title || 'Holiday' };
+          return { multiplier: validEventMultiplier(matched.multiplier), label: title || 'Holiday' };
         }
         if (matched.multiplier && Number(matched.multiplier) !== 1.0) {
           return { multiplier: Number(matched.multiplier), label: title || 'Local Event' };
@@ -133,10 +150,10 @@
       }
     }
     if (BASELINE_JAGS_HOME_GAMES.includes(dateStr)) {
-      return { multiplier: 3.5, label: 'Jaguars Game' };
+      return { multiplier: 1.0, label: 'Jaguars Game' }; // no measured lift (see calendar multiplier_basis)
     }
     if (BASELINE_HOLIDAYS.includes(dateStr)) {
-      return { multiplier: 0.7, label: 'Holiday' };
+      return { multiplier: 1.0, label: 'Holiday' }; // too few measured holidays to adjust prep
     }
     return { multiplier: 1.0, label: '' };
   }
@@ -272,9 +289,9 @@
   const KITCHEN_UNIT_SPECS = {
     brisket: {
       name: 'Brisket',
-      lbsPerCase: 70.0,
+      lbsPerCase: 82.0,
       cutsPerCase: 5,
-      lbsPerCut: 14.0,
+      lbsPerCut: 16.4,
       cutLabelSingular: 'Brisket',
       cutLabelPlural: 'Briskets',
       yieldRatio: 0.40,
@@ -294,8 +311,8 @@
       name: 'Pork Spare Ribs',
       racksPerCase: 6,
       racksPerBag: 2,
-      lbsPerRack: 5.0,
-      lbsPerCase: 30.0,
+      lbsPerRack: 5.6,
+      lbsPerCase: 33.6,
       cutLabelSingular: 'Rack',
       cutLabelPlural: 'Racks',
       yieldRatio: 0.60,
@@ -355,7 +372,7 @@
     } catch (_e) {}
     const btn = typeof document !== 'undefined' ? document.getElementById('btn-debug-unit-mode') : null;
     if (btn) {
-      btn.textContent = cleanMode === 'case' ? 'Units: Case & Cut View' : 'Units: Raw Lbs View';
+      btn.textContent = cleanMode === 'case' ? 'Units: Counts' : 'Units: Lbs';
       btn.setAttribute('data-unit-mode', cleanMode);
     }
     return cleanMode;
@@ -399,6 +416,9 @@
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} • ~${packers} ${cutWord}`
           : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+        countText: `~${packers} ${cutWord}`,
+        caseText: `${cases} ${caseWord}`,
+        yieldPct: Math.round(spec.yieldRatio * 100),
         caseSummaryText: `(${cases} ${caseWord} / ~${packers} ${cutWord})`
       };
     }
@@ -423,6 +443,9 @@
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} / ~${butts} ${cutWord}`
           : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+        countText: `~${butts} ${cutWord}`,
+        caseText: `${cases} ${caseWord}`,
+        yieldPct: Math.round(spec.yieldRatio * 100),
         caseSummaryText: `(${cases} ${caseWord} / ~${butts} ${cutWord})`
       };
     }
@@ -450,6 +473,9 @@
         secondaryText: activeMode === 'lbs'
           ? `${racks} ${cutWord} • ${cases} ${caseWord} (~${bags} Bags)`
           : `~${rawLbs} lbs raw • ~${bags} Cryovac Bags`,
+        countText: `${racks} ${cutWord}`,
+        caseText: `${cases} ${caseWord}`,
+        yieldPct: Math.round(spec.yieldRatio * 100),
         caseSummaryText: `(${racks} ${cutWord} / ${cases} ${caseWord})`
       };
     }
@@ -475,6 +501,9 @@
         secondaryText: activeMode === 'lbs'
           ? `${ribs} ${cutWord} • ${cases} ${caseWord}`
           : `~${rawLbs} lbs raw • ~${cookedLbs} lbs cooked`,
+        countText: `${ribs} ${cutWord}`,
+        caseText: `${cases} ${caseWord}`,
+        yieldPct: Math.round(spec.yieldRatio * 100),
         caseSummaryText: `(${ribs} ${cutWord} / ${cases} ${caseWord})`
       };
     }
@@ -501,6 +530,9 @@
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} • ~${breasts} ${cutWord}`
           : `~${rawLbs} lbs raw • ~${cookedLbs} lbs cooked`,
+        countText: `~${breasts} ${cutWord}`,
+        caseText: `${cases} ${caseWord}`,
+        yieldPct: Math.round(spec.yieldRatio * 100),
         caseSummaryText: `(${cases} ${caseWord} / ~${breasts} ${cutWord})`
       };
     }
@@ -523,7 +555,10 @@
           : `${batches} ${batchWord} • ~${links} Links`,
         secondaryText: activeMode === 'lbs'
           ? `${batches} ${batchWord} • ~${links} Links`
-          : `~${rawLbs} lbs stuffed weight (50 lb block)`,
+          : `~${rawLbs} lbs stuffed weight (60 lb batch)`,
+        countText: `~${links} Links`,
+        caseText: `${batches} ${batchWord}`,
+        yieldPct: null,
         caseSummaryText: `(${batches} ${batchWord} / ~${links} Links)`
       };
     }
@@ -543,6 +578,17 @@
 
   function KitchenQuantityDisplay(meatKey, rawVal, mode) {
     const q = formatKitchenQuantity(meatKey, rawVal, mode);
+    // Counts view: the physical piece count is the big number; weights are muted rows beneath it.
+    if (q.mode !== 'lbs' && q.countText) {
+      const cooked = q.yieldPct !== null && q.yieldPct !== undefined
+        ? `<span class="kitchen-qty-secondary">Cooked ${escapeHTML(q.cookedLbs)} lbs &bull; ${escapeHTML(q.yieldPct)}% yield</span>`
+        : '';
+      return `<div class="kitchen-qty-display kitchen-qty-counts" data-meat="${escapeHTML(meatKey)}" data-unit-mode="${escapeHTML(q.mode)}">` +
+        `<span class="kitchen-qty-primary">${escapeHTML(q.countText)}</span>` +
+        `<span class="kitchen-qty-secondary">Raw ${escapeHTML(q.rawLbs)} lbs &bull; ${escapeHTML(q.caseText)}</span>` +
+        cooked +
+        `</div>`;
+    }
     return `<div class="kitchen-qty-display" data-meat="${escapeHTML(meatKey)}" data-unit-mode="${escapeHTML(q.mode)}">` +
       `<span class="kitchen-qty-primary">${escapeHTML(q.primaryText)}</span>` +
       (q.secondaryText ? `<span class="kitchen-qty-secondary">${escapeHTML(q.secondaryText)}</span>` : '') +
@@ -552,6 +598,8 @@
   // Expose on global namespace and BBQModules.shared
   global.escapeHTML = escapeHTML;
   global.isMobileViewport = isMobileViewport;
+  global.isLandscapePhone = isLandscapePhone;
+  global.fitChartHeight = fitChartHeight;
   global.getPlotlyConfig = getPlotlyConfig;
   global.applyChartTouchSafety = applyChartTouchSafety;
   global.parseValidDate = parseValidDate;
@@ -566,6 +614,7 @@
   global.setUnitDisplayMode = setUnitDisplayMode;
   global.formatKitchenQuantity = formatKitchenQuantity;
   global.KitchenQuantityDisplay = KitchenQuantityDisplay;
+  global.KITCHEN_UNIT_SPECS = KITCHEN_UNIT_SPECS;
 
   global.BBQModules.shared = {
     escapeHTML,

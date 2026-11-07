@@ -130,7 +130,7 @@ def build_shift_forecast():
                 "reversescale": False
             }],
             "layout": {
-                "title": "Labor Optimization: Hourly Foot Traffic by Shift",
+                "title": "Hourly Foot Traffic by Shift",
                 "xaxis": {"title": "Hour of Day (12-Hour Eastern Standard Time)", "gridcolor": "rgba(255,255,255,0.1)", "tickangle": -45},
                 "yaxis": {"title": "Day of Week — Identifies Required Staffing Levels", "gridcolor": "rgba(255,255,255,0.1)"},
                 "paper_bgcolor": "rgba(0,0,0,0)",

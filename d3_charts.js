@@ -34,7 +34,11 @@ function enforceMobileTouchSafety(container, svgNode) {
 
 function injectMobileFaceCallouts(container, peakLabel, lowLabel, nowLabel) {
     if (!container) return;
-    const existing = container.querySelector('.mobile-chart-face-badges');
+    // A Plotly graph div sizes its plot from its own box, so badges inside it make the height drift and clip the plot.
+    // For Plotly charts the badge strip goes just above the chart (same card); D3 containers keep it inside.
+    const beside = container.classList.contains('js-plotly-plot') && container.parentElement;
+    const host = beside ? container.parentElement : container;
+    const existing = host.querySelector(beside ? ':scope > .mobile-chart-face-badges' : '.mobile-chart-face-badges');
     if (existing) existing.remove();
     const bar = document.createElement('div');
     bar.className = 'mobile-chart-face-badges';
@@ -43,7 +47,8 @@ function injectMobileFaceCallouts(container, peakLabel, lowLabel, nowLabel) {
         <span class="mobile-face-badge badge-low">▼ LOW: ${d3EscapeHTML(lowLabel)}</span>
         <span class="mobile-face-badge badge-now">● CURRENT: ${d3EscapeHTML(nowLabel)}</span>
     `;
-    container.insertBefore(bar, container.firstChild);
+    if (beside) host.insertBefore(bar, container);
+    else host.insertBefore(bar, host.firstChild);
 }
 
 function renderD3ForecastingChart(containerId, records, anomalies = [], selectedCat = 'baseline') {
@@ -75,7 +80,7 @@ function renderD3ForecastingChart(containerId, records, anomalies = [], selected
         return {
             ...r,
             turkey_lbs: tRaw || (tCooked ? Math.round(tCooked / 0.70) : 0),
-            pork_ribs_lbs: (r.pork_ribs_racks || 0) * 5,
+            pork_ribs_lbs: (r.pork_ribs_racks || 0) * (((window.KITCHEN_UNIT_SPECS || {}).pork_ribs || {}).lbsPerRack || 5.6),
             beef_dino_ribs_lbs: (r.beef_dino_ribs || 0) * 4,
             brisket_raw_lbs: r.brisket_raw_lbs || 0,
             pork_shoulder_raw_lbs: r.pork_shoulder_raw_lbs || 0,
@@ -924,7 +929,7 @@ function renderMonthEventsCalendar(containerId, year, month, activeFilter = 'all
 
             pill.innerHTML = `
                 <span>${d3EscapeHTML(evt.icon || '🔥')} ${d3EscapeHTML(evt.title || '')}</span>
-                <span class="cal-multiplier-badge">${d3EscapeHTML(evt.multiplier ?? 1.0)}x</span>
+                ${evt.multiplier && evt.multiplier !== 1 ? `<span class="cal-multiplier-badge">${d3EscapeHTML(evt.multiplier)}x</span>` : ''}
             `;
             cell.appendChild(pill);
         });

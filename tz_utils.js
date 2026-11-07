@@ -48,6 +48,15 @@
     return parseInt(h, 10) % 24;
   }
 
+  /** Minute (0-59) of an instant in the shop timezone. */
+  function shopMinute(date) {
+    const d = date || getEffectiveNow();
+    const m = new Intl.DateTimeFormat('en-US', {
+      timeZone: SHOP_TZ, minute: 'numeric'
+    }).format(d);
+    return parseInt(m, 10) % 60;
+  }
+
   /** Construct a Date instant matching YYYY-MM-DD and integer hour (0-23) in shop timezone. */
   function createShopInstant(dateStr, hour) {
     if (!dateStr) dateStr = shopDateStr();
@@ -192,7 +201,8 @@
     // Fallback baseline for dates or simulations where POS actuals haven't yet been synced/recorded
     let fallbackBuckets = null;
     const hasRealActuals = !!(dayData && dayData.buckets && (dayData.total_orders > 0 || dayData.total_sales_usd > 0));
-    if (!hasRealActuals && actuals && actuals.weekday_baseline) {
+    // Monday is closed: with no real POS rows for that date, do not invent "actuals" from weekday history.
+    if (!hasRealActuals && actuals && actuals.weekday_baseline && weekdayIndexMon0(targetDate) !== 0) {
       const dowIdx = String(weekdayIndexMon0(targetDate));
       const base = actuals.weekday_baseline[dowIdx];
       if (base && base.n > 0) {
@@ -294,10 +304,38 @@
       });
     }
 
-    const blendedTotalRevenue = Math.round((actualSalesSoFar + forecastRemaining) * 100) / 100;
-    const pacingUsd = Math.round((actualSalesSoFar - forecastToHour) * 100) / 100;
-    const pacingPct = forecastToHour > 0 ? Math.round(((actualSalesSoFar - forecastToHour) / forecastToHour) * 1000) / 10 : 0;
-    const pacingRatio = forecastToHour > 0 ? (actualSalesSoFar / forecastToHour) : 1.0;
+    // Projected Day Total = Current POS + (remaining-hours weight x historical weekday average).
+    // Both come from real POS history (weekday_baseline), so the projection does not collapse to
+    // "actual so far" when the hourly forecast is on a different scale than the POS.
+    let historicalDayAvg = null;
+    let remainingHoursWeight = null;
+    let typicalToHour = null;
+    // Monday is the closed day: never project a Monday total from history (time travel included).
+    const dowIdx = weekdayIndexMon0(targetDate);
+    const dowBase = (dowIdx !== 0 && actuals && actuals.weekday_baseline) ? actuals.weekday_baseline[String(dowIdx)] : null;
+    if (dowBase && dowBase.n > 0 && Array.isArray(dowBase.sales_sum) && dowBase.sales_sum.length === 24) {
+      const avgByHour = dowBase.sales_sum.map(v => (Number(v) || 0) / dowBase.n);
+      const dayAvg = avgByHour.reduce((a, b) => a + b, 0);
+      if (dayAvg > 0) {
+        // The live hour counts only for the part that has elapsed (minutes/60) when running on the real clock;
+        // a simulated clock, a past day and a full hour bucket count it as fully elapsed.
+        const liveFrac = (isToday && !isSimulating()) ? shopMinute(effNow) / 60 : 1;
+        const elapsedWeight = h => (h < cutoff ? 1 : (h === cutoff ? liveFrac : 0));
+        typicalToHour = avgByHour.reduce((a, v, h) => a + v * elapsedWeight(h), 0);
+        const remainingAvg = avgByHour.reduce((a, v, h) => a + v * (1 - elapsedWeight(h)), 0);
+        historicalDayAvg = dayAvg;
+        remainingHoursWeight = remainingAvg / dayAvg;
+      }
+    }
+    const blendedTotalRevenue = historicalDayAvg !== null
+      ? Math.round((actualSalesSoFar + remainingHoursWeight * historicalDayAvg) * 100) / 100
+      : Math.round((actualSalesSoFar + forecastRemaining) * 100) / 100;
+    // Pace is measured against what this weekday has really sold by this hour (POS history),
+    // falling back to the hourly forecast only when no history exists.
+    const paceBaseline = (typicalToHour !== null && typicalToHour > 0) ? typicalToHour : forecastToHour;
+    const pacingUsd = Math.round((actualSalesSoFar - paceBaseline) * 100) / 100;
+    const pacingPct = paceBaseline > 0 ? Math.round(((actualSalesSoFar - paceBaseline) / paceBaseline) * 1000) / 10 : 0;
+    const pacingRatio = paceBaseline > 0 ? (actualSalesSoFar / paceBaseline) : 1.0;
     const actualBrisketCooked = Math.round(forecastBrisketToHour * pacingRatio * 10) / 10;
     const actualPorkCooked = Math.round(forecastPorkToHour * pacingRatio * 10) / 10;
     const blendedBrisketCooked = Math.round((actualBrisketCooked + remainingBrisketCooked) * 10) / 10;
@@ -319,6 +357,9 @@
         forecastRemaining: Math.round(forecastRemaining * 100) / 100,
         forecastFullDay: Math.round(forecastFullDay * 100) / 100,
         blendedTotalRevenue,
+        historicalDayAvg: historicalDayAvg === null ? null : Math.round(historicalDayAvg * 100) / 100,
+        typicalToHour: typicalToHour === null ? null : Math.round(typicalToHour * 100) / 100,
+        remainingHoursWeight: remainingHoursWeight === null ? null : Math.round(remainingHoursWeight * 1000) / 1000,
         pacingUsd,
         pacingPct,
         pacingRatio: Math.round(pacingRatio * 100) / 100,
@@ -340,6 +381,7 @@
     isSimulating,
     shopDateStr,
     shopHour,
+    shopMinute,
     createShopInstant,
     formatShopTimestamp,
     buildActualsOverlay,

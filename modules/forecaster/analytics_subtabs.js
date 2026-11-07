@@ -39,23 +39,22 @@
 
       if (dateLabel) dateLabel.textContent = dateFormatted;
 
-      if (dow === 6) {
-        if (demandVal) demandVal.textContent = '1.8x (Peak Saturday Surge)';
-        if (eventVal) eventVal.textContent = 'Jaguars Stadium Game Day';
-        if (weatherVal) weatherVal.textContent = '86°F | Clear & Sunny';
-      } else if (dow === 5) {
-        if (demandVal) demandVal.textContent = '1.4x (High Friday Run)';
-        if (eventVal) eventVal.textContent = 'Weekend Launch';
-        if (weatherVal) weatherVal.textContent = '82°F | Mild';
-      } else if (dow === 0) {
-        if (demandVal) demandVal.textContent = '1.3x (Sunday Family Pack Run)';
-        if (eventVal) eventVal.textContent = 'Sunday Smokehouse Service';
-        if (weatherVal) weatherVal.textContent = '86°F | Heavy Rain (31.7mm)';
-      } else {
-        if (demandVal) demandVal.textContent = '1.0x (Standard Baseline)';
-        if (eventVal) eventVal.textContent = 'Regular Operations';
-        if (weatherVal) weatherVal.textContent = '84°F | Normal';
+      // Real record for that date: actual sales vs the median of the same weekday, plus any calendar event. No typed-in text.
+      const P = global.BBQ_PAYLOADS || {};
+      const recs = (P.historical_payload && P.historical_payload.historical_records) || [];
+      const rec = recs.find(r => r && r.date === selectedDateStr);
+      const dayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dow];
+      const dayLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow];
+      const peers = recs.filter(r => r && r.day_name === dayShort && r.date !== selectedDateStr && (r.actual_revenue || 0) >= 1500).map(r => r.actual_revenue).sort((x, y) => x - y);
+      const median = peers.length >= 3 ? (peers.length % 2 ? peers[(peers.length - 1) / 2] : (peers[peers.length / 2 - 1] + peers[peers.length / 2]) / 2) : null;
+      const cal = Array.isArray(P.calendar_events) ? P.calendar_events.find(e => e && e.date === selectedDateStr) : null;
+      if (demandVal) {
+        if (rec && (rec.actual_revenue || 0) > 0 && median) demandVal.textContent = `${(rec.actual_revenue / median).toFixed(2)}x a typical ${dayLong} ($${Math.round(rec.actual_revenue).toLocaleString()} sold)`;
+        else if (rec && (rec.actual_revenue || 0) > 0) demandVal.textContent = `$${Math.round(rec.actual_revenue).toLocaleString()} sold`;
+        else demandVal.textContent = dow === 1 ? 'Closed (Monday)' : 'No sales recorded';
       }
+      if (eventVal) eventVal.textContent = cal ? cal.title : 'No event on the calendar';
+      if (weatherVal) weatherVal.textContent = 'Not recorded for past days';
     } else {
       histCard.style.display = 'none';
     }
@@ -245,7 +244,7 @@
       const defaultSelloutLayout = {
         height: mobile ? 300 : 340,
         title: {
-          text: mobile ? 'Sell-Out Depletion Curve' : 'Hourly Smoked Meat Inventory Depletion & Cushion Curve (11 AM – 9 PM)',
+          text: mobile ? 'Sell-Out Depletion Curve' : 'Hourly Smoked Meat Inventory Depletion (11 AM – 9 PM)',
           font: { size: mobile ? 11 : 13, color: '#f8fafc', family: 'Inter, system-ui, sans-serif' }
         },
         paper_bgcolor: 'rgba(0,0,0,0)',
@@ -256,6 +255,8 @@
         legend: { orientation: 'h', y: -0.24, x: 0 },
         margin: mobile ? { l: 38, r: 20, t: 36, b: 56 } : { l: 52, r: 30, t: 44, b: 64 }
       };
+
+      defaultSelloutLayout.height = global.fitChartHeight(defaultSelloutLayout.height); // landscape phones: fit the short screen
 
       const hasPayloadChart = payload.sell_out_prediction_chart && Array.isArray(payload.sell_out_prediction_chart.data) && payload.sell_out_prediction_chart.data.length > 0;
       const sTraces = hasPayloadChart ? JSON.parse(JSON.stringify(payload.sell_out_prediction_chart.data)) : defaultSelloutTraces;
@@ -332,7 +333,7 @@
     const noteP = document.getElementById('drawer-event-note');
 
     if (dateSpan) dateSpan.textContent = formattedDate;
-    if (badgeSpan) badgeSpan.textContent = `${evt.multiplier || 1.0}x Demand Multiplier`;
+    if (badgeSpan) badgeSpan.textContent = (evt.multiplier && evt.multiplier !== 1) ? `${evt.multiplier}x Demand Multiplier` : 'No measured sales lift';
     if (titleP) titleP.textContent = `${evt.icon || ''} ${evt.title}`.trim();
     if (noteP) noteP.textContent = evt.note || 'Standard operational pace.';
 
@@ -405,22 +406,38 @@
     refreshEventsCalendar();
   }
 
+  // Keep only event types with a usable multiplier (a tiny or negative sample, e.g. a refund-only holiday, is not a result),
+  // and build the Peak/Low/Now badge text from what is actually plotted.
+  function sanitizeEventTraces(traces) {
+    const t = traces && traces[0];
+    if (!t || !Array.isArray(t.x) || !Array.isArray(t.y)) return { traces, labels: ['No event data yet', 'No event data yet', 'Normal Day (1.0x)'] };
+    const keep = t.y.map((v, i) => (typeof v === 'number' && Number.isFinite(v) && v > 0.1 ? i : -1)).filter(i => i >= 0);
+    const pick = arr => (Array.isArray(arr) ? keep.map(i => arr[i]) : arr);
+    t.x = pick(t.x); t.y = pick(t.y); t.text = t.y.map(v => `${v.toFixed(2)}x`); t.hovertext = pick(t.hovertext);
+    if (t.marker && Array.isArray(t.marker.color)) t.marker.color = pick(t.marker.color);
+    const entries = t.x.map((name, i) => ({ name, y: t.y[i] }));
+    const label = e => (e ? `${e.name} (${e.y.toFixed(2)}x)` : 'n/a');
+    const top = entries.reduce((a, b) => (b.y > a.y ? b : a), entries[0]);
+    const low = entries.reduce((a, b) => (b.y < a.y ? b : a), entries[0]);
+    return { traces, labels: [label(top), label(low), label(entries.find(e => e.name === 'Normal Day') || entries[0])] };
+  }
+
   async function renderPlotlyEventChart() {
     const container = document.getElementById('plotly-event-impact-chart');
     if (!container) return;
 
     const defaultEventTraces = [{
-      x: ['Normal Day', 'State/Federal Holiday', 'Jaguars Game Day'],
-      y: [1.0, 0.9, 3.5],
+      x: ['Normal Day'],
+      y: [1.0],
       type: 'bar',
-      marker: { color: ['#7f8c8d', '#e67e22', '#006778'], opacity: 0.9 },
-      text: ['1.0x', '0.9x', '3.5x'],
+      marker: { color: ['#7f8c8d'], opacity: 0.9 },
+      text: ['1.0x'],
       textposition: 'auto'
     }];
 
     const defaultEventLayout = {
-      height: global.isMobileViewport() ? 300 : 340,
-      title: global.isMobileViewport() ? 'Event Revenue Multipliers' : 'Demand Surge Multipliers: Local Events vs. Normal Operations',
+      height: global.fitChartHeight(global.isMobileViewport() ? 300 : 340),
+      title: global.isMobileViewport() ? 'Event Revenue Multipliers' : 'Sales on Event Days vs. Normal Days',
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(20,20,30,0.6)',
       font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 11 },
@@ -436,7 +453,8 @@
       }
       if (payload && payload.plotly_event_chart) {
         const layout = JSON.parse(JSON.stringify(payload.plotly_event_chart.layout || defaultEventLayout));
-        const traces = JSON.parse(JSON.stringify(payload.plotly_event_chart.data || defaultEventTraces));
+        const cleaned = sanitizeEventTraces(JSON.parse(JSON.stringify(payload.plotly_event_chart.data || defaultEventTraces)));
+        const traces = cleaned.traces;
         layout.height = global.isMobileViewport() ? 300 : 340;
         layout.plot_bgcolor = 'rgba(0,0,0,0)';
         layout.paper_bgcolor = 'rgba(0,0,0,0)';
@@ -457,6 +475,7 @@
           layout.yaxis.gridcolor = '#334155';
           layout.yaxis.zerolinecolor = '#334155';
           layout.yaxis.color = '#94a3b8';
+          if (global.isMobileViewport()) layout.yaxis.title = { text: 'Multiplier vs normal day', font: { size: 10, color: '#94a3b8' } };
         }
         if (typeof Plotly !== 'undefined') {
           Plotly.newPlot('plotly-event-impact-chart', traces, layout, global.getPlotlyConfig());
@@ -465,7 +484,7 @@
           }
           global.applyChartTouchSafety(container);
           if (typeof global.injectMobileFaceCallouts === 'function') {
-            global.injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
+            global.injectMobileFaceCallouts(container, cleaned.labels[0], cleaned.labels[1], cleaned.labels[2]);
           }
         }
         refreshEventsCalendar();
@@ -482,7 +501,7 @@
       }
       global.applyChartTouchSafety(container);
       if (typeof global.injectMobileFaceCallouts === 'function') {
-        global.injectMobileFaceCallouts(container, 'Jaguars Game (3.5x Sales)', 'Holiday (0.9x Sales)', 'Normal Day (1.0x)');
+        global.injectMobileFaceCallouts(container, 'Normal Day (1.0x)', 'Normal Day (1.0x)', 'Normal Day (1.0x)');
       }
     }
     refreshEventsCalendar();
@@ -512,7 +531,7 @@
     ];
 
     const defaultWeatherLayout = {
-      height: global.isMobileViewport() ? 300 : 340,
+      height: global.fitChartHeight(global.isMobileViewport() ? 300 : 340),
       title: global.isMobileViewport() ? 'Weather vs. Sales Impact' : 'How Weather Affects Daily Sales (Temperature & Rain)',
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(20,20,30,0.6)',
@@ -693,6 +712,8 @@
   async function renderPlotlyPredictiveChart() {
     const chartElem = document.getElementById('plotly-predictive-velocity-chart');
     if (!chartElem) return;
+    // Plotly sizes to 0px inside a hidden container; the subtab click handler re-renders once it is visible.
+    if (chartElem.offsetParent === null) return;
 
     let payload = global.BBQ_PAYLOADS?.predictive_payload || null;
     if (!payload && typeof global.fetchJsonSafe === 'function') {
@@ -709,7 +730,7 @@
     let activeForecast = payload.hourly_forecast;
     let activeDirectives = payload.operational_directives;
     let activeKpis = payload.summary_kpis;
-    let chartTitle = '24-Hour Real-Time Sales Pace & Smoked Meat Draw';
+    let chartTitle = '24-Hour Order Pace & Smoked Meat Draw';
     let currentDayName = '';
 
     if (payload.day_profiles && startDateVal) {
@@ -743,7 +764,7 @@
             pitmaster_hours: profile.pitmaster_hours,
             average_ticket_usd: profile.average_ticket_usd
           };
-          chartTitle = `${dayName} Hourly Sales Pace & Smoked Meat Draw (${startDateVal})`;
+          chartTitle = `${dayName} Hourly Sales & Smoked Meat Draw (${startDateVal})`;
         }
       } else {
         const rangeHours = [];
@@ -782,7 +803,7 @@
 
         if (rangeHours.length > 0) {
           activeForecast = rangeHours;
-          const avgFoodCost = totalRev > 0 ? (totalCogs / totalRev * 100).toFixed(1) : '29.5';
+          const avgFoodCost = totalRev > 0 ? (totalCogs / totalRev * 100).toFixed(1) : null;
           activeKpis = {
             current_sales_velocity: `${maxOrders.toFixed(1)} orders/hr (Peak)`,
             pacing_status: maxOrders >= 10.0 ? 'Heavy Rush Surge' : 'Normal Pacing',
@@ -798,7 +819,7 @@
             'Weather / Service Action: In high humidity (>85%) or rain (>5mm), stage additional takeout packaging; walk-in dine-in will drop ~15% into to-go family packs.',
             'Smoker Pacing: Balance smoke pit reload intervals to maintain continuous hot holding capacity.'
           ];
-          chartTitle = `${daysCount}-Day Hourly Sales Pace & Smoked Meat Draw (${startDateVal} to ${endDateVal})`;
+          chartTitle = `${daysCount}-Day Hourly Sales & Smoked Meat Draw (${startDateVal} to ${endDateVal})`;
         }
       }
     }
@@ -814,10 +835,11 @@
     const hasActiveBlendedKPIs = Boolean(velBlendedPill && velBlendedPill.style.display === 'block' && velBlendedPill.innerHTML.trim() !== '');
 
     if (activeKpis) {
-      if (kpiFoodCost) kpiFoodCost.textContent = `${activeKpis.estimated_food_cost_pct || 29.5}%`;
+      // Est. Meat Cost % (#kpi-food-cost-pct) is written only by app.js from the day's batch cost / projected sales,
+      // so it updates whichever subtab is open.
       if (!hasActiveBlendedKPIs) {
-        if (kpiVelocity) kpiVelocity.textContent = activeKpis.current_sales_velocity || '--';
-        if (kpiPacing) kpiPacing.textContent = `(${activeKpis.pacing_status || 'Normal'})`;
+        if (kpiVelocity) kpiVelocity.textContent = '--';
+        if (kpiPacing) kpiPacing.textContent = (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') ? '(Closed)' : '(No sales yet)';
         if (kpiAov) {
           if (activeKpis.pacing_status === 'Closed' || activeKpis.current_sales_velocity === '0 orders/hr (Closed)') {
             kpiAov.textContent = '$0.00';
@@ -829,15 +851,6 @@
           }
         }
       }
-    }
-
-    const directivesList = document.getElementById('predictive-directives-list');
-    if (directivesList && Array.isArray(activeDirectives)) {
-      const safeDirectives = activeDirectives.map(d => global.escapeHTML(d));
-      if (activeKpis && activeKpis.recommended_staff !== undefined && activeKpis.pitmaster_hours !== undefined) {
-        safeDirectives.push(`Labor &amp; Shift Coverage: Recommended roster of <strong>${global.escapeHTML(activeKpis.recommended_staff)} crew members</strong> (~${global.escapeHTML(activeKpis.pitmaster_hours)} total kitchen/pit hours at 8.5h shift) to cover peak throughput.`);
-      }
-      directivesList.innerHTML = safeDirectives.map(d => `<li style="margin-bottom: 4px;">${d}</li>`).join('');
     }
 
     const velocitySummaryElem = document.getElementById('predictive-velocity-summary');
@@ -982,16 +995,16 @@
 
     const mobile = global.isMobileViewport();
     const layout = {
-      height: mobile ? 300 : 340,
+      height: global.fitChartHeight(mobile ? 360 : 340),
       title: {
-        text: mobile ? (currentDayName ? `${currentDayName} Hourly Sales Pace & Meat Draw` : 'Hourly Sales Pace & Meat Draw') : chartTitle,
+        text: mobile ? (currentDayName ? `${currentDayName} Hourly Sales & Meat Draw` : 'Hourly Sales & Meat Draw') : chartTitle,
         font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: mobile ? 11 : 13 }
       },
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(15,23,42,0.45)',
       font: { color: '#f8fafc', family: 'Inter, system-ui, sans-serif', size: 10 },
       xaxis: { showgrid: false, zeroline: false, tickangle: -45 },
-      yaxis: { title: mobile ? 'Pace (Orders/hr)' : 'Hourly Sales Pace (Orders/hr)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
+      yaxis: { title: mobile ? 'Orders/hr' : 'Hourly Orders (per hour)', gridcolor: 'rgba(148,163,184,0.12)', zeroline: false },
       yaxis2: {
         title: mobile ? 'Brisket (lbs/hr)' : 'Cooked Brisket Used (lbs/hr)',
         overlaying: 'y',
@@ -1002,8 +1015,8 @@
         tickfont: { color: '#E69F00' }
       },
       annotations: mobileAnnotations,
-      legend: { orientation: 'h', y: -0.22, x: 0 },
-      margin: mobile ? { l: 38, r: 38, t: 36, b: 56 } : { l: 50, r: 50, t: 42, b: 64 }
+      legend: { orientation: 'h', y: mobile ? -0.62 : -0.22, x: 0 },
+      margin: mobile ? { l: 38, r: 38, t: 36, b: 104 } : { l: 50, r: 50, t: 42, b: 64 }
     };
 
     if (typeof Plotly !== 'undefined') {
@@ -1036,6 +1049,7 @@
 
     function updateSimulatorUI() {
       if (!global.ShopTime) return;
+      if (slider) slider.dataset.previewing = '';
       const isSim = global.ShopTime.isSimulating();
       const effNow = global.ShopTime.getEffectiveNow();
       const currentHour = global.ShopTime.shopHour(effNow);
@@ -1084,7 +1098,19 @@
     }
 
     if (slider) {
+      // Commit on release ('change'), not on every drag tick, so a vertical swipe that grazes
+      // the slider while scrolling never triggers a chart re-render or time jump.
+      // While dragging, show a preview in the label only; nothing re-renders until release.
       slider.addEventListener('input', (e) => {
+        slider.dataset.previewing = '1';
+        const ph = parseInt(e.target.value, 10);
+        const ph12 = ph === 0 ? 12 : (ph > 12 ? ph - 12 : ph);
+        if (currentLabel) currentLabel.innerHTML = `Preview: <strong>${ph12}:00 ${ph >= 12 ? 'PM' : 'AM'} EST</strong> (release to apply)`;
+      });
+      // If the drag ends on the starting value no 'change' fires; put the real clock label back.
+      const restoreLabel = () => setTimeout(() => { if (slider.dataset.previewing === '1') updateSimulatorUI(); }, 120);
+      ['pointerup', 'touchend', 'keyup', 'blur'].forEach(evt => slider.addEventListener(evt, restoreLabel));
+      slider.addEventListener('change', (e) => {
         const h = parseInt(e.target.value, 10);
         setSimHour(h);
       });
@@ -1116,6 +1142,181 @@
     }
 
     updateSimulatorUI();
+    hydrateSubtabStatCards();
+    hydrateExplainerLines();
+    startHourlyRefresh();
+  }
+
+
+  // Summary cards at the top of each subtab, filled from the same payloads the charts use.
+  function hydrateSubtabStatCards() {
+    const P = global.BBQ_PAYLOADS || {};
+    const fin = x => typeof x === 'number' && Number.isFinite(x);
+    const money = n => '$' + Math.round(n).toLocaleString();
+    const signedPct = (v, ref) => (fin(v) && fin(ref) && ref > 0) ? ((v - ref) / ref >= 0 ? '+' : '') + (Math.round((v - ref) / ref * 1000) / 10) + '%' : '--';
+    const hourLabel = h => `${h === 0 ? 12 : (h > 12 ? h - 12 : h)}:00 ${h >= 12 ? 'PM' : 'AM'} EST`;
+    const setStat = (key, kicker, val, sub) => {
+      const el = document.querySelector(`[data-stat="${key}"]`);
+      if (!el) return;
+      if (kicker) el.querySelector('.subtab-stat-kicker').textContent = kicker;
+      el.querySelector('.subtab-stat-val').textContent = val;
+      el.querySelector('.subtab-stat-sub').textContent = sub;
+    };
+    const none = (key, kicker) => setStat(key, kicker, '--', 'Not enough sales data yet');
+
+    // Weekday sales history (index 0 = Monday, closed). Averages per hour and per day from real POS buckets.
+    const base = P.hourly_actuals && P.hourly_actuals.weekday_baseline;
+    const open = [];
+    if (base) {
+      for (let d = 1; d <= 6; d++) {
+        const b = base[String(d)];
+        if (b && b.n > 0 && Array.isArray(b.sales_sum) && b.sales_sum.length === 24) open.push({ d, n: b.n, sum: b.sales_sum.map(v => Number(v) || 0) });
+      }
+    }
+    if (open.length) {
+      const totalDays = open.reduce((s, o) => s + o.n, 0);
+      const hourAvg = Array.from({ length: 24 }, (_, h) => open.reduce((s, o) => s + o.sum[h], 0) / totalDays);
+      const argmax = (lo, hi) => { let best = lo; for (let h = lo; h <= hi; h++) if (hourAvg[h] > hourAvg[best]) best = h; return best; };
+      const dayAvgOf = o => o.sum.reduce((a, b) => a + b, 0) / o.n;
+      const peak = argmax(0, 23), lunch = argmax(10, 15), dinner = argmax(16, 20);
+      const busyHours = hourAvg.filter(v => v >= hourAvg[peak] * 0.05).length;
+      const openDayAvg = open.reduce((s, o) => s + dayAvgOf(o) * o.n, 0) / totalDays;
+      setStat('peak-hour', 'Busiest Hour', hourLabel(peak), `${money(hourAvg[peak])} average sales that hour`);
+      setStat('hourly-avg', 'Average Sales Per Busy Hour', money(openDayAvg / busyHours), `${busyHours} busy hours in a typical day`);
+      setStat('open-day-avg', 'Average Open Day', money(openDayAvg), `Tue–Sun, ${totalDays} days of sales`);
+      const mid = open.filter(o => o.d >= 1 && o.d <= 3), wk = open.filter(o => o.d >= 4);
+      const grp = g => g.length ? g.reduce((s, o) => s + dayAvgOf(o) * o.n, 0) / g.reduce((s, o) => s + o.n, 0) : null;
+      setStat('midweek-weekend', 'Midweek vs Weekend', (grp(mid) !== null && grp(wk) !== null) ? `${money(grp(mid))} vs ${money(grp(wk))}` : '--', 'Tue–Thu vs Fri–Sun average');
+      setStat('lunch-peak', 'Lunch Peak', hourLabel(lunch), `${money(hourAvg[lunch])} average sales that hour`);
+      setStat('dinner-peak', 'Dinner Peak', hourLabel(dinner), `${money(hourAvg[dinner])} average sales that hour`);
+      let drop = null;
+      for (let h = dinner + 1; h < 24; h++) if (hourAvg[h] < hourAvg[dinner] * 0.25) { drop = h; break; }
+      setStat('dropoff', 'Sales Drop-Off', drop === null ? '--' : hourLabel(drop), 'Under a quarter of dinner-peak sales');
+      const todayStr = global.ShopTime ? global.ShopTime.shopDateStr() : new Date().toLocaleDateString('en-CA');
+      const dow = (new Date(todayStr + 'T12:00:00').getDay() + 6) % 7;
+      const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const today = open.find(o => o.d === dow);
+      if (dow === 0) setStat('typical-day', 'Today', 'Closed', 'Monday, pit maintenance');
+      else if (today) setStat('typical-day', `Typical ${dayNames[dow]}`, money(dayAvgOf(today)), `Average of ${today.n} past ${dayNames[dow]}s`);
+      else none('typical-day', `Typical ${dayNames[dow]}`);
+    } else {
+      ['peak-hour', 'hourly-avg', 'open-day-avg', 'midweek-weekend', 'lunch-peak', 'dinner-peak', 'dropoff', 'typical-day'].forEach(k => none(k));
+    }
+
+    const ws = P.weather_payload && P.weather_payload.weather_stats;
+    if (ws) {
+      setStat('rain-days', 'Rainy Days', signedPct(ws.rain_avg_usd, ws.normal_avg_usd), `${money(ws.rain_avg_usd)} vs ${money(ws.normal_avg_usd)} on a normal day`);
+      setStat('heat-days', 'Hot Days (over 90°F)', signedPct(ws.heat_avg_usd, ws.normal_avg_usd), `${money(ws.heat_avg_usd)} vs ${money(ws.normal_avg_usd)} on a normal day`);
+    } else { none('rain-days'); none('heat-days'); }
+
+    const adv = P.advanced_payload;
+    const im = adv && adv.interaction_modeling;
+    if (im && fin(im.rain_only)) setStat('rain-game', 'Rain Day, No Game', money(im.rain_only), `vs ${money(im.normal)} on a normal day`);
+    else none('rain-game');
+    if (im && fin(im.game_and_rain)) setStat('game-rain', 'Game Day + Rain', money(im.game_and_rain), `vs ${money(im.normal)} on a normal day`);
+    else none('game-rain');
+    const cn = adv && adv.cannibalization;
+    if (cn && fin(cn.impact_pct)) setStat('dino-shift', 'Dino vs Pork Rib Shift', `${cn.impact_pct > 0 ? '+' : ''}${cn.impact_pct}% Pork Ribs`, `${cn.pork_ribs_avg_without_dino} → ${cn.pork_ribs_avg_with_dino} racks on Dino days`);
+    else none('dino-shift');
+    const seg = adv && Array.isArray(adv.order_type_segmentation) ? adv.order_type_segmentation.filter(s => fin(s.avg_ticket)) : [];
+    if (seg.length) {
+      const top = seg.reduce((a, b) => (b.avg_ticket > a.avg_ticket ? b : a));
+      const rest = seg.filter(s => s !== top).map(s => `~${money(s.avg_ticket)} ${s.order_type}`).join(' • ');
+      setStat('channel-aov', 'Highest Average Ticket', `~${money(top.avg_ticket)} ${top.order_type}`, rest);
+    } else none('channel-aov');
+
+    const es = P.event_payload && P.event_payload.event_stats;
+    // Event effect is always the same-weekday multiplier (game days fall on busy weekends, so raw averages mislead).
+    const multPct = m => (fin(m) ? (m >= 1 ? '+' : '') + (Math.round((m - 1) * 1000) / 10) + '%' : null);
+    if (es && fin(es.jags_multiplier)) setStat('jags', 'Jaguars Home Games', multPct(es.jags_multiplier), `vs a normal day of the same weekday, ${es.jags_days} game days`);
+    else if (es) setStat('jags', 'Jaguars Home Games', '--', 'Not enough game days with sales yet');
+    else none('jags');
+    const cal = Array.isArray(P.calendar_events) ? P.calendar_events : [];
+    const todayKey = global.ShopTime ? global.ShopTime.shopDateStr() : new Date().toLocaleDateString('en-CA');
+    const upcoming = cal.filter(e => e && e.date >= todayKey).sort((x, y) => (x.date < y.date ? -1 : 1));
+    if (upcoming.length) {
+      const nx = upcoming[0];
+      setStat('next-event', 'Next Local Event', nx.title, `${nx.date} • ${nx.multiplier && nx.multiplier !== 1 ? nx.multiplier + 'x expected sales' : 'no measured sales lift'}`);
+      const limit = new Date(todayKey + 'T12:00:00'); limit.setDate(limit.getDate() + 14);
+      const limitKey = limit.toLocaleDateString('en-CA');
+      setStat('events-ahead', 'Events In The Next 14 Days', String(upcoming.filter(e => e.date <= limitKey).length), 'On the local events calendar');
+    } else { none('next-event', 'Next Local Event'); none('events-ahead', 'Events In The Next 14 Days'); }
+  }
+
+  // Explainer lines under each subtab: the same payload numbers as the cards, never typed-in values.
+  function hydrateExplainerLines() {
+    const P = global.BBQ_PAYLOADS || {};
+    const fin = x => typeof x === 'number' && Number.isFinite(x);
+    const money = n => '$' + Math.round(n).toLocaleString();
+    const pct = (v, ref) => (fin(v) && fin(ref) && ref > 0) ? ((v - ref) / ref >= 0 ? '+' : '') + (Math.round((v - ref) / ref * 1000) / 10) + '%' : null;
+    const put = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    const ws = P.weather_payload && P.weather_payload.weather_stats;
+    const es = P.event_payload && P.event_payload.event_stats;
+    const adv = P.advanced_payload || {};
+    const nodata = 'Not enough sales data yet.';
+
+    put('live-rain-line', ws && pct(ws.rain_avg_usd, ws.normal_avg_usd) ? `Average ${money(ws.rain_avg_usd)} vs ${money(ws.normal_avg_usd)} on a normal day (${pct(ws.rain_avg_usd, ws.normal_avg_usd)}).` : nodata);
+    put('live-heat-line', ws && pct(ws.heat_avg_usd, ws.normal_avg_usd) ? `Average ${money(ws.heat_avg_usd)} vs ${money(ws.normal_avg_usd)} on a normal day (${pct(ws.heat_avg_usd, ws.normal_avg_usd)}).` : nodata);
+    put('live-jags-line', es && fin(es.jags_multiplier)
+      ? `${es.jags_multiplier}x a normal day of the same weekday across ${es.jags_days} game days${es.jags_applied_multiplier === 1 ? ' (inside normal day-to-day swings, so no prep change)' : ''}.` : 'Not enough game days with sales yet.');
+
+    const cal = Array.isArray(P.calendar_events) ? P.calendar_events : [];
+    const range = cat => { const m = cal.filter(e => e && e.category === cat && fin(e.multiplier) && e.multiplier > 0).map(e => e.multiplier); return m.length ? { lo: Math.min(...m), hi: Math.max(...m), n: m.length } : null; };
+    const fmtRange = (r, noun) => r ? (r.lo === 1 && r.hi === 1 ? `No measured sales lift; planned at 1.0x across ${r.n} ${noun}${r.n === 1 ? '' : 's'}.` : `Planned at ${r.lo === r.hi ? r.lo + 'x' : r.lo + 'x–' + r.hi + 'x'} across ${r.n} ${noun}${r.n === 1 ? '' : 's'}.`) : 'None on the calendar.';
+    const flga = cal.find(e => e && /georgia/i.test(e.title || ''));
+    put('live-flga-line', flga ? `${flga.date}: ${flga.multiplier && flga.multiplier !== 1 ? 'planned at ' + flga.multiplier + 'x' : 'no measured sales lift for this event type (planned at 1.0x)'}.` : 'None on the calendar.');
+    put('live-concert-line', fmtRange(range('concert'), 'concert'));
+    put('live-baseball-line', fmtRange(range('baseball'), 'home game'));
+    [['jaguars', 'Stadium', '🏈'], ['concert', 'Concerts', '🎸'], ['baseball', 'Baseball', '⚾']].forEach(([cat, name, icon]) => {
+      const btn = document.querySelector(`.cal-filter-btn[data-filter="${cat}"]`);
+      const r = range(cat);
+      if (btn) btn.textContent = (r && !(r.lo === 1 && r.hi === 1)) ? `${icon} ${name} (${r.lo === r.hi ? r.lo + 'x' : r.lo + 'x–' + r.hi + 'x'})` : `${icon} ${name}`;
+    });
+
+    const cn = adv.cannibalization;
+    put('live-dino-line', cn && fin(cn.impact_pct) ? `Serving Beef Dino Ribs trims Pork Spare Rib demand from ${cn.pork_ribs_avg_without_dino} to ${cn.pork_ribs_avg_with_dino} racks (${cn.impact_pct}%).` : nodata);
+    const seg = Array.isArray(adv.order_type_segmentation) ? adv.order_type_segmentation.filter(x => fin(x.avg_ticket)).sort((a, b) => b.avg_ticket - a.avg_ticket) : [];
+    put('live-channel-line', seg.length ? `Average ticket by order type: ${seg.map(x => `${x.order_type} ~${money(x.avg_ticket)}`).join(', ')}.` : nodata);
+    const im = adv.interaction_modeling;
+    put('live-weather-stadium-line', ws && im && fin(im.game_and_rain) ? `Rainy days average ${money(ws.rain_avg_usd)}${es && fin(es.jags_avg_usd) ? `, Jaguars game days ${money(es.jags_avg_usd)}` : ''}, game days in rain ${money(im.game_and_rain)}.` : nodata);
+    const pd = adv.payday_effect;
+    put('live-payday-line', pd && fin(pd.payday_avg_ticket) ? `Payday checks average $${pd.payday_avg_ticket.toFixed(2)} vs $${pd.normal_avg_ticket.toFixed(2)} on a standard day.` : nodata);
+  }
+
+  global.hydrateSubtabStatCards = hydrateSubtabStatCards;
+  global.hydrateExplainerLines = hydrateExplainerLines;
+
+  // Once per shop hour (live mode only): pull fresh payload JSON and redraw the hourly chart.
+  function startHourlyRefresh() {
+    if (!global.ShopTime || global.__hourlyRefreshStarted) return;
+    global.__hourlyRefreshStarted = true;
+    let lastHour = global.ShopTime.shopHour(new Date());
+    const files = {
+      predictive_payload: 'predictive_payload.json',
+      hourly_actuals: 'hourly_actuals.json',
+      forecast_snapshots: 'forecast_snapshots.json'
+    };
+    setInterval(async () => {
+      if (global.ShopTime.isSimulating()) return;
+      const hour = global.ShopTime.shopHour(new Date());
+      if (hour === lastHour) return;
+      lastHour = hour;
+      if (!global.BBQ_PAYLOADS || typeof global.fetchJsonSafe !== 'function') return;
+      let gotFresh = false;
+      for (const key of Object.keys(files)) {
+        const fresh = await global.fetchJsonSafe('clover_api/analytics/' + files[key] + '?v=' + Date.now(), null, 4000);
+        if (fresh) { global.BBQ_PAYLOADS[key] = fresh; gotFresh = true; }
+      }
+      if (!gotFresh) return; // offline or fetch failed: keep what is on screen, redraw next hour
+      hydrateSubtabStatCards();
+      hydrateExplainerLines();
+      // renderPlotlyForecastingChart also recomputes the KPI tiles, projected total and pace pill, so it must run
+      // whichever subtab is open (updateSimulatorUI calls it the same way).
+      if (typeof global.renderPlotlyForecastingChart === 'function') {
+        global.renderPlotlyForecastingChart(global.getActiveDaysCount());
+      }
+      renderPlotlyPredictiveChart();
+    }, 60000);
   }
 
   // Expose on global and BBQModules.forecaster

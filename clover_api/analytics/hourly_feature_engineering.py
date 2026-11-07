@@ -13,6 +13,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DB_PATH = BASE_DIR / "clover_api" / "data" / "clover_sales.db"
 SHIFT_PAYLOAD = BASE_DIR / "clover_api" / "analytics" / "shift_payload.json"
+HOURLY_ACTUALS = BASE_DIR / "clover_api" / "analytics" / "hourly_actuals.json"
 
 DAYS_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
@@ -22,7 +23,17 @@ def load_hourly_baseline_series():
     Utilizes shift_payload.json (derived from aggregated POS line items & orders).
     """
     hourly_records = []
-    
+
+    # Real POS history per weekday/hour (orders and dollars). The shift heatmap undercounts orders
+    # by 1.1-2.4x, so it is only the fallback for a weekday with no history.
+    real = {}
+    if HOURLY_ACTUALS.exists():
+        try:
+            with open(HOURLY_ACTUALS, 'r') as f:
+                real = json.load(f).get("weekday_baseline", {}) or {}
+        except (OSError, ValueError):
+            real = {}
+
     if SHIFT_PAYLOAD.exists():
         with open(SHIFT_PAYLOAD, 'r') as f:
             data = json.load(f)
@@ -38,6 +49,12 @@ def load_hourly_baseline_series():
                     current_date = base_monday + datetime.timedelta(days=d_idx)
                     for h_idx in range(len(hours)):
                         avg_orders = z_matrix[d_idx][h_idx] if d_idx < len(z_matrix) and h_idx < len(z_matrix[d_idx]) else 0.0
+                        avg_sales = None
+                        base = real.get(str(d_idx))
+                        if (base and base.get("n", 0) > 0 and len(base.get("orders_sum", [])) == 24
+                                and len(base.get("sales_sum", [])) == 24 and day_name != "Monday"):
+                            avg_orders = base["orders_sum"][h_idx] / base["n"]
+                            avg_sales = base["sales_sum"][h_idx] / base["n"]
                         dt = datetime.datetime.combine(current_date, datetime.time(h_idx, 0))
                         hourly_records.append({
                             "timestamp": dt.isoformat(),
@@ -46,6 +63,7 @@ def load_hourly_baseline_series():
                             "day_of_week": d_idx,
                             "hour": h_idx,
                             "avg_orders": float(avg_orders),
+                            "avg_sales_usd": avg_sales,
                             "is_closed": 1 if day_name == "Monday" else 0
                         })
     return hourly_records
@@ -79,14 +97,12 @@ def build_feature_engineered_dataset(records=None):
         # 4. Estimated sales revenue and meat draw
         # Average ticket is approx $48.50 at Yellow Rose BBQ
         orders = r["avg_orders"]
-        est_revenue = round(orders * 48.50, 2)
+        # Real average sales for this weekday/hour when POS history exists; else orders x average ticket.
+        est_revenue = round(r["avg_sales_usd"], 2) if r.get("avg_sales_usd") is not None else round(orders * 48.50, 2)
         
         # Draw rates: each order consumes ~0.45 lbs cooked meat equivalent (yielding 1.1 lbs raw meat draw)
         cooked_meat_lbs = round(orders * 0.45, 2)
         raw_meat_prep_lbs = round(cooked_meat_lbs / 0.40, 2)
-        
-        # Wholesale Food Cost (approx 29.5% food cost ratio)
-        est_food_cost_usd = round(est_revenue * 0.295, 2)
         
         # 5. Rush Classification
         if orders >= 7.0:
@@ -108,7 +124,6 @@ def build_feature_engineered_dataset(records=None):
             "est_revenue_usd": est_revenue,
             "cooked_meat_depleted_lbs": cooked_meat_lbs,
             "raw_meat_draw_lbs": raw_meat_prep_lbs,
-            "est_food_cost_usd": est_food_cost_usd,
             "rush_status": rush_status
         })
         enriched.append(feature_row)

@@ -84,8 +84,8 @@ def build_payloads():
     cogs = sk.get("estimated_24h_cogs_usd", 0)
     staff = sk.get("recommended_staff", 0)
     hours = sk.get("pitmaster_hours", 0)
-    fc = sk.get("estimated_food_cost_pct", 29.5)
-    msg = f"COGS: ${cogs:,.2f} ({fc}%) | Labor: {staff} crew ({hours}h)" if cogs else "Live POS & Analytics Data Synchronized"
+    fc = sk.get("estimated_food_cost_pct")
+    msg = f"Est. Meat Cost: ${cogs:,.2f} ({fc if fc is not None else '--'}% of sales)" if cogs else "Live POS & Analytics Data Synchronized"
 
     status = {
         "last_synced_at": now_ny.isoformat(),

@@ -15,6 +15,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from clover_api.secure_config import DB_PATH, ANALYTICS_DIR
+from clover_api.analytics.food_cost_engine import batch_meat_cost, meat_cost_pct
 
 
 def get_dynamic_baseline_revenue() -> float:
@@ -169,11 +170,18 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
             staff_count = min(5, max(2, int(base_revenue // 1000) + 1))
             pit_hours = round(staff_count * 8.5, 1)
 
+        batch_cost = batch_meat_cost(
+            brisket_raw_lbs=brisket_raw_lbs, pork_raw_lbs=pork_lbs, turkey_raw_lbs=turkey_target_raw,
+            sausage_lbs=sausage_lbs, rib_racks=pork_ribs_racks, dino_ribs=beef_dino_ribs
+        )
+
         records.append({
             "date": date_str,
             "day_name": day_name,
             "is_closed": is_closed,
             "predicted_revenue": round(base_revenue, 2),
+            "estimated_cogs_usd": batch_cost,
+            "estimated_food_cost_pct": meat_cost_pct(batch_cost, base_revenue),
             "brisket_raw_lbs": round(brisket_raw_lbs, 1),
             "pork_shoulder_raw_lbs": round(pork_lbs, 1),
             "sausage_lbs": round(sausage_lbs, 1),

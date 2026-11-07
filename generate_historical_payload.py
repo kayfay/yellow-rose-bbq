@@ -3,6 +3,7 @@ import json
 import os
 from collections import defaultdict
 from datetime import datetime
+from clover_api.analytics.food_cost_engine import record_batch_cost, meat_cost_pct
 
 conn = sqlite3.connect('clover_api/data/clover_sales.db')
 cursor = conn.cursor()
@@ -163,6 +164,13 @@ else:
             r['actual_total_cooked_lbs'] = round(r['actual_brisket_cooked_lbs'] + r['actual_pork_cooked_lbs'], 1)
     except Exception as e:
         print(f"[WARN] Failed to enrich historical records with MultiMeatForecaster: {e}")
+
+    # Batch meat cost per day from raw lbs x invoice price (never revenue x a ratio).
+    for r in combined_records:
+        rev = r.get('actual_revenue', r.get('predicted_revenue', 0)) or 0
+        closed = r.get('day_name') == 'Mon' or rev < 500  # closed or partial days carry floor lbs (40 lb brisket), not real prep; matches insight engine's >500 rule
+        r['estimated_cogs_usd'] = 0.0 if closed else round(record_batch_cost(r), 2)
+        r['estimated_food_cost_pct'] = None if closed else meat_cost_pct(r['estimated_cogs_usd'], rev)
 
     with open(hist_file, 'w', encoding='utf-8') as f:
         json.dump({"historical_records": combined_records}, f, indent=2)
