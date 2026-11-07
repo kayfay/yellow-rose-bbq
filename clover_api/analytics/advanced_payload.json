@@ -2,18 +2,18 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 301,
-      "confidence": 20.3
+      "count": 300,
+      "confidence": 20.2
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 281,
+      "count": 280,
       "confidence": 22.5
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 234,
-      "confidence": 18.8
+      "count": 233,
+      "confidence": 18.7
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
@@ -32,8 +32,8 @@
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-      "count": 111,
-      "confidence": 23.3
+      "count": 110,
+      "confidence": 22.9
     },
     {
       "pair": "Brisket + Mac & Cheese",
@@ -48,11 +48,11 @@
     {
       "pair": "Brisket + Pulled Pork",
       "count": 99,
-      "confidence": 49.0
+      "confidence": 49.3
     }
   ],
   "interaction_modeling": {
-    "normal": 4168.71,
+    "normal": 4174.34,
     "game_only": 4245.02,
     "rain_only": 4128.27,
     "game_and_rain": 4610.73
@@ -60,9 +60,9 @@
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4887,
-      "total_revenue": 210689.94,
-      "avg_ticket": 43.11232658072437
+      "order_count": 4896,
+      "total_revenue": 211277.74,
+      "avg_ticket": 43.15313316993464
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2474,
-      "total_revenue": 151446.22,
-      "avg_ticket": 61.21512530315279
+      "order_count": 2476,
+      "total_revenue": 151241.23,
+      "avg_ticket": 61.082887722132476
     }
   ],
   "sell_out_prediction_chart": {
@@ -483,12 +483,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 2.7,
-    "impact_pct": -49.6
+    "pork_ribs_avg_without_dino": 5.0,
+    "pork_ribs_avg_with_dino": 3.3,
+    "impact_pct": -34.8
   },
   "payday_effect": {
-    "payday_avg_ticket": 44.84,
+    "payday_avg_ticket": 44.78,
     "normal_avg_ticket": 46.02
   }
 }
