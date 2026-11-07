@@ -670,52 +670,32 @@
     ]
   },
   "2026-11-07": {
-    "captured_at": "2026-11-07T12:00:13.127800-05:00",
+    "captured_at": "2026-11-07T16:05:14.364650-05:00",
     "hourly_forecast": [
       {
-        "hour": 12,
-        "predicted_orders": 17.3,
-        "predicted_revenue": 839.05
-      },
-      {
-        "hour": 13,
-        "predicted_orders": 17.5,
-        "predicted_revenue": 848.75
-      },
-      {
-        "hour": 14,
-        "predicted_orders": 12.4,
-        "predicted_revenue": 601.4
-      },
-      {
-        "hour": 15,
-        "predicted_orders": 10.1,
-        "predicted_revenue": 489.85
-      },
-      {
         "hour": 16,
-        "predicted_orders": 9.7,
-        "predicted_revenue": 470.45
+        "predicted_orders": 9.2,
+        "predicted_revenue": 446.2
       },
       {
         "hour": 17,
-        "predicted_orders": 11.8,
-        "predicted_revenue": 572.3
+        "predicted_orders": 11.0,
+        "predicted_revenue": 533.5
       },
       {
         "hour": 18,
-        "predicted_orders": 11.9,
-        "predicted_revenue": 577.15
+        "predicted_orders": 11.1,
+        "predicted_revenue": 538.35
       },
       {
         "hour": 19,
-        "predicted_orders": 6.9,
-        "predicted_revenue": 334.65
+        "predicted_orders": 6.5,
+        "predicted_revenue": 315.25
       },
       {
         "hour": 20,
-        "predicted_orders": 1.8,
-        "predicted_revenue": 87.3
+        "predicted_orders": 1.7,
+        "predicted_revenue": 82.45
       },
       {
         "hour": 21,
