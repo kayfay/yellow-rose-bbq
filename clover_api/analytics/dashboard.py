@@ -199,15 +199,15 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
     # Generate dynamic insight string
     saturday_record = next((r for r in records if r["day_name"] == "Sat"), records[0])
     raw_b = saturday_record['brisket_raw_lbs']
-    cooked_b = round(raw_b * 0.4, 1)
+    cooked_b = round(raw_b * 0.35, 1)
     raw_p = saturday_record['pork_shoulder_raw_lbs']
-    cooked_p = round(raw_p * 0.4, 1)
+    cooked_p = round(raw_p * 0.44, 1)
     total_raw = round(raw_b + raw_p, 1)
     total_cooked = round(cooked_b + cooked_p, 1)
     insight_string = (
         f"The forecast dictates prepping ~{raw_b} lbs raw brisket (~{cooked_b} lbs cooked yield) and "
         f"~{raw_p} lbs raw pork shoulder (~{cooked_p} lbs cooked yield) [~{total_raw} lbs total raw / ~{total_cooked} lbs total cooked meat] for Saturday. "
-        f"Because brisket and pork lose ~60% of their weight during the 14-hour smoke, and composed items like "
+        f"Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like "
         f"Tacos ({int(saturday_record['tacos_sold'])} projected) and Rosebuds ({int(saturday_record['rosebuds_sold'])} projected) "
         f"pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing."
     )

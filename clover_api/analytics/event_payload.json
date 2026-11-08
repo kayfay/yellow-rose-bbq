@@ -4,39 +4,34 @@
       {
         "x": [
           "Normal Day",
-          "State/Federal Holiday",
           "Jaguars Game Day"
         ],
         "y": [
           1.0,
-          -0.02,
-          1.02
+          0.95
         ],
         "type": "bar",
         "marker": {
           "color": [
             "#7f8c8d",
-            "#e67e22",
             "#006778"
           ],
           "opacity": 0.9
         },
         "text": [
-          "1.0x",
-          "-0.0x",
-          "1.0x"
+          "1.00x",
+          "0.95x"
         ],
         "textposition": "auto",
         "hovertext": [
           "Normal Day<br>Action: Standard Prep",
-          "Major Holiday<br>Action: Pre-smoke starting Tuesday. Scale family-style sides.",
-          "Jaguars Home Game<br>Action: Massive Surge. Activate Drive-Thru Express Lane."
+          "Jaguars Home Game<br>Measured against normal days of the same weekday."
         ],
-        "hovertemplate": "<b>%{y:.2f}x Multiplier</b><br>%{hovertext}<extra></extra>"
+        "hovertemplate": "<b>%{y:.2f}x vs a normal day</b><br>%{hovertext}<extra></extra>"
       }
     ],
     "layout": {
-      "title": "Event Action Plan: Expected Revenue Surges",
+      "title": "Event Days vs. Normal Days (Same Weekday)",
       "paper_bgcolor": "rgba(0,0,0,0)",
       "plot_bgcolor": "rgba(20,20,30,0.6)",
       "font": {
@@ -44,11 +39,11 @@
         "family": "Outfit, sans-serif"
       },
       "xaxis": {
-        "title": "Event Type \u2014 Determines Special Menu & Drive-Thru Operations",
+        "title": "Day Type",
         "gridcolor": "rgba(255,255,255,0.1)"
       },
       "yaxis": {
-        "title": "Surge Multiplier vs. Baseline (x) \u2014 Scale Prep Volume Accordingly",
+        "title": "Sales vs. Normal Day (x)",
         "gridcolor": "rgba(255,255,255,0.1)"
       },
       "margin": {
@@ -81,10 +76,15 @@
     }
   },
   "event_stats": {
-    "normal_avg_usd": 4259.11,
-    "jags_avg_usd": 4336.44,
-    "jags_multiplier": 1.0,
-    "holiday_avg_usd": -81.0,
-    "holiday_multiplier": -0.0
+    "normal_avg_usd": 4900.91,
+    "normal_days": 71,
+    "jags_avg_usd": 5271.29,
+    "jags_multiplier": 0.95,
+    "jags_applied_multiplier": 1.0,
+    "jags_days": 7,
+    "holiday_avg_usd": null,
+    "holiday_multiplier": null,
+    "holiday_applied_multiplier": 1.0,
+    "holiday_days": 1
   }
 }

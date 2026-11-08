@@ -6,7 +6,7 @@ Tests:
   1. Historical date lookup (POS actuals).
   2. Present date calculation (today's operations).
   3. Weekend multi-day horizon aggregation (Fri-Sun, 3 days) verifying raw brisket,
-     pork shoulder, cooked yield (40%), sausage batches/links, ribs, dino ribs, and case conversions.
+     pork shoulder, cooked yield (35%), sausage batches/links, ribs, dino ribs, and case conversions.
   4. Single-day projections (Thursday, Friday, Saturday).
   5. Multipliers (Calibrated measured multipliers from calendar_events.json).
   6. Defensive edge cases (empty strings, malformed dates, zero-division resilience).
@@ -77,7 +77,7 @@ def simulate_prep_calculations(records, is_range=False):
     p_val = round(p_raw)
 
     # Yield and sausage math
-    b_cooked = round(b_val * 0.4)
+    b_cooked = round(b_val * 0.35)
     p_cooked = round(p_val * 0.4)
     total_raw = b_val + p_val
     total_cooked = b_cooked + p_cooked
@@ -129,7 +129,7 @@ def test_historical_lookup(hist_records):
     calc = simulate_prep_calculations([matched], is_range=False)
     assert calc['b_val'] == round(matched.get('brisket_raw_lbs', 0))
     assert calc['p_val'] == round(matched.get('pork_shoulder_raw_lbs', 0))
-    assert calc['b_cooked'] == round(matched.get('brisket_raw_lbs', 0) * 0.4)
+    assert calc['b_cooked'] == round(matched.get('brisket_raw_lbs', 0) * 0.35)
     assert calc['p_cooked'] == round(matched.get('pork_shoulder_raw_lbs', 0) * 0.4)
     print(f"  ✓ {known_date} successfully resolved: Actual Rev=${matched['actual_revenue']}, Cooked Brisket={calc['b_cooked']} lbs")
 
@@ -152,8 +152,8 @@ def test_weekend_aggregation():
     assert calc['s_val'] == expected_s_val, f"Sausage sum mismatch: {calc['s_val']} vs {expected_s_val}"
     assert calc['total_rev'] == expected_rev, f"Rev sum mismatch: {calc['total_rev']} vs {expected_rev}"
 
-    # Yield checks (40% recovery)
-    assert calc['b_cooked'] == round(expected_b_raw * 0.4)
+    # Yield checks (35% brisket recovery)
+    assert calc['b_cooked'] == round(expected_b_raw * 0.35)
     assert calc['p_cooked'] == round(expected_p_raw * 0.4)
     assert calc['total_cooked'] == calc['b_cooked'] + calc['p_cooked']
 
@@ -184,7 +184,7 @@ def test_single_day_projections():
         assert calc['b_val'] == round(d['rec']['brisket_raw_lbs'])
         assert calc['p_val'] == round(d['rec']['pork_shoulder_raw_lbs'])
         assert calc['s_val'] == d['rec']['sausage_lbs']
-        assert calc['b_cooked'] == round(calc['b_val'] * 0.4)
+        assert calc['b_cooked'] == round(calc['b_val'] * 0.35)
         print(f"  ✓ {d['name']}: {calc['b_val']} lbs raw brisket ({calc['b_cooked']} lbs cooked), {calc['p_val']} lbs pork, ${calc['total_rev']} rev")
 
 def test_event_multipliers():

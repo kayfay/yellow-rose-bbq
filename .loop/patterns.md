@@ -1,7 +1,7 @@
 # Multi-Meat Forecasting, Executive BI & Smokehouse UX Distillate (<= 40 Lines)
 
 ## 1. Culinary Yield, Case Pack & Unit Conversion Invariants
-- **Brisket**: `Y_net = 0.40` (`~16.4 lb` raw packer (invoice); `5 packers/case = 82 lbs raw`; `2.3` 7-oz portions/cooked lb).
+- **Brisket**: `Y_net = 0.35` (`5.75 lbs` cooked per `~16.4 lb` raw packer (invoice); `5 packers/case = 82 lbs raw`; `2.3` portions/cooked lb).
 - **Pork Butt (Shoulder)**: `Y_net = 0.44` (`~8 lb` bone-in butt; `4 butts/case = 32 lbs raw`; `2.0` 8-oz portions/cooked lb).
 - **Pork Spare Ribs**: `~5.6 lbs/rack` (12 bones, invoice); `6 racks/case = 33.6 lbs raw` (`2 racks/cryovac bag`; `Y_cook = 0.60`).
 - **Beef Dino Ribs**: `3 bones/plate`; `4 lbs/rack`; `12 ribs/case` (`3 cryovac bags`).

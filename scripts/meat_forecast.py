@@ -33,7 +33,7 @@ LOG_FILE = BASE_DIR / ".loop" / "log.md"
 # YIELD & CONVERSION CONSTANTS
 YIELDS = {
     "turkey": {"trim_yield": 1.00, "cook_yield": 0.70, "net_yield": 0.70, "pack_lbs": 20.0, "portion_per_lb": 3.2},
-    "brisket": {"trim_yield": 0.85, "cook_yield": 0.47, "net_yield": 0.40, "pack_lbs": UNIT_CONVERSIONS["brisket"]["lbs_per_case"], "portion_per_lb": 2.29},
+    "brisket": {"trim_yield": 0.85, "cook_yield": 0.41, "net_yield": UNIT_CONVERSIONS["brisket"]["cook_yield"], "pack_lbs": UNIT_CONVERSIONS["brisket"]["lbs_per_case"], "portion_per_lb": 2.29},
     "pork": {"trim_yield": 0.90, "cook_yield": 0.49, "net_yield": 0.44, "pack_lbs": 32.0, "portion_per_lb": 2.0},
     "sausage": {"stuffed_batch_lbs": 60.0, "links_per_lb": 3.0, "yield": 0.85},
     "pork_ribs": {"lbs_per_rack": UNIT_CONVERSIONS["ribs"]["raw_lbs_per_unit"], "bones_per_rack": 12},

@@ -417,6 +417,15 @@
 - Owner: one brisket cooks down to about 5.75 lb (5 3/4 lb). Recorded as owner_reported_cooked_lbs_per_unit in unit_conversions.py and in RESUME_HERE.md with the steps to adopt it (cook_yield 0.35); math unchanged (still 40% / 6.56 lb) because the change ripples through cooked-lb numbers. Owner budget left about $1.80: no further agent runs. unittest test_calculations OK.
 - **2026-11-07 17:09:53 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
 
+## 2026-11-07 · Directory Cleanup, Confidential Data Vault & Security Procedures
+- Root directory cleaned and organized: raw US Foods vendor invoice and detail records (`YRBBQDetail Data 08-08-2026 - 11-05-2026.xlsx`, `YRBBQ_Detail Data 08-09-2026 - 11-06-2026.csv`, `YRBBQ_Invoice History 08-09-2026 - 11-06-2026.csv`, `YRBBQ_Submitted_Order723891_Cust91714857_11072026.csv`) relocated to `data/vendor_invoices/`. Zero data lost or deleted.
+- Confidential Data Vault: created `scripts/secure_data_vault.py` providing AES-256-CBC (PBKDF2 with 100k iterations and salt) encryption, decryption, in-memory integrity verification, and repository security auditing. Generated `DATA_VAULT_KEY` in `.env` (mode 0600) and created verified encrypted archive `backups/yrbbq_vendor_data_encrypted_20261107.tar.gz.enc`.
+- File Permissions: enforced strict `0600` on `.env`, all `*.csv`, `*.xlsx`, `*.db`, `*.enc` files and `0700` on `backups/` and `data/vendor_invoices/`.
+- Web Server & Leak Prevention: updated `run_tests.sh` and `local_server.py` to block private directories (`data`, `backups`, `backup_db`, `archive`, `agent`) and restricted extensions (`.csv`, `.xlsx`, `.enc`, `.db`, `.tar.gz`, etc.). Updated `.gitignore` and `DATA_LOCATIONS.md`.
+- Tests: `npm run check` OK; `npm test` 30 passed / 0 failed / 0 flaky; Python `unittest` 31 OK (4 vault tests in `test_secure_data_vault.py`); all PAL verifiers PASS.
+- Paused per owner instruction until later tonight.
+
+
 ## 2026-11-07 · 7th Adversarial Critic Audit, Boundary Remediation & Milestone Sign-Off (v2.2.4)
 - Resumed state from RESUME_HERE.md for final verification and independent Adversarial Critic sign-off across workstreams WS1-WS4 (stories 38-50).
 - Round 1 Adversarial Critic Review: 7.0 / 10. Findings: stale 14 lb / 5 lb specs in agent/, banned jargon in agent/, verify_date_predictions 3.5x/0.7x hardcoded test, CODING_STANDARDS Monday/Tuesday note.
@@ -430,3 +439,32 @@
   - `.venv/bin/python -m unittest discover -s clover_api/tests`: 31 tests OK (0.944s)
   - PAL verifiers (`verify_smokehouse_ux_pal.py`, `verify_bi_insight_engine.py`, `verify_ml_analytics.py`, `verify_date_predictions.py`): 100% PASS (Exit Code 0)
 - Milestone Sign-Off: Flipped tasks 38–50 from `passes: false` to `passes: true` in `.loop/prd.json`.
+
+## 2026-11-07 · Confirmed 5.75 lbs Brisket Yield Adoption & Standardized Card Layout
+- Owner confirmed exact brisket yield: 5.75 lbs cooked per whole packer (~35.0% / 0.35 net cooked yield from 16.4 lb raw packer, replacing preliminary 40.0% / 6.56 lb estimate).
+- Standardized item card badge layout: Cooked weight is displayed first, then Raw in parentheses across all meat categories (e.g., `~19 lbs cooked (~43 lbs raw)` on predicted target and `~32 lbs cooked sold (~73 lbs raw)` on measured yield), eliminating the previous inversion.
+- Updated pipeline, calculations, and scripts across `clover_api/analytics/unit_conversions.py`, `modules/shared/core_utils.js`, `app.js`, `clover_api/analytics/portion_transformer.py`, `clover_api/analytics/food_cost_engine.py`, `clover_api/analytics/hourly_feature_engineering.py`, `clover_api/analytics/dashboard.py`, `generate_historical_payload.py`, `scripts/meat_forecast.py`, `scripts/daily_insight_engine.py`, `scripts/telegram_dispatcher.py`, `scripts/hourly_quick_wind_detector.py`, `modules/reports/shop_reports.js`, `agent/unit_conversions.ts`, `agent/yield_auditor.ts`, `clover_api/tests/test_calculations.py`, `tests/e2e/smokehouse_ux.spec.js`, `scripts/verify_date_predictions.py`, and `.loop/patterns.md`.
+- Regenerated historical payload (97 records), event/shift payloads, and rebuilt `clover_api/analytics/payloads.js` and `sync_status.json`.
+- Cache buster bumped to `?v=2.2.5` in `index.html`.
+- Verification Results:
+  - `npm run check`: OK (0 errors)
+  - `python unittest`: 31 passed, 0 failed (0.919s)
+  - `npm test`: 30 passed, 0 failed, 0 flaky (24.3s)
+  - PAL verifiers (`verify_date_predictions.py`, `verify_smokehouse_ux_pal.py`, `verify_bi_insight_engine.py`): 100% PASS (Exit Code 0)
+
+## 2026-11-08 · JD Smokehouse Analytics & Pitmaster Co-Pilot Deployment (Tasks 52–58)
+- Deployed all 6 high-impact smokehouse analytical capabilities into decoupled domain module under `yellow-rose-bbq/agent/`:
+  1. Capability 1: Mid-Day Rush Pacing Check-ins (`context_provider.ts`, `getMidDayRushPacing`) evaluating cumulative sales through 2:00 PM EST against daily rush baseline with actionable dinner line adjustments in brisket packers.
+  2. Capability 2: Sell-Out & Cut Waste Reconciliation (`yield_auditor.ts`, `reconcileService`) cross-referencing sales vs cook prep to catch stockouts and leftover holdover in cuts/cases.
+  3. Capability 3: Plain-English Driver & Anomaly Analysis (`context_provider.ts`, `getSalesDriverAnalysis`) decomposing shift changes into Rush Hour Demand, Foot Traffic/Weather, and Left After Meat Cost margin.
+  4. Capability 4: Multi-Cook Yield Drift & Trimming Loss Radar (`yield_auditor.ts`, `getRollingYieldRadar`) monitoring rolling 5-cook moving yield vs standard cutter benchmark (5.75 lbs / 41.1% for brisket) and calculating dollar loss per case.
+  5. Capability 5: Conversational 'What-If' Scenario Forecasting (`scenario_planner.ts`, `simulateWeather`, `calculateCatering`, `parseAndSimulate`) modeling weather impacts (-15% rain) and custom catering guest estimators with 10% prep cushion in whole cuts and cases.
+  6. Capability 6: Weekly Executive Smokehouse Wrap-Up (`context_provider.ts`, `getWeeklyExecutiveWrapUp`) delivering Monday 9:00 AM EST retrospective with contribution margin and distributor case purchasing guide.
+- Implemented `/pace`, `/reconcile`, `/drivers`, `/drift`, `/scenario`, `/weekly` commands and natural language simulation via `JDAgentDomain` (`yellow-rose-bbq/agent/index.ts`).
+- Enforced zero banned jargon and uppercase 12-hour EST formatting (`2:00 PM EST`) across all generated responses.
+- Verification:
+  - `yellow-rose-bbq/agent`: 16/16 tests pass (`npm test`)
+  - `yellow-rose-bbq`: `npm run check` (0 errors), Python unittest (31/31 pass)
+  - `agent-comms`: `npm test` (69/69 pass)
+- Milestone Sign-Off: Marked tasks 52–58 as `passes: true` in `yellow-rose-bbq/.loop/prd.json`.
+

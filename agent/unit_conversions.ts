@@ -38,16 +38,17 @@ export function calculateCases(meatKey: string, targetCookedLbs: number): MeatCa
   const key = meatKey.toLowerCase().trim();
 
   if (key.includes('brisket')) {
-    // Y_net = 0.40 (16.4 lb raw packer; 5 packers/case = 82 lbs raw; ~6.56 lbs cooked each)
-    const rawLbs = targetCookedLbs / 0.40;
-    const packers = Math.ceil(rawLbs / 16.4);
+    // Y_net = 0.411 (14.0 lb raw packer; 5 packers/case = 70 lbs raw; ~5.75 lbs cooked each)
+    // Verified by cutter: 5 and 3/4 lbs cooked per whole packer
+    const packers = Math.ceil(targetCookedLbs / 5.75);
+    const rawLbs = packers * 14.0;
     const cases = Math.ceil((packers / 5) * 10) / 10;
     return {
       meat: 'Brisket',
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (${packers} raw packers @ 16.4 lbs each, yielding ~6.56 lbs cooked each)`,
+      unitsDescription: `${cases} Cases (${packers} raw packers @ 14.0 lbs each, yielding ~5.75 lbs cooked each)`,
       portionsEstimate: Math.round(targetCookedLbs * 2.3)
     };
   } else if (key.includes('pork') || key.includes('butt') || key.includes('shoulder')) {

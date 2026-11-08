@@ -84,8 +84,8 @@ for d in dates:
     base_rev = 2000
     rev_multiplier = max(1.0, revenue / base_rev)
     
-    brisket_raw = max(40.0, cooked_brisket_lbs / 0.4) * (1 if cooked_brisket_lbs > 10 else rev_multiplier)
-    pork_raw = max(24.0, cooked_pork_lbs / 0.4) * (1 if cooked_pork_lbs > 5 else rev_multiplier)
+    brisket_raw = max(40.0, cooked_brisket_lbs / 0.35) * (1 if cooked_brisket_lbs > 10 else rev_multiplier)
+    pork_raw = max(24.0, cooked_pork_lbs / 0.44) * (1 if cooked_pork_lbs > 5 else rev_multiplier)
     sausage_final = max(20.0, sausage_lbs) * (1 if sausage_lbs > 5 else rev_multiplier)
     
     historical_records.append({
@@ -151,7 +151,7 @@ else:
             act_p_raw = r.get('pork_shoulder_raw_lbs', 0.0)
             act_s_lbs = r.get('sausage_lbs', 0.0)
             r['actual_brisket_raw_lbs'] = act_b_raw
-            r['actual_brisket_cooked_lbs'] = round(act_b_raw * 0.4, 1)
+            r['actual_brisket_cooked_lbs'] = round(act_b_raw * 0.35, 1)
             r['actual_pork_shoulder_raw_lbs'] = act_p_raw
             r['actual_pork_cooked_lbs'] = round(act_p_raw * 0.44, 1)
             r['actual_sausage_lbs'] = act_s_lbs

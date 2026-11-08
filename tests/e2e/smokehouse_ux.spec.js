@@ -69,7 +69,7 @@ test.describe('Smokehouse UX Overhaul (v2.2.0) — Plain English, Case/Cut Units
     });
     expect(unitMath.brisket140.cases).toBe(1.7);   // 140 / 82 lb per invoice case
     expect(unitMath.brisket140.cuts).toBe(9);      // ceil(140 / 16.4 lb per brisket)
-    expect(unitMath.brisket140.cookedLbs).toBe(56);
+    expect(unitMath.brisket140.cookedLbs).toBe(49); // 140 * 0.35 yield (5.75 lbs / 16.4 lb packer)
     expect(unitMath.pork64.cases).toBe(2);
     expect(unitMath.pork64.cuts).toBe(8);
     expect(unitMath.pork64.cookedLbs).toBe(28);

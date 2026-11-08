@@ -228,7 +228,7 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
     leftover_pct = round(100.0 - meat_cost_pct, 1) if meat_cost_pct is not None else None
 
     brisket_raw = round(float(record.get("brisket_raw_lbs", 0.0)))
-    brisket_cooked = round(brisket_raw * 0.40)
+    brisket_cooked = round(brisket_raw * 0.35)
     pork_raw = round(float(record.get("pork_shoulder_raw_lbs", 0.0)))
     pork_cooked = round(pork_raw * 0.44)
     ribs_racks = int(round(float(record.get("pork_ribs_racks", 0))))

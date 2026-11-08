@@ -15,12 +15,10 @@ UNIT_CONVERSIONS = {
         "unit_name_plural": "Briskets",
         "raw_lbs_per_unit": 16.4,   # invoice: 3 cs = $1,257.15 at $5.10/lb -> ~82 lb/cs of 5
         "units_per_case": 5,
-        "cook_yield": 0.40,
-        # Owner-reported 2026-11-07: one brisket yields about 5.75 lb cooked (5 3/4 lb), i.e. ~35% of 16.4 lb raw.
-        # Recorded only; the app still uses the 40% yield-sheet figure (6.56 lb). Switch cook_yield to 0.35 (and the
-        # JS mirror yieldRatio) if the owner wants counts and cooked lbs to follow the real figure.
+        "cook_yield": 0.35,
+        # Owner-confirmed 2026-11-07: one brisket yields 5.75 lb cooked (5 3/4 lb), i.e. ~35% of 16.4 lb raw invoice packer.
         "owner_reported_cooked_lbs_per_unit": 5.75,
-        "source": "US Foods invoice 2026-09-03 (catch weight)",
+        "source": "US Foods invoice 2026-09-03 (catch weight, 5.75 lbs cooked confirmed)",
     },
     "pork_butt": {
         "unit_name": "Pork Butt",

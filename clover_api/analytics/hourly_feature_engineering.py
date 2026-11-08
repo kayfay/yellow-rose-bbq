@@ -100,9 +100,9 @@ def build_feature_engineered_dataset(records=None):
         # Real average sales for this weekday/hour when POS history exists; else orders x average ticket.
         est_revenue = round(r["avg_sales_usd"], 2) if r.get("avg_sales_usd") is not None else round(orders * 48.50, 2)
         
-        # Draw rates: each order consumes ~0.45 lbs cooked meat equivalent (yielding 1.1 lbs raw meat draw)
+        # Draw rates: each order consumes ~0.45 lbs cooked meat equivalent (yielding ~1.28 lbs raw meat draw at 35% yield)
         cooked_meat_lbs = round(orders * 0.45, 2)
-        raw_meat_prep_lbs = round(cooked_meat_lbs / 0.40, 2)
+        raw_meat_prep_lbs = round(cooked_meat_lbs / 0.35, 2)
         
         # 5. Rush Classification
         if orders >= 7.0:

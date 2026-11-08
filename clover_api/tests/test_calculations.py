@@ -50,7 +50,8 @@ from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS, units_for_ra
 
 class TestUnitConversions(unittest.TestCase):
     def test_cooked_lbs_per_unit_is_raw_times_yield(self):
-        self.assertAlmostEqual(UNIT_CONVERSIONS["brisket"]["lbs_per_unit"], 6.56, places=2)
+        self.assertAlmostEqual(UNIT_CONVERSIONS["brisket"]["lbs_per_unit"], 5.74, places=2)
+        self.assertEqual(UNIT_CONVERSIONS["brisket"]["owner_reported_cooked_lbs_per_unit"], 5.75)
         self.assertAlmostEqual(UNIT_CONVERSIONS["pork_butt"]["lbs_per_unit"], 3.52, places=2)
         self.assertAlmostEqual(UNIT_CONVERSIONS["ribs"]["lbs_per_unit"], 3.36, places=2)
         self.assertAlmostEqual(UNIT_CONVERSIONS["sausage"]["lbs_per_unit"], 0.33, places=2)

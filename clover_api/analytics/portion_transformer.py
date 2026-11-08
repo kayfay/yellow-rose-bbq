@@ -171,7 +171,7 @@ def get_daily_category_aggregates(db_path: str = "clover_api/data/clover_sales.d
     # Apply yield factors so ARIMA forecasts the RAW weights natively
     daily_totals = daily_totals.with_columns(
         pl.when(pl.col("category") == "brisket_lbs")
-        .then(pl.col("qty_sold") / 0.40)
+        .then(pl.col("qty_sold") / UNIT_CONVERSIONS["brisket"]["cook_yield"])
         .when(pl.col("category") == "pulled_pork_lbs")
         .then(pl.col("qty_sold") / 0.44)
         .otherwise(pl.col("qty_sold"))
@@ -203,12 +203,12 @@ def calculate_daily_procurement(df_joined: pl.DataFrame) -> pl.DataFrame:
     ).fill_null(0.0)
     
     # Apply Yield Losses and Convert to Raw Inventory Units (Owner's Tracking Method)
-    # Brisket Yield: ~50% shrinkage. 1 Whole Raw Brisket = ~12 lbs raw
+    # Brisket Yield: ~65% render/trim loss (35% net yield). 1 Whole Raw Brisket = ~16.4 lbs raw
     if "brisket_lbs" in daily_pivot.columns:
         daily_pivot = daily_pivot.with_columns(
-            (pl.col("brisket_lbs") / 0.4).alias("Total Raw Brisket Needed (Lbs)"),
-            ((pl.col("brisket_lbs") / 0.4) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]).ceil().cast(pl.Int32).alias("Total Whole Briskets Needed"),
-            (((pl.col("brisket_lbs") / 0.4) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]) / UNIT_CONVERSIONS["brisket"]["units_per_case"]).ceil().cast(pl.Int32).alias("Total Cases of Brisket Needed")
+            (pl.col("brisket_lbs") / UNIT_CONVERSIONS["brisket"]["cook_yield"]).alias("Total Raw Brisket Needed (Lbs)"),
+            ((pl.col("brisket_lbs") / UNIT_CONVERSIONS["brisket"]["cook_yield"]) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]).ceil().cast(pl.Int32).alias("Total Whole Briskets Needed"),
+            (((pl.col("brisket_lbs") / UNIT_CONVERSIONS["brisket"]["cook_yield"]) / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]) / UNIT_CONVERSIONS["brisket"]["units_per_case"]).ceil().cast(pl.Int32).alias("Total Cases of Brisket Needed")
         )
         
     if "sausage_links" in daily_pivot.columns:

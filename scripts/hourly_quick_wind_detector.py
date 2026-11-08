@@ -61,11 +61,11 @@ ANALYTIC_TERMS_GLOSSARY = {
     "Cooked Yield %": {
         "term": "Cooked Yield %",
         "definition": "How much sellable meat is left after trimming and smoking: finished sliced weight ÷ raw weight × 100.",
-        "how_it_helps": "Shows the real yield of meat on the board. Whole packer brisket yields about 40% after trimming and smoking to finished sliceable yield."
+        "how_it_helps": "Shows the real yield of meat on the board. Whole packer brisket yields about 35% (5.75 lbs cooked per 16.4 lb packer) after trimming and smoking to finished sliceable yield."
     },
     "Shrinkage": {
         "term": "Shrinkage",
-        "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 60% for brisket, 56% for pork butt).",
+        "definition": "Weight lost during smoking as moisture cooks off and fat renders (about 65% for brisket, 56% for pork butt).",
         "how_it_helps": "Guides smoker humidity and wrap timing. Too much shrinkage means dry meat and less to sell."
     },
     "Tallow Rest": {

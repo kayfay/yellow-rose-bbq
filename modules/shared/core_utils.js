@@ -294,7 +294,7 @@
       lbsPerCut: 16.4,
       cutLabelSingular: 'Brisket',
       cutLabelPlural: 'Briskets',
-      yieldRatio: 0.40,
+      yieldRatio: 0.35,
       portionsPerCookedLb: 2.3
     },
     pork: {
@@ -411,11 +411,11 @@
         rawLbs: Math.round(val),
         cookedLbs,
         primaryText: activeMode === 'lbs'
-          ? `${Math.round(val)} lbs Raw (~${cookedLbs} lbs Cooked)`
+          ? `${cookedLbs} lbs Cooked (~${Math.round(val)} lbs Raw)`
           : `${cases} ${caseWord} • ~${packers} ${cutWord}`,
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} • ~${packers} ${cutWord}`
-          : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+          : `~${cookedLbs} lbs cooked • ~${Math.round(val)} lbs raw`,
         countText: `~${packers} ${cutWord}`,
         caseText: `${cases} ${caseWord}`,
         yieldPct: Math.round(spec.yieldRatio * 100),
@@ -438,11 +438,11 @@
         rawLbs: Math.round(val),
         cookedLbs,
         primaryText: activeMode === 'lbs'
-          ? `${Math.round(val)} lbs Raw (~${cookedLbs} lbs Cooked)`
+          ? `${cookedLbs} lbs Cooked (~${Math.round(val)} lbs Raw)`
           : `${cases} ${caseWord} / ~${butts} ${cutWord}`,
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} / ~${butts} ${cutWord}`
-          : `~${Math.round(val)} lbs raw • ~${cookedLbs} lbs cooked`,
+          : `~${cookedLbs} lbs cooked • ~${Math.round(val)} lbs raw`,
         countText: `~${butts} ${cutWord}`,
         caseText: `${cases} ${caseWord}`,
         yieldPct: Math.round(spec.yieldRatio * 100),
@@ -529,7 +529,7 @@
           : `${cases} ${caseWord} • ~${breasts} ${cutWord}`,
         secondaryText: activeMode === 'lbs'
           ? `${cases} ${caseWord} • ~${breasts} ${cutWord}`
-          : `~${rawLbs} lbs raw • ~${cookedLbs} lbs cooked`,
+          : `~${cookedLbs} lbs cooked • ~${rawLbs} lbs raw`,
         countText: `~${breasts} ${cutWord}`,
         caseText: `${cases} ${caseWord}`,
         yieldPct: Math.round(spec.yieldRatio * 100),

@@ -243,7 +243,7 @@ def get_operational_attentions() -> list[str]:
             pass
 
     # 3. Scale Tare & Trim Loss Invariant
-    attentions.append("• <b>⚖️ Scale Tare & Yield Invariant:</b> Zero counter scale with butcher paper tare before slicing flat brisket. Trevor's brisket trim target strictly &lt;18% loss to preserve 40.0% cooked yield.")
+    attentions.append("• <b>⚖️ Scale Tare & Yield Invariant:</b> Zero counter scale with butcher paper tare before slicing flat brisket. Trevor's brisket trim target strictly &lt;18% loss to preserve 35.0% cooked yield (5.75 lbs cooked per 16.4 lb packer).")
 
     # 4. Menu Pricing & Margin Watch
     attentions.append("• <b>🏷️ Menu Board Margin Watch:</b> Audit physical menu board vs Clover terminal ($13 menu photo vs $17 modeled brisket sandwich). Prompt sides ($4.00) and drinks ($2.95) to protect 68%+ gross margin.")
@@ -469,7 +469,7 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
         return (
             "🪵 <b>PITMASTER &amp; SMOKER GEOMETRY</b>\n"
             f"• <b>Total Smoker Capacity:</b> {_PIT_MAX_BRISKETS} briskets max (14 big offset pit + 10 small pit = ~{_PIT_RAW_LBS} lbs raw load).\n"
-            "• <b>Trevor's Spec:</b> 2:30 AM pit ignition with post oak coal bed; trim briskets strictly &lt;18% loss to preserve 40.0% cooked yield.\n"
+            "• <b>Trevor's Spec:</b> 2:30 AM pit ignition with post oak coal bed; trim briskets strictly &lt;18% loss to preserve 35.0% cooked yield (5.75 lbs cooked per 16.4 lb packer).\n"
             "• <b>Max's Spec:</b> 8:00 AM handoff; manage airflow dampers, spritz, peach paper wrap at 165°F stall; probe tender ~203°F.\n"
             "• <b>Holding Cabinet:</b> Meats rest in 140°F–150°F tallow warming cabinet until carving. Never allow holding temp below 140°F."
         )

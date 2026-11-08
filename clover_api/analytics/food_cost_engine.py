@@ -17,7 +17,7 @@ INVOICE_2 = (DATA_DIR / "Submitted_Order564310_Cust91714857_09032026.csv") if (D
 
 # Realistic range bounds for smoked Texas BBQ (Trim scraps + Smoker render loss)
 YIELD_RANGES = {
-    "brisket": {"min_yield": 0.38, "max_yield": 0.45, "nominal_yield": 0.40},
+    "brisket": {"min_yield": 0.32, "max_yield": 0.40, "nominal_yield": 0.35},
     "pork_butt": {"min_yield": 0.40, "max_yield": 0.48, "nominal_yield": 0.44},
     "pork_ribs": {"min_yield": 0.55, "max_yield": 0.65, "nominal_yield": 0.60},
     "turkey": {"min_yield": 0.65, "max_yield": 0.75, "nominal_yield": 0.70},
@@ -115,8 +115,8 @@ def compute_effective_meat_costs():
             }
         },
         "item_portions_cost": {
-            "brisket_taco_2oz": round((brisket_raw / 0.40) * (2.0 / 16.0), 2),
-            "brisket_sandwich_7oz": round((brisket_raw / 0.40) * (7.0 / 16.0), 2),
+            "brisket_taco_2oz": round((brisket_raw / 0.35) * (2.0 / 16.0), 2),
+            "brisket_sandwich_7oz": round((brisket_raw / 0.35) * (7.0 / 16.0), 2),
             "pork_sandwich_8oz": round((pork_raw / 0.44) * (8.0 / 16.0), 2),
             "turkey_sandwich_5oz": round((turkey_raw / 0.70) * (5.0 / 16.0), 2),
             "sausage_sandwich": 1.25,
@@ -130,11 +130,11 @@ def compute_effective_meat_costs():
             "half_rack_ribs": round((rib_raw * RIB_RACK_RAW_LBS) / 2.0, 2),
             "single_bone_rib": round((rib_raw * RIB_RACK_RAW_LBS) / 12.0, 2),
             "beef_dino_rib": 14.50,
-            "bbq_plate_brisket": round((brisket_raw / 0.40) * 0.5, 2),
-            "two_meat_plate": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 2, 2),
-            "pitmaster_platter": round((brisket_raw / 0.40) * 0.5 + (pork_raw / 0.44) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
-            "hill_country_trinity": round((brisket_raw / 0.40) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
-            "bevo_platter": round((brisket_raw / 0.40) * 1.0 + 2.50 + (rib_raw * RIB_RACK_RAW_LBS) * 0.5, 2),
+            "bbq_plate_brisket": round((brisket_raw / 0.35) * 0.5, 2),
+            "two_meat_plate": round((brisket_raw / 0.35) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 2, 2),
+            "pitmaster_platter": round((brisket_raw / 0.35) * 0.5 + (pork_raw / 0.44) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
+            "hill_country_trinity": round((brisket_raw / 0.35) * 0.5 + ((rib_raw * RIB_RACK_RAW_LBS) / 12.0) * 3 + 1.25, 2),
+            "bevo_platter": round((brisket_raw / 0.35) * 1.0 + 2.50 + (rib_raw * RIB_RACK_RAW_LBS) * 0.5, 2),
             "rose_buds_portion": 1.85,
             "elote_street_corn": 0.85,
             "charro_beans": 0.65,
@@ -146,7 +146,7 @@ def compute_effective_meat_costs():
             "loaded_cheese_fries": 2.10,
             "jalapeno_cheddar_1lb": 5.52,
             "pork_belly_burnt_ends_1lb": 6.83,
-            "brisket_burnt_ends_8oz": round((brisket_raw / 0.40) * 0.5 + 0.45, 2),
+            "brisket_burnt_ends_8oz": round((brisket_raw / 0.35) * 0.5 + 0.45, 2),
             "wings_catering_40ct": 17.30,
             "crispy_quesa_taco_barbacoa": 2.39,
             "crispy_quesa_taco_pork": round((pork_raw / 0.44) * (2.0 / 16.0) + 0.45, 2),

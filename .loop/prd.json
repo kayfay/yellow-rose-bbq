@@ -310,43 +310,49 @@
       "id": 52,
       "description": "JD Capability 1: Mid-Day Rush Pacing Check-ins (context_provider.ts) - Evaluate live Clover POS vs baseline rush curve at 2:00 PM EST post-lunch and on NL /pace command; output pacing in dollars/percentage with dinner line adjustments in brisket packers.",
       "acceptance_criteria": "Generates 2:00 PM EST check-in message; compares actuals vs baseline; recommends dinner packer adjustment; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 53,
       "description": "JD Capability 2: Sell-Out & Cut Waste Reconciliation (yield_auditor.ts) - Stockout and holdover radar cross-referencing Clover line-item sales with logged cook yields in raw/cooked cuts and cases.",
       "acceptance_criteria": "Reconciles line-item sales vs logged cook yield; flags early stockout hours and holdover in cuts/cases; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 54,
       "description": "JD Capability 3: Plain-English Driver & Anomaly Analysis (context_provider.ts) - Root-cause shift explanations decomposing changes into Rush Hour Demand, Foot Traffic/Weather, and Ticket Volume vs Check Size without statistical jargon.",
       "acceptance_criteria": "Decomposes sales variance into 3 smokehouse drivers; zero banned jargon; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 55,
       "description": "JD Capability 4: Multi-Cook Yield Drift & Trimming Loss Radar (yield_auditor.ts) - Rolling 5-cook moving audit monitoring net yield vs 5.75 lbs / 41.1% benchmark and flagging dollar loss across cases.",
       "acceptance_criteria": "Rolling 5-cook moving average computes yield drift; calculates dollar trim/render loss when below benchmark; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 56,
       "description": "JD Capability 5: Conversational 'What-If' Scenario Forecasting (scenario_planner.ts) - Instant planning simulations combining weather impact (-15% rain) and custom catering guest estimators in cases and cuts.",
       "acceptance_criteria": "Simulates weather impacts and catering guest counts; outputs case/cut orders; handles NL and /scenario; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 57,
       "description": "JD Capability 6: Weekly Executive Smokehouse Wrap-Up (index.ts) - Monday 9:00 AM EST retrospective reporting Gross Sales vs Baseline, Contribution Margin after Meat Cost, Cook Accuracy Summary, and distributor Case Purchasing Guide.",
       "acceptance_criteria": "Generates 7-day retrospective digest; calculates meat cost margin; outputs next week case order guide; passes unit test.",
-      "passes": false
+      "passes": true
     },
     {
       "id": 58,
       "description": "JD Verification Gate & Sensor Linter: Automated test suite in agent/tests/test_agent_analytics.test.ts covering all 6 capabilities, 0 banned jargon terms, 100% cutting-board unit invariants, and passing all tests.",
       "acceptance_criteria": "Node 22 test suite runs without errors; jargon linter verifies 0 forbidden terms across all outputs; 100% test pass rate.",
-      "passes": false
+      "passes": true
+    },
+    {
+      "id": 59,
+      "description": "Adopt confirmed exact brisket yield of 5.75 lbs cooked per packer (~35.0% yield) and standardize all item comparison cards to Cooked weight first, Raw in parentheses across all dashboard views.",
+      "acceptance_criteria": "UNIT_CONVERSIONS and KITCHEN_UNIT_SPECS set brisket yield to 0.35 (5.75 lbs cooked / 16.4 lb packer); all item comparison cards show cooked weight first then raw in parentheses; all test suites (npm run check, python unittest discover -s clover_api/tests, npm test, PAL verifiers) pass with exit code 0.",
+      "passes": true
     }
   ]
 }
