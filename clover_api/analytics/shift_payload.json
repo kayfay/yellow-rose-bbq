@@ -189,8 +189,8 @@
             12.7,
             12.6,
             7.0,
-            1.7,
-            0.0,
+            1.9,
+            0.1,
             0.0,
             0.1
           ],
@@ -373,8 +373,8 @@
             "Saturday 5:00 PM EST<br>12.7 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
             "Saturday 6:00 PM EST<br>12.6 Orders/hr<br><b>RUSH HOUR. 2 Cashiers, 2 Pit required.</b>",
             "Saturday 7:00 PM EST<br>7.0 Orders/hr<br><i>Normal volume. 1 Cashier, 1 Pit.</i>",
-            "Saturday 8:00 PM EST<br>1.7 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
-            "Saturday 9:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+            "Saturday 8:00 PM EST<br>1.9 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
+            "Saturday 9:00 PM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
             "Saturday 10:00 PM EST<br>0.0 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>",
             "Saturday 11:00 PM EST<br>0.1 Orders/hr<br><i>Dead period. Prep/Cleaning time.</i>"
           ],
