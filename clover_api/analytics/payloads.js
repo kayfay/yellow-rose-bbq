@@ -1,69 +1,27 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-08T13:41:36.884285-05:00",
+      "generated_at": "2026-11-10T13:00:02.145147-05:00",
       "days_count": 14,
-      "insight_string": "The forecast dictates prepping ~217.8 lbs raw brisket (~76.2 lbs cooked yield) and ~46.4 lbs raw pork shoulder (~20.4 lbs cooked yield) [~264.2 lbs total raw / ~96.6 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (53 projected) and Rosebuds (36 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
+      "insight_string": "The forecast dictates prepping ~244.1 lbs raw brisket (~85.4 lbs cooked yield) and ~43.2 lbs raw pork shoulder (~19.0 lbs cooked yield) [~287.3 lbs total raw / ~104.4 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (59 projected) and Rosebuds (44 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
-        {
-          "date": "2026-11-08",
-          "day_name": "Sun",
-          "is_closed": false,
-          "predicted_revenue": 4205.11,
-          "estimated_cogs_usd": 1036.32,
-          "estimated_food_cost_pct": 24.6,
-          "brisket_raw_lbs": 138.2,
-          "pork_shoulder_raw_lbs": 10.6,
-          "sausage_lbs": 23.9,
-          "turkey_lbs": 9.2,
-          "turkey_cooked_lbs": 9.2,
-          "turkey_raw_lbs": 13.1,
-          "tacos_sold": 36,
-          "rosebuds_sold": 35,
-          "pork_ribs_racks": 9,
-          "beef_dino_ribs": 3,
-          "recommended_staff": 5,
-          "pitmaster_hours": 42.5,
-          "data_type": "PREDICTED"
-        },
-        {
-          "date": "2026-11-09",
-          "day_name": "Mon",
-          "is_closed": true,
-          "predicted_revenue": 0.0,
-          "estimated_cogs_usd": 0.0,
-          "estimated_food_cost_pct": null,
-          "brisket_raw_lbs": 0.0,
-          "pork_shoulder_raw_lbs": 0.0,
-          "sausage_lbs": 0.0,
-          "turkey_lbs": 0.0,
-          "turkey_cooked_lbs": 0.0,
-          "turkey_raw_lbs": 0.0,
-          "tacos_sold": 0,
-          "rosebuds_sold": 0,
-          "pork_ribs_racks": 0,
-          "beef_dino_ribs": 0,
-          "recommended_staff": 0,
-          "pitmaster_hours": 0.0,
-          "data_type": "PREDICTED"
-        },
         {
           "date": "2026-11-10",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 4418.41,
-          "estimated_cogs_usd": 905.01,
-          "estimated_food_cost_pct": 20.5,
-          "brisket_raw_lbs": 131.6,
-          "pork_shoulder_raw_lbs": 17.8,
-          "sausage_lbs": 10.4,
-          "turkey_lbs": 9.0,
-          "turkey_cooked_lbs": 9.0,
-          "turkey_raw_lbs": 12.9,
-          "tacos_sold": 45,
-          "rosebuds_sold": 19,
-          "pork_ribs_racks": 8,
-          "beef_dino_ribs": 0,
+          "predicted_revenue": 4519.98,
+          "estimated_cogs_usd": 1187.04,
+          "estimated_food_cost_pct": 26.3,
+          "brisket_raw_lbs": 176.7,
+          "pork_shoulder_raw_lbs": 19.1,
+          "sausage_lbs": 11.6,
+          "turkey_lbs": 8.4,
+          "turkey_cooked_lbs": 8.4,
+          "turkey_raw_lbs": 12.0,
+          "tacos_sold": 51,
+          "rosebuds_sold": 27,
+          "pork_ribs_racks": 10,
+          "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
@@ -72,18 +30,18 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-11",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 4367.62,
-          "estimated_cogs_usd": 878.07,
-          "estimated_food_cost_pct": 20.1,
-          "brisket_raw_lbs": 128.1,
-          "pork_shoulder_raw_lbs": 14.5,
-          "sausage_lbs": 9.0,
+          "predicted_revenue": 4418.41,
+          "estimated_cogs_usd": 1098.16,
+          "estimated_food_cost_pct": 24.9,
+          "brisket_raw_lbs": 165.5,
+          "pork_shoulder_raw_lbs": 17.9,
+          "sausage_lbs": 10.8,
           "turkey_lbs": 8.2,
           "turkey_cooked_lbs": 8.2,
           "turkey_raw_lbs": 11.7,
-          "tacos_sold": 40,
-          "rosebuds_sold": 22,
-          "pork_ribs_racks": 7,
+          "tacos_sold": 39,
+          "rosebuds_sold": 32,
+          "pork_ribs_racks": 9,
           "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -93,19 +51,19 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-12",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 5078.63,
-          "estimated_cogs_usd": 1061.13,
-          "estimated_food_cost_pct": 20.9,
-          "brisket_raw_lbs": 156.8,
-          "pork_shoulder_raw_lbs": 22.0,
-          "sausage_lbs": 12.5,
-          "turkey_lbs": 9.2,
-          "turkey_cooked_lbs": 9.2,
-          "turkey_raw_lbs": 13.1,
-          "tacos_sold": 75,
-          "rosebuds_sold": 30,
-          "pork_ribs_racks": 9,
-          "beef_dino_ribs": 0,
+          "predicted_revenue": 5027.84,
+          "estimated_cogs_usd": 1199.06,
+          "estimated_food_cost_pct": 23.8,
+          "brisket_raw_lbs": 174.3,
+          "pork_shoulder_raw_lbs": 19.2,
+          "sausage_lbs": 14.3,
+          "turkey_lbs": 9.1,
+          "turkey_cooked_lbs": 9.1,
+          "turkey_raw_lbs": 13.0,
+          "tacos_sold": 61,
+          "rosebuds_sold": 36,
+          "pork_ribs_racks": 12,
+          "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
@@ -114,18 +72,18 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-13",
           "day_name": "Fri",
           "is_closed": false,
-          "predicted_revenue": 6856.15,
-          "estimated_cogs_usd": 1370.77,
-          "estimated_food_cost_pct": 20.0,
-          "brisket_raw_lbs": 198.3,
-          "pork_shoulder_raw_lbs": 18.2,
-          "sausage_lbs": 19.0,
-          "turkey_lbs": 14.0,
-          "turkey_cooked_lbs": 14.0,
-          "turkey_raw_lbs": 20.0,
-          "tacos_sold": 51,
-          "rosebuds_sold": 38,
-          "pork_ribs_racks": 13,
+          "predicted_revenue": 6602.22,
+          "estimated_cogs_usd": 1515.76,
+          "estimated_food_cost_pct": 23.0,
+          "brisket_raw_lbs": 225.2,
+          "pork_shoulder_raw_lbs": 26.8,
+          "sausage_lbs": 19.5,
+          "turkey_lbs": 13.6,
+          "turkey_cooked_lbs": 13.6,
+          "turkey_raw_lbs": 19.4,
+          "tacos_sold": 52,
+          "rosebuds_sold": 46,
+          "pork_ribs_racks": 12,
           "beef_dino_ribs": 0,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -135,18 +93,18 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-14",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 8227.38,
-          "estimated_cogs_usd": 1698.28,
-          "estimated_food_cost_pct": 20.6,
-          "brisket_raw_lbs": 217.8,
-          "pork_shoulder_raw_lbs": 46.4,
-          "sausage_lbs": 28.4,
-          "turkey_lbs": 16.7,
-          "turkey_cooked_lbs": 16.7,
-          "turkey_raw_lbs": 23.9,
-          "tacos_sold": 53,
-          "rosebuds_sold": 36,
-          "pork_ribs_racks": 17,
+          "predicted_revenue": 8379.74,
+          "estimated_cogs_usd": 1844.19,
+          "estimated_food_cost_pct": 22.0,
+          "brisket_raw_lbs": 244.1,
+          "pork_shoulder_raw_lbs": 43.2,
+          "sausage_lbs": 30.6,
+          "turkey_lbs": 16.9,
+          "turkey_cooked_lbs": 16.9,
+          "turkey_raw_lbs": 24.1,
+          "tacos_sold": 59,
+          "rosebuds_sold": 44,
+          "pork_ribs_racks": 18,
           "beef_dino_ribs": 5,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -156,19 +114,19 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-15",
           "day_name": "Sun",
           "is_closed": false,
-          "predicted_revenue": 4205.11,
-          "estimated_cogs_usd": 1036.32,
-          "estimated_food_cost_pct": 24.6,
-          "brisket_raw_lbs": 138.2,
-          "pork_shoulder_raw_lbs": 10.6,
-          "sausage_lbs": 23.9,
-          "turkey_lbs": 9.2,
-          "turkey_cooked_lbs": 9.2,
-          "turkey_raw_lbs": 13.1,
-          "tacos_sold": 36,
-          "rosebuds_sold": 35,
+          "predicted_revenue": 4707.89,
+          "estimated_cogs_usd": 1090.32,
+          "estimated_food_cost_pct": 23.2,
+          "brisket_raw_lbs": 142.2,
+          "pork_shoulder_raw_lbs": 21.6,
+          "sausage_lbs": 24.4,
+          "turkey_lbs": 8.3,
+          "turkey_cooked_lbs": 8.3,
+          "turkey_raw_lbs": 11.9,
+          "tacos_sold": 38,
+          "rosebuds_sold": 36,
           "pork_ribs_racks": 9,
-          "beef_dino_ribs": 3,
+          "beef_dino_ribs": 4,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
@@ -198,19 +156,19 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-17",
           "day_name": "Tue",
           "is_closed": false,
-          "predicted_revenue": 4418.41,
-          "estimated_cogs_usd": 905.01,
-          "estimated_food_cost_pct": 20.5,
-          "brisket_raw_lbs": 131.6,
-          "pork_shoulder_raw_lbs": 17.8,
-          "sausage_lbs": 10.4,
-          "turkey_lbs": 9.0,
-          "turkey_cooked_lbs": 9.0,
-          "turkey_raw_lbs": 12.9,
-          "tacos_sold": 45,
-          "rosebuds_sold": 19,
-          "pork_ribs_racks": 8,
-          "beef_dino_ribs": 0,
+          "predicted_revenue": 4519.98,
+          "estimated_cogs_usd": 1187.04,
+          "estimated_food_cost_pct": 26.3,
+          "brisket_raw_lbs": 176.7,
+          "pork_shoulder_raw_lbs": 19.1,
+          "sausage_lbs": 11.6,
+          "turkey_lbs": 8.4,
+          "turkey_cooked_lbs": 8.4,
+          "turkey_raw_lbs": 12.0,
+          "tacos_sold": 51,
+          "rosebuds_sold": 27,
+          "pork_ribs_racks": 10,
+          "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
@@ -219,18 +177,18 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-18",
           "day_name": "Wed",
           "is_closed": false,
-          "predicted_revenue": 4367.62,
-          "estimated_cogs_usd": 878.07,
-          "estimated_food_cost_pct": 20.1,
-          "brisket_raw_lbs": 128.1,
-          "pork_shoulder_raw_lbs": 14.5,
-          "sausage_lbs": 9.0,
+          "predicted_revenue": 4418.41,
+          "estimated_cogs_usd": 1098.16,
+          "estimated_food_cost_pct": 24.9,
+          "brisket_raw_lbs": 165.5,
+          "pork_shoulder_raw_lbs": 17.9,
+          "sausage_lbs": 10.8,
           "turkey_lbs": 8.2,
           "turkey_cooked_lbs": 8.2,
           "turkey_raw_lbs": 11.7,
-          "tacos_sold": 40,
-          "rosebuds_sold": 22,
-          "pork_ribs_racks": 7,
+          "tacos_sold": 39,
+          "rosebuds_sold": 32,
+          "pork_ribs_racks": 9,
           "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -240,19 +198,19 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-19",
           "day_name": "Thu",
           "is_closed": false,
-          "predicted_revenue": 5078.63,
-          "estimated_cogs_usd": 1061.13,
-          "estimated_food_cost_pct": 20.9,
-          "brisket_raw_lbs": 156.8,
-          "pork_shoulder_raw_lbs": 22.0,
-          "sausage_lbs": 12.5,
-          "turkey_lbs": 9.2,
-          "turkey_cooked_lbs": 9.2,
-          "turkey_raw_lbs": 13.1,
-          "tacos_sold": 75,
-          "rosebuds_sold": 30,
-          "pork_ribs_racks": 9,
-          "beef_dino_ribs": 0,
+          "predicted_revenue": 5027.84,
+          "estimated_cogs_usd": 1199.06,
+          "estimated_food_cost_pct": 23.8,
+          "brisket_raw_lbs": 174.3,
+          "pork_shoulder_raw_lbs": 19.2,
+          "sausage_lbs": 14.3,
+          "turkey_lbs": 9.1,
+          "turkey_cooked_lbs": 9.1,
+          "turkey_raw_lbs": 13.0,
+          "tacos_sold": 61,
+          "rosebuds_sold": 36,
+          "pork_ribs_racks": 12,
+          "beef_dino_ribs": 1,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
           "data_type": "PREDICTED"
@@ -261,18 +219,18 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-20",
           "day_name": "Fri",
           "is_closed": false,
-          "predicted_revenue": 6856.15,
-          "estimated_cogs_usd": 1370.77,
-          "estimated_food_cost_pct": 20.0,
-          "brisket_raw_lbs": 198.3,
-          "pork_shoulder_raw_lbs": 18.2,
-          "sausage_lbs": 19.0,
-          "turkey_lbs": 14.0,
-          "turkey_cooked_lbs": 14.0,
-          "turkey_raw_lbs": 20.0,
-          "tacos_sold": 51,
-          "rosebuds_sold": 38,
-          "pork_ribs_racks": 13,
+          "predicted_revenue": 6602.22,
+          "estimated_cogs_usd": 1515.76,
+          "estimated_food_cost_pct": 23.0,
+          "brisket_raw_lbs": 225.2,
+          "pork_shoulder_raw_lbs": 26.8,
+          "sausage_lbs": 19.5,
+          "turkey_lbs": 13.6,
+          "turkey_cooked_lbs": 13.6,
+          "turkey_raw_lbs": 19.4,
+          "tacos_sold": 52,
+          "rosebuds_sold": 46,
+          "pork_ribs_racks": 12,
           "beef_dino_ribs": 0,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
@@ -282,21 +240,63 @@ window.BBQ_PAYLOADS = {
           "date": "2026-11-21",
           "day_name": "Sat",
           "is_closed": false,
-          "predicted_revenue": 8227.38,
-          "estimated_cogs_usd": 1698.28,
-          "estimated_food_cost_pct": 20.6,
-          "brisket_raw_lbs": 217.8,
-          "pork_shoulder_raw_lbs": 46.4,
-          "sausage_lbs": 28.4,
-          "turkey_lbs": 16.7,
-          "turkey_cooked_lbs": 16.7,
-          "turkey_raw_lbs": 23.9,
-          "tacos_sold": 53,
-          "rosebuds_sold": 36,
-          "pork_ribs_racks": 17,
+          "predicted_revenue": 8379.74,
+          "estimated_cogs_usd": 1844.19,
+          "estimated_food_cost_pct": 22.0,
+          "brisket_raw_lbs": 244.1,
+          "pork_shoulder_raw_lbs": 43.2,
+          "sausage_lbs": 30.6,
+          "turkey_lbs": 16.9,
+          "turkey_cooked_lbs": 16.9,
+          "turkey_raw_lbs": 24.1,
+          "tacos_sold": 59,
+          "rosebuds_sold": 44,
+          "pork_ribs_racks": 18,
           "beef_dino_ribs": 5,
           "recommended_staff": 5,
           "pitmaster_hours": 42.5,
+          "data_type": "PREDICTED"
+        },
+        {
+          "date": "2026-11-22",
+          "day_name": "Sun",
+          "is_closed": false,
+          "predicted_revenue": 4707.89,
+          "estimated_cogs_usd": 1090.32,
+          "estimated_food_cost_pct": 23.2,
+          "brisket_raw_lbs": 142.2,
+          "pork_shoulder_raw_lbs": 21.6,
+          "sausage_lbs": 24.4,
+          "turkey_lbs": 8.3,
+          "turkey_cooked_lbs": 8.3,
+          "turkey_raw_lbs": 11.9,
+          "tacos_sold": 38,
+          "rosebuds_sold": 36,
+          "pork_ribs_racks": 9,
+          "beef_dino_ribs": 4,
+          "recommended_staff": 5,
+          "pitmaster_hours": 42.5,
+          "data_type": "PREDICTED"
+        },
+        {
+          "date": "2026-11-23",
+          "day_name": "Mon",
+          "is_closed": true,
+          "predicted_revenue": 0.0,
+          "estimated_cogs_usd": 0.0,
+          "estimated_food_cost_pct": null,
+          "brisket_raw_lbs": 0.0,
+          "pork_shoulder_raw_lbs": 0.0,
+          "sausage_lbs": 0.0,
+          "turkey_lbs": 0.0,
+          "turkey_cooked_lbs": 0.0,
+          "turkey_raw_lbs": 0.0,
+          "tacos_sold": 0,
+          "rosebuds_sold": 0,
+          "pork_ribs_racks": 0,
+          "beef_dino_ribs": 0,
+          "recommended_staff": 0,
+          "pitmaster_hours": 0.0,
           "data_type": "PREDICTED"
         }
       ]
@@ -305,11 +305,6 @@ window.BBQ_PAYLOADS = {
       "data": [
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -318,23 +313,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            131.6,
-            128.1,
-            156.8,
-            198.3,
-            217.8,
-            138.2,
+            142.2,
             0.0,
-            130.5,
-            126.9,
-            155.6,
-            197.1,
-            216.6,
-            137.1,
-            0.0
+            176.7,
+            165.5,
+            174.3,
+            225.2,
+            244.1,
+            151.3,
+            0.0,
+            187.1,
+            179.9,
+            179.3,
+            229.5,
+            254.8
           ],
           "name": "Raw Brisket Prep (lbs)",
           "type": "bar",
@@ -344,11 +344,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -357,23 +352,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            17.8,
-            14.5,
-            22.0,
-            18.2,
-            46.4,
-            10.6,
+            21.6,
             0.0,
-            18.4,
+            19.1,
+            17.9,
             19.2,
-            19.2,
-            18.8,
-            49.9,
-            18.2,
-            0.0
+            26.8,
+            43.2,
+            22.8,
+            0.0,
+            19.6,
+            17.7,
+            19.0,
+            27.2,
+            44.1
           ],
           "name": "Pork Shoulder (lbs)",
           "type": "bar",
@@ -383,11 +383,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -396,23 +391,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            10.4,
-            9.0,
-            12.5,
-            19.0,
-            28.4,
-            23.9,
+            24.4,
             0.0,
-            9.9,
-            8.5,
-            12.0,
-            18.5,
-            28.0,
-            23.4,
-            0.0
+            11.6,
+            10.8,
+            14.3,
+            19.5,
+            30.6,
+            24.1,
+            0.0,
+            11.3,
+            10.5,
+            14.0,
+            19.1,
+            30.3
           ],
           "name": "Sausage Sold (lbs)",
           "type": "scatter",
@@ -428,11 +428,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -441,23 +436,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            45,
-            40,
-            75,
-            51,
-            53,
-            36,
+            38,
             0,
-            46,
-            41,
-            76,
-            52,
-            54,
+            51,
             39,
-            0
+            61,
+            52,
+            59,
+            41,
+            0,
+            53,
+            40,
+            62,
+            54,
+            61
           ],
           "name": "Tacos Sold",
           "type": "scatter",
@@ -471,11 +471,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -484,23 +479,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            19,
-            22,
-            30,
-            38,
             36,
-            35,
             0,
-            19,
-            22,
-            30,
-            38,
+            27,
+            32,
             36,
-            35,
-            0
+            46,
+            44,
+            38,
+            0,
+            29,
+            39,
+            36,
+            47,
+            48
           ],
           "name": "Rosebuds Sold",
           "type": "scatter",
@@ -514,11 +514,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -527,23 +522,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
-            8,
-            7,
-            9,
-            13,
-            17,
             9,
             0,
-            9,
-            7,
+            10,
             9,
             12,
-            16,
+            12,
+            18,
             9,
-            0
+            0,
+            11,
+            9,
+            12,
+            13,
+            18
           ],
           "name": "Pork Ribs (Racks)",
           "type": "scatter",
@@ -556,11 +556,6 @@ window.BBQ_PAYLOADS = {
         },
         {
           "x": [
-            "2026-11-03 (Tue)",
-            "2026-11-04 (Wed)",
-            "2026-11-05 (Thu)",
-            "2026-11-06 (Fri)",
-            "2026-11-07 (Sat)",
             "2026-11-08 (Sun)",
             "2026-11-09 (Mon)",
             "2026-11-10 (Tue)",
@@ -569,23 +564,28 @@ window.BBQ_PAYLOADS = {
             "2026-11-13 (Fri)",
             "2026-11-14 (Sat)",
             "2026-11-15 (Sun)",
-            "2026-11-16 (Mon)"
+            "2026-11-16 (Mon)",
+            "2026-11-17 (Tue)",
+            "2026-11-18 (Wed)",
+            "2026-11-19 (Thu)",
+            "2026-11-20 (Fri)",
+            "2026-11-21 (Sat)"
           ],
           "y": [
+            4,
             0,
             1,
-            0,
+            1,
+            1,
             0,
             5,
-            3,
-            0,
-            1,
-            1,
-            0,
-            0,
-            6,
             4,
-            0
+            0,
+            0,
+            1,
+            0,
+            0,
+            6
           ],
           "name": "Beef Dino Ribs",
           "type": "scatter",
@@ -17084,7 +17084,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-08T13:41:36.876852-05:00",
+    "generated_at": "2026-11-10T13:00:02.138005-05:00",
     "days": {
       "2026-08-02": {
         "buckets": [
@@ -27638,13 +27638,643 @@ window.BBQ_PAYLOADS = {
           },
           {
             "hour": 18,
-            "sales_usd": 370.65,
-            "orders": 13
+            "sales_usd": 574.62,
+            "orders": 21
           },
           {
             "hour": 19,
+            "sales_usd": 117.67,
+            "orders": 2
+          },
+          {
+            "hour": 20,
+            "sales_usd": 95.81,
+            "orders": 4
+          },
+          {
+            "hour": 21,
             "sales_usd": 0.0,
             "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5022.54,
+        "total_orders": 125
+      },
+      "2026-11-04": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 64.82,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 673.27,
+            "orders": 21
+          },
+          {
+            "hour": 12,
+            "sales_usd": 859.53,
+            "orders": 27
+          },
+          {
+            "hour": 13,
+            "sales_usd": 447.07,
+            "orders": 12
+          },
+          {
+            "hour": 14,
+            "sales_usd": 696.87,
+            "orders": 7
+          },
+          {
+            "hour": 15,
+            "sales_usd": 157.95,
+            "orders": 4
+          },
+          {
+            "hour": 16,
+            "sales_usd": 258.09,
+            "orders": 5
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1588.78,
+            "orders": 12
+          },
+          {
+            "hour": 18,
+            "sales_usd": 670.54,
+            "orders": 20
+          },
+          {
+            "hour": 19,
+            "sales_usd": 362.2,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 31.72,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 5810.84,
+        "total_orders": 119
+      },
+      "2026-11-05": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 502.52,
+            "orders": 13
+          },
+          {
+            "hour": 12,
+            "sales_usd": 849.32,
+            "orders": 17
+          },
+          {
+            "hour": 13,
+            "sales_usd": 793.93,
+            "orders": 23
+          },
+          {
+            "hour": 14,
+            "sales_usd": 204.62,
+            "orders": 5
+          },
+          {
+            "hour": 15,
+            "sales_usd": 471.19,
+            "orders": 10
+          },
+          {
+            "hour": 16,
+            "sales_usd": 370.75,
+            "orders": 6
+          },
+          {
+            "hour": 17,
+            "sales_usd": 345.97,
+            "orders": 8
+          },
+          {
+            "hour": 18,
+            "sales_usd": 822.21,
+            "orders": 18
+          },
+          {
+            "hour": 19,
+            "sales_usd": 308.49,
+            "orders": 10
+          },
+          {
+            "hour": 20,
+            "sales_usd": 259.31,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4928.31,
+        "total_orders": 114
+      },
+      "2026-11-06": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 43.54,
+            "orders": 1
+          },
+          {
+            "hour": 11,
+            "sales_usd": 744.6,
+            "orders": 21
+          },
+          {
+            "hour": 12,
+            "sales_usd": 803.28,
+            "orders": 21
+          },
+          {
+            "hour": 13,
+            "sales_usd": 578.76,
+            "orders": 22
+          },
+          {
+            "hour": 14,
+            "sales_usd": 276.52,
+            "orders": 8
+          },
+          {
+            "hour": 15,
+            "sales_usd": 334.38,
+            "orders": 9
+          },
+          {
+            "hour": 16,
+            "sales_usd": 379.32,
+            "orders": 9
+          },
+          {
+            "hour": 17,
+            "sales_usd": 508.09,
+            "orders": 15
+          },
+          {
+            "hour": 18,
+            "sales_usd": 759.06,
+            "orders": 17
+          },
+          {
+            "hour": 19,
+            "sales_usd": 340.47,
+            "orders": 7
+          },
+          {
+            "hour": 20,
+            "sales_usd": 129.15,
+            "orders": 4
+          },
+          {
+            "hour": 21,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 4897.17,
+        "total_orders": 134
+      },
+      "2026-11-07": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1167.41,
+            "orders": 23
+          },
+          {
+            "hour": 12,
+            "sales_usd": 1166.8,
+            "orders": 19
+          },
+          {
+            "hour": 13,
+            "sales_usd": 647.4,
+            "orders": 17
+          },
+          {
+            "hour": 14,
+            "sales_usd": 1196.46,
+            "orders": 24
+          },
+          {
+            "hour": 15,
+            "sales_usd": 846.95,
+            "orders": 18
+          },
+          {
+            "hour": 16,
+            "sales_usd": 570.34,
+            "orders": 14
+          },
+          {
+            "hour": 17,
+            "sales_usd": 1142.16,
+            "orders": 24
+          },
+          {
+            "hour": 18,
+            "sales_usd": 898.01,
+            "orders": 21
+          },
+          {
+            "hour": 19,
+            "sales_usd": 281.86,
+            "orders": 8
+          },
+          {
+            "hour": 20,
+            "sales_usd": 39.35,
+            "orders": 2
+          },
+          {
+            "hour": 21,
+            "sales_usd": 11.1,
+            "orders": 1
+          },
+          {
+            "hour": 22,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 23,
+            "sales_usd": 0.0,
+            "orders": 0
+          }
+        ],
+        "total_sales_usd": 7967.84,
+        "total_orders": 171
+      },
+      "2026-11-08": {
+        "buckets": [
+          {
+            "hour": 0,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 1,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 2,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 3,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 4,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 5,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 6,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 7,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 8,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 9,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 10,
+            "sales_usd": 0.0,
+            "orders": 0
+          },
+          {
+            "hour": 11,
+            "sales_usd": 1058.36,
+            "orders": 16
+          },
+          {
+            "hour": 12,
+            "sales_usd": 884.96,
+            "orders": 20
+          },
+          {
+            "hour": 13,
+            "sales_usd": 808.96,
+            "orders": 19
+          },
+          {
+            "hour": 14,
+            "sales_usd": 873.34,
+            "orders": 18
+          },
+          {
+            "hour": 15,
+            "sales_usd": 473.22,
+            "orders": 11
+          },
+          {
+            "hour": 16,
+            "sales_usd": 716.53,
+            "orders": 12
+          },
+          {
+            "hour": 17,
+            "sales_usd": 197.7,
+            "orders": 7
+          },
+          {
+            "hour": 18,
+            "sales_usd": 400.44,
+            "orders": 12
+          },
+          {
+            "hour": 19,
+            "sales_usd": 35.24,
+            "orders": 2
           },
           {
             "hour": 20,
@@ -27667,8 +28297,8 @@ window.BBQ_PAYLOADS = {
             "orders": 0
           }
         ],
-        "total_sales_usd": 4605.09,
-        "total_orders": 111
+        "total_sales_usd": 5448.75,
+        "total_orders": 117
       }
     },
     "weekday_baseline": {
@@ -27748,9 +28378,9 @@ window.BBQ_PAYLOADS = {
           2622.72,
           2680.44,
           4395.36,
-          5630.01,
-          3850.08,
-          813.08,
+          5833.98,
+          3967.75,
+          908.89,
           -18.47,
           0.0,
           0.0
@@ -27774,16 +28404,16 @@ window.BBQ_PAYLOADS = {
           68,
           56,
           110,
-          140,
-          85,
-          22,
+          148,
+          87,
+          26,
           2,
           0,
           0
         ]
       },
       "2": {
-        "n": 13,
+        "n": 14,
         "sales_sum": [
           0.0,
           0.0,
@@ -27795,17 +28425,17 @@ window.BBQ_PAYLOADS = {
           0.0,
           306.92,
           428.44,
-          684.63,
-          7027.59,
-          7346.58,
-          3920.03,
-          2356.61,
-          1784.01,
-          1617.55,
-          4730.58,
-          6507.81,
-          2957.91,
-          1051.32,
+          749.45,
+          7700.86,
+          8206.11,
+          4367.1,
+          3053.48,
+          1941.96,
+          1875.64,
+          6319.36,
+          7178.35,
+          3320.11,
+          1083.04,
           0.0,
           0.0,
           0.0
@@ -27821,24 +28451,24 @@ window.BBQ_PAYLOADS = {
           0,
           1,
           4,
-          4,
-          187,
-          217,
-          100,
-          61,
-          47,
-          45,
-          114,
-          151,
-          74,
-          25,
+          5,
+          208,
+          244,
+          112,
+          68,
+          51,
+          50,
+          126,
+          171,
+          82,
+          27,
           0,
           0,
           0
         ]
       },
       "3": {
-        "n": 13,
+        "n": 14,
         "sales_sum": [
           0.0,
           0.0,
@@ -27851,16 +28481,16 @@ window.BBQ_PAYLOADS = {
           258.81,
           0.0,
           1265.08,
-          8900.69,
-          7127.02,
-          5168.12,
-          2324.92,
-          3464.37,
-          3446.6,
-          4109.71,
-          6437.5,
-          4716.9,
-          1938.14,
+          9403.21,
+          7976.34,
+          5962.05,
+          2529.54,
+          3935.56,
+          3817.35,
+          4455.68,
+          7259.71,
+          5025.39,
+          2197.45,
           0.0,
           0.0,
           0.0
@@ -27877,23 +28507,23 @@ window.BBQ_PAYLOADS = {
           1,
           0,
           4,
-          212,
-          196,
-          130,
-          73,
-          59,
-          83,
-          97,
-          142,
-          103,
-          39,
+          225,
+          213,
+          153,
+          78,
+          69,
+          89,
+          105,
+          160,
+          113,
+          43,
           0,
           0,
           0
         ]
       },
       "4": {
-        "n": 13,
+        "n": 14,
         "sales_sum": [
           0.0,
           0.0,
@@ -27905,17 +28535,17 @@ window.BBQ_PAYLOADS = {
           45.15,
           0.0,
           111.26,
-          1368.86,
-          11832.61,
-          9119.57,
-          5790.72,
-          6184.03,
-          2460.96,
-          4212.74,
-          8407.31,
-          9190.62,
-          7300.39,
-          2147.05,
+          1412.4,
+          12577.21,
+          9922.85,
+          6369.48,
+          6460.55,
+          2795.34,
+          4592.06,
+          8915.4,
+          9949.68,
+          7640.86,
+          2276.2,
           0.0,
           0.0,
           0.0
@@ -27931,24 +28561,24 @@ window.BBQ_PAYLOADS = {
           1,
           0,
           1,
-          9,
-          270,
-          263,
-          161,
-          121,
-          64,
-          98,
-          159,
-          189,
-          156,
-          51,
+          10,
+          291,
+          284,
+          183,
+          129,
+          73,
+          107,
+          174,
+          206,
+          163,
+          55,
           0,
           0,
           0
         ]
       },
       "5": {
-        "n": 13,
+        "n": 14,
         "sales_sum": [
           0.0,
           0.0,
@@ -27961,17 +28591,17 @@ window.BBQ_PAYLOADS = {
           0.0,
           1208.04,
           908.9,
-          9841.37,
-          12406.5,
-          13026.23,
-          8036.78,
-          9288.3,
-          7302.92,
-          9823.34,
-          9046.53,
-          4715.23,
-          1108.55,
-          0.0,
+          11008.78,
+          13573.3,
+          13673.63,
+          9233.24,
+          10135.25,
+          7873.26,
+          10965.5,
+          9944.54,
+          4997.09,
+          1147.9,
+          11.1,
           0.0,
           93.53
         ],
@@ -27987,23 +28617,23 @@ window.BBQ_PAYLOADS = {
           0,
           2,
           15,
-          177,
-          260,
-          257,
-          179,
-          148,
-          138,
-          183,
-          174,
-          102,
-          28,
-          0,
+          200,
+          279,
+          274,
+          203,
+          166,
+          152,
+          207,
+          195,
+          110,
+          30,
+          1,
           0,
           1
         ]
       },
       "6": {
-        "n": 14,
+        "n": 15,
         "sales_sum": [
           0.0,
           0.0,
@@ -28016,15 +28646,15 @@ window.BBQ_PAYLOADS = {
           0.0,
           0.0,
           285.56,
-          9518.86,
-          12891.48,
-          9355.77,
-          6748.83,
-          5846.89,
-          6273.34,
-          7044.41,
-          5907.0,
-          2050.79,
+          10577.22,
+          13776.44,
+          10164.73,
+          7622.17,
+          6320.11,
+          6989.87,
+          7242.11,
+          6307.44,
+          2086.03,
           -6.93,
           -81.0,
           0.0,
@@ -28042,15 +28672,15 @@ window.BBQ_PAYLOADS = {
           0,
           0,
           3,
+          165,
+          285,
+          223,
+          168,
+          105,
+          123,
+          138,
           149,
-          265,
-          204,
-          150,
-          94,
-          111,
-          131,
-          137,
-          55,
+          57,
           1,
           1,
           0,
@@ -30930,14 +31560,14 @@ window.BBQ_PAYLOADS = {
       },
       {
         "id": 106,
-        "title": "Rainy Days Average +6.6% vs Normal Days",
+        "title": "Rainy Days Average +0.8% vs Normal Days",
         "category": "weather_elasticity",
         "category_label": "\ud83c\udf27\ufe0f Weather Sensitivity",
-        "insight": "Comparing operating days by weather, rainy days averaged $4,758 in sales against $4,462 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
+        "insight": "Comparing operating days by weather, rainy days averaged $4,561 in sales against $4,527 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
         "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
-        "quantitative_proof": "$4,758 rainy-day average vs $4,462 normal-day average (+6.6%)",
+        "quantitative_proof": "$4,561 rainy-day average vs $4,527 normal-day average (+0.8%)",
         "actionable_recommendation": "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, and side cups by 10:30 AM to prevent packing bottlenecks at the counter.",
-        "impact_usd": 295.44,
+        "impact_usd": 34.02,
         "terms": [
           "Average Ticket",
           "Sales Trend",
@@ -31026,28 +31656,28 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-08T13:00:01.447126-05:00",
-    "total_alerts_detected": 20,
+    "generated_at": "2026-11-10T13:00:02.060867-05:00",
+    "total_alerts_detected": 15,
     "active_alert": {
-      "alert_id": "qw-aov-2026-11-03-11",
-      "date": "2026-11-03",
-      "hour": 11,
-      "hour_formatted": "11:00 AM EST",
+      "alert_id": "qw-aov-2026-11-08-16",
+      "date": "2026-11-08",
+      "hour": 16,
+      "hour_formatted": "4:00 PM EST",
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (Average Ticket $53.41 vs $39.13 Usual)",
-      "immediate_present_status": "Counter ticket size jumped to $53.41/order (+36% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 11:00 AM EST window. While ticket volume (26 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $59.71 vs $56.83 Usual)",
+      "immediate_present_status": "Counter ticket size jumped to $59.71/order (+5% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 4:00 PM EST window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
       "velocity_metrics": {
-        "actual_sales": 1388.66,
-        "expected_sales": 698.39,
-        "actual_orders": 26,
-        "expected_orders": 17.8,
-        "aov": 53.41,
-        "baseline_aov": 39.13,
-        "z_score": 2.55
+        "actual_sales": 716.53,
+        "expected_sales": 465.99,
+        "actual_orders": 12,
+        "expected_orders": 8.2,
+        "aov": 59.71,
+        "baseline_aov": 56.83,
+        "z_score": 1.14
       },
       "terms": [
         "Average Ticket",
@@ -31058,81 +31688,25 @@ window.BBQ_PAYLOADS = {
     },
     "recent_alerts": [
       {
-        "alert_id": "qw-aov-2026-10-31-18",
-        "date": "2026-10-31",
-        "hour": 18,
-        "hour_formatted": "6:00 PM EST",
-        "event_type": "ticket_spike",
-        "severity": "surge",
-        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-        "headline": "Large Group / Catering Ticket Spike (Average Ticket $59.62 vs $51.99 Usual)",
-        "immediate_present_status": "Counter ticket size jumped to $59.62/order (+15% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 6:00 PM EST window. While ticket volume (7 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-        "velocity_metrics": {
-          "actual_sales": 417.31,
-          "expected_sales": 695.89,
-          "actual_orders": 7,
-          "expected_orders": 13.4,
-          "aov": 59.62,
-          "baseline_aov": 51.99,
-          "z_score": -0.76
-        },
-        "terms": [
-          "Average Ticket",
-          "Meat Used Per Hour",
-          "Prep Target",
-          "Cooked Yield %"
-        ]
-      },
-      {
-        "alert_id": "qw-aov-2026-11-01-11",
-        "date": "2026-11-01",
-        "hour": 11,
-        "hour_formatted": "11:00 AM EST",
-        "event_type": "ticket_spike",
-        "severity": "surge",
-        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-        "headline": "Large Group / Catering Ticket Spike (Average Ticket $63.08 vs $63.88 Usual)",
-        "immediate_present_status": "Counter ticket size jumped to $63.08/order (+-1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 11:00 AM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
-        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
-        "velocity_metrics": {
-          "actual_sales": 630.75,
-          "expected_sales": 679.92,
-          "actual_orders": 10,
-          "expected_orders": 10.6,
-          "aov": 63.08,
-          "baseline_aov": 63.88,
-          "z_score": -0.14
-        },
-        "terms": [
-          "Average Ticket",
-          "Meat Used Per Hour",
-          "Prep Target",
-          "Cooked Yield %"
-        ]
-      },
-      {
-        "alert_id": "qw-aov-2026-11-01-12",
-        "date": "2026-11-01",
+        "alert_id": "qw-aov-2026-11-07-12",
+        "date": "2026-11-07",
         "hour": 12,
         "hour_formatted": "12:00 PM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-        "headline": "Large Group / Catering Ticket Spike (Average Ticket $49.12 vs $48.65 Usual)",
-        "immediate_present_status": "Counter ticket size jumped to $49.12/order (+1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (24 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "headline": "Large Group / Catering Ticket Spike (Average Ticket $61.41 vs $48.65 Usual)",
+        "immediate_present_status": "Counter ticket size jumped to $61.41/order (+26% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (19 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
-          "actual_sales": 1178.96,
-          "expected_sales": 920.82,
-          "actual_orders": 24,
-          "expected_orders": 18.9,
-          "aov": 49.12,
+          "actual_sales": 1166.8,
+          "expected_sales": 969.52,
+          "actual_orders": 19,
+          "expected_orders": 19.9,
+          "aov": 61.41,
           "baseline_aov": 48.65,
-          "z_score": 0.77
+          "z_score": 0.71
         },
         "terms": [
           "Average Ticket",
@@ -31142,25 +31716,25 @@ window.BBQ_PAYLOADS = {
         ]
       },
       {
-        "alert_id": "qw-aov-2026-11-01-17",
-        "date": "2026-11-01",
-        "hour": 17,
-        "hour_formatted": "5:00 PM EST",
+        "alert_id": "qw-aov-2026-11-07-14",
+        "date": "2026-11-07",
+        "hour": 14,
+        "hour_formatted": "2:00 PM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-        "headline": "Large Group / Catering Ticket Spike (Average Ticket $54.38 vs $53.77 Usual)",
-        "immediate_present_status": "Counter ticket size jumped to $54.38/order (+1% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 5:00 PM EST window. While ticket volume (10 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "headline": "Large Group / Catering Ticket Spike (Average Ticket $49.85 vs $45.48 Usual)",
+        "immediate_present_status": "Counter ticket size jumped to $49.85/order (+10% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 2:00 PM EST window. While ticket volume (24 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
-          "actual_sales": 543.83,
-          "expected_sales": 503.17,
-          "actual_orders": 10,
-          "expected_orders": 9.4,
-          "aov": 54.38,
-          "baseline_aov": 53.77,
-          "z_score": 0.17
+          "actual_sales": 1196.46,
+          "expected_sales": 659.52,
+          "actual_orders": 24,
+          "expected_orders": 14.5,
+          "aov": 49.85,
+          "baseline_aov": 45.48,
+          "z_score": 1.71
         },
         "terms": [
           "Average Ticket",
@@ -31170,25 +31744,81 @@ window.BBQ_PAYLOADS = {
         ]
       },
       {
-        "alert_id": "qw-aov-2026-11-03-11",
-        "date": "2026-11-03",
+        "alert_id": "qw-aov-2026-11-08-11",
+        "date": "2026-11-08",
         "hour": 11,
         "hour_formatted": "11:00 AM EST",
         "event_type": "ticket_spike",
         "severity": "surge",
         "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-        "headline": "Large Group / Catering Ticket Spike (Average Ticket $53.41 vs $39.13 Usual)",
-        "immediate_present_status": "Counter ticket size jumped to $53.41/order (+36% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-        "causal_explanation": "Large office/family group orders concentrated in the 11:00 AM EST window. While ticket volume (26 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "headline": "Large Group / Catering Ticket Spike (Average Ticket $66.15 vs $64.10 Usual)",
+        "immediate_present_status": "Counter ticket size jumped to $66.15/order (+3% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 11:00 AM EST window. While ticket volume (16 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
         "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
         "velocity_metrics": {
-          "actual_sales": 1388.66,
-          "expected_sales": 698.39,
-          "actual_orders": 26,
-          "expected_orders": 17.8,
-          "aov": 53.41,
-          "baseline_aov": 39.13,
-          "z_score": 2.55
+          "actual_sales": 1058.36,
+          "expected_sales": 705.15,
+          "actual_orders": 16,
+          "expected_orders": 11,
+          "aov": 66.15,
+          "baseline_aov": 64.1,
+          "z_score": 0.97
+        },
+        "terms": [
+          "Average Ticket",
+          "Meat Used Per Hour",
+          "Prep Target",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-11-08-14",
+        "date": "2026-11-08",
+        "hour": 14,
+        "hour_formatted": "2:00 PM EST",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (Average Ticket $48.52 vs $45.37 Usual)",
+        "immediate_present_status": "Counter ticket size jumped to $48.52/order (+7% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 2:00 PM EST window. While ticket volume (18 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 873.34,
+          "expected_sales": 508.14,
+          "actual_orders": 18,
+          "expected_orders": 11.2,
+          "aov": 48.52,
+          "baseline_aov": 45.37,
+          "z_score": 1.13
+        },
+        "terms": [
+          "Average Ticket",
+          "Meat Used Per Hour",
+          "Prep Target",
+          "Cooked Yield %"
+        ]
+      },
+      {
+        "alert_id": "qw-aov-2026-11-08-16",
+        "date": "2026-11-08",
+        "hour": 16,
+        "hour_formatted": "4:00 PM EST",
+        "event_type": "ticket_spike",
+        "severity": "surge",
+        "severity_badge": "\ud83e\udd69 High-Ticket Surge",
+        "headline": "Large Group / Catering Ticket Spike (Average Ticket $59.71 vs $56.83 Usual)",
+        "immediate_present_status": "Counter ticket size jumped to $59.71/order (+5% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+        "causal_explanation": "Large office/family group orders concentrated in the 4:00 PM EST window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+        "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
+        "velocity_metrics": {
+          "actual_sales": 716.53,
+          "expected_sales": 465.99,
+          "actual_orders": 12,
+          "expected_orders": 8.2,
+          "aov": 59.71,
+          "baseline_aov": 56.83,
+          "z_score": 1.14
         },
         "terms": [
           "Average Ticket",

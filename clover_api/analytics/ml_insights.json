@@ -98,14 +98,14 @@
     },
     {
       "id": 106,
-      "title": "Rainy Days Average +6.6% vs Normal Days",
+      "title": "Rainy Days Average +0.8% vs Normal Days",
       "category": "weather_elasticity",
       "category_label": "\ud83c\udf27\ufe0f Weather Sensitivity",
-      "insight": "Comparing operating days by weather, rainy days averaged $4,758 in sales against $4,462 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
+      "insight": "Comparing operating days by weather, rainy days averaged $4,561 in sales against $4,527 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
       "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
-      "quantitative_proof": "$4,758 rainy-day average vs $4,462 normal-day average (+6.6%)",
+      "quantitative_proof": "$4,561 rainy-day average vs $4,527 normal-day average (+0.8%)",
       "actionable_recommendation": "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, and side cups by 10:30 AM to prevent packing bottlenecks at the counter.",
-      "impact_usd": 295.44,
+      "impact_usd": 34.02,
       "terms": [
         "Average Ticket",
         "Sales Trend",
