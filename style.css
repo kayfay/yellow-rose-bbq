@@ -3781,3 +3781,34 @@ body:not([data-unit-mode="lbs"]) .est-card:has(.kitchen-qty-counts) .est-metric 
 body:not([data-unit-mode="lbs"]) .est-card:has(.kitchen-qty-counts) [id$="-cases"] { display: none; }
 .kitchen-qty-counts .kitchen-qty-primary { font-size: 1.75rem; line-height: 1.15; }
 .kitchen-qty-counts .kitchen-qty-secondary { font-size: 1rem; font-weight: 500; color: var(--text-secondary); }
+
+/* 3-Tier Sync Health Status Badge */
+.sync-status-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sync-state-fresh {
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.sync-state-warning {
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.sync-state-stale {
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.48);
+  background: rgba(239, 68, 68, 0.16);
+}
+

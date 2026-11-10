@@ -7,7 +7,7 @@
 - **Beef Dino Ribs**: `3 bones/plate`; `4 lbs/rack`; `12 ribs/case` (`3 cryovac bags`).
 - **Smoked Turkey (No-Trim)**: `Y_trim = 1.0`, `Y_cook = 0.70` (`20 lbs/case raw`; `3.2` 5-oz portions/cooked lb).
 - **Sausage**: `50 lb` base block (`~55.5–63 lb` stuffed; `60 lb` nominal batch), `3.0 links/lb` (`85%` smoke yield).
-- **Prep Margin**: `Target Cooked = F_t * 1.10` (built-in 10% margin; never shown in the UI). Closed Mon = `0` prep, `$0 (Closed)`, no alert.
+- **Prep Margin & Counts**: `Target Cooked = F_t * 1.10` (never in UI). Always report piece counts first, lbs in `()` (e.g. `~3 Packers (~49 lbs raw)`). Mon = `$0 (Closed)`.
 
 ## 2. Plain-English Smokehouse Copywriting & Zero-Jargon Mandate
 - **Banned UI Jargon**: Never show `"MultiMeatForecaster"`, `"variance"`, `"safety buffer"`, `"model evaluation"`, `"DOW Base"`, `"Z-Score"`, `"Sigma"`, `"COGS"`, `"Velocity"`, `"Elasticity"`, or `"Stadium Lift"`.
@@ -35,3 +35,4 @@
 - **Units**: `clover_api/analytics/unit_conversions.py` is the source (invoice 9/3/26): brisket 16.4 lb/82 lb case, rack 5.6 lb, butt 8 lb (yield sheet). JS mirror `KITCHEN_UNIT_SPECS`; `test_calculations.py` enforces parity.
 - **Meat cost %** = batch cost (raw lbs x invoice $) / revenue; null on closed/partial days; never a ratio constant. Revenue comes from `hourly_actuals` POS history, not the shift heatmap (undercounts 1.1-2.4x).
 - **Plotly badges**: Peak/Low/Now strip sits beside Plotly charts, never inside (inside breaks autosize). Only Monday is closed.
+- **Sync-Aware Projection & Badges**: `Projected = POS_to_Date + remainingHoursWeight * historicalDayAvg` anchored to `min(now, lastSyncedAt)` or last POS bucket (`< 20:00 EST`); `predicted_revenue` never copies `actual_revenue`. Sync badge: `<30m` `fresh`, `30-120m` `warning`, `>120m` `stale`.

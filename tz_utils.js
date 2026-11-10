@@ -8,6 +8,7 @@
   const HAS_ZONE = /(Z|[+-]\d{2}:?\d{2})$/;
 
   let simulatedNow = null;
+  let lastSyncedAt = null;
 
   function setSimulatedNow(val) {
     if (!val) {
@@ -21,6 +22,39 @@
 
   function clearSimulatedNow() {
     simulatedNow = null;
+  }
+
+  function setLastSyncedAt(val) {
+    if (!val) {
+      lastSyncedAt = null;
+      return null;
+    }
+    const d = val instanceof Date ? new Date(val.getTime()) : new Date(val);
+    lastSyncedAt = isNaN(d.getTime()) ? null : d;
+    return lastSyncedAt;
+  }
+
+  function getLastSyncedAt() {
+    return lastSyncedAt ? new Date(lastSyncedAt.getTime()) : null;
+  }
+
+  function getSyncHealth(syncIsoOrDate, now) {
+    const effNow = now instanceof Date ? now : (now ? new Date(now) : new Date());
+    const syncDate = syncIsoOrDate instanceof Date
+      ? syncIsoOrDate
+      : (syncIsoOrDate ? new Date(syncIsoOrDate) : getLastSyncedAt());
+    if (!syncDate || isNaN(syncDate.getTime()) || isNaN(effNow.getTime())) {
+      return { ageMinutes: 0, state: 'fresh', label: 'Live Sync', badgeText: '● Live Sync' };
+    }
+    const ageMinutes = Math.max(0, Math.round((effNow.getTime() - syncDate.getTime()) / 60000));
+    if (ageMinutes < 30) {
+      return { ageMinutes, state: 'fresh', label: 'Live Sync', badgeText: '● Live Sync' };
+    }
+    if (ageMinutes <= 120) {
+      return { ageMinutes, state: 'warning', label: 'Sync Lag', badgeText: `⚠ Sync Lag (${ageMinutes}m ago)` };
+    }
+    const hours = Math.max(2, Math.round(ageMinutes / 60));
+    return { ageMinutes, state: 'stale', label: 'Stale Sync', badgeText: `⚠ Stale Sync (${hours}h ago)` };
   }
 
   function getEffectiveNow() {
@@ -107,18 +141,73 @@
     return (d.getUTCDay() + 6) % 7;
   }
 
+  function resolveEffectiveCutoff(actuals, dayData, targetDate, effNow, syncNow) {
+    const today = shopDateStr(effNow);
+    const isToday = targetDate === today;
+    const isPast = targetDate < today;
+    const isFuture = targetDate > today;
+    let cutoff = isPast ? 23 : (isToday ? shopHour(effNow) : -1);
+    let effMinute = shopMinute(effNow);
+    let isMidDaySynced = false;
+
+    const hasRealActuals = !!(dayData && dayData.buckets && (dayData.total_orders > 0 || dayData.total_sales_usd > 0));
+    let lastActiveBucketHour = -1;
+    if (hasRealActuals && Array.isArray(dayData.buckets)) {
+      for (let h = 23; h >= 0; h--) {
+        const b = dayData.buckets[h];
+        if (b && (Number(b.sales_usd) > 0 || Number(b.orders) > 0)) {
+          lastActiveBucketHour = h;
+          break;
+        }
+      }
+    }
+
+    if (!isSimulating()) {
+      const rawSync = syncNow !== undefined ? syncNow : (lastSyncedAt || (actuals && actuals.generated_at) || null);
+      const syncInst = rawSync ? (rawSync instanceof Date ? rawSync : new Date(rawSync)) : null;
+      const validSync = syncInst && !isNaN(syncInst.getTime());
+
+      if (validSync && shopDateStr(syncInst) === targetDate) {
+        const syncHr = shopHour(syncInst);
+        const syncMin = shopMinute(syncInst);
+        // If sync timestamp is on targetDate and before close (hour < 20), and either today's clock is ahead
+        // of syncInst or targetDate was only synced mid-day (lastActiveBucketHour < 19), anchor cutoff to syncInst.
+        if (syncHr < 20 && ((isToday && syncInst.getTime() < effNow.getTime()) || (isPast && lastActiveBucketHour < 19))) {
+          cutoff = syncHr;
+          effMinute = syncMin;
+          isMidDaySynced = true;
+        }
+      }
+
+      // Additional safeguard: if viewing Today after 8 PM wall-clock (cutoff >= 20) or an incomplete mid-day sync
+      // (including a past date where recorded POS buckets stopped mid-day before dinner rush), bound cutoff to lastActiveBucketHour.
+      if ((isToday || isPast || isMidDaySynced) && cutoff >= 20 && hasRealActuals && lastActiveBucketHour >= 10 && lastActiveBucketHour <= 16) {
+        cutoff = lastActiveBucketHour;
+        effMinute = 59;
+        isMidDaySynced = true;
+      } else if ((isToday || isMidDaySynced) && cutoff >= 20 && hasRealActuals && lastActiveBucketHour >= 10 && lastActiveBucketHour < 19) {
+        cutoff = lastActiveBucketHour;
+        effMinute = 59;
+        isMidDaySynced = true;
+      }
+    }
+
+    return { today, isToday, isPast, isFuture, cutoff, effMinute, isMidDaySynced, hasRealActuals, lastActiveBucketHour };
+  }
+
   /**
    * Build chart series + summary for one shop-local date.
    * forecastRecords: [{hour, predicted_orders, predicted_revenue}]
    * Returns null when the date is in the future (forecast-only).
    */
-  function buildActualsOverlay(actuals, snapshots, dateStr, forecastRecords, now) {
+  function buildActualsOverlay(actuals, snapshots, dateStr, forecastRecords, now, syncNow) {
     const effNow = now || getEffectiveNow();
     const today = shopDateStr(effNow);
     if (dateStr > today) return null;
-    const isToday = dateStr === today;
-    const cutoff = isToday ? shopHour(effNow) : 23;
     const dayData = actuals && actuals.days ? actuals.days[dateStr] : null;
+    const resolved = resolveEffectiveCutoff(actuals, dayData, dateStr, effNow, syncNow);
+    const isToday = resolved.isToday || resolved.isMidDaySynced;
+    const cutoff = resolved.cutoff;
     const recs = Array.isArray(forecastRecords) ? forecastRecords : [];
 
     const actualOrders = recs.map(r => {
@@ -186,21 +275,22 @@
    *   - 'live': current hour in progress (=== cutoff on today)
    *   - 'predicted': upcoming hour (> cutoff on today, or future date)
    */
-  function computeBlendedDayMetrics(actuals, forecastRecords, now, dateStr) {
+  function computeBlendedDayMetrics(actuals, forecastRecords, now, dateStr, syncNow) {
     const effNow = now || getEffectiveNow();
     const today = shopDateStr(effNow);
     const targetDate = dateStr || today;
-    const isToday = targetDate === today;
-    const isPast = targetDate < today;
-    const isFuture = targetDate > today;
-    const cutoff = isPast ? 23 : (isToday ? shopHour(effNow) : -1);
-
     const dayData = actuals && actuals.days ? actuals.days[targetDate] : null;
+    const resolved = resolveEffectiveCutoff(actuals, dayData, targetDate, effNow, syncNow);
+    const isToday = resolved.isToday;
+    const isPast = resolved.isPast && !resolved.isMidDaySynced;
+    const isFuture = resolved.isFuture;
+    const isInProgressDay = isToday || resolved.isMidDaySynced;
+    const cutoff = resolved.cutoff;
     const recs = Array.isArray(forecastRecords) ? forecastRecords : [];
 
     // Fallback baseline for dates or simulations where POS actuals haven't yet been synced/recorded
     let fallbackBuckets = null;
-    const hasRealActuals = !!(dayData && dayData.buckets && (dayData.total_orders > 0 || dayData.total_sales_usd > 0));
+    const hasRealActuals = resolved.hasRealActuals;
     // Monday is closed: with no real POS rows for that date, do not invent "actuals" from weekday history.
     if (!hasRealActuals && actuals && actuals.weekday_baseline && weekdayIndexMon0(targetDate) !== 0) {
       const dowIdx = String(weekdayIndexMon0(targetDate));
@@ -251,7 +341,7 @@
       let status = 'predicted';
       if (isPast) {
         status = 'actual';
-      } else if (isToday) {
+      } else if (isInProgressDay) {
         if (h < cutoff) {
           status = 'actual';
         } else if (h === cutoff) {
@@ -317,9 +407,9 @@
       const avgByHour = dowBase.sales_sum.map(v => (Number(v) || 0) / dowBase.n);
       const dayAvg = avgByHour.reduce((a, b) => a + b, 0);
       if (dayAvg > 0) {
-        // The live hour counts only for the part that has elapsed (minutes/60) when running on the real clock;
-        // a simulated clock, a past day and a full hour bucket count it as fully elapsed.
-        const liveFrac = (isToday && !isSimulating()) ? shopMinute(effNow) / 60 : 1;
+        // The live hour counts only for the part that has elapsed (minutes/60) when running on the real clock
+        // or anchored to a mid-day sync timestamp; a simulated clock, a past day and a full hour bucket count it as fully elapsed.
+        const liveFrac = (isInProgressDay && !isSimulating()) ? resolved.effMinute / 60 : 1;
         const elapsedWeight = h => (h < cutoff ? 1 : (h === cutoff ? liveFrac : 0));
         typicalToHour = avgByHour.reduce((a, v, h) => a + v * elapsedWeight(h), 0);
         const remainingAvg = avgByHour.reduce((a, v, h) => a + v * (1 - elapsedWeight(h)), 0);
@@ -379,6 +469,9 @@
     clearSimulatedNow,
     getEffectiveNow,
     isSimulating,
+    setLastSyncedAt,
+    getLastSyncedAt,
+    getSyncHealth,
     shopDateStr,
     shopHour,
     shopMinute,

@@ -79,4 +79,60 @@ test.describe('Projected Day Total and sales pace', () => {
     expect(s.blendedTotalRevenue).toBe(s.actualSalesSoFar + s.forecastRemaining);
     expect(s.blendedTotalRevenue).toBe(0);
   });
+
+  test('mid-day sync lag (e.g. synced at 1:41 PM EST while wall-clock is 8:30 PM EST) projects remaining hours and never copies Actual POS to Date', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    const s = await page.evaluate(() => {
+      window.ShopTime.clearSimulatedNow();
+      const buckets = Array.from({ length: 24 }, (_, h) => ({
+        hour: h,
+        sales_usd: (h >= 11 && h <= 13) ? 300 : 0,
+        orders: (h >= 11 && h <= 13) ? 6 : 0
+      }));
+      const actuals = {
+        generated_at: '2026-11-08T13:41:00-05:00',
+        days: { '2026-11-08': { buckets, total_orders: 18, total_sales_usd: 900 } },
+        weekday_baseline: {
+          '6': { n: 2, sales_sum: Array.from({ length: 24 }, (_, h) => (h >= 11 && h <= 20) ? 400 : 0), orders_sum: Array(24).fill(0) }
+        }
+      };
+      const recs = Array.from({ length: 24 }, (_, h) => ({ hour: h, predicted_revenue: (h >= 11 && h <= 20) ? 200 : 0, predicted_orders: 4 }));
+      const wallClockLate = new Date('2026-11-08T20:30:00-05:00');
+      window.ShopTime.setLastSyncedAt('2026-11-08T13:41:00-05:00');
+      const out = window.ShopTime.computeBlendedDayMetrics(actuals, recs, wallClockLate, '2026-11-08');
+      window.ShopTime.setLastSyncedAt(null);
+      return out;
+    });
+    expect(s.cutoffHour).toBe(13);
+    expect(s.summary.actualSalesSoFar).toBe(900);
+    expect(s.summary.remainingHoursWeight).toBeGreaterThan(0.6);
+    expect(s.summary.blendedTotalRevenue).toBeGreaterThan(s.summary.actualSalesSoFar + 1200);
+    expect(s.summary.blendedTotalRevenue).not.toBe(s.summary.actualSalesSoFar);
+  });
+
+  test('3-tier sync health classifier distinguishes fresh (<30m), warning (30-120m), and stale (>120m) sync states', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    const res = await page.evaluate(() => {
+      const refNow = new Date('2026-11-08T16:00:00-05:00');
+      const fresh = window.ShopTime.getSyncHealth('2026-11-08T15:45:00-05:00', refNow);
+      const warning = window.ShopTime.getSyncHealth('2026-11-08T14:45:00-05:00', refNow);
+      const stale = window.ShopTime.getSyncHealth('2026-11-08T13:00:00-05:00', refNow);
+      const pill = document.getElementById('data-last-pulled');
+      return {
+        fresh,
+        warning,
+        stale,
+        hasSyncStateAttr: !!(pill && pill.dataset && pill.dataset.syncState)
+      };
+    });
+    expect(res.fresh.state).toBe('fresh');
+    expect(res.fresh.badgeText).toContain('Live Sync');
+    expect(res.warning.state).toBe('warning');
+    expect(res.warning.badgeText).toContain('Sync Lag');
+    expect(res.stale.state).toBe('stale');
+    expect(res.stale.badgeText).toContain('Stale Sync');
+    expect(res.hasSyncStateAttr).toBe(true);
+  });
 });

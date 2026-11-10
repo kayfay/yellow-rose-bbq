@@ -954,7 +954,13 @@
               const cutH = overlay.cutoffHour;
               const cutH12 = cutH === 0 ? 12 : (cutH > 12 ? cutH - 12 : cutH);
               const cutAmpm = cutH >= 12 ? 'PM' : 'AM';
-              summaryElem.textContent = `Today so far (through ${cutH12}:00 ${cutAmpm} EST, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; full-day forecast ${money(s.forecastFullDay)}.`;
+              const blendedMetrics = (window.ShopTime && typeof window.ShopTime.computeBlendedDayMetrics === 'function')
+                ? window.ShopTime.computeBlendedDayMetrics(actuals, activeForecast, null, overlay.date)
+                : null;
+              const projDayTotal = (blendedMetrics && blendedMetrics.summary && typeof blendedMetrics.summary.blendedTotalRevenue === 'number')
+                ? blendedMetrics.summary.blendedTotalRevenue
+                : s.forecastFullDay;
+              summaryElem.textContent = `Today so far (through ${cutH12}:00 ${cutAmpm} EST, as of last sync): ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastToHour)} forecast to this hour; Projected Day Total ${money(projDayTotal)} (full-day forecast ${money(s.forecastFullDay)}).`;
             } else {
               summaryElem.textContent = `${overlay.date}: ${money(s.actualSales)} actual (${s.actualOrders} orders) vs ${money(s.forecastFullDay)} forecast total.`;
             }
@@ -1088,8 +1094,22 @@
 
     function setSimHour(hour) {
       if (!global.ShopTime) return;
-      const targetDateInput = document.getElementById('forecast-start-date')?.value;
-      const targetDateStr = targetDateInput || global.ShopTime.shopDateStr();
+      const targetDateInput = document.getElementById('forecast-start-date');
+      let targetDateStr = (targetDateInput && targetDateInput.value) || global.ShopTime.shopDateStr();
+      // If the active date is a Monday (closed day, 0 retail service), advance to the next open Tuesday
+      // so the Time-Travel Simulator always exercises an active operating day with POS turnover.
+      if (targetDateStr) {
+        const dCheck = new Date(targetDateStr + 'T12:00:00Z');
+        if (!isNaN(dCheck.getTime()) && dCheck.getUTCDay() === 1) {
+          dCheck.setUTCDate(dCheck.getUTCDate() + 1);
+          targetDateStr = dCheck.toISOString().split('T')[0];
+          if (targetDateInput) targetDateInput.value = targetDateStr;
+          const endDateInput = document.getElementById('forecast-end-date');
+          if (endDateInput && (!endDateInput.value || endDateInput.value < targetDateStr)) {
+            endDateInput.value = targetDateStr;
+          }
+        }
+      }
       const simDate = typeof global.ShopTime.createShopInstant === 'function'
         ? global.ShopTime.createShopInstant(targetDateStr, hour)
         : new Date(new Date(targetDateStr + 'T12:00:00').setHours(hour, 0, 0, 0));

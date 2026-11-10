@@ -14,6 +14,11 @@ BANNED = [
     # typed-in demand numbers that disagreed with the payloads, and the old 35/15 70:30 sausage blend
     r"peak saturday surge", r"high friday run", r"heavy rain \(31", r"stadium game day",
     r"97\.37", r"17\.4k", r"17\.3k", r"13\.8k", r"\b3\.5x\b", r"5\.8%", r"\(-37%\)", r"2,330", r"70:30",
+    # superseded 40% brisket cooked yield (canonical is 35% / 5.75 lbs cooked per 16.4 lb packer)
+    r"40%\s*cooked yield", r"40%\s*brisket", r"brisket yields\s*<strong>40%", r"bRaw\s*\*\s*0\.40",
+    # banned statistical/BI jargon in rendered text
+    r"multimeatforecaster", r"safety buffer", r"model evaluation", r"dow base",
+    r"z-score", r"\bsigma\b", r"\belasticity\b", r"stadium lift", r"airflow velocity",
 ]
 FILES = ["index.html", "app.js", "d3_charts.js", "modules/forecaster/analytics_subtabs.js",
          "modules/reports/shop_reports.js", "modules/recipes/sausage_calc.js", "modules/shared/core_utils.js"]

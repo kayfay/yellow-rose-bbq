@@ -88,11 +88,22 @@ for d in dates:
     pork_raw = max(24.0, cooked_pork_lbs / 0.44) * (1 if cooked_pork_lbs > 5 else rev_multiplier)
     sausage_final = max(20.0, sausage_lbs) * (1 if sausage_lbs > 5 else rev_multiplier)
     
+    DOW_BASELINE_REV = {
+        "Mon": 0.0,
+        "Tue": 3689.0,
+        "Wed": 3050.0,
+        "Thu": 3900.0,
+        "Fri": 5100.0,
+        "Sat": 6200.0,
+        "Sun": 4650.0
+    }
+    baseline_pred_rev = DOW_BASELINE_REV.get(day_name, 3900.0)
+
     historical_records.append({
         "date": d,
         "day_name": day_name,
         "actual_revenue": round(revenue, 2),
-        "predicted_revenue": round(revenue, 2), # for compatibility with app.js
+        "predicted_revenue": round(baseline_pred_rev, 2),
         "brisket_raw_lbs": round(brisket_raw, 1),
         "pork_shoulder_raw_lbs": round(pork_raw, 1),
         "sausage_lbs": round(sausage_final, 1),

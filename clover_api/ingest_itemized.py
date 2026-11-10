@@ -4,6 +4,7 @@ Fetches itemized POS menu items and line item transactions from Clover REST API.
 Generates WEBSITE_MENU.md and populates the SQLite itemized catalog.
 """
 
+import time
 import sqlite3
 import requests
 import pandas as pd
@@ -20,13 +21,25 @@ def fetch_pos_items():
     
     while True:
         url = f"{creds['base_url']}/v3/merchants/{creds['merchant_id']}/items?limit=100&offset={offset}"
-        res = requests.get(url, headers=headers, timeout=30)
-        res.raise_for_status()
-        elements = res.json().get("elements", [])
+        elements = []
+        for attempt in range(5):
+            try:
+                res = requests.get(url, headers=headers, timeout=30)
+                if res.status_code == 200:
+                    elements = res.json().get("elements", [])
+                    break
+                elif res.status_code in (429, 500, 502, 503, 504):
+                    time.sleep(2.0 ** (attempt + 1))
+                else:
+                    res.raise_for_status()
+            except (requests.ConnectionError, requests.Timeout):
+                time.sleep(2.0 ** (attempt + 1))
+        
         all_items.extend(elements)
         if len(elements) < 100:
             break
         offset += 100
+        time.sleep(0.2)
 
     print(f"[ITEMIZED INGEST] Fetched {len(all_items)} total POS items.")
     return all_items

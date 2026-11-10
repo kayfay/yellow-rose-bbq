@@ -1,7 +1,7 @@
 # yellow-rose-sync-trigger
 
-Cloudflare Worker with a cron trigger (`5 * * * *`, UTC) that starts the
-**Update Clover Data** GitHub Actions workflow every hour through
+Cloudflare Worker with a cron trigger (`5,35 * * * *`, UTC) that starts the
+**Update Clover Data** GitHub Actions workflow every 30 minutes through
 `workflow_dispatch`. GitHub's own `schedule:` trigger is best-effort and was
 only firing every 3–7 hours, which left gaps in the prediction vs. actual
 tracking. The workflow's `schedule:` stays as a fallback.
@@ -16,7 +16,7 @@ tracking. The workflow's `schedule:` stays as a fallback.
    npx wrangler secret put GITHUB_TOKEN   # paste the token
    ```
    Or ask the Cloudflare MCP to deploy `src/index.js` as worker
-   `yellow-rose-sync-trigger` with cron `5 * * * *`, the `[vars]` from
+   `yellow-rose-sync-trigger` with cron `5,35 * * * *`, the `[vars]` from
    `wrangler.toml`, and secret `GITHUB_TOKEN`.
 
 ## Verify

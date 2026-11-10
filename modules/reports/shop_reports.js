@@ -113,7 +113,7 @@
           : `${labelStr} sales ($${expSales.toLocaleString()}) are tracking ${Math.abs(pct)}% ($${Math.abs(diffUsd).toLocaleString()}) ${diffWord} the usual $${typSales.toLocaleString()} pace, leaving ~$${leftover.toLocaleString()} for the shop after ~$${meatCost.toLocaleString()} in estimated meat cost.`,
         the_action: expSales === 0
           ? 'Keep main offset smokers cold, deep-clean the firebox, inspect Tuesday opening Brisket trims, and grind/cure Day 1 sausage batches.'
-          : `Prep ${Math.round(bRaw)} lbs raw Brisket (~${Math.round(bRaw * 0.40)} lbs cooked), ${Math.round(pRaw)} lbs raw Pulled Pork (~${Math.round(pRaw * 0.44)} lbs cooked), ${Math.round(rRacks)} racks of Spare Ribs, and ${Math.round(tCooked / 0.70)} lbs raw Turkey (~${Math.round(tCooked)} lbs cooked) ahead of peak rush.`,
+          : `Prep ${Math.round(bRaw)} lbs raw Brisket (~${Math.round(bRaw * 0.35)} lbs cooked), ${Math.round(pRaw)} lbs raw Pulled Pork (~${Math.round(pRaw * 0.44)} lbs cooked), ${Math.round(rRacks)} racks of Spare Ribs, and ${Math.round(tCooked / 0.70)} lbs raw Turkey (~${Math.round(tCooked)} lbs cooked) ahead of peak rush.`,
         sales_bridge: {
           typical_day_label: `Usual ${labelStr}`,
           typical_day_usd: typSales,
@@ -208,7 +208,7 @@
     'Spray apple cider vinegar and Worcestershire spritz only after the bark sets (~150°F internal) to avoid washing away rub spices.',
     'Cut brisket strictly against the grain: remember the grain direction changes by 90 degrees between the flat muscle and the point muscle.',
     'On cold mornings (<40°F), pre-heat the smoker pit with weed burners to avoid burning through two hours of prime post oak splits.',
-    'Soak natural hog casings in lukewarm water (85°F) with 1 tbsp of vinegar to maximize casing elasticity and reduce blowout risk.',
+    'Soak natural hog casings in lukewarm water (85°F) with 1 tbsp of vinegar to maximize casing stretch and reduce blowout risk.',
     'Stage extra jalapeño cheddar links for weekend lunch—historical sales show sausage links index 35% higher on Saturdays and Sundays.',
     'Burn seasoned post oak with 15–20% moisture content; green wood creates bitter black creosote, while bone-dry wood burns too hot.',
     'Save all brisket trimmings: fat caps render down into golden liquid tallow, and lean trimmings formulate the base for daily sausage.',
@@ -300,7 +300,7 @@
         cat: 'weather',
         cat_label: 'Weather Watch',
         importance: 'Bark Formation',
-        title: 'Ambient Humidity & Smoke Airflow Velocity',
+        title: 'Ambient Humidity & Smoke Airflow Draft',
         desc: 'High ambient humidity slows surface evaporative cooling on raw meats (the stall). To build a crisp mahogany bark without sour creosote buildup, maintain high convective draft.',
         pit_check: 'Pit Check: Open exhaust stack dampers 10% wider on humid or foggy mornings to keep clean airflow sweeping across briskets.'
       },

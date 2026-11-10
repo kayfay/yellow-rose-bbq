@@ -56,6 +56,17 @@ Notes:
 - The pipeline unit tests write payload JSON under `clover_api/analytics/`. Run `git status` afterwards and do not commit incidental data churn.
 - When reporting E2E results, give exact pass/fail/flaky counts. Compare failures against untouched `HEAD` before calling them pre-existing.
 
+## Spec-Driven Development (SDD) Invariant
+
+When assigned a new feature, major refactor, or complex task:
+1. **No Code Without Specs:** DO NOT edit application source code immediately.
+2. **Phase 1 (Alignment):** Execute a `/grill-me` probing interview (1–2 questions at a time) to clarify requirements and generate a 2D ASCII/SVG layout anchor [9, 10].
+3. **Phase 2 (Spec Artifacts):** Write three formal specification files to disk before coding:
+   - `SPEC.md`: Functional requirements written using EARS syntax (*"When [trigger], the system shall [response]"*).
+   - `DESIGN.md`: 2D component wireframe, layout grid, and state contracts.
+   - `PLAN.md`: Numbered sub-tasks with deterministic test verification steps.
+4. **Phase 3 (Pause Gate):** Pause and present `SPEC.md` / `PLAN.md` for human approval before initializing the `.loop/` state tracking or writing code [9, 11].
+
 ## 4. 3-Layer State Architecture (`.loop/`) — Mandatory
 
 Persist work state across sessions in `.loop/`, which is tracked in git:

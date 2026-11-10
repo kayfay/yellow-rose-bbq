@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.2.5">
+  <link rel="stylesheet" href="style.css?v=2.2.6">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -342,7 +342,7 @@
           <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; max-width: 700px;">
             <strong style="color: var(--text-primary);">Date &amp; Horizon Controls:</strong> Pick a <strong>past date</strong> for recorded Clover POS sales or a <strong>future date</strong> for upcoming pit prep targets.
           </div>
-          <div id="data-last-pulled" style="font-size: 10px; color: #34d399; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); white-space: nowrap;">
+          <div id="data-last-pulled" class="sync-status-pill sync-state-fresh" data-sync-state="fresh">
             Data Last Synced: ...
           </div>
         </div>
@@ -626,7 +626,7 @@
             <h3>Pit Throughput &amp; Smoker Pacing</h3>
             <ul>
               <li><strong>Peak Service Windows:</strong> <span id="predictive-velocity-summary">Lunch rush (12:00 PM – 1:30 PM) averages 12–14 orders/hr; dinner rush (5:30 PM – 7:30 PM) averages 10–12 orders/hr.</span></li>
-              <li><strong>Cooked Yield Standards:</strong> Brisket yields <strong>40%</strong> cooked weight; Pork Shoulder <strong>44%</strong>; Turkey Breast <strong>70%</strong>.</li>
+              <li><strong>Cooked Yield Standards:</strong> Brisket yields <strong>35%</strong> cooked weight (~5.75 lbs per packer); Pork Shoulder <strong>44%</strong>; Turkey Breast <strong>70%</strong>.</li>
               <li hidden><ul id="predictive-directives-list"></ul></li>
             </ul>
           </div>
@@ -701,7 +701,7 @@
             <h3>Weekly Operating Cycle Baseline</h3>
             <ul>
               <li><strong>Operating Baseline:</strong> <span id="dynamic-baseline-trend">Loading sales history…</span></li>
-              <li><strong>Procurement Directive:</strong> <span id="dynamic-insight-string">Stage raw proteins for 40% Brisket &amp; 44% Pork cooked yield plus Tacos and Rosebuds through 9:00 PM.</span></li>
+              <li><strong>Procurement Directive:</strong> <span id="dynamic-insight-string">Stage raw proteins for 35% Brisket &amp; 44% Pork cooked yield plus Tacos and Rosebuds through 9:00 PM.</span></li>
             </ul>
           </div>
         </section>
@@ -1317,7 +1317,7 @@
               <div style="margin-top: 10px;">
                 <strong>📦 Standard Case Pack &amp; Yield Specs:</strong>
                 <ul style="margin-top: 4px;">
-                  <li><strong>Brisket:</strong> 5 packers/case (~82 lbs raw, ~16.4 lbs each; 40% cooked yield).</li>
+                  <li><strong>Brisket:</strong> 5 packers/case (~82 lbs raw, ~16.4 lbs each; 35% cooked yield / ~5.75 lbs cooked).</li>
                   <li><strong>Pork Shoulder:</strong> 4 bone-in butts/case (~32 lbs raw; 44% cooked yield).</li>
                   <li><strong>Pork Spare Ribs:</strong> 6 racks/case (~34 lbs raw at 5.6 lbs/rack; 60% cooked yield).</li>
                   <li><strong>Beef Dino Ribs:</strong> 12 plate ribs/case (3 cryovac bags).</li>
@@ -1355,14 +1355,14 @@
     </button>
   </nav>
 
-  <script src="clover_api/analytics/payloads.js?v=2.2.5"></script>
-  <script src="d3_charts.js?v=2.2.5"></script>
-  <script src="tz_utils.js?v=2.2.5"></script>
-  <script src="modules/shared/core_utils.js?v=2.2.5" defer></script>
-  <script src="modules/recipes/sausage_calc.js?v=2.2.5" defer></script>
-  <script src="modules/reports/shop_reports.js?v=2.2.5" defer></script>
-  <script src="modules/forecaster/analytics_subtabs.js?v=2.2.5" defer></script>
-  <script src="app.js?v=2.2.5" defer></script>
+  <script src="clover_api/analytics/payloads.js?v=2.2.6"></script>
+  <script src="d3_charts.js?v=2.2.6"></script>
+  <script src="tz_utils.js?v=2.2.6"></script>
+  <script src="modules/shared/core_utils.js?v=2.2.6" defer></script>
+  <script src="modules/recipes/sausage_calc.js?v=2.2.6" defer></script>
+  <script src="modules/reports/shop_reports.js?v=2.2.6" defer></script>
+  <script src="modules/forecaster/analytics_subtabs.js?v=2.2.6" defer></script>
+  <script src="app.js?v=2.2.6" defer></script>
 </body>
 </html>
 

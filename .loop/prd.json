@@ -353,6 +353,48 @@
       "description": "Adopt confirmed exact brisket yield of 5.75 lbs cooked per packer (~35.0% yield) and standardize all item comparison cards to Cooked weight first, Raw in parentheses across all dashboard views.",
       "acceptance_criteria": "UNIT_CONVERSIONS and KITCHEN_UNIT_SPECS set brisket yield to 0.35 (5.75 lbs cooked / 16.4 lb packer); all item comparison cards show cooked weight first then raw in parentheses; all test suites (npm run check, python unittest discover -s clover_api/tests, npm test, PAL verifiers) pass with exit code 0.",
       "passes": true
+    },
+    {
+      "id": 60,
+      "description": "Increase Clover POS data sync cadence from hourly to every 30 minutes: update sync_trigger/wrangler.toml cron to ['5,35 * * * *'] and deploy Cloudflare Worker, update .github/workflows/update_clover_data.yml fallback schedule to '7,37 * * * *', and update build_payloads.py next_scheduled_sync.",
+      "acceptance_criteria": "sync_trigger deployed with crons = ['5,35 * * * *']; update_clover_data.yml configured for 30-min cadence; build_payloads.py reports 30-minute sync; npm run check, node --check sync_trigger/src/index.js, python unittest, and npm test pass.",
+      "passes": true
+    },
+    {
+      "id": 61,
+      "description": "Clover POS Historical Backfill, Ingestion Retry Resilience & Google Drive Rclone Backup: Pull complete order, line item, and payment records from opening day (July 21, 2026) to present (7,928 orders, 33,070 line items across 90 service days) into local data/clover_sales_master.db; add 5xx and network retry resilience to ingest.py and ingest_itemized.py; create scripts/backup_to_gdrive.py for rclone backup of GitHub projects; update hourly actuals (89 days) and payloads.js.",
+      "acceptance_criteria": "clover_sales_master.db holds all 90 days of transactions; scripts/backup_to_gdrive.py runs rclone sync; clover_api/ingest.py retries on 5xx; npm run check, python unittest, and npm test pass.",
+      "passes": true
+    },
+    {
+      "id": 62,
+      "description": "Bitwarden Automated Master Secrets Saver & Offsite Nightly Backup Automation: Author scripts/save_to_bitwarden.py to securely collect project secrets (DATA_VAULT_KEY, CLOVER_MERCHANT_ID, CLOVER_API_KEY, TELEGRAM credentials) and save them into the user's local Bitwarden vault as a Secure Note with a single master password prompt; configure crontab for automated 3:00 AM EST nightly Google Drive backups via rclone; enforce pitmaster piece count copy rule across all outputs.",
+      "acceptance_criteria": "scripts/save_to_bitwarden.py packages and creates Bitwarden secure note; crontab has active 3:00 AM EST backup entry; all pitmaster outputs provide piece counts first with lbs in parentheses; test suite exits 0.",
+      "passes": true
+    },
+    {
+      "id": 63,
+      "description": "Task 1: Fix POS projection decoupling in tz_utils.js, app.js, analytics_subtabs.js, and generate_historical_payload.py so Projected Day Total = Actual_POS_to_Date + (Remaining_Hours_Weight * Historical_Weekday_Avg) using sync-aware cutoff (last_synced_at or last non-zero POS bucket) and never copying Actual_POS_to_Date into predicted_revenue.",
+      "acceptance_criteria": "node --check tz_utils.js && npm run check pass; projection.spec.js verifies mid-day/lagging sync cutoff keeps remainingHoursWeight > 0 so blendedTotalRevenue diverges from actualSalesSoFar; generate_historical_payload.py never initializes predicted_revenue to actual_revenue.",
+      "passes": true
+    },
+    {
+      "id": 64,
+      "description": "Task 2: Implement dynamic 3-tier sync age badges and stale data indicators (<30m Fresh Green, 30m-2h Warning Amber, >2h Stale Red) across #data-last-pulled and #last-updated-time via ShopTime.getSyncHealth().",
+      "acceptance_criteria": "ShopTime.getSyncHealth classifies fresh/warning/stale accurately; #data-last-pulled and #last-updated-time render data-sync-state and Okabe-Ito status classes; Playwright E2E verifies all 3 badge states.",
+      "passes": true
+    },
+    {
+      "id": 65,
+      "description": "Task 3: Comprehensive page-by-page text & metric alignment audit across all 6 subtabs + Shop Reports, replacing residual 40% brisket yield text in index.html and shop_reports.js with canonical 35% (5.75 lbs cooked / 16.4 lb packer) and locking test_copy_audit.py.",
+      "acceptance_criteria": "Zero occurrences of '40% cooked yield', '40% Brisket', or 'bRaw * 0.40' in index.html and modules/**/*.js; test_copy_audit.py and stat_cards.spec.js pass 100%.",
+      "passes": true
+    },
+    {
+      "id": 66,
+      "description": "Task 4: Execute full test suite & deterministic PAL verifiers (npm run check, python unittest, verify_smokehouse_ux_pal.py, npm test) and pass independent read-only Adversarial Critic audit with score >= 9/10.",
+      "acceptance_criteria": "All CLI syntax, unittest, PAL verifiers, and Playwright E2E tests exit 0; independent Adversarial Critic rates the build >= 9/10.",
+      "passes": true
     }
   ]
 }

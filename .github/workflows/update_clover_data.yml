@@ -2,11 +2,11 @@ name: Update Clover Data
 
 on:
   schedule:
-    # Fallback only. The hourly trigger is the Cloudflare cron Worker in
-    # sync_trigger/ (fires workflow_dispatch at :05). GitHub drops many
-    # top-of-hour schedules, so this one runs off-peak at :37.
-    - cron: '37 * * * *'
-  workflow_dispatch: # Hourly from sync_trigger Worker; also manual from the Actions tab
+    # Fallback only. The 30-minute trigger is the Cloudflare cron Worker in
+    # sync_trigger/ (fires workflow_dispatch at :05 and :35). GitHub drops many
+    # top-of-hour schedules, so this fallback runs off-peak at :07 and :37.
+    - cron: '7,37 * * * *'
+  workflow_dispatch: # Every 30 mins from sync_trigger Worker; also manual from the Actions tab
 
 # Never run two syncs at once; a queued run waits and checks out the latest data.
 concurrency:
@@ -94,7 +94,7 @@ jobs:
           else
             # Discard any stray unstaged modifications to other tracked files so worktree is clean for rebase
             git checkout -- .
-            git commit -m "chore(data): auto-update clover api analytics data (hourly)"
+            git commit -m "chore(data): auto-update clover api analytics data (every 30 mins)"
             
             for attempt in 1 2 3; do
               if git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push; then

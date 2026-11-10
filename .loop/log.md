@@ -468,3 +468,66 @@
   - `agent-comms`: `npm test` (69/69 pass)
 - Milestone Sign-Off: Marked tasks 52–58 as `passes: true` in `yellow-rose-bbq/.loop/prd.json`.
 
+## 2026-11-08 · Clover POS Sync Cadence Upgrade to Every 30 Minutes (Task 60)
+- Upgraded synchronization trigger frequency from hourly to every 30 minutes across primary and fallback systems:
+  - `sync_trigger/wrangler.toml`: Updated cron triggers to `["5,35 * * * *"]` (executing at :05 and :35 past every hour).
+  - Deployed `yellow-rose-sync-trigger` Cloudflare Worker via `npx wrangler deploy` (Version ID: `be469808-048d-4035-90c8-3ce3c55bb56a`).
+  - `.github/workflows/update_clover_data.yml`: Updated off-peak fallback cron schedule to `'7,37 * * * *'` and commit message to `(every 30 mins)`.
+  - `clover_api/analytics/build_payloads.py`: Updated `next_scheduled_sync` to `"Every 30 minutes via GitHub Actions"`.
+  - `sync_trigger/README.md`: Documented 30-minute schedule.
+- Verification:
+  - `npm run check`: OK (0 errors)
+  - `node --check sync_trigger/src/index.js`: OK (0 errors)
+  - Python `unittest`: 31 passed, 0 failed (1.258s)
+  - PAL verifiers (`verify_date_predictions.py`, `verify_smokehouse_ux_pal.py`, `verify_bi_insight_engine.py`): 100% PASS (Exit Code 0)
+  - `npm test` (Playwright E2E): 30 passed, 0 failed, 0 flaky (24.9s)
+
+## 2026-11-08 · Clover POS Historical Backfill, Retry Resilience & Rclone Google Drive Backup (Task 61)
+- Built `scripts/backfill_clover_history.py` to pull complete transaction history from opening day (July 21, 2026) to present in 7-day windows with 0.5s pause and 5x exponential retry backoff.
+- Executed backfill: assembled 7,928 orders and 33,070 line items across 90 service days into local SQLite database `data/clover_sales_master.db` (mode 0600, gitignored) and mirrored to `clover_api/data/clover_sales.db`.
+- Enriched `historical_payload.json` to 103 historical records and `hourly_actuals.json` to 89 days; regenerated `payloads.js`.
+- Added 5xx server error and connection timeout retry backoff (up to 5 attempts) in `clover_api/ingest.py` and `clover_api/ingest_itemized.py`.
+- Installed standalone `rclone` (v1.76.0) in `~/.local/bin/` and created `scripts/backup_to_gdrive.py` syncing `/home/atools/Documents/GitHub` to Google Drive `gdrive:backups/GitHub_Projects` with exclusions for virtualenvs and disposable artifacts. Verified clean dry-run.
+- Updated `.loop/patterns.md` with Pit Piece Counts Rule (counts first, lbs in parentheses).
+- Verification:
+  - `npm run check` and `node --check sync_trigger/src/index.js`: OK (0 errors)
+  - Python `unittest`: 31 passed, 0 failed (9.142s)
+  - PAL verifiers (`verify_date_predictions.py`, `verify_smokehouse_ux_pal.py`, `verify_bi_insight_engine.py`): 100% PASS (Exit Code 0)
+  - `npm test` (Playwright E2E): 30 passed, 0 failed, 0 flaky (26.5s)
+
+## 2026-11-08 · Spec-Driven Development (SDD) Invariant Added to AGENTS.md
+- Added Spec-Driven Development (SDD) Invariant to `AGENTS.md` (and mirrored via `CLAUDE.md` symlink) preceding the 3-Layer State Architecture (`.loop/`) section.
+- Enforces three-phase protocol for new features, major refactors, or complex tasks:
+  1. Alignment via `/grill-me` probing interview and 2D layout anchor.
+  2. Spec artifacts (`SPEC.md` with EARS syntax, `DESIGN.md` wireframes/contracts, `PLAN.md` deterministic test verification).
+  3. Pause gate for human approval prior to `.loop/` state tracking or coding.
+- Verification:
+  - `npm run check`: OK (0 errors)
+  - Python `unittest`: 31 passed, 0 failed (8.417s)
+
+## 2026-11-08 · Automated Bitwarden Master Secrets Saver & Offsite Nightly Backup (Task 62)
+- Created `scripts/save_to_bitwarden.py` to automatically collect all production secrets (`DATA_VAULT_KEY` from `.env`, `CLOVER_MERCHANT_ID`, `CLOVER_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` from `clover_api/.env`) and upload them into Bitwarden as a Secure Note titled `"Yellow Rose BBQ - Master Secrets & Clover POS"` with a single master password prompt.
+- Verified active nightly backup schedule in crontab at 3:00 AM EST syncing `/home/atools/Documents/GitHub` (including local master POS database `data/clover_sales_master.db`) to `gdrive:backups/GitHub_Projects` via `rclone`.
+- Enforced smokehouse piece-count formatting rule (piece count first, lbs in parentheses `()`) across all pitmaster outputs.
+- Verification:
+  - `npm run check`: OK (0 errors)
+  - Python `unittest`: 31 passed, 0 failed
+
+
+## 2026-11-09 · POS Sync Projection Decoupling, 3-Tier Sync Health Badges & Page-by-Page Copy Audit (Tasks 63–66)
+- Created SDD specification artifacts (`SPEC.md`, `DESIGN.md`, `PLAN.md`) and pre-flight backup archive `backups/archive_pre_sync_audit_20261109.tar.gz` (mode `0600`).
+- **Task 1 (POS Projection Decoupling)**:
+  - `tz_utils.js`: Added `setLastSyncedAt`, `getLastSyncedAt`, `resolveEffectiveCutoff`, and updated `computeBlendedDayMetrics` + `buildActualsOverlay` so that when POS sync lags behind wall-clock time or stops mid-day (e.g., synced at 1:41 PM EST while viewed at 8:30 PM EST or on a subsequent day), `cutoff` is bounded to the effective sync hour / last active POS bucket (`< 20:00 EST`), keeping `remainingHoursWeight > 0` and preventing `Projected Day Total` (`blendedTotalRevenue`) from collapsing to `Actual POS to Date` (`actualSalesSoFar`).
+  - `generate_historical_payload.py` & `app.js`: Replaced `"predicted_revenue": round(revenue, 2)` initialization with `DOW_BASELINE_REV` weekday lookup and removed cross-fallback between `predicted_revenue` and `actual_revenue` in `app.js` (`lines 1749, 1759`).
+  - `modules/forecaster/analytics_subtabs.js`: Included decoupled `Projected Day Total` (`blendedTotalRevenue`) in `#hourly-actuals-summary` and ensured `setSimHour` advances Monday dates to Tuesday so Time-Travel Simulation exercises active operating hours while preserving Monday `$0 (Closed)` projection invariance.
+- **Task 2 (Dynamic 3-Tier Sync Status Badge)**:
+  - `tz_utils.js`, `app.js`, `style.css`, `index.html`: Implemented `ShopTime.getSyncHealth(syncIsoOrDate, now)` classifying `< 30m` as `fresh` (`● Live Sync`, Green), `30–120m` as `warning` (`⚠ Sync Lag (Xm ago)`, Amber), and `> 120m` as `stale` (`⚠ Stale Sync (Xh ago)`, Red) with synchronous initial seeding and full parity on `#data-last-pulled` and `#last-updated-time`.
+- **Task 3 (Comprehensive Page-by-Page Text & Metric Audit)**:
+  - Standardized all residual `40%` brisket cooked yield strings in `index.html` (`lines 629, 704, 1320`) and `modules/reports/shop_reports.js` (`line 116`) to the canonical `35%` (`~5.75 lbs` cooked per `16.4 lb` raw packer).
+  - Replaced residual jargon in `modules/reports/shop_reports.js` (`lines 211, 303`) and expanded `BANNED` regexes in `clover_api/tests/test_copy_audit.py`. Bumped asset cache-busting query strings to `?v=2.2.6` in `index.html`.
+- **Verification & Adversarial Critic Gate (Task 4)**:
+  - `node --check tz_utils.js && npm run check`: OK (0 errors)
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: 31 passed, 0 failed
+  - PAL Verifiers (`verify_smokehouse_ux_pal.py`, `verify_v2_facelift_pal.py`, `verify_bi_insight_engine.py`, `verify_subtab_rollup_pal.py`, `verify_timezone_and_actuals.py`): 100% PASS (Exit Code 0)
+  - `npm test` (Playwright E2E): 32 passed, 0 failed, 0 flaky (`projection.spec.js`: 7/7 passed)
+  - Independent Adversarial Critic Subagent (`22745e09-3cec-4c14-8211-03014f24f4e4`): Round 1 scored `8.6/10` (flagged 4 minor edge cases); Round 2 scored **`9.8/10`** (all 10 `SPEC.md` requirements `PASS`).

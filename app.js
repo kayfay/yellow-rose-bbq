@@ -538,20 +538,32 @@ function initForecastingControls() {
       if (!bestDate || (payloadDate && payloadDate > bestDate)) {
         bestDate = payloadDate;
       }
+      if (bestDate && window.ShopTime && typeof window.ShopTime.setLastSyncedAt === 'function') {
+        window.ShopTime.setLastSyncedAt(bestDate);
+      }
       const formatted = (bestDate && window.ShopTime && typeof window.ShopTime.formatShopTimestamp === 'function')
         ? window.ShopTime.formatShopTimestamp(bestDate.toISOString())
         : (bestDate ? bestDate.toLocaleString() : 'Live');
+      const health = (window.ShopTime && typeof window.ShopTime.getSyncHealth === 'function')
+        ? window.ShopTime.getSyncHealth(bestDate)
+        : { state: 'fresh', badgeText: '● Live Sync' };
 
       if (timeElem) {
-        timeElem.textContent = formatted;
+        timeElem.dataset.syncState = health.state;
+        timeElem.className = `sync-status-pill sync-state-${health.state}`;
+        timeElem.textContent = `${formatted} · ${health.badgeText}`;
       }
       if (lastPulledElem) {
-        lastPulledElem.textContent = `Data Last Synced: ${formatted}`;
+        lastPulledElem.dataset.syncState = health.state;
+        lastPulledElem.className = `sync-status-pill sync-state-${health.state}`;
+        lastPulledElem.textContent = `Data Last Synced: ${formatted} · ${health.badgeText}`;
       }
     };
 
+    // Seed initial sync timestamp immediately from bundled payloads so synchronous first renders have lastSyncedAt.
+    setTimeText(null);
+
     if (typeof fetchJsonSafe !== 'function') {
-      setTimeText(null);
       return;
     }
 
@@ -1736,7 +1748,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         recordsToSum.forEach(r => {
           if (!r) return;
           sumBatchCogs += (r.estimated_cogs_usd || 0);
-          sumPredRev += (r.predicted_revenue !== undefined ? r.predicted_revenue : (r.actual_revenue || 0));
+          sumPredRev += (r.predicted_revenue !== undefined ? r.predicted_revenue : 0);
           sumPredBRaw += (r.predicted_brisket_raw_lbs !== undefined ? r.predicted_brisket_raw_lbs : (r.brisket_raw_lbs || 0));
           sumPredPRaw += (r.predicted_pork_raw_lbs !== undefined ? r.predicted_pork_raw_lbs : (r.pork_shoulder_raw_lbs || 0));
           sumPredSLbs += (r.predicted_sausage_lbs !== undefined ? r.predicted_sausage_lbs : (r.sausage_lbs || 0));
@@ -1746,7 +1758,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
           sumPredTacos += (r.predicted_tacos_sold !== undefined ? r.predicted_tacos_sold : (r.tacos_sold || 0));
           sumPredRosebuds += (r.predicted_rosebuds_sold !== undefined ? r.predicted_rosebuds_sold : (r.rosebuds_sold || 0));
 
-          sumActRev += (r.actual_revenue !== undefined ? r.actual_revenue : (r.predicted_revenue || 0));
+          sumActRev += (r.actual_revenue !== undefined ? r.actual_revenue : 0);
           sumActBRaw += (r.actual_brisket_raw_lbs !== undefined ? r.actual_brisket_raw_lbs : (r.brisket_raw_lbs || 0));
           sumActPRaw += (r.actual_pork_shoulder_raw_lbs !== undefined ? r.actual_pork_shoulder_raw_lbs : (r.pork_shoulder_raw_lbs || 0));
           sumActSLbs += (r.actual_sausage_lbs !== undefined ? r.actual_sausage_lbs : (r.sausage_lbs || 0));

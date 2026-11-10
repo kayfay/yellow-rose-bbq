@@ -4,9 +4,9 @@ compatibility_date = "2024-10-01"
 workers_dev = false
 
 # Cloudflare cron triggers run in UTC and fire reliably, unlike GitHub's
-# best-effort `schedule:` events. :05 every hour.
+# best-effort `schedule:` events. Runs at :05 and :35 every hour (every 30 minutes).
 [triggers]
-crons = ["5 * * * *"]
+crons = ["5,35 * * * *"]
 
 [vars]
 GITHUB_REPO = "kayfay/yellow-rose-bbq"
