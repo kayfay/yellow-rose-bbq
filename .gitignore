@@ -51,3 +51,7 @@ test-results/
 .pytest_cache/
 *.bak
 .ipynb_checkpoints/
+
+# Agent Instructions
+AGENTS.md
+CLAUDE.md
