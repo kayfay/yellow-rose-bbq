@@ -548,3 +548,16 @@
   - `node --check tz_utils.js && node --check sync_trigger/src/index.js && (cd access_agent && npm test && npm run check)`: 8 passed, 0 failed
   - Playwright E2E (`npm test`): 32 passed, 0 failed, 0 flaky (28.6s)
 
+## 2026-11-11 · Fix Bottom "Refresh Data" Button Client-Side Behavior (Task 68)
+- **Problem**: Clicking `#btn-refresh-analytics` ("Refresh Data") at the bottom of the page appeared to do nothing because it only re-rendered `renderPlotlyForecastingChart` from in-memory `window.BBQ_PAYLOADS` without reloading `payloads.js` or `sync_status.json` from the server, and without updating whichever subtab or turnover deck the user was currently viewing.
+- **Fixes Applied**:
+  - `app.js`: Upgraded `#btn-refresh-analytics` handler to dynamically fetch cache-busted `sync_status.json?v=...`, reload `payloads.js?v=...` via a fresh `<script>` tag to replace `window.BBQ_PAYLOADS` in memory, update sync status timestamp pills, and re-render all active subtabs (Predictive Pace & Meat Draw, ARIMA, Weather, Event, Shift Heatmap, Calendar).
+  - Provided interactive status feedback: "Checking for updates..." (with button disabled during check) -> "✓ Data refreshed" -> restores to "Refresh Data".
+  - `index.html`: Bumped cache-busting query string across stylesheet and scripts to `?v=2.2.7`.
+- **Verification Results**:
+  - `npm run check`: OK (0 errors across 7 files)
+  - Playwright E2E (`npm test`): 32 passed, 0 failed, 0 flaky (26.4s)
+  - Python `unittest` (`.venv/bin/python -m unittest discover -s clover_api/tests`): 32 passed, 0 failed (13.3s)
+  - PAL Verifiers (`scripts/verify_v2_facelift_pal.py` & `scripts/verify_smokehouse_ux_pal.py`): 100% PASS
+
+

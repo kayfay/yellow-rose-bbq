@@ -584,21 +584,64 @@ function initForecastingControls() {
     updateSyncStatusTime();
 
     let lastRefreshTime = 0;
-    btnRefreshAnalytics.addEventListener('click', () => {
+    btnRefreshAnalytics.addEventListener('click', async () => {
       const now = Date.now();
-      if (now - lastRefreshTime < 5000) {
+      if (now - lastRefreshTime < 2000) {
         return;
       }
       lastRefreshTime = now;
       const origText = btnRefreshAnalytics.innerHTML;
-      btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Refreshing...</span>';
+      btnRefreshAnalytics.innerHTML = '<span class="btn-icon">↻</span><span class="btn-text">Checking for updates...</span>';
+      btnRefreshAnalytics.disabled = true;
 
-      renderPlotlyForecastingChart(getActiveDaysCount()).then(() => {
-        updateSyncStatusTime();
-        btnRefreshAnalytics.innerHTML = origText;
-      });
-      if (typeof renderPlotlyEventChart === 'function') renderPlotlyEventChart();
-      if (typeof renderPlotlyWeatherChart === 'function') renderPlotlyWeatherChart();
+      try {
+        // 1. Re-fetch sync status
+        await updateSyncStatusTime();
+
+        // 2. Dynamically reload payloads.js to refresh window.BBQ_PAYLOADS
+        await new Promise((resolve) => {
+          const oldScript = document.getElementById('bbq-payloads-script');
+          const script = document.createElement('script');
+          script.id = 'bbq-payloads-script';
+          script.src = 'clover_api/analytics/payloads.js?v=' + Date.now();
+          script.onload = () => {
+            if (oldScript && oldScript !== script) oldScript.remove();
+            resolve();
+          };
+          script.onerror = () => resolve(); // Non-fatal fallback
+          document.head.appendChild(script);
+        });
+
+        // 3. Re-render active subtabs & charts
+        if (typeof renderPlotlyForecastingChart === 'function') {
+          await renderPlotlyForecastingChart(getActiveDaysCount());
+        }
+        if (typeof renderPlotlyPredictiveChart === 'function') {
+          renderPlotlyPredictiveChart();
+        }
+        if (typeof renderPlotlyWeatherChart === 'function') {
+          renderPlotlyWeatherChart();
+        }
+        if (typeof renderPlotlyEventChart === 'function') {
+          renderPlotlyEventChart();
+        }
+        if (typeof renderPlotlyShiftHeatmap === 'function') {
+          renderPlotlyShiftHeatmap();
+        }
+        if (typeof refreshEventsCalendar === 'function') {
+          refreshEventsCalendar();
+        }
+
+        btnRefreshAnalytics.innerHTML = '<span class="btn-icon">✓</span><span class="btn-text">Data refreshed</span>';
+      } catch (err) {
+        console.warn('Refresh error:', err);
+        btnRefreshAnalytics.innerHTML = '<span class="btn-text">Error refreshing</span>';
+      } finally {
+        setTimeout(() => {
+          btnRefreshAnalytics.innerHTML = origText;
+          btnRefreshAnalytics.disabled = false;
+        }, 2000);
+      }
     });
   }
 
