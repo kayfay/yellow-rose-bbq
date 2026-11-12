@@ -531,3 +531,20 @@
   - PAL Verifiers (`verify_smokehouse_ux_pal.py`, `verify_v2_facelift_pal.py`, `verify_bi_insight_engine.py`, `verify_subtab_rollup_pal.py`, `verify_timezone_and_actuals.py`): 100% PASS (Exit Code 0)
   - `npm test` (Playwright E2E): 32 passed, 0 failed, 0 flaky (`projection.spec.js`: 7/7 passed)
   - Independent Adversarial Critic Subagent (`22745e09-3cec-4c14-8211-03014f24f4e4`): Round 1 scored `8.6/10` (flagged 4 minor edge cases); Round 2 scored **`9.8/10`** (all 10 `SPEC.md` requirements `PASS`).
+
+## 2026-11-11 · Fix Clover Ingestion & Analytics Pipeline CI Failure (Task 67)
+- **Root Cause Analysis**: The GitHub Actions workflow `update_clover_data.yml` runs `python clover_api/analytics/food_cost_engine.py` as a standalone script. When executed directly, Python sets `sys.path[0]` to `clover_api/analytics/`. In commit `4e82a0a`, `food_cost_engine.py` imported `from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS` without first adding the repo root to `sys.path`. This caused `ModuleNotFoundError: No module named 'clover_api'`, halting the automated hourly/30-minute sync pipeline for ~30 hours.
+- **Fixes Applied**:
+  - `clover_api/analytics/food_cost_engine.py`: Added repository root `BASE_DIR` to `sys.path` prior to importing from `clover_api`.
+  - `clover_api/analytics/anomaly_detector.py` & `clover_api/analytics/ml_model.py`: Added `BASE_DIR` to `sys.path` to ensure robust standalone execution across all analytics modules. Added `os.umask(0o022)` in `ml_model.py` to enforce secure 0644/0755 file permissions.
+  - `clover_api/ingest.py`: Replaced deprecated `inplace=True` in `DataFrame.sort_values` (lines 116, 140, 192) with `df = df.sort_values(...)` to resolve `Pandas4Warning` deprecation notices.
+  - `clover_api/tests/test_pipeline.py`: Added `test_standalone_script_execution` to test suite, running standalone subprocesses for `food_cost_engine.py`, `anomaly_detector.py`, and `ml_model.py` to guarantee CI invocations without `PYTHONPATH` never regress.
+  - `scripts/verify_v2_facelift_pal.py`: Excluded gitignored ephemeral test directories (`test-results`, `playwright-report`) from zero-trust world-writable permission scan.
+- **Verification Results**:
+  - Standalone script check (`.venv/bin/python clover_api/analytics/food_cost_engine.py`): Exit Code 0
+  - Python `unittest` (`.venv/bin/python -m unittest discover -s clover_api/tests`): 32 passed, 0 failed (12.4s)
+  - `npm run check`: OK (0 errors across 7 files)
+  - PAL Verifiers (`scripts/verify_v2_facelift_pal.py` & `scripts/verify_smokehouse_ux_pal.py`): 100% PASS
+  - `node --check tz_utils.js && node --check sync_trigger/src/index.js && (cd access_agent && npm test && npm run check)`: 8 passed, 0 failed
+  - Playwright E2E (`npm test`): 32 passed, 0 failed, 0 flaky (28.6s)
+

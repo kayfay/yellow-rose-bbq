@@ -43,6 +43,7 @@ clover_api/analytics/*.html
 clover_api/analytics/*.log
 !clover_api/analytics/*.json
 clover_api/analytics/telegram_state.json
+clover_api/analytics/bbq_xgboost_model.json
 
 # Testing & Node
 node_modules/

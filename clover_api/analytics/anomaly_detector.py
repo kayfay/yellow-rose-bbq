@@ -9,6 +9,13 @@ import sqlite3
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import IsolationForest
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from clover_api.secure_config import DB_PATH
 
 def detect_anomalies(contamination: float = 0.05):

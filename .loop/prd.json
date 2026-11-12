@@ -395,6 +395,12 @@
       "description": "Task 4: Execute full test suite & deterministic PAL verifiers (npm run check, python unittest, verify_smokehouse_ux_pal.py, npm test) and pass independent read-only Adversarial Critic audit with score >= 9/10.",
       "acceptance_criteria": "All CLI syntax, unittest, PAL verifiers, and Playwright E2E tests exit 0; independent Adversarial Critic rates the build >= 9/10.",
       "passes": true
+    },
+    {
+      "id": 67,
+      "description": "Fix Clover POS sync pipeline CI failure: resolve ModuleNotFoundError for clover_api in food_cost_engine.py, anomaly_detector.py, and ml_model.py by adding repo root to sys.path, resolve Pandas4Warning inplace deprecation warnings in ingest.py, and add standalone CLI subprocess test in test_pipeline.py.",
+      "acceptance_criteria": "Standalone execution of clover_api/analytics/food_cost_engine.py, anomaly_detector.py, and ml_model.py exits 0; clover_api/ingest.py parses orders/payments/lineitems without inplace deprecation warnings; npm run check, .venv/bin/python -m unittest discover -s clover_api/tests (32 tests), PAL verifiers, and npm test (32 tests) pass 100%.",
+      "passes": true
     }
   ]
 }

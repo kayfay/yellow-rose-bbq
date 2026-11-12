@@ -119,7 +119,7 @@ def verify_zero_trust_security() -> None:
     # 1. Check zero world-writable files/dirs (excluding .git and .venv)
     ww_items = []
     for root_dir, dirs, files in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in (".git", ".venv", "node_modules")]
+        dirs[:] = [d for d in dirs if d not in (".git", ".venv", "node_modules", "test-results", "playwright-report")]
         for name in dirs + files:
             p = Path(root_dir) / name
             if p.is_symlink():

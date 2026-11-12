@@ -113,7 +113,7 @@ def parse_orders(raw_orders: List[Dict[str, Any]]) -> pd.DataFrame:
 
     df = pd.DataFrame(parsed)
     if not df.empty and "created_time" in df.columns:
-        df.sort_values(by="created_time", inplace=True)
+        df = df.sort_values(by="created_time")
     return df
 
 def parse_payments(raw_payments: List[Dict[str, Any]]) -> pd.DataFrame:
@@ -137,7 +137,7 @@ def parse_payments(raw_payments: List[Dict[str, Any]]) -> pd.DataFrame:
 
     df = pd.DataFrame(parsed)
     if not df.empty and "created_time" in df.columns:
-        df.sort_values(by="created_time", inplace=True)
+        df = df.sort_values(by="created_time")
     return df
 
 def save_to_sqlite(df: pd.DataFrame, table_name: str):
@@ -189,7 +189,7 @@ def parse_line_items(raw_orders: List[Dict[str, Any]]) -> pd.DataFrame:
 
     df = pd.DataFrame(parsed)
     if not df.empty and "created_time" in df.columns:
-        df.sort_values(by="created_time", inplace=True)
+        df = df.sort_values(by="created_time")
     return df
 
 def run_ingestion():

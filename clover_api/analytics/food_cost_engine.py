@@ -6,11 +6,15 @@ Uses range-based cooked yields (~38%-45% net yield, 55%-62% shrinkage & trim).
 
 import csv
 import json
+import sys
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 INVOICE_1 = (DATA_DIR / "Review order detail_91714857_09042026.csv") if (DATA_DIR / "Review order detail_91714857_09042026.csv").exists() else (BASE_DIR / "Review order detail_91714857_09042026.csv")
 INVOICE_2 = (DATA_DIR / "Submitted_Order564310_Cust91714857_09032026.csv") if (DATA_DIR / "Submitted_Order564310_Cust91714857_09032026.csv").exists() else (BASE_DIR / "Submitted_Order564310_Cust91714857_09032026.csv")

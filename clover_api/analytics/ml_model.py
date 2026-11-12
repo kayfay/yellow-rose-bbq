@@ -4,14 +4,23 @@ Trains an XGBoost regressor predicting daily revenue using POS time-series + Wea
 Uses Polars for fast preprocessing and Scikit-Learn for validation.
 """
 
+import os
 import sqlite3
 import pandas as pd
 import polars as pl
 import numpy as np
 from pathlib import Path
+import sys
 import xgboost as xgb
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import mean_absolute_percentage_error
+
+os.umask(0o022)
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from clover_api.secure_config import DB_PATH, ANALYTICS_DIR
 
 def build_training_dataset() -> pl.DataFrame:
