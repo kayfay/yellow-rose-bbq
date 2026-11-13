@@ -2,22 +2,22 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 293,
+      "count": 292,
       "confidence": 19.8
     },
     {
       "pair": "2 meat plate + Rosebud",
       "count": 285,
-      "confidence": 22.7
+      "confidence": 22.8
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 237,
-      "confidence": 18.9
+      "count": 235,
+      "confidence": 18.8
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 143,
+      "count": 142,
       "confidence": 20.9
     },
     {
@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4188.14,
-    "game_only": 4336.44,
-    "rain_only": 2931.7,
-    "game_and_rain": 11726.79
+    "normal": 4203.15,
+    "game_only": 4245.02,
+    "rain_only": 4349.89,
+    "game_and_rain": 4610.73
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4913,
-      "total_revenue": 212191.83,
-      "avg_ticket": 43.18986973336047
+      "order_count": 4908,
+      "total_revenue": 211960.17,
+      "avg_ticket": 43.18666870415648
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2438,
-      "total_revenue": 151400.11,
-      "avg_ticket": 62.10012715340442
+      "order_count": 2434,
+      "total_revenue": 151138.76,
+      "avg_ticket": 62.09480690221857
     }
   ],
   "sell_out_prediction_chart": {
@@ -129,13 +129,13 @@
           8.0,
           35.5,
           88.5,
-          196.03,
-          243.61,
-          333.28000000000003,
-          419.24,
-          556.39,
-          612.8,
-          661.405
+          195.03,
+          242.61,
+          332.28000000000003,
+          418.24,
+          555.39,
+          611.8,
+          660.405
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -160,13 +160,13 @@
           0.0,
           0.0,
           18.0,
-          208.0,
-          451.0,
-          614.0,
-          735.0,
-          844.0,
-          927.0,
-          1046.0
+          205.0,
+          448.0,
+          611.0,
+          732.0,
+          841.0,
+          924.0,
+          1043.0
         ],
         "name": "Crispy Quesa Taco Brisket",
         "type": "scatter",
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 3.0,
-    "impact_pct": -44.1
+    "pork_ribs_avg_without_dino": 5.1,
+    "pork_ribs_avg_with_dino": 3.2,
+    "impact_pct": -36.5
   },
   "payday_effect": {
-    "payday_avg_ticket": 44.88,
-    "normal_avg_ticket": 46.49
+    "payday_avg_ticket": 44.78,
+    "normal_avg_ticket": 46.43
   }
 }
