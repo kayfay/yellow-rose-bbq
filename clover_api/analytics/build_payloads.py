@@ -91,7 +91,7 @@ def build_payloads():
         "last_synced_at": now_ny.isoformat(),
         "status": "success",
         "message": msg,
-        "next_scheduled_sync": "Hourly via GitHub Actions"
+        "next_scheduled_sync": "Every 30 minutes via GitHub Actions"
     }
 
     for target_dir in [analytics_dir, analytics_dir.parent.parent / "analytics"]:

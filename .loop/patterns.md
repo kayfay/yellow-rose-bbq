@@ -5,7 +5,7 @@
 - **Pork Butt (Shoulder)**: `Y_net = 0.44` (`~8 lb` bone-in butt; `4 butts/case = 32 lbs raw`; `2.0` 8-oz portions/cooked lb).
 - **Pork Spare Ribs**: `~5.6 lbs/rack` (12 bones, invoice); `6 racks/case = 33.6 lbs raw` (`2 racks/cryovac bag`; `Y_cook = 0.60`).
 - **Beef Dino Ribs**: `3 bones/plate`; `4 lbs/rack`; `12 ribs/case` (`3 cryovac bags`).
-- **Smoked Turkey (No-Trim)**: `Y_trim = 1.0`, `Y_cook = 0.70` (`20 lbs/case raw`; `3.2` 5-oz portions/cooked lb).
+- **Smoked Turkey (No-Trim)**: `1 cooked breast = 3.0 lbs cooked` (`~4.29 lbs raw`, `Y_cook = 0.70`; `20 lbs/case raw`).
 - **Sausage**: `50 lb` base block (`~55.5–63 lb` stuffed; `60 lb` nominal batch), `3.0 links/lb` (`85%` smoke yield).
 - **Prep Margin & Counts**: `Target Cooked = F_t * 1.10` (never in UI). Always report piece counts first, lbs in `()` (e.g. `~3 Packers (~49 lbs raw)`). Mon = `$0 (Closed)`.
 

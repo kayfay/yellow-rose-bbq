@@ -83,7 +83,10 @@ def generate_holiday_and_event_features(dates_series: pl.Series) -> pl.DataFrame
     ]
     
     # Sample actual Jaguars home games and Jax events
-    JAGS_HOME_GAMES = ["2026-09-13", "2026-09-27", "2026-10-18", "2026-11-01", "2026-11-22", "2026-12-06", "2026-12-20"]
+    JAGS_HOME_GAMES = [
+        "2026-08-22", "2026-09-13", "2026-09-27", "2026-10-11", "2026-10-25",
+        "2026-11-15", "2026-11-29", "2026-12-13", "2026-12-27"
+    ]
     JAX_EVENTS = ["2026-05-22", "2026-05-23", "2026-05-24", "2026-10-31"] # Jazz fest, etc.
     
     def is_holiday(date_str):

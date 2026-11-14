@@ -111,8 +111,8 @@
   }
 
   const BASELINE_JAGS_HOME_GAMES = [
-    '2026-09-13', '2026-09-27', '2026-10-18', '2026-11-01',
-    '2026-11-22', '2026-12-06', '2026-12-20'
+    '2026-08-22', '2026-09-13', '2026-09-27', '2026-10-11', '2026-10-25',
+    '2026-11-15', '2026-11-29', '2026-12-13', '2026-12-27'
   ];
 
   const BASELINE_HOLIDAYS = [
@@ -331,8 +331,8 @@
     turkey: {
       name: 'Smoked Turkey Breast',
       lbsPerCase: 20.0,
-      cutsPerCase: 2,
-      lbsPerCut: 10.0,
+      cutsPerCase: 4,
+      lbsPerCut: 4.29,
       cutLabelSingular: 'Breast',
       cutLabelPlural: 'Breasts',
       yieldRatio: 0.70,

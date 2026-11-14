@@ -1,6 +1,6 @@
 {
-  "last_synced_at": "2026-11-13T21:16:49.145996-05:00",
+  "last_synced_at": "2026-11-14T02:10:03.759987-05:00",
   "status": "success",
   "message": "Est. Meat Cost: $1,972.47 (31.3% of sales)",
-  "next_scheduled_sync": "Hourly via GitHub Actions"
+  "next_scheduled_sync": "Every 30 minutes via GitHub Actions"
 }

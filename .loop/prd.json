@@ -407,6 +407,12 @@
       "description": "Fix bottom 'Refresh Data' button (#btn-refresh-analytics): dynamically reload payloads.js and sync_status.json with cache busters, re-render active subtabs and charts, update sync timestamp pills, and provide active user feedback states ('Checking for updates...' -> '✓ Data refreshed').",
       "acceptance_criteria": "Clicking #btn-refresh-analytics re-fetches sync_status.json and payloads.js, refreshes all active charts and subtab turnover views, and provides visible status feedback; npm run check and npm test pass 100%.",
       "passes": true
+    },
+    {
+      "id": 69,
+      "description": "Refactor JD messaging and smokehouse production targets to piece counts first (Packers, Butts, Racks, Breasts, Links/Batches) and calibrate turkey conversion invariant to 3.0 lbs cooked per breast.",
+      "acceptance_criteria": "clover_api/analytics/unit_conversions.py and core_utils.js reflect 3.0 lbs cooked per turkey breast; daily_insight_engine.py and telegram_dispatcher.py lead with piece counts for briskets, butts, ribs, turkey, and sausage; JD agent prompts, persona instructions, and Layer 2 memory mandate piece counts first; test_calculations.py, unittest suite (32 tests), PAL verifiers, agent-comms tests (69 tests), and Playwright E2E (32 tests) pass 100%.",
+      "passes": true
     }
   ]
 }

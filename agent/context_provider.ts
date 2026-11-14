@@ -85,14 +85,10 @@ export function getBBQQuickActionPrep(): string {
 
   const raw = `🥩 Today's Smokehouse Prep Plan:\n\n` +
     `🔥 Pitmaster Daily Forecast for ${brisket.meat}:\n` +
-    `• Target Cooked: ${brisket.targetCookedLbs} lbs\n` +
-    `• Required Raw Weight: ${brisket.rawLbsRequired} lbs\n` +
-    `• Case Order: ${brisket.unitsDescription}\n` +
+    `• Prep Target: ${brisket.unitsDescription}\n` +
     `• Est. Servings: ~${brisket.portionsEstimate} portions\n\n` +
     `🔥 Pitmaster Daily Forecast for ${ribs.meat}:\n` +
-    `• Target Cooked: ${ribs.targetCookedLbs} lbs\n` +
-    `• Required Raw Weight: ${ribs.rawLbsRequired} lbs\n` +
-    `• Case Order: ${ribs.unitsDescription}\n\n` +
+    `• Prep Target: ${ribs.unitsDescription}\n\n` +
     `Tip: Ready for fire-up at 4:00 AM EST.`;
 
   return purgeJargon(raw);

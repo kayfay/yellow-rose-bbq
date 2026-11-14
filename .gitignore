@@ -29,6 +29,8 @@ venv/
 backups/
 data/vendor_invoices/
 data/encrypted/
+data/word_documents/
+*.docx
 YRBBQ*
 *Cust91714857*
 data/*.json

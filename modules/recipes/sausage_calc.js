@@ -41,7 +41,7 @@
         { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
       ],
       customSteps: {
-        8: 'Mix lean beef and beef fat thoroughly with Day 1 cure.',
+        8: 'Classic beef has no solid inclusions; verify cured meat block temperature is under 38°F before mixing.',
         9: 'Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.',
         11: 'Fold in powdered milk and ice water until sticky.'
       }
@@ -87,8 +87,8 @@
         { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Cure #1 (Overnight)', highlight: true, isGram: true }
       ],
       customSteps: {
-        8: 'Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.',
-        9: 'Mix lean meat, pork, and fat with Day 1 cure.',
+        8: 'Mild sausage has no solid inclusions; verify cured meat block temperature is under 38°F before mixing.',
+        9: 'Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.',
         11: 'Incorporate the remaining ice water until the mixture binds properly.'
       }
     },
@@ -272,9 +272,9 @@
         { id: 'curing-salt', label: 'Pink Curing Salt (Day 1)', amount: 60, unit: 'g', desc: 'Prague Powder #1', highlight: true, isGram: true }
       ],
       customSteps: {
-        8: 'Whisk the first half of prepped ice water with the Apple Cider Vinegar and spices to form a slurry.',
-        9: 'Mix the Day 1 slurry into the meat block and cure overnight.',
-        11: 'Whisk Non-Fat Dry Milk Powder into the remaining ice water (Day 2) and incorporate into the emulsion.'
+        8: 'Verify cured chorizo meat block temperature is under 38°F and stuffer horn is iced.',
+        9: 'Whisk Non-Fat Dry Milk Powder into the prepped ice water (Day 2) to form a smooth binder liquid.',
+        11: 'Incorporate remaining ice water and binder liquid into the chorizo grind and knead until tacky.'
       }
     }
   };
@@ -537,6 +537,9 @@
       setHTML('verif-pepper', spiceVerifHtml);
       setHTML('verif-water', waterAmt > 0 ? `<strong>${formatVerif(waterAmt, 'cups')}</strong> Ice Cold Water` : '<em>(No Water)</em>');
       setHTML('verif-milk', milkAmt > 0 ? `<strong>${formatVerif(milkAmt, 'cups')}</strong> Powdered Milk` : '<em>(No Milk)</em>');
+      setHTML('verif-inclusions', currentRecipe.stuffedAddInLbs > 0
+        ? `<strong>${(currentRecipe.stuffedAddInLbs * scale).toFixed(1)} lbs</strong> Inclusions &amp; Add-ins`
+        : '<em>(No Solid Inclusions)</em>');
 
       setText('verif-yield-base', state.weight.toFixed(1));
       setText('verif-yield-total', ((50.0 + currentRecipe.stuffedAddInLbs) * scale).toFixed(1));
@@ -545,8 +548,8 @@
 
     // Hydrate recipe-specific customSteps (Steps 8, 9, 11) in the Day 2 checklist
     const defaultStepTexts = {
-      8: 'Strain brine from diced jalapeños; whisk first half of ice water with powdered milk and black pepper.',
-      9: 'Mix lean beef, pork base, and chilled fat with Day 1 pink curing salt.',
+      8: 'Thoroughly strain all brine juice out of the pickled/spiced jalapeños, then medium-dice.',
+      9: 'Whisk the first half of prepped ice water with Powdered Milk and Coarse Black Pepper.',
       11: 'Fold in remaining ice water, high-temp cheddar cubes, and drained jalapeño dice until tacky.'
     };
     [8, 9, 11].forEach(stepNum => {

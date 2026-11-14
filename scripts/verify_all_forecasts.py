@@ -4,7 +4,7 @@ Asserts:
 1. Multi-Meat 30-Day Historical Backtest confirms MAPE < 15.0% across all categories.
 2. Cooked Usable vs. Raw Prep conversion invariants:
    - Turkey: 70% nominal yield (no-trim protocol).
-   - Brisket: 40% net yield (~16.4 lb whole packer, invoice weight).
+   - Brisket: 35% net yield (~16.4 lb whole packer, invoice weight; 5.75 lbs cooked).
    - Pork: 44% net yield (~8 lb whole butt).
    - Sausage: 85% yield, 3 links/lb.
 3. Paired Drift Detection Method:
@@ -52,9 +52,9 @@ def test_culinary_yield_invariants():
     assert t["portions"] == int(round(t["cooked_usable_lbs"] * 3.2))
     print(f"  Turkey:  {t['cooked_usable_lbs']} lbs cooked usable -> {t['raw_prep_lbs']} lbs raw prep ({t['portions']} portions @ 5 oz)")
 
-    # Brisket (40% net yield)
+    # Brisket (35% net yield)
     b = pred["brisket"]
-    expected_b_raw = round(b["cooked_usable_lbs"] / 0.40, 1)
+    expected_b_raw = round(b["cooked_usable_lbs"] / 0.35, 1)
     assert abs(b["raw_prep_lbs"] - expected_b_raw) <= 0.2
     print(f"  Brisket: {b['cooked_usable_lbs']} lbs cooked usable -> {b['raw_prep_lbs']} lbs raw prep ({b['packers']} packers)")
 

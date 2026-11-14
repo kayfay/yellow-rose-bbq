@@ -561,3 +561,53 @@
   - PAL Verifiers (`scripts/verify_v2_facelift_pal.py` & `scripts/verify_smokehouse_ux_pal.py`): 100% PASS
 
 
+- **2026-11-12 19:21:14 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-11-12 20:31:18 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-11-12 20:31:44 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+## 2026-11-12 · Comprehensive Site Audit & Bug Fixes (Error & Discrepancy Clearance)
+- **Problem & Scope**: Full site and pipeline audit to fix test failures, recipe discrepancies, stale payloads, and UI copy issues.
+- **Fixes Applied**:
+  1. `clover_api/tests/test_copy_audit.py`: Scoped the `29.5%` stale regex check to `(?:meat|food)\s*cost[^.\n]{0,25}29\.5%|29\.5%\s*(?:meat|food)\s*cost` to prevent false-positive collisions with legitimate weekday sales variances (e.g. `+29.5% vs. Typical Wednesday`).
+  2. `modules/recipes/sausage_calc.js`: Corrected Day 2 checklist `customSteps` for Classic Texas Beef (Step 8), Texas Mild Sausage (Step 8 & 9), and Mexican Chorizo (Step 8, 9, 11) to eliminate Day 1 cure steps placed in Day 2 checklists; added dynamic scaling of `#verif-inclusions` in the Recipe Verification card.
+  3. `index.html`: Aligned static pre-hydration values for 50 lb Jalapeño Cheddar (diced jalapeños 8.00 cups, powdered milk 3.00 cups, total stuffed weight 59.5 lbs, 179 links expected); updated glossary category filter button count to `All Terms (13)`; updated `#term-drawer-name` fallback from `PAR Level` to `Prep Target`; repaired Advanced Analytics sequential numbered headings (`1, 2, 3, 4, 5, 6`); bumped cache busters to `?v=2.2.8`.
+  4. `modules/shared/core_utils.js` & `clover_api/analytics/ml_features.py`: Standardized `BASELINE_JAGS_HOME_GAMES` dates to match the 2026 NFL Jacksonville home schedule in `calendar_events.json`.
+  5. `clover_api/analytics/build_payloads.py`: Updated `next_scheduled_sync` string to `"Every 30 minutes via GitHub Actions"`.
+  6. `scripts/ml_data_intelligence_engine.py`: Corrected brisket cooked yield string in insights #104 and #111 to canonical 35% (`Y_net = 0.35`). Regenerated `ml_insights.json` (11 insights, restoring missing #101 and #102).
+  7. `clover_api/analytics/weather_impact.py`: Added dynamic date check for `🌟 YESTERDAY'S SALES` vs `🌟 MOST RECENT SALES` tooltip annotation and legend halo.
+  8. `scripts/verify_all_forecasts.py`: Updated brisket yield invariant test assertion from 0.40 to canonical 0.35 (5.75 lbs cooked / 16.4 lb raw packer).
+  9. File permissions: Fixed world-writable permissions in `data/word_documents/` and `test-results/`.
+- **Verification Results**:
+  - `npm run check`: OK (0 errors across 7 JS files)
+  - `node --check tz_utils.js modules/recipes/sausage_calc.js modules/shared/core_utils.js modules/reports/shop_reports.js modules/forecaster/analytics_subtabs.js`: OK (0 errors)
+  - Python `unittest` (`.venv/bin/python -m unittest discover -s clover_api/tests`): 32 passed, 0 failed (11.5s)
+  - PAL Verifiers (`scripts/verify_v2_facelift_pal.py`, `scripts/verify_smokehouse_ux_pal.py`, `scripts/verify_bi_insight_engine.py`): 100% PASS (Exit Code 0)
+  - Playwright E2E (`npm test`): **32 passed, 0 failed, 0 flaky (22.9s)**
+
+- **2026-11-14 01:27:23 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+## 2026-11-14 · Piece Counts Mandate Across JD Messaging & Turkey 3.0 lbs Cooked Calibration (Task 69)
+- **Problem & Scope**: User noted: *"jd still messages me in pounds of meat when thats not useful because we do everything in counts, so like 7 briskit, 3 pork butt, 7 ribs, for example. eqch turkey comes out to 3 lbs cooked"*. Followed by: *"i still get pounds instead of whole counts as well from jd"*. The pitmaster crew and cutting board operate strictly on physical piece counts (Packers, Butts, Racks, Breasts, Links) with ZERO mentions of pounds (neither raw nor cooked, not even parenthetically). Turkey conversions calibrated to 3.0 lbs cooked (~4.29 lbs raw @ 70% yield, 20.0 lbs/case).
+- **Fixes Applied**:
+  1. `clover_api/analytics/unit_conversions.py`: Calibrated turkey unit spec to `4.29 lbs raw` per breast, `3.0 lbs cooked` (`owner_reported_cooked_lbs_per_unit: 3.0`, `cook_yield: 0.70`), and `20.0 lbs/case raw`.
+  2. `modules/shared/core_utils.js`: Synchronized `KITCHEN_UNIT_SPECS.turkey` (`lbsPerCut: 4.29`, `lbsPerCase: 20.0`, `cutsPerCase: 4`, `yieldRatio: 0.70`) and updated `formatKitchenUnits` to compute whole turkey breasts using `Math.max(1, Math.ceil(cookedLbs / 3.0))`.
+  3. `clover_api/tests/test_calculations.py`: Added explicit assertions in `TestUnitConversions` for turkey cooked lbs per unit (3.0), case weight (20.0 lbs), rounding up, and exact property match between Python and `core_utils.js`.
+  4. `scripts/daily_insight_engine.py`: Refactored `the_action` to emit strictly whole piece counts with zero pounds: `Prep {briskets} Briskets, {pork_butts} Pork Butts, {ribs_racks} racks of spare ribs, {turkey_breasts} Turkey Breasts, and {sausage_links} Sausage Links (~{sausage_batches} batches); stage sliced brisket on the cutting block 30 minutes before the {PEAK_RUSH_BY_DOW[short_day]}.`
+  5. `scripts/verify_bi_insight_engine.py`: Updated assertion from `"lbs raw brisket" in the_action` to `"brisket" in the_action and "spare ribs" in the_action` to enable 100% pound-free executive briefs.
+  6. `scripts/telegram_dispatcher.py`: Updated `build_morning_brief_message()` to format production targets purely in counts: `🥩 Prep Targets: {briskets} Briskets | {pork_butts} Pork Butts | {ribs_racks} Racks Ribs | {turkey_breasts} Turkey Breasts | {sausage_links} Sausage Links`.
+  7. `agent/unit_conversions.ts`: Updated `calculateCases` for Brisket, Pork Butt, Dino Ribs, Spare Ribs, Turkey (3.0 lbs cooked/breast), and Sausage (3 links/lb) to output count-only descriptions (`18 Packers (~3.6 Cases)`), eliminating all `, ~X lbs raw`.
+  8. `agent/context_provider.ts`, `agent/index.ts`: Updated `getBBQQuickActionPrep()` and `/forecast` commands to output piece counts only, completely omitting `Target Cooked: X lbs (~Y lbs raw)`.
+  9. `/home/atools/Documents/GitHub/agent-comms/shared/runtime/brain.ts`: Updated JD persona and system prompt with hard invariant: `ZERO POUNDS INVARIANT: NEVER mention or output pounds of meat (raw or cooked). State all meat prep amounts and recommendations strictly as whole physical piece counts: briskets, pork butts, rib racks, turkey breasts, and sausage links.`
+  10. `/home/atools/Documents/GitHub/agent-comms/shared/runtime/core.ts`: Added `cleanJDOutput(t)` filter in outbound message stream that regex-strips compound and parenthetical pounds (e.g., `(, ~252 lbs raw)`, `(~280 lbs raw)`) before transmission to Telegram.
+  11. `/home/atools/Documents/GitHub/agent-comms/agents/jd/memory/MEMORY.md` & `facts.md`: Recorded Strict Piece Counts Only Invariant [JD-F3] and turkey breast 3.0 lbs cooked yield. Restarted `agent-comms.service` daemon.
+  12. `.loop/patterns.md`: Updated turkey specification to `1 cooked breast = 3.0 lbs cooked (~4.29 lbs raw, Y_cook = 0.70; 20 lbs/case raw)`. Added Task 69 to `.loop/prd.json` (`passes: true`).
+- **Verification Results**:
+  - `npm run check`: OK (0 errors across 7 files)
+  - Python `unittest` (`.venv/bin/python -m unittest discover -s clover_api/tests`): 32 passed, 0 failed (4.15s)
+  - PAL Verifiers (`scripts/verify_v2_facelift_pal.py`, `scripts/verify_smokehouse_ux_pal.py`, `scripts/verify_bi_insight_engine.py`, `scripts/verify_all_forecasts.py`): 100% PASS
+  - `agent-comms` test suite (`npm test` in `agent-comms`): 69 passed, 0 failed (412ms)
+  - `systemctl --user status agent-comms.service`: Active (running)
+  - Playwright E2E (`npm test`): 32 passed, 0 failed, 0 flaky (22.5s)
+- **2026-11-14 02:02:02 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-11-14 02:03:48 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-11-14 02:10:03 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach

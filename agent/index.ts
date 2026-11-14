@@ -91,9 +91,7 @@ export class JDAgentDomain {
       const calc = this.calculateCases(meat, lbs);
 
       const rawMsg = `🔥 Pitmaster Daily Forecast for ${calc.meat}:\n` +
-        `• Target Cooked: ${calc.targetCookedLbs} lbs\n` +
-        `• Required Raw Weight: ${calc.rawLbsRequired} lbs\n` +
-        `• Case Order: ${calc.unitsDescription}\n` +
+        `• Prep Target: ${calc.unitsDescription}\n` +
         (calc.portionsEstimate ? `• Est. Servings: ~${calc.portionsEstimate} portions\n` : '') +
         `\nTip: Ready for fire-up at 4:00 AM EST.`;
 

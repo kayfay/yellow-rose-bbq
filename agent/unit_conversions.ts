@@ -5,6 +5,8 @@ export interface MeatCalculation {
   casesRequired: number;
   unitsDescription: string;
   portionsEstimate?: number;
+  cuts?: number;
+  cutLabel?: string;
 }
 
 export function purgeJargon(text: string): string {
@@ -48,7 +50,9 @@ export function calculateCases(meatKey: string, targetCookedLbs: number): MeatCa
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (${packers} raw packers @ 14.0 lbs each, yielding ~5.75 lbs cooked each)`,
+      cuts: packers,
+      cutLabel: packers === 1 ? 'Packer' : 'Packers',
+      unitsDescription: `${packers} Packers (~${cases} Cases)`,
       portionsEstimate: Math.round(targetCookedLbs * 2.3)
     };
   } else if (key.includes('pork') || key.includes('butt') || key.includes('shoulder')) {
@@ -61,7 +65,9 @@ export function calculateCases(meatKey: string, targetCookedLbs: number): MeatCa
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (${butts} bone-in butts @ 8 lbs each)`,
+      cuts: butts,
+      cutLabel: butts === 1 ? 'Butt' : 'Butts',
+      unitsDescription: `${butts} Butts (~${cases} Cases)`,
       portionsEstimate: Math.round(targetCookedLbs * 2.0)
     };
   } else if (key.includes('dino')) {
@@ -74,7 +80,9 @@ export function calculateCases(meatKey: string, targetCookedLbs: number): MeatCa
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (${ribs} plate ribs @ 4.0 lbs each, 3 bags/case)`
+      cuts: ribs,
+      cutLabel: ribs === 1 ? 'Rib' : 'Ribs',
+      unitsDescription: `${ribs} Ribs (~${cases} Cases)`
     };
   } else if (key.includes('rib')) {
     // Y_cook = 0.60, 33.6 lbs/case (6 racks @ 5.6 lbs)
@@ -86,19 +94,38 @@ export function calculateCases(meatKey: string, targetCookedLbs: number): MeatCa
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (${racks} racks @ 5.6 lbs each, 2 racks/cryovac)`
+      cuts: racks,
+      cutLabel: racks === 1 ? 'Rack' : 'Racks',
+      unitsDescription: `${racks} Racks (~${cases} Cases)`
     };
   } else if (key.includes('turkey')) {
-    // Y_trim = 1.0, Y_cook = 0.70, 20 lbs/case
+    // Each whole turkey breast yields 3.0 lbs cooked (~4.29 lbs raw @ 70% yield)
     const rawLbs = targetCookedLbs / 0.70;
-    const cases = Math.ceil((rawLbs / 20) * 10) / 10;
+    const breasts = Math.ceil(targetCookedLbs / 3.0);
+    const cases = Math.ceil((breasts / 4) * 10) / 10;
     return {
       meat: 'Smoked Turkey (No-Trim)',
       targetCookedLbs,
       rawLbsRequired: Math.round(rawLbs),
       casesRequired: cases,
-      unitsDescription: `${cases} Cases (20 lbs/case raw)`,
+      cuts: breasts,
+      cutLabel: breasts === 1 ? 'Breast' : 'Breasts',
+      unitsDescription: `${breasts} Breasts (~${cases} Cases)`,
       portionsEstimate: Math.round(targetCookedLbs * 3.2)
+    };
+  } else if (key.includes('sausage')) {
+    // 3 links/lb, 60 lb nominal batch (180 links)
+    const links = Math.ceil(targetCookedLbs * 3.0);
+    const batches = Math.ceil(targetCookedLbs / 60.0);
+    return {
+      meat: 'House Sausage',
+      targetCookedLbs,
+      rawLbsRequired: Math.round(targetCookedLbs),
+      casesRequired: batches,
+      cuts: links,
+      cutLabel: links === 1 ? 'Link' : 'Links',
+      unitsDescription: `${links} Links (~${batches} batch${batches === 1 ? '' : 'es'})`,
+      portionsEstimate: links
     };
   } else {
     // Generic fallback

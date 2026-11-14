@@ -67,7 +67,7 @@ class TestRenderedPayloadText(unittest.TestCase):
     """Generated JSON that the pages render must not carry superseded numbers or banned labels."""
 
     PAYLOADS = ["ml_insights.json", "quick_wind_alerts.json", "daily_executive_brief.json", "shift_payload.json"]
-    STALE = [r"14\.0 lbs raw", r"\b336 lbs", r"134(\.4)? lbs cooked", r"29\.5%", r"labor optimization", r"plain[- ]english", r"97\.37", r"70:30", r"\b3\.5x\b"]
+    STALE = [r"14\.0 lbs raw", r"\b336 lbs", r"134(\.4)? lbs cooked", r"(?:meat|food)\s*cost[^.\n]{0,25}29\.5%|29\.5%\s*(?:meat|food)\s*cost", r"labor optimization", r"plain[- ]english", r"97\.37", r"70:30", r"\b3\.5x\b"]
 
     def test_generated_payload_text(self):
         hits = []

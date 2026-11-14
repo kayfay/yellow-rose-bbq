@@ -3,6 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import json
 import sqlite3
+from datetime import datetime, timedelta
 import pandas as pd
 import polars as pl
 import numpy as np
@@ -137,8 +138,11 @@ def run_weather_impact_analysis():
         date_str = d_obj.strftime('%A, %Y-%m-%d')
         
         rank_str = ""
-        if row['date'] == most_recent_date:
+        yesterday_str = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+        if row['date'] == yesterday_str:
             rank_str += f"<br><br><b>🌟 YESTERDAY'S SALES</b>"
+        elif row['date'] == most_recent_date:
+            rank_str += f"<br><br><b>🌟 MOST RECENT SALES</b>"
         if row['date'] in top_3_dates:
             rank = top_3_dates.index(row['date']) + 1
             rank_str += f"<br><br><b>🏆 #{rank} Highest Recent Sales Day</b>"
@@ -228,12 +232,12 @@ def run_weather_impact_analysis():
         "showlegend": True
     })
     
-    # Dummy trace for legend entry - Yesterday
+    # Dummy trace for legend entry - Most Recent Sales
     traces.append({
         "x": [],
         "y": [],
         "mode": "markers",
-        "name": "Yesterday's Sales (Neon Pink Halo)",
+        "name": "Most Recent Sales (Neon Pink Halo)",
         "marker": {
             "size": 12,
             "color": "rgba(0,0,0,0)",

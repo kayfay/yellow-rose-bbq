@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -286,10 +287,16 @@ def build_morning_brief_message() -> str:
             pass
 
     rev = forecast.get("predicted_revenue", 0.0)
-    brisket_raw = forecast.get("brisket_raw_lbs", 0.0)
-    pork_raw = forecast.get("pork_shoulder_raw_lbs", 0.0)
-    ribs_racks = forecast.get("pork_ribs_racks", 0)
-    sausage_lbs = forecast.get("sausage_lbs", 0.0)
+    brisket_raw = float(forecast.get("brisket_raw_lbs", 0.0))
+    pork_raw = float(forecast.get("pork_shoulder_raw_lbs", 0.0))
+    ribs_racks = int(round(float(forecast.get("pork_ribs_racks", 0))))
+    sausage_lbs = float(forecast.get("sausage_lbs", 0.0))
+    turkey_cooked = float(forecast.get("turkey_cooked_lbs", forecast.get("turkey_lbs", 0.0)))
+
+    briskets = int(math.ceil(brisket_raw / 16.4)) if brisket_raw > 0 else 0
+    pork_butts = int(math.ceil(pork_raw / 8.0)) if pork_raw > 0 else 0
+    turkey_breasts = int(math.ceil(turkey_cooked / 3.0)) if turkey_cooked > 0 else 0
+    sausage_links = int(round(sausage_lbs * 3.0))
 
     if is_closed:
         status_line = "🔴 <b>STATUS: MONDAY CLOSED (PIT COLD &amp; MAINTENANCE)</b>"
@@ -298,7 +305,11 @@ def build_morning_brief_message() -> str:
         status_line = f"🟢 <b>STATUS: ACTIVE SERVICE DAY</b>"
         sales_section = (
             f"💰 <b>Projected Revenue:</b> ${rev:,.2f}\n"
-            f"🥩 <b>Raw Prep Targets:</b> {brisket_raw:.0f} lbs Brisket (~{brisket_raw/16.4:.1f} packers) | {pork_raw:.0f} lbs Butt | {ribs_racks} Racks Ribs | {sausage_lbs:.0f} lbs Sausage"
+            f"🥩 <b>Prep Targets:</b> {briskets} Brisket{'s' if briskets != 1 else ''} | "
+            f"{pork_butts} Pork Butt{'s' if pork_butts != 1 else ''} | "
+            f"{ribs_racks} Racks Ribs | "
+            f"{turkey_breasts} Turkey Breast{'s' if turkey_breasts != 1 else ''} | "
+            f"{sausage_links} Sausage Links"
         )
 
     # Previous night wrap-up
@@ -544,11 +555,12 @@ def answer_smokehouse_query(query: str, gemini_key: str = "") -> str:
     if gemini_key:
         try:
             prompt = (
-                f"You are the autonomous Yellow Rose BBQ Smokehouse Intelligence Agent. "
+                f"You are the autonomous Yellow Rose BBQ Smokehouse Intelligence Agent (JD). "
                 f"Answer the following user question concisely (max 3-4 bullet points or short paragraph) using Texas BBQ pitmaster wisdom. "
                 f"Ground facts: We use post oak, offset pits (24 briskets max: 14 big, 10 small), Trevor fires at 2:30 AM (brisket trim <18%), "
                 f"Max works 8 AM-6 PM (dampers/wraps/140F holding), The Boss relieves at 6 PM, Jake opens kitchen line at 8:30 AM, Nick departs sharp at 7:00 PM for the bus, "
                 f"Freddy closes kitchen/cutting block, Elly leads closing expo, Alyssa opens expo, Allen crafts 50 lb custom sausage and Rosebuds and runs dish pit open-to-close. "
+                f"CRITICAL UNIT RULE: Always report and communicate meat quantities in whole piece counts first (e.g. 7 briskets, 3 pork butts, 7 ribs, 3 turkey breasts, 45 sausage links), never pounds alone. The pit crew and cutting board do everything in piece counts. Each whole cooked turkey breast yields 3.0 lbs cooked. "
                 f"Question: {query}"
             )
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={gemini_key}"

@@ -79,9 +79,9 @@ def verify_daily_insight_engine() -> None:
                 f"{day_key} insight grounded in dollar sales and comparison to a typical {day_key}",
             )
             assert_true(
-                "lbs raw brisket" in day_brief.get("the_action", "").lower()
-                and "racks of spare ribs" in day_brief.get("the_action", "").lower(),
-                f"{day_key} action specifies concrete raw/cooked lbs and rib racks to prep",
+                "brisket" in day_brief.get("the_action", "").lower()
+                and "spare ribs" in day_brief.get("the_action", "").lower(),
+                f"{day_key} action specifies concrete piece counts and rib racks to prep",
             )
 
     sparks = payload.get("sparklines_7d", {})

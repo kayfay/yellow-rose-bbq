@@ -55,15 +55,21 @@ class TestUnitConversions(unittest.TestCase):
         self.assertAlmostEqual(UNIT_CONVERSIONS["pork_butt"]["lbs_per_unit"], 3.52, places=2)
         self.assertAlmostEqual(UNIT_CONVERSIONS["ribs"]["lbs_per_unit"], 3.36, places=2)
         self.assertAlmostEqual(UNIT_CONVERSIONS["sausage"]["lbs_per_unit"], 0.33, places=2)
+        self.assertAlmostEqual(UNIT_CONVERSIONS["turkey"]["lbs_per_unit"], 3.0, places=1)
+        self.assertEqual(UNIT_CONVERSIONS["turkey"]["owner_reported_cooked_lbs_per_unit"], 3.0)
 
     def test_case_weights_match_invoice(self):
         self.assertEqual(UNIT_CONVERSIONS["brisket"]["lbs_per_case"], 82.0)   # 3 cs = $1,257.15 / $5.10
         self.assertEqual(UNIT_CONVERSIONS["ribs"]["lbs_per_case"], 33.6)      # 5 cs = $402.72 / $2.40
+        self.assertEqual(UNIT_CONVERSIONS["turkey"]["lbs_per_case"], 20.0)
 
     def test_pieces_round_up(self):
         self.assertEqual(units_for_raw_lbs("brisket", 140), 9)
         self.assertEqual(units_for_raw_lbs("brisket", 16.4), 1)
         self.assertEqual(units_for_raw_lbs("brisket", 16.5), 2)
+        self.assertEqual(units_for_raw_lbs("turkey", 4.29), 1)
+        self.assertEqual(units_for_raw_lbs("turkey", 8.58), 2)
+        self.assertEqual(units_for_raw_lbs("turkey", 8.6), 3)
 
     def test_js_kitchen_specs_match_python_dictionary(self):
         js = (ROOT_DIR / "modules" / "shared" / "core_utils.js").read_text()
@@ -86,6 +92,10 @@ class TestUnitConversions(unittest.TestCase):
         self.assertEqual(num(pork, "lbsPerCase"), UNIT_CONVERSIONS["pork_butt"]["lbs_per_case"])
         self.assertEqual(num(pork, "lbsPerCut"), UNIT_CONVERSIONS["pork_butt"]["raw_lbs_per_unit"])
         self.assertEqual(num(pork, "yieldRatio"), UNIT_CONVERSIONS["pork_butt"]["cook_yield"])
+        turkey = spec_block("turkey")
+        self.assertEqual(num(turkey, "lbsPerCase"), UNIT_CONVERSIONS["turkey"]["lbs_per_case"])
+        self.assertEqual(num(turkey, "lbsPerCut"), UNIT_CONVERSIONS["turkey"]["raw_lbs_per_unit"])
+        self.assertEqual(num(turkey, "yieldRatio"), UNIT_CONVERSIONS["turkey"]["cook_yield"])
 
 
 import json

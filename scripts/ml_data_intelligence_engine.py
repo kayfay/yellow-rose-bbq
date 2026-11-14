@@ -370,7 +370,7 @@ def run_ml_intelligence_engine() -> dict:
         "insight": (
             f"Physical pit constraints confirm maximum single-session smoker capacity is 24 briskets "
             f"(14 packers in the big offset pit + 10 packers in the small pit). At {_each:g} lbs raw per packer (invoice weight), "
-            f"maximum raw brisket load is ~{_max_raw} lbs (~{round(_max_cooked)} lbs cooked yield at 40%), capping single-day retail brisket sales at ~${_max_sales:,.0f}."
+            f"maximum raw brisket load is ~{_max_raw} lbs (~{round(_max_cooked)} lbs cooked yield at 35%), capping single-day retail brisket sales at ~${_max_sales:,.0f}."
         ),
         "evidence": "OPERATIONAL_QUESTIONNAIRE.md Section 3 (Smoker Constraints)",
         "quantitative_proof": f"14 big pit + 10 small pit = {max_briskets} briskets ({_max_raw} lbs raw / {_max_cooked} lbs cooked max)",
@@ -535,7 +535,7 @@ def run_ml_intelligence_engine() -> dict:
         "quantitative_proof": "7:00 PM transit departure handoff; 2:30 AM Trevor pit fire (<18% trim loss); 8:30 AM Jake kitchen open",
         "actionable_recommendation": (
             "Transition evening kitchen line prep to Freddy by 6:45 PM before Nick's 7:00 PM bus departure; "
-            "ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 40.0% cooked yield."
+            "ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 35.0% cooked yield."
         ),
         "impact_usd": 450.0,
         "terms": ["Prep Target", "Meat Used Per Hour", "Cooked Yield %"]

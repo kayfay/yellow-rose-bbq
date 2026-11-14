@@ -55,18 +55,22 @@ UNIT_CONVERSIONS = {
     "turkey": {
         "unit_name": "Smoked Turkey Breast",
         "unit_name_plural": "Smoked Turkey Breasts",
-        "raw_lbs_per_unit": 10.0,
-        "units_per_case": 2,
+        "raw_lbs_per_unit": 4.29,
+        "units_per_case": 4,
+        "lbs_per_case": 20.0,
         "cook_yield": 0.70,
-        "source": "20 lbs/case raw (2 breasts @ 10 lbs), 70% cook yield",
+        # Owner-confirmed 2026-11-13: each turkey comes out to 3.0 lbs cooked (~4.29 lbs raw @ 70% cook yield).
+        "owner_reported_cooked_lbs_per_unit": 3.0,
+        "source": "Cutting block confirmed: 3.0 lbs cooked per breast (~4.29 lbs raw, 70% yield, 20 lbs/case raw)",
     },
 }
 
 for _spec in UNIT_CONVERSIONS.values():
     _spec["lbs_per_unit"] = round(_spec["raw_lbs_per_unit"] * _spec["cook_yield"], 2)
-    _spec["lbs_per_case"] = (
-        round(_spec["raw_lbs_per_unit"] * _spec["units_per_case"], 1) if _spec["units_per_case"] else None
-    )
+    if "lbs_per_case" not in _spec:
+        _spec["lbs_per_case"] = (
+            round(_spec["raw_lbs_per_unit"] * _spec["units_per_case"], 1) if _spec["units_per_case"] else None
+        )
 
 
 def units_for_raw_lbs(meat_key, raw_lbs):

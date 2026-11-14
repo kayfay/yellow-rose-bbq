@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-13T21:16:48.697270-05:00",
-  "total_insights_mined": 9,
+  "generated_at": "2026-11-11T19:24:05.134604-05:00",
+  "total_insights_mined": 11,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
     "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
@@ -16,11 +16,44 @@
   ],
   "insights": [
     {
+      "id": 101,
+      "title": "High-Profit Anchor: Banana Pudding Catering Tray (12.9% Food Cost)",
+      "category": "profitability",
+      "category_label": "\u2b50 Profitability Mining",
+      "insight": "Machine learning clustering ranks Banana Pudding Catering Tray in the highest profitability tier ('Super Star'): delivering $39.20 in gross profit on a $45.00 ticket with only 12.9% food cost.",
+      "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier Meat Cost Model",
+      "quantitative_proof": "$39.20 profit (87.1% margin) vs the kitchen average",
+      "actionable_recommendation": "Train counter staff to actively recommend Banana Pudding Catering Tray and feature it on POS modifier quick-keys; every 10 incremental orders generates +$392.00 pure gross profit.",
+      "impact_usd": 588.0,
+      "terms": [
+        "Est. Meat Cost",
+        "Meat Cost %",
+        "Left After Meat Cost",
+        "Prep Target"
+      ]
+    },
+    {
+      "id": 102,
+      "title": "Clover POS vs Menu Board Pricing Anomaly: Brisket Sandwich Margin Risk",
+      "category": "margin_anomaly",
+      "category_label": "\u26a0\ufe0f Pricing Disparity",
+      "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 meat cost per portion), severely compressing margin.",
+      "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
+      "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 difference from target)",
+      "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to keep more than 68% of each sale after meat cost.",
+      "impact_usd": 480.0,
+      "terms": [
+        "Est. Meat Cost",
+        "Meat Cost %",
+        "Average Ticket"
+      ]
+    },
+    {
       "id": 103,
       "title": "Midweek vs Weekend Revenue Gap: $64 Family Feast Playbook",
       "category": "midweek_revenue",
       "category_label": "\ud83d\udcc8 Revenue Strategy",
-      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,924.81/day compared to $6,198.77 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
+      "insight": "Historical Clover sales indicate Tuesday\u2013Thursday counter volume averages $3,924.81/day compared to $7,063.70 on Saturdays. The Midweek Revenue Playbook highlights a +$1,500 to +$2,000/week expansion opportunity by activating the $64 Midweek Family Feast Pack.",
       "evidence": "strategy_infographic.jpg (Midweek Playbook) & 89-Day Clover POS Sales History",
       "quantitative_proof": "Weekend $37,654 vs Midweek $6,719",
       "actionable_recommendation": "Promote the $64 Family Feast Pack (1 lb brisket, 1/2 rack ribs, 2 sausage links, 3 sides) for early 2:00\u20134:30 PM pickup to capture suburban dinner commuters before evening pit cool-down.",
@@ -36,7 +69,7 @@
       "title": "Smoker Physical Limit: 24 Packer Briskets Max Capacity Ceiling",
       "category": "pit_capacity",
       "category_label": "\ud83d\udd25 Smoker Geometry",
-      "insight": "Physical pit constraints confirm maximum single-session smoker capacity is 24 briskets (14 packers in the big offset pit + 10 packers in the small pit). At 16.4 lbs raw per packer (invoice weight), maximum raw brisket load is ~394 lbs (~138 lbs cooked yield at 40%), capping single-day retail brisket sales at ~$3,930.",
+      "insight": "Physical pit constraints confirm maximum single-session smoker capacity is 24 briskets (14 packers in the big offset pit + 10 packers in the small pit). At 16.4 lbs raw per packer (invoice weight), maximum raw brisket load is ~394 lbs (~138 lbs cooked yield at 35%), capping single-day retail brisket sales at ~$3,930.",
       "evidence": "OPERATIONAL_QUESTIONNAIRE.md Section 3 (Smoker Constraints)",
       "quantitative_proof": "14 big pit + 10 small pit = 24 briskets (394 lbs raw / 137.8 lbs cooked max)",
       "actionable_recommendation": "When Saturday projected sales exceed $7,500, stagger the cook into dual smoking waves: Worker #1 fires wave 1 at 2:00 AM, allowing finished briskets to transfer into 145\u00b0F tallow hold by 2:00 PM while wave 2 loads.",
@@ -68,11 +101,11 @@
       "title": "Rainy Days Average -30.0% vs Normal Days",
       "category": "weather_elasticity",
       "category_label": "\ud83c\udf27\ufe0f Weather Sensitivity",
-      "insight": "Comparing operating days by weather, rainy days averaged $3,140 in sales against $4,485 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
+      "insight": "Comparing operating days by weather, rainy days averaged $3,228 in sales against $4,612 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
       "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
-      "quantitative_proof": "$3,140 rainy-day average vs $4,485 normal-day average (-30.0%)",
+      "quantitative_proof": "$3,228 rainy-day average vs $4,612 normal-day average (-30.0%)",
       "actionable_recommendation": "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, and side cups by 10:30 AM to prevent packing bottlenecks at the counter.",
-      "impact_usd": 1345.61,
+      "impact_usd": 1383.49,
       "terms": [
         "Average Ticket",
         "Sales Trend",
@@ -150,7 +183,7 @@
       "insight": "Ground-truth staffing records establish strict station invariants: Smoker Crew is dedicated strictly to Trevor, Max, and The Boss; neither Nick nor Freddy work on pits. Critical evening bottleneck occurs at 7:00 PM sharp when Nick departs for the bus, requiring Freddy to assume primary meat slicing block and grill lead while Elly commands closing expo.",
       "evidence": "STAFF_ROSTER.md (Operational Staff Roster & Station Handoff Windows)",
       "quantitative_proof": "7:00 PM transit departure handoff; 2:30 AM Trevor pit fire (<18% trim loss); 8:30 AM Jake kitchen open",
-      "actionable_recommendation": "Transition evening kitchen line prep to Freddy by 6:45 PM before Nick's 7:00 PM bus departure; ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 40.0% cooked yield.",
+      "actionable_recommendation": "Transition evening kitchen line prep to Freddy by 6:45 PM before Nick's 7:00 PM bus departure; ensure Trevor's morning brisket trim remains below 18% to preserve the modeled 35.0% cooked yield.",
       "impact_usd": 450.0,
       "terms": [
         "Prep Target",

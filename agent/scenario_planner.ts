@@ -57,7 +57,7 @@ export class ScenarioPlanner {
 
     const adjustments: string[] = [
       `Expected Sales: $${projectedSales.toLocaleString()} (${modPct >= 0 ? '+' : ''}${modPct}% vs $${baselineSales.toLocaleString()} baseline)`,
-      `Brisket Prep: Target ${adjustedCookedBrisket} lbs cooked (${adjCalc.unitsDescription}) vs normal ${baseCookedBrisket} lbs cooked`,
+      `Brisket Prep: Target ${adjCalc.cuts} Packers (${adjCalc.unitsDescription}) vs normal ${baseCalc.cuts} Packers`,
       `Spare Ribs Prep: Target ${adjRacks} racks vs normal ${baseRacks} racks`
     ];
 

@@ -229,11 +229,22 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
 
     brisket_raw = round(float(record.get("brisket_raw_lbs", 0.0)))
     brisket_cooked = round(brisket_raw * 0.35)
+    briskets = int(math.ceil(brisket_raw / 16.4)) if brisket_raw > 0 else 0
+
     pork_raw = round(float(record.get("pork_shoulder_raw_lbs", 0.0)))
     pork_cooked = round(pork_raw * 0.44)
+    pork_butts = int(math.ceil(pork_raw / 8.0)) if pork_raw > 0 else 0
+
     ribs_racks = int(round(float(record.get("pork_ribs_racks", 0))))
+
     turkey_cooked = round(float(record.get("turkey_cooked_lbs", record.get("turkey_lbs", 0.0))))
     turkey_raw = round(turkey_cooked / 0.70)
+    # Each turkey breast yields 3.0 lbs cooked
+    turkey_breasts = int(math.ceil(turkey_cooked / 3.0)) if turkey_cooked > 0 else 0
+
+    sausage_raw_lbs = float(record.get("sausage_lbs", 0.0))
+    sausage_links = int(round(sausage_raw_lbs * 3.0))
+    sausage_batches = max(1, int(math.ceil(sausage_raw_lbs / 60.0))) if sausage_raw_lbs > 0 else 0
 
     # Split difference into Rush Hour demand vs Weather/Local Events in plain dollars
     rush_delta = round(diff_usd * 0.62)
@@ -266,9 +277,11 @@ def build_day_brief(record: dict, dow_baselines: dict) -> dict:
     )
 
     the_action = (
-        f"Prep {brisket_raw} lbs raw Brisket (~{brisket_cooked} lbs cooked), "
-        f"{pork_raw} lbs raw Pulled Pork (~{pork_cooked} lbs cooked), "
-        f"{ribs_racks} racks of Spare Ribs, and {turkey_raw} lbs raw Turkey (~{turkey_cooked} lbs cooked); "
+        f"Prep {briskets} Brisket{'s' if briskets != 1 else ''}, "
+        f"{pork_butts} Pork Butt{'s' if pork_butts != 1 else ''}, "
+        f"{ribs_racks} racks of spare ribs, "
+        f"{turkey_breasts} Turkey Breast{'s' if turkey_breasts != 1 else ''}, and "
+        f"{sausage_links} Sausage Links (~{sausage_batches} batch{'es' if sausage_batches != 1 else ''}); "
         f"stage sliced brisket on the cutting block 30 minutes before the {PEAK_RUSH_BY_DOW[short_day]}."
     )
 
