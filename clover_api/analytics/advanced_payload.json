@@ -2,17 +2,17 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 291,
-      "confidence": 19.7
+      "count": 287,
+      "confidence": 19.4
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 286,
-      "confidence": 22.8
+      "count": 284,
+      "confidence": 22.7
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 236,
+      "count": 235,
       "confidence": 18.8
     },
     {
@@ -22,8 +22,8 @@
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 126,
-      "confidence": 19.4
+      "count": 125,
+      "confidence": 19.3
     },
     {
       "pair": "Brisket + Turkey",
@@ -33,48 +33,48 @@
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
       "count": 111,
-      "confidence": 23.5
+      "confidence": 23.4
     },
     {
       "pair": "Quesabirria taco + Rosebud",
-      "count": 105,
-      "confidence": 27.8
+      "count": 103,
+      "confidence": 27.3
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
-      "count": 102,
-      "confidence": 15.7
+      "count": 101,
+      "confidence": 15.6
     },
     {
       "pair": "Brisket + Mac & Cheese",
       "count": 97,
-      "confidence": 21.3
+      "confidence": 21.1
     }
   ],
   "interaction_modeling": {
-    "normal": 4172.21,
-    "game_only": 4245.02,
-    "rain_only": 4349.89,
-    "game_and_rain": 4610.73
+    "normal": 4158.65,
+    "game_only": 4336.44,
+    "rain_only": 2911.05,
+    "game_and_rain": 11644.21
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4896,
-      "total_revenue": 210522.73,
-      "avg_ticket": 42.99892361111111
+      "order_count": 4907,
+      "total_revenue": 210468.07,
+      "avg_ticket": 42.891393927043
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 354,
-      "total_revenue": 21055.09,
-      "avg_ticket": 59.47765536723164
+      "order_count": 355,
+      "total_revenue": 21163.67,
+      "avg_ticket": 59.61597183098591
     },
     {
       "order_type": "To-Go",
-      "order_count": 2434,
-      "total_revenue": 154102.35,
-      "avg_ticket": 63.312387017255546
+      "order_count": 2437,
+      "total_revenue": 153941.05,
+      "avg_ticket": 63.16826015592942
     }
   ],
   "sell_out_prediction_chart": {
@@ -104,7 +104,7 @@
           137.0,
           164.0,
           191.0,
-          222.0
+          221.0
         ],
         "name": "1/2 Rack Pork Spare Ribs",
         "type": "scatter",
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 4.8,
-    "pork_ribs_avg_with_dino": 3.7,
-    "impact_pct": -22.9
+    "pork_ribs_avg_without_dino": 5.0,
+    "pork_ribs_avg_with_dino": 3.8,
+    "impact_pct": -24.3
   },
   "payday_effect": {
-    "payday_avg_ticket": 43.9,
-    "normal_avg_ticket": 46.31
+    "payday_avg_ticket": 43.36,
+    "normal_avg_ticket": 46.32
   }
 }
