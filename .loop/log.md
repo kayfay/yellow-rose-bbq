@@ -611,3 +611,25 @@
 - **2026-11-14 02:02:02 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
 - **2026-11-14 02:03:48 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
 - **2026-11-14 02:10:03 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+- **2026-11-15 08:08:38 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach
+
+
+## 2026-11-15 · Brisket Prediction & Yield Recalibration (Task 70)
+- **Problem & Scope**: Saturday `2026-11-14` projected 17 briskets vs. 12 actual (+5 briskets / ~82 lbs raw over-prep).
+- **SDD Artifacts**: Created `SPEC.md`, `DESIGN.md`, `PLAN.md`, and archived baseline to `backups/archive_pre_brisket_recalibration_20261115.tar.gz`.
+- **Root-Cause & Fixes**:
+  1. `scripts/diagnose_brisket_variance.py`: Traced compound `1.10x` revenue multiplier + `1.10x` margin stacking on `78.0` lbs Saturday baseline (`94.4 / 5.75 = 16.41 -> 17 packers`).
+  2. `scripts/meat_forecast.py`: Calibrated Saturday `brisket_cooked` baseline to `63.25` lbs cooked sliced (11 expected packers @ 5.75 lbs/packer) and replaced `1 + buf` percentage stacking with single-cushion `+1 brisket` cap (`predict_day('2026-11-14', 3500.0)` now outputs **12 packers**).
+- **Verification**: `npm run check` (0 errors), `unittest` (32/32 pass), `verify_all_forecasts.py` (5/5 pass), PAL verifiers (100% pass).
+
+
+## 2026-11-15 · Modular Time-Series Intelligence Suite (Task 71)
+- **SDD & Archive**: Created `backups/archive_pre_ts_improvements_20261115.tar.gz`, `SPEC.md`, `DESIGN.md`, and `PLAN.md`.
+- **Modules Implemented (`clover_api/analytics/modules/`)**:
+  - `hierarchical/`: `reconciler.py` (3-level MinTrace reconciliation: `Store -> Category -> Cut/Item`) & `hierarchical_forecast.py` (`statsmodels` MSTL decomposition).
+  - `probabilistic/`: `quantile_buffers.py` & `darts_pipeline.py` (P10/P50/P90 whole-cut buffers with `+1 brisket` cap).
+  - `motifs/`: `regime_detector.py` (structural break detection, `p < 0.01`) & `stumpy_motifs.py` (matrix-profile motif/anomaly scoring).
+  - `causal/`: `causal_impact_analyzer.py` (synthetic counterfactual lift/drop) & `feature_extractor.py` (rolling median & IQR outlier masking).
+  - `smokehouse_translator.py`: Plain-English whole-cut formatter with statistical jargon quarantine.
+- **Verification**: `npm run check` (0 errors), `unittest` (36/36 pass including `test_ts_improvements.py`).
+- **2026-11-15 11:34:33 [ALERT: PAIRED DRIFT DETECTED - TURKEY]**: Projected 24.0 vs. Actual 8.0 (Rel Error: 200.0% > 25% | Abs Error: 16.0 >= 2.0 | Tracking Signal: 0.0). CoVe Tier 1 Simulated Operational Drift Breach

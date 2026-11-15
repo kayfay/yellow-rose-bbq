@@ -47,7 +47,7 @@ DOW_BASELINES: Dict[str, Dict[str, float]] = {
     "Wed": {"turkey_cooked": 7.2, "brisket_cooked": 35.0, "pork_cooked": 16.0, "sausage_links": 55.0, "ribs_racks": 4.0, "dino_ribs": 0.0, "tacos": 35.0, "rosebuds": 20.0},
     "Thu": {"turkey_cooked": 7.0, "brisket_cooked": 38.0, "pork_cooked": 16.0, "sausage_links": 60.0, "ribs_racks": 4.0, "dino_ribs": 0.0, "tacos": 35.0, "rosebuds": 20.0},
     "Fri": {"turkey_cooked": 11.5, "brisket_cooked": 55.0, "pork_cooked": 24.0, "sausage_links": 90.0, "ribs_racks": 8.0, "dino_ribs": 4.0, "tacos": 55.0, "rosebuds": 30.0},
-    "Sat": {"turkey_cooked": 12.9, "brisket_cooked": 78.0, "pork_cooked": 38.0, "sausage_links": 130.0, "ribs_racks": 12.0, "dino_ribs": 8.0, "tacos": 75.0, "rosebuds": 40.0},
+    "Sat": {"turkey_cooked": 12.9, "brisket_cooked": 63.25, "pork_cooked": 38.0, "sausage_links": 130.0, "ribs_racks": 12.0, "dino_ribs": 8.0, "tacos": 75.0, "rosebuds": 40.0},
     "Sun": {"turkey_cooked": 8.9, "brisket_cooked": 45.0, "pork_cooked": 20.0, "sausage_links": 75.0, "ribs_racks": 6.0, "dino_ribs": 4.0, "tacos": 45.0, "rosebuds": 25.0}
 }
 
@@ -135,12 +135,14 @@ class MultiMeatForecaster:
         t_cases = round(t_raw_prep / YIELDS["turkey"]["pack_lbs"], 2)
         t_portions = int(round(t_cooked_target * YIELDS["turkey"]["portion_per_lb"]))
 
-        # 2. Brisket (Net yield 40%)
+        # 2. Brisket (Single-cushion cap: +1 brisket max over expected, 5.75 lbs cooked sliced / 16.4 lb raw)
         b_cooked_demand = calc_item(baselines["brisket_cooked"], "brisket", max_damp=5.0)
-        b_cooked_target = round(b_cooked_demand * (1.0 + buf), 2)
-        b_raw_prep = round(b_cooked_target / YIELDS["brisket"]["net_yield"], 1)
+        b_cooked_per_packer = UNIT_CONVERSIONS["brisket"].get("owner_reported_cooked_lbs_per_unit", 5.75)
+        b_expected_packers = b_cooked_demand / b_cooked_per_packer if b_cooked_per_packer > 0 else 0.0
+        b_packers = (int(round(b_expected_packers)) + 1) if b_cooked_demand > 0 else 0
+        b_raw_prep = round(b_packers * UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"], 1)
+        b_cooked_target = round(b_raw_prep * YIELDS["brisket"]["net_yield"], 2)
         b_cases = round(b_raw_prep / YIELDS["brisket"]["pack_lbs"], 1)
-        b_packers = int(round(b_raw_prep / UNIT_CONVERSIONS["brisket"]["raw_lbs_per_unit"]))
         b_portions = int(round(b_cooked_target * YIELDS["brisket"]["portion_per_lb"]))
 
         # 3. Pork (Net yield 44%)

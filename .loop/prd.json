@@ -413,6 +413,18 @@
       "description": "Refactor JD messaging and smokehouse production targets to piece counts first (Packers, Butts, Racks, Breasts, Links/Batches) and calibrate turkey conversion invariant to 3.0 lbs cooked per breast.",
       "acceptance_criteria": "clover_api/analytics/unit_conversions.py and core_utils.js reflect 3.0 lbs cooked per turkey breast; daily_insight_engine.py and telegram_dispatcher.py lead with piece counts for briskets, butts, ribs, turkey, and sausage; JD agent prompts, persona instructions, and Layer 2 memory mandate piece counts first; test_calculations.py, unittest suite (32 tests), PAL verifiers, agent-comms tests (69 tests), and Playwright E2E (32 tests) pass 100%.",
       "passes": true
+    },
+    {
+      "id": 70,
+      "description": "Diagnose, recalibrate, and fix the Brisket Prediction & Yield Measurement Pipeline per SPEC.md, DESIGN.md, and PLAN.md: eliminate compound 1.10x buffer stacking, cap buffer at +1 brisket, damp-filter catering outliers (> $500 or > 20 lbs), and standardize 5.75 lb cooked yield + chopped/taco end-cut accounting.",
+      "acceptance_criteria": "scripts/diagnose_brisket_variance.py traces 2026-11-14 (17 vs 12); Saturday 2026-11-14 projects 12 briskets (within ±1); npm run check, python unittest, PAL verifiers, and Playwright E2E pass 100%; Adversarial Critic rates >= 9/10.",
+      "passes": true
+    },
+    {
+      "id": 71,
+      "description": "Build and integrate the modular time-series intelligence suite under clover_api/analytics/modules/ per SPEC.md, DESIGN.md, and PLAN.md: 3-level MinTrace hierarchical reconciliation, P10/P50/P90 probabilistic quantile buffers (+1 brisket cap), PELT/CUSUM regime & motif detection, causal counterfactual lift/drop, and smokehouse plain-English translator.",
+      "acceptance_criteria": "All 5 modular subpackages exist under clover_api/analytics/modules/; sum(items) == sum(categories) == store_total within 0.01; zero statistical jargon in translated outputs; test_ts_improvements.py, unittest suite, npm run check, and PAL verifiers pass 100%.",
+      "passes": true
     }
   ]
 }
