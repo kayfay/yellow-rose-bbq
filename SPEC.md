@@ -1,21 +1,26 @@
-# Time-Series Intelligence Suite Specification (`SPEC.md`)
+# Yellow Rose BBQ — POS Actuals Calibration, Portion Mapping & Time-Series Wiring Specification (`SPEC.md`)
 
 ## 1. Overview
-This specification defines the modular time-series intelligence suite under `clover_api/analytics/modules/` for **Yellow Rose BBQ** (`sausage.allen.tools`), integrating hierarchical coherence, probabilistic quantile prep buffers, structural regime/motif detection, causal event impact, and plain-English smokehouse translation.
+This specification defines the functional requirements (in EARS syntax) for resolving the 5 structural bugs between Clover POS line-item actuals (`data/clover_sales_master.db`) and the meat demand forecasting pipeline, alongside smart closed-hours sync staleness management.
 
 ## 2. Functional Requirements (EARS Syntax)
 
-### REQ-1: 3-Level Hierarchy Coherence (MinTrace)
-- **When** predicting category and item sales, **the system shall** apply MinTrace (Minimum Trace / Shrinkage) reconciliation across the 3-level hierarchy (`Store Revenue -> Category [Brisket, Pork, Ribs, Turkey, Sausage, Sides] -> Cut/Item`) so that item-level totals mathematically equal category totals and store revenue within `0.01` tolerance.
+### FR-1: Master POS Database Resolution
+- **When** any analytics or forecasting module (`portion_transformer.py`, `dashboard.py`, `meat_forecast.py`, `backtest_all_forecasts.py`) loads historical POS transactions, **the system shall** resolve `data/clover_sales_master.db` first (when present and non-empty) and fall back to `clover_api/data/clover_sales.db` only when the master database is unavailable.
 
-### REQ-2: Probabilistic Quantile Prep Buffers
-- **When** generating cook targets, **the system shall** compute P10 (Slow Day Floor), P50 (Expected Cook Target), and P90 (Busy Day Ceiling), and output the delta above P50 as *"Extra Weekend Prep"* expressed in whole physical cuts (Briskets, Pork Butts, Racks of Ribs, Turkey Breasts, Sausage Links), **capped at +1 brisket** over expected demand, and **never** as raw percentages.
+### FR-2: Combo Plate Modification Parsing & Complete Portion Mapping
+- **When** translating `order_line_items` into cooked meat equivalents in `clover_api/analytics/portion_transformer.py`, **the system shall** parse the `modifications` string on combo plates (`BBQ plate`, `2 meat plate`) to attribute cooked weight/racks/links to the actual proteins selected (`Moist Brisket`, `Lean Brisket`, `Mixed Brisket`, `Ribs`, `Pulled Pork`, `Turkey`, `Sausage`) rather than hardcoding 100% Brisket.
+- **When** classifying standalone POS menu items, **the system shall** map all high-volume menu items—including bulk scale items (`Brisket`, `Turkey`, `Pulled Pork`, `Sausage` divided by `1000.0`), sandwiches (`Moist Sandwich`, `Lean sandwich`, `Pulled pork sandwich`, `Turkey sandwich`), platters (`Pitmaster Platter &3 Sm Sides`, `Hill Country Trinity W/3Sides`, `Bevo Platter`), ribs (`Full Rack Pork Spare Ribs`, `1/2 Rack Pork Spare Ribs`, `Single Bone Pork Rib`, `Dino Beef Rib`), tacos (`Crispy Quesa Taco Brisket`, `Crispy Quesa Taco Turkey`, `Quesabirria taco`, `Taco Plate W/2 Sides`), and `Rosebud`—with zero unmapped core protein rings.
 
-### REQ-3: Regime Shift & Motif Detection
-- **When** analyzing historical daily sales, **the system shall** run PELT/CUSUM structural break detection to flag permanent baseline shifts (`p < 0.01`) and matrix-profile motif/anomaly scoring to identify recurring weekly patterns and anomalous trading days.
+### FR-3: Empirical Day-of-Week Baselines & Time-Series Suite Wiring
+- **When** computing daily meat prep targets in `scripts/meat_forecast.py` and `clover_api/analytics/dashboard.py`, **the system shall** derive day-of-week baselines (`DOW_BASELINES`) from actual POS-translated cooked consumption in `data/clover_sales_master.db` and wire the `clover_api/analytics/modules/` suite (`hierarchical/reconciler.py`, `probabilistic/quantile_buffers.py`, `smokehouse_translator.py`) so that:
+  - $\sum \text{Items} = \sum \text{Categories} = \text{Store Total}$ within `0.01`,
+  - Brisket uses `5.75 lbs` cooked per `16.4 lb` raw packer (`35%` net yield) with a maximum single cushion of `+1 brisket`,
+  - Turkey uses `3.0 lbs` cooked per breast (`70%` yield, `20.0 lbs/case`),
+  - Pork Spare Ribs (`12 bones/rack`, `6 racks/case`) include both standalone racks and combo/platter rib allocations.
 
-### REQ-4: Causal Intervention & Synthetic Controls
-- **When** measuring the impact of a past event (e.g., Jaguars home game, weather storm, promotion), **the system shall** compare actual POS revenue against a synthetic counterfactual baseline and report *"Estimated Dollar Lift / Drop"* in plain English.
+### FR-4: Non-Circular POS Backtesting
+- **When** `scripts/backtest_all_forecasts.py` evaluates 30-day forecast accuracy, **the system shall** compare model predictions against actual daily POS-translated meat consumption from `data/clover_sales_master.db` (rather than comparing `DOW_BASELINES * rev_idx` against itself) and report honest MAPE, MAD, RMSE, and Tracking Signal metrics.
 
-### REQ-5: Jargon Quarantine & Plain-English Translation
-- **The system shall** strictly forbid statistical jargon (`heteroskedasticity`, `eigenvalues`, `matrix profile`, `MinTrace`, `WLS`, `P90`, `P50`, `P10`, `variance`, `regression`, `velocity`, `Z-Score`, `Sigma`) in all rendered JSON text strings and UI views, translating all outputs into whole smokehouse units via `smokehouse_translator.py`.
+### FR-5: Smart Closed-Hours Sync Staleness Management
+- **When** `ShopTime.getSyncHealth()` in `tz_utils.js` evaluates sync age on Mondays (closed all day) or outside operating hours (`< 10:00` or `>= 21:00` `America/New_York`), **the system shall** return `state: 'fresh'` with badge `● Closed · Synced` as long as a valid sync occurred within the past 24 hours (`1440` minutes), preventing false `⚠ Stale Sync` alarms overnight and on closed days.

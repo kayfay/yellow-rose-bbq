@@ -47,6 +47,14 @@
       return { ageMinutes: 0, state: 'fresh', label: 'Live Sync', badgeText: '● Live Sync' };
     }
     const ageMinutes = Math.max(0, Math.round((effNow.getTime() - syncDate.getTime()) / 60000));
+    const effDow = new Intl.DateTimeFormat('en-US', { timeZone: SHOP_TZ, weekday: 'short' }).format(effNow);
+    const effHour = parseInt(new Intl.DateTimeFormat('en-US', {
+      timeZone: SHOP_TZ, hour: 'numeric', hourCycle: 'h23'
+    }).format(effNow), 10) % 24;
+    const isClosed = (effDow === 'Mon') || effHour < 10 || effHour >= 21;
+    if (isClosed && ageMinutes <= 1440) {
+      return { ageMinutes, state: 'fresh', label: 'Closed · Synced', badgeText: '● Closed · Synced' };
+    }
     if (ageMinutes < 30) {
       return { ageMinutes, state: 'fresh', label: 'Live Sync', badgeText: '● Live Sync' };
     }

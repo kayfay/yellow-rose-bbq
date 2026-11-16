@@ -22,6 +22,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
 
 from scripts.meat_forecast import MultiMeatForecaster, DOW_BASELINES, YIELDS
+from clover_api.analytics.portion_transformer import (
+    load_transactions,
+    normalize_quantity,
+    explode_and_translate_portions,
+)
+
+def _load_pos_daily_actuals() -> Dict[str, Dict[str, float]]:
+    """Load real daily POS-translated meat actuals keyed by YYYY-MM-DD when master DB exists."""
+    master_db = BASE_DIR / "data" / "clover_sales_master.db"
+    if not master_db.exists():
+        return {}
+    import polars as pl
+    df = explode_and_translate_portions(normalize_quantity(load_transactions(str(master_db))))
+    df = df.with_columns(pl.col("created_time").str.slice(0, 10).alias("dt"))
+    daily = df.group_by(["dt", "ingredient"]).agg(pl.col("total_ingredient_qty").sum().alias("qty"))
+    out: Dict[str, Dict[str, float]] = {}
+    for row in daily.to_dicts():
+        out.setdefault(row["dt"], {})[row["ingredient"]] = float(row["qty"])
+    return out
 
 def run_30_day_all_meats_backtest(verbose: bool = True) -> Dict[str, Any]:
     hist_path = BASE_DIR / "clover_api" / "analytics" / "historical_payload.json"
@@ -59,6 +78,7 @@ def run_30_day_all_meats_backtest(verbose: bool = True) -> Dict[str, Any]:
     }
 
     recent_errors = {item[0]: [] for item in eval_items}
+    pos_actuals = _load_pos_daily_actuals()
     active_days = 0
 
     for r in records:
@@ -72,21 +92,30 @@ def run_30_day_all_meats_backtest(verbose: bool = True) -> Dict[str, Any]:
         active_days += 1
         day_pred = engine.predict_day(date_str, revenue=rev, recent_errors=recent_errors, safety_buffer=0.0)
 
-        # Ground truth actuals for day
-        dow_base = DOW_BASELINES.get(dow, DOW_BASELINES["Tue"])
-        
-        # Ground truths (scaled by day revenue index to reflect ground truth variation)
-        rev_idx = min(1.10, max(0.90, rev / (3500.0 if dow in ["Fri", "Sat", "Sun"] else 2800.0)))
-
-        item_actuals = {
-            "turkey": round(dow_base["turkey_cooked"], 1),
-            "brisket": round(dow_base["brisket_cooked"] * rev_idx, 1),
-            "pork": round(dow_base["pork_cooked"] * rev_idx, 1),
-            "sausage": int(round(dow_base["sausage_links"] * rev_idx)),
-            "pork_ribs": int(round(dow_base["ribs_racks"] * rev_idx)),
-            "tacos": int(round(dow_base["tacos"] * rev_idx)),
-            "rosebuds": int(round(dow_base["rosebuds"] * rev_idx))
-        }
+        # Ground truth actuals: prefer real POS-translated consumption when available
+        pos_day = pos_actuals.get(date_str)
+        if pos_day:
+            item_actuals = {
+                "turkey": round(pos_day.get("turkey_lbs", 0.0), 1),
+                "brisket": round(pos_day.get("brisket_lbs", 0.0), 1),
+                "pork": round(pos_day.get("pulled_pork_lbs", 0.0), 1),
+                "sausage": int(round(pos_day.get("sausage_links", 0.0))),
+                "pork_ribs": int(round(pos_day.get("pork_ribs_racks", 0.0))),
+                "tacos": int(round(pos_day.get("tacos", 0.0))),
+                "rosebuds": int(round(pos_day.get("rosebuds", 0.0))),
+            }
+        else:
+            dow_base = DOW_BASELINES.get(dow, DOW_BASELINES["Tue"])
+            rev_idx = min(1.10, max(0.90, rev / (3500.0 if dow in ["Fri", "Sat", "Sun"] else 2800.0)))
+            item_actuals = {
+                "turkey": round(dow_base["turkey_cooked"], 1),
+                "brisket": round(dow_base["brisket_cooked"] * rev_idx, 1),
+                "pork": round(dow_base["pork_cooked"] * rev_idx, 1),
+                "sausage": int(round(dow_base["sausage_links"] * rev_idx)),
+                "pork_ribs": int(round(dow_base["ribs_racks"] * rev_idx)),
+                "tacos": int(round(dow_base["tacos"] * rev_idx)),
+                "rosebuds": int(round(dow_base["rosebuds"] * rev_idx))
+            }
 
         # Predictions
         item_preds = {

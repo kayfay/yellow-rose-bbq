@@ -1,54 +1,60 @@
-# Time-Series Intelligence Suite Design (`DESIGN.md`)
+# Yellow Rose BBQ — Architecture, Contracts & Mathematical Proofs (`DESIGN.md`)
 
-## 1. 2D Modular Architecture Blueprint
+## 1. 2D End-to-End Data Flow Architecture
 
 ```
-clover_sales.db
-   │
-   ▼
-[1. Multivariate Outlier Masking] (numpy/scipy ECOD-style tail scoring)
-   │
-   ▼
-[2. Feature Extraction & MSTL] (statsmodels MSTL 24h + 7d seasonality)
-   │
-   ▼
-[3. Hierarchical MinTrace Reconciliation] (clover_api/analytics/modules/hierarchical/)
-   │   Store Revenue ──▶ Category (Brisket, Pork, Ribs, Turkey, Sausage, Sides) ──▶ Cut/Item
-   ▼
-[4. Probabilistic Quantile Engine] (clover_api/analytics/modules/probabilistic/)
-   │   P10 (Slow Floor) / P50 (Expected) / P90 (Busy Ceiling, +1 brisket cap)
-   ▼
-[5. Regime & Causal Engines] (modules/motifs/ & modules/causal/)
-   │   PELT/CUSUM Regime Shifts + Matrix Profile Motifs + Synthetic Counterfactuals
-   ▼
-[6. Smokehouse Plain-English Translator] (modules/smokehouse_translator.py)
-   │   Zero statistical jargon; whole Briskets, Butts, Racks, Breasts, Links
-   ▼
-predictive_cache.json / payloads.js
++-------------------------------------------------------------------------+
+| data/clover_sales_master.db (7,928 Orders | 33,070 Line Items)          |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| clover_api/analytics/portion_transformer.py                             |
+|  1. Scale normalization: weight_items -> quantity / 1000.0              |
+|  2. Combo plate modification parser (BBQ plate, 2 meat plate):          |
+|     Splits plate meat weight across parsed protein modifiers            |
+|     (Brisket, Ribs, Pulled Pork, Turkey, Sausage)                       |
+|  3. Complete PORTION_MAP lookup (Sandwiches, Platters, Tacos, Rosebuds) |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| Daily POS Cooked Actuals by Protein (America/New_York Date & Weekday)   |
+|  - brisket_lbs, pork_ribs_racks, pulled_pork_lbs, turkey_lbs,           |
+|    sausage_links, dino_ribs, tacos, rosebuds                            |
++-------------------------------------------------------------------------+
+                  |                                   |
+                  v                                   v
++-----------------------------------+   +---------------------------------+
+| scripts/meat_forecast.py          |   | scripts/backtest_all_forecasts  |
+| + clover_api/analytics/modules/   |   |  Compares predicted P50 demand  |
+|  - Empirical DOW Medians (P50)    |   |  against real POS daily actuals |
+|  - MinTrace Hierarchical Reconcil |   |  (Non-circular evaluation)      |
+|  - Quantile Buffer (P90 - P50)    |   +---------------------------------+
+|    capped at +1 Brisket           |
+|  - Smokehouse Whole-Cut Output    |
++-----------------------------------+
 ```
 
-## 2. Modular Directory Structure (`clover_api/analytics/modules/`)
-- `clover_api/analytics/modules/__init__.py`
-- `clover_api/analytics/modules/hierarchical/`
-  - `__init__.py`
-  - `hierarchical_forecast.py` (3-level MSTL + seasonal forecast)
-  - `reconciler.py` (MinTrace shrinkage reconciliation: $S (S^T W^{-1} S)^{-1} S^T W^{-1} \hat{y}$)
-- `clover_api/analytics/modules/probabilistic/`
-  - `__init__.py`
-  - `quantile_buffers.py` (P10/P50/P90 quantile estimation + `+1 brisket` cap)
-  - `darts_pipeline.py` (Quantile wrapper with `darts` optional hook & `scipy`/`numpy` fallback)
-- `clover_api/analytics/modules/motifs/`
-  - `__init__.py`
-  - `regime_detector.py` (PELT/CUSUM structural break detection with `ruptures` optional hook)
-  - `stumpy_motifs.py` (Matrix profile motif/anomaly scoring with `stumpy` optional hook)
-- `clover_api/analytics/modules/causal/`
-  - `__init__.py`
-  - `causal_impact_analyzer.py` (Synthetic counterfactual lift/drop estimator)
-  - `feature_extractor.py` (Rolling & MSTL feature extraction)
-- `clover_api/analytics/modules/smokehouse_translator.py` (Plain-English & whole-cut formatter + jargon quarantine)
+## 2. Mathematical Contracts
 
-## 3. Data Contracts
-- **Reconciled Forecast:** `{"store_total": float, "categories": dict[str, float], "items": dict[str, float], "coherence_error": float}`
-- **Quantile Prep:** `{"meat": str, "p10_cuts": int, "p50_cuts": int, "p90_cuts": int, "extra_weekend_prep": int, "summary_text": str}`
-- **Regime Shift:** `{"date": str, "direction": "up"|"down", "p_value": float, "note": str}`
-- **Causal Impact:** `{"event": str, "actual_usd": float, "counterfactual_usd": float, "lift_usd": float, "summary_text": str}`
+### 2.1 Combo Plate Modification Attribution
+For a combo plate $i \in \{\text{BBQ plate}, \text{2 meat plate}\}$ with modification string $M_i$:
+- Extract matched protein tokens $P(M_i) \subseteq \{\text{brisket}, \text{ribs}, \text{pork}, \text{turkey}, \text{sausage}\}$ (handling duplicate selections such as double ribs or moist + lean brisket).
+- For **1-meat `BBQ plate`** (total plate cooked equivalent $= 0.5\text{ lb}$ meat or $0.33\text{ rack}$ ribs or $2\text{ links}$ sausage):
+  - Attribute $100\%$ of the 1-meat portion to the selected protein in $P(M_i)$ (defaulting to brisket only when $P(M_i) = \emptyset$).
+- For **2-meat `2 meat plate`** (2 protein slots, each slot $= 0.33\text{ lb}$ meat or $0.25\text{ rack}$ ribs or $1.5\text{ links}$ sausage):
+  - Attribute each slot proportionally to the tokens in $P(M_i)$.
+
+### 2.2 Canonical Unit Conversions (`unit_conversions.py` & `core_utils.js`)
+- **Brisket:** $16.4\text{ lb raw packer} \times 0.35 = 5.75\text{ lbs cooked usable}$ ($5\text{ packers/case} = 82\text{ lbs raw}$).
+  $$\text{Expected Packers} = \left\lceil \frac{D_{\text{P50}}}{5.75} \right\rceil, \quad \text{Prep Target} = \text{Expected Packers} + \min\left(1, \left\lceil \frac{\max(0, D_{\text{P90}} - D_{\text{P50}})}{5.75} \right\rceil\right)$$
+- **Pork Spare Ribs:** $12\text{ bones/rack}$ ($1\text{ Full Rack} = 1.0$, $1/2\text{ Rack} = 0.5$, $\text{Single Bone} = 1/12 \approx 0.0833$, $\text{Platter/Plate Rib Slot} = 0.25\text{–}0.50\text{ rack}$). $6\text{ racks/case} = 30\text{ lbs raw}$.
+- **Turkey Breast:** $3.0\text{ lbs cooked per breast}$ ($4.29\text{ lbs raw}$ @ $Y_{\text{cook}} = 0.70$; $20\text{ lbs/case raw}$).
+- **Pulled Pork:** $8.0\text{ lbs raw butt} \times 0.44 = 3.52\text{ lbs cooked}$ ($8\text{ butts/case} = 64\text{ lbs raw}$).
+- **Sausage:** $3\text{ links/lb}$ ($25\text{ lbs/batch} = 75\text{ links}$).
+
+### 2.3 Smart Closed-Hours Sync Health (`tz_utils.js`)
+Let $\Delta t_{\min} = \lfloor (t_{\text{now}} - t_{\text{sync}}) / 60000 \rfloor$, $d = \text{weekday}(t_{\text{now}}, \text{America/New\_York})$, and $h = \text{hour}(t_{\text{now}}, \text{America/New\_York})$.
+$$\text{isClosed}(d, h) \iff (d = \text{Mon}) \lor (h < 10) \lor (h \ge 21)$$
+If $\text{isClosed}(d, h) \land \Delta t_{\min} \le 1440$, return `{ state: 'fresh', label: 'Closed · Synced', badgeText: '● Closed · Synced' }`.

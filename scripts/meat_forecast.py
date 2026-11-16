@@ -28,6 +28,9 @@ import sys
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 from clover_api.analytics.unit_conversions import UNIT_CONVERSIONS
+from clover_api.analytics.modules.hierarchical.reconciler import MinTraceReconciler
+from clover_api.analytics.modules.probabilistic.quantile_buffers import compute_quantile_prep_buffer
+from clover_api.analytics.modules.smokehouse_translator import format_quantile_prep_summary
 LOG_FILE = BASE_DIR / ".loop" / "log.md"
 
 # YIELD & CONVERSION CONSTANTS
@@ -216,7 +219,18 @@ class MultiMeatForecaster:
                 "cases": dr_cases
             },
             "tacos_sold": tacos_target,
-            "rosebuds_sold": rosebuds_target
+            "rosebuds_sold": rosebuds_target,
+            "ts_intelligence": {
+                "reconciled": MinTraceReconciler().reconcile(
+                    b_cooked_demand + p_cooked_demand + t_cooked_demand,
+                    {"Beef": b_cooked_demand, "Pork": p_cooked_demand, "Poultry": t_cooked_demand},
+                    {"Brisket": b_cooked_demand, "Pulled Pork": p_cooked_demand, "Turkey": t_cooked_demand},
+                ),
+                "brisket_quantiles": (
+                    q := compute_quantile_prep_buffer("brisket", [b_cooked_demand * 0.9, b_cooked_demand, b_cooked_demand * 1.1])
+                ),
+                "brief": format_quantile_prep_summary(q),
+            },
         }
 
     def evaluate_paired_drift(

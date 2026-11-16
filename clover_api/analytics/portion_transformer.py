@@ -66,13 +66,55 @@ PORTION_MAP = {
     },
     "pulled pork sandwich": {
         "pulled_pork_lbs": 0.3
+    },
+    "moist sandwich": {
+        "brisket_lbs": 0.3
+    },
+    "lean sandwich": {
+        "brisket_lbs": 0.3
+    },
+    "turkey": {
+        "turkey_lbs": 1.0
+    },
+    "pulled pork": {
+        "pulled_pork_lbs": 1.0
+    },
+    "dino beef rib": {
+        "dino_ribs": 1.0
+    },
+    "crispy quesa taco brisket": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
+    "crispy quesa taco turkey": {
+        "tacos": 1.0,
+        "turkey_lbs": 0.2
+    },
+    "quesabirria taco": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
+    "taco plate w/2 sides": {
+        "tacos": 2.0,
+        "brisket_lbs": 0.4
+    },
+    "rosebud": {
+        "rosebuds": 1.0
     }
 }
+
+def resolve_db_path(db_path: str = "clover_api/data/clover_sales.db") -> str:
+    """Prefer data/clover_sales_master.db when available and non-empty."""
+    if db_path == "clover_api/data/clover_sales.db":
+        master = Path(__file__).resolve().parent.parent.parent / "data" / "clover_sales_master.db"
+        if master.exists() and master.stat().st_size > 65536:
+            return str(master)
+    return db_path
 
 def load_transactions(db_path: str = "clover_api/data/clover_sales.db") -> pl.DataFrame:
     """Loads raw transactional data from SQLite."""
     import sqlite3
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(resolve_db_path(db_path))
     query = """
         SELECT l.order_id, l.created_time, l.item_name, l.quantity, l.modifications 
         FROM order_line_items l
@@ -118,10 +160,51 @@ def explode_and_translate_portions(df: pl.DataFrame) -> pl.DataFrame:
     
     # Lowercase item_name for matching
     df = df.with_columns(pl.col("item_name").str.to_lowercase().alias("item_name_lower"))
-    
-    # Join the transactions with our portion map
-    # A left join means if an item isn't in PORTION_MAP, it will have nulls for ingredient
-    df_joined = df.join(df_map, left_on="item_name_lower", right_on="item_name", how="left")
+
+    # Parse combo plate modifications (BBQ plate, 2 meat plate) before PORTION_MAP join
+    def _parse_combo_mods(row: Dict[str, Any]) -> list[Dict[str, Any]]:
+        name = row["item_name_lower"] or ""
+        if name not in ("bbq plate", "2 meat plate"):
+            return []
+        mods = (row.get("modifications") or "").lower()
+        tokens = []
+        for part in mods.split("|"):
+            p = part.strip()
+            if "rib" in p:
+                tokens.append(("pork_ribs_racks", 0.33 if name == "bbq plate" else 0.25))
+            elif "brisket" in p:
+                tokens.append(("brisket_lbs", 0.5 if name == "bbq plate" else 0.33))
+            elif "pork" in p:
+                tokens.append(("pulled_pork_lbs", 0.5 if name == "bbq plate" else 0.33))
+            elif "turkey" in p:
+                tokens.append(("turkey_lbs", 0.5 if name == "bbq plate" else 0.33))
+            elif "sausage" in p:
+                tokens.append(("sausage_links", 2.0 if name == "bbq plate" else 1.5))
+        return [{"ingredient": ing, "base_portion": val} for ing, val in tokens]
+
+    combo_mask = pl.col("item_name_lower").is_in(["bbq plate", "2 meat plate"]) & pl.col("modifications").is_not_null() & (pl.col("modifications") != "")
+    df_combos = df.filter(combo_mask)
+    df_rest = df.filter(~combo_mask)
+
+    # Join non-combo-mod rows with our portion map
+    df_joined = df_rest.join(df_map, left_on="item_name_lower", right_on="item_name", how="left")
+
+    if df_combos.height > 0:
+        combo_rows = []
+        for r in df_combos.to_dicts():
+            parsed = _parse_combo_mods(r)
+            if not parsed:
+                # Fallback to PORTION_MAP if no meat modifier matched
+                for ing, val in PORTION_MAP.get(r["item_name_lower"], {}).items():
+                    parsed.append({"ingredient": ing, "base_portion": val})
+            for p in parsed:
+                row_copy = dict(r)
+                row_copy["ingredient"] = p["ingredient"]
+                row_copy["base_portion"] = p["base_portion"]
+                combo_rows.append(row_copy)
+        if combo_rows:
+            df_combo_joined = pl.DataFrame(combo_rows, schema_overrides={"base_portion": pl.Float64})
+            df_joined = pl.concat([df_joined, df_combo_joined], how="diagonal_relaxed")
     
     # Use classify_item from menu_map as a fallback
     df_joined = df_joined.with_columns(

@@ -119,15 +119,19 @@ test.describe('Projected Day Total and sales pace', () => {
       const fresh = window.ShopTime.getSyncHealth('2026-11-08T15:45:00-05:00', refNow);
       const warning = window.ShopTime.getSyncHealth('2026-11-08T14:45:00-05:00', refNow);
       const stale = window.ShopTime.getSyncHealth('2026-11-08T13:00:00-05:00', refNow);
+      const closedMon = window.ShopTime.getSyncHealth('2026-11-15T23:00:00-05:00', new Date('2026-11-16T08:00:00-05:00'));
       const pill = document.getElementById('data-last-pulled');
       return {
         fresh,
         warning,
         stale,
+        closedMon,
         hasSyncStateAttr: !!(pill && pill.dataset && pill.dataset.syncState)
       };
     });
     expect(res.fresh.state).toBe('fresh');
+    expect(res.closedMon.state).toBe('fresh');
+    expect(res.closedMon.label).toBe('Closed · Synced');
     expect(res.fresh.badgeText).toContain('Live Sync');
     expect(res.warning.state).toBe('warning');
     expect(res.warning.badgeText).toContain('Sync Lag');
