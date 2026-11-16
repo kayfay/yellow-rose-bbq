@@ -52,17 +52,17 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4155.59,
-    "game_only": 5642.42,
-    "rain_only": 4683.98,
-    "game_and_rain": 2308.76
+    "normal": 4244.77,
+    "game_only": 4531.2,
+    "rain_only": 2971.34,
+    "game_and_rain": 11885.35
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 5028,
-      "total_revenue": 216210.08,
-      "avg_ticket": 43.0012092283214
+      "order_count": 5032,
+      "total_revenue": 216234.15,
+      "avg_ticket": 42.97181041335453
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2489,
-      "total_revenue": 156531.75,
-      "avg_ticket": 62.88941341904379
+      "order_count": 2490,
+      "total_revenue": 156538.35,
+      "avg_ticket": 62.86680722891567
     }
   ],
   "sell_out_prediction_chart": {
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.5,
-    "pork_ribs_avg_with_dino": 3.3,
-    "impact_pct": -39.4
+    "pork_ribs_avg_without_dino": 5.6,
+    "pork_ribs_avg_with_dino": 3.1,
+    "impact_pct": -45.5
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.3
+    "normal_avg_ticket": 46.27
   }
 }

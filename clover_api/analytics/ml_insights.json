@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T19:20:23.638762-05:00",
+  "generated_at": "2026-11-16T02:13:01.691300-05:00",
   "total_insights_mined": 9,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -65,14 +65,14 @@
     },
     {
       "id": 106,
-      "title": "Rainy Days Average +0.6% vs Normal Days",
+      "title": "Rainy Days Average -30.0% vs Normal Days",
       "category": "weather_elasticity",
       "category_label": "\ud83c\udf27\ufe0f Weather Sensitivity",
-      "insight": "Comparing operating days by weather, rainy days averaged $4,675 in sales against $4,645 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
+      "insight": "Comparing operating days by weather, rainy days averaged $3,255 in sales against $4,650 on a normal day. Rain moves volume into multi-pound takeout feasts and family platters.",
       "evidence": "weather_payload.json & Open-Meteo API Historical Weather Comparison",
-      "quantitative_proof": "$4,675 rainy-day average vs $4,645 normal-day average (+0.6%)",
+      "quantitative_proof": "$3,255 rainy-day average vs $4,650 normal-day average (-30.0%)",
       "actionable_recommendation": "When rain is in the morning forecast, pre-pack +20% butcher paper takeout bags, 16oz sauce containers, and side cups by 10:30 AM to prevent packing bottlenecks at the counter.",
-      "impact_usd": 29.94,
+      "impact_usd": 1395.1,
       "terms": [
         "Average Ticket",
         "Sales Trend",
