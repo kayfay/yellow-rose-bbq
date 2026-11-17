@@ -76,8 +76,8 @@
     }
   },
   "event_stats": {
-    "normal_avg_usd": 4618.68,
-    "normal_days": 71,
+    "normal_avg_usd": 4655.21,
+    "normal_days": 70,
     "jags_avg_usd": 5304.24,
     "jags_multiplier": 0.96,
     "jags_applied_multiplier": 1.0,

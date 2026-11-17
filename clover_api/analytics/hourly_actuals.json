@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-11-16T12:24:07.686886-05:00",
+  "generated_at": "2026-11-16T20:02:01.481022-05:00",
   "days": {
     "2026-08-02": {
       "buckets": [
@@ -1835,43 +1835,43 @@
         },
         {
           "hour": 13,
-          "sales_usd": 280.56,
-          "orders": 8
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 14,
-          "sales_usd": 264.26,
-          "orders": 6
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 15,
-          "sales_usd": 276.12,
-          "orders": 7
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 16,
-          "sales_usd": 302.87,
-          "orders": 4
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 17,
-          "sales_usd": 357.15,
-          "orders": 9
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 18,
-          "sales_usd": 430.68,
-          "orders": 11
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 19,
-          "sales_usd": 118.97,
-          "orders": 4
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 20,
-          "sales_usd": 31.08,
-          "orders": 1
+          "sales_usd": 0.0,
+          "orders": 0
         },
         {
           "hour": 21,
@@ -1889,8 +1889,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 2043.22,
-      "total_orders": 52
+      "total_sales_usd": -18.47,
+      "total_orders": 2
     },
     "2026-08-19": {
       "buckets": [
@@ -12045,14 +12045,14 @@
         515.04,
         9678.93,
         9353.27,
-        5505.24,
-        2933.56,
-        2764.76,
-        2680.44,
-        4395.36,
-        5833.98,
-        3967.75,
-        908.89,
+        5224.68,
+        2669.3,
+        2488.64,
+        2377.57,
+        4038.21,
+        5403.3,
+        3848.78,
+        877.81,
         -18.47,
         0.0,
         0.0
@@ -12071,14 +12071,14 @@
         1,
         233,
         221,
-        155,
-        81,
-        70,
-        56,
-        110,
-        148,
-        87,
-        26,
+        147,
+        75,
+        63,
+        52,
+        101,
+        137,
+        83,
+        25,
         2,
         0,
         0
