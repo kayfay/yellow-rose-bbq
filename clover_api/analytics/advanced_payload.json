@@ -52,7 +52,7 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4164.89,
+    "normal": 4165.18,
     "game_only": 5642.42,
     "rain_only": 4683.98,
     "game_and_rain": 2308.76
@@ -60,9 +60,9 @@
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4970,
-      "total_revenue": 213992.37,
-      "avg_ticket": 43.05681488933602
+      "order_count": 4968,
+      "total_revenue": 214010.84,
+      "avg_ticket": 43.077866344605475
     },
     {
       "order_type": "In-store Pickup",
@@ -515,11 +515,11 @@
   },
   "cannibalization": {
     "pork_ribs_avg_without_dino": 5.2,
-    "pork_ribs_avg_with_dino": 3.7,
-    "impact_pct": -28.6
+    "pork_ribs_avg_with_dino": 3.6,
+    "impact_pct": -31.4
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.38
+    "normal_avg_ticket": 46.4
   }
 }
