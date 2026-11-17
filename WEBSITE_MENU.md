@@ -130,6 +130,7 @@ This document is automatically generated from live POS API metadata.
 | **Gift Card** |  |
 | **Gift card** |  |
 | **Gift card** |  |
+| **Glazed Holiday Ham** |  |
 | **Green Bean Catering Tray** |  |
 | **Hat** |  |
 | **Horchata** |  |
