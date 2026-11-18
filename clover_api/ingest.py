@@ -172,8 +172,8 @@ def parse_line_items(raw_orders: List[Dict[str, Any]]) -> pd.DataFrame:
             mod_str = "|".join([m.get("name", "") for m in mods]) if mods else None
             
             parsed.append({
-                "order_id": order_id,
                 "line_item_id": li.get("id"),
+                "order_id": order_id,
                 "item_name": li.get("name"),
                 "item_id": li.get("item", {}).get("id") if isinstance(li.get("item"), dict) else None,
                 "quantity": li.get("unitQty", 1) if li.get("unitQty") else 1, # Some Clover items use unitQty, others implicit 1

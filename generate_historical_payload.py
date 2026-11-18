@@ -43,9 +43,10 @@ for d in dates:
         name = item_name.lower()
         
         # Exact counts
-        if "taco" in name:
-            tacos_sold += qty
-            cooked_brisket_lbs += qty * 0.25
+        if "taco" in name or "quesabirria" in name:
+            taco_units = qty * 2 if "plate" in name else qty
+            tacos_sold += taco_units
+            cooked_brisket_lbs += taco_units * 0.20
         if "rosebud" in name:
             rosebuds_sold += qty
             cooked_brisket_lbs += qty * 0.1

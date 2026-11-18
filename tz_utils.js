@@ -178,9 +178,9 @@
       if (validSync && shopDateStr(syncInst) === targetDate) {
         const syncHr = shopHour(syncInst);
         const syncMin = shopMinute(syncInst);
-        // If sync timestamp is on targetDate and before close (hour < 20), and either today's clock is ahead
+        // If sync timestamp is on targetDate during active service (10 <= hour < 20), and either today's clock is ahead
         // of syncInst or targetDate was only synced mid-day (lastActiveBucketHour < 19), anchor cutoff to syncInst.
-        if (syncHr < 20 && ((isToday && syncInst.getTime() < effNow.getTime()) || (isPast && lastActiveBucketHour < 19))) {
+        if (syncHr >= 10 && syncHr < 20 && ((isToday && syncInst.getTime() < effNow.getTime()) || (isPast && lastActiveBucketHour < 19))) {
           cutoff = syncHr;
           effMinute = syncMin;
           isMidDaySynced = true;

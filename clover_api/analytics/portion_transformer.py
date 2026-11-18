@@ -80,9 +80,14 @@ PORTION_MAP = {
         "pulled_pork_lbs": 1.0
     },
     "dino beef rib": {
+        "beef_dino_ribs": 1.0,
         "dino_ribs": 1.0
     },
     "crispy quesa taco brisket": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
+    "crispy quesa brisket taco": {
         "tacos": 1.0,
         "brisket_lbs": 0.2
     },
@@ -90,7 +95,31 @@ PORTION_MAP = {
         "tacos": 1.0,
         "turkey_lbs": 0.2
     },
+    "crispy quesa turkey taco": {
+        "tacos": 1.0,
+        "turkey_lbs": 0.2
+    },
+    "crispy quesa taco pork": {
+        "tacos": 1.0,
+        "pulled_pork_lbs": 0.2
+    },
+    "crispy quesa pork taco": {
+        "tacos": 1.0,
+        "pulled_pork_lbs": 0.2
+    },
+    "crispy quesa taco barbacoa": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
     "quesabirria taco": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
+    "street taco barbacoa": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.2
+    },
+    "guisada taco": {
         "tacos": 1.0,
         "brisket_lbs": 0.2
     },
@@ -98,18 +127,28 @@ PORTION_MAP = {
         "tacos": 2.0,
         "brisket_lbs": 0.4
     },
+    "guisada taco plate": {
+        "tacos": 2.0,
+        "brisket_lbs": 0.4
+    },
+    "kids taco w/ side": {
+        "tacos": 1.0,
+        "brisket_lbs": 0.15
+    },
     "rosebud": {
         "rosebuds": 1.0
     }
 }
 
 def resolve_db_path(db_path: str = "clover_api/data/clover_sales.db") -> str:
-    """Prefer data/clover_sales_master.db when available and non-empty."""
-    if db_path == "clover_api/data/clover_sales.db":
+    """Prefer data/clover_sales_master.db when available and larger than clover_sales.db."""
+    p = Path(db_path)
+    if p.name == "clover_sales.db":
         master = Path(__file__).resolve().parent.parent.parent / "data" / "clover_sales_master.db"
-        if master.exists() and master.stat().st_size > 65536:
+        p_size = p.stat().st_size if p.exists() else 0
+        if master.exists() and master.stat().st_size > max(65536, p_size):
             return str(master)
-    return db_path
+    return str(db_path)
 
 def load_transactions(db_path: str = "clover_api/data/clover_sales.db") -> pl.DataFrame:
     """Loads raw transactional data from SQLite."""
@@ -237,7 +276,7 @@ def get_daily_category_aggregates(db_path: str = "clover_api/data/clover_sales.d
     
     # Extract date
     df_exploded = df_exploded.with_columns(
-        pl.col("created_time").str.to_datetime().dt.date().alias("date")
+        pl.col("created_time").cast(pl.Utf8).str.replace("T", " ").str.slice(0, 19).str.to_datetime(strict=False).dt.date().alias("date")
     )
     
     # Filter out 'other'
@@ -270,7 +309,7 @@ def calculate_daily_procurement(df_joined: pl.DataFrame) -> pl.DataFrame:
     """
     # Group by date and ingredient
     df_joined = df_joined.with_columns(
-        pl.col("created_time").str.to_datetime().dt.date().alias("date")
+        pl.col("created_time").cast(pl.Utf8).str.replace("T", " ").str.slice(0, 19).str.to_datetime(strict=False).dt.date().alias("date")
     )
     
     daily_totals = df_joined.group_by(["date", "ingredient"]).agg([

@@ -12,19 +12,20 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from clover_api.secure_config import DB_PATH, ANALYTICS_DIR
-from clover_api.analytics.portion_transformer import get_daily_category_aggregates
+from clover_api.analytics.portion_transformer import get_daily_category_aggregates, resolve_db_path
 
 def build_arima_forecast(forecast_days: int = 14):
     """
     Loads POS data, aggregates it via Polars per category, and fits a Univariate SARIMA model 
     for each category to establish the baseline weekly sales cycle. Generates category_payload.json.
     """
-    if not DB_PATH.exists():
+    eff_db = Path(resolve_db_path(str(DB_PATH)))
+    if not eff_db.exists():
         print("[ERROR] Database not found. Cannot run ARIMA baseline.")
         return
 
     # 1. Load Data
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(eff_db)
     try:
         df_orders = pl.read_database("SELECT created_time, total_usd FROM orders WHERE lower(state)='locked' OR state is null", conn)
     except Exception as e:
@@ -35,7 +36,7 @@ def build_arima_forecast(forecast_days: int = 14):
 
     # 2. Aggregate by Category using the new Portion Translation Layer
     try:
-        daily_category_df = get_daily_category_aggregates(str(DB_PATH))
+        daily_category_df = get_daily_category_aggregates(str(eff_db))
     except Exception as e:
         print(f"[WARN] Portion translation failed: {e}")
         return
@@ -47,8 +48,8 @@ def build_arima_forecast(forecast_days: int = 14):
     pd_daily = daily_category_df.to_pandas()
     pd_daily['date'] = pd.to_datetime(pd_daily['date'])
     
-    # Ensure we don't use partial data for today
-    today = pd.Timestamp.today().normalize()
+    # Ensure we don't use partial data for today (in shop timezone America/New_York)
+    today = pd.Timestamp.now(tz="America/New_York").tz_localize(None).normalize()
     pd_daily = pd_daily[pd_daily['date'] < today]
     
     # Ensure full date range for each category
@@ -56,7 +57,7 @@ def build_arima_forecast(forecast_days: int = 14):
     
     # 3. Overall Demand Index (from orders total_usd)
     df_orders = df_orders.to_pandas()
-    df_orders['date'] = pd.to_datetime(df_orders['created_time']).dt.strftime('%Y-%m-%d')
+    df_orders['date'] = pd.to_datetime(df_orders['created_time'], format='ISO8601', errors='coerce').dt.strftime('%Y-%m-%d')
     df_daily_rev = df_orders.groupby('date')['total_usd'].sum().reset_index()
     df_daily_rev['date'] = pd.to_datetime(df_daily_rev['date'])
     df_daily_rev = df_daily_rev[df_daily_rev['date'] < today]
@@ -64,16 +65,20 @@ def build_arima_forecast(forecast_days: int = 14):
     df_daily_rev = df_daily_rev.asfreq('D', fill_value=0)
     
     baseline_avg = df_daily_rev['total_usd'].mean() if len(df_daily_rev) > 0 and df_daily_rev['total_usd'].mean() > 0 else 2700.0
+    last_rev_date = df_daily_rev.index.max() if len(df_daily_rev) > 0 else (today - pd.Timedelta(days=1))
+    gap_rev_days = max(0, int((today - pd.Timedelta(days=1) - last_rev_date).days))
+    target_future_index = pd.date_range(start=today, periods=forecast_days, freq='D')
     
     # Fit SARIMA on overall revenue to get future demand index
     try:
         rev_model = SARIMAX(df_daily_rev['total_usd'], order=(1, 0, 1), seasonal_order=(1, 1, 1, 7),
                             enforce_stationarity=False, enforce_invertibility=False)
         rev_results = rev_model.fit(disp=False)
-        pred_future_rev = rev_results.get_forecast(steps=forecast_days).predicted_mean
-        pred_future_rev = np.maximum(pred_future_rev, 0)
-    except:
-        pred_future_rev = pd.Series(np.random.uniform(2000, 3000, forecast_days), index=pd.date_range(all_dates[-1] + pd.Timedelta(days=1), periods=forecast_days))
+        raw_pred_rev = rev_results.get_forecast(steps=gap_rev_days + forecast_days).predicted_mean
+        raw_pred_rev = np.maximum(raw_pred_rev, 0)
+        pred_future_rev = pd.Series(raw_pred_rev.iloc[gap_rev_days:].values, index=target_future_index)
+    except Exception:
+        pred_future_rev = pd.Series(np.random.uniform(2000, 3000, forecast_days), index=target_future_index)
         
     future_dates = [d.strftime("%Y-%m-%d (%a)") for d in pred_future_rev.index]
     future_demand_index = [round(v / baseline_avg, 2) for v in pred_future_rev]
@@ -123,10 +128,11 @@ def build_arima_forecast(forecast_days: int = 14):
             if best_model is None:
                 raise ValueError("All SARIMA fits failed")
                 
-            pred_future = best_model.get_forecast(steps=forecast_days).predicted_mean
+            gap_cat_days = max(0, int((today - pd.Timedelta(days=1) - all_dates[-1]).days))
+            pred_future = best_model.get_forecast(steps=gap_cat_days + forecast_days).predicted_mean
             pred_future = np.maximum(pred_future, 0)
             
-            forecast_list = [round(v, 1) for v in pred_future]
+            forecast_list = [round(v, 1) for v in pred_future.iloc[gap_cat_days:]]
         except Exception as e:
             print(f"[ERROR] SARIMA fit failed for {cat}: {e}")
             forecast_list = [0.0] * forecast_days

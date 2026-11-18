@@ -6,7 +6,7 @@ set -e
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-CRON_JOB_AUTO="0 * * * 0,2-6 cd $REPO_DIR && bash scripts/cron_smokehouse_pipeline.sh --auto >> $REPO_DIR/clover_api/analytics/cron.log 2>&1"
+CRON_JOB_AUTO="*/30 10-23 * * 0,2-6 cd $REPO_DIR && bash scripts/cron_smokehouse_pipeline.sh --auto >> $REPO_DIR/clover_api/analytics/cron.log 2>&1"
 CRON_JOB_BRIEF="30 6 * * 0,2-6 cd $REPO_DIR && bash scripts/cron_smokehouse_pipeline.sh --brief >> $REPO_DIR/clover_api/analytics/cron.log 2>&1"
 CRON_JOB_INBOUND="*/10 11-20 * * 0,2-6 cd $REPO_DIR && python3 scripts/telegram_dispatcher.py --inbound >> $REPO_DIR/clover_api/analytics/cron.log 2>&1"
 

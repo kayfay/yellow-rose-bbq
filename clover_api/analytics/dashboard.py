@@ -112,19 +112,26 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         brisket_pure_raw_lbs = categories.get("brisket_lbs", {}).get("forecast", [0]*30)[i]
         pork_pure_raw_lbs = categories.get("pulled_pork_lbs", {}).get("forecast", [0]*30)[i]
         sausage_lbs = categories.get("sausage_links", {}).get("forecast", [0]*30)[i]
+        tacos_generic = categories.get("tacos", {}).get("forecast", [0]*30)[i]
         tacos_brisket = categories.get("tacos_brisket", {}).get("forecast", [0]*30)[i]
         tacos_pork = categories.get("tacos_pork", {}).get("forecast", [0]*30)[i]
-        tacos_sold = tacos_brisket + tacos_pork
+        tacos_turkey = categories.get("tacos_turkey", {}).get("forecast", [0]*30)[i]
+        tacos_sold = round(tacos_generic + tacos_brisket + tacos_pork + tacos_turkey)
+        if day_name != "Mon" and tacos_sold < 15:
+            dow_tacos = {"Tue": 35, "Wed": 44, "Thu": 55, "Fri": 70, "Sat": 85, "Sun": 60}.get(day_name, 40)
+            tacos_sold = max(int(tacos_sold), dow_tacos)
         
         # Add 25% safety buffer to Rosebuds due to ARIMA underestimation
         rosebuds_sold = int(categories.get("rosebuds", {}).get("forecast", [0]*30)[i] * 1.25)
         
         pork_ribs_racks = categories.get("pork_ribs_racks", {}).get("forecast", [0]*30)[i]
-        beef_dino_ribs = categories.get("beef_dino_ribs", {}).get("forecast", [0]*30)[i]
+        beef_dino_ribs = (
+            categories.get("beef_dino_ribs", {}).get("forecast", [0]*30)[i]
+            or categories.get("dino_ribs", {}).get("forecast", [0]*30)[i]
+        )
         
-        # Calculate raw meat needed for composed items (Yield Loss = 60%, Yield = 40%)
-        # 1 Taco = 0.25 lbs cooked meat = 0.625 lbs raw meat
-        # 1 Rosebud = 0.1 lbs cooked meat = 0.25 lbs raw meat
+        # Calculate raw meat needed for composed items not already exploded in PORTION_MAP
+        # (PORTION_MAP items in 'tacos' already add 0.2 lb/taco into brisket_lbs / pulled_pork_lbs)
         brisket_raw_tacos = tacos_brisket * 0.625
         brisket_raw_rosebuds = rosebuds_sold * 0.25
         pork_raw_tacos = tacos_pork * 0.625
@@ -133,7 +140,6 @@ def generate_forecast_data_polars(days: int = 14) -> Dict[str, Any]:
         pork_lbs = pork_pure_raw_lbs + pork_raw_tacos
 
         turkey_pure_cooked_lbs = categories.get("turkey_lbs", {}).get("forecast", [0]*30)[i]
-        tacos_turkey = categories.get("tacos_turkey", {}).get("forecast", [0]*30)[i]
         
         # Dynamic baseline revenue (Approx $5078 from historical data)
         demand_index = arima_data["forecast_metrics"]["demand_index"][:days][i]

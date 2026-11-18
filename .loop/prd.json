@@ -425,6 +425,54 @@
       "description": "Build and integrate the modular time-series intelligence suite under clover_api/analytics/modules/ per SPEC.md, DESIGN.md, and PLAN.md: 3-level MinTrace hierarchical reconciliation, P10/P50/P90 probabilistic quantile buffers (+1 brisket cap), PELT/CUSUM regime & motif detection, causal counterfactual lift/drop, and smokehouse plain-English translator.",
       "acceptance_criteria": "All 5 modular subpackages exist under clover_api/analytics/modules/; sum(items) == sum(categories) == store_total within 0.01; zero statistical jargon in translated outputs; test_ts_improvements.py, unittest suite, npm run check, and PAL verifiers pass 100%.",
       "passes": true
+    },
+    {
+      "id": 72,
+      "description": "Task 1-2: Unify Pork Butt (32.0 lb case of 4 x 8.0 lb) and Spare Rib (33.6 lb case of 6 x 5.6 lb) specs across clover_api/analytics/unit_conversions.py, scripts/meat_forecast.py, modules/shared/core_utils.js, and clover_api/tests/test_calculations.py.",
+      "acceptance_criteria": "Python UNIT_CONVERSIONS and JS KITCHEN_UNIT_SPECS match exactly; test_calculations.py passes 100%.",
+      "passes": true
+    },
+    {
+      "id": 73,
+      "description": "Task 3: Enforce Counts-First across #prep-insight-banner, Today's Projected Finish breakdowns, and Predicted vs. Measured compare badges in app.js (lbs strictly inside muted parentheses).",
+      "acceptance_criteria": "Zero bare-pound primary strings in app.js prep banner, Projected Finish, or compare badges; npm run check and stat_cards.spec.js pass.",
+      "passes": true
+    },
+    {
+      "id": 74,
+      "description": "Task 4-5: Harmonize hourly-to-daily dollar rounding, closed/partial meat cost display, prohibited jargon purge (test_copy_audit.py), mobile chart touch-safety, and index.html cache-buster bump.",
+      "acceptance_criteria": "test_copy_audit.py, projection.spec.js, and mobile_ergonomics.spec.js pass 100%; ?v= bumped in index.html.",
+      "passes": true
+    },
+    {
+      "id": 75,
+      "description": "Task 6: Run full deterministic verification suite (npm run check, unittest, PAL verifiers, Playwright E2E) and pass independent read-only Adversarial Critic audit >= 9/10.",
+      "acceptance_criteria": "All CLI, Python unittest, PAL verifiers, and Playwright E2E tests exit 0; Adversarial Critic rates >= 9/10.",
+      "passes": true
+    },
+    {
+      "id": 76,
+      "description": "MOXE Task 1-2: Build scripts/moxe_inventory_cogs_engine.py implementing schema validation (176 SKUs, 157 invoices, 3,060 delivery lines), pack-size parser, 4-zone Walk-the-Shop Par-Level sheet (CSV/HTML), POS-to-Supply depletion table, and 4-Bucket COGS & shrinkage report under data/vendor_invoices/reports/ (mode 0600).",
+      "acceptance_criteria": "All 176 SKUs map cleanly into 4 walk zones and 4 COGS buckets; pack-size parser passes all anchor SKUs; outputs written with 0600 permissions.",
+      "passes": true
+    },
+    {
+      "id": 77,
+      "description": "MOXE Task 3-4: Add deterministic unit & security sensors in clover_api/tests/test_moxe_inventory_cogs.py, run full test suite (npm run check, unittest, PAL verifiers, Playwright E2E), and pass independent Adversarial Critic audit >= 9/10.",
+      "acceptance_criteria": "test_moxe_inventory_cogs.py, unittest suite, PAL verifiers, and npm test exit 0; Adversarial Critic rates >= 9/10.",
+      "passes": true
+    },
+    {
+      "id": 78,
+      "description": "Expand the COGS master sheet and Inventory Master exports to include 100% of menu items across clover_live_catalog_audit.json (125 items), WEBSITE_MENU.md, and clover_sales_master.db, plus build the 34-recipe Batch & Portion COGS Breakdown (32 Yellow Rose BBQ recipes from Handwritten Recipe Collection through Asiago Cheddar Grits, excluding HGC/Dine Happy, + Mild & Jalapeño Cheddar Sausages across 151 ingredient lines), updating yellow_rose_bbq_cogs.csv, yellow_rose_bbq_complete_cogs_model.csv, yellow_rose_bbq_recipe_cogs_breakdown.csv, yellow_rose_bbq_recipe_ingredients_detail.csv, yellow_rose_bbq_cogs.xlsx, and YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.{xlsx,pdf,docx,html}.",
+      "acceptance_criteria": "100% of Clover catalog items (125/125), WEBSITE_MENU.md items, and all 34 Yellow Rose BBQ recipes (151 ingredient lines) are mapped and included across all CSV, XLSX, PDF, DOCX, and HTML COGS exports with mode 0600 and passing verification suites.",
+      "passes": true
+    },
+    {
+      "id": 79,
+      "description": "Fix 3-taco forecast bug in clover_api/analytics/dashboard.py, portion_transformer.py, and generate_historical_payload.py (summing categories['tacos'] + taco subcategories and mapping all POS taco & dino rib variants), and configure 30-minute active-hours Clover sync (10:00 AM - 11:30 PM EST Tue-Sun) in scripts/cron_smokehouse_pipeline.sh and crontab.",
+      "acceptance_criteria": "dashboard.py sums categories['tacos'] + taco subcategories so daily taco projections reflect true demand (~41-80 tacos/day, never 3); dino_ribs key mismatch resolved; cron_smokehouse_pipeline.sh ingests live Clover data and runs every 30 mins 10:00 AM - 11:30 PM EST Tue-Sun; all tests pass.",
+      "passes": true
     }
   ]
 }
