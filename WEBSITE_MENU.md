@@ -21,6 +21,7 @@ This document is automatically generated from live POS API metadata.
 | **Cheese Quesadilla** |  |
 | **Chopped lean sandwich** |  |
 | **Chopped moist Sandwich** |  |
+| **Crispy Quesa Reuben Taco** |  |
 | **Crispy Quesa Taco Barbacoa** |  |
 | **Crispy Quesa Taco Brisket** |  |
 | **Crispy Quesa Taco Pork** |  |
@@ -140,6 +141,7 @@ This document is automatically generated from live POS API metadata.
 | **Patch** |  |
 | **Pimento Cheese W/ Crackers** |  |
 | **Ranch side** |  |
+| **Reuben** |  |
 | **Rosebud** |  |
 | **Sauteed Cabbage Catering Tray** |  |
 | **Sauteed Cabbage** |  |
