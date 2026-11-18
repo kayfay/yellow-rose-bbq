@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-11-17T13:28:16.700491-05:00",
+  "generated_at": "2026-11-17T20:16:10.476427-05:00",
   "days": {
     "2026-08-02": {
       "buckets": [
@@ -12041,38 +12041,38 @@
         },
         {
           "hour": 13,
-          "sales_usd": 338.29,
-          "orders": 8
+          "sales_usd": 670.2,
+          "orders": 23
         },
         {
           "hour": 14,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 254.11,
+          "orders": 8
         },
         {
           "hour": 15,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 276.52,
+          "orders": 7
         },
         {
           "hour": 16,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 285.55,
+          "orders": 6
         },
         {
           "hour": 17,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 241.8,
+          "orders": 7
         },
         {
           "hour": 18,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 404.38,
+          "orders": 8
         },
         {
           "hour": 19,
-          "sales_usd": 0.0,
-          "orders": 0
+          "sales_usd": 252.99,
+          "orders": 5
         },
         {
           "hour": 20,
@@ -12095,8 +12095,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 1770.24,
-      "total_orders": 46
+      "total_sales_usd": 3817.5,
+      "total_orders": 102
     }
   },
   "weekday_baseline": {
@@ -12171,13 +12171,13 @@
         515.04,
         10209.99,
         10254.16,
-        5562.97,
-        2669.3,
-        2488.64,
-        2377.57,
-        4038.21,
-        5403.3,
-        3848.78,
+        5894.88,
+        2923.41,
+        2765.16,
+        2663.12,
+        4280.01,
+        5807.68,
+        4101.77,
         877.81,
         -18.47,
         0.0,
@@ -12197,13 +12197,13 @@
         1,
         247,
         245,
-        155,
-        75,
-        63,
-        52,
-        101,
-        137,
+        170,
         83,
+        70,
+        58,
+        108,
+        145,
+        88,
         25,
         2,
         0,

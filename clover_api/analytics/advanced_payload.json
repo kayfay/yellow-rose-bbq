@@ -12,33 +12,33 @@
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 237,
-      "confidence": 18.7
+      "count": 238,
+      "confidence": 18.8
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 146,
-      "confidence": 21.3
+      "count": 147,
+      "confidence": 21.4
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 128,
-      "confidence": 19.3
+      "count": 129,
+      "confidence": 19.5
     },
     {
       "pair": "Brisket + Turkey",
-      "count": 113,
-      "confidence": 47.9
+      "count": 115,
+      "confidence": 48.3
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-      "count": 109,
-      "confidence": 22.6
+      "count": 108,
+      "confidence": 22.4
     },
     {
       "pair": "Quesabirria taco + Rosebud",
-      "count": 105,
-      "confidence": 27.3
+      "count": 104,
+      "confidence": 27.1
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
@@ -48,33 +48,33 @@
     {
       "pair": "Brisket + Mac & Cheese",
       "count": 97,
-      "confidence": 21.0
+      "confidence": 21.1
     }
   ],
   "interaction_modeling": {
-    "normal": 4140.98,
+    "normal": 4124.18,
     "game_only": 5642.42,
-    "rain_only": 4475.86,
+    "rain_only": 4604.02,
     "game_and_rain": 2308.76
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4972,
-      "total_revenue": 214090.26,
-      "avg_ticket": 43.05918342719228
+      "order_count": 4987,
+      "total_revenue": 214833.7,
+      "avg_ticket": 43.07874473631442
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 363,
-      "total_revenue": 21638.84,
-      "avg_ticket": 59.611129476584026
+      "order_count": 364,
+      "total_revenue": 21668.4,
+      "avg_ticket": 59.52857142857143
     },
     {
       "order_type": "To-Go",
-      "order_count": 2458,
-      "total_revenue": 155409.3,
-      "avg_ticket": 63.22591537835638
+      "order_count": 2462,
+      "total_revenue": 156799.4,
+      "avg_ticket": 63.68781478472786
     }
   ],
   "sell_out_prediction_chart": {
@@ -104,7 +104,7 @@
           139.0,
           168.0,
           196.0,
-          224.0
+          223.0
         ],
         "name": "1/2 Rack Pork Spare Ribs",
         "type": "scatter",
@@ -132,10 +132,10 @@
           189.78,
           236.86,
           326.53000000000003,
-          414.99,
-          552.64,
-          629.3,
-          676.405
+          415.49,
+          553.64,
+          653.05,
+          700.28
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -163,10 +163,10 @@
           180.0,
           420.0,
           591.0,
-          706.0,
-          823.0,
-          907.0,
-          1027.0
+          710.0,
+          824.0,
+          909.0,
+          1028.0
         ],
         "name": "Crispy Quesa Taco Brisket",
         "type": "scatter",
@@ -227,8 +227,8 @@
           74.0,
           107.0,
           128.0,
-          150.0,
-          166.0
+          151.0,
+          167.0
         ],
         "name": "Full Rack Pork Spare Ribs",
         "type": "scatter",
@@ -349,10 +349,10 @@
           25.0,
           59.0,
           95.0,
-          125.0,
-          143.0,
-          160.0,
-          199.0
+          126.0,
+          144.0,
+          161.0,
+          202.0
         ],
         "name": "Single Bone Pork Rib",
         "type": "scatter",
@@ -412,9 +412,9 @@
           8.0,
           16.0,
           17.0,
-          20.0,
-          20.0,
-          20.0
+          21.0,
+          21.0,
+          21.0
         ],
         "name": "Brisket Bacon Ranch Quesadilla",
         "type": "scatter",
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.1,
-    "pork_ribs_avg_with_dino": 3.5,
-    "impact_pct": -30.8
+    "pork_ribs_avg_without_dino": 5.2,
+    "pork_ribs_avg_with_dino": 3.4,
+    "impact_pct": -34.2
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.41
+    "normal_avg_ticket": 46.4
   }
 }
