@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T20:16:10-05:00",
+  "generated_at": "2026-11-18T04:04:01-05:00",
   "timezone": "America/New_York",
-  "today_date": "2026-11-17",
+  "today_date": "2026-11-18",
   "active_service_brief": {
     "date": "2026-11-18",
     "day_name": "Wed",
@@ -129,8 +129,8 @@
     ],
     "left_after_meat_usd": [
       2614,
-      4241,
-      4268,
+      4242,
+      4269,
       6350,
       4625,
       2709,
@@ -738,27 +738,27 @@
       "status_tone": "steady",
       "z_score": 0.17,
       "pct_vs_typical": 4.8,
-      "expected_sales_usd": 7831,
+      "expected_sales_usd": 7832,
       "typical_day_sales_usd": 7471,
-      "sales_diff_usd": 360,
+      "sales_diff_usd": 361,
       "estimated_meat_cost_usd": 1840,
-      "left_after_meat_cost_usd": 5991,
+      "left_after_meat_cost_usd": 5992,
       "meat_cost_pct": 23.5,
       "leftover_pct": 76.5,
       "primary_driver": "",
       "peak_rush_window": "12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner",
-      "the_insight": "Saturday sales ($7,831) are tracking 4.8% ($360) above a typical Saturday ($7,471). That leaves ~$5,991 for the shop after ~$1,840 in estimated meat cost.",
+      "the_insight": "Saturday sales ($7,832) are tracking 4.8% ($361) above a typical Saturday ($7,471). That leaves ~$5,992 for the shop after ~$1,840 in estimated meat cost.",
       "the_action": "Prep 14 Briskets, 8 Pork Butts, 24 racks of spare ribs, 7 Turkey Breasts, and 132 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
       "sales_bridge": {
         "typical_day_label": "Typical Saturday",
         "typical_day_usd": 7471,
         "rush_hour_delta_label": "Rush Hour Demand",
-        "rush_hour_delta_usd": 223,
+        "rush_hour_delta_usd": 224,
         "weather_event_delta_label": "Weather & Local Crowd",
         "weather_event_delta_usd": 137,
-        "expected_sales_usd": 7831,
+        "expected_sales_usd": 7832,
         "estimated_meat_cost_usd": 1840,
-        "left_after_meat_cost_usd": 5991
+        "left_after_meat_cost_usd": 5992
       }
     },
     "2026-11-29": {
