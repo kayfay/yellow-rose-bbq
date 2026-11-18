@@ -1011,7 +1011,7 @@
     {
       "date": "2026-08-20",
       "day_name": "Thu",
-      "actual_revenue": 802.46,
+      "actual_revenue": 569.57,
       "predicted_revenue": 2800.0,
       "brisket_raw_lbs": 40.0,
       "pork_shoulder_raw_lbs": 24.0,
@@ -1048,7 +1048,7 @@
       "actual_rosebuds_sold": 5,
       "actual_total_cooked_lbs": 24.6,
       "estimated_cogs_usd": 321.88,
-      "estimated_food_cost_pct": 40.1
+      "estimated_food_cost_pct": 56.5
     },
     {
       "date": "2026-08-21",
@@ -4623,14 +4623,14 @@
     {
       "date": "2026-11-18",
       "day_name": "Wed",
-      "actual_revenue": 1898.25,
+      "actual_revenue": 2261.16,
       "predicted_revenue": 2800.0,
-      "brisket_raw_lbs": 57.0,
+      "brisket_raw_lbs": 63.6,
       "pork_shoulder_raw_lbs": 24.0,
-      "sausage_lbs": 20.0,
-      "tacos_sold": 26,
-      "rosebuds_sold": 10,
-      "pork_ribs_racks": 1.2,
+      "sausage_lbs": 22.6,
+      "tacos_sold": 27,
+      "rosebuds_sold": 11,
+      "pork_ribs_racks": 1.4,
       "beef_dino_ribs": 0,
       "is_historical": true,
       "data_type": "ACTUAL",
@@ -4647,20 +4647,20 @@
       "predicted_tacos_sold": 35,
       "predicted_rosebuds_sold": 20,
       "predicted_total_cooked_lbs": 57.8,
-      "actual_brisket_raw_lbs": 57.0,
-      "actual_brisket_cooked_lbs": 19.9,
+      "actual_brisket_raw_lbs": 63.6,
+      "actual_brisket_cooked_lbs": 22.3,
       "actual_pork_shoulder_raw_lbs": 24.0,
       "actual_pork_cooked_lbs": 10.6,
-      "actual_sausage_lbs": 20.0,
-      "actual_sausage_links": 60,
-      "actual_pork_ribs_racks": 1.2,
+      "actual_sausage_lbs": 22.6,
+      "actual_sausage_links": 68,
+      "actual_pork_ribs_racks": 1.4,
       "actual_beef_dino_ribs": 0,
       "actual_turkey_cooked_lbs": 7.92,
-      "actual_tacos_sold": 26,
-      "actual_rosebuds_sold": 10,
-      "actual_total_cooked_lbs": 30.5,
-      "estimated_cogs_usd": 424.37,
-      "estimated_food_cost_pct": 22.4
+      "actual_tacos_sold": 27,
+      "actual_rosebuds_sold": 11,
+      "actual_total_cooked_lbs": 32.9,
+      "estimated_cogs_usd": 470.33,
+      "estimated_food_cost_pct": 20.8
     }
   ]
 }
