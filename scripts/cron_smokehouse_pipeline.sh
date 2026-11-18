@@ -104,7 +104,7 @@ git add -u clover_api/analytics/ analytics/ api/analytics/ WEBSITE_MENU.md 2>/de
 if ! git diff --staged --quiet; then
     git commit -m "chore(data): auto-update clover api analytics data (every 30 mins)" || true
     for attempt in 1 2 3; do
-        if git pull --rebase --autostash origin master && git push origin master; then
+        if git pull --rebase -X theirs --autostash origin master && git push origin master; then
             echo "[GIT SYNC] Successfully pushed fresh analytics payloads to origin/master."
             break
         fi
