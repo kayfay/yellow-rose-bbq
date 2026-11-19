@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T20:31:20-05:00",
+  "generated_at": "2026-11-18T21:01:17-05:00",
   "timezone": "America/New_York",
   "today_date": "2026-11-18",
   "active_service_brief": {
@@ -113,7 +113,7 @@
       3835,
       4636,
       5648,
-      7291,
+      7292,
       4514,
       4046,
       3203
@@ -128,7 +128,7 @@
       899
     ],
     "left_after_meat_usd": [
-      2925,
+      2926,
       3560,
       4207,
       5454,
@@ -288,27 +288,27 @@
       "status_tone": "steady",
       "z_score": -0.08,
       "pct_vs_typical": -2.4,
-      "expected_sales_usd": 7291,
+      "expected_sales_usd": 7292,
       "typical_day_sales_usd": 7471,
-      "sales_diff_usd": -180,
+      "sales_diff_usd": -179,
       "estimated_meat_cost_usd": 1837,
-      "left_after_meat_cost_usd": 5454,
+      "left_after_meat_cost_usd": 5455,
       "meat_cost_pct": 25.2,
       "leftover_pct": 74.8,
       "primary_driver": "",
       "peak_rush_window": "12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner",
-      "the_insight": "Saturday sales ($7,291) are tracking 2.4% ($180) below a typical Saturday ($7,471). That leaves ~$5,454 for the shop after ~$1,837 in estimated meat cost.",
+      "the_insight": "Saturday sales ($7,292) are tracking 2.4% ($179) below a typical Saturday ($7,471). That leaves ~$5,455 for the shop after ~$1,837 in estimated meat cost.",
       "the_action": "Prep 14 Briskets, 8 Pork Butts, 19 racks of spare ribs, 7 Turkey Breasts, and 131 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
       "sales_bridge": {
         "typical_day_label": "Typical Saturday",
         "typical_day_usd": 7471,
         "rush_hour_delta_label": "Rush Hour Demand",
-        "rush_hour_delta_usd": -112,
+        "rush_hour_delta_usd": -111,
         "weather_event_delta_label": "Weather & Local Crowd",
         "weather_event_delta_usd": -68,
-        "expected_sales_usd": 7291,
+        "expected_sales_usd": 7292,
         "estimated_meat_cost_usd": 1837,
-        "left_after_meat_cost_usd": 5454
+        "left_after_meat_cost_usd": 5455
       }
     },
     "Sun": {
@@ -514,27 +514,27 @@
       "status_tone": "steady",
       "z_score": -0.08,
       "pct_vs_typical": -2.4,
-      "expected_sales_usd": 7291,
+      "expected_sales_usd": 7292,
       "typical_day_sales_usd": 7471,
-      "sales_diff_usd": -180,
+      "sales_diff_usd": -179,
       "estimated_meat_cost_usd": 1837,
-      "left_after_meat_cost_usd": 5454,
+      "left_after_meat_cost_usd": 5455,
       "meat_cost_pct": 25.2,
       "leftover_pct": 74.8,
       "primary_driver": "",
       "peak_rush_window": "12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner",
-      "the_insight": "Saturday sales ($7,291) are tracking 2.4% ($180) below a typical Saturday ($7,471). That leaves ~$5,454 for the shop after ~$1,837 in estimated meat cost.",
+      "the_insight": "Saturday sales ($7,292) are tracking 2.4% ($179) below a typical Saturday ($7,471). That leaves ~$5,455 for the shop after ~$1,837 in estimated meat cost.",
       "the_action": "Prep 14 Briskets, 8 Pork Butts, 19 racks of spare ribs, 7 Turkey Breasts, and 131 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
       "sales_bridge": {
         "typical_day_label": "Typical Saturday",
         "typical_day_usd": 7471,
         "rush_hour_delta_label": "Rush Hour Demand",
-        "rush_hour_delta_usd": -112,
+        "rush_hour_delta_usd": -111,
         "weather_event_delta_label": "Weather & Local Crowd",
         "weather_event_delta_usd": -68,
-        "expected_sales_usd": 7291,
+        "expected_sales_usd": 7292,
         "estimated_meat_cost_usd": 1837,
-        "left_after_meat_cost_usd": 5454
+        "left_after_meat_cost_usd": 5455
       }
     },
     "2026-11-22": {
@@ -738,27 +738,27 @@
       "status_tone": "steady",
       "z_score": -0.06,
       "pct_vs_typical": -1.8,
-      "expected_sales_usd": 7333,
+      "expected_sales_usd": 7334,
       "typical_day_sales_usd": 7471,
-      "sales_diff_usd": -138,
+      "sales_diff_usd": -137,
       "estimated_meat_cost_usd": 1839,
-      "left_after_meat_cost_usd": 5494,
+      "left_after_meat_cost_usd": 5495,
       "meat_cost_pct": 25.1,
       "leftover_pct": 74.9,
       "primary_driver": "",
       "peak_rush_window": "12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner",
-      "the_insight": "Saturday sales ($7,333) are tracking 1.8% ($138) below a typical Saturday ($7,471). That leaves ~$5,494 for the shop after ~$1,839 in estimated meat cost.",
+      "the_insight": "Saturday sales ($7,334) are tracking 1.8% ($137) below a typical Saturday ($7,471). That leaves ~$5,495 for the shop after ~$1,839 in estimated meat cost.",
       "the_action": "Prep 14 Briskets, 8 Pork Butts, 19 racks of spare ribs, 7 Turkey Breasts, and 131 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
       "sales_bridge": {
         "typical_day_label": "Typical Saturday",
         "typical_day_usd": 7471,
         "rush_hour_delta_label": "Rush Hour Demand",
-        "rush_hour_delta_usd": -86,
+        "rush_hour_delta_usd": -85,
         "weather_event_delta_label": "Weather & Local Crowd",
         "weather_event_delta_usd": -52,
-        "expected_sales_usd": 7333,
+        "expected_sales_usd": 7334,
         "estimated_meat_cost_usd": 1839,
-        "left_after_meat_cost_usd": 5494
+        "left_after_meat_cost_usd": 5495
       }
     },
     "2026-11-29": {
