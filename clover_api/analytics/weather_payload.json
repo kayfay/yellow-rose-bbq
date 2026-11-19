@@ -328,7 +328,7 @@
           78.44,
           66.92,
           69.25999999999999,
-          68.54
+          69.25999999999999
         ],
         "y": [
           5009.98,
@@ -345,7 +345,7 @@
           4610.73,
           3564.51,
           2533.45,
-          1235.39
+          3228.75
         ],
         "text": [
           "<b>Thursday, 2026-08-27</b><br>Revenue: $5,009.98<br>Weather: 89.6\u00b0F, 28.1mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
@@ -362,7 +362,7 @@
           "<b>Sunday, 2026-11-01</b><br>Revenue: $4,610.73<br>Weather: 78.44\u00b0F, 32.7mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Tuesday, 2026-11-17</b><br>Revenue: $3,564.51<br>Weather: 66.92\u00b0F, 56.4mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
           "<b>Wednesday, 2026-11-18</b><br>Revenue: $2,533.45<br>Weather: 69.25999999999999\u00b0F, 13.6mm rain<br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>",
-          "<b>Thursday, 2026-11-19</b><br>Revenue: $1,235.39<br>Weather: 68.54\u00b0F, 15.4mm rain<br><br><b>\ud83c\udf1f MOST RECENT SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
+          "<b>Thursday, 2026-11-19</b><br>Revenue: $3,228.75<br>Weather: 69.25999999999999\u00b0F, 21.2mm rain<br><br><b>\ud83c\udf1f MOST RECENT SALES</b><br><br><i>Insight: Heavy rain shifts customers from patio<br>to high-margin To-Go Family Bundles.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -436,7 +436,7 @@
           92.3
         ],
         "y": [
-          3509.2,
+          121.66,
           6630.04,
           4388.4,
           4409.6,
@@ -445,7 +445,7 @@
           6868.89
         ],
         "text": [
-          "<b>Friday, 2026-08-21</b><br>Revenue: $3,509.20<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
+          "<b>Friday, 2026-08-21</b><br>Revenue: $121.66<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Sunday, 2026-08-23</b><br>Revenue: $6,630.04<br>Weather: 91.94\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Wednesday, 2026-08-26</b><br>Revenue: $4,388.40<br>Weather: 91.58000000000001\u00b0F, 0.4mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
           "<b>Friday, 2026-09-04</b><br>Revenue: $4,409.60<br>Weather: 90.32\u00b0F, 0.0mm rain<br><br><i>Insight: Extreme heat (>90\u00b0F) kills patio seating.<br>Push curbside pickup and A/C indoor dining.</i>",
@@ -566,8 +566,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4660.624576271187,
-          "y1": 4660.624576271187,
+          "y0": 4603.208644067798,
+          "y1": 4603.208644067798,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -579,8 +579,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4960.624576271187,
-          "text": "Baseline Target ($4,661)",
+          "y": 4903.208644067798,
+          "text": "Baseline Target ($4,603)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -592,12 +592,12 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4660.62,
-    "rain_avg_usd": 4281.19,
-    "rain_drop_pct": -8.1,
-    "heat_avg_usd": 5147.17,
-    "heat_drop_pct": 14.7,
-    "rain_coef": -3.89,
-    "temp_coef": 9.15
+    "normal_avg_usd": 4603.21,
+    "rain_avg_usd": 4398.45,
+    "rain_drop_pct": -4.4,
+    "heat_avg_usd": 4808.41,
+    "heat_drop_pct": 6.4,
+    "rain_coef": -2.42,
+    "temp_coef": -3.1
   }
 }
