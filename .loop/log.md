@@ -672,3 +672,18 @@
   4. `tz_utils.js`: Guarded `resolveEffectiveCutoff()` mid-day sync clamping to active service hours (`syncHr >= 10 && syncHr < 20`).
   5. `scripts/cron_smokehouse_pipeline.sh`, `scripts/setup_hourly_cron.sh` & `crontab`: Added live `clover_api/ingest.py` + `ingest_itemized.py` + master DB merge (now 36,432 line items across 97 days, including today's 27 orders / $893.15 through 1:05 PM EST) and updated crontab to `*/30 10-23 * * 0,2-6` (every 30 minutes from **10:00 AM to 11:30 PM EST, Tuesday–Sunday**, skipping closed overnight hours).
 - **Verification**: `npm run check && node --check tz_utils.js` (0 errors), Python `unittest` (`39/39 passed`), Playwright E2E `projection.spec.js` & `stat_cards.spec.js` (`8/8 passed`).
+
+## 2026-11-19 · Full COGS Engine & Adjacent UI Card
+- **What changed & why:** Implemented the Comprehensive Cost of Goods Sold (Full COGS) Engine and adjacent UI card per SDD specs (`SPEC.md`, `DESIGN.md`, `PLAN.md`) to capture non-meat inventory depletion (bakery/perishables, sides, packaging/sauces) alongside wholesale protein cost.
+- **Files touched:**
+  - `SPEC.md`, `DESIGN.md`, `PLAN.md` (prior specs archived to `archive/*.20261119.orig`)
+  - `backups/archive_pre_full_cogs_20261119.tar.gz` (mode `0600`)
+  - `clover_api/analytics/recipe_bom.json`, `clover_api/analytics/cost_engine.py`, `clover_api/analytics/build_payloads.py`
+  - `index.html` (`?v=2.3.1`), `style.css`, `modules/forecaster/analytics_subtabs.js`, `app.js`
+  - `clover_api/tests/test_cost_engine.py`, `scripts/verify_cogs_math.py`, `tests/e2e/full_cogs_card.spec.js`
+- **Verification results:**
+  - `npm run check`: PASS (0 errors)
+  - `.venv/bin/python scripts/verify_cogs_math.py`: PASS (14 days checked: 12 open, 2 closed/pending; 100% math parity & monotonicity, 0 banned jargon)
+  - `.venv/bin/python -m unittest discover -s clover_api/tests`: PASS (45/45 tests OK)
+  - `npm test -- tests/e2e/full_cogs_card.spec.js`: PASS (2 passed, 0 failed, 0 flaky in 12.9s)
+  - Read-only Adversarial Critic audit: **9.4 / 10** (Financial Accuracy 9.8/10, Card Clarity & Ergonomics 9.0/10)

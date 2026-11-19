@@ -1,35 +1,46 @@
-# Yellow Rose BBQ — Bundled Calibration & Verification Plan (`PLAN.md`)
+# PLAN.md — Full COGS Engine & UI Card Implementation Plan
 
 ## Milestones & Deterministic Verification Tasks
 
-### Task 1: Master DB Resolution & Combo Modification Parser (`portion_transformer.py`)
-- **Action:**
-  1. Update `load_transactions()` in `clover_api/analytics/portion_transformer.py` (and `dashboard.py`) to auto-select `data/clover_sales_master.db` when present and non-empty, falling back to `clover_api/data/clover_sales.db`.
-  2. Expand `PORTION_MAP` to cover all high-volume menu items (`Moist Sandwich`, `Lean sandwich`, bulk `turkey`, bulk `pulled pork`, `Crispy Quesa Taco Brisket`, `Crispy Quesa Taco Turkey`, `Quesabirria taco`, `Taco Plate W/2 Sides`, `Rosebud`, `Dino Beef Rib`).
-  3. Parse `modifications` on `BBQ plate` and `2 meat plate` so Ribs, Turkey, Pulled Pork, Sausage, and Brisket selections are accurately attributed instead of defaulting 100% of plates to Brisket.
-- **Verification:** Run a deterministic check confirming `unclassified_item` drops to 0 for core meat items and daily POS rib rack totals include plate/platter rib selections.
+### Task 1: Baseline Workspace Backup & Invoice Dependency Audit
+- **Action:** Create non-destructive workspace archive at `backups/archive_pre_full_cogs_20261119.tar.gz` (excluding `.venv`, `node_modules`, `.git`). Verify `data/vendor_invoices/` permissions (`0600`) and inspect available CSV headers without logging proprietary prices.
+- **Verification:** `ls -lh backups/archive_pre_full_cogs_20261119.tar.gz` exits `0`; `git status` clean.
 
-### Task 2: Recalibrate `DOW_BASELINES` & Wire Time-Series Modules (`scripts/meat_forecast.py`)
+### Task 2: Recipe BOM Catalog & Backend Cost Engine (`cost_engine.py`)
 - **Action:**
-  1. Compute empirical day-of-week cooked demand medians (P50) and P90 upper bounds from the corrected `portion_transformer.py` output across `data/clover_sales_master.db` (plus pitmaster operational floors for high-volume weekend rib/brisket runs).
-  2. Update `DOW_BASELINES` in `scripts/meat_forecast.py` and wire `clover_api/analytics/modules/probabilistic/quantile_buffers.py` + `hierarchical/reconciler.py` + `smokehouse_translator.py` into `MultiMeatForecaster`.
-- **Verification:** Confirm Saturday `2026-11-14` projects `12` briskets (`11 expected + 1 cushion`), Sunday ribs reflect real platter + rack volume, and `reconciler.py` preserves $\sum \text{Items} = \sum \text{Categories} = \text{Store Total}$.
+  - Create `clover_api/analytics/recipe_bom.json` mapping Clover menu items (sandwiches, plates, family packs, bulk cuts, sides) to Meat + Bakery + Sides + Packaging/Sauce BOM costs.
+  - Implement `clover_api/analytics/cost_engine.py` with fault-isolated `data/vendor_invoices/` reconciliation and fallback defaults, outputting `clover_api/analytics/full_cogs.json`.
+  - Wire `full_cogs.json` into `clover_api/analytics/build_payloads.py` so `payloads.js` exposes `window.FULL_COGS_PAYLOAD`.
+- **Verification:**
+  - `.venv/bin/python clover_api/analytics/cost_engine.py` exits `0`.
+  - `.venv/bin/python clover_api/analytics/build_payloads.py` exits `0`.
+  - `.venv/bin/python -m unittest clover_api/tests/test_cost_engine.py` passes 100%.
 
-### Task 3: De-Circularize Historical Backtester (`scripts/backtest_all_forecasts.py`)
+### Task 3: Full COGS UI Card & Responsive Grid (`index.html`, `style.css`, `analytics_subtabs.js`)
 - **Action:**
-  1. Update `scripts/backtest_all_forecasts.py` to load actual POS daily meat consumption via `portion_transformer.py` from `data/clover_sales_master.db` (when available) as the ground-truth `item_actuals`, falling back to payload baselines only in CI environments where `data/clover_sales_master.db` is absent.
-  2. Print side-by-side Predicted vs. Actual yields (in whole kitchen cuts and cooked lbs) and verify calibrated MAPE < 15.0%.
-- **Verification:** `.venv/bin/python scripts/backtest_all_forecasts.py` and `.venv/bin/python scripts/verify_all_forecasts.py` exit `0` with non-zero, honest residual statistics.
+  - Wrap `#kpi-card-food-cost-container` and new `#kpi-card-full-cogs-container` in `.cost-cards-grid` in `index.html`.
+  - Add Okabe-Ito pacing pills (`< 32%` Green, `32–36%` Amber, `> 36%` Red) and mobile-first stacking rules (`< 768px`, `>= 48px` tap targets) in `style.css`.
+  - Implement Full COGS Card hydration and `[Meat Only | Full COGS]` toggle in `modules/forecaster/analytics_subtabs.js` and `app.js` with `Pending Service` and `$0 (Closed)` guards.
+  - Bump `?v=` cache-busting query strings in `index.html`.
+- **Verification:**
+  - `npm run check` passes (`node --check app.js d3_charts.js`).
+  - `node --check modules/forecaster/analytics_subtabs.js` passes.
 
-### Task 4: Smart Closed-Hours Sync Staleness & Payload Rebuild (`tz_utils.js`, `build_payloads.py`)
+### Task 4: Deterministic PAL Verification & Playwright E2E Suite
 - **Action:**
-  1. Verify `ShopTime.getSyncHealth()` in `tz_utils.js` returns `Closed · Synced` (`state: 'fresh'`) on Mondays and outside `10:00–21:00` `America/New_York` when synced within 24h (`<= 1440` min), while preserving `<30m` fresh / `30–120m` warning / `>120m` stale during open hours.
-  2. Add a unit/E2E assertion in `tests/e2e/projection.spec.js` testing Monday/overnight closed-sync behavior.
-  3. Rebuild `clover_api/analytics/payloads.js` and `sync_status.json` via `.venv/bin/python clover_api/analytics/build_payloads.py`.
-- **Verification:** `node --check tz_utils.js && npm run check` and `npx playwright test tests/e2e/projection.spec.js` exit `0`.
+  - Create `scripts/verify_cogs_math.py` asserting:
+    1. `meat_cost + non_meat_cost == total_cogs` (exact within `$0.01`).
+    2. `full_cogs_pct >= meat_cost_pct` on all open service days.
+    3. Zero banned statistical jargon in rendered strings.
+    4. Zero raw invoice strings leaked into `full_cogs.json` or `payloads.js`.
+  - Create `tests/e2e/full_cogs_card.spec.js` verifying adjacent desktop placement, mobile vertical stack with zero horizontal overflow, toggle state, and zero console errors.
+- **Verification:**
+  - `.venv/bin/python scripts/verify_cogs_math.py` exits `0`.
+  - `.venv/bin/python -m unittest discover -s clover_api/tests` exits `0`.
+  - `npm test -- tests/e2e/full_cogs_card.spec.js` and full `npm test` pass with exact counts reported.
 
-### Task 5: Full Regression Suite & `.loop/` Audit Log Update
+### Task 5: Adversarial Critic Audit & `.loop/` State Closure
 - **Action:**
-  1. Run `npm run check`, `.venv/bin/python -m unittest discover -s clover_api/tests`, PAL verifiers (`verify_all_forecasts.py`, `verify_v2_facelift_pal.py`, `verify_smokehouse_ux_pal.py`, `verify_bi_insight_engine.py`), and `npm test` (Playwright E2E).
-  2. Update `.loop/prd.json` and `.loop/log.md` with exact verification counts.
-- **Verification:** 100% pass rate across all suites with exit code `0`.
+  - Spawn read-only Critic subagent to audit math integrity, UI alignment, and plain-English copy (must score `>= 9/10`).
+  - Update `.loop/prd.json` (`passes: true`), `.loop/patterns.md` (keeping `<= 40` lines), and `.loop/log.md` with exact verification output.
+- **Verification:** All Tier 1 & Tier 2 gates green; Critic score `>= 9/10`.

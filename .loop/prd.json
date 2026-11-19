@@ -473,6 +473,24 @@
       "description": "Fix 3-taco forecast bug in clover_api/analytics/dashboard.py, portion_transformer.py, and generate_historical_payload.py (summing categories['tacos'] + taco subcategories and mapping all POS taco & dino rib variants), and configure 30-minute active-hours Clover sync (10:00 AM - 11:30 PM EST Tue-Sun) in scripts/cron_smokehouse_pipeline.sh and crontab.",
       "acceptance_criteria": "dashboard.py sums categories['tacos'] + taco subcategories so daily taco projections reflect true demand (~41-80 tacos/day, never 3); dino_ribs key mismatch resolved; cron_smokehouse_pipeline.sh ingests live Clover data and runs every 30 mins 10:00 AM - 11:30 PM EST Tue-Sun; all tests pass.",
       "passes": true
+    },
+    {
+      "id": 80,
+      "description": "Full COGS Task 1-2: Build clover_api/analytics/recipe_bom.json and clover_api/analytics/cost_engine.py with fault-isolated vendor invoice reconciliation, output full_cogs.json, register window.FULL_COGS_PAYLOAD in build_payloads.py, and add unit tests in clover_api/tests/test_cost_engine.py.",
+      "acceptance_criteria": "cost_engine.py and build_payloads.py exit 0; total_cogs == meat_cost + non_meat_cost; full_cogs_pct >= meat_cost_pct on open days; closed/zero-revenue days return null cogs_pct; test_cost_engine.py passes 100%.",
+      "passes": true
+    },
+    {
+      "id": 81,
+      "description": "Full COGS Task 3: Add adjacent Full COGS Card (#kpi-card-full-cogs-container) inside .cost-cards-grid in index.html, style Okabe-Ito pacing pills and responsive mobile stacking in style.css, hydrate card + [Meat Only | Full COGS] toggle in modules/forecaster/analytics_subtabs.js and app.js, and bump ?v= cache busting.",
+      "acceptance_criteria": "Full COGS Card renders adjacent to Est. Meat Cost Card on desktop (>=768px) and stacks cleanly on mobile (<768px) with >=48px tap targets; displays Pending Service / $0 (Closed) guards; zero banned jargon; npm run check passes.",
+      "passes": true
+    },
+    {
+      "id": 82,
+      "description": "Full COGS Task 4-5: Build scripts/verify_cogs_math.py and tests/e2e/full_cogs_card.spec.js, run full verification suite (unittest, PAL verifier, Playwright E2E), and pass read-only Adversarial Critic audit >= 9/10.",
+      "acceptance_criteria": "verify_cogs_math.py, unittest discover, and npm test exit 0; Adversarial Critic rates card clarity and financial accuracy >= 9/10.",
+      "passes": true
     }
   ]
 }

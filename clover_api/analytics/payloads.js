@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-19T02:51:34.126636-05:00",
+      "generated_at": "2026-11-19T08:30:43.464206-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~219.5 lbs raw brisket (~76.8 lbs cooked yield) and ~58.9 lbs raw pork shoulder (~25.9 lbs cooked yield) [~278.4 lbs total raw / ~102.7 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (84 projected) and Rosebuds (46 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -17696,7 +17696,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-19T02:51:34.022812-05:00",
+    "generated_at": "2026-11-19T08:30:42.845439-05:00",
     "days": {
       "2026-08-02": {
         "buckets": [
@@ -31621,7 +31621,7 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-19": {
-      "captured_at": "2026-11-19T02:51:34.065346-05:00",
+      "captured_at": "2026-11-19T08:30:42.898302-05:00",
       "hourly_forecast": [
         {
           "hour": 2,
@@ -33927,5 +33927,245 @@ window.BBQ_PAYLOADS = {
         "how_it_helps": "Turns 'rainy days feel slow' into a number you can plan prep around."
       }
     }
+  },
+  "full_cogs": {
+    "generated_at": "2026-11-19T08:30:43.453345-05:00",
+    "bom_version": "1.0.0",
+    "target_bands": {
+      "green_max_pct": 32.0,
+      "amber_max_pct": 36.0
+    },
+    "non_meat_ratios_by_category": {
+      "bakery_per_order": 0.72,
+      "sides_per_order": 1.48,
+      "packaging_per_order": 1.05
+    },
+    "daily": {
+      "2026-11-19": {
+        "date": "2026-11-19",
+        "day_name": "Thu",
+        "status": "ok",
+        "gross_revenue": 4552.01,
+        "meat_cost": 1115.68,
+        "bakery_cost": 67.58,
+        "sides_cost": 138.91,
+        "packaging_cost": 98.55,
+        "non_meat_cost": 305.04,
+        "total_cogs": 1420.72,
+        "meat_cost_pct": 24.5,
+        "cogs_pct": 31.2,
+        "pacing_band": "green",
+        "pacing_label": "Healthy Pacing (<32%)"
+      },
+      "2026-11-20": {
+        "date": "2026-11-20",
+        "day_name": "Fri",
+        "status": "ok",
+        "gross_revenue": 5732.16,
+        "meat_cost": 1423.14,
+        "bakery_cost": 85.1,
+        "sides_cost": 174.92,
+        "packaging_cost": 124.1,
+        "non_meat_cost": 384.12,
+        "total_cogs": 1807.26,
+        "meat_cost_pct": 24.8,
+        "cogs_pct": 31.5,
+        "pacing_band": "green",
+        "pacing_label": "Healthy Pacing (<32%)"
+      },
+      "2026-11-21": {
+        "date": "2026-11-21",
+        "day_name": "Sat",
+        "status": "ok",
+        "gross_revenue": 7165.2,
+        "meat_cost": 1803.18,
+        "bakery_cost": 106.37,
+        "sides_cost": 218.65,
+        "packaging_cost": 155.12,
+        "non_meat_cost": 480.14,
+        "total_cogs": 2283.32,
+        "meat_cost_pct": 25.2,
+        "cogs_pct": 31.9,
+        "pacing_band": "green",
+        "pacing_label": "Healthy Pacing (<32%)"
+      },
+      "2026-11-22": {
+        "date": "2026-11-22",
+        "day_name": "Sun",
+        "status": "ok",
+        "gross_revenue": 4931.34,
+        "meat_cost": 1332.61,
+        "bakery_cost": 73.21,
+        "sides_cost": 150.48,
+        "packaging_cost": 106.76,
+        "non_meat_cost": 330.45,
+        "total_cogs": 1663.06,
+        "meat_cost_pct": 27.0,
+        "cogs_pct": 33.7,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-23": {
+        "date": "2026-11-23",
+        "day_name": "Mon",
+        "status": "closed",
+        "gross_revenue": 0.0,
+        "meat_cost": 0.0,
+        "bakery_cost": 0.0,
+        "sides_cost": 0.0,
+        "packaging_cost": 0.0,
+        "non_meat_cost": 0.0,
+        "total_cogs": 0.0,
+        "meat_cost_pct": null,
+        "cogs_pct": null,
+        "pacing_band": "closed",
+        "pacing_label": "$0 (Closed)"
+      },
+      "2026-11-24": {
+        "date": "2026-11-24",
+        "day_name": "Tue",
+        "status": "ok",
+        "gross_revenue": 3751.19,
+        "meat_cost": 977.91,
+        "bakery_cost": 55.69,
+        "sides_cost": 114.47,
+        "packaging_cost": 81.21,
+        "non_meat_cost": 251.37,
+        "total_cogs": 1229.28,
+        "meat_cost_pct": 26.1,
+        "cogs_pct": 32.8,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-25": {
+        "date": "2026-11-25",
+        "day_name": "Wed",
+        "status": "ok",
+        "gross_revenue": 3161.12,
+        "meat_cost": 843.36,
+        "bakery_cost": 46.93,
+        "sides_cost": 96.46,
+        "packaging_cost": 68.44,
+        "non_meat_cost": 211.83,
+        "total_cogs": 1055.19,
+        "meat_cost_pct": 26.7,
+        "cogs_pct": 33.4,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-26": {
+        "date": "2026-11-26",
+        "day_name": "Thu",
+        "status": "ok",
+        "gross_revenue": 4425.56,
+        "meat_cost": 1124.65,
+        "bakery_cost": 65.7,
+        "sides_cost": 135.05,
+        "packaging_cost": 95.81,
+        "non_meat_cost": 296.56,
+        "total_cogs": 1421.21,
+        "meat_cost_pct": 25.4,
+        "cogs_pct": 32.1,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-27": {
+        "date": "2026-11-27",
+        "day_name": "Fri",
+        "status": "ok",
+        "gross_revenue": 5690.01,
+        "meat_cost": 1434.21,
+        "bakery_cost": 84.47,
+        "sides_cost": 173.63,
+        "packaging_cost": 123.19,
+        "non_meat_cost": 381.29,
+        "total_cogs": 1815.5,
+        "meat_cost_pct": 25.2,
+        "cogs_pct": 31.9,
+        "pacing_band": "green",
+        "pacing_label": "Healthy Pacing (<32%)"
+      },
+      "2026-11-28": {
+        "date": "2026-11-28",
+        "day_name": "Sat",
+        "status": "ok",
+        "gross_revenue": 7123.05,
+        "meat_cost": 1809.31,
+        "bakery_cost": 105.74,
+        "sides_cost": 217.36,
+        "packaging_cost": 154.21,
+        "non_meat_cost": 477.31,
+        "total_cogs": 2286.62,
+        "meat_cost_pct": 25.4,
+        "cogs_pct": 32.1,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-29": {
+        "date": "2026-11-29",
+        "day_name": "Sun",
+        "status": "ok",
+        "gross_revenue": 4703.74,
+        "meat_cost": 1347.34,
+        "bakery_cost": 69.83,
+        "sides_cost": 143.54,
+        "packaging_cost": 101.83,
+        "non_meat_cost": 315.2,
+        "total_cogs": 1662.54,
+        "meat_cost_pct": 28.6,
+        "cogs_pct": 35.3,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-11-30": {
+        "date": "2026-11-30",
+        "day_name": "Mon",
+        "status": "closed",
+        "gross_revenue": 0.0,
+        "meat_cost": 0.0,
+        "bakery_cost": 0.0,
+        "sides_cost": 0.0,
+        "packaging_cost": 0.0,
+        "non_meat_cost": 0.0,
+        "total_cogs": 0.0,
+        "meat_cost_pct": null,
+        "cogs_pct": null,
+        "pacing_band": "closed",
+        "pacing_label": "$0 (Closed)"
+      },
+      "2026-12-01": {
+        "date": "2026-12-01",
+        "day_name": "Tue",
+        "status": "ok",
+        "gross_revenue": 3751.19,
+        "meat_cost": 983.53,
+        "bakery_cost": 55.69,
+        "sides_cost": 114.47,
+        "packaging_cost": 81.21,
+        "non_meat_cost": 251.37,
+        "total_cogs": 1234.9,
+        "meat_cost_pct": 26.2,
+        "cogs_pct": 32.9,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      },
+      "2026-12-02": {
+        "date": "2026-12-02",
+        "day_name": "Wed",
+        "status": "ok",
+        "gross_revenue": 3245.41,
+        "meat_cost": 850.4,
+        "bakery_cost": 48.18,
+        "sides_cost": 99.04,
+        "packaging_cost": 70.26,
+        "non_meat_cost": 217.48,
+        "total_cogs": 1067.88,
+        "meat_cost_pct": 26.2,
+        "cogs_pct": 32.9,
+        "pacing_band": "amber",
+        "pacing_label": "Watch (32\u201336%)"
+      }
+    }
   }
 };
+window.FULL_COGS_PAYLOAD = window.BBQ_PAYLOADS.full_cogs || {};

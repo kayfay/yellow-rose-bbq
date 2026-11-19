@@ -17,9 +17,16 @@ def build_payloads():
         export_hourly_actuals()
     except Exception as e:
         print(f"[WARN] hourly actuals not refreshed: {e}")
+
+    # Refresh Full COGS payload before bundling (fault-isolated).
+    try:
+        from cost_engine import export_full_cogs_payload
+        export_full_cogs_payload(analytics_dir)
+    except Exception as e:
+        print(f"[WARN] full_cogs not refreshed: {e}")
     
     payloads = {}
-    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts"]:
+    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts", "full_cogs"]:
         filepath = analytics_dir / (filename + ".json")
         if filepath.exists():
             with open(filepath, 'r') as f:
@@ -69,7 +76,10 @@ def build_payloads():
         else:
             print(f"Missing {filename}.json")
             
-    js_content = f"window.BBQ_PAYLOADS = {json.dumps(payloads, indent=2)};\n"
+    js_content = (
+        f"window.BBQ_PAYLOADS = {json.dumps(payloads, indent=2)};\n"
+        f"window.FULL_COGS_PAYLOAD = window.BBQ_PAYLOADS.full_cogs || {{}};\n"
+    )
     
     outpath = analytics_dir / "payloads.js"
     with open(outpath, 'w') as f:

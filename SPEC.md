@@ -1,26 +1,39 @@
-# Yellow Rose BBQ — POS Actuals Calibration, Portion Mapping & Time-Series Wiring Specification (`SPEC.md`)
+# SPEC.md — Comprehensive Cost of Goods Sold (Full COGS) Engine & UI Card
 
 ## 1. Overview
-This specification defines the functional requirements (in EARS syntax) for resolving the 5 structural bugs between Clover POS line-item actuals (`data/clover_sales_master.db`) and the meat demand forecasting pipeline, alongside smart closed-hours sync staleness management.
+This specification defines the **Full COGS Engine** and adjacent **Full COGS Card** for the Yellow Rose BBQ dashboard (`sausage.allen.tools`). While the existing **Est. Meat Cost** card tracks wholesale protein batch cost against gross sales, the Full COGS Engine adds non-meat inventory depleted during service—packaging/disposables, bakery/perishables, pantry/consumables (rubs, sauces, wood), and prepared sides—to report true operational plate cost.
+
+### Aligned Defaults (Phase 1)
+- **Allocation Model:** Granular recipe Bill-of-Materials (`recipe_bom.json`) per sold Clover menu item, with calibrated smokehouse defaults overridden by `data/vendor_invoices/` unit costs where available.
+- **Target Benchmark Thresholds (Full COGS %):**
+  - **Green (Healthy Pacing):** `< 32.0%` (`#009E73`, Okabe-Ito Green)
+  - **Amber (Watch / Tight):** `32.0% – 36.0%` (`#E69F00`, Okabe-Ito Orange)
+  - **Red (Over Budget):** `> 36.0%` (`#D55E00`, Okabe-Ito Vermillion)
+  - *(Reference Meat-Only COGS band: ~26%–29%)*
+- **Security & Privacy Invariant:** Raw wholesale vendor invoice unit prices stay server-side / offline in `data/vendor_invoices/` (`0600`) and encrypted `backups/*.enc`. Only aggregated category totals (`meat_cost`, `bakery_cost`, `sides_cost`, `packaging_cost`, `total_cogs`, `cogs_pct`) are emitted to client payloads.
+
+---
 
 ## 2. Functional Requirements (EARS Syntax)
 
-### FR-1: Master POS Database Resolution
-- **When** any analytics or forecasting module (`portion_transformer.py`, `dashboard.py`, `meat_forecast.py`, `backtest_all_forecasts.py`) loads historical POS transactions, **the system shall** resolve `data/clover_sales_master.db` first (when present and non-empty) and fall back to `clover_api/data/clover_sales.db` only when the master database is unavailable.
+### 2.1 Backend BOM Depletion & Cost Engine
+- **REQ-01 (BOM Depletion Invariant):** When processing sold line items from Clover POS transactions or daily totals, the system shall multiply item counts by their recipe bill-of-materials (`recipe_bom.json`) to calculate `meat_cost`, `bakery_cost`, `sides_cost`, and `packaging_cost`.
+- **REQ-02 (Vendor Invoice Reconciliation):** When `data/vendor_invoices/` CSVs are present during pipeline execution, the system shall ingest unit costs for proteins, bakery items, sides ingredients, sauces, and disposables to update BOM unit rates without printing, logging, or exposing raw invoice lines in public JSON/JS payloads.
+- **REQ-03 (Fault-Isolated Degradation):** If `data/vendor_invoices/` is missing or an item lacks a vendor invoice match, the system shall log `[WARN]` and fall back to calibrated default unit costs in `recipe_bom.json` without blocking `build_payloads.py`.
+- **REQ-04 (Full COGS Math Parity):** When computing daily or period Full COGS, `total_cogs` shall strictly equal `meat_cost + non_meat_cost` (where `non_meat_cost = bakery_cost + sides_cost + packaging_cost`), and `cogs_pct` shall calculate as `(total_cogs / gross_revenue) * 100`.
+- **REQ-05 (Monotonicity Invariant):** For every open service day with positive sales, `full_cogs_pct` shall be greater than or equal to `meat_cost_pct`, and `total_cogs` shall be greater than or equal to `meat_cost`.
 
-### FR-2: Combo Plate Modification Parsing & Complete Portion Mapping
-- **When** translating `order_line_items` into cooked meat equivalents in `clover_api/analytics/portion_transformer.py`, **the system shall** parse the `modifications` string on combo plates (`BBQ plate`, `2 meat plate`) to attribute cooked weight/racks/links to the actual proteins selected (`Moist Brisket`, `Lean Brisket`, `Mixed Brisket`, `Ribs`, `Pulled Pork`, `Turkey`, `Sausage`) rather than hardcoding 100% Brisket.
-- **When** classifying standalone POS menu items, **the system shall** map all high-volume menu items—including bulk scale items (`Brisket`, `Turkey`, `Pulled Pork`, `Sausage` divided by `1000.0`), sandwiches (`Moist Sandwich`, `Lean sandwich`, `Pulled pork sandwich`, `Turkey sandwich`), platters (`Pitmaster Platter &3 Sm Sides`, `Hill Country Trinity W/3Sides`, `Bevo Platter`), ribs (`Full Rack Pork Spare Ribs`, `1/2 Rack Pork Spare Ribs`, `Single Bone Pork Rib`, `Dino Beef Rib`), tacos (`Crispy Quesa Taco Brisket`, `Crispy Quesa Taco Turkey`, `Quesabirria taco`, `Taco Plate W/2 Sides`), and `Rosebud`—with zero unmapped core protein rings.
+### 2.2 Frontend Card Layout & Hydration
+- **REQ-06 (Adjacent Grid Placement):** When viewing the Forecaster KPI strip (`index.html`) and Cost/Shop Reports subtabs, the **Full COGS Card** shall render directly adjacent to the **Est. Meat Cost Card** in a responsive `.cost-cards-grid` container, maintaining equal card height on desktop (`>= 768px`) and stacking cleanly with zero horizontal overflow on mobile (`< 768px`).
+- **REQ-07 (Card Information Hierarchy):** When rendering the Full COGS Card, the system shall display:
+  1. Primary metric: Total Full COGS `$` and `%` of gross sales.
+  2. Comparative subtext: `Meat: $X,XXX (XX%) • Non-Meat: $X,XXX (XX%)` plus category breakdown (`Sides/Buns: $A | Paper/Sauce: $B`).
+  3. Visual pacing pill: Color-coded Okabe-Ito status badge comparing Full COGS % against the 32% / 36% food cost target bands.
+- **REQ-08 (Partial Day & Closed Day Guard):** When viewing a closed day (Monday) or a partial-day / pre-service sync state where `gross_revenue <= 0`, the Full COGS Card shall display `Pending Service` (or `$0 (Closed)` on Monday) instead of `0.0%`, `Infinity%`, or `NaN%`, and shall emit zero console errors.
+- **REQ-09 (View Mode Toggle):** When toggling between `Meat Only` and `Full COGS` in the analytics subtabs, the system shall update the active cost comparison in-place without page reload, modal traps, or stale placeholder flash.
+- **REQ-10 (Subtab Hydration):** When switching between Forecaster, Menu Mix, and Shop Reports subtabs, the system shall hydrate both the Est. Meat Cost Card and Full COGS Card from read-only cloned payloads without mutating `dashPayload` or `historicalRecords`.
 
-### FR-3: Empirical Day-of-Week Baselines & Time-Series Suite Wiring
-- **When** computing daily meat prep targets in `scripts/meat_forecast.py` and `clover_api/analytics/dashboard.py`, **the system shall** derive day-of-week baselines (`DOW_BASELINES`) from actual POS-translated cooked consumption in `data/clover_sales_master.db` and wire the `clover_api/analytics/modules/` suite (`hierarchical/reconciler.py`, `probabilistic/quantile_buffers.py`, `smokehouse_translator.py`) so that:
-  - $\sum \text{Items} = \sum \text{Categories} = \text{Store Total}$ within `0.01`,
-  - Brisket uses `5.75 lbs` cooked per `16.4 lb` raw packer (`35%` net yield) with a maximum single cushion of `+1 brisket`,
-  - Turkey uses `3.0 lbs` cooked per breast (`70%` yield, `20.0 lbs/case`),
-  - Pork Spare Ribs (`12 bones/rack`, `6 racks/case`) include both standalone racks and combo/platter rib allocations.
-
-### FR-4: Non-Circular POS Backtesting
-- **When** `scripts/backtest_all_forecasts.py` evaluates 30-day forecast accuracy, **the system shall** compare model predictions against actual daily POS-translated meat consumption from `data/clover_sales_master.db` (rather than comparing `DOW_BASELINES * rev_idx` against itself) and report honest MAPE, MAD, RMSE, and Tracking Signal metrics.
-
-### FR-5: Smart Closed-Hours Sync Staleness Management
-- **When** `ShopTime.getSyncHealth()` in `tz_utils.js` evaluates sync age on Mondays (closed all day) or outside operating hours (`< 10:00` or `>= 21:00` `America/New_York`), **the system shall** return `state: 'fresh'` with badge `● Closed · Synced` as long as a valid sync occurred within the past 24 hours (`1440` minutes), preventing false `⚠ Stale Sync` alarms overnight and on closed days.
+### 2.3 Copywriting, Ergonomics & Security
+- **REQ-11 (Plain-English Reporting):** The Full COGS Card, tooltips, and JD assistant messages shall strictly prohibit statistical jargon (`regression`, `variance`, `heteroskedasticity`, `Z-Score`, `Sigma`, `DOW Base`, `Elasticity`), using commercial kitchen terms such as `Full Food Cost`, `Meat Cost vs. Full COGS`, and `Plate Cost Cushion`.
+- **REQ-12 (Mobile Touch-Safety):** On viewports `< 768px`, all interactive controls (including the `[Meat Only | Full COGS]` toggle) shall have tap targets `>= 48px` and body text `>= 16px`.
+- **REQ-13 (Cache Busting):** When `app.js`, `modules/forecaster/analytics_subtabs.js`, or `style.css` are modified, the `?v=` query parameter in `index.html` shall be bumped.

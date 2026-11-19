@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.3.0">
+  <link rel="stylesheet" href="style.css?v=2.3.1">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -548,12 +548,35 @@
             <div id="kpi-velocity-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
           </div>
 
-          <div class="est-card kpi-card-gold" id="kpi-card-food-cost-container">
-            <div class="est-metric">
-              <span id="kpi-food-cost-pct" class="est-number">--</span>
+          <div class="cost-cards-grid" id="cost-cards-grid">
+            <div class="est-card kpi-card-gold" id="kpi-card-food-cost-container">
+              <div class="est-metric">
+                <span id="kpi-food-cost-pct" class="est-number">--</span>
+              </div>
+              <span class="est-label">Est. Meat Cost Share <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- Est. Meat Cost)</span></span>
+              <div id="kpi-food-cost-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
             </div>
-            <span class="est-label">Est. Meat Cost Share <br><span id="kpi-cogs-usd" style="color:#f59e0b; font-weight:600;">(-- Est. Meat Cost)</span></span>
-            <div id="kpi-food-cost-blended-sub" class="kpi-blended-pill" style="display: none;"></div>
+
+            <div class="est-card kpi-card-full-cogs" id="kpi-card-full-cogs-container" data-cost-view="full">
+              <div class="full-cogs-card-header">
+                <span class="full-cogs-title">Full Food Cost (Full COGS)</span>
+                <span id="kpi-full-cogs-pill" class="cogs-pacing-pill cogs-pill-pending">Pending Service</span>
+              </div>
+              <div class="est-metric">
+                <span id="kpi-full-cogs-pct" class="est-number">--</span>
+              </div>
+              <span class="est-label">
+                <span id="kpi-full-cogs-usd" class="full-cogs-usd-line">-- Full Food Cost</span>
+                <br>
+                <span id="kpi-full-cogs-split" class="full-cogs-subtext">Meat: -- • Non-Meat: --</span>
+                <br>
+                <span id="kpi-full-cogs-breakdown" class="full-cogs-subtext">Sides/Buns: -- | Paper/Sauce: --</span>
+              </span>
+              <div class="cost-view-toggle" role="group" aria-label="Cost View Mode">
+                <button type="button" class="cost-toggle-btn" id="btn-cost-view-meat" data-cost-mode="meat" aria-pressed="false">Meat Only</button>
+                <button type="button" class="cost-toggle-btn active" id="btn-cost-view-full" data-cost-mode="full" aria-pressed="true">Full COGS</button>
+              </div>
+            </div>
           </div>
 
           <div class="est-card kpi-card-teal" id="kpi-card-aov-container">
@@ -1355,14 +1378,14 @@
     </button>
   </nav>
 
-  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.0"></script>
+  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.1"></script>
   <script src="d3_charts.js?v=2.3.0"></script>
   <script src="tz_utils.js?v=2.3.0"></script>
   <script src="modules/shared/core_utils.js?v=2.3.0" defer></script>
   <script src="modules/recipes/sausage_calc.js?v=2.3.0" defer></script>
   <script src="modules/reports/shop_reports.js?v=2.3.0" defer></script>
-  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.0" defer></script>
-  <script src="app.js?v=2.3.0" defer></script>
+  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.1" defer></script>
+  <script src="app.js?v=2.3.1" defer></script>
 </body>
 </html>
 

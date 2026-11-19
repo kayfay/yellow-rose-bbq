@@ -1154,12 +1154,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
     const pctDisplay = isTargetClosed ? 'Closed' : (totalRev === 0 ? 'Closed' : (pctDiff > 0 ? `+${pctDiff}%` : `${pctDiff}%`));
 
     let insightStr = '';
+    const bCountInsight = Math.max(1, Math.ceil(bRaw / BRISKET_PIECE_LBS));
+    const pCountInsight = Math.max(1, Math.ceil(pRaw / 8.0));
     if (isTargetClosed) {
       insightStr = `Closed Today (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0]?.date || targetDateInput}): Scheduled Monday pit maintenance. Zero retail service; reopens Tuesday 11:00 AM EST.`;
     } else if (isRangeSelected) {
-      insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} days): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs ck) & ~${pRaw.toFixed(1)} lbs raw pork (~${pCooked} lbs ck), plus ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
+      insightStr = `Prep Horizon (${startDateVal} to ${endDateVal}, ${activeOpenDays} days): Stage ${bCountInsight} Briskets (~${bCooked} lbs cooked / ~${Math.round(bRaw)} lbs raw) & ${pCountInsight} Pork Butts (~${pCooked} lbs cooked / ~${Math.round(pRaw)} lbs raw), plus ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
     } else {
-      insightStr = `Single-Day Prep (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Stage ~${bRaw.toFixed(1)} lbs raw brisket (~${bCooked} lbs ck) & ~${pRaw.toFixed(1)} lbs raw pork (~${pCooked} lbs ck), covering ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
+      insightStr = `Single-Day Prep (${matchedRecord.day_name || shortDayStr}, ${slicedRecords[0].date}): Stage ${bCountInsight} Briskets (~${bCooked} lbs cooked / ~${Math.round(bRaw)} lbs raw) & ${pCountInsight} Pork Butts (~${pCooked} lbs cooked / ~${Math.round(pRaw)} lbs raw), covering ${totalTacos} Tacos & ${totalRosebuds} Rosebuds.`;
     }
 
     if (selectedCat !== 'baseline' && catSelector && !isTargetClosed) {
@@ -1365,6 +1367,9 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (drCasesElem) drCasesElem.textContent = '(Closed / 0 Cases)';
 
       if (cogsUsdElem) cogsUsdElem.textContent = '($0 Est. Meat Cost)';
+      if (typeof window.renderFullCogsCard === 'function') {
+        window.renderFullCogsCard({ isClosed: true, grossRevenue: 0, meatCost: 0, dateKey: selectedDate || null });
+      }
       if (aovUsdElem) aovUsdElem.textContent = '$0.00';
       if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
       if (revenueElem) revenueElem.textContent = '$0 (Closed)';
@@ -1416,12 +1421,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedCookedBrisket = Math.round((actCookedBrisket + remCookedBrisket) * 10) / 10;
       const blendedRawBrisket = Math.round(blendedCookedBrisket / 0.35);
 
+      const actBrisketCount = Math.round(actCookedBrisket / 5.75);
+      const remBrisketCount = Math.max(0, Math.round(remCookedBrisket / 5.75));
+      const totBrisketCount = Math.max(1, Math.ceil(blendedRawBrisket / BRISKET_PIECE_LBS));
       if (brisketElem) brisketElem.textContent = blendedRawBrisket;
       if (bCasesElem) bCasesElem.textContent = `(~${blendedRawBrisket} lbs raw / ~${(blendedRawBrisket / BRISKET_CASE_LBS).toFixed(1)} Cases)`;
-      if (bCookedElem) bCookedElem.textContent = `(~${Math.round(actCookedBrisket)} Cooked lbs Sold • ~${Math.round(remCookedBrisket)} lbs remaining)`;
+      if (bCookedElem) bCookedElem.textContent = `(~${actBrisketCount} Briskets / ${Math.round(actCookedBrisket)} Cooked lbs Sold • ~${remBrisketCount} remaining)`;
       setBlendedPill('kpi-brisket-blended-sub', `
-        <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedBrisket)} lbs sold so far + ~${Math.round(remCookedBrisket)} lbs needed to close (~${Math.round(blendedCookedBrisket)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actCookedBrisket)} lbs cooked (~${Math.round(actCookedBrisket / 0.35)} lbs raw)</span> • 
+        <strong>Today's Projected Finish</strong>: ~${actBrisketCount} Briskets sold so far + ~${remBrisketCount} remaining = ${totBrisketCount} Briskets (~${Math.round(blendedCookedBrisket)} lbs cooked)<br>
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${actBrisketCount} Briskets (~${Math.round(actCookedBrisket)} lbs cooked / ~${Math.round(actCookedBrisket / 0.35)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1430,13 +1438,16 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const remCookedPork = bSum.remainingPorkCooked !== undefined ? bSum.remainingPorkCooked : Math.round(pCooked * (1 - salesProgress) * 10) / 10;
       const blendedCookedPork = Math.round((actCookedPork + remCookedPork) * 10) / 10;
       const blendedRawPork = Math.round(blendedCookedPork / 0.44);
+      const actPorkCount = Math.round(actCookedPork / 3.52);
+      const remPorkCount = Math.max(0, Math.round(remCookedPork / 3.52));
+      const totPorkCount = Math.max(1, Math.ceil(blendedRawPork / 8.0));
 
       if (porkElem) porkElem.textContent = blendedRawPork;
       if (pCasesElem) pCasesElem.textContent = `(~${blendedRawPork} lbs raw / ~${(blendedRawPork / 32.0).toFixed(1)} Cases)`;
-      if (pCookedElem) pCookedElem.textContent = `(~${Math.round(actCookedPork)} Cooked lbs Sold • ~${Math.round(remCookedPork)} lbs remaining)`;
+      if (pCookedElem) pCookedElem.textContent = `(~${actPorkCount} Butts / ${Math.round(actCookedPork)} Cooked lbs Sold • ~${remPorkCount} remaining)`;
       setBlendedPill('kpi-pork-blended-sub', `
-        <strong>Today's Projected Finish</strong>: ~${Math.round(actCookedPork)} lbs sold so far + ~${Math.round(remCookedPork)} lbs needed to close (~${Math.round(blendedCookedPork)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actCookedPork)} lbs cooked (~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
+        <strong>Today's Projected Finish</strong>: ~${actPorkCount} Butts sold so far + ~${remPorkCount} remaining = ${totPorkCount} Butts (~${Math.round(blendedCookedPork)} lbs cooked)<br>
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${actPorkCount} Butts (~${Math.round(actCookedPork)} lbs cooked / ~${Math.round(actCookedPork / 0.44)} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1488,11 +1499,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const blendedTurkeyCooked = Math.round((actTurkeyCooked + remTurkeyCooked) * 10) / 10;
       const blendedTurkeyRaw = Math.round(blendedTurkeyCooked / 0.70);
 
+      const actTurkeyCount = Math.round(actTurkeyCooked / 3.0);
+      const remTurkeyCount = Math.max(0, Math.round(remTurkeyCooked / 3.0));
+      const totTurkeyCount = Math.max(1, Math.ceil(blendedTurkeyCooked / 3.0));
       if (turkeyElem) turkeyElem.textContent = Math.round(blendedTurkeyCooked);
-      if (turkeySubElem) turkeySubElem.textContent = `(~${Math.round(actTurkeyCooked)} Cooked lbs Sold • ~${Math.round(remTurkeyCooked)} lbs remaining)`;
+      if (turkeySubElem) turkeySubElem.textContent = `(~${actTurkeyCount} Turkey Breasts / ${Math.round(actTurkeyCooked)} Cooked lbs Sold • ~${remTurkeyCount} remaining)`;
       setBlendedPill('kpi-turkey-blended-sub', `
-        <strong>Today's Projected Finish</strong>: ~${Math.round(actTurkeyCooked)} lbs sold so far + ~${Math.round(remTurkeyCooked)} lbs needed to close (~${Math.round(blendedTurkeyCooked)} lbs cooked finish)<br>
-        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${Math.round(actTurkeyCooked)} lbs cooked (~${blendedTurkeyRaw} lbs raw)</span> • 
+        <strong>Today's Projected Finish</strong>: ~${actTurkeyCount} Turkey Breasts sold so far + ~${remTurkeyCount} remaining = ${totTurkeyCount} Breasts (~${Math.round(blendedTurkeyCooked)} lbs cooked)<br>
+        <span style="color:#cbd5e1;">Through ${h12}:00 ${ampm} EST: ~${actTurkeyCount} Breasts (~${Math.round(actTurkeyCooked)} lbs cooked / ~${blendedTurkeyRaw} lbs raw)</span> • 
         <span style="color:${pColor}; font-weight:700;">${pSign}${bSum.pacingPct}% Pace</span>
       `);
 
@@ -1605,22 +1619,26 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const bPct = bVal > 0 ? Math.round((bDiff / bVal) * 1000) / 10 : 0;
       const actBPortions = Math.round(actCookedBrisket * 2.3);
       const estBPortions = Math.round(blendedCookedBrisket * 2.3);
+      const predBCount = Math.max(1, Math.ceil(bVal / BRISKET_PIECE_LBS));
+      const actBCount = Math.round(actCookedBrisket / 5.75);
       setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
-        'Predicted Total', '~' + bCooked + ' lbs cooked (~' + bVal + ' lbs raw)',
-        'Measured Yield', '~' + Math.round(actCookedBrisket) + ' lbs cooked sold (~' + blendedRawBrisket + ' lbs raw)',
+        'Predicted Total', `${predBCount} Briskets (~${bCooked} lbs cooked / ~${bVal} lbs raw)`,
+        'Measured Yield', `${actBCount} Briskets (~${Math.round(actCookedBrisket)} lbs cooked / ~${blendedRawBrisket} lbs raw)`,
         bDiff, 'lbs', bPct, null,
-        `~${actBPortions} portions sliced (~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ~${estBPortions} day-end portions (~${blendedRawBrisket} lbs raw prep).`
+        `~${actBCount} Briskets (~${actBPortions} portions / ~${Math.round(actCookedBrisket)} lbs cooked) so far; tracking toward ${totBrisketCount} Briskets (~${estBPortions} portions).`
       ));
 
       const pDiff = blendedRawPork - pVal;
       const pPct = pVal > 0 ? Math.round((pDiff / pVal) * 1000) / 10 : 0;
       const actPPortions = Math.round(actCookedPork * 2.0);
       const estPPortions = Math.round(blendedCookedPork * 2.0);
+      const predPCount = Math.max(1, Math.ceil(pVal / 8.0));
+      const actPCount = Math.round(actCookedPork / 3.52);
       setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
-        'Predicted Total', '~' + pCooked + ' lbs cooked (~' + pVal + ' lbs raw)',
-        'Measured Yield', '~' + Math.round(actCookedPork) + ' lbs cooked sold (~' + blendedRawPork + ' lbs raw)',
+        'Predicted Total', `${predPCount} Butts (~${pCooked} lbs cooked / ~${pVal} lbs raw)`,
+        'Measured Yield', `${actPCount} Butts (~${Math.round(actCookedPork)} lbs cooked / ~${blendedRawPork} lbs raw)`,
         pDiff, 'lbs', pPct, null,
-        `~${actPPortions} pork sandwiches served (~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ~${estPPortions} day-end sandwiches.`
+        `~${actPCount} Butts (~${actPPortions} sandwiches / ~${Math.round(actCookedPork)} lbs cooked) so far; tracking toward ${totPorkCount} Butts (~${estPPortions} sandwiches).`
       ));
 
       const sDiff = blendedSausageLinks - sausageLinks;
@@ -1654,11 +1672,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       const tPct = tVal > 0 ? Math.round((tDiff / tVal) * 1000) / 10 : 0;
       const actTPortions = Math.round(actTurkeyCooked * 3.2);
       const estTPortions = Math.round(blendedTurkeyCooked * 3.2);
+      const predTCount = Math.max(1, Math.ceil(tVal / 3.0));
+      const actTCount = Math.round(actTurkeyCooked / 3.0);
       setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
-        'Predicted Total', tVal + ' lbs cooked (~' + Math.round(tVal / 0.70) + ' lbs raw)',
-        'Measured Yield', '~' + Math.round(actTurkeyCooked) + ' lbs cooked sold (~' + Math.round(blendedTurkeyRaw) + ' lbs raw)',
+        'Predicted Total', `${predTCount} Turkey Breasts (~${tVal} lbs cooked / ~${Math.round(tVal / 0.70)} lbs raw)`,
+        'Measured Yield', `${actTCount} Turkey Breasts (~${Math.round(actTurkeyCooked)} lbs cooked / ~${Math.round(blendedTurkeyRaw)} lbs raw)`,
         tDiff, 'lbs', tPct, null,
-        `~${actTPortions} carved plates sold so far; tracking toward ~${estTPortions} day-end portions (~${blendedTurkeyRaw} lbs raw prep).`
+        `~${actTCount} Breasts (~${actTPortions} plates) sold so far; tracking toward ${totTurkeyCount} Breasts (~${estTPortions} day-end portions).`
       ));
 
       const rbDiff = blendedRosebuds - rbVal;
@@ -1773,6 +1793,14 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
       if (drCasesElem) drCasesElem.textContent = `(~${(drVal / 12.0).toFixed(1)} Cases)`;
 
       if (cogsUsdElem) cogsUsdElem.textContent = `(~$${Math.round(totalCogs).toLocaleString()} Est. Meat Cost)`;
+      if (typeof window.renderFullCogsCard === 'function') {
+        window.renderFullCogsCard({
+          isClosed: false,
+          grossRevenue: Number(totalRev) || 0,
+          meatCost: Number(totalCogs) || 0,
+          dateKey: !isRangeSelected && matchedRecord ? matchedRecord.date : null
+        });
+      }
       if (aovUsdElem) aovUsdElem.textContent = '$48.50';
       if (aovSubElem) aovSubElem.textContent = '(Average Order Value)';
 
@@ -1838,11 +1866,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const bPct = pBRawRound > 0 ? Math.round((bDiff / pBRawRound) * 1000) / 10 : 0;
         const pBPortions = Math.round(pBCooked * 2.3);
         const aBPortions = Math.round(aBCooked * 2.3);
+        const pBCount = Math.max(1, Math.ceil(pBRawRound / BRISKET_PIECE_LBS));
+        const aBCount = Math.round(aBCooked / 5.75);
         setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML(
-          'Predicted Target', '~' + pBCooked + ' lbs cooked (~' + pBRawRound + ' lbs raw)',
-          'Actual Measured', '~' + aBCooked + ' lbs cooked (~' + aBRawRound + ' lbs raw)',
+          'Predicted Target', `${pBCount} Briskets (~${pBCooked} lbs cooked / ~${pBRawRound} lbs raw)`,
+          'Actual Measured', `${aBCount} Briskets (~${aBCooked} lbs cooked / ~${aBRawRound} lbs raw)`,
           bDiff, 'lbs', bPct, null,
-          `Model targeted ~${pBPortions} sliced servings (~${pBRawRound} lbs raw) vs ~${aBPortions} portions served (~${aBCooked} lbs cooked).`
+          `Model targeted ${pBCount} Briskets (~${pBPortions} servings) vs ${aBCount} Briskets (~${aBPortions} portions served).`
         ));
 
         const pPRawRound = Math.round(sumPredPRaw);
@@ -1853,11 +1883,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const pPct = pPRawRound > 0 ? Math.round((pDiff / pPRawRound) * 1000) / 10 : 0;
         const pPPortions = Math.round(pPCooked * 2.0);
         const aPPortions = Math.round(aPCooked * 2.0);
+        const pPCount = Math.max(1, Math.ceil(pPRawRound / 8.0));
+        const aPCount = Math.round(aPCooked / 3.52);
         setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML(
-          'Predicted Target', '~' + pPCooked + ' lbs cooked (~' + pPRawRound + ' lbs raw)',
-          'Actual Measured', '~' + aPCooked + ' lbs cooked (~' + aPRawRound + ' lbs raw)',
+          'Predicted Target', `${pPCount} Butts (~${pPCooked} lbs cooked / ~${pPRawRound} lbs raw)`,
+          'Actual Measured', `${aPCount} Butts (~${aPCooked} lbs cooked / ~${aPRawRound} lbs raw)`,
           pDiff, 'lbs', pPct, null,
-          `Model targeted ~${pPPortions} pork sandwiches (~${pPRawRound} lbs raw) vs ~${aPPortions} sandwiches served (~${aPCooked} lbs cooked).`
+          `Model targeted ${pPCount} Butts (~${pPPortions} sandwiches) vs ${aPCount} Butts (~${aPPortions} sandwiches served).`
         ));
 
         const pSLinks = Math.round(sumPredSLbs * 3);
@@ -1899,11 +1931,13 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         const tPct = pTCooked > 0 ? Math.round((tDiff / pTCooked) * 1000) / 10 : 0;
         const pTPortions = Math.round(pTCooked * 3.2);
         const aTPortions = Math.round(aTCooked * 3.2);
+        const pTCount = Math.max(1, Math.ceil(pTCooked / 3.0));
+        const aTCount = Math.round(aTCooked / 3.0);
         setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML(
-          'Predicted Target', pTCooked + ' lbs cooked (~' + Math.round(pTCooked / 0.70) + ' lbs raw)',
-          'Actual Measured', aTCooked + ' lbs cooked (~' + Math.round(aTCooked / 0.70) + ' lbs raw)',
+          'Predicted Target', `${pTCount} Turkey Breasts (~${pTCooked} lbs cooked / ~${Math.round(pTCooked / 0.70)} lbs raw)`,
+          'Actual Measured', `${aTCount} Turkey Breasts (~${aTCooked} lbs cooked / ~${Math.round(aTCooked / 0.70)} lbs raw)`,
           tDiff, 'lbs', tPct, null,
-          `Target ~${pTPortions} carved plates (~${pTCooked} lbs cooked) vs ~${aTPortions} plates served (~${aTCooked} lbs cooked).`
+          `Target ${pTCount} Breasts (~${pTPortions} plates) vs ${aTCount} Breasts (~${aTPortions} plates served).`
         ));
 
         const pTacos = Math.round(sumPredTacos);
@@ -2005,12 +2039,15 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
         }
       } else {
         setCompareBadge('kpi-revenue-compare', buildCompareBadgeHTML('Predicted Total', '$' + Math.round(totalRev).toLocaleString(), 'Actual Total', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target $${Math.round(totalRev).toLocaleString()} sales across service (~${Math.round(totalRev / 48.50)} orders at $48.50 avg check).`));
-        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', '~' + bCooked + ' lbs cooked (~' + bVal + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(bVal / BRISKET_PIECE_LBS)} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
-        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', '~' + pCooked + ' lbs cooked (~' + pVal + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ~${Math.ceil(pVal / 8.0)} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
+        const schedBCount = Math.max(1, Math.ceil(bVal / BRISKET_PIECE_LBS));
+        const schedPCount = Math.max(1, Math.ceil(pVal / 8.0));
+        const schedTCount = Math.max(1, Math.ceil(tVal / 3.0));
+        setCompareBadge('kpi-brisket-compare', buildCompareBadgeHTML('Predicted Target', `${schedBCount} Briskets (~${bCooked} lbs cooked / ~${bVal} lbs raw)`, 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ${schedBCount} raw packers (~${bVal} lbs) to yield ~${bCooked} lbs sliced brisket (~${Math.round(bCooked * 2.3)} 7-oz servings).`));
+        setCompareBadge('kpi-pork-compare', buildCompareBadgeHTML('Predicted Target', `${schedPCount} Butts (~${pCooked} lbs cooked / ~${pVal} lbs raw)`, 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Pull ${schedPCount} bone-in butts (~${pVal} lbs raw) to produce ~${pCooked} lbs pulled pork (~${Math.round(pCooked * 2.0)} 8-oz sandwiches).`));
         setCompareBadge('kpi-sausage-compare', buildCompareBadgeHTML('Predicted Target', sausageLinks + ' links (~' + sVal + ' lbs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Mix & stuff ${sausageBatches} batches (~${sausageLinks} links, 1/3-lb each).`));
         setCompareBadge('kpi-pork-ribs-compare', buildCompareBadgeHTML('Predicted Target', rVal + ' racks (~' + (rVal / 6.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${rVal} whole spare rib racks (~${rVal * 12} individual bones from ~${(rVal / 6.0).toFixed(1)} cases).`));
         setCompareBadge('kpi-beef-dino-ribs-compare', buildCompareBadgeHTML('Predicted Target', drVal + ' ribs (~' + (drVal / 12.0).toFixed(1) + ' cs)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${drVal} plate short ribs (~${(drVal / 12.0).toFixed(1)} cases). Pull in small batches to preserve bark.`));
-        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', tVal + ' lbs cooked (~' + Math.round(tVal / 0.70) + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ~${tVal} lbs cooked breast (~${Math.round(tVal / 0.70)} lbs raw prep) yielding ~${Math.round(tVal * 3.2)} 5-oz sliced plates.`));
+        setCompareBadge('kpi-turkey-compare', buildCompareBadgeHTML('Predicted Target', `${schedTCount} Turkey Breasts (~${tVal} lbs cooked / ~${Math.round(tVal / 0.70)} lbs raw)`, 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Smoke ${schedTCount} turkey breasts (~${tVal} lbs cooked / ~${Math.round(tVal / 0.70)} lbs raw) yielding ~${Math.round(tVal * 3.2)} 5-oz sliced plates.`));
         setCompareBadge('kpi-rosebuds-compare', buildCompareBadgeHTML('Predicted Target', rbVal + ' units', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Prep ${rbVal} bacon-wrapped brisket bites (~${Math.round(rbVal / 4)} orders of 4). Trims drawn from brisket burnt ends.`));
         setCompareBadge('kpi-tacos-compare', buildCompareBadgeHTML('Predicted Target', tacoVal + ' tacos', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Target ${tacoVal} tacos across daily service. Portions pulled from hot-holding brisket and pork bins.`));
         setCompareBadge('kpi-total-cooked-compare', buildCompareBadgeHTML('Predicted Target', '~' + totalCooked + ' lbs cooked (~' + totalRaw + ' lbs raw)', 'Actual Measured', 'Pending Service', null, null, null, { text: 'Scheduled', className: 'pill-pending' }, `Total kitchen yield: ~${totalCooked} lbs hot-holding barbecue ready to carve from ~${totalRaw} lbs raw butcher trim.`));

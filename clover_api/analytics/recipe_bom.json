@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "target_bands": {
+    "green_max_pct": 32.0,
+    "amber_max_pct": 36.0
+  },
+  "protein_raw_cost_per_lb": {
+    "brisket": 5.08,
+    "pork": 1.82,
+    "ribs": 2.40,
+    "dino_ribs": 7.95,
+    "turkey": 3.58,
+    "sausage": 3.45
+  },
+  "protein_yields": {
+    "brisket": 0.35,
+    "pork": 0.44,
+    "ribs": 0.60,
+    "dino_ribs": 0.65,
+    "turkey": 0.70,
+    "sausage": 0.85
+  },
+  "non_meat_ratios_by_category": {
+    "bakery_per_order": 0.72,
+    "sides_per_order": 1.48,
+    "packaging_per_order": 1.05
+  },
+  "recipes": {
+    "brisket_sandwich": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 0.33,
+      "bun_cost": 0.42,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.25,
+      "paper_tray_cost": 0.38,
+      "pickle_onion_cost": 0.15
+    },
+    "pulled_pork_sandwich": {
+      "meat_cut": "pork",
+      "cooked_meat_lbs": 0.33,
+      "bun_cost": 0.42,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.25,
+      "paper_tray_cost": 0.38,
+      "pickle_onion_cost": 0.15
+    },
+    "turkey_sandwich": {
+      "meat_cut": "turkey",
+      "cooked_meat_lbs": 0.33,
+      "bun_cost": 0.42,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.22,
+      "paper_tray_cost": 0.38,
+      "pickle_onion_cost": 0.15
+    },
+    "sausage_sandwich": {
+      "meat_cut": "sausage",
+      "cooked_meat_lbs": 0.33,
+      "bun_cost": 0.42,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.22,
+      "paper_tray_cost": 0.38,
+      "pickle_onion_cost": 0.15
+    },
+    "one_meat_plate": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 0.50,
+      "bun_cost": 0.28,
+      "sides_cost": 1.35,
+      "sauce_cost": 0.32,
+      "paper_tray_cost": 0.62,
+      "pickle_onion_cost": 0.18
+    },
+    "two_meat_plate": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 0.75,
+      "bun_cost": 0.28,
+      "sides_cost": 1.35,
+      "sauce_cost": 0.35,
+      "paper_tray_cost": 0.65,
+      "pickle_onion_cost": 0.18
+    },
+    "three_meat_plate": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 1.00,
+      "bun_cost": 0.35,
+      "sides_cost": 1.85,
+      "sauce_cost": 0.45,
+      "paper_tray_cost": 0.78,
+      "pickle_onion_cost": 0.22
+    },
+    "family_pack": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 2.00,
+      "bun_cost": 1.68,
+      "sides_cost": 3.80,
+      "sauce_cost": 0.90,
+      "paper_tray_cost": 1.45,
+      "pickle_onion_cost": 0.45
+    },
+    "bulk_brisket_lb": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 1.00,
+      "bun_cost": 0.00,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.25,
+      "paper_tray_cost": 0.42,
+      "pickle_onion_cost": 0.12
+    },
+    "bulk_pork_lb": {
+      "meat_cut": "pork",
+      "cooked_meat_lbs": 1.00,
+      "bun_cost": 0.00,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.25,
+      "paper_tray_cost": 0.42,
+      "pickle_onion_cost": 0.12
+    },
+    "ribs_half_rack": {
+      "meat_cut": "ribs",
+      "cooked_meat_lbs": 1.68,
+      "bun_cost": 0.00,
+      "sides_cost": 0.00,
+      "sauce_cost": 0.30,
+      "paper_tray_cost": 0.55,
+      "pickle_onion_cost": 0.12
+    },
+    "tacos_order": {
+      "meat_cut": "brisket",
+      "cooked_meat_lbs": 0.25,
+      "bun_cost": 0.36,
+      "sides_cost": 0.15,
+      "sauce_cost": 0.20,
+      "paper_tray_cost": 0.35,
+      "pickle_onion_cost": 0.18
+    },
+    "rosebuds_order": {
+      "meat_cut": "pork",
+      "cooked_meat_lbs": 0.20,
+      "bun_cost": 0.25,
+      "sides_cost": 0.45,
+      "sauce_cost": 0.22,
+      "paper_tray_cost": 0.35,
+      "pickle_onion_cost": 0.10
+    },
+    "side_individual": {
+      "meat_cut": null,
+      "cooked_meat_lbs": 0.00,
+      "bun_cost": 0.00,
+      "sides_cost": 0.72,
+      "sauce_cost": 0.00,
+      "paper_tray_cost": 0.24,
+      "pickle_onion_cost": 0.00
+    }
+  }
+}

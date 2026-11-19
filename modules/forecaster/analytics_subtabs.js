@@ -1368,3 +1368,168 @@
     setupTimeTravelControls
   };
 })(typeof window !== 'undefined' ? window : globalThis);
+
+// ============================================================================
+// Full COGS Card Hydration & [Meat Only | Full COGS] Toggle
+// ============================================================================
+(function initFullCogsCardModule() {
+  let lastRenderState = null;
+  let activeCostMode = 'full';
+
+  function getClonedFullCogsPayload() {
+    const raw = (window.FULL_COGS_PAYLOAD && typeof window.FULL_COGS_PAYLOAD === 'object')
+      ? window.FULL_COGS_PAYLOAD
+      : (window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.full_cogs ? window.BBQ_PAYLOADS.full_cogs : null);
+    if (!raw) return null;
+    try {
+      return JSON.parse(JSON.stringify(raw));
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  function classifyPacing(pct, bands) {
+    if (pct === null || pct === undefined || Number.isNaN(pct) || !Number.isFinite(pct)) {
+      return { cls: 'cogs-pill-pending', label: 'Pending Service' };
+    }
+    const greenMax = Number((bands && bands.green_max_pct) || 32.0);
+    const amberMax = Number((bands && bands.amber_max_pct) || 36.0);
+    if (pct < greenMax) return { cls: 'cogs-pill-green', label: `Healthy Pacing (<${greenMax}%)` };
+    if (pct <= amberMax) return { cls: 'cogs-pill-amber', label: `Watch (${greenMax}–${amberMax}%)` };
+    return { cls: 'cogs-pill-red', label: `Over Budget (>${amberMax}%)` };
+  }
+
+  function renderFullCogsCard(opts) {
+    const card = document.getElementById('kpi-card-full-cogs-container');
+    if (!card) return;
+
+    lastRenderState = Object.assign({}, opts || {});
+    const pctEl = document.getElementById('kpi-full-cogs-pct');
+    const usdEl = document.getElementById('kpi-full-cogs-usd');
+    const splitEl = document.getElementById('kpi-full-cogs-split');
+    const breakdownEl = document.getElementById('kpi-full-cogs-breakdown');
+    const pillEl = document.getElementById('kpi-full-cogs-pill');
+
+    const payload = getClonedFullCogsPayload();
+    const bands = (payload && payload.target_bands) || { green_max_pct: 32.0, amber_max_pct: 36.0 };
+    const ratios = (payload && payload.non_meat_ratios_by_category) || {
+      bakery_per_order: 0.72,
+      sides_per_order: 1.48,
+      packaging_per_order: 1.05
+    };
+
+    const isClosed = Boolean(opts && opts.isClosed);
+    const dateKey = opts && opts.dateKey;
+    const matchedDaily = (payload && payload.daily && dateKey && payload.daily[dateKey]) ? payload.daily[dateKey] : null;
+
+    if (isClosed || (matchedDaily && matchedDaily.status === 'closed')) {
+      if (pctEl) pctEl.textContent = '$0 (Closed)';
+      if (usdEl) usdEl.textContent = 'Shop Closed (Monday)';
+      if (splitEl) splitEl.textContent = 'Meat: $0 • Non-Meat: $0';
+      if (breakdownEl) breakdownEl.textContent = 'Sides/Buns: $0 | Paper/Sauce: $0';
+      if (pillEl) {
+        pillEl.className = 'cogs-pacing-pill cogs-pill-closed';
+        pillEl.textContent = '$0 (Closed)';
+      }
+      return;
+    }
+
+    let grossRev = Number((opts && opts.grossRevenue) || 0);
+    let meatCost = Number((opts && opts.meatCost) || 0);
+    let bakeryCost = 0;
+    let sidesCost = 0;
+    let packagingCost = 0;
+
+    if (matchedDaily && matchedDaily.status === 'ok' && grossRev <= 0) {
+      grossRev = Number(matchedDaily.gross_revenue || 0);
+      meatCost = Number(matchedDaily.meat_cost || 0);
+      bakeryCost = Number(matchedDaily.bakery_cost || 0);
+      sidesCost = Number(matchedDaily.sides_cost || 0);
+      packagingCost = Number(matchedDaily.packaging_cost || 0);
+    } else if (grossRev > 0) {
+      if (matchedDaily && matchedDaily.status === 'ok') {
+        bakeryCost = Number(matchedDaily.bakery_cost || 0);
+        sidesCost = Number(matchedDaily.sides_cost || 0);
+        packagingCost = Number(matchedDaily.packaging_cost || 0);
+      } else {
+        const estOrders = Math.max(1, grossRev / 48.5);
+        bakeryCost = Math.round(estOrders * Number(ratios.bakery_per_order || 0.72) * 100) / 100;
+        sidesCost = Math.round(estOrders * Number(ratios.sides_per_order || 1.48) * 100) / 100;
+        packagingCost = Math.round(estOrders * Number(ratios.packaging_per_order || 1.05) * 100) / 100;
+      }
+    }
+
+    if (!Number.isFinite(grossRev) || grossRev <= 0) {
+      if (pctEl) pctEl.textContent = 'Pending Service';
+      if (usdEl) usdEl.textContent = 'Awaiting POS Sales';
+      if (splitEl) splitEl.textContent = 'Meat: -- • Non-Meat: --';
+      if (breakdownEl) breakdownEl.textContent = 'Sides/Buns: -- | Paper/Sauce: --';
+      if (pillEl) {
+        pillEl.className = 'cogs-pacing-pill cogs-pill-pending';
+        pillEl.textContent = 'Pending Service';
+      }
+      return;
+    }
+
+    const nonMeatCost = Math.round((bakeryCost + sidesCost + packagingCost) * 100) / 100;
+    const totalCogs = Math.round((meatCost + nonMeatCost) * 100) / 100;
+    const meatPct = Math.round((meatCost / grossRev) * 1000) / 10;
+    const nonMeatPct = Math.round((nonMeatCost / grossRev) * 1000) / 10;
+    let fullPct = Math.round((totalCogs / grossRev) * 1000) / 10;
+    if (fullPct < meatPct) fullPct = meatPct;
+
+    const sidesAndBuns = Math.round(sidesCost + bakeryCost);
+    const paperAndSauce = Math.round(packagingCost);
+
+    const isMeatMode = activeCostMode === 'meat';
+    const displayPct = isMeatMode ? meatPct : fullPct;
+    const displayUsd = isMeatMode ? meatCost : totalCogs;
+    const displayLabel = isMeatMode ? 'Meat-Only Cost' : 'Full Food Cost';
+
+    if (pctEl) pctEl.textContent = `${displayPct.toFixed(1)}%`;
+    if (usdEl) usdEl.textContent = `$${Math.round(displayUsd).toLocaleString()} ${displayLabel}`;
+    if (splitEl) {
+      splitEl.textContent = `Meat: $${Math.round(meatCost).toLocaleString()} (${meatPct.toFixed(1)}%) • Non-Meat: $${Math.round(nonMeatCost).toLocaleString()} (${nonMeatPct.toFixed(1)}%)`;
+    }
+    if (breakdownEl) {
+      breakdownEl.textContent = `Sides/Buns: $${sidesAndBuns.toLocaleString()} | Paper/Sauce: $${paperAndSauce.toLocaleString()}`;
+    }
+
+    const pacing = classifyPacing(fullPct, bands);
+    if (pillEl) {
+      pillEl.className = `cogs-pacing-pill ${pacing.cls}`;
+      pillEl.textContent = pacing.label;
+    }
+    card.setAttribute('data-cost-view', activeCostMode);
+  }
+
+  function bindCostViewToggle() {
+    const btnMeat = document.getElementById('btn-cost-view-meat');
+    const btnFull = document.getElementById('btn-cost-view-full');
+    if (!btnMeat || !btnFull) return;
+
+    function setMode(mode) {
+      activeCostMode = mode === 'meat' ? 'meat' : 'full';
+      const card = document.getElementById('kpi-card-full-cogs-container');
+      if (card) card.setAttribute('data-cost-view', activeCostMode);
+      btnMeat.classList.toggle('active', activeCostMode === 'meat');
+      btnMeat.setAttribute('aria-pressed', activeCostMode === 'meat' ? 'true' : 'false');
+      btnFull.classList.toggle('active', activeCostMode === 'full');
+      btnFull.setAttribute('aria-pressed', activeCostMode === 'full' ? 'true' : 'false');
+      if (lastRenderState) {
+        renderFullCogsCard(lastRenderState);
+      }
+    }
+
+    btnMeat.addEventListener('click', () => setMode('meat'));
+    btnFull.addEventListener('click', () => setMode('full'));
+  }
+
+  window.renderFullCogsCard = renderFullCogsCard;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindCostViewToggle);
+  } else {
+    bindCostViewToggle();
+  }
+})();
