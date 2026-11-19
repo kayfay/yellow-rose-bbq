@@ -2,15 +2,14 @@
 """
 Yellow Rose BBQ - Comprehensive COGS, Math, and Clover POS Verification Script
 Validates:
- 1. 100% of arithmetic formulas across all 61 items (COGS, Retail, Gross Profit, Food Cost %, Gross Margin %).
- 2. Wholesale meat raw pricing against US Foods contract invoices (Review order detail & Submitted order CSVs).
- 3. Smoker rendering & trim shrinkage yield math for all meat cuts.
- 4. Live Clover POS REST API item catalog comparison (Retail prices, item existence, variance analysis).
+ 1. 100% of arithmetic formulas across all 137 menu items (COGS, Retail, Gross Profit, Food Cost %, Gross Margin %).
+ 2. 100% coverage of all 125 live Clover POS catalog items and all WEBSITE_MENU.md items.
+ 3. Live Clover POS REST API item catalog comparison (Retail prices, item existence, variance analysis).
 """
 
-import json
 import csv
-import re
+import json
+import os
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +19,7 @@ COGS_CSV = DATA_DIR / "yellow_rose_bbq_cogs.csv"
 AUDIT_CSV = DATA_DIR / "yellow_rose_bbq_clover_audit.csv"
 
 EXPLICIT_MAP = {
+    # Original 61 items
     'Brisket Sandwich (Chopped / Moist / Lean)': 'Bbq Sandwich (Brisket)',
     'Pulled Pork Sandwich': 'Pulled pork sandwich',
     'Smoked Turkey Sandwich': 'Turkey sandwich',
@@ -80,14 +80,92 @@ EXPLICIT_MAP = {
     '40ct Wing Catering Tray': '40ct Wing Catering Tray',
     'Signature Side Catering Tray (1/2 Steam Pan)': 'Mac And Cheese Catering Tray',
     'Skillet Cornbread Tray (10-Count)': 'Cornbread 10ct Catering Tray',
-    'Banana Pudding Catering Tray': 'Banana Pudding Catering Tray'
+    'Banana Pudding Catering Tray': 'Banana Pudding Catering Tray',
+    # 76 additional POS/Menu items (completing 125/125 Clover catalog & WEBSITE_MENU.md)
+    'BBQ Sandwich (Standard POS Ring)': 'Bbq Sandwich',
+    'Moist Brisket Sandwich': 'Moist Sandwich',
+    'Lean Brisket Sandwich': 'Lean sandwich',
+    'Chopped Moist Brisket Sandwich': 'Chopped moist Sandwich',
+    'Chopped Lean Brisket Sandwich': 'Chopped lean sandwich',
+    'Turkey Bacon Ranch Sandwich': 'Turkey Bacon Ranch',
+    '904 Local Special Sandwich': '904 Sandwich',
+    'Smoked Turkey Quesadilla': 'Quesadilla Turkey',
+    'Brisket Bacon Ranch Quesadilla': 'Brisket Bacon Ranch Quesadilla',
+    'Turkey Bacon Ranch Quesadilla': 'Quasadilla Turkey Bacon Ranch',
+    'Three-Cheese Quesadilla': 'Cheese Quesadilla',
+    'Quesabirria Taco (Single)': 'Quesabirria taco',
+    'Smoked BBQ Chicken Wings (5-Piece)': '5pc BBQ Wing',
+    'Smoked Buffalo Chicken Wings (5-Piece)': '5pc Buffalo Wing',
+    'Smoked Pork Belly (Single Portion)': 'Pork Belly',
+    'BBQ Plate w/ 2 Sides (POS Combo Button)': 'Bbq Plate W/2Sides',
+    'Guisada Taco Plate (w/ 2 Sides)': 'Guisada Taco Plate',
+    'King of the Hill Pitmaster Feast': 'King Of The Hill',
+    'BBQ Cheese Fries': 'BBQ Cheese Fries',
+    'Texas Cheese Fries (TX Cheese)': 'TX Cheese',
+    'Chili Cheese Fries': 'Chili Cheese Fries',
+    'Cheese Fries (Side Order)': 'Cheese Fries',
+    'Texas Red Cup Chili (8 oz)': 'Cup Chili',
+    'Pimento Cheese w/ Crackers': 'Pimento Cheese W/ Crackers',
+    'Classic Creamy Coleslaw (Side)': 'Cole Slaw',
+    'Elote Pasta Salad (Side)': 'Elote Pasta Salad',
+    'Smoked Street Corn (Side)': 'Smoked Corn',
+    'Sautéed Garlic Cabbage (Side)': 'Sauteed Cabbage',
+    'Southern Cheese Grits (Side)': 'Cheese Grits',
+    'Cowgirl Salad (Side)': 'Cowgirl Salad',
+    'Smokehouse Holiday Stuffing (Side)': 'Stuffing',
+    'Tex Mex Jalapeño Cornbread': 'Tex Mex Cornbread',
+    'Charro Bean Catering Tray (1/2 Steam Pan)': 'Charro Bean Catering Tray',
+    'Coleslaw Catering Tray (1/2 Steam Pan)': 'Coleslaw Catering Tray',
+    'Potato Salad Catering Tray (1/2 Steam Pan)': 'Potato Salad Catering Tray',
+    'Elote Pasta Salad Catering Tray (1/2 Steam Pan)': 'Elote Pasta Salad Catering Tray',
+    'Fresh Green Beans Catering Tray (1/2 Steam Pan)': 'Fresh Green Beans Catering Tray',
+    'Green Bean Catering Tray (Alt POS Button)': 'Green Bean Catering Tray',
+    'Caesar Salad Catering Tray (1/2 Steam Pan)': 'Caesar Salad Catering Tray',
+    'Sautéed Cabbage Catering Tray (1/2 Steam Pan)': 'Sauteed Cabbage Catering Tray',
+    'Seasoned French Fry Catering Tray (1/2 Steam Pan)': 'Seasoned French Fry Catering Tray',
+    'Smoked Corn Catering Tray (1/2 Steam Pan)': 'Smoked Corn Catering Tray',
+    'Elote Street Corn Catering Tray (1/2 Steam Pan)': 'Street Corn Catering Tray',
+    'Original Texas BBQ Sauce (8 oz Bottle/Tub)': '8 ounce original BBQ sauce',
+    'Spicy Texas BBQ Sauce (8 oz Bottle/Tub)': '8 ounce spicy BBQ sauce',
+    'Carolina Gold Mustard Sauce (8 oz Bottle/Tub)': '8 ounce mustard sauce',
+    'House Buttermilk Ranch (8 oz Tub)': '8 ounce Ranch',
+    'Original Texas BBQ Sauce (16 oz Pint)': '16 oz original BBQ sauce',
+    'Spicy Texas BBQ Sauce (16 oz Pint)': '16 ounce spicy BBQ sauce',
+    'Carolina Gold Mustard Sauce (16 oz Pint)': '16 ounce mustard sauce',
+    'House Buttermilk Ranch (16 oz Pint)': '16 ounce ranch',
+    'Ranch Dressing Side Cup (2 oz)': 'Ranch side',
+    'Warm Queso Cheese Sauce Side (2 oz)': '2oz Cheese Sauce',
+    'Extra Toasted Brioche Bun': 'Toasted Bun',
+    'Coca-Cola Fountain Drink / Bottled Soda (24 oz)': 'Coca Cola Products',
+    'Kids Fountain Drink (12-14 oz)': 'Kids drink',
+    'Fresh Cherry Limeade (24 oz)': 'Cherry Limeade',
+    'House Cinnamon Horchata (24 oz)': 'Horchata',
+    'Brewed Iced Tea (1 Gallon Jug)': 'Gallon Tea',
+    'Canned Still Water': 'Canned water',
+    'Topo Chico Mineral Water / Hard Seltzer': 'Topo Chico Seltzer',
+    'Miller Lite (12 oz Can/Bottle)': 'Miller Lite',
+    'Coors Banquet (12 oz Can/Bottle)': 'Coors Banquet',
+    'Shiner Bock (12 oz Can/Bottle)': 'Shiner Bock',
+    'Dos Equis Especial (12 oz Can/Bottle)': 'Dos Equis',
+    'Local Craft IPA (12 oz Can)': 'Local IPA',
+    'Carbliss Black Raspberry Canned Cocktail': 'Black Raspberry Carbliss',
+    'Carbliss Mango Canned Cocktail': 'Carbliss Mango',
+    'Mango Carbliss Canned Cocktail (Alt Button)': 'Mango Carbliss',
+    'Margarita Carbliss Canned Cocktail': 'Marg Carbliss Cocktail',
+    'Yellow Rose BBQ Embroidered Hat': 'Hat',
+    'Yellow Rose BBQ Embroidered Patch': 'Patch',
+    'Yellow Rose BBQ Die-Cut Sticker': 'Sticker',
+    'Gift Card Load ($5.00 Base Denomination)': 'Gift card',
+    'Catering Delivery Fee': 'Delivery Fee',
+    'POS Kitchen Modifier (Dont Make Instruction)': 'dont make',
 }
 
+
 def run_audit():
-    with open(CLOVER_CATALOG_JSON, 'r') as f:
+    with open(CLOVER_CATALOG_JSON, 'r', encoding='utf-8') as f:
         clover_items = json.load(f)
 
-    with open(COGS_CSV, 'r') as f:
+    with open(COGS_CSV, 'r', encoding='utf-8') as f:
         sheet_items = list(csv.DictReader(f))
 
     audit_rows = []
@@ -104,8 +182,12 @@ def run_audit():
 
         # Math verification
         exp_profit = round(retail_model - cogs, 2)
-        exp_fc = round((cogs / retail_model) * 100, 1)
-        exp_gm = round((exp_profit / retail_model) * 100, 1)
+        if retail_model > 0:
+            exp_fc = round((cogs / retail_model) * 100, 1)
+            exp_gm = round((exp_profit / retail_model) * 100, 1)
+        else:
+            exp_fc = 0.0
+            exp_gm = 0.0
 
         if abs(gross_profit_model - exp_profit) > 0.01 or abs(fc_pct_model - exp_fc) > 0.1 or abs(gm_pct_model - exp_gm) > 0.1:
             math_errors += 1
@@ -114,26 +196,24 @@ def run_audit():
         clover_name = EXPLICIT_MAP.get(name, '')
         clover_item = clover_items.get(clover_name.lower()) if clover_name else None
         clover_price = clover_item['price'] if clover_item else 0.0
-        
+
         if clover_price > 0:
             clover_fc_pct = round((cogs / clover_price) * 100, 1)
-            clover_gm_pct = round(((clover_price - cogs) / clover_price) * 100, 1)
             diff = round(retail_model - clover_price, 2)
             if abs(diff) < 0.01:
                 status = "Exact Match"
-                note = "Live Clover price matches website model exactly."
+                note = "Live Clover price matches model exactly."
             elif diff > 0:
                 status = "Target Price Increase"
-                note = f"Website model sets +${diff:.2f} higher retail to protect margins (FC drops from {clover_fc_pct}% in Clover to {fc_pct_model}% in model)."
+                note = f"Model sets +${diff:.2f} higher retail to protect margins (FC drops from {clover_fc_pct}% in Clover to {fc_pct_model}% in model)."
             else:
                 status = "Clover Price Higher"
                 note = f"Clover charges +${abs(diff):.2f} more than model. Generates higher profit in store."
         else:
             clover_fc_pct = 0.0
-            clover_gm_pct = 0.0
             diff = retail_model
             status = "Bundled in POS ($0.00)"
-            note = "Configured as $0.00 inside Clover because item is bundled inside plates/combos."
+            note = "Configured as $0.00 inside Clover catalog (bundled inside plates/combos or custom POS ring)."
 
         audit_rows.append({
             "Category": cat,
@@ -146,7 +226,7 @@ def run_audit():
             "Clover Actual FC %": f"{clover_fc_pct:.1f}%" if clover_price > 0 else "N/A (Bundled)",
             "Price Variance ($)": f"{diff:+.2f}",
             "Audit Status": status,
-            "Operational Audit Note": note
+            "Operational Audit Note": note,
         })
 
     # Save Audit CSV
@@ -161,16 +241,21 @@ def run_audit():
         "Clover Actual FC %",
         "Price Variance ($)",
         "Audit Status",
-        "Operational Audit Note"
+        "Operational Audit Note",
     ]
     with open(AUDIT_CSV, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(audit_rows)
+    os.chmod(AUDIT_CSV, 0o600)
 
+    mapped_clover = {v.lower() for v in EXPLICIT_MAP.values()}
+    unmapped_clover = set(clover_items.keys()) - mapped_clover
     print(f"Audit completed: {len(audit_rows)} items verified.")
+    print(f"Clover catalog coverage: {len(clover_items) - len(unmapped_clover)}/{len(clover_items)} (unmapped: {len(unmapped_clover)})")
     print(f"Math errors found: {math_errors}")
     print(f"Audit CSV written to: {AUDIT_CSV}")
+
 
 if __name__ == "__main__":
     run_audit()

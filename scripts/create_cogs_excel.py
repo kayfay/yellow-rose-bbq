@@ -24,6 +24,8 @@ CSV_2 = DATA_DIR / "yellow_rose_bbq_wholesale_yields.csv"
 CSV_3 = DATA_DIR / "yellow_rose_bbq_complete_cogs_model.csv"
 CSV_4 = DATA_DIR / "yellow_rose_bbq_clover_audit.csv"
 CSV_5 = DATA_DIR / "yellow_rose_bbq_audit_report.csv"
+CSV_6 = DATA_DIR / "yellow_rose_bbq_recipe_cogs_breakdown.csv"
+CSV_7 = DATA_DIR / "yellow_rose_bbq_recipe_ingredients_detail.csv"
 
 def get_col_letter(col_idx):
     """Convert 1-based column index to Excel column letters (A, B, ..., Z, AA, AB, ...)."""
@@ -214,7 +216,19 @@ def main():
         rows5 = read_csv_rows(CSV_5)
         writer.add_sheet("Executive Report", rows5)
 
+    # Sheet 6: Recipe Batch & Portion COGS Breakdown (34 Recipes)
+    if CSV_6.exists():
+        rows6 = read_csv_rows(CSV_6)
+        writer.add_sheet("Recipe Batch COGS", rows6)
+
+    # Sheet 7: Recipe Line-by-Line Ingredient Costs (151 Lines)
+    if CSV_7.exists():
+        rows7 = read_csv_rows(CSV_7)
+        writer.add_sheet("Recipe Ingredients", rows7)
+
     writer.build_zip(OUTPUT_XLSX)
+    import os
+    os.chmod(OUTPUT_XLSX, 0o600)
     print(f"Successfully generated Excel workbook with {len(writer.sheets)} tabs: {OUTPUT_XLSX}")
 
 if __name__ == "__main__":
