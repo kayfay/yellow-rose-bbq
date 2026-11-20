@@ -10,13 +10,8 @@
     ]
   },
   "2026-11-20": {
-    "captured_at": "2026-11-20T15:31:43.319410-05:00",
+    "captured_at": "2026-11-20T16:01:43.999948-05:00",
     "hourly_forecast": [
-      {
-        "hour": 15,
-        "predicted_orders": 5.3,
-        "predicted_revenue": 186.06
-      },
       {
         "hour": 16,
         "predicted_orders": 7.2,
