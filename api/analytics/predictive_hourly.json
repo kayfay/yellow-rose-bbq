@@ -1,32 +1,19 @@
 {
-  "generated_at": "2026-11-20T17:38:50.570846-05:00",
+  "generated_at": "2026-11-20T18:01:50.087804-05:00",
   "summary_kpis": {
-    "projected_24h_revenue_usd": 6007.94,
-    "estimated_24h_cogs_usd": 1657.46,
-    "estimated_food_cost_pct": 27.6,
+    "projected_24h_revenue_usd": 6172.87,
+    "estimated_24h_cogs_usd": 1723.45,
+    "estimated_food_cost_pct": 27.9,
     "average_ticket_usd": 48.5,
     "recommended_staff": 5,
     "pitmaster_hours": 42.5,
     "peak_rush_window": "1:00 PM EST (Sat)",
-    "current_sales_velocity": "9.1 orders/hr",
-    "pacing_status": "Normal Pacing",
-    "total_brisket_draw_lbs": 68.4,
-    "total_pork_draw_lbs": 37.6
+    "current_sales_velocity": "12.0 orders/hr",
+    "pacing_status": "Heavy Rush Surge",
+    "total_brisket_draw_lbs": 70.4,
+    "total_pork_draw_lbs": 39.8
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-11-20T17:00:00",
-      "hour_display": "5:00 PM EST",
-      "day_name": "Fri",
-      "hour": 17,
-      "predicted_orders": 9.1,
-      "predicted_revenue": 480.25,
-      "estimated_cogs_usd": 117.64,
-      "brisket_cooked_lbs": 5.3,
-      "pork_cooked_lbs": 2.2,
-      "pacing_status": "Normal Pacing",
-      "is_peak": true
-    },
     {
       "timestamp": "2026-11-20T18:00:00",
       "hour_display": "6:00 PM EST",
@@ -325,11 +312,24 @@
       "pork_cooked_lbs": 3.5,
       "pacing_status": "Heavy Rush Surge",
       "is_peak": true
+    },
+    {
+      "timestamp": "2026-11-21T17:00:00",
+      "hour_display": "5:00 PM EST",
+      "day_name": "Sat",
+      "hour": 17,
+      "predicted_orders": 12.7,
+      "predicted_revenue": 645.18,
+      "estimated_cogs_usd": 183.62,
+      "brisket_cooked_lbs": 7.3,
+      "pork_cooked_lbs": 4.4,
+      "pacing_status": "Heavy Rush Surge",
+      "is_peak": true
     }
   ],
   "operational_directives": [
     "Peak Window: 1:00 PM EST (Sat) (~17.8 orders/hr).",
-    "24h Meat Draw: ~68.4 lbs cooked brisket & ~37.6 lbs pulled pork.",
+    "24h Meat Draw: ~70.4 lbs cooked brisket & ~39.8 lbs pulled pork.",
     "Rain / Humidity (>85%): Stage +20% takeout packaging as dine-in shifts to family packs.",
     "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM for a 45-min rest before the 5:00 PM rush."
   ],
