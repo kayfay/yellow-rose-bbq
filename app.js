@@ -1368,7 +1368,7 @@ async function renderPlotlyForecastingChart(daysCount = 14) {
 
       if (cogsUsdElem) cogsUsdElem.textContent = '($0 Est. Meat Cost)';
       if (typeof window.renderFullCogsCard === 'function') {
-        window.renderFullCogsCard({ isClosed: true, grossRevenue: 0, meatCost: 0, dateKey: selectedDate || null });
+        window.renderFullCogsCard({ isClosed: true, grossRevenue: 0, meatCost: 0, dateKey: null });
       }
       if (aovUsdElem) aovUsdElem.textContent = '$0.00';
       if (aovSubElem) aovSubElem.textContent = '(Closed / 0 Orders)';
