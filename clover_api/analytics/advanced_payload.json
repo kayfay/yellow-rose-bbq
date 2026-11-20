@@ -2,23 +2,23 @@
   "market_basket": [
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 294,
-      "confidence": 19.9
+      "count": 293,
+      "confidence": 19.8
     },
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 284,
-      "confidence": 22.7
+      "count": 285,
+      "confidence": 22.8
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 237,
+      "count": 238,
       "confidence": 19.0
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 145,
-      "confidence": 21.1
+      "count": 146,
+      "confidence": 21.2
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
@@ -28,7 +28,7 @@
     {
       "pair": "Brisket + Turkey",
       "count": 117,
-      "confidence": 48.3
+      "confidence": 48.1
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
@@ -37,13 +37,13 @@
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
-      "count": 104,
-      "confidence": 15.6
+      "count": 103,
+      "confidence": 15.5
     },
     {
       "pair": "Quesabirria taco + Rosebud",
-      "count": 100,
-      "confidence": 26.3
+      "count": 101,
+      "confidence": 26.5
     },
     {
       "pair": "Brisket + Mac & Cheese",
@@ -52,29 +52,29 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4093.7,
-    "game_only": 5642.42,
-    "rain_only": 4388.65,
-    "game_and_rain": 2308.76
+    "normal": 4159.48,
+    "game_only": 4484.22,
+    "rain_only": 2911.64,
+    "game_and_rain": 11646.55
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
       "order_count": 4925,
-      "total_revenue": 212195.35,
-      "avg_ticket": 43.08535025380711
+      "total_revenue": 212239.57,
+      "avg_ticket": 43.09432893401016
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 351,
-      "total_revenue": 20847.88,
-      "avg_ticket": 59.39566951566952
+      "order_count": 350,
+      "total_revenue": 20748.44,
+      "avg_ticket": 59.281257142857136
     },
     {
       "order_type": "To-Go",
-      "order_count": 2461,
-      "total_revenue": 155527.8,
-      "avg_ticket": 63.19699309223892
+      "order_count": 2466,
+      "total_revenue": 155682.84,
+      "avg_ticket": 63.131727493917275
     }
   ],
   "sell_out_prediction_chart": {
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.3,
-    "pork_ribs_avg_with_dino": 3.3,
-    "impact_pct": -37.5
+    "pork_ribs_avg_without_dino": 5.1,
+    "pork_ribs_avg_with_dino": 3.5,
+    "impact_pct": -31.0
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.27
+    "normal_avg_ticket": 46.26
   }
 }
