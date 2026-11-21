@@ -2,23 +2,23 @@
   "market_basket": [
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 289,
-      "confidence": 23.2
+      "count": 291,
+      "confidence": 23.3
     },
     {
       "pair": "2 meat plate + BBQ plate",
-      "count": 288,
-      "confidence": 19.6
+      "count": 289,
+      "confidence": 19.7
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 238,
-      "confidence": 19.1
+      "count": 236,
+      "confidence": 18.9
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 146,
-      "confidence": 21.3
+      "count": 145,
+      "confidence": 21.2
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
@@ -27,7 +27,7 @@
     },
     {
       "pair": "Brisket + Turkey",
-      "count": 117,
+      "count": 116,
       "confidence": 48.3
     },
     {
@@ -47,34 +47,34 @@
     },
     {
       "pair": "Brisket + Mac & Cheese",
-      "count": 97,
-      "confidence": 21.7
+      "count": 95,
+      "confidence": 21.4
     }
   ],
   "interaction_modeling": {
-    "normal": 4199.12,
-    "game_only": 3472.25,
-    "rain_only": 2939.38,
-    "game_and_rain": 11757.53
+    "normal": 4097.42,
+    "game_only": 4997.47,
+    "rain_only": 4380.86,
+    "game_and_rain": 2308.76
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4896,
-      "total_revenue": 209740.11,
-      "avg_ticket": 42.83907475490196
+      "order_count": 4886,
+      "total_revenue": 209185.97,
+      "avg_ticket": 42.81333810888252
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 351,
-      "total_revenue": 20583.71,
-      "avg_ticket": 58.64304843304843
+      "order_count": 350,
+      "total_revenue": 20513.02,
+      "avg_ticket": 58.608628571428575
     },
     {
       "order_type": "To-Go",
-      "order_count": 2469,
-      "total_revenue": 156011.31,
-      "avg_ticket": 63.18805589307412
+      "order_count": 2478,
+      "total_revenue": 156371.18,
+      "avg_ticket": 63.10378531073446
     }
   ],
   "sell_out_prediction_chart": {
@@ -514,12 +514,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.7,
-    "pork_ribs_avg_with_dino": 2.7,
-    "impact_pct": -53.5
+    "pork_ribs_avg_without_dino": 5.4,
+    "pork_ribs_avg_with_dino": 3.3,
+    "impact_pct": -38.7
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.02
+    "normal_avg_ticket": 45.99
   }
 }
