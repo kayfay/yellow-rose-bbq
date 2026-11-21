@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-20T22:54:38.018294-05:00",
+      "generated_at": "2026-11-20T23:01:42.740852-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~216.3 lbs raw brisket (~75.7 lbs cooked yield) and ~59.4 lbs raw pork shoulder (~26.1 lbs cooked yield) [~275.7 lbs total raw / ~101.8 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (84 projected) and Rosebuds (43 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -2834,7 +2834,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-11-20T22:54:37.456079-05:00",
+    "generated_at": "2026-11-20T23:01:40.382033-05:00",
     "summary_kpis": {
       "projected_24h_revenue_usd": 6020.5,
       "estimated_24h_cogs_usd": 1728.28,
@@ -2849,19 +2849,6 @@ window.BBQ_PAYLOADS = {
       "total_pork_draw_lbs": 41.8
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-11-20T22:00:00",
-        "hour_display": "10:00 PM EST",
-        "day_name": "Fri",
-        "hour": 22,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
       {
         "timestamp": "2026-11-20T23:00:00",
         "hour_display": "11:00 PM EST",
@@ -3156,6 +3143,19 @@ window.BBQ_PAYLOADS = {
         "predicted_orders": 0.1,
         "predicted_revenue": 0.85,
         "estimated_cogs_usd": 1.13,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-21T22:00:00",
+        "hour_display": "10:00 PM EST",
+        "day_name": "Sat",
+        "hour": 22,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
         "brisket_cooked_lbs": 0.0,
         "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
@@ -17784,7 +17784,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-20T22:54:37.999371-05:00",
+    "generated_at": "2026-11-20T23:01:42.520430-05:00",
     "days": {
       "2026-08-21": {
         "buckets": [
@@ -28519,13 +28519,8 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-20": {
-      "captured_at": "2026-11-20T22:54:38.012625-05:00",
+      "captured_at": "2026-11-20T23:01:42.544380-05:00",
       "hourly_forecast": [
-        {
-          "hour": 22,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
         {
           "hour": 23,
           "predicted_orders": 0.0,
@@ -28535,7 +28530,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-11-20T22:54:37-05:00",
+    "generated_at": "2026-11-20T23:01:41-05:00",
     "timezone": "America/New_York",
     "today_date": "2026-11-20",
     "active_service_brief": {
@@ -30292,8 +30287,8 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-11-20T22:54:37.456079-05:00",
-    "total_insights_mined": 9,
+    "generated_at": "2026-11-20T23:01:40.382033-05:00",
+    "total_insights_mined": 11,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
       "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
@@ -30454,7 +30449,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-20T22:54:37.892130-05:00",
+    "generated_at": "2026-11-20T23:01:42.128993-05:00",
     "total_alerts_detected": 17,
     "active_alert": {
       "alert_id": "qw-aov-2026-11-20-18",
@@ -30695,7 +30690,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "full_cogs": {
-    "generated_at": "2026-11-20T22:54:38.016245-05:00",
+    "generated_at": "2026-11-20T23:01:42.735526-05:00",
     "bom_version": "1.0.0",
     "target_bands": {
       "green_max_pct": 32.0,
