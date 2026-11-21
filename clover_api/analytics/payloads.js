@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-20T22:01:44.623305-05:00",
+      "generated_at": "2026-11-20T22:31:42.858133-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~215.2 lbs raw brisket (~75.3 lbs cooked yield) and ~56.2 lbs raw pork shoulder (~24.7 lbs cooked yield) [~271.4 lbs total raw / ~100.0 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (81 projected) and Rosebuds (39 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -2808,7 +2808,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-11-20T22:01:42.237043-05:00",
+    "generated_at": "2026-11-20T22:31:40.480449-05:00",
     "summary_kpis": {
       "projected_24h_revenue_usd": 6020.5,
       "estimated_24h_cogs_usd": 1728.28,
@@ -17758,7 +17758,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-20T22:01:44.386680-05:00",
+    "generated_at": "2026-11-20T22:31:42.612059-05:00",
     "days": {
       "2026-08-21": {
         "buckets": [
@@ -28493,7 +28493,7 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-20": {
-      "captured_at": "2026-11-20T22:01:44.412586-05:00",
+      "captured_at": "2026-11-20T22:31:42.635762-05:00",
       "hourly_forecast": [
         {
           "hour": 22,
@@ -28509,7 +28509,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-11-20T22:01:42-05:00",
+    "generated_at": "2026-11-20T22:31:41-05:00",
     "timezone": "America/New_York",
     "today_date": "2026-11-20",
     "active_service_brief": {
@@ -30266,7 +30266,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-11-20T22:01:42.237043-05:00",
+    "generated_at": "2026-11-20T22:31:40.480449-05:00",
     "total_insights_mined": 11,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -30461,7 +30461,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-20T22:01:43.986465-05:00",
+    "generated_at": "2026-11-20T22:31:42.216179-05:00",
     "total_alerts_detected": 17,
     "active_alert": {
       "alert_id": "qw-aov-2026-11-20-18",
@@ -30702,7 +30702,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "full_cogs": {
-    "generated_at": "2026-11-20T22:01:44.617115-05:00",
+    "generated_at": "2026-11-20T22:31:42.851410-05:00",
     "bom_version": "1.0.0",
     "target_bands": {
       "green_max_pct": 32.0,
