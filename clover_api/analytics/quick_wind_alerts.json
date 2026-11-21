@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T07:30:10.958957-05:00",
+  "generated_at": "2026-11-21T10:01:46.315551-05:00",
   "total_alerts_detected": 17,
   "active_alert": {
     "alert_id": "qw-aov-2026-11-20-18",
@@ -15,12 +15,12 @@
     "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
     "velocity_metrics": {
       "actual_sales": 415.65,
-      "expected_sales": 598.49,
+      "expected_sales": 644.53,
       "actual_orders": 7,
-      "expected_orders": 12.5,
+      "expected_orders": 13.5,
       "aov": 59.38,
       "baseline_aov": 47.88,
-      "z_score": -0.71
+      "z_score": -1.15
     },
     "terms": [
       "Average Ticket",
@@ -128,12 +128,12 @@
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
       "velocity_metrics": {
         "actual_sales": 449.16,
-        "expected_sales": 340.88,
+        "expected_sales": 367.1,
         "actual_orders": 8,
-        "expected_orders": 7.8,
+        "expected_orders": 8.4,
         "aov": 56.15,
         "baseline_aov": 43.78,
-        "z_score": 0.58
+        "z_score": 0.49
       },
       "terms": [
         "Average Ticket",
@@ -156,12 +156,12 @@
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
       "velocity_metrics": {
         "actual_sales": 415.65,
-        "expected_sales": 598.49,
+        "expected_sales": 644.53,
         "actual_orders": 7,
-        "expected_orders": 12.5,
+        "expected_orders": 13.5,
         "aov": 59.38,
         "baseline_aov": 47.88,
-        "z_score": -0.71
+        "z_score": -1.15
       },
       "terms": [
         "Average Ticket",
