@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.3.1">
+  <link rel="stylesheet" href="style.css?v=2.3.2">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -614,6 +614,7 @@
           <button type="button" class="preset-btn" id="btn-subtab-event">🏈 Local Game Day Boost</button>
           <button type="button" class="preset-btn" id="btn-subtab-advanced">📋 Menu Mix &amp; Rush Patterns</button>
           <button type="button" class="preset-btn" id="btn-subtab-reports">📝 Shop Reports</button>
+          <button type="button" class="preset-btn" id="btn-subtab-plate-costs">🧾 Plate &amp; Recipe Costs</button>
         </div>
       </section>
 
@@ -1351,6 +1352,77 @@
         </section>
       </div>
 
+      <!-- Plate & Recipe Costs: Mobile-first Category Rollup + Fuzzy Search Line-Item Inspector -->
+      <div id="subtab-view-plate-costs" style="display: none;">
+        <div class="subtab-stat-strip" aria-label="Menu & Recipe Food Cost Summary">
+          <div class="subtab-stat-card">
+            <span class="subtab-stat-kicker">Base vs. Full To-Go</span>
+            <strong class="subtab-stat-val" id="plate-stat-base-vs-full">--</strong>
+            <span class="subtab-stat-sub" id="plate-stat-item-count">Loading 137 menu items</span>
+          </div>
+          <div class="subtab-stat-card">
+            <span class="subtab-stat-kicker">Avg To-Go Add-On</span>
+            <strong class="subtab-stat-val" id="plate-stat-addon-avg">--</strong>
+            <span class="subtab-stat-sub" id="plate-stat-addon-lift">Packaging, garnish &amp; sauce lift</span>
+          </div>
+          <div class="subtab-stat-card plate-stat-clickable" id="plate-stat-watchlist-card" role="button" tabindex="0">
+            <span class="subtab-stat-kicker">Margin Watchlist (&gt;36%)</span>
+            <strong class="subtab-stat-val" id="plate-stat-high-count">--</strong>
+            <span class="subtab-stat-sub">Tap to inspect highest-cost items</span>
+          </div>
+        </div>
+
+        <!-- Category-by-Category Base vs. Full To-Go Food Cost Rollup Cards -->
+        <section class="control-card rollup-section" data-rollup-key="plate-category-rollup">
+          <button type="button" class="rollup-header" aria-expanded="true">
+            <span class="rollup-title-wrap">
+              <span class="rollup-title">📊 Category Food Cost Rollup (Base vs. Full To-Go)</span>
+              <span class="rollup-summary-pill" id="plate-rollup-pill">8 Categories • Tap to Filter</span>
+            </span>
+            <span class="rollup-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="rollup-body">
+            <p class="plate-helper-note">Tap any category card below to filter items. Green &lt;32% • Watch 32–36% • High &gt;36%.</p>
+            <div id="plate-category-cards-grid" class="plate-category-cards-grid"></div>
+          </div>
+        </section>
+
+        <!-- Fuzzy Search, Filter Pills & Sort Controls -->
+        <section class="control-card plate-explorer-controls" aria-label="Plate & Recipe Search and Filters">
+          <div class="plate-search-wrap">
+            <input type="search" id="plate-fuzzy-search" class="plate-search-input" placeholder="Fuzzy search item, ingredient, packaging, or recipe (e.g. brskt, clamshell, slaw)..." autocomplete="off" aria-label="Fuzzy search menu items, ingredients, packaging, and recipes">
+            <button type="button" id="plate-search-clear" class="plate-search-clear-btn" aria-label="Clear search" hidden>✕</button>
+          </div>
+
+          <div class="plate-filter-bar" role="group" aria-label="Food Cost Filter Modes">
+            <button type="button" class="plate-filter-pill active" data-plate-filter="all" aria-pressed="true">All 137 Items</button>
+            <button type="button" class="plate-filter-pill" data-plate-filter="high" aria-pressed="false">High Cost (&gt;36%)</button>
+            <button type="button" class="plate-filter-pill" data-plate-filter="watch" aria-pressed="false">Watch (32–36%)</button>
+            <button type="button" class="plate-filter-pill" data-plate-filter="recipes" aria-pressed="false">34 House Recipes</button>
+          </div>
+
+          <div class="plate-sort-status-row">
+            <div class="plate-active-meta">
+              <span id="plate-result-count" class="plate-result-count">Showing --</span>
+              <button type="button" id="plate-active-cat-chip" class="plate-cat-clear-chip" hidden></button>
+            </div>
+            <label class="plate-sort-label" for="plate-sort-select">
+              <span>Sort:</span>
+              <select id="plate-sort-select" class="plate-sort-select">
+                <option value="full_pct_desc">Highest Full Cost %</option>
+                <option value="addon_desc">Biggest To-Go Add-On $</option>
+                <option value="left_asc">Lowest Left After Cost $</option>
+                <option value="retail_desc">Highest Menu Price</option>
+                <option value="name_asc">Name (A–Z)</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <!-- Expandable Mobile-First Plate & Recipe Accordion Cards -->
+        <div id="plate-explorer-cards-list" class="plate-explorer-cards-list" aria-live="polite"></div>
+      </div>
+
       <!-- Bottom Refresh Frame -->
       <section class="control-card refresh-frame" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
         <div class="sync-status-container" style="display: flex; align-items: center; gap: 8px;">
@@ -1378,14 +1450,14 @@
     </button>
   </nav>
 
-  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.1"></script>
+  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.2"></script>
   <script src="d3_charts.js?v=2.3.0"></script>
   <script src="tz_utils.js?v=2.3.0"></script>
   <script src="modules/shared/core_utils.js?v=2.3.0" defer></script>
   <script src="modules/recipes/sausage_calc.js?v=2.3.0" defer></script>
   <script src="modules/reports/shop_reports.js?v=2.3.0" defer></script>
-  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.1" defer></script>
-  <script src="app.js?v=2.3.1" defer></script>
+  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.2" defer></script>
+  <script src="app.js?v=2.3.2" defer></script>
 </body>
 </html>
 

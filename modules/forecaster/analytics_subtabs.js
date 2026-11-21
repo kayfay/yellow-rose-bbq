@@ -1533,3 +1533,478 @@
     bindCostViewToggle();
   }
 })();
+
+// ============================================================================
+// Plate & Recipe Costs Subtab — Mobile-First Card Explorer + Fuzzy Search
+// ============================================================================
+(function initPlateCostExplorerModule() {
+  let explorerState = {
+    filter: 'all',        // 'all' | 'high' | 'watch' | 'recipes'
+    category: null,       // selected category string or null
+    query: '',
+    sort: 'full_pct_desc',
+    expandedIds: new Set(),
+    initialized: false
+  };
+
+  function escHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function normalizeText(str) {
+    return String(str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function boundedLevenshtein(a, b, maxDist) {
+    const la = a.length;
+    const lb = b.length;
+    if (Math.abs(la - lb) > maxDist) return maxDist + 1;
+    let prev = new Array(lb + 1);
+    let curr = new Array(lb + 1);
+    for (let j = 0; j <= lb; j++) prev[j] = j;
+    for (let i = 1; i <= la; i++) {
+      curr[0] = i;
+      let rowMin = curr[0];
+      const ca = a.charCodeAt(i - 1);
+      for (let j = 1; j <= lb; j++) {
+        const cost = ca === b.charCodeAt(j - 1) ? 0 : 1;
+        const val = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+        curr[j] = val;
+        if (val < rowMin) rowMin = val;
+      }
+      if (rowMin > maxDist) return maxDist + 1;
+      const tmp = prev;
+      prev = curr;
+      curr = tmp;
+    }
+    return prev[lb];
+  }
+
+  function isOrderedSubsequence(needle, haystack) {
+    let ni = 0;
+    for (let hi = 0; hi < haystack.length && ni < needle.length; hi++) {
+      if (haystack.charCodeAt(hi) === needle.charCodeAt(ni)) ni++;
+    }
+    return ni === needle.length;
+  }
+
+  /**
+   * Typo-tolerant fuzzy matcher across title + full line-item corpus.
+   * Returns score > 0 when matched (higher = better), or 0 when unmatched.
+   */
+  function fuzzyScore(rawQuery, primaryText, secondaryText) {
+    const q = normalizeText(rawQuery);
+    if (!q) return 1;
+    const pNorm = normalizeText(primaryText);
+    const sNorm = normalizeText(secondaryText);
+    const full = (pNorm + ' ' + sNorm).trim();
+    if (!full) return 0;
+
+    // Fast exact phrase boost
+    if (pNorm.includes(q)) return 120 - Math.min(20, pNorm.indexOf(q));
+    if (full.includes(q)) return 85;
+
+    const qTokens = q.split(' ').filter(Boolean);
+    const pWords = pNorm.split(' ').filter(Boolean);
+    const allWords = full.split(' ').filter(Boolean);
+
+    let totalScore = 0;
+    for (let t = 0; t < qTokens.length; t++) {
+      const tok = qTokens[t];
+      let bestTokScore = 0;
+
+      // 1. Word prefix / substring match
+      for (let i = 0; i < allWords.length; i++) {
+        const w = allWords[i];
+        const inPrimary = i < pWords.length;
+        const boost = inPrimary ? 1.35 : 1.0;
+        if (w === tok) {
+          bestTokScore = Math.max(bestTokScore, 40 * boost);
+        } else if (w.startsWith(tok)) {
+          bestTokScore = Math.max(bestTokScore, 32 * boost);
+        } else if (tok.length >= 3 && w.includes(tok)) {
+          bestTokScore = Math.max(bestTokScore, 24 * boost);
+        } else if (tok.length >= 3 && isOrderedSubsequence(tok, w) && (w.length - tok.length) <= 4) {
+          bestTokScore = Math.max(bestTokScore, 18 * boost);
+        } else if (tok.length >= 3) {
+          const maxEdit = tok.length >= 5 ? 2 : 1;
+          const dist = boundedLevenshtein(tok, w, maxEdit);
+          if (dist <= maxEdit) {
+            bestTokScore = Math.max(bestTokScore, (22 - dist * 7) * boost);
+          }
+        }
+      }
+
+      // 2. Fallback: ordered subsequence across whole primary title (e.g. "brskt" -> "brisket")
+      if (bestTokScore === 0 && tok.length >= 3 && isOrderedSubsequence(tok, pNorm.replace(/\s+/g, ''))) {
+        bestTokScore = 14;
+      }
+
+      if (bestTokScore === 0) return 0; // every query token must match
+      totalScore += bestTokScore;
+    }
+
+    return Math.round(totalScore);
+  }
+
+  function getClonedExplorerData() {
+    const raw = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.plate_cost_explorer;
+    if (!raw || typeof raw !== 'object') return null;
+    try {
+      return JSON.parse(JSON.stringify(raw));
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  function pillClassForBand(band) {
+    if (band === 'green') return 'cogs-pill-green';
+    if (band === 'amber') return 'cogs-pill-amber';
+    if (band === 'red') return 'cogs-pill-red';
+    return 'cogs-pill-pending';
+  }
+
+  function renderCategoryCards(data) {
+    const grid = document.getElementById('plate-category-cards-grid');
+    if (!grid) return;
+    const rollups = Array.isArray(data.category_rollup) ? data.category_rollup : [];
+    grid.innerHTML = rollups.map(c => {
+      const isActive = explorerState.category === c.category;
+      const baseW = Math.min(100, Math.max(0, (Number(c.avg_base_cost_pct || 0) / 50) * 100));
+      const addonW = Math.min(100 - baseW, Math.max(0, (Number(c.togo_lift_pct || 0) / 50) * 100));
+      return `
+        <button type="button" class="plate-cat-card${isActive ? ' active' : ''}" data-cat-filter="${escHtml(c.category)}" aria-pressed="${isActive ? 'true' : 'false'}">
+          <div class="plate-cat-card-top">
+            <span class="plate-cat-name">${escHtml(c.category)}</span>
+            <span class="cogs-pacing-pill ${pillClassForBand(c.status_band)}">${Number(c.avg_full_cost_pct || 0).toFixed(1)}%</span>
+          </div>
+          <div class="plate-cat-metrics">
+            ${c.item_count} items • Base ${Number(c.avg_base_cost_pct || 0).toFixed(1)}% &rarr; Full ${Number(c.avg_full_cost_pct || 0).toFixed(1)}% (+$${Number(c.avg_addon_usd || 0).toFixed(2)} To-Go)
+          </div>
+          <div class="plate-cost-bar-track" aria-hidden="true">
+            <div class="plate-bar-base" style="width:${baseW.toFixed(1)}%"></div>
+            <div class="plate-bar-addon" style="width:${addonW.toFixed(1)}%"></div>
+            <div class="plate-bar-target-mark"></div>
+          </div>
+        </button>
+      `;
+    }).join('');
+
+    grid.querySelectorAll('.plate-cat-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const picked = btn.getAttribute('data-cat-filter');
+        explorerState.category = (explorerState.category === picked) ? null : picked;
+        if (explorerState.filter === 'recipes' && explorerState.category) {
+          explorerState.filter = 'all';
+        }
+        renderPlateCostExplorer();
+      });
+    });
+  }
+
+  function renderExplorerList(data) {
+    const listEl = document.getElementById('plate-explorer-cards-list');
+    const countEl = document.getElementById('plate-result-count');
+    const catChip = document.getElementById('plate-active-cat-chip');
+    const clearBtn = document.getElementById('plate-search-clear');
+    if (!listEl) return;
+
+    const q = explorerState.query.trim();
+    if (clearBtn) clearBtn.hidden = !q;
+
+    if (catChip) {
+      if (explorerState.category) {
+        catChip.hidden = false;
+        catChip.textContent = `${explorerState.category} ✕`;
+      } else {
+        catChip.hidden = true;
+      }
+    }
+
+    // Sync filter pill UI
+    document.querySelectorAll('.plate-filter-pill').forEach(p => {
+      const active = p.getAttribute('data-plate-filter') === explorerState.filter;
+      p.classList.toggle('active', active);
+      p.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (explorerState.filter === 'recipes') {
+      const recipes = Array.isArray(data.recipes) ? data.recipes : [];
+      let matched = recipes.map(r => {
+        const corpus = r.category + ' ' + (r.lines || []).map(l => `${l.ingredient} ${l.measurement} ${l.anchor}`).join(' ');
+        const score = fuzzyScore(q, r.name, corpus);
+        return { recipe: r, score };
+      }).filter(x => x.score > 0);
+
+      if (q) {
+        matched.sort((a, b) => b.score - a.score || b.recipe.batch_cost_usd - a.recipe.batch_cost_usd);
+      } else if (explorerState.sort === 'name_asc') {
+        matched.sort((a, b) => a.recipe.name.localeCompare(b.recipe.name));
+      } else {
+        matched.sort((a, b) => b.recipe.batch_cost_usd - a.recipe.batch_cost_usd);
+      }
+
+      if (countEl) countEl.textContent = `Showing ${matched.length} of ${recipes.length} house recipes`;
+      if (!matched.length) {
+        listEl.innerHTML = `<div class="plate-empty-state">No recipes matched "${escHtml(q)}". Try a shorter keyword or tap Clear.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = matched.map(({ recipe: r }) => {
+        const cardKey = `recipe:${r.name}`;
+        const isOpen = explorerState.expandedIds.has(cardKey);
+        const linesHtml = (r.lines || []).map(l => `
+          <div class="plate-bom-row">
+            <div class="plate-bom-left">
+              <div class="plate-bom-desc">${escHtml(l.ingredient)}</div>
+              <div class="plate-bom-note">${escHtml(l.anchor)}</div>
+            </div>
+            <div class="plate-bom-right">
+              <span class="plate-bom-cost">$${Number(l.cost_usd || 0).toFixed(2)}</span>
+              <span class="plate-bom-qty">${escHtml(l.measurement)} • ${escHtml(l.share_pct)}</span>
+            </div>
+          </div>
+        `).join('');
+
+        return `
+          <article class="plate-item-card" data-card-key="${escHtml(cardKey)}">
+            <button type="button" class="plate-item-card-trigger" aria-expanded="${isOpen ? 'true' : 'false'}">
+              <div class="plate-item-head">
+                <div>
+                  <div class="plate-item-title">${escHtml(r.name)}</div>
+                  <div class="plate-item-cat-sub">${escHtml(r.category)}</div>
+                </div>
+                <span class="cogs-pacing-pill cogs-pill-green">$${Number(r.batch_cost_usd || 0).toFixed(2)} batch</span>
+              </div>
+              <div class="plate-item-foot-row">
+                <span>${r.ingredient_count} ingredient lines</span>
+                <span>${isOpen ? 'Hide ingredients ▲' : 'Inspect ingredients ▼'}</span>
+              </div>
+            </button>
+            <div class="plate-item-body"${isOpen ? '' : ' hidden'}>${linesHtml}</div>
+          </article>
+        `;
+      }).join('');
+    } else {
+      const items = Array.isArray(data.menu_items) ? data.menu_items : [];
+      let matched = items.filter(m => {
+        if (explorerState.category && m.category !== explorerState.category) return false;
+        if (explorerState.filter === 'high') return m.full_cost_pct !== null && m.full_cost_pct > 36.0;
+        if (explorerState.filter === 'watch') return m.full_cost_pct !== null && m.full_cost_pct >= 32.0 && m.full_cost_pct <= 36.0;
+        return true;
+      }).map(m => {
+        const corpus = `${m.category} ${m.portion_spec} ${(m.lines || []).map(l => `${l.type} ${l.item} ${l.note}`).join(' ')}`;
+        const score = fuzzyScore(q, m.name, corpus);
+        return { item: m, score };
+      }).filter(x => x.score > 0);
+
+      if (q) {
+        matched.sort((a, b) => b.score - a.score || (b.item.full_cost_pct || 0) - (a.item.full_cost_pct || 0));
+      } else {
+        const sKey = explorerState.sort;
+        matched.sort((a, b) => {
+          const x = a.item;
+          const y = b.item;
+          if (sKey === 'addon_desc') return (y.addon_total_usd || 0) - (x.addon_total_usd || 0);
+          if (sKey === 'left_asc') return (x.left_after_cost_usd || 0) - (y.left_after_cost_usd || 0);
+          if (sKey === 'retail_desc') return (y.retail_usd || 0) - (x.retail_usd || 0);
+          if (sKey === 'name_asc') return x.name.localeCompare(y.name);
+          return (y.full_cost_pct || -1) - (x.full_cost_pct || -1);
+        });
+      }
+
+      if (countEl) countEl.textContent = `Showing ${matched.length} of ${items.length} menu items`;
+      if (!matched.length) {
+        listEl.innerHTML = `<div class="plate-empty-state">No menu items matched "${escHtml(q)}". Try another spelling or clear filters.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = matched.map(({ item: m }) => {
+        const cardKey = `menu:${m.id}`;
+        const isOpen = explorerState.expandedIds.has(cardKey);
+        const pctLabel = m.full_cost_pct !== null ? `${Number(m.full_cost_pct).toFixed(1)}%` : 'N/A';
+        const baseW = m.base_cost_pct ? Math.min(100, (m.base_cost_pct / 50) * 100) : 0;
+        const liftPct = (m.full_cost_pct !== null && m.base_cost_pct !== null) ? Math.max(0, m.full_cost_pct - m.base_cost_pct) : 0;
+        const addonW = Math.min(100 - baseW, (liftPct / 50) * 100);
+
+        const linesHtml = (m.lines || []).map(l => {
+          const isZeroInc = Number(l.cost_usd || 0) === 0 && l.type !== 'System / Non-Food';
+          return `
+            <div class="plate-bom-row">
+              <div class="plate-bom-left">
+                <span class="plate-bom-type">${escHtml(l.type)}</span>
+                <div class="plate-bom-desc">${escHtml(l.item)}</div>
+                ${l.note ? `<div class="plate-bom-note">${escHtml(l.note)}</div>` : ''}
+              </div>
+              <div class="plate-bom-right">
+                <span class="plate-bom-cost${isZeroInc ? ' included' : ''}">${isZeroInc ? 'Included ($0.00)' : '$' + Number(l.cost_usd || 0).toFixed(2)}</span>
+                <span class="plate-bom-qty">${escHtml(l.qty)}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <article class="plate-item-card" data-card-key="${escHtml(cardKey)}">
+            <button type="button" class="plate-item-card-trigger" aria-expanded="${isOpen ? 'true' : 'false'}">
+              <div class="plate-item-head">
+                <div>
+                  <div class="plate-item-title">${escHtml(m.name)}</div>
+                  <div class="plate-item-cat-sub">${escHtml(m.category)}</div>
+                </div>
+                <span class="cogs-pacing-pill ${pillClassForBand(m.status_band)}">${pctLabel}</span>
+              </div>
+              <div class="plate-item-metrics-row">
+                <span>Price <strong>$${Number(m.retail_usd || 0).toFixed(2)}</strong></span>
+                <span>Base <strong>$${Number(m.base_cost_usd || 0).toFixed(2)}</strong></span>
+                <span>To-Go <strong>+$${Number(m.addon_total_usd || 0).toFixed(2)}</strong></span>
+                <span>Full <strong>$${Number(m.full_cost_usd || 0).toFixed(2)}</strong></span>
+              </div>
+              <div class="plate-cost-bar-track" aria-hidden="true">
+                <div class="plate-bar-base" style="width:${baseW.toFixed(1)}%"></div>
+                <div class="plate-bar-addon" style="width:${addonW.toFixed(1)}%"></div>
+                <div class="plate-bar-target-mark"></div>
+              </div>
+              <div class="plate-item-foot-row">
+                <span>Left after full cost: <strong>$${Number(m.left_after_cost_usd || 0).toFixed(2)}</strong></span>
+                <span>${isOpen ? 'Hide line items ▲' : `${(m.lines || []).length} line items ▼`}</span>
+              </div>
+            </button>
+            <div class="plate-item-body"${isOpen ? '' : ' hidden'}>${linesHtml}</div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Bind accordion expand/collapse
+    listEl.querySelectorAll('.plate-item-card-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.plate-item-card');
+        if (!card) return;
+        const key = card.getAttribute('data-card-key');
+        const body = card.querySelector('.plate-item-body');
+        const openNow = !explorerState.expandedIds.has(key);
+        if (openNow) {
+          explorerState.expandedIds.add(key);
+        } else {
+          explorerState.expandedIds.delete(key);
+        }
+        btn.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+        if (body) body.hidden = !openNow;
+      });
+    });
+  }
+
+  function renderPlateCostExplorer() {
+    const data = getClonedExplorerData();
+    if (!data) return;
+
+    const s = data.summary || {};
+    const baseVsFullEl = document.getElementById('plate-stat-base-vs-full');
+    const itemCountEl = document.getElementById('plate-stat-item-count');
+    const addonAvgEl = document.getElementById('plate-stat-addon-avg');
+    const addonLiftEl = document.getElementById('plate-stat-addon-lift');
+    const highCountEl = document.getElementById('plate-stat-high-count');
+
+    if (baseVsFullEl) {
+      baseVsFullEl.textContent = `${Number(s.avg_base_food_cost_pct || 0).toFixed(1)}% → ${Number(s.avg_full_togo_food_cost_pct || 0).toFixed(1)}%`;
+    }
+    if (itemCountEl) {
+      itemCountEl.textContent = `${s.menu_item_count || 0} menu items • ${s.recipe_count || 0} house recipes`;
+    }
+    if (addonAvgEl) {
+      addonAvgEl.textContent = `+$${Number(s.avg_togo_addon_usd || 0).toFixed(2)} / item`;
+    }
+    if (addonLiftEl) {
+      addonLiftEl.textContent = `+${Number(s.avg_togo_lift_pct || 0).toFixed(1)}% packaging, garnish & sauce lift`;
+    }
+    if (highCountEl) {
+      highCountEl.textContent = `${s.high_cost_item_count || 0} Items`;
+    }
+
+    renderCategoryCards(data);
+    renderExplorerList(data);
+  }
+
+  function initPlateCostExplorer() {
+    if (!explorerState.initialized) {
+      explorerState.initialized = true;
+
+      const searchInput = document.getElementById('plate-fuzzy-search');
+      const clearBtn = document.getElementById('plate-search-clear');
+      const sortSelect = document.getElementById('plate-sort-select');
+      const catChip = document.getElementById('plate-active-cat-chip');
+      const watchlistCard = document.getElementById('plate-stat-watchlist-card');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          explorerState.query = searchInput.value || '';
+          renderPlateCostExplorer();
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          explorerState.query = '';
+          if (searchInput) {
+            searchInput.value = '';
+            searchInput.focus();
+          }
+          renderPlateCostExplorer();
+        });
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          explorerState.sort = sortSelect.value || 'full_pct_desc';
+          renderPlateCostExplorer();
+        });
+      }
+
+      if (catChip) {
+        catChip.addEventListener('click', () => {
+          explorerState.category = null;
+          renderPlateCostExplorer();
+        });
+      }
+
+      if (watchlistCard) {
+        const jumpHigh = () => {
+          explorerState.filter = 'high';
+          explorerState.category = null;
+          renderPlateCostExplorer();
+        };
+        watchlistCard.addEventListener('click', jumpHigh);
+        watchlistCard.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            jumpHigh();
+          }
+        });
+      }
+
+      document.querySelectorAll('.plate-filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          explorerState.filter = pill.getAttribute('data-plate-filter') || 'all';
+          if (explorerState.filter === 'recipes') explorerState.category = null;
+          renderPlateCostExplorer();
+        });
+      });
+    }
+
+    renderPlateCostExplorer();
+  }
+
+  window.initPlateCostExplorer = initPlateCostExplorer;
+})();

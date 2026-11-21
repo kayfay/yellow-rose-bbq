@@ -491,6 +491,24 @@
       "description": "Full COGS Task 4-5: Build scripts/verify_cogs_math.py and tests/e2e/full_cogs_card.spec.js, run full verification suite (unittest, PAL verifier, Playwright E2E), and pass read-only Adversarial Critic audit >= 9/10.",
       "acceptance_criteria": "verify_cogs_math.py, unittest discover, and npm test exit 0; Adversarial Critic rates card clarity and financial accuracy >= 9/10.",
       "passes": true
+    },
+    {
+      "id": 83,
+      "description": "Plate & Recipe Cost Explorer Task 1: Emit clover_api/analytics/plate_cost_explorer.json (8-category Base vs. Full To-Go rollup, 137 menu items with line-by-line BOM, 34 house recipes with 151 lines), register in build_payloads.py, and embed the Category-by-Category Base vs. Full To-Go Rollup on Page 1 of YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.pdf.",
+      "acceptance_criteria": "plate_cost_explorer.json generated cleanly with zero banned jargon or raw invoice filenames; Page 1 of Master PDF includes the Category-by-Category Base vs. Full To-Go rollup table; build_payloads.py exits 0.",
+      "passes": true
+    },
+    {
+      "id": 84,
+      "description": "Plate & Recipe Cost Explorer Task 2: Build mobile-first #subtab-view-plate-costs subtab next to Shop Reports with tappable Category Summary Cards, typo-tolerant fuzzy search, filter pills, sort dropdown, and expandable vertical BOM/Recipe accordion cards.",
+      "acceptance_criteria": "Zero wide HTML tables in web subtab; fuzzy search matches typos/subsequences across items/ingredients/packaging/recipes; all tap targets >= 48px; zero horizontal overflow on 390px mobile; zero banned UI jargon; npm run check passes.",
+      "passes": true
+    },
+    {
+      "id": 85,
+      "description": "Plate & Recipe Cost Explorer Task 3: Add tests/e2e/plate_cost_explorer.spec.js, run full verification suite (unittest, verify_cogs_math.py, full npm test including smokehouse_ux.spec.js), sync updated PDFs to Google Drive, and push to GitHub Pages.",
+      "acceptance_criteria": "All Python unit tests, PAL verifiers, and Playwright E2E specs pass 100% with zero console errors; Master PDF synced to Google Drive; code pushed to origin/master.",
+      "passes": true
     }
   ]
 }

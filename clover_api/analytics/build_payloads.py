@@ -26,7 +26,7 @@ def build_payloads():
         print(f"[WARN] full_cogs not refreshed: {e}")
     
     payloads = {}
-    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts", "full_cogs"]:
+    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts", "full_cogs", "plate_cost_explorer"]:
         filepath = analytics_dir / (filename + ".json")
         if filepath.exists():
             with open(filepath, 'r') as f:

@@ -403,6 +403,7 @@ function initForecastingControls() {
   const btnSubtabShift = document.getElementById('btn-subtab-shift');
   const btnSubtabAdvanced = document.getElementById('btn-subtab-advanced');
   const btnSubtabReports = document.getElementById('btn-subtab-reports');
+  const btnSubtabPlateCosts = document.getElementById('btn-subtab-plate-costs');
 
   const viewPredictive = document.getElementById('subtab-view-predictive');
   const viewArima = document.getElementById('subtab-view-arima');
@@ -411,9 +412,10 @@ function initForecastingControls() {
   const viewShift = document.getElementById('subtab-view-shift');
   const viewAdvanced = document.getElementById('subtab-view-advanced');
   const viewReports = document.getElementById('subtab-view-reports');
+  const viewPlateCosts = document.getElementById('subtab-view-plate-costs');
 
-  const allSubtabBtns = [btnSubtabPredictive, btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced, btnSubtabReports].filter(Boolean);
-  const allSubtabViews = [viewPredictive, viewArima, viewWeather, viewEvent, viewShift, viewAdvanced, viewReports].filter(Boolean);
+  const allSubtabBtns = [btnSubtabPredictive, btnSubtabArima, btnSubtabWeather, btnSubtabEvent, btnSubtabShift, btnSubtabAdvanced, btnSubtabReports, btnSubtabPlateCosts].filter(Boolean);
+  const allSubtabViews = [viewPredictive, viewArima, viewWeather, viewEvent, viewShift, viewAdvanced, viewReports, viewPlateCosts].filter(Boolean);
 
   function activateSubtab(btn, view) {
     allSubtabBtns.forEach(b => b.classList.remove('active'));
@@ -484,6 +486,13 @@ function initForecastingControls() {
     btnSubtabReports.addEventListener('click', () => {
       activateSubtab(btnSubtabReports, viewReports);
       if (typeof initDailyPitIntelligence === 'function') initDailyPitIntelligence();
+    });
+  }
+
+  if (btnSubtabPlateCosts) {
+    btnSubtabPlateCosts.addEventListener('click', () => {
+      activateSubtab(btnSubtabPlateCosts, viewPlateCosts);
+      if (typeof window.initPlateCostExplorer === 'function') window.initPlateCostExplorer();
     });
   }
 

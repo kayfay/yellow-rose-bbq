@@ -687,3 +687,16 @@
   - `.venv/bin/python -m unittest discover -s clover_api/tests`: PASS (45/45 tests OK)
   - `npm test -- tests/e2e/full_cogs_card.spec.js`: PASS (2 passed, 0 failed, 0 flaky in 12.9s)
   - Read-only Adversarial Critic audit: **9.4 / 10** (Financial Accuracy 9.8/10, Card Clarity & Ergonomics 9.0/10)
+
+## 2026-11-21 · Mobile-First Plate & Recipe Cost Explorer Subtab + Page 1 Master PDF Rollup
+- **What changed & why:** Added the new mobile-first `🧾 Plate & Recipe Costs` subtab (`#subtab-view-plate-costs`) next to Shop Reports with tappable 8-category Base vs. Full To-Go rollup cards, typo-tolerant fuzzy search across all 137 menu items & 34 house recipes (151 ingredient lines), and expandable vertical line-by-line BOM accordion cards (zero wide HTML tables on mobile). Also embedded the highlighted Category-by-Category Base vs. Full To-Go Food Cost Rollup on Page 1 of `YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.pdf` (82 pages, mode `0600`).
+- **Files touched:**
+  - `SPEC.md`, `DESIGN.md`, `PLAN.md` (prior archived to `archive/*.20261121.orig`)
+  - `scripts/plate_bom_line_item_report.py`, `scripts/generate_boss_master_exports.py`, `clover_api/analytics/build_payloads.py`
+  - `clover_api/analytics/plate_cost_explorer.json`, `analytics/plate_cost_explorer.json`, `api/analytics/plate_cost_explorer.json`, `clover_api/analytics/payloads.js`
+  - `index.html` (`?v=2.3.2`), `style.css`, `app.js`, `modules/forecaster/analytics_subtabs.js`, `tests/e2e/plate_cost_explorer.spec.js`
+- **Verification results:**
+  - `npm run check`: PASS
+  - `verify_cogs_math.py`: PASS (14/14 days)
+  - `unittest` (`test_copy_audit.py`, `test_cost_engine.py`, full suite): PASS (45/45 OK after replacing banned `"cushion"` copy with `"Left After Cost"`)
+  - Full Playwright `npm test`: PASS (36/36 passed: 34 passed, 2 flaky on retry under concurrent CPU load, 0 failed)

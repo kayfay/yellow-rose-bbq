@@ -10,31 +10,36 @@ Design & Sanity Invariants:
   - Balanced, clean formatting: no yellow highlighting or special sauce-cup columns/badges;
     House BBQ Sauce (choice of OG, Spicy, or Mustard, 1.5 oz portion cup + lid) appears as a
     standard inventory line item only on BBQ items that include sauce.
-  - Built-in sanity check verifies 100% math parity, zero NaNs/negatives, and accurate
-    category classification across all 137 menu items and 34 recipes.
+  - Emits clover_api/analytics/plate_cost_explorer.json for the mobile-first interactive
+    Plate & Recipe Costs subtab (plain-English copy, zero banned UI jargon, zero raw
+    vendor invoice filenames).
 
-Outputs (under data/vendor_invoices/reports/, mode 0600):
+Outputs (private under data/vendor_invoices/reports/, mode 0600):
   1. YRBBQ_Plate_Line_Item_BOM_and_ToGo_Packaging_2026-11-19.csv
   2. YRBBQ_Plate_Line_Item_BOM_and_ToGo_Packaging_2026-11-19.html
   3. YRBBQ_Plate_Line_Item_BOM_and_ToGo_Packaging_2026-11-19.pdf
-And safely rebuilds + appends onto:
-  4. YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.pdf (from clean .orig backup)
+And public SPA explorer payload (mode 0644):
+  4. clover_api/analytics/plate_cost_explorer.json (+ analytics/, api/analytics/)
 """
 
 from __future__ import annotations
 
 import csv
 import html
+import json
 import os
 import shutil
 import subprocess
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 REPORTS_DIR = DATA_DIR / "vendor_invoices" / "reports"
 BACKUPS_DIR = BASE_DIR / "backups"
+ANALYTICS_DIR = BASE_DIR / "clover_api" / "analytics"
 
 MENU_COGS_CSV = DATA_DIR / "yellow_rose_bbq_cogs.csv"
 RECIPE_DETAIL_CSV = DATA_DIR / "yellow_rose_bbq_recipe_ingredients_detail.csv"
@@ -51,6 +56,16 @@ def parse_float(val: str) -> float:
         return float(cleaned)
     except ValueError:
         return 0.0
+
+
+def classify_cost_band(pct: float | None) -> tuple[str, str]:
+    if pct is None:
+        return "neutral", "System / N/A"
+    if pct < 32.0:
+        return "green", "Healthy (<32%)"
+    if pct <= 36.0:
+        return "amber", "Watch (32–36%)"
+    return "red", "High (>36%)"
 
 
 def build_item_bom_lines(
@@ -73,7 +88,10 @@ def build_item_bom_lines(
     has_pickles_in_base = "pickle" in spec_all
     has_slaw_in_base = "slaw" in spec_all
     has_onion_in_base = "onion" in spec_all
-    has_cup_in_base = any(k in spec_all for k in ("pet cold cup", "cup +", "deli container", "mason jar", "gallon plastic jug", "portion cup"))
+    has_cup_in_base = any(
+        k in spec_all
+        for k in ("pet cold cup", "cup +", "deli container", "mason jar", "gallon plastic jug", "portion cup")
+    )
 
     lines: list[tuple[str, str, str, float, str]] = []
 
@@ -106,7 +124,7 @@ def build_item_bom_lines(
             lines.append(("Packaging", "Portion Cup + Lid", "1 set", 0.06, "Side container"))
         return lines
 
-    # 4. Catering Trays & Family Specials (1/2 steam pans, wing trays, cornbread trays)
+    # 4. Catering Trays & Family Specials
     if "catering" in cat:
         if "wing" in name:
             lines.append(("Fresh Veggies", "Celery / Pickle & Onion Catering Garnish", "8 oz", 0.45, "Catering wing garnish"))
@@ -122,9 +140,8 @@ def build_item_bom_lines(
             lines.append(("Packaging", "Deep Half Aluminum Steam Pan + Lid + Serving Spoon", "1 set", 0.95, "Half-pan catering side tray"))
         return lines
 
-    # 5. Scratch Sides, Appetizers & Desserts (distinguish appetizers, salads, chili, desserts, cornbread, sides)
+    # 5. Scratch Sides, Appetizers & Desserts
     if "scratch sides" in cat or "appetizer" in cat or "dessert" in cat:
-        # Desserts
         if any(k in name for k in ("banana pudding", "churro")):
             if "churro" in name:
                 lines.append(("Packaging", "Grease-Resistant Pastry Bag / 6x6 Clamshell + Napkins", "1 set", 0.16, "Dessert to-go"))
@@ -134,13 +151,11 @@ def build_item_bom_lines(
                 lines.append(("Packaging", f"{cup_sz} + Plastic Spoon + Napkin", "1 set", round(cup_cost + 0.05, 2), "Dessert to-go"))
             return lines
 
-        # Salads
         if "caesar salad" in name:
             lines.append(("Fresh Veggies", "Romaine Lettuce, Parmesan/Cotija & Croutons (in core spec)", "1 portion", 0.00, "Already priced in Core Portion"))
             lines.append(("Packaging", "Clear Hinged Salad Container + 2 oz Dressing Cup/Lid + Fork", "1 set", 0.34, "To-go salad pack"))
             return lines
 
-        # Chili / Consomme
         if any(k in name for k in ("chili", "consommé", "consomme")):
             sz = "12 oz Soup Container + Vented Lid" if "bowl" in name else "8 oz Deli Cup + Lid"
             cost = 0.22 if "bowl" in name else 0.14
@@ -149,12 +164,10 @@ def build_item_bom_lines(
             lines.append(("Packaging", f"{sz} + Spoon + Napkin + Bag Share", "1 set", round(cost + 0.07, 2), "Hot liquid to-go"))
             return lines
 
-        # Cornbread
         if "cornbread" in name:
             lines.append(("Packaging", "Foil Wrap Sheet / 6x6 Clamshell + Napkin", "1 set", 0.14, "Warm cornbread wrap"))
             return lines
 
-        # Appetizers (Rose Buds, Loaded/BBQ/Texas/Chili/Cheese Fries, Frito Pie, Pimento Cheese)
         if any(k in name for k in ("rose bud", "fries", "frito pie", "pimento")):
             if "rose bud" in name:
                 lines.append(("Sauces", "House BBQ Sauce (OG, Spicy, or Mustard) — 1.5 oz Portion Cup + Lid", "1 cup", 0.25, "Sauce ($0.19) + cup/lid ($0.06)"))
@@ -170,11 +183,9 @@ def build_item_bom_lines(
             elif "pimento" in name:
                 lines.append(("Packaging", "8 oz Deli Cup + Lid (Pimento) + Cracker Sleeves Bag", "1 set", 0.18, "Cold dip to-go"))
             else:
-                # Plain Seasoned French Fries
                 lines.append(("Packaging", "Paper Fry Boat / 6x6 Vented Clamshell + Napkins", "1 set", 0.20, "Crispy fries to-go"))
             return lines
 
-        # Standard Individual Sides (6 oz)
         lines.append(("Packaging", "8 oz Side Deli Cup + Tight-Fit Lid", "1 set", 0.12, "Leak-proof side cup"))
         lines.append(("Packaging", "Plastic Fork/Spoon + Napkin + Bag Share", "1 set", 0.07, "To-go utensils"))
         return lines
@@ -207,7 +218,6 @@ def build_item_bom_lines(
             lines.append(("Sauces", "House Salsa / Crema (or BBQ Sauce) — 1.5 oz Portion Cup + Lid", "1 cup", 0.24, "Side dipping cup"))
             lines.append(("Packaging", "9x9 3-Comp Clamshell + Foil Liner + 2x 8 oz Side Cups + Cutlery/Bag", "1 set", 0.72, "Plate to-go kit"))
             return lines
-        # Standard 1-Meat or 2-Meat BBQ Plates
         cups = 2 if ("2 meat" in name or "two meat" in name) else 1
         lines.append(("Fresh Veggies", "Dill Pickle Chips (1.5 oz), White Onion (1.0 oz) & Jalapenos", "2.5 oz", 0.20, "Plate garnish"))
         lines.append(("Bakery", "Texas Toast / White Bread (2 slices)", "2 slices", 0.26, "Plate bread"))
@@ -255,7 +265,6 @@ def build_item_bom_lines(
             lines.append(("Packaging", "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share", "1 set", 0.26, "Single taco to-go"))
         return lines
 
-    # Sandwiches & Burgers
     if has_bun_in_base:
         lines.append(("Bakery", "Toasted Brioche Bun (included in core spec)", "1 ea", 0.00, "Already priced in Core Portion"))
     else:
@@ -275,15 +284,13 @@ def build_item_bom_lines(
     return lines
 
 
-def generate_full_reports() -> None:
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
-
-    menu_items = []
+def compute_plate_cost_explorer_data() -> dict:
+    """Build structured explorer dataset (summary, category_rollup, 137 menu items, 34 recipes)."""
+    menu_items_raw = []
     with open(MENU_COGS_CSV, "r", encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
             if (row.get("Menu Item") or "").strip():
-                menu_items.append(row)
+                menu_items_raw.append(row)
 
     recipes_by_name: dict[str, list[dict]] = defaultdict(list)
     with open(RECIPE_DETAIL_CSV, "r", encoding="utf-8-sig") as f:
@@ -292,17 +299,15 @@ def generate_full_reports() -> None:
             if r_name:
                 recipes_by_name[r_name].append(row)
 
-    flat_csv_rows = []
-    summary_rows_html = []
-    detail_blocks_html = []
-    sanity_warnings = []
+    menu_items_out = []
+    cat_buckets: dict[str, list[dict]] = defaultdict(list)
 
-    for item in menu_items:
+    for idx, item in enumerate(menu_items_raw, 1):
         cat = (item.get("Category") or "General").strip()
         name = (item.get("Menu Item") or "").strip()
         portion_spec = (item.get("Portion Specification") or "Standard portion").strip()
         comp_math = (item.get("Wholesale Component Math") or "").strip()
-        base_cogs = parse_float(item.get("Portion COGS ($)"))
+        base_cost = parse_float(item.get("Portion COGS ($)"))
         retail_price = parse_float(item.get("Retail Price ($)"))
 
         addons = build_item_bom_lines(cat, name, portion_spec, comp_math, retail_price)
@@ -310,81 +315,248 @@ def generate_full_reports() -> None:
         veggies_bakery_inc = round(sum(c for lc, _, _, c, _ in addons if lc in ("Fresh Veggies", "Bakery")), 2)
         sauce_inc = round(sum(c for lc, _, _, c, _ in addons if lc == "Sauces"), 2)
         pkg_inc = round(sum(c for lc, _, _, c, _ in addons if lc == "Packaging"), 2)
-        total_inc = round(veggies_bakery_inc + sauce_inc + pkg_inc, 2)
-        full_togo_cogs = round(base_cogs + total_inc, 2)
-        full_cogs_pct = round((full_togo_cogs / retail_price) * 100.0, 1) if retail_price > 0 else 0.0
+        addon_total = round(veggies_bakery_inc + sauce_inc + pkg_inc, 2)
+        full_cost = round(base_cost + addon_total, 2)
 
-        # Sanity assertions per item
-        assert full_togo_cogs >= 0.0, f"Negative COGS on {name}"
-        assert abs((base_cogs + veggies_bakery_inc + sauce_inc + pkg_inc) - full_togo_cogs) <= 0.01, f"Parity mismatch on {name}"
-        if retail_price <= 0 and full_togo_cogs > 0:
-            sanity_warnings.append(f"Zero-retail item has nonzero COGS: {name} (${full_togo_cogs:.2f})")
-        if retail_price > 0 and full_cogs_pct > 55.0:
-            sanity_warnings.append(f"High full COGS % ({full_cogs_pct:.1f}%): {name} (${full_togo_cogs:.2f} / ${retail_price:.2f})")
+        if retail_price > 0:
+            base_pct = round((base_cost / retail_price) * 100.0, 1)
+            full_pct = round((full_cost / retail_price) * 100.0, 1)
+            left_after_cost = round(retail_price - full_cost, 2)
+        else:
+            base_pct = None
+            full_pct = None
+            left_after_cost = 0.0
 
-        pct_str = f"{full_cogs_pct:.1f}%" if retail_price > 0 else "N/A"
+        assert full_cost >= 0.0, f"Negative food cost on {name}"
+        assert abs((base_cost + addon_total) - full_cost) <= 0.01, f"Parity mismatch on {name}"
+
+        band, band_label = classify_cost_band(full_pct)
+
+        lines_list = [
+            {
+                "type": "Core Portion",
+                "item": portion_spec,
+                "qty": "1 order",
+                "cost_usd": base_cost,
+                "note": comp_math[:95],
+            }
+        ]
+        for lc, desc, qty_u, cost, note in addons:
+            lines_list.append({
+                "type": lc,
+                "item": desc,
+                "qty": qty_u,
+                "cost_usd": cost,
+                "note": note,
+            })
+
+        rec = {
+            "id": idx,
+            "category": cat,
+            "name": name,
+            "portion_spec": portion_spec,
+            "retail_usd": retail_price,
+            "base_cost_usd": base_cost,
+            "base_cost_pct": base_pct,
+            "veggies_bakery_addon_usd": veggies_bakery_inc,
+            "sauce_addon_usd": sauce_inc,
+            "packaging_addon_usd": pkg_inc,
+            "addon_total_usd": addon_total,
+            "full_cost_usd": full_cost,
+            "full_cost_pct": full_pct,
+            "left_after_cost_usd": left_after_cost,
+            "status_band": band,
+            "status_label": band_label,
+            "lines": lines_list,
+        }
+        menu_items_out.append(rec)
+        cat_buckets[cat].append(rec)
+
+    # Category-by-Category Base vs. Full To-Go Food Cost % Rollup
+    category_rollup = []
+    for cat, items in cat_buckets.items():
+        priced = [x for x in items if x["retail_usd"] > 0]
+        if priced:
+            avg_retail = round(sum(x["retail_usd"] for x in priced) / len(priced), 2)
+            avg_base = round(sum(x["base_cost_usd"] for x in priced) / len(priced), 2)
+            avg_base_pct = round(sum(x["base_cost_pct"] for x in priced) / len(priced), 1)
+            avg_addon = round(sum(x["addon_total_usd"] for x in priced) / len(priced), 2)
+            avg_full = round(sum(x["full_cost_usd"] for x in priced) / len(priced), 2)
+            avg_full_pct = round(sum(x["full_cost_pct"] for x in priced) / len(priced), 1)
+            lift_pct = round(avg_full_pct - avg_base_pct, 1)
+        else:
+            avg_retail = avg_base = avg_addon = avg_full = 0.0
+            avg_base_pct = avg_full_pct = lift_pct = 0.0
+        c_band, c_label = classify_cost_band(avg_full_pct if priced else None)
+        category_rollup.append({
+            "category": cat,
+            "item_count": len(items),
+            "avg_retail_usd": avg_retail,
+            "avg_base_cost_usd": avg_base,
+            "avg_base_cost_pct": avg_base_pct,
+            "avg_addon_usd": avg_addon,
+            "avg_full_cost_usd": avg_full,
+            "avg_full_cost_pct": avg_full_pct,
+            "togo_lift_pct": lift_pct,
+            "high_cost_count": sum(1 for x in priced if x["full_cost_pct"] > 36.0),
+            "status_band": c_band,
+            "status_label": c_label,
+        })
+    # Sort categories highest full food cost % first for cost-reduction focus
+    category_rollup.sort(key=lambda r: r["avg_full_cost_pct"], reverse=True)
+
+    # Recipes (34 recipes, 151 lines)
+    recipes_out = []
+    total_recipe_lines = 0
+    for r_name, r_lines in recipes_by_name.items():
+        r_cat = (r_lines[0].get("Recipe_Category") or "House Recipe").strip()
+        batch_cost = round(sum(parse_float(x.get("Ingredient_Cost_USD")) for x in r_lines), 2)
+        total_recipe_lines += len(r_lines)
+        parsed_lines = []
+        for rl in r_lines:
+            parsed_lines.append({
+                "ingredient": (rl.get("Ingredient") or "").strip(),
+                "measurement": (rl.get("Recipe_Measurement") or "").strip(),
+                "anchor": (rl.get("US_Foods_MOXE_Anchor") or "").strip(),
+                "cost_usd": parse_float(rl.get("Ingredient_Cost_USD")),
+                "share_pct": (rl.get("Share_of_Batch_Pct") or "").strip(),
+            })
+        recipes_out.append({
+            "name": r_name,
+            "category": r_cat,
+            "batch_cost_usd": batch_cost,
+            "ingredient_count": len(parsed_lines),
+            "lines": parsed_lines,
+        })
+
+    priced_all = [x for x in menu_items_out if x["retail_usd"] > 0]
+    avg_base_pct_all = round(sum(x["base_cost_pct"] for x in priced_all) / len(priced_all), 1) if priced_all else 0.0
+    avg_full_pct_all = round(sum(x["full_cost_pct"] for x in priced_all) / len(priced_all), 1) if priced_all else 0.0
+    avg_addon_all = round(sum(x["addon_total_usd"] for x in priced_all) / len(priced_all), 2) if priced_all else 0.0
+    high_cnt = sum(1 for x in priced_all if x["full_cost_pct"] > 36.0)
+    watch_cnt = sum(1 for x in priced_all if 32.0 <= x["full_cost_pct"] <= 36.0)
+
+    now_ny = datetime.now(ZoneInfo("America/New_York"))
+    return {
+        "generated_at": now_ny.isoformat(),
+        "summary": {
+            "menu_item_count": len(menu_items_out),
+            "recipe_count": len(recipes_out),
+            "recipe_line_count": total_recipe_lines,
+            "avg_base_food_cost_pct": avg_base_pct_all,
+            "avg_full_togo_food_cost_pct": avg_full_pct_all,
+            "avg_togo_lift_pct": round(avg_full_pct_all - avg_base_pct_all, 1),
+            "avg_togo_addon_usd": avg_addon_all,
+            "high_cost_item_count": high_cnt,
+            "watch_cost_item_count": watch_cnt,
+        },
+        "category_rollup": category_rollup,
+        "menu_items": menu_items_out,
+        "recipes": recipes_out,
+    }
+
+
+def build_page1_category_rollup_html(data: dict | None = None) -> str:
+    """Render the Page 1 Category-by-Category Base vs. Full To-Go Food Cost Rollup block for the Master PDF."""
+    if data is None:
+        data = compute_plate_cost_explorer_data()
+    s = data["summary"]
+    rows = []
+    for c in data["category_rollup"]:
+        cls = "alert" if c["status_band"] == "red" else ("ok" if c["status_band"] == "green" else "")
+        rows.append(
+            f"<tr>"
+            f"<td><strong>{html.escape(c['category'])}</strong></td>"
+            f"<td class='num'>{c['item_count']}</td>"
+            f"<td class='num'>${c['avg_retail_usd']:.2f}</td>"
+            f"<td class='num'>${c['avg_base_cost_usd']:.2f} ({c['avg_base_cost_pct']:.1f}%)</td>"
+            f"<td class='num'>+${c['avg_addon_usd']:.2f} (+{c['togo_lift_pct']:.1f}%)</td>"
+            f"<td class='num'><strong>${c['avg_full_cost_usd']:.2f} ({c['avg_full_cost_pct']:.1f}%)</strong></td>"
+            f"<td class='num'>{c['high_cost_count']}</td>"
+            f"<td class='{cls}'>{html.escape(c['status_label'])}</td>"
+            f"</tr>"
+        )
+    return (
+        "<div style='background:#f8fafc;border:1.5px solid #0072B2;border-radius:6px;padding:10px 12px;margin:10px 0 14px 0;'>"
+        "<h2 style='margin-top:0;border-bottom-color:#0072B2;'>Executive Summary Highlight: Category-by-Category Base vs. Full To-Go Food Cost Rollup (137 Items)</h2>"
+        f"<p class='sub' style='margin:0 0 8px 0;'>Menu-Wide Average: <strong>{s['avg_base_food_cost_pct']:.1f}% Base Portion</strong> &rarr; "
+        f"<strong>{s['avg_full_togo_food_cost_pct']:.1f}% Full To-Go</strong> (+${s['avg_togo_addon_usd']:.2f} / +{s['avg_togo_lift_pct']:.1f}% avg packaging, garnish &amp; sauce lift) "
+        f"| <strong>{s['high_cost_item_count']} items &gt; 36%</strong> (Primary Cost-Reduction Targets) | <strong>{s['watch_cost_item_count']} items 32–36%</strong></p>"
+        "<table><thead><tr>"
+        "<th>Menu Category</th><th class='num'>Items</th><th class='num'>Avg Retail</th>"
+        "<th class='num'>Avg Base Cost (%)</th><th class='num'>Avg To-Go Add-On</th>"
+        "<th class='num'>Avg Full To-Go (%)</th><th class='num'>Items &gt;36%</th><th>Target Status</th>"
+        "</tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+    )
+
+
+def generate_full_reports() -> dict:
+    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
+
+    data = compute_plate_cost_explorer_data()
+    menu_items = data["menu_items"]
+    recipes = data["recipes"]
+
+    # 1. Write public SPA explorer payload (mode 0644)
+    for target_dir in (ANALYTICS_DIR, BASE_DIR / "analytics", BASE_DIR / "api" / "analytics"):
+        target_dir.mkdir(parents=True, exist_ok=True)
+        out_json = target_dir / "plate_cost_explorer.json"
+        out_json.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        os.chmod(out_json, 0o644)
+
+    # 2. Write flat line-by-line CSV (mode 0600)
+    flat_csv_rows = []
+    summary_rows_html = []
+    detail_blocks_html = []
+
+    for m in menu_items:
+        pct_str = f"{m['full_cost_pct']:.1f}%" if m["full_cost_pct"] is not None else "N/A"
         summary_rows_html.append(
             f"<tr>"
-            f"<td>{html.escape(cat)}</td>"
-            f"<td>{html.escape(name)}</td>"
-            f"<td class='num'>${base_cogs:.2f}</td>"
-            f"<td class='num'>${veggies_bakery_inc:.2f}</td>"
-            f"<td class='num'>${sauce_inc:.2f}</td>"
-            f"<td class='num'>${pkg_inc:.2f}</td>"
-            f"<td class='num'><strong>${full_togo_cogs:.2f}</strong></td>"
-            f"<td class='num'>${retail_price:.2f}</td>"
+            f"<td>{html.escape(m['category'])}</td>"
+            f"<td>{html.escape(m['name'])}</td>"
+            f"<td class='num'>${m['base_cost_usd']:.2f}</td>"
+            f"<td class='num'>${m['veggies_bakery_addon_usd']:.2f}</td>"
+            f"<td class='num'>${m['sauce_addon_usd']:.2f}</td>"
+            f"<td class='num'>${m['packaging_addon_usd']:.2f}</td>"
+            f"<td class='num'><strong>${m['full_cost_usd']:.2f}</strong></td>"
+            f"<td class='num'>${m['retail_usd']:.2f}</td>"
             f"<td class='num'>{pct_str}</td>"
             f"</tr>"
         )
-
-        line_trs = [
-            f"<tr>"
-            f"<td>Core Portion</td>"
-            f"<td>{html.escape(portion_spec)}</td>"
-            f"<td class='num'>1 order</td>"
-            f"<td class='num'>${base_cogs:.2f}</td>"
-            f"<td>{html.escape(comp_math[:95])}</td>"
-            f"</tr>"
-        ]
-        flat_csv_rows.append({
-            "Menu Item": name,
-            "Menu Category": cat,
-            "Line Category": "Core Portion",
-            "Inventory / Ingredient Item": portion_spec,
-            "Qty / Unit": "1 order",
-            "Incremental Cost ($)": f"{base_cogs:.2f}",
-            "Notes": comp_math,
-        })
-
-        for lc, desc, qty_u, cost, note in addons:
+        line_trs = []
+        for ln in m["lines"]:
             line_trs.append(
                 f"<tr>"
-                f"<td>{html.escape(lc)}</td>"
-                f"<td>{html.escape(desc)}</td>"
-                f"<td class='num'>{html.escape(qty_u)}</td>"
-                f"<td class='num'>${cost:.2f}</td>"
-                f"<td>{html.escape(note)}</td>"
+                f"<td>{html.escape(ln['type'])}</td>"
+                f"<td>{html.escape(ln['item'])}</td>"
+                f"<td class='num'>{html.escape(ln['qty'])}</td>"
+                f"<td class='num'>${ln['cost_usd']:.2f}</td>"
+                f"<td>{html.escape(ln['note'])}</td>"
                 f"</tr>"
             )
             flat_csv_rows.append({
-                "Menu Item": name,
-                "Menu Category": cat,
-                "Line Category": lc,
-                "Inventory / Ingredient Item": desc,
-                "Qty / Unit": qty_u,
-                "Incremental Cost ($)": f"{cost:.2f}",
-                "Notes": note,
+                "Menu Item": m["name"],
+                "Menu Category": m["category"],
+                "Line Category": ln["type"],
+                "Inventory / Ingredient Item": ln["item"],
+                "Qty / Unit": ln["qty"],
+                "Incremental Cost ($)": f"{ln['cost_usd']:.2f}",
+                "Notes": ln["note"],
             })
 
         cost_badge = (
-            f"Full To-Go Cost: ${full_togo_cogs:.2f} ({pct_str} of ${retail_price:.2f})"
-            if retail_price > 0
+            f"Full To-Go Cost: ${m['full_cost_usd']:.2f} ({pct_str} of ${m['retail_usd']:.2f})"
+            if m["retail_usd"] > 0
             else "Non-Food / System Item ($0.00)"
         )
         detail_blocks_html.append(
             f"<section class='plate-block'>"
             f"<div class='plate-hdr'>"
-            f"<h3>{html.escape(name)} <span class='cat-tag'>({html.escape(cat)})</span></h3>"
+            f"<h3>{html.escape(m['name'])} <span class='cat-tag'>({html.escape(m['category'])})</span></h3>"
             f"<span class='pill total-pill'>{cost_badge}</span>"
             f"</div>"
             f"<table><thead><tr><th>Category</th><th>Inventory / Ingredient Item</th><th class='num'>Qty / Unit</th><th class='num'>Cost</th><th>Notes</th></tr></thead>"
@@ -392,48 +564,37 @@ def generate_full_reports() -> None:
             f"</section>"
         )
 
-    # Recipes Section (All 34 Recipes, 151 Ingredient Lines)
     recipe_blocks_html = []
-    total_recipe_lines = 0
-    for r_name, r_lines in recipes_by_name.items():
-        r_cat = (r_lines[0].get("Recipe_Category") or "House Recipe").strip()
-        batch_cost = round(sum(parse_float(x.get("Ingredient_Cost_USD")) for x in r_lines), 2)
-        total_recipe_lines += len(r_lines)
+    for r in recipes:
         r_trs = []
-        for rl in r_lines:
-            ing = (rl.get("Ingredient") or "").strip()
-            meas = (rl.get("Recipe_Measurement") or "").strip()
-            anchor = (rl.get("US_Foods_MOXE_Anchor") or "").strip()
-            icost = parse_float(rl.get("Ingredient_Cost_USD"))
-            share = (rl.get("Share_of_Batch_Pct") or "").strip()
+        for rl in r["lines"]:
             r_trs.append(
                 f"<tr>"
-                f"<td>{html.escape(ing)}</td>"
-                f"<td class='num'>{html.escape(meas)}</td>"
-                f"<td>{html.escape(anchor)}</td>"
-                f"<td class='num'>${icost:.2f}</td>"
-                f"<td class='num'>{html.escape(share)}</td>"
+                f"<td>{html.escape(rl['ingredient'])}</td>"
+                f"<td class='num'>{html.escape(rl['measurement'])}</td>"
+                f"<td>{html.escape(rl['anchor'])}</td>"
+                f"<td class='num'>${rl['cost_usd']:.2f}</td>"
+                f"<td class='num'>{html.escape(rl['share_pct'])}</td>"
                 f"</tr>"
             )
         recipe_blocks_html.append(
             f"<section class='plate-block'>"
             f"<div class='plate-hdr'>"
-            f"<h3>{html.escape(r_name)} <span class='cat-tag'>({html.escape(r_cat)})</span></h3>"
-            f"<span class='pill total-pill'>Total Batch Cost: ${batch_cost:.2f} ({len(r_lines)} ingredients)</span>"
+            f"<h3>{html.escape(r['name'])} <span class='cat-tag'>({html.escape(r['category'])})</span></h3>"
+            f"<span class='pill total-pill'>Total Batch Cost: ${r['batch_cost_usd']:.2f} ({r['ingredient_count']} ingredients)</span>"
             f"</div>"
-            f"<table><thead><tr><th>Ingredient</th><th class='num'>Measurement</th><th>US Foods / MOXE Anchor</th><th class='num'>Line Cost</th><th class='num'>% of Batch</th></tr></thead>"
+            f"<table><thead><tr><th>Ingredient</th><th class='num'>Measurement</th><th>Supply Anchor</th><th class='num'>Line Cost</th><th class='num'>% of Batch</th></tr></thead>"
             f"<tbody>{''.join(r_trs)}</tbody></table>"
             f"</section>"
         )
 
-    # Write CSV
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(flat_csv_rows[0].keys()))
         writer.writeheader()
         writer.writerows(flat_csv_rows)
     os.chmod(OUT_CSV, 0o600)
 
-    # Write HTML (clean, neutral styling — zero yellow row highlighting, no sauce-cup column)
+    s = data["summary"]
     html_doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -451,6 +612,8 @@ def generate_full_reports() -> None:
   th, td {{ border: 1px solid #cbd5e1; padding: 3px 5px; text-align: left; }}
   th {{ background: #f1f5f9; font-weight: 700; }}
   .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
+  .alert {{ color: #b91c1c; font-weight: 700; }}
+  .ok {{ color: #15803d; font-weight: 600; }}
   .plate-block {{ break-inside: avoid; margin-bottom: 9px; border: 1px solid #cbd5e1; border-radius: 5px; padding: 6px; }}
   .plate-hdr {{ display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 4px; }}
   .pill {{ display: inline-block; padding: 2px 7px; border-radius: 999px; font-weight: 700; font-size: 9.5px; }}
@@ -460,34 +623,29 @@ def generate_full_reports() -> None:
 </head>
 <body>
   <h1>Yellow Rose BBQ — Complete Line-by-Line Menu BOM, To-Go Packaging &amp; Recipe Breakdown</h1>
-  <div class="meta">Generated 2026-11-19 • {len(menu_items)} Menu Items • {len(recipes_by_name)} House Recipes ({total_recipe_lines} ingredient lines) • Items already priced in Core Portion are shown at $0.00 add-on to prevent double-counting • Confidential (mode 0600)</div>
+  <div class="meta">Generated 2026-11-21 • {s['menu_item_count']} Menu Items • {s['recipe_count']} House Recipes ({s['recipe_line_count']} ingredient lines) • Items already priced in Core Portion are shown at $0.00 add-on to prevent double-counting • Confidential (mode 0600)</div>
 
-  <h2>Appendix A: Complete Menu Full To-Go Cost Summary ({len(menu_items)} Items)</h2>
+  {build_page1_category_rollup_html(data)}
+
+  <h2>Appendix A: Complete Menu Full To-Go Cost Summary ({s['menu_item_count']} Items)</h2>
   <table>
     <thead>
       <tr>
-        <th>Category</th>
-        <th>Menu Item</th>
-        <th class="num">Core Portion</th>
-        <th class="num">Add-On Veggies/Bakery</th>
-        <th class="num">Add-On Sauce</th>
-        <th class="num">Add-On Packaging</th>
-        <th class="num">Full To-Go COGS</th>
-        <th class="num">Retail</th>
-        <th class="num">Full %</th>
+        <th>Category</th><th>Menu Item</th><th class="num">Core Portion</th>
+        <th class="num">Add-On Veggies/Bakery</th><th class="num">Add-On Sauce</th>
+        <th class="num">Add-On Packaging</th><th class="num">Full To-Go Cost</th>
+        <th class="num">Retail</th><th class="num">Full %</th>
       </tr>
     </thead>
-    <tbody>
-      {''.join(summary_rows_html)}
-    </tbody>
+    <tbody>{''.join(summary_rows_html)}</tbody>
   </table>
 
   <div class="page-break"></div>
-  <h2>Appendix B: Line-by-Line Inventory &amp; Packaging Breakdown for All {len(menu_items)} Menu Items</h2>
+  <h2>Appendix B: Line-by-Line Inventory &amp; Packaging Breakdown for All {s['menu_item_count']} Menu Items</h2>
   {''.join(detail_blocks_html)}
 
   <div class="page-break"></div>
-  <h2>Appendix C: Line-by-Line Ingredient Breakdown for All {len(recipes_by_name)} House Recipes ({total_recipe_lines} Lines)</h2>
+  <h2>Appendix C: Line-by-Line Ingredient Breakdown for All {s['recipe_count']} House Recipes ({s['recipe_line_count']} Lines)</h2>
   {''.join(recipe_blocks_html)}
 </body>
 </html>
@@ -495,38 +653,22 @@ def generate_full_reports() -> None:
     OUT_HTML.write_text(html_doc, encoding="utf-8")
     os.chmod(OUT_HTML, 0o600)
 
-    # Render standalone PDF via Playwright Chromium
     node_pdf = f"""
 const {{ chromium }} = require('playwright');
 (async () => {{
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto('file://{OUT_HTML}', {{ waitUntil: 'networkidle' }});
-  await page.pdf({{
-    path: '{OUT_PDF}',
-    preferCSSPageSize: true,
-    printBackground: true
-  }});
+  await page.pdf({{ path: '{OUT_PDF}', preferCSSPageSize: true, printBackground: true }});
   await browser.close();
 }})();
 """
     subprocess.run(["node", "-e", node_pdf], cwd=str(BASE_DIR), check=True)
     os.chmod(OUT_PDF, 0o600)
 
-    # Rebuild Master PDF cleanly from the untouched .orig backup + new Appendix A/B/C PDF
-    backup_pdf = BACKUPS_DIR / "YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.pdf.20261119.orig"
-    if backup_pdf.exists():
-        merged_tmp = REPORTS_DIR / "YRBBQ_Complete_COGS_and_Inventory_Master_2026-11-15.merged.tmp.pdf"
-        subprocess.run(["pdfunite", str(backup_pdf), str(OUT_PDF), str(merged_tmp)], check=True)
-        shutil.move(str(merged_tmp), str(MASTER_PDF))
-        os.chmod(MASTER_PDF, 0o600)
-        print(f"[OK] Rebuilt {MASTER_PDF.name} cleanly from original backup + updated Appendix A/B/C")
-
-    print(f"[OK] Generated {OUT_CSV.name} ({len(flat_csv_rows)} line items across {len(menu_items)} menu items)")
-    print(f"[OK] Generated {OUT_HTML.name} & {OUT_PDF.name} ({len(recipes_by_name)} recipes, {total_recipe_lines} ingredient lines)")
-    print(f"[SANITY CHECK] Menu items: {len(menu_items)}/137 | Recipes: {len(recipes_by_name)}/34 | Parity: 100% | Warnings: {len(sanity_warnings)}")
-    for w in sanity_warnings:
-        print(f"  [NOTE] {w}")
+    print(f"[OK] Generated plate_cost_explorer.json ({s['menu_item_count']} items, {s['recipe_count']} recipes, {len(data['category_rollup'])} categories)")
+    print(f"[OK] Generated {OUT_CSV.name}, {OUT_HTML.name}, {OUT_PDF.name}")
+    return data
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-21T07:30:11.040183-05:00",
+      "generated_at": "2026-11-21T08:12:50.704965-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~215.7 lbs raw brisket (~75.5 lbs cooked yield) and ~60.1 lbs raw pork shoulder (~26.4 lbs cooked yield) [~275.8 lbs total raw / ~101.9 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (84 projected) and Rosebuds (44 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -17786,7 +17786,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-21T07:30:11.027253-05:00",
+    "generated_at": "2026-11-21T08:12:50.469389-05:00",
     "days": {
       "2026-08-21": {
         "buckets": [
@@ -28531,7 +28531,7 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-21": {
-      "captured_at": "2026-11-21T07:30:11.036517-05:00",
+      "captured_at": "2026-11-21T08:12:50.495249-05:00",
       "hourly_forecast": [
         {
           "hour": 7,
@@ -30814,7 +30814,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "full_cogs": {
-    "generated_at": "2026-11-21T07:30:11.039314-05:00",
+    "generated_at": "2026-11-21T08:12:50.697007-05:00",
     "bom_version": "1.0.0",
     "target_bands": {
       "green_max_pct": 32.0,
@@ -31051,6 +31051,7357 @@ window.BBQ_PAYLOADS = {
         "pacing_label": "Watch (32\u201336%)"
       }
     }
+  },
+  "plate_cost_explorer": {
+    "generated_at": "2026-11-21T08:10:48.874751-05:00",
+    "summary": {
+      "menu_item_count": 137,
+      "recipe_count": 34,
+      "recipe_line_count": 151,
+      "avg_base_food_cost_pct": 24.1,
+      "avg_full_togo_food_cost_pct": 28.1,
+      "avg_togo_lift_pct": 4.0,
+      "avg_togo_addon_usd": 0.58,
+      "high_cost_item_count": 29,
+      "watch_cost_item_count": 15
+    },
+    "category_rollup": [
+      {
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "item_count": 12,
+        "avg_retail_usd": 37.25,
+        "avg_base_cost_usd": 11.71,
+        "avg_base_cost_pct": 30.2,
+        "avg_addon_usd": 1.86,
+        "avg_full_cost_usd": 13.57,
+        "avg_full_cost_pct": 36.4,
+        "togo_lift_pct": 6.2,
+        "high_cost_count": 7,
+        "status_band": "red",
+        "status_label": "High (>36%)"
+      },
+      {
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "item_count": 27,
+        "avg_retail_usd": 11.02,
+        "avg_base_cost_usd": 3.09,
+        "avg_base_cost_pct": 27.5,
+        "avg_addon_usd": 0.63,
+        "avg_full_cost_usd": 3.72,
+        "avg_full_cost_pct": 34.1,
+        "togo_lift_pct": 6.6,
+        "high_cost_count": 11,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)"
+      },
+      {
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "item_count": 17,
+        "avg_retail_usd": 19.21,
+        "avg_base_cost_usd": 5.39,
+        "avg_base_cost_pct": 26.9,
+        "avg_addon_usd": 0.9,
+        "avg_full_cost_usd": 6.29,
+        "avg_full_cost_pct": 32.7,
+        "togo_lift_pct": 5.8,
+        "high_cost_count": 7,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)"
+      },
+      {
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "item_count": 11,
+        "avg_retail_usd": 5.59,
+        "avg_base_cost_usd": 1.27,
+        "avg_base_cost_pct": 27.3,
+        "avg_addon_usd": 0.03,
+        "avg_full_cost_usd": 1.3,
+        "avg_full_cost_pct": 29.1,
+        "togo_lift_pct": 1.8,
+        "high_cost_count": 3,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)"
+      },
+      {
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "item_count": 16,
+        "avg_retail_usd": 4.89,
+        "avg_base_cost_usd": 1.26,
+        "avg_base_cost_pct": 24.5,
+        "avg_addon_usd": 0.01,
+        "avg_full_cost_usd": 1.27,
+        "avg_full_cost_pct": 24.6,
+        "togo_lift_pct": 0.1,
+        "high_cost_count": 0,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)"
+      },
+      {
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "item_count": 33,
+        "avg_retail_usd": 6.58,
+        "avg_base_cost_usd": 1.37,
+        "avg_base_cost_pct": 19.0,
+        "avg_addon_usd": 0.27,
+        "avg_full_cost_usd": 1.64,
+        "avg_full_cost_pct": 23.2,
+        "togo_lift_pct": 4.2,
+        "high_cost_count": 1,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)"
+      },
+      {
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "item_count": 15,
+        "avg_retail_usd": 48.0,
+        "avg_base_cost_usd": 10.02,
+        "avg_base_cost_pct": 20.7,
+        "avg_addon_usd": 1.0,
+        "avg_full_cost_usd": 11.03,
+        "avg_full_cost_pct": 22.8,
+        "togo_lift_pct": 2.1,
+        "high_cost_count": 0,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)"
+      },
+      {
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "item_count": 6,
+        "avg_retail_usd": 25.27,
+        "avg_base_cost_usd": 5.02,
+        "avg_base_cost_pct": 16.4,
+        "avg_addon_usd": 0.03,
+        "avg_full_cost_usd": 5.05,
+        "avg_full_cost_pct": 17.1,
+        "togo_lift_pct": 0.7,
+        "high_cost_count": 0,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)"
+      }
+    ],
+    "menu_items": [
+      {
+        "id": 1,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Brisket Sandwich (Chopped / Moist / Lean)",
+        "portion_spec": "7 oz cooked brisket + brioche bun & pickles",
+        "retail_usd": 17.0,
+        "base_cost_usd": 5.91,
+        "base_cost_pct": 34.8,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 6.58,
+        "full_cost_pct": 38.7,
+        "left_after_cost_usd": 10.42,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "7 oz cooked brisket + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.91,
+            "note": "$5.56 meat (7 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Pulled Pork Sandwich",
+        "portion_spec": "8 oz cooked pork + brioche bun & slaw",
+        "retail_usd": 14.0,
+        "base_cost_usd": 2.42,
+        "base_cost_pct": 17.3,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 3.09,
+        "full_cost_pct": 22.1,
+        "left_after_cost_usd": 10.91,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz cooked pork + brioche bun & slaw",
+            "qty": "1 order",
+            "cost_usd": 2.42,
+            "note": "$2.07 meat (8 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Smoked Turkey Sandwich",
+        "portion_spec": "5 oz cooked turkey breast + brioche bun",
+        "retail_usd": 14.5,
+        "base_cost_usd": 1.95,
+        "base_cost_pct": 13.4,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.76,
+        "full_cost_usd": 2.71,
+        "full_cost_pct": 18.7,
+        "left_after_cost_usd": 11.79,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 oz cooked turkey breast + brioche bun",
+            "qty": "1 order",
+            "cost_usd": 1.95,
+            "note": "$1.60 meat (5 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Sausage Sandwich",
+        "portion_spec": "1 split house link (4 oz) + brioche bun",
+        "retail_usd": 13.0,
+        "base_cost_usd": 1.6,
+        "base_cost_pct": 12.3,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.76,
+        "full_cost_usd": 2.36,
+        "full_cost_pct": 18.2,
+        "left_after_cost_usd": 10.64,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 split house link (4 oz) + brioche bun",
+            "qty": "1 order",
+            "cost_usd": 1.6,
+            "note": "$1.25 link + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Two-Step Sandwich (Brisket & Sausage)",
+        "portion_spec": "6 oz brisket + 1/2 house sausage link + brioche bun",
+        "retail_usd": 18.5,
+        "base_cost_usd": 5.74,
+        "base_cost_pct": 31.0,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.76,
+        "full_cost_usd": 6.5,
+        "full_cost_pct": 35.1,
+        "left_after_cost_usd": 12.0,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz brisket + 1/2 house sausage link + brioche bun",
+            "qty": "1 order",
+            "cost_usd": 5.74,
+            "note": "$4.76 brisket + $0.63 half link + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Texas Half-Pound Burger",
+        "portion_spec": "9 oz fresh ground beef patty + brioche bun & cheddar",
+        "retail_usd": 15.0,
+        "base_cost_usd": 3.56,
+        "base_cost_pct": 23.7,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.51,
+        "full_cost_usd": 4.07,
+        "full_cost_pct": 27.1,
+        "left_after_cost_usd": 10.93,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "9 oz fresh ground beef patty + brioche bun & cheddar",
+            "qty": "1 order",
+            "cost_usd": 3.56,
+            "note": "$2.86 beef (9 oz) + $0.35 bun + $0.35 cheese/toppings"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Smoked Meat Quesadilla (Brisket / Turkey)",
+        "portion_spec": "4 oz meat + 12\" flour tortilla & quesa blend",
+        "retail_usd": 15.0,
+        "base_cost_usd": 3.83,
+        "base_cost_pct": 25.5,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.32,
+        "addon_total_usd": 0.72,
+        "full_cost_usd": 4.55,
+        "full_cost_pct": 30.3,
+        "left_after_cost_usd": 10.45,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4 oz meat + 12\" flour tortilla & quesa blend",
+            "qty": "1 order",
+            "cost_usd": 3.83,
+            "note": "$3.18 meat (4 oz) + $0.65 tortilla/queso"
+          },
+          {
+            "type": "Bakery",
+            "item": "12 in Flour Tortilla (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Fresh Pico / Pickled Red Onion & Jalapeno Garnish",
+            "qty": "1.5 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Crema \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.32,
+            "note": "Quesadilla to-go"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Crispy Quesa Taco (Brisket)",
+        "portion_spec": "2 oz brisket + griddled corn tortilla, queso, consomm\u00e9",
+        "retail_usd": 6.5,
+        "base_cost_usd": 2.04,
+        "base_cost_pct": 31.4,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.28,
+        "addon_total_usd": 0.42,
+        "full_cost_usd": 2.46,
+        "full_cost_pct": 37.8,
+        "left_after_cost_usd": 4.04,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz brisket + griddled corn tortilla, queso, consomm\u00e9",
+            "qty": "1 order",
+            "cost_usd": 2.04,
+            "note": "$1.59 meat (2 oz) + $0.45 taco shell/queso"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "4 oz Consomme Dipping Cup + Lid + Foil Taco Wrap + Clamshell",
+            "qty": "1 set",
+            "cost_usd": 0.28,
+            "note": "Birria to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Crispy Quesa Taco (Barbacoa / Quesabirria)",
+        "portion_spec": "2 oz barbacoa + griddled tortilla, queso & consomm\u00e9 dip",
+        "retail_usd": 7.0,
+        "base_cost_usd": 2.39,
+        "base_cost_pct": 34.1,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.28,
+        "addon_total_usd": 0.42,
+        "full_cost_usd": 2.81,
+        "full_cost_pct": 40.1,
+        "left_after_cost_usd": 4.19,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz barbacoa + griddled tortilla, queso & consomm\u00e9 dip",
+            "qty": "1 order",
+            "cost_usd": 2.39,
+            "note": "$1.59 barbacoa (2 oz) + $0.45 shell/queso + $0.35 consomm\u00e9"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "4 oz Consomme Dipping Cup + Lid + Foil Taco Wrap + Clamshell",
+            "qty": "1 set",
+            "cost_usd": 0.28,
+            "note": "Birria to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Crispy Quesa Taco (Pulled Pork)",
+        "portion_spec": "2 oz pulled pork + griddled corn tortilla & queso",
+        "retail_usd": 6.0,
+        "base_cost_usd": 0.97,
+        "base_cost_pct": 16.2,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.64,
+        "full_cost_usd": 1.61,
+        "full_cost_pct": 26.8,
+        "left_after_cost_usd": 4.39,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz pulled pork + griddled corn tortilla & queso",
+            "qty": "1 order",
+            "cost_usd": 0.97,
+            "note": "$0.52 pork (2 oz) + $0.45 taco shell/queso"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Crispy Quesa Taco (Smoked Turkey)",
+        "portion_spec": "2 oz turkey + griddled corn tortilla & queso",
+        "retail_usd": 6.0,
+        "base_cost_usd": 1.09,
+        "base_cost_pct": 18.2,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.64,
+        "full_cost_usd": 1.73,
+        "full_cost_pct": 28.8,
+        "left_after_cost_usd": 4.27,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz turkey + griddled corn tortilla & queso",
+            "qty": "1 order",
+            "cost_usd": 1.09,
+            "note": "$0.64 turkey (2 oz) + $0.45 taco shell/queso"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Street Taco (Barbacoa)",
+        "portion_spec": "2 oz shredded barbacoa + double street tortilla & garnish",
+        "retail_usd": 5.5,
+        "base_cost_usd": 1.84,
+        "base_cost_pct": 33.5,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.64,
+        "full_cost_usd": 2.48,
+        "full_cost_pct": 45.1,
+        "left_after_cost_usd": 3.02,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz shredded barbacoa + double street tortilla & garnish",
+            "qty": "1 order",
+            "cost_usd": 1.84,
+            "note": "$1.59 barbacoa (2 oz) + $0.25 tortilla/garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Street Taco (Pork / Carnitas)",
+        "portion_spec": "2 oz pulled pork + double street tortilla, cilantro, onion",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.77,
+        "base_cost_pct": 15.4,
+        "veggies_bakery_addon_usd": 0.0,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.5,
+        "full_cost_usd": 1.27,
+        "full_cost_pct": 25.4,
+        "left_after_cost_usd": 3.73,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz pulled pork + double street tortilla, cilantro, onion",
+            "qty": "1 order",
+            "cost_usd": 0.77,
+            "note": "$0.52 meat (2 oz) + $0.25 tortilla/garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Onion & Taco Garnish (included in core spec)",
+            "qty": "1.0 oz",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Street Taco (Smoked Turkey)",
+        "portion_spec": "2 oz sliced turkey + double street tortilla & salsa",
+        "retail_usd": 5.5,
+        "base_cost_usd": 0.89,
+        "base_cost_pct": 16.2,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.64,
+        "full_cost_usd": 1.53,
+        "full_cost_pct": 27.8,
+        "left_after_cost_usd": 3.97,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz sliced turkey + double street tortilla & salsa",
+            "qty": "1 order",
+            "cost_usd": 0.89,
+            "note": "$0.64 meat (2 oz) + $0.25 tortilla/garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Guisada Taco",
+        "portion_spec": "2 oz Texas beef chili guisada + warm flour tortilla",
+        "retail_usd": 5.5,
+        "base_cost_usd": 1.7,
+        "base_cost_pct": 30.9,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.26,
+        "addon_total_usd": 0.64,
+        "full_cost_usd": 2.34,
+        "full_cost_pct": 42.5,
+        "left_after_cost_usd": 3.16,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz Texas beef chili guisada + warm flour tortilla",
+            "qty": "1 order",
+            "cost_usd": 1.7,
+            "note": "$1.45 stewed beef/gravy (2 oz) + $0.25 flour tortilla"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Taco Liner + 6x6 Clamshell + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.26,
+            "note": "Single taco to-go"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "BBQ Sandwich (Standard POS Ring)",
+        "portion_spec": "6 oz cooked brisket/pork + brioche bun & pickles",
+        "retail_usd": 12.0,
+        "base_cost_usd": 5.11,
+        "base_cost_pct": 42.6,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 5.78,
+        "full_cost_pct": 48.2,
+        "left_after_cost_usd": 6.22,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz cooked brisket/pork + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.11,
+            "note": "$4.76 meat (6 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Moist Brisket Sandwich",
+        "portion_spec": "7 oz fatty point sliced brisket + brioche bun & pickles",
+        "retail_usd": 13.0,
+        "base_cost_usd": 5.91,
+        "base_cost_pct": 45.5,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 6.58,
+        "full_cost_pct": 50.6,
+        "left_after_cost_usd": 6.42,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "7 oz fatty point sliced brisket + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.91,
+            "note": "$5.56 meat (7 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Lean Brisket Sandwich",
+        "portion_spec": "7 oz lean flat sliced brisket + brioche bun & pickles",
+        "retail_usd": 13.0,
+        "base_cost_usd": 5.91,
+        "base_cost_pct": 45.5,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 6.58,
+        "full_cost_pct": 50.6,
+        "left_after_cost_usd": 6.42,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "7 oz lean flat sliced brisket + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.91,
+            "note": "$5.56 meat (7 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Chopped Moist Brisket Sandwich",
+        "portion_spec": "7 oz chopped moist brisket + brioche bun & pickles",
+        "retail_usd": 13.0,
+        "base_cost_usd": 5.91,
+        "base_cost_pct": 45.5,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 6.58,
+        "full_cost_pct": 50.6,
+        "left_after_cost_usd": 6.42,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "7 oz chopped moist brisket + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.91,
+            "note": "$5.56 meat (7 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Chopped Lean Brisket Sandwich",
+        "portion_spec": "7 oz chopped lean brisket + brioche bun & pickles",
+        "retail_usd": 13.0,
+        "base_cost_usd": 5.91,
+        "base_cost_pct": 45.5,
+        "veggies_bakery_addon_usd": 0.06,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.67,
+        "full_cost_usd": 6.58,
+        "full_cost_pct": 50.6,
+        "left_after_cost_usd": 6.42,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "7 oz chopped lean brisket + brioche bun & pickles",
+            "qty": "1 order",
+            "cost_usd": 5.91,
+            "note": "$5.56 meat (7 oz) + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Pickles / Slaw (included in core spec) + Fresh White Onion",
+            "qty": "1.5 oz",
+            "cost_usd": 0.06,
+            "note": "Only onion is incremental"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Turkey Bacon Ranch Sandwich",
+        "portion_spec": "5 oz smoked turkey + 2 strips bacon + ranch + brioche bun",
+        "retail_usd": 14.0,
+        "base_cost_usd": 2.5,
+        "base_cost_pct": 17.9,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.0,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.51,
+        "full_cost_usd": 3.01,
+        "full_cost_pct": 21.5,
+        "left_after_cost_usd": 10.99,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 oz smoked turkey + 2 strips bacon + ranch + brioche bun",
+            "qty": "1 order",
+            "cost_usd": 2.5,
+            "note": "$1.60 turkey + $0.55 bacon/ranch + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Buttermilk Ranch (included in core spec)",
+            "qty": "1 portion",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "904 Local Special Sandwich",
+        "portion_spec": "5 oz pulled pork or chopped brisket + brioche bun",
+        "retail_usd": 9.04,
+        "base_cost_usd": 2.4,
+        "base_cost_pct": 26.5,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.76,
+        "full_cost_usd": 3.16,
+        "full_cost_pct": 35.0,
+        "left_after_cost_usd": 5.88,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 oz pulled pork or chopped brisket + brioche bun",
+            "qty": "1 order",
+            "cost_usd": 2.4,
+            "note": "$2.05 blended meat + $0.35 bun"
+          },
+          {
+            "type": "Bakery",
+            "item": "Toasted Brioche Bun (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.0 oz) + Sliced White Onion (0.75 oz)",
+            "qty": "1.75 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh sandwich garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap + 6x6 Clamshell + Bag/Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Sandwich to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Smoked Turkey Quesadilla",
+        "portion_spec": "4 oz smoked turkey + 12\" flour tortilla & quesa blend",
+        "retail_usd": 14.0,
+        "base_cost_usd": 2.23,
+        "base_cost_pct": 15.9,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.32,
+        "addon_total_usd": 0.72,
+        "full_cost_usd": 2.95,
+        "full_cost_pct": 21.1,
+        "left_after_cost_usd": 11.05,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4 oz smoked turkey + 12\" flour tortilla & quesa blend",
+            "qty": "1 order",
+            "cost_usd": 2.23,
+            "note": "$1.28 turkey + $0.95 tortilla & cheese"
+          },
+          {
+            "type": "Bakery",
+            "item": "12 in Flour Tortilla (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Fresh Pico / Pickled Red Onion & Jalapeno Garnish",
+            "qty": "1.5 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Crema \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.32,
+            "note": "Quesadilla to-go"
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Brisket Bacon Ranch Quesadilla",
+        "portion_spec": "4 oz brisket + bacon + ranch + 12\" flour tortilla & cheese",
+        "retail_usd": 16.0,
+        "base_cost_usd": 4.68,
+        "base_cost_pct": 29.2,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.32,
+        "addon_total_usd": 0.72,
+        "full_cost_usd": 5.4,
+        "full_cost_pct": 33.8,
+        "left_after_cost_usd": 10.6,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4 oz brisket + bacon + ranch + 12\" flour tortilla & cheese",
+            "qty": "1 order",
+            "cost_usd": 4.68,
+            "note": "$3.18 brisket + $0.55 bacon/ranch + $0.95 tortilla/cheese"
+          },
+          {
+            "type": "Bakery",
+            "item": "12 in Flour Tortilla (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Fresh Pico / Pickled Red Onion & Jalapeno Garnish",
+            "qty": "1.5 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Crema \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.32,
+            "note": "Quesadilla to-go"
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Turkey Bacon Ranch Quesadilla",
+        "portion_spec": "4 oz turkey + bacon + ranch + 12\" flour tortilla & cheese",
+        "retail_usd": 14.0,
+        "base_cost_usd": 2.78,
+        "base_cost_pct": 19.9,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.32,
+        "addon_total_usd": 0.72,
+        "full_cost_usd": 3.5,
+        "full_cost_pct": 25.0,
+        "left_after_cost_usd": 10.5,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4 oz turkey + bacon + ranch + 12\" flour tortilla & cheese",
+            "qty": "1 order",
+            "cost_usd": 2.78,
+            "note": "$1.28 turkey + $0.55 bacon/ranch + $0.95 tortilla/cheese"
+          },
+          {
+            "type": "Bakery",
+            "item": "12 in Flour Tortilla (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Fresh Pico / Pickled Red Onion & Jalapeno Garnish",
+            "qty": "1.5 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Crema \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.32,
+            "note": "Quesadilla to-go"
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Three-Cheese Quesadilla",
+        "portion_spec": "4 oz melted cheddar/jack/quesa blend + 12\" flour tortilla",
+        "retail_usd": 7.0,
+        "base_cost_usd": 1.3,
+        "base_cost_pct": 18.6,
+        "veggies_bakery_addon_usd": 0.15,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.32,
+        "addon_total_usd": 0.47,
+        "full_cost_usd": 1.77,
+        "full_cost_pct": 25.3,
+        "left_after_cost_usd": 5.23,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4 oz melted cheddar/jack/quesa blend + 12\" flour tortilla",
+            "qty": "1 order",
+            "cost_usd": 1.3,
+            "note": "$0.95 cheese blend + $0.35 tortilla & salsa"
+          },
+          {
+            "type": "Bakery",
+            "item": "12 in Flour Tortilla (included in core spec)",
+            "qty": "1 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Fresh Pico / Pickled Red Onion & Jalapeno Garnish",
+            "qty": "1.5 oz",
+            "cost_usd": 0.15,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.32,
+            "note": "Quesadilla to-go"
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "category": "\ud83e\udd6a TEXAS BBQ SANDWICHES & TACOS",
+        "name": "Quesabirria Taco (Single)",
+        "portion_spec": "2.5 oz braised birria/brisket + griddled tortilla, cheese & consomm\u00e9",
+        "retail_usd": 5.5,
+        "base_cost_usd": 2.0,
+        "base_cost_pct": 36.4,
+        "veggies_bakery_addon_usd": 0.14,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.28,
+        "addon_total_usd": 0.42,
+        "full_cost_usd": 2.42,
+        "full_cost_pct": 44.0,
+        "left_after_cost_usd": 3.08,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2.5 oz braised birria/brisket + griddled tortilla, cheese & consomm\u00e9",
+            "qty": "1 order",
+            "cost_usd": 2.0,
+            "note": "$1.55 birria meat + $0.45 tortilla, cheese & broth"
+          },
+          {
+            "type": "Bakery",
+            "item": "Griddled Corn / Flour Tortilla(s) (included in core spec)",
+            "qty": "1-2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion & Lime Wedge",
+            "qty": "1.0 oz",
+            "cost_usd": 0.14,
+            "note": "Fresh street taco garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "4 oz Consomme Dipping Cup + Lid + Foil Taco Wrap + Clamshell",
+            "qty": "1 set",
+            "cost_usd": 0.28,
+            "note": "Birria to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Sliced Beef Brisket (1 lb)",
+        "portion_spec": "16 oz net cooked butcher paper portion",
+        "retail_usd": 34.0,
+        "base_cost_usd": 12.7,
+        "base_cost_pct": 37.4,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 13.84,
+        "full_cost_pct": 40.7,
+        "left_after_cost_usd": 20.16,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked butcher paper portion",
+            "qty": "1 order",
+            "cost_usd": 12.7,
+            "note": "$5.08 raw price / 0.40 yield factor"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked Brisket Burnt Ends (0.5 lb)",
+        "portion_spec": "8 oz double-smoked brisket point in rich BBQ glaze",
+        "retail_usd": 19.0,
+        "base_cost_usd": 6.8,
+        "base_cost_pct": 35.8,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 0.89,
+        "full_cost_usd": 7.69,
+        "full_cost_pct": 40.5,
+        "left_after_cost_usd": 11.31,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz double-smoked brisket point in rich BBQ glaze",
+            "qty": "1 order",
+            "cost_usd": 6.8,
+            "note": "$6.35 meat (8 oz) + $0.45 butter/sauce reduction"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1x 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 30,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Pork Belly Burnt Ends (1 lb)",
+        "portion_spec": "16 oz net cooked caramelized pork belly cubes",
+        "retail_usd": 26.0,
+        "base_cost_usd": 6.83,
+        "base_cost_pct": 26.3,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 7.97,
+        "full_cost_pct": 30.7,
+        "left_after_cost_usd": 18.03,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked caramelized pork belly cubes",
+            "qty": "1 order",
+            "cost_usd": 6.83,
+            "note": "$6.33 pork belly (16 oz cooked) + $0.50 brown sugar glaze"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 31,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Pulled Pork (1 lb)",
+        "portion_spec": "16 oz net cooked butcher paper portion",
+        "retail_usd": 24.0,
+        "base_cost_usd": 4.14,
+        "base_cost_pct": 17.2,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 5.28,
+        "full_cost_pct": 22.0,
+        "left_after_cost_usd": 18.72,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked butcher paper portion",
+            "qty": "1 order",
+            "cost_usd": 4.14,
+            "note": "$1.82 raw price / 0.44 yield factor"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked Turkey Breast (1 lb)",
+        "portion_spec": "16 oz net cooked sliced portion",
+        "retail_usd": 26.0,
+        "base_cost_usd": 5.11,
+        "base_cost_pct": 19.7,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 6.25,
+        "full_cost_pct": 24.0,
+        "left_after_cost_usd": 19.75,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked sliced portion",
+            "qty": "1 order",
+            "cost_usd": 5.11,
+            "note": "$3.58 raw price / 0.70 yield factor"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 33,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Mild Smoked Sausage (1 lb)",
+        "portion_spec": "16 oz net cooked portion (4 links)",
+        "retail_usd": 22.0,
+        "base_cost_usd": 5.0,
+        "base_cost_pct": 22.7,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 6.14,
+        "full_cost_pct": 27.9,
+        "left_after_cost_usd": 15.86,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked portion (4 links)",
+            "qty": "1 order",
+            "cost_usd": 5.0,
+            "note": "4 links \u00d7 $1.25 base link cost"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 34,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Jalape\u00f1o Cheddar Sausage (1 lb)",
+        "portion_spec": "16 oz net cooked portion (4 links)",
+        "retail_usd": 23.0,
+        "base_cost_usd": 5.52,
+        "base_cost_pct": 24.0,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 6.66,
+        "full_cost_pct": 29.0,
+        "left_after_cost_usd": 16.34,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz net cooked portion (4 links)",
+            "qty": "1 order",
+            "cost_usd": 5.52,
+            "note": "4 links \u00d7 $1.38 cheese/jalape\u00f1o link cost"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 35,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Mild Sausage Link (Original Texas)",
+        "portion_spec": "Single 4 oz smoked link",
+        "retail_usd": 7.0,
+        "base_cost_usd": 1.25,
+        "base_cost_pct": 17.9,
+        "veggies_bakery_addon_usd": 0.09,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.18,
+        "addon_total_usd": 0.52,
+        "full_cost_usd": 1.77,
+        "full_cost_pct": 25.3,
+        "left_after_cost_usd": 5.23,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Single 4 oz smoked link",
+            "qty": "1 order",
+            "cost_usd": 1.25,
+            "note": "70/30 beef trim blend + natural hog casing"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & White Onion",
+            "qty": "1.0 oz",
+            "cost_usd": 0.09,
+            "note": "Garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Pink Butcher Paper + Foil Wrap + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.18,
+            "note": "Single item wrap"
+          }
+        ]
+      },
+      {
+        "id": 36,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Jalape\u00f1o Cheddar Sausage Link",
+        "portion_spec": "Single 4 oz smoked link",
+        "retail_usd": 7.0,
+        "base_cost_usd": 1.38,
+        "base_cost_pct": 19.7,
+        "veggies_bakery_addon_usd": 0.09,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.18,
+        "addon_total_usd": 0.52,
+        "full_cost_usd": 1.9,
+        "full_cost_pct": 27.1,
+        "left_after_cost_usd": 5.1,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Single 4 oz smoked link",
+            "qty": "1 order",
+            "cost_usd": 1.38,
+            "note": "$1.25 base + $0.13 cheese & jalape\u00f1os"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & White Onion",
+            "qty": "1.0 oz",
+            "cost_usd": 0.09,
+            "note": "Garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Pink Butcher Paper + Foil Wrap + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.18,
+            "note": "Single item wrap"
+          }
+        ]
+      },
+      {
+        "id": 37,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked Chicken Wings (5-Piece)",
+        "portion_spec": "5 jumbo smoked wings + rub & sauce",
+        "retail_usd": 11.0,
+        "base_cost_usd": 2.25,
+        "base_cost_pct": 20.5,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.59,
+        "full_cost_usd": 2.84,
+        "full_cost_pct": 25.8,
+        "left_after_cost_usd": 8.16,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 jumbo smoked wings + rub & sauce",
+            "qty": "1 order",
+            "cost_usd": 2.25,
+            "note": "$1.85 raw wings + $0.40 sauce/ranch"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Ranch \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Clamshell + Foil Liner + Wet Wipes + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "Wings to-go"
+          }
+        ]
+      },
+      {
+        "id": 38,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Full Rack Pork Spare Ribs",
+        "portion_spec": "12 bones (~3.0 lbs cooked yield)",
+        "retail_usd": 38.0,
+        "base_cost_usd": 12.0,
+        "base_cost_pct": 31.6,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.75,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.39,
+        "full_cost_usd": 13.39,
+        "full_cost_pct": 35.2,
+        "left_after_cost_usd": 24.61,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 bones (~3.0 lbs cooked yield)",
+            "qty": "1 order",
+            "cost_usd": 12.0,
+            "note": "5 lb raw slab at $2.40 / lb wholesale"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 3x 1.5 oz Portion Cups + Lid",
+            "qty": "3 cups",
+            "cost_usd": 0.75,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 39,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Half Rack Pork Spare Ribs",
+        "portion_spec": "6 bones (~1.5 lbs cooked yield)",
+        "retail_usd": 21.0,
+        "base_cost_usd": 6.0,
+        "base_cost_pct": 28.6,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 7.14,
+        "full_cost_pct": 34.0,
+        "left_after_cost_usd": 13.86,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 bones (~1.5 lbs cooked yield)",
+            "qty": "1 order",
+            "cost_usd": 6.0,
+            "note": "$12.00 full rack cost / 2"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 40,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Single Bone Pork Rib",
+        "portion_spec": "1 bone rib add-on",
+        "retail_usd": 4.0,
+        "base_cost_usd": 1.0,
+        "base_cost_pct": 25.0,
+        "veggies_bakery_addon_usd": 0.09,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.18,
+        "addon_total_usd": 0.52,
+        "full_cost_usd": 1.52,
+        "full_cost_pct": 38.0,
+        "left_after_cost_usd": 2.48,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 bone rib add-on",
+            "qty": "1 order",
+            "cost_usd": 1.0,
+            "note": "$12.00 full rack cost / 12"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & White Onion",
+            "qty": "1.0 oz",
+            "cost_usd": 0.09,
+            "note": "Garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Pink Butcher Paper + Foil Wrap + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.18,
+            "note": "Single item wrap"
+          }
+        ]
+      },
+      {
+        "id": 41,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Beef Dino Short Rib",
+        "portion_spec": "1 single giant plate short rib (~1.5 lbs cooked)",
+        "retail_usd": 42.0,
+        "base_cost_usd": 14.5,
+        "base_cost_pct": 34.5,
+        "veggies_bakery_addon_usd": 0.18,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.46,
+        "addon_total_usd": 1.14,
+        "full_cost_usd": 15.64,
+        "full_cost_pct": 37.2,
+        "left_after_cost_usd": 26.36,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 single giant plate short rib (~1.5 lbs cooked)",
+            "qty": "1 order",
+            "cost_usd": 14.5,
+            "note": "3-bone chuck flap short plate wholesale cut"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & Sliced White Onion (in 4 oz garnish cup)",
+            "qty": "2.5 oz",
+            "cost_usd": 0.18,
+            "note": "Side garnish cup"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "18x24 Pink Butcher Paper + Heavy Foil Sheet + 4 oz Garnish Cup + Bag/Wipes",
+            "qty": "1 set",
+            "cost_usd": 0.46,
+            "note": "Bulk meat / rack wrap"
+          }
+        ]
+      },
+      {
+        "id": 42,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked BBQ Chicken Wings (5-Piece)",
+        "portion_spec": "5 jumbo smoked wings tossed in original BBQ glaze",
+        "retail_usd": 7.5,
+        "base_cost_usd": 2.45,
+        "base_cost_pct": 32.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.59,
+        "full_cost_usd": 3.04,
+        "full_cost_pct": 40.5,
+        "left_after_cost_usd": 4.46,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 jumbo smoked wings tossed in original BBQ glaze",
+            "qty": "1 order",
+            "cost_usd": 2.45,
+            "note": "$2.15 raw wings (5 pc) + $0.30 BBQ glaze & ranch"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Ranch \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Clamshell + Foil Liner + Wet Wipes + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "Wings to-go"
+          }
+        ]
+      },
+      {
+        "id": 43,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked Buffalo Chicken Wings (5-Piece)",
+        "portion_spec": "5 jumbo smoked wings tossed in spicy buffalo sauce",
+        "retail_usd": 7.5,
+        "base_cost_usd": 2.45,
+        "base_cost_pct": 32.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.59,
+        "full_cost_usd": 3.04,
+        "full_cost_pct": 40.5,
+        "left_after_cost_usd": 4.46,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "5 jumbo smoked wings tossed in spicy buffalo sauce",
+            "qty": "1 order",
+            "cost_usd": 2.45,
+            "note": "$2.15 raw wings (5 pc) + $0.30 buffalo glaze & ranch"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) or Ranch \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Clamshell + Foil Liner + Wet Wipes + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "Wings to-go"
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "category": "\ud83e\udd69 SMOKED MEATS BY THE POUND & RIBS",
+        "name": "Smoked Pork Belly (Single Portion)",
+        "portion_spec": "6 oz sliced/cubed smoked pork belly",
+        "retail_usd": 7.5,
+        "base_cost_usd": 2.3,
+        "base_cost_pct": 30.7,
+        "veggies_bakery_addon_usd": 0.09,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.18,
+        "addon_total_usd": 0.52,
+        "full_cost_usd": 2.82,
+        "full_cost_pct": 37.6,
+        "left_after_cost_usd": 4.68,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz sliced/cubed smoked pork belly",
+            "qty": "1 order",
+            "cost_usd": 2.3,
+            "note": "$2.10 pork belly (6 oz cooked) + $0.20 glaze"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles & White Onion",
+            "qty": "1.0 oz",
+            "cost_usd": 0.09,
+            "note": "Garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Pink Butcher Paper + Foil Wrap + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.18,
+            "note": "Single item wrap"
+          }
+        ]
+      },
+      {
+        "id": 45,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "BBQ Plate (1 Meat w/ 2 Sides)",
+        "portion_spec": "0.5 lb brisket + 2 standard sides",
+        "retail_usd": 23.0,
+        "base_cost_usd": 7.55,
+        "base_cost_pct": 32.8,
+        "veggies_bakery_addon_usd": 0.46,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.74,
+        "addon_total_usd": 1.45,
+        "full_cost_usd": 9.0,
+        "full_cost_pct": 39.1,
+        "left_after_cost_usd": 14.0,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "0.5 lb brisket + 2 standard sides",
+            "qty": "1 order",
+            "cost_usd": 7.55,
+            "note": "$6.35 meat + $1.20 two sides"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.5 oz), White Onion (1.0 oz) & Jalapenos",
+            "qty": "2.5 oz",
+            "cost_usd": 0.2,
+            "note": "Plate garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread (2 slices)",
+            "qty": "2 slices",
+            "cost_usd": 0.26,
+            "note": "Plate bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1x 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + 12x12 Butcher Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.74,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 46,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "2 Meat Plate (w/ 2 Sides)",
+        "portion_spec": "0.5 lb brisket + 2 pork ribs + 2 sides",
+        "retail_usd": 29.0,
+        "base_cost_usd": 9.55,
+        "base_cost_pct": 32.9,
+        "veggies_bakery_addon_usd": 0.46,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.74,
+        "addon_total_usd": 1.7,
+        "full_cost_usd": 11.25,
+        "full_cost_pct": 38.8,
+        "left_after_cost_usd": 17.75,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "0.5 lb brisket + 2 pork ribs + 2 sides",
+            "qty": "1 order",
+            "cost_usd": 9.55,
+            "note": "$6.35 brisket + $2.00 ribs + $1.20 sides"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.5 oz), White Onion (1.0 oz) & Jalapenos",
+            "qty": "2.5 oz",
+            "cost_usd": 0.2,
+            "note": "Plate garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread (2 slices)",
+            "qty": "2 slices",
+            "cost_usd": 0.26,
+            "note": "Plate bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lid",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + 12x12 Butcher Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.74,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 47,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Taco Plate (w/ 2 Sides)",
+        "portion_spec": "2 tacos + Tex Mex Rice & Charro Beans",
+        "retail_usd": 16.5,
+        "base_cost_usd": 4.95,
+        "base_cost_pct": 30.0,
+        "veggies_bakery_addon_usd": 0.22,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.72,
+        "addon_total_usd": 1.18,
+        "full_cost_usd": 6.13,
+        "full_cost_pct": 37.2,
+        "left_after_cost_usd": 10.37,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 tacos + Tex Mex Rice & Charro Beans",
+            "qty": "1 order",
+            "cost_usd": 4.95,
+            "note": "$3.80 tacos (avg) + $1.15 rice & beans"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion, Pickled Red Onion & Lime Wedges",
+            "qty": "2.0 oz",
+            "cost_usd": 0.22,
+            "note": "Fresh Tex-Mex garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + Foil Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.72,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 48,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Guisada Plate (w/ 2 Sides & Tortillas)",
+        "portion_spec": "6 oz Texas beef chili guisada + rice, beans & 2 tortillas",
+        "retail_usd": 18.5,
+        "base_cost_usd": 6.0,
+        "base_cost_pct": 32.4,
+        "veggies_bakery_addon_usd": 0.22,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.72,
+        "addon_total_usd": 1.18,
+        "full_cost_usd": 7.18,
+        "full_cost_pct": 38.8,
+        "left_after_cost_usd": 11.32,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz Texas beef chili guisada + rice, beans & 2 tortillas",
+            "qty": "1 order",
+            "cost_usd": 6.0,
+            "note": "$4.35 guisada stew + $1.15 sides + $0.50 tortillas"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion, Pickled Red Onion & Lime Wedges",
+            "qty": "2.0 oz",
+            "cost_usd": 0.22,
+            "note": "Fresh Tex-Mex garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Warm Tortillas (included in core spec)",
+            "qty": "2 ea",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + Foil Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.72,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 49,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Hill Country Trinity w/ 3 Sides",
+        "portion_spec": "0.5 lb brisket + 3 ribs + 1 sausage link + 3 sides",
+        "retail_usd": 39.0,
+        "base_cost_usd": 12.4,
+        "base_cost_pct": 31.8,
+        "veggies_bakery_addon_usd": 0.56,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.88,
+        "addon_total_usd": 1.94,
+        "full_cost_usd": 14.34,
+        "full_cost_pct": 36.8,
+        "left_after_cost_usd": 24.66,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "0.5 lb brisket + 3 ribs + 1 sausage link + 3 sides",
+            "qty": "1 order",
+            "cost_usd": 12.4,
+            "note": "$6.35 + $3.00 + $1.25 + $1.80"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles (2 oz), White Onion (1.5 oz) & Jalapenos",
+            "qty": "3.5 oz",
+            "cost_usd": 0.24,
+            "note": "Platter garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread (3 slices)",
+            "qty": "3 slices",
+            "cost_usd": 0.32,
+            "note": "Platter bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lids",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 Heavy Clamshell + Butcher Liner + 3x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.88,
+            "note": "3-side platter to-go"
+          }
+        ]
+      },
+      {
+        "id": 50,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Pitmaster Platter & 3 Sides",
+        "portion_spec": "0.5 lb brisket + 0.5 lb pork + 3 ribs + 1 sausage + 3 sides",
+        "retail_usd": 48.0,
+        "base_cost_usd": 14.47,
+        "base_cost_pct": 30.1,
+        "veggies_bakery_addon_usd": 0.56,
+        "sauce_addon_usd": 0.5,
+        "packaging_addon_usd": 0.88,
+        "addon_total_usd": 1.94,
+        "full_cost_usd": 16.41,
+        "full_cost_pct": 34.2,
+        "left_after_cost_usd": 31.59,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "0.5 lb brisket + 0.5 lb pork + 3 ribs + 1 sausage + 3 sides",
+            "qty": "1 order",
+            "cost_usd": 14.47,
+            "note": "$6.35 + $2.07 + $3.00 + $1.25 + $1.80"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles (2 oz), White Onion (1.5 oz) & Jalapenos",
+            "qty": "3.5 oz",
+            "cost_usd": 0.24,
+            "note": "Platter garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread (3 slices)",
+            "qty": "3 slices",
+            "cost_usd": 0.32,
+            "note": "Platter bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 2x 1.5 oz Portion Cups + Lids",
+            "qty": "2 cups",
+            "cost_usd": 0.5,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 Heavy Clamshell + Butcher Liner + 3x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.88,
+            "note": "3-side platter to-go"
+          }
+        ]
+      },
+      {
+        "id": 51,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Bevo Platter (Family Feast)",
+        "portion_spec": "1.0 lb brisket + 2 sausage links + 6 ribs (half rack) + 4 sides",
+        "retail_usd": 79.0,
+        "base_cost_usd": 23.6,
+        "base_cost_pct": 29.9,
+        "veggies_bakery_addon_usd": 1.2,
+        "sauce_addon_usd": 1.0,
+        "packaging_addon_usd": 2.1,
+        "addon_total_usd": 4.3,
+        "full_cost_usd": 27.9,
+        "full_cost_pct": 35.3,
+        "left_after_cost_usd": 51.1,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1.0 lb brisket + 2 sausage links + 6 ribs (half rack) + 4 sides",
+            "qty": "1 order",
+            "cost_usd": 23.6,
+            "note": "$12.70 + $2.50 + $6.00 + $2.40"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles (4-6 oz), White Onion (4 oz) & Pickled Jalapenos",
+            "qty": "8-10 oz",
+            "cost_usd": 0.55,
+            "note": "In 8 oz garnish deli cup"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread Loaf Portion",
+            "qty": "6-8 slices",
+            "cost_usd": 0.65,
+            "note": "Feast bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 4x 1.5 oz Portion Cups + Lids",
+            "qty": "4 cups",
+            "cost_usd": 1.0,
+            "note": "Mix of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "Half Foil Pan(s) + Butcher Paper + Quart Side Containers + Bags & Cutlery",
+            "qty": "1 set",
+            "cost_usd": 2.1,
+            "note": "Family feast to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 52,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Kids BBQ Plate (w/ 1 Side & Drink)",
+        "portion_spec": "3 oz pulled pork or brisket + small side + roll & drink",
+        "retail_usd": 8.5,
+        "base_cost_usd": 2.25,
+        "base_cost_pct": 26.5,
+        "veggies_bakery_addon_usd": 0.05,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.42,
+        "addon_total_usd": 0.72,
+        "full_cost_usd": 2.97,
+        "full_cost_pct": 34.9,
+        "left_after_cost_usd": 5.53,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "3 oz pulled pork or brisket + small side + roll & drink",
+            "qty": "1 order",
+            "cost_usd": 2.25,
+            "note": "$1.40 meat + $0.45 side + $0.40 roll & drink"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (optional)",
+            "qty": "0.5 oz",
+            "cost_usd": 0.05,
+            "note": "Kids garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavor"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Clamshell + 6 oz Side Cup + Kids Drink Cup/Lid/Straw + Cutlery",
+            "qty": "1 set",
+            "cost_usd": 0.42,
+            "note": "Kids meal to-go"
+          }
+        ]
+      },
+      {
+        "id": 53,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Kids Taco Plate (w/ 1 Side & Drink)",
+        "portion_spec": "1 soft taco (1.5 oz meat) + small side & drink",
+        "retail_usd": 7.5,
+        "base_cost_usd": 1.65,
+        "base_cost_pct": 22.0,
+        "veggies_bakery_addon_usd": 0.05,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.42,
+        "addon_total_usd": 0.47,
+        "full_cost_usd": 2.12,
+        "full_cost_pct": 28.3,
+        "left_after_cost_usd": 5.38,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 soft taco (1.5 oz meat) + small side & drink",
+            "qty": "1 order",
+            "cost_usd": 1.65,
+            "note": "$0.95 taco + $0.45 side + $0.25 drink"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (optional)",
+            "qty": "0.5 oz",
+            "cost_usd": 0.05,
+            "note": "Kids garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Clamshell + 6 oz Side Cup + Kids Drink Cup/Lid/Straw + Cutlery",
+            "qty": "1 set",
+            "cost_usd": 0.42,
+            "note": "Kids meal to-go"
+          }
+        ]
+      },
+      {
+        "id": 54,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "BBQ Plate w/ 2 Sides (POS Combo Button)",
+        "portion_spec": "0.5 lb smoked meat + 2 standard 6 oz sides",
+        "retail_usd": 18.0,
+        "base_cost_usd": 6.25,
+        "base_cost_pct": 34.7,
+        "veggies_bakery_addon_usd": 0.46,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.74,
+        "addon_total_usd": 1.45,
+        "full_cost_usd": 7.7,
+        "full_cost_pct": 42.8,
+        "left_after_cost_usd": 10.3,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "0.5 lb smoked meat + 2 standard 6 oz sides",
+            "qty": "1 order",
+            "cost_usd": 6.25,
+            "note": "$4.65 blended 0.5 lb meat + $1.60 (2 sides)"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickle Chips (1.5 oz), White Onion (1.0 oz) & Jalapenos",
+            "qty": "2.5 oz",
+            "cost_usd": 0.2,
+            "note": "Plate garnish"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread (2 slices)",
+            "qty": "2 slices",
+            "cost_usd": 0.26,
+            "note": "Plate bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1x 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Choice of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + 12x12 Butcher Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.74,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 55,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "Guisada Taco Plate (w/ 2 Sides)",
+        "portion_spec": "2 beef guisada tacos + Tex Mex Rice & Charro Beans",
+        "retail_usd": 15.0,
+        "base_cost_usd": 4.0,
+        "base_cost_pct": 26.7,
+        "veggies_bakery_addon_usd": 0.22,
+        "sauce_addon_usd": 0.24,
+        "packaging_addon_usd": 0.72,
+        "addon_total_usd": 1.18,
+        "full_cost_usd": 5.18,
+        "full_cost_pct": 34.5,
+        "left_after_cost_usd": 9.82,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 beef guisada tacos + Tex Mex Rice & Charro Beans",
+            "qty": "1 order",
+            "cost_usd": 4.0,
+            "note": "$2.50 (2 guisada tacos) + $1.50 rice & beans"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Cilantro, Diced White Onion, Pickled Red Onion & Lime Wedges",
+            "qty": "2.0 oz",
+            "cost_usd": 0.22,
+            "note": "Fresh Tex-Mex garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House Salsa / Crema (or BBQ Sauce) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.24,
+            "note": "Side dipping cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x9 3-Comp Clamshell + Foil Liner + 2x 8 oz Side Cups + Cutlery/Bag",
+            "qty": "1 set",
+            "cost_usd": 0.72,
+            "note": "Plate to-go kit"
+          }
+        ]
+      },
+      {
+        "id": 56,
+        "category": "\ud83c\udf7d\ufe0f COMBINATION PLATTERS & PLATES",
+        "name": "King of the Hill Pitmaster Feast",
+        "portion_spec": "1 lb brisket + 1 lb pork + full rack ribs + 1 dino rib + 2 links + 4 sides",
+        "retail_usd": 145.0,
+        "base_cost_usd": 47.88,
+        "base_cost_pct": 33.0,
+        "veggies_bakery_addon_usd": 1.2,
+        "sauce_addon_usd": 1.5,
+        "packaging_addon_usd": 2.1,
+        "addon_total_usd": 4.8,
+        "full_cost_usd": 52.68,
+        "full_cost_pct": 36.3,
+        "left_after_cost_usd": 92.32,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 lb brisket + 1 lb pork + full rack ribs + 1 dino rib + 2 links + 4 sides",
+            "qty": "1 order",
+            "cost_usd": 47.88,
+            "note": "$12.70 brisket + $4.14 pork + $13.44 ribs + $11.50 dino + $2.50 links + $3.60 sides"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Dill Pickles (4-6 oz), White Onion (4 oz) & Pickled Jalapenos",
+            "qty": "8-10 oz",
+            "cost_usd": 0.55,
+            "note": "In 8 oz garnish deli cup"
+          },
+          {
+            "type": "Bakery",
+            "item": "Texas Toast / White Bread Loaf Portion",
+            "qty": "6-8 slices",
+            "cost_usd": 0.65,
+            "note": "Feast bread"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 6x 1.5 oz Portion Cups + Lids",
+            "qty": "6 cups",
+            "cost_usd": 1.5,
+            "note": "Mix of house flavors"
+          },
+          {
+            "type": "Packaging",
+            "item": "Half Foil Pan(s) + Butcher Paper + Quart Side Containers + Bags & Cutlery",
+            "qty": "1 set",
+            "cost_usd": 2.1,
+            "note": "Family feast to-go pack"
+          }
+        ]
+      },
+      {
+        "id": 57,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Rose Buds (Bacon-Wrapped Bites)",
+        "portion_spec": "4-pack (bacon, cream cheese, brisket rub)",
+        "retail_usd": 9.0,
+        "base_cost_usd": 1.85,
+        "base_cost_pct": 20.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.28,
+        "addon_total_usd": 0.53,
+        "full_cost_usd": 2.38,
+        "full_cost_pct": 26.4,
+        "left_after_cost_usd": 6.62,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "4-pack (bacon, cream cheese, brisket rub)",
+            "qty": "1 order",
+            "cost_usd": 1.85,
+            "note": "$1.20 bacon + $0.45 cheese/spices + $0.20 packaging"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Sauce ($0.19) + cup/lid ($0.06)"
+          },
+          {
+            "type": "Packaging",
+            "item": "6x6 Hinged Clamshell + Butcher Paper Liner + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.28,
+            "note": "Appetizer to-go"
+          }
+        ]
+      },
+      {
+        "id": 58,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Loaded BBQ Cheese Fries",
+        "portion_spec": "Crinkle-cut fries + queso + 5 oz smoked meat",
+        "retail_usd": 11.5,
+        "base_cost_usd": 2.1,
+        "base_cost_pct": 18.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.61,
+        "full_cost_usd": 2.71,
+        "full_cost_pct": 23.6,
+        "left_after_cost_usd": 8.79,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Crinkle-cut fries + queso + 5 oz smoked meat",
+            "qty": "1 order",
+            "cost_usd": 2.1,
+            "note": "$0.65 fries/queso + $1.45 smoked pork"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Sauce ($0.19) + cup/lid ($0.06)"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Fork + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Loaded fries to-go"
+          }
+        ]
+      },
+      {
+        "id": 59,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Seasoned French Fries",
+        "portion_spec": "6 oz serving crinkle-cut fries + Texas rub",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.54,
+        "base_cost_pct": 12.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.2,
+        "addon_total_usd": 0.2,
+        "full_cost_usd": 0.74,
+        "full_cost_pct": 16.4,
+        "left_after_cost_usd": 3.76,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving crinkle-cut fries + Texas rub",
+            "qty": "1 order",
+            "cost_usd": 0.54,
+            "note": "$0.46 fries + $0.08 seasoning/oil"
+          },
+          {
+            "type": "Packaging",
+            "item": "Paper Fry Boat / 6x6 Vented Clamshell + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.2,
+            "note": "Crispy fries to-go"
+          }
+        ]
+      },
+      {
+        "id": 60,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Texas Frito Pie",
+        "portion_spec": "8 oz chili & smoked brisket + Fritos & queso",
+        "retail_usd": 12.0,
+        "base_cost_usd": 2.9,
+        "base_cost_pct": 24.2,
+        "veggies_bakery_addon_usd": 0.08,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.42,
+        "full_cost_usd": 3.32,
+        "full_cost_pct": 27.7,
+        "left_after_cost_usd": 8.68,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz chili & smoked brisket + Fritos & queso",
+            "qty": "1 order",
+            "cost_usd": 2.9,
+            "note": "$2.10 chili/brisket + $0.45 Fritos + $0.35 queso"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Diced White Onion & Pickled Jalapenos",
+            "qty": "1.0 oz",
+            "cost_usd": 0.08,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Fork + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "Hot appetizer to-go"
+          }
+        ]
+      },
+      {
+        "id": 61,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Texas Red Bowl Chili",
+        "portion_spec": "12 oz smoked brisket Texas red chili + cheddar",
+        "retail_usd": 10.0,
+        "base_cost_usd": 2.7,
+        "base_cost_pct": 27.0,
+        "veggies_bakery_addon_usd": 0.08,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.29,
+        "addon_total_usd": 0.37,
+        "full_cost_usd": 3.07,
+        "full_cost_pct": 30.7,
+        "left_after_cost_usd": 6.93,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz smoked brisket Texas red chili + cheddar",
+            "qty": "1 order",
+            "cost_usd": 2.7,
+            "note": "$2.40 chili meat & spices + $0.30 toppings"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Diced White Onion & Sliced Jalapeno Garnish",
+            "qty": "1.0 oz",
+            "cost_usd": 0.08,
+            "note": "Optional fresh topping"
+          },
+          {
+            "type": "Packaging",
+            "item": "12 oz Soup Container + Vented Lid + Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.29,
+            "note": "Hot liquid to-go"
+          }
+        ]
+      },
+      {
+        "id": 62,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Elote Street Corn / Pasta Salad",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.85,
+        "base_cost_pct": 17.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 1.04,
+        "full_cost_pct": 20.8,
+        "left_after_cost_usd": 3.96,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.85,
+            "note": "Sweet corn + cotija + crema + tajin"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 63,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Charro Beans",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.65,
+        "base_cost_pct": 14.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.84,
+        "full_cost_pct": 18.7,
+        "left_after_cost_usd": 3.66,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.65,
+            "note": "Pinto beans + bacon trimmings + chiles"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 64,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Tex Mex Rice",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.5,
+        "base_cost_pct": 11.1,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.69,
+        "full_cost_pct": 15.3,
+        "left_after_cost_usd": 3.81,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.5,
+            "note": "Long-grain rice + tomato, cumin & mirepoix broth"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 65,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Mac & Cheese",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.95,
+        "base_cost_pct": 19.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 1.14,
+        "full_cost_pct": 22.8,
+        "left_after_cost_usd": 3.86,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.95,
+            "note": "Cavatappi pasta + sharp cheddar b\u00e9chamel"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 66,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Potato Salad / Coleslaw",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.55,
+        "base_cost_pct": 12.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.74,
+        "full_cost_pct": 16.4,
+        "left_after_cost_usd": 3.76,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.55,
+            "note": "Red potatoes / fresh cabbage + dressing"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 67,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Southern Green Beans",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.6,
+        "base_cost_pct": 13.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.79,
+        "full_cost_pct": 17.6,
+        "left_after_cost_usd": 3.71,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.6,
+            "note": "Fresh snipped beans + bacon trim & onion"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 68,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Cowgirl / Cucumber Salad",
+        "portion_spec": "6 oz serving",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.65,
+        "base_cost_pct": 14.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.84,
+        "full_cost_pct": 18.7,
+        "left_after_cost_usd": 3.66,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz serving",
+            "qty": "1 order",
+            "cost_usd": 0.65,
+            "note": "Cucumbers + sweet corn, tomatoes & vinaigrette"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 69,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "San Antonio Caesar Salad (w/ Meat)",
+        "portion_spec": "Romaine, cotija, croutons + 5 oz smoked meat",
+        "retail_usd": 14.5,
+        "base_cost_usd": 4.05,
+        "base_cost_pct": 27.9,
+        "veggies_bakery_addon_usd": 0.0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.34,
+        "full_cost_usd": 4.39,
+        "full_cost_pct": 30.3,
+        "left_after_cost_usd": 10.11,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Romaine, cotija, croutons + 5 oz smoked meat",
+            "qty": "1 order",
+            "cost_usd": 4.05,
+            "note": "$2.95 smoked meat (5 oz) + $1.10 salad base & dressing"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Romaine Lettuce, Parmesan/Cotija & Croutons (in core spec)",
+            "qty": "1 portion",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "Clear Hinged Salad Container + 2 oz Dressing Cup/Lid + Fork",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "To-go salad pack"
+          }
+        ]
+      },
+      {
+        "id": 70,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "San Antonio Caesar Salad (Side)",
+        "portion_spec": "Side romaine salad + shaved parmesan & croutons",
+        "retail_usd": 6.0,
+        "base_cost_usd": 1.1,
+        "base_cost_pct": 18.3,
+        "veggies_bakery_addon_usd": 0.0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.34,
+        "full_cost_usd": 1.44,
+        "full_cost_pct": 24.0,
+        "left_after_cost_usd": 4.56,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Side romaine salad + shaved parmesan & croutons",
+            "qty": "1 order",
+            "cost_usd": 1.1,
+            "note": "Crisp romaine + cotija/parm + Caesar dressing"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Romaine Lettuce, Parmesan/Cotija & Croutons (in core spec)",
+            "qty": "1 portion",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "Clear Hinged Salad Container + 2 oz Dressing Cup/Lid + Fork",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "To-go salad pack"
+          }
+        ]
+      },
+      {
+        "id": 71,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Skillet Cornbread",
+        "portion_spec": "Single baked square",
+        "retail_usd": 3.5,
+        "base_cost_usd": 0.4,
+        "base_cost_pct": 11.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.14,
+        "addon_total_usd": 0.14,
+        "full_cost_usd": 0.54,
+        "full_cost_pct": 15.4,
+        "left_after_cost_usd": 2.96,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Single baked square",
+            "qty": "1 order",
+            "cost_usd": 0.4,
+            "note": "Cornmeal + buttermilk + honey butter glaze"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Wrap Sheet / 6x6 Clamshell + Napkin",
+            "qty": "1 set",
+            "cost_usd": 0.14,
+            "note": "Warm cornbread wrap"
+          }
+        ]
+      },
+      {
+        "id": 72,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Rich Dipping Consomm\u00e9 (8 oz)",
+        "portion_spec": "8 oz cup birria dipping broth w/ cilantro & onion",
+        "retail_usd": 3.5,
+        "base_cost_usd": 0.55,
+        "base_cost_pct": 15.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.21,
+        "addon_total_usd": 0.21,
+        "full_cost_usd": 0.76,
+        "full_cost_pct": 21.7,
+        "left_after_cost_usd": 2.74,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz cup birria dipping broth w/ cilantro & onion",
+            "qty": "1 order",
+            "cost_usd": 0.55,
+            "note": "Smoked beef bone & brisket reduction broth"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Deli Cup + Lid + Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.21,
+            "note": "Hot liquid to-go"
+          }
+        ]
+      },
+      {
+        "id": 73,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Banana Pudding (Individual)",
+        "portion_spec": "6 oz individual cup",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.75,
+        "base_cost_pct": 15.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.17,
+        "addon_total_usd": 0.17,
+        "full_cost_usd": 0.92,
+        "full_cost_pct": 18.4,
+        "left_after_cost_usd": 4.08,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz individual cup",
+            "qty": "1 order",
+            "cost_usd": 0.75,
+            "note": "Vanilla custard + bananas + 'Nilla wafers"
+          },
+          {
+            "type": "Packaging",
+            "item": "6-8 oz Clear Deli Cup + Lid + Plastic Spoon + Napkin",
+            "qty": "1 set",
+            "cost_usd": 0.17,
+            "note": "Dessert to-go"
+          }
+        ]
+      },
+      {
+        "id": 74,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Banana Pudding Large (Pint / 16 oz)",
+        "portion_spec": "16 oz mason jar / container",
+        "retail_usd": 9.5,
+        "base_cost_usd": 1.65,
+        "base_cost_pct": 17.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.23,
+        "addon_total_usd": 0.23,
+        "full_cost_usd": 1.88,
+        "full_cost_pct": 19.8,
+        "left_after_cost_usd": 7.62,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz mason jar / container",
+            "qty": "1 order",
+            "cost_usd": 1.65,
+            "note": "Layered custard + fresh bananas + vanilla wafers"
+          },
+          {
+            "type": "Packaging",
+            "item": "16 oz Pint Container + Lid + Plastic Spoon + Napkin",
+            "qty": "1 set",
+            "cost_usd": 0.23,
+            "note": "Dessert to-go"
+          }
+        ]
+      },
+      {
+        "id": 75,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Scratch Churros (2-Pack)",
+        "portion_spec": "2 fried churros + cinnamon sugar & dulce de leche",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.6,
+        "base_cost_pct": 12.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.16,
+        "addon_total_usd": 0.16,
+        "full_cost_usd": 0.76,
+        "full_cost_pct": 15.2,
+        "left_after_cost_usd": 4.24,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 fried churros + cinnamon sugar & dulce de leche",
+            "qty": "1 order",
+            "cost_usd": 0.6,
+            "note": "Scratch churro batter + cinnamon sugar & caramel dip"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grease-Resistant Pastry Bag / 6x6 Clamshell + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.16,
+            "note": "Dessert to-go"
+          }
+        ]
+      },
+      {
+        "id": 76,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "BBQ Cheese Fries",
+        "portion_spec": "6 oz seasoned fries + warm queso + 4 oz chopped brisket/pork & BBQ drizzle",
+        "retail_usd": 12.0,
+        "base_cost_usd": 3.55,
+        "base_cost_pct": 29.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.61,
+        "full_cost_usd": 4.16,
+        "full_cost_pct": 34.7,
+        "left_after_cost_usd": 7.84,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz seasoned fries + warm queso + 4 oz chopped brisket/pork & BBQ drizzle",
+            "qty": "1 order",
+            "cost_usd": 3.55,
+            "note": "$0.65 fries + $0.75 queso + $2.15 smoked meat"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Sauce ($0.19) + cup/lid ($0.06)"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Fork + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Loaded fries to-go"
+          }
+        ]
+      },
+      {
+        "id": 77,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Texas Cheese Fries (TX Cheese)",
+        "portion_spec": "6 oz seasoned fries + warm queso + bacon, jalape\u00f1os & 4 oz smoked meat",
+        "retail_usd": 12.0,
+        "base_cost_usd": 3.65,
+        "base_cost_pct": 30.4,
+        "veggies_bakery_addon_usd": 0.0,
+        "sauce_addon_usd": 0.25,
+        "packaging_addon_usd": 0.36,
+        "addon_total_usd": 0.61,
+        "full_cost_usd": 4.26,
+        "full_cost_pct": 35.5,
+        "left_after_cost_usd": 7.74,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz seasoned fries + warm queso + bacon, jalape\u00f1os & 4 oz smoked meat",
+            "qty": "1 order",
+            "cost_usd": 3.65,
+            "note": "$0.65 fries + $0.85 queso/bacon + $2.15 smoked meat"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Sliced Jalapenos (included in core spec)",
+            "qty": "0.75 oz",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) \u2014 1.5 oz Portion Cup + Lid",
+            "qty": "1 cup",
+            "cost_usd": 0.25,
+            "note": "Sauce ($0.19) + cup/lid ($0.06)"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Foil Liner + Fork + Napkins",
+            "qty": "1 set",
+            "cost_usd": 0.36,
+            "note": "Loaded fries to-go"
+          }
+        ]
+      },
+      {
+        "id": 78,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Chili Cheese Fries",
+        "portion_spec": "6 oz seasoned fries + 6 oz Texas red brisket chili & cheddar",
+        "retail_usd": 12.0,
+        "base_cost_usd": 2.85,
+        "base_cost_pct": 23.8,
+        "veggies_bakery_addon_usd": 0.08,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.21,
+        "addon_total_usd": 0.29,
+        "full_cost_usd": 3.14,
+        "full_cost_pct": 26.2,
+        "left_after_cost_usd": 8.86,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz seasoned fries + 6 oz Texas red brisket chili & cheddar",
+            "qty": "1 order",
+            "cost_usd": 2.85,
+            "note": "$0.65 fries + $1.65 brisket chili + $0.55 cheese"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Diced White Onion & Sliced Jalapeno Garnish",
+            "qty": "1.0 oz",
+            "cost_usd": 0.08,
+            "note": "Optional fresh topping"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Deli Cup + Lid + Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.21,
+            "note": "Hot liquid to-go"
+          }
+        ]
+      },
+      {
+        "id": 79,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Cheese Fries (Side Order)",
+        "portion_spec": "6 oz seasoned french fries + warm melted queso sauce",
+        "retail_usd": 7.0,
+        "base_cost_usd": 1.4,
+        "base_cost_pct": 20.0,
+        "veggies_bakery_addon_usd": 0.08,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.34,
+        "addon_total_usd": 0.42,
+        "full_cost_usd": 1.82,
+        "full_cost_pct": 26.0,
+        "left_after_cost_usd": 5.18,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz seasoned french fries + warm melted queso sauce",
+            "qty": "1 order",
+            "cost_usd": 1.4,
+            "note": "$0.65 fries + $0.75 warm queso"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Diced White Onion & Pickled Jalapenos",
+            "qty": "1.0 oz",
+            "cost_usd": 0.08,
+            "note": "Fresh garnish"
+          },
+          {
+            "type": "Packaging",
+            "item": "9x6 Hinged Clamshell + Fork + Napkins + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.34,
+            "note": "Hot appetizer to-go"
+          }
+        ]
+      },
+      {
+        "id": 80,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Texas Red Cup Chili (8 oz)",
+        "portion_spec": "8 oz cup smoked brisket Texas red chili + cheddar",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.75,
+        "base_cost_pct": 35.0,
+        "veggies_bakery_addon_usd": 0.08,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.21,
+        "addon_total_usd": 0.29,
+        "full_cost_usd": 2.04,
+        "full_cost_pct": 40.8,
+        "left_after_cost_usd": 2.96,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz cup smoked brisket Texas red chili + cheddar",
+            "qty": "1 order",
+            "cost_usd": 1.75,
+            "note": "$1.45 brisket trim chili + $0.30 cheddar & cup"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Diced White Onion & Sliced Jalapeno Garnish",
+            "qty": "1.0 oz",
+            "cost_usd": 0.08,
+            "note": "Optional fresh topping"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Deli Cup + Lid + Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.21,
+            "note": "Hot liquid to-go"
+          }
+        ]
+      },
+      {
+        "id": 81,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Pimento Cheese w/ Crackers",
+        "portion_spec": "6 oz house sharp cheddar pimento spread + club crackers",
+        "retail_usd": 7.0,
+        "base_cost_usd": 1.6,
+        "base_cost_pct": 22.9,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.18,
+        "addon_total_usd": 0.18,
+        "full_cost_usd": 1.78,
+        "full_cost_pct": 25.4,
+        "left_after_cost_usd": 5.22,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz house sharp cheddar pimento spread + club crackers",
+            "qty": "1 order",
+            "cost_usd": 1.6,
+            "note": "$1.25 cheddar/pimento/mayo + $0.35 crackers"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Deli Cup + Lid (Pimento) + Cracker Sleeves Bag",
+            "qty": "1 set",
+            "cost_usd": 0.18,
+            "note": "Cold dip to-go"
+          }
+        ]
+      },
+      {
+        "id": 82,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Classic Creamy Coleslaw (Side)",
+        "portion_spec": "6 oz shredded green/red cabbage & carrot slaw",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.7,
+        "base_cost_pct": 15.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.89,
+        "full_cost_pct": 19.8,
+        "left_after_cost_usd": 3.61,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz shredded green/red cabbage & carrot slaw",
+            "qty": "1 order",
+            "cost_usd": 0.7,
+            "note": "$0.45 cabbage/carrots + $0.25 slaw dressing"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 83,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Elote Pasta Salad (Side)",
+        "portion_spec": "6 oz roasted corn & cavatappi pasta in cotija crema",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.95,
+        "base_cost_pct": 19.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 1.14,
+        "full_cost_pct": 22.8,
+        "left_after_cost_usd": 3.86,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz roasted corn & cavatappi pasta in cotija crema",
+            "qty": "1 order",
+            "cost_usd": 0.95,
+            "note": "$0.55 cavatappi/corn + $0.40 cotija/crema"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 84,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Smoked Street Corn (Side)",
+        "portion_spec": "6 oz buttered smoked sweet corn kernels with pit rub",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.8,
+        "base_cost_pct": 17.8,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.99,
+        "full_cost_pct": 22.0,
+        "left_after_cost_usd": 3.51,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz buttered smoked sweet corn kernels with pit rub",
+            "qty": "1 order",
+            "cost_usd": 0.8,
+            "note": "$0.55 sweet corn + $0.25 butter & seasoning"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 85,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Saut\u00e9ed Garlic Cabbage (Side)",
+        "portion_spec": "6 oz pan-seared green cabbage with bacon & garlic",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.75,
+        "base_cost_pct": 16.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.94,
+        "full_cost_pct": 20.9,
+        "left_after_cost_usd": 3.56,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz pan-seared green cabbage with bacon & garlic",
+            "qty": "1 order",
+            "cost_usd": 0.75,
+            "note": "$0.45 green cabbage + $0.30 bacon render & garlic"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 86,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Southern Cheese Grits (Side)",
+        "portion_spec": "6 oz stone-ground creamy cheddar grits",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.8,
+        "base_cost_pct": 17.8,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.99,
+        "full_cost_pct": 22.0,
+        "left_after_cost_usd": 3.51,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz stone-ground creamy cheddar grits",
+            "qty": "1 order",
+            "cost_usd": 0.8,
+            "note": "$0.35 grits/cream + $0.45 sharp cheddar & butter"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 87,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Cowgirl Salad (Side)",
+        "portion_spec": "6 oz black bean, sweet corn, tomato & cilantro lime salad",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.8,
+        "base_cost_pct": 17.8,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 0.99,
+        "full_cost_pct": 22.0,
+        "left_after_cost_usd": 3.51,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz black bean, sweet corn, tomato & cilantro lime salad",
+            "qty": "1 order",
+            "cost_usd": 0.8,
+            "note": "$0.55 beans/corn/peppers + $0.25 lime vinaigrette"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 88,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Smokehouse Holiday Stuffing (Side)",
+        "portion_spec": "6 oz savory herb & smoked sausage cornbread dressing",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.9,
+        "base_cost_pct": 20.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.19,
+        "addon_total_usd": 0.19,
+        "full_cost_usd": 1.09,
+        "full_cost_pct": 24.2,
+        "left_after_cost_usd": 3.41,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "6 oz savory herb & smoked sausage cornbread dressing",
+            "qty": "1 order",
+            "cost_usd": 0.9,
+            "note": "$0.50 cornbread/stock + $0.40 smoked sausage & herbs"
+          },
+          {
+            "type": "Packaging",
+            "item": "8 oz Side Deli Cup + Tight-Fit Lid",
+            "qty": "1 set",
+            "cost_usd": 0.12,
+            "note": "Leak-proof side cup"
+          },
+          {
+            "type": "Packaging",
+            "item": "Plastic Fork/Spoon + Napkin + Bag Share",
+            "qty": "1 set",
+            "cost_usd": 0.07,
+            "note": "To-go utensils"
+          }
+        ]
+      },
+      {
+        "id": 89,
+        "category": "\ud83c\udf3d SCRATCH SIDES, APPETIZERS & DESSERTS",
+        "name": "Tex Mex Jalape\u00f1o Cornbread",
+        "portion_spec": "Single baked cheddar-jalape\u00f1o skillet cornbread square",
+        "retail_usd": 3.5,
+        "base_cost_usd": 0.7,
+        "base_cost_pct": 20.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.14,
+        "addon_total_usd": 0.14,
+        "full_cost_usd": 0.84,
+        "full_cost_pct": 24.0,
+        "left_after_cost_usd": 2.66,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Single baked cheddar-jalape\u00f1o skillet cornbread square",
+            "qty": "1 order",
+            "cost_usd": 0.7,
+            "note": "$0.45 cornmeal/buttermilk/eggs + $0.25 cheddar & jalape\u00f1o"
+          },
+          {
+            "type": "Packaging",
+            "item": "Foil Wrap Sheet / 6x6 Clamshell + Napkin",
+            "qty": "1 set",
+            "cost_usd": 0.14,
+            "note": "Warm cornbread wrap"
+          }
+        ]
+      },
+      {
+        "id": 90,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "40ct Wing Catering Tray",
+        "portion_spec": "40 jumbo smoked wings + BBQ/ranch (feeds 8-10)",
+        "retail_usd": 80.0,
+        "base_cost_usd": 17.3,
+        "base_cost_pct": 21.6,
+        "veggies_bakery_addon_usd": 0.45,
+        "sauce_addon_usd": 0.0,
+        "packaging_addon_usd": 1.15,
+        "addon_total_usd": 1.6,
+        "full_cost_usd": 18.9,
+        "full_cost_pct": 23.6,
+        "left_after_cost_usd": 61.1,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "40 jumbo smoked wings + BBQ/ranch (feeds 8-10)",
+            "qty": "1 order",
+            "cost_usd": 17.3,
+            "note": "$14.80 raw wings + $2.50 sauces & catering tray"
+          },
+          {
+            "type": "Fresh Veggies",
+            "item": "Celery / Pickle & Onion Catering Garnish",
+            "qty": "8 oz",
+            "cost_usd": 0.45,
+            "note": "Catering wing garnish"
+          },
+          {
+            "type": "Sauces",
+            "item": "House BBQ Sauce (OG, Spicy, or Mustard) & Ranch \u2014 Bulk Cups",
+            "qty": "2x 8 oz",
+            "cost_usd": 0.0,
+            "note": "Included in core wing tray spec"
+          },
+          {
+            "type": "Packaging",
+            "item": "Full/Half Aluminum Foil Catering Pan + Lid + Tongs",
+            "qty": "1 set",
+            "cost_usd": 1.15,
+            "note": "Catering transport"
+          }
+        ]
+      },
+      {
+        "id": 91,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Signature Side Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 size pan (Mac & Cheese, Beans, etc., feeds 20-25)",
+        "retail_usd": 65.0,
+        "base_cost_usd": 14.5,
+        "base_cost_pct": 22.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 15.45,
+        "full_cost_pct": 23.8,
+        "left_after_cost_usd": 49.55,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 size pan (Mac & Cheese, Beans, etc., feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 14.5,
+            "note": "Batch prep ingredients + aluminum steam pan"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 92,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Skillet Cornbread Tray (10-Count)",
+        "portion_spec": "10 full squares + honey butter glaze",
+        "retail_usd": 30.0,
+        "base_cost_usd": 4.5,
+        "base_cost_pct": 15.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 5.45,
+        "full_cost_pct": 18.2,
+        "left_after_cost_usd": 24.55,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "10 full squares + honey butter glaze",
+            "qty": "1 order",
+            "cost_usd": 4.5,
+            "note": "10 squares \u00d7 $0.40 + $0.50 tray/butter"
+          },
+          {
+            "type": "Packaging",
+            "item": "Half Aluminum Foil Pan + Lid + Serving Spatula",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "10-count cornbread tray"
+          }
+        ]
+      },
+      {
+        "id": 93,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Banana Pudding Catering Tray",
+        "portion_spec": "Deep 1/2 pan banana pudding (feeds 15-20)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 5.8,
+        "base_cost_pct": 12.9,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 6.75,
+        "full_cost_pct": 15.0,
+        "left_after_cost_usd": 38.25,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 pan banana pudding (feeds 15-20)",
+            "qty": "1 order",
+            "cost_usd": 5.8,
+            "note": "3.5x large batch custard, fresh bananas & wafers"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Foil Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Cold dessert catering tray"
+          }
+        ]
+      },
+      {
+        "id": 94,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Charro Bean Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan pinto beans w/ brisket ends (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 10.15,
+        "base_cost_pct": 22.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 11.1,
+        "full_cost_pct": 24.7,
+        "left_after_cost_usd": 33.9,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan pinto beans w/ brisket ends (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 10.15,
+            "note": "$6.20 pinto beans/veg + $3.10 brisket trim + $0.85 foil pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 95,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Coleslaw Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan creamy house slaw (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 8.9,
+        "base_cost_pct": 19.8,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 9.85,
+        "full_cost_pct": 21.9,
+        "left_after_cost_usd": 35.15,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan creamy house slaw (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 8.9,
+            "note": "$5.40 shredded cabbage/carrot + $2.65 dressing + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 96,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Potato Salad Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan mustard/herb potato salad (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 10.2,
+        "base_cost_pct": 22.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 11.15,
+        "full_cost_pct": 24.8,
+        "left_after_cost_usd": 33.85,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan mustard/herb potato salad (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 10.2,
+            "note": "$6.50 red potatoes/eggs + $2.85 dressing + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 97,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Elote Pasta Salad Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan elote pasta salad (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 11.1,
+        "base_cost_pct": 24.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 12.05,
+        "full_cost_pct": 26.8,
+        "left_after_cost_usd": 32.95,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan elote pasta salad (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 11.1,
+            "note": "$6.80 cavatappi/corn + $3.45 cotija/crema + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 98,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Fresh Green Beans Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan southern green beans (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 9.9,
+        "base_cost_pct": 22.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 10.85,
+        "full_cost_pct": 24.1,
+        "left_after_cost_usd": 34.15,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan southern green beans (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 9.9,
+            "note": "$6.90 green beans + $2.15 bacon/onion/stock + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 99,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Green Bean Catering Tray (Alt POS Button)",
+        "portion_spec": "Deep 1/2 steam pan southern green beans (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 9.9,
+        "base_cost_pct": 22.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 10.85,
+        "full_cost_pct": 24.1,
+        "left_after_cost_usd": 34.15,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan southern green beans (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 9.9,
+            "note": "$6.90 green beans + $2.15 bacon/onion/stock + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 100,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Caesar Salad Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan romaine, parmesan, croutons & Caesar dressing",
+        "retail_usd": 45.0,
+        "base_cost_usd": 9.9,
+        "base_cost_pct": 22.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 1.1,
+        "addon_total_usd": 1.1,
+        "full_cost_usd": 11.0,
+        "full_cost_pct": 24.4,
+        "left_after_cost_usd": 34.0,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan romaine, parmesan, croutons & Caesar dressing",
+            "qty": "1 order",
+            "cost_usd": 9.9,
+            "note": "$5.80 chopped romaine + $3.25 parmesan/croutons/dressing + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Foil Pan + Lid + 16 oz Dressing Tub + Tongs",
+            "qty": "1 set",
+            "cost_usd": 1.1,
+            "note": "Salad catering tray"
+          }
+        ]
+      },
+      {
+        "id": 101,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Saut\u00e9ed Cabbage Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan bacon-saut\u00e9ed cabbage (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 8.8,
+        "base_cost_pct": 19.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 9.75,
+        "full_cost_pct": 21.7,
+        "left_after_cost_usd": 35.25,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan bacon-saut\u00e9ed cabbage (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 8.8,
+            "note": "$5.20 green cabbage + $2.75 bacon/butter/garlic + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 102,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Seasoned French Fry Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan seasoned crinkle-cut fries (feeds 15-20)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 8.6,
+        "base_cost_pct": 19.1,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 9.55,
+        "full_cost_pct": 21.2,
+        "left_after_cost_usd": 35.45,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan seasoned crinkle-cut fries (feeds 15-20)",
+            "qty": "1 order",
+            "cost_usd": 8.6,
+            "note": "$6.40 crinkle fries + $1.35 fry oil/rub + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 103,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Smoked Corn Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan buttered smoked sweet corn (feeds 20-25)",
+        "retail_usd": 45.0,
+        "base_cost_usd": 9.6,
+        "base_cost_pct": 21.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 10.55,
+        "full_cost_pct": 23.4,
+        "left_after_cost_usd": 34.45,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan buttered smoked sweet corn (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 9.6,
+            "note": "$6.50 sweet corn + $2.25 butter & pit seasoning + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 104,
+        "category": "\ud83c\udf89 CATERING TRAYS & FAMILY SPECIALS",
+        "name": "Elote Street Corn Catering Tray (1/2 Steam Pan)",
+        "portion_spec": "Deep 1/2 steam pan Mexican street corn w/ cotija & crema (feeds 20-25)",
+        "retail_usd": 50.0,
+        "base_cost_usd": 11.2,
+        "base_cost_pct": 22.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.95,
+        "addon_total_usd": 0.95,
+        "full_cost_usd": 12.15,
+        "full_cost_pct": 24.3,
+        "left_after_cost_usd": 37.85,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Deep 1/2 steam pan Mexican street corn w/ cotija & crema (feeds 20-25)",
+            "qty": "1 order",
+            "cost_usd": 11.2,
+            "note": "$6.50 roasted corn + $3.85 cotija/crema/tajin + $0.85 pan/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deep Half Aluminum Steam Pan + Lid + Serving Spoon",
+            "qty": "1 set",
+            "cost_usd": 0.95,
+            "note": "Half-pan catering side tray"
+          }
+        ]
+      },
+      {
+        "id": 105,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Original Texas BBQ Sauce (8 oz Bottle/Tub)",
+        "portion_spec": "8 oz house espresso/molasses BBQ sauce + deli container",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.06,
+        "base_cost_pct": 21.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 1.09,
+        "full_cost_pct": 21.8,
+        "left_after_cost_usd": 3.91,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz house espresso/molasses BBQ sauce + deli container",
+            "qty": "1 order",
+            "cost_usd": 1.06,
+            "note": "$0.95 house BBQ sauce (8 oz) + $0.11 container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 106,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Spicy Texas BBQ Sauce (8 oz Bottle/Tub)",
+        "portion_spec": "8 oz cayenne/habanero BBQ sauce + deli container",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.11,
+        "base_cost_pct": 22.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 1.14,
+        "full_cost_pct": 22.8,
+        "left_after_cost_usd": 3.86,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz cayenne/habanero BBQ sauce + deli container",
+            "qty": "1 order",
+            "cost_usd": 1.11,
+            "note": "$1.00 spicy BBQ sauce (8 oz) + $0.11 container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 107,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Carolina Gold Mustard Sauce (8 oz Bottle/Tub)",
+        "portion_spec": "8 oz tangy mustard BBQ sauce + deli container",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.01,
+        "base_cost_pct": 20.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 1.04,
+        "full_cost_pct": 20.8,
+        "left_after_cost_usd": 3.96,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz tangy mustard BBQ sauce + deli container",
+            "qty": "1 order",
+            "cost_usd": 1.01,
+            "note": "$0.90 mustard sauce (8 oz) + $0.11 container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 108,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "House Buttermilk Ranch (8 oz Tub)",
+        "portion_spec": "8 oz scratch herb buttermilk ranch + deli container",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.21,
+        "base_cost_pct": 24.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 1.24,
+        "full_cost_pct": 24.8,
+        "left_after_cost_usd": 3.76,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "8 oz scratch herb buttermilk ranch + deli container",
+            "qty": "1 order",
+            "cost_usd": 1.21,
+            "note": "$1.10 mayo/buttermilk/herbs (8 oz) + $0.11 container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 109,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Original Texas BBQ Sauce (16 oz Pint)",
+        "portion_spec": "16 oz pint house original BBQ sauce + container",
+        "retail_usd": 9.75,
+        "base_cost_usd": 2.06,
+        "base_cost_pct": 21.1,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 2.09,
+        "full_cost_pct": 21.4,
+        "left_after_cost_usd": 7.66,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz pint house original BBQ sauce + container",
+            "qty": "1 order",
+            "cost_usd": 2.06,
+            "note": "$1.90 house BBQ sauce (16 oz) + $0.16 pint container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 110,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Spicy Texas BBQ Sauce (16 oz Pint)",
+        "portion_spec": "16 oz pint house spicy BBQ sauce + container",
+        "retail_usd": 9.75,
+        "base_cost_usd": 2.16,
+        "base_cost_pct": 22.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 2.19,
+        "full_cost_pct": 22.5,
+        "left_after_cost_usd": 7.56,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz pint house spicy BBQ sauce + container",
+            "qty": "1 order",
+            "cost_usd": 2.16,
+            "note": "$2.00 spicy BBQ sauce (16 oz) + $0.16 pint container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 111,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Carolina Gold Mustard Sauce (16 oz Pint)",
+        "portion_spec": "16 oz pint tangy mustard BBQ sauce + container",
+        "retail_usd": 9.75,
+        "base_cost_usd": 1.96,
+        "base_cost_pct": 20.1,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 1.99,
+        "full_cost_pct": 20.4,
+        "left_after_cost_usd": 7.76,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz pint tangy mustard BBQ sauce + container",
+            "qty": "1 order",
+            "cost_usd": 1.96,
+            "note": "$1.80 mustard sauce (16 oz) + $0.16 pint container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 112,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "House Buttermilk Ranch (16 oz Pint)",
+        "portion_spec": "16 oz pint scratch buttermilk ranch + container",
+        "retail_usd": 9.75,
+        "base_cost_usd": 2.36,
+        "base_cost_pct": 24.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 2.39,
+        "full_cost_pct": 24.5,
+        "left_after_cost_usd": 7.36,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "16 oz pint scratch buttermilk ranch + container",
+            "qty": "1 order",
+            "cost_usd": 2.36,
+            "note": "$2.20 mayo/buttermilk/herbs (16 oz) + $0.16 pint container/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 113,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Ranch Dressing Side Cup (2 oz)",
+        "portion_spec": "2 oz portion cup buttermilk ranch + lid",
+        "retail_usd": 0.5,
+        "base_cost_usd": 0.26,
+        "base_cost_pct": 52.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 0.29,
+        "full_cost_pct": 58.0,
+        "left_after_cost_usd": 0.21,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz portion cup buttermilk ranch + lid",
+            "qty": "1 order",
+            "cost_usd": 0.26,
+            "note": "$0.22 ranch (2 oz) + $0.04 portion cup/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 114,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Warm Queso Cheese Sauce Side (2 oz)",
+        "portion_spec": "2 oz portion cup melted queso blanco/cheddar",
+        "retail_usd": 1.0,
+        "base_cost_usd": 0.34,
+        "base_cost_pct": 34.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.03,
+        "addon_total_usd": 0.03,
+        "full_cost_usd": 0.37,
+        "full_cost_pct": 37.0,
+        "left_after_cost_usd": 0.63,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "2 oz portion cup melted queso blanco/cheddar",
+            "qty": "1 order",
+            "cost_usd": 0.34,
+            "note": "$0.30 queso sauce (2 oz) + $0.04 portion cup/lid"
+          },
+          {
+            "type": "Packaging",
+            "item": "Deli / Portion Container + Lid (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          },
+          {
+            "type": "Packaging",
+            "item": "To-Go Bag Share",
+            "qty": "1 share",
+            "cost_usd": 0.03,
+            "note": "Per-order share"
+          }
+        ]
+      },
+      {
+        "id": 115,
+        "category": "\ud83c\udf6f HOUSE SAUCES, DRESSINGS & EXTRAS",
+        "name": "Extra Toasted Brioche Bun",
+        "portion_spec": "1 buttered & griddled 4.5\" brioche bun",
+        "retail_usd": 1.0,
+        "base_cost_usd": 0.39,
+        "base_cost_pct": 39.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.07,
+        "addon_total_usd": 0.07,
+        "full_cost_usd": 0.46,
+        "full_cost_pct": 46.0,
+        "left_after_cost_usd": 0.54,
+        "status_band": "red",
+        "status_label": "High (>36%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1 buttered & griddled 4.5\" brioche bun",
+            "qty": "1 order",
+            "cost_usd": 0.39,
+            "note": "$0.35 brioche bun + $0.04 butter"
+          },
+          {
+            "type": "Packaging",
+            "item": "12x12 Butcher Paper Wrap Sheet",
+            "qty": "1 sheet",
+            "cost_usd": 0.07,
+            "note": "Extra bun wrap"
+          }
+        ]
+      },
+      {
+        "id": 116,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Coca-Cola Fountain Drink / Bottled Soda (24 oz)",
+        "portion_spec": "24 oz PET cold cup + slotted lid + straw + BIB syrup & ice",
+        "retail_usd": 2.95,
+        "base_cost_usd": 0.4,
+        "base_cost_pct": 13.6,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.0,
+        "addon_total_usd": 0.0,
+        "full_cost_usd": 0.4,
+        "full_cost_pct": 13.6,
+        "left_after_cost_usd": 2.55,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "24 oz PET cold cup + slotted lid + straw + BIB syrup & ice",
+            "qty": "1 order",
+            "cost_usd": 0.4,
+            "note": "$0.24 BIB syrup + $0.10 PET cup + $0.055 lid/straw"
+          },
+          {
+            "type": "Packaging",
+            "item": "Beverage Cup / Jug, Lid & Straw (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          }
+        ]
+      },
+      {
+        "id": 117,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Kids Fountain Drink (12-14 oz)",
+        "portion_spec": "12-14 oz PET cold cup + lid + straw + BIB syrup & ice",
+        "retail_usd": 1.5,
+        "base_cost_usd": 0.28,
+        "base_cost_pct": 18.7,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.0,
+        "addon_total_usd": 0.0,
+        "full_cost_usd": 0.28,
+        "full_cost_pct": 18.7,
+        "left_after_cost_usd": 1.22,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12-14 oz PET cold cup + lid + straw + BIB syrup & ice",
+            "qty": "1 order",
+            "cost_usd": 0.28,
+            "note": "$0.14 BIB syrup + $0.08 PET cup + $0.055 lid/straw"
+          },
+          {
+            "type": "Packaging",
+            "item": "Beverage Cup / Jug, Lid & Straw (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          }
+        ]
+      },
+      {
+        "id": 118,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Fresh Cherry Limeade (24 oz)",
+        "portion_spec": "24 oz cup + lime juice, cherry syrup, lemon-lime soda & cherry garnish",
+        "retail_usd": 4.5,
+        "base_cost_usd": 0.71,
+        "base_cost_pct": 15.8,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.0,
+        "addon_total_usd": 0.0,
+        "full_cost_usd": 0.71,
+        "full_cost_pct": 15.8,
+        "left_after_cost_usd": 3.79,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "24 oz cup + lime juice, cherry syrup, lemon-lime soda & cherry garnish",
+            "qty": "1 order",
+            "cost_usd": 0.71,
+            "note": "$0.55 lime/cherry syrup/soda + $0.155 cup/lid/straw"
+          },
+          {
+            "type": "Packaging",
+            "item": "Beverage Cup / Jug, Lid & Straw (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          }
+        ]
+      },
+      {
+        "id": 119,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "House Cinnamon Horchata (24 oz)",
+        "portion_spec": "24 oz cup + sweet rice milk, cinnamon & vanilla",
+        "retail_usd": 4.0,
+        "base_cost_usd": 0.66,
+        "base_cost_pct": 16.5,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.0,
+        "addon_total_usd": 0.0,
+        "full_cost_usd": 0.66,
+        "full_cost_pct": 16.5,
+        "left_after_cost_usd": 3.34,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "24 oz cup + sweet rice milk, cinnamon & vanilla",
+            "qty": "1 order",
+            "cost_usd": 0.66,
+            "note": "$0.50 rice milk/condensed milk/cinnamon + $0.155 cup/lid/straw"
+          },
+          {
+            "type": "Packaging",
+            "item": "Beverage Cup / Jug, Lid & Straw (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          }
+        ]
+      },
+      {
+        "id": 120,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Brewed Iced Tea (1 Gallon Jug)",
+        "portion_spec": "1-gallon plastic jug + freshly brewed sweet/unsweet black tea",
+        "retail_usd": 6.75,
+        "base_cost_usd": 1.1,
+        "base_cost_pct": 16.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.0,
+        "addon_total_usd": 0.0,
+        "full_cost_usd": 1.1,
+        "full_cost_pct": 16.3,
+        "left_after_cost_usd": 5.65,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "1-gallon plastic jug + freshly brewed sweet/unsweet black tea",
+            "qty": "1 order",
+            "cost_usd": 1.1,
+            "note": "$0.45 bulk tea & cane sugar + $0.65 gallon jug/cap"
+          },
+          {
+            "type": "Packaging",
+            "item": "Beverage Cup / Jug, Lid & Straw (included in core spec)",
+            "qty": "1 set",
+            "cost_usd": 0.0,
+            "note": "Already priced in Core Portion"
+          }
+        ]
+      },
+      {
+        "id": 121,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Canned Still Water",
+        "portion_spec": "12 oz aluminum can / bottle purified water",
+        "retail_usd": 2.0,
+        "base_cost_usd": 0.38,
+        "base_cost_pct": 19.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 0.39,
+        "full_cost_pct": 19.5,
+        "left_after_cost_usd": 1.61,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz aluminum can / bottle purified water",
+            "qty": "1 order",
+            "cost_usd": 0.38,
+            "note": "$0.38 wholesale beverage unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 122,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Topo Chico Mineral Water / Hard Seltzer",
+        "portion_spec": "12 oz glass bottle / can Topo Chico",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.35,
+        "base_cost_pct": 27.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.36,
+        "full_cost_pct": 27.2,
+        "left_after_cost_usd": 3.64,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz glass bottle / can Topo Chico",
+            "qty": "1 order",
+            "cost_usd": 1.35,
+            "note": "$1.35 wholesale bottle/can cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 123,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Miller Lite (12 oz Can/Bottle)",
+        "portion_spec": "12 oz domestic light lager",
+        "retail_usd": 4.5,
+        "base_cost_usd": 1.1,
+        "base_cost_pct": 24.4,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.11,
+        "full_cost_pct": 24.7,
+        "left_after_cost_usd": 3.39,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz domestic light lager",
+            "qty": "1 order",
+            "cost_usd": 1.1,
+            "note": "$1.10 distributor case unit cost (24-pk)"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 124,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Coors Banquet (12 oz Can/Bottle)",
+        "portion_spec": "12 oz domestic lager",
+        "retail_usd": 5.0,
+        "base_cost_usd": 1.15,
+        "base_cost_pct": 23.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.16,
+        "full_cost_pct": 23.2,
+        "left_after_cost_usd": 3.84,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz domestic lager",
+            "qty": "1 order",
+            "cost_usd": 1.15,
+            "note": "$1.15 distributor case unit cost (24-pk)"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 125,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Shiner Bock (12 oz Can/Bottle)",
+        "portion_spec": "12 oz Texas dark bock beer",
+        "retail_usd": 5.5,
+        "base_cost_usd": 1.35,
+        "base_cost_pct": 24.5,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.36,
+        "full_cost_pct": 24.7,
+        "left_after_cost_usd": 4.14,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz Texas dark bock beer",
+            "qty": "1 order",
+            "cost_usd": 1.35,
+            "note": "$1.35 distributor case unit cost (24-pk)"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 126,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Dos Equis Especial (12 oz Can/Bottle)",
+        "portion_spec": "12 oz Mexican import lager",
+        "retail_usd": 6.0,
+        "base_cost_usd": 1.45,
+        "base_cost_pct": 24.2,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.46,
+        "full_cost_pct": 24.3,
+        "left_after_cost_usd": 4.54,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz Mexican import lager",
+            "qty": "1 order",
+            "cost_usd": 1.45,
+            "note": "$1.45 distributor case unit cost (24-pk)"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 127,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Local Craft IPA (12 oz Can)",
+        "portion_spec": "12 oz regional craft India Pale Ale",
+        "retail_usd": 6.5,
+        "base_cost_usd": 1.85,
+        "base_cost_pct": 28.5,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 1.86,
+        "full_cost_pct": 28.6,
+        "left_after_cost_usd": 4.64,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz regional craft India Pale Ale",
+            "qty": "1 order",
+            "cost_usd": 1.85,
+            "note": "$1.85 craft distributor unit cost (24-pk)"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 128,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Carbliss Black Raspberry Canned Cocktail",
+        "portion_spec": "12 oz RTD vodka cocktail can",
+        "retail_usd": 6.0,
+        "base_cost_usd": 2.1,
+        "base_cost_pct": 35.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 2.11,
+        "full_cost_pct": 35.2,
+        "left_after_cost_usd": 3.89,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz RTD vodka cocktail can",
+            "qty": "1 order",
+            "cost_usd": 2.1,
+            "note": "$2.10 RTD spirits distributor unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 129,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Carbliss Mango Canned Cocktail",
+        "portion_spec": "12 oz RTD vodka cocktail can",
+        "retail_usd": 6.0,
+        "base_cost_usd": 2.1,
+        "base_cost_pct": 35.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 2.11,
+        "full_cost_pct": 35.2,
+        "left_after_cost_usd": 3.89,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz RTD vodka cocktail can",
+            "qty": "1 order",
+            "cost_usd": 2.1,
+            "note": "$2.10 RTD spirits distributor unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 130,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Mango Carbliss Canned Cocktail (Alt Button)",
+        "portion_spec": "12 oz RTD vodka cocktail can",
+        "retail_usd": 6.0,
+        "base_cost_usd": 2.1,
+        "base_cost_pct": 35.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 2.11,
+        "full_cost_pct": 35.2,
+        "left_after_cost_usd": 3.89,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz RTD vodka cocktail can",
+            "qty": "1 order",
+            "cost_usd": 2.1,
+            "note": "$2.10 RTD spirits distributor unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 131,
+        "category": "\ud83e\udd64 BEVERAGES, BEER & COCKTAILS",
+        "name": "Margarita Carbliss Canned Cocktail",
+        "portion_spec": "12 oz RTD tequila margarita cocktail can",
+        "retail_usd": 6.0,
+        "base_cost_usd": 2.1,
+        "base_cost_pct": 35.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.01,
+        "addon_total_usd": 0.01,
+        "full_cost_usd": 2.11,
+        "full_cost_pct": 35.2,
+        "left_after_cost_usd": 3.89,
+        "status_band": "amber",
+        "status_label": "Watch (32\u201336%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "12 oz RTD tequila margarita cocktail can",
+            "qty": "1 order",
+            "cost_usd": 2.1,
+            "note": "$2.10 RTD spirits distributor unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Grab-and-Go Can / Bottle (optional napkin)",
+            "qty": "1 ea",
+            "cost_usd": 0.01,
+            "note": "Pre-packaged beverage"
+          }
+        ]
+      },
+      {
+        "id": 132,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "Yellow Rose BBQ Embroidered Hat",
+        "portion_spec": "Custom embroidered snapback/trucker cap",
+        "retail_usd": 30.0,
+        "base_cost_usd": 8.5,
+        "base_cost_pct": 28.3,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.05,
+        "addon_total_usd": 0.05,
+        "full_cost_usd": 8.55,
+        "full_cost_pct": 28.5,
+        "left_after_cost_usd": 21.45,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Custom embroidered snapback/trucker cap",
+            "qty": "1 order",
+            "cost_usd": 8.5,
+            "note": "$8.50 wholesale embroidered cap unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Retail Bag / Tissue Share",
+            "qty": "1 ea",
+            "cost_usd": 0.05,
+            "note": "Merchandise handoff"
+          }
+        ]
+      },
+      {
+        "id": 133,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "Yellow Rose BBQ Embroidered Patch",
+        "portion_spec": "Iron-on / sew-on woven logo patch",
+        "retail_usd": 6.0,
+        "base_cost_usd": 1.2,
+        "base_cost_pct": 20.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.05,
+        "addon_total_usd": 0.05,
+        "full_cost_usd": 1.25,
+        "full_cost_pct": 20.8,
+        "left_after_cost_usd": 4.75,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Iron-on / sew-on woven logo patch",
+            "qty": "1 order",
+            "cost_usd": 1.2,
+            "note": "$1.20 wholesale woven patch unit cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Retail Bag / Tissue Share",
+            "qty": "1 ea",
+            "cost_usd": 0.05,
+            "note": "Merchandise handoff"
+          }
+        ]
+      },
+      {
+        "id": 134,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "Yellow Rose BBQ Die-Cut Sticker",
+        "portion_spec": "Weatherproof vinyl logo decal",
+        "retail_usd": 2.0,
+        "base_cost_usd": 0.25,
+        "base_cost_pct": 12.5,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0.05,
+        "addon_total_usd": 0.05,
+        "full_cost_usd": 0.3,
+        "full_cost_pct": 15.0,
+        "left_after_cost_usd": 1.7,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Weatherproof vinyl logo decal",
+            "qty": "1 order",
+            "cost_usd": 0.25,
+            "note": "$0.25 bulk vinyl print cost"
+          },
+          {
+            "type": "Packaging",
+            "item": "Retail Bag / Tissue Share",
+            "qty": "1 ea",
+            "cost_usd": 0.05,
+            "note": "Merchandise handoff"
+          }
+        ]
+      },
+      {
+        "id": 135,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "Gift Card Load ($5.00 Base Denomination)",
+        "portion_spec": "Stored-value gift card / PVC card carrier (non-food liability)",
+        "retail_usd": 5.0,
+        "base_cost_usd": 0.15,
+        "base_cost_pct": 3.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0,
+        "addon_total_usd": 0,
+        "full_cost_usd": 0.15,
+        "full_cost_pct": 3.0,
+        "left_after_cost_usd": 4.85,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Stored-value gift card / PVC card carrier (non-food liability)",
+            "qty": "1 order",
+            "cost_usd": 0.15,
+            "note": "$0.15 PVC card & sleeve cost (load value redeemed on food)"
+          },
+          {
+            "type": "System / Non-Food",
+            "item": "No food or to-go packaging depleted",
+            "qty": "0",
+            "cost_usd": 0.0,
+            "note": "Fee, gift card, or POS instruction"
+          }
+        ]
+      },
+      {
+        "id": 136,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "Catering Delivery Fee",
+        "portion_spec": "Offsite catering delivery, fuel & insulated cambro transport",
+        "retail_usd": 83.33,
+        "base_cost_usd": 15.0,
+        "base_cost_pct": 18.0,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0,
+        "addon_total_usd": 0,
+        "full_cost_usd": 15.0,
+        "full_cost_pct": 18.0,
+        "left_after_cost_usd": 68.33,
+        "status_band": "green",
+        "status_label": "Healthy (<32%)",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Offsite catering delivery, fuel & insulated cambro transport",
+            "qty": "1 order",
+            "cost_usd": 15.0,
+            "note": "$15.00 avg driver fuel/mileage reimbursement vs $83.33 avg fee"
+          },
+          {
+            "type": "System / Non-Food",
+            "item": "No food or to-go packaging depleted",
+            "qty": "0",
+            "cost_usd": 0.0,
+            "note": "Fee, gift card, or POS instruction"
+          }
+        ]
+      },
+      {
+        "id": 137,
+        "category": "\ud83e\udde2 MERCHANDISE, FEES & POS SYSTEM ITEMS",
+        "name": "POS Kitchen Modifier (Dont Make Instruction)",
+        "portion_spec": "Non-food POS kitchen hold/prep instruction button ($0.00 ring)",
+        "retail_usd": 0.0,
+        "base_cost_usd": 0.0,
+        "base_cost_pct": null,
+        "veggies_bakery_addon_usd": 0,
+        "sauce_addon_usd": 0,
+        "packaging_addon_usd": 0,
+        "addon_total_usd": 0,
+        "full_cost_usd": 0.0,
+        "full_cost_pct": null,
+        "left_after_cost_usd": 0.0,
+        "status_band": "neutral",
+        "status_label": "System / N/A",
+        "lines": [
+          {
+            "type": "Core Portion",
+            "item": "Non-food POS kitchen hold/prep instruction button ($0.00 ring)",
+            "qty": "1 order",
+            "cost_usd": 0.0,
+            "note": "$0.00 non-depleting POS kitchen routing flag"
+          },
+          {
+            "type": "System / Non-Food",
+            "item": "No food or to-go packaging depleted",
+            "qty": "0",
+            "cost_usd": 0.0,
+            "note": "Fee, gift card, or POS instruction"
+          }
+        ]
+      }
+    ],
+    "recipes": [
+      {
+        "name": "Frijoles Charros (Small Kettle Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 9.35,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Pinto Beans (Dry)",
+            "measurement": "1 lb",
+            "anchor": "US Foods #2214914 Pinto Beans",
+            "cost_usd": 1.15,
+            "share_pct": "12.3%"
+          },
+          {
+            "ingredient": "Ground Chorizo",
+            "measurement": "1/3 lb (5.3 oz)",
+            "anchor": "House Pork Chorizo Grind",
+            "cost_usd": 1.35,
+            "share_pct": "14.4%"
+          },
+          {
+            "ingredient": "Smoked Bacon (Cubed)",
+            "measurement": "4 strips (150 g)",
+            "anchor": "US Foods #2569820 Layout Bacon",
+            "cost_usd": 1.45,
+            "share_pct": "15.5%"
+          },
+          {
+            "ingredient": "Smoked Sausage / Franks (Cubed)",
+            "measurement": "3 links (~12 oz)",
+            "anchor": "House Mild Sausage Links",
+            "cost_usd": 3.1,
+            "share_pct": "33.2%"
+          },
+          {
+            "ingredient": "Roma Tomatoes (Diced)",
+            "measurement": "3 tomatoes (250 g)",
+            "anchor": "US Foods #6952840 Roma Tomato",
+            "cost_usd": 0.95,
+            "share_pct": "10.2%"
+          },
+          {
+            "ingredient": "Yellow Onion, Garlic, Serrano & Jalape\u00f1o",
+            "measurement": "1.5 onions + 4 cloves + 2 chiles",
+            "anchor": "US Foods Produce (#7816325 / #6921415)",
+            "cost_usd": 1.35,
+            "share_pct": "14.4%"
+          }
+        ]
+      },
+      {
+        "name": "CHARRO BEANS (Commercial Pit Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 22.8,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Pinto Beans (#10 Cans)",
+            "measurement": "2 cans (#10)",
+            "anchor": "US Foods #1984319 Pinto Beans",
+            "cost_usd": 11.8,
+            "share_pct": "51.8%"
+          },
+          {
+            "ingredient": "Dried Guajillo, Arbol & Ancho Peppers",
+            "measurement": "20 guajillo + 6 arbol + 2 ancho",
+            "anchor": "US Foods Dried Chiles (#4128901)",
+            "cost_usd": 3.85,
+            "share_pct": "16.9%"
+          },
+          {
+            "ingredient": "Diced Yellow Onions",
+            "measurement": "1/4 pan (~1 qt)",
+            "anchor": "US Foods #7816325 Jumbo Yellow Onion",
+            "cost_usd": 1.9,
+            "share_pct": "8.3%"
+          },
+          {
+            "ingredient": "Diced Roma Tomatoes",
+            "measurement": "1/9 pan (~1 qt)",
+            "anchor": "US Foods #6952840 Roma Tomato",
+            "cost_usd": 2.2,
+            "share_pct": "9.6%"
+          },
+          {
+            "ingredient": "Sliced/Diced Jalape\u00f1os",
+            "measurement": "1/3 pan (~12 oz)",
+            "anchor": "US Foods #6921415 Fresh Jalape\u00f1o",
+            "cost_usd": 1.4,
+            "share_pct": "6.1%"
+          },
+          {
+            "ingredient": "Chicken Bouillon, Garlic, Onion Pwd, Oregano, Cumin, Salt",
+            "measurement": "14 tbsp total spices",
+            "anchor": "US Foods Spice Rack (#3184920)",
+            "cost_usd": 1.65,
+            "share_pct": "7.2%"
+          }
+        ]
+      },
+      {
+        "name": "Mexican Rice (Tex-Mex Rice)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 3.2,
+        "ingredient_count": 5,
+        "lines": [
+          {
+            "ingredient": "Long Grain White Rice",
+            "measurement": "2 cups (~1 lb raw)",
+            "anchor": "US Foods #1049218 Long Grain Parboiled Rice",
+            "cost_usd": 0.95,
+            "share_pct": "29.7%"
+          },
+          {
+            "ingredient": "Large Roma Tomatoes",
+            "measurement": "3 large tomatoes",
+            "anchor": "US Foods #6952840 Roma Tomato",
+            "cost_usd": 1.05,
+            "share_pct": "32.8%"
+          },
+          {
+            "ingredient": "Yellow Onion & Fresh Garlic",
+            "measurement": "1/4 onion + 1 clove",
+            "anchor": "US Foods #7816325 Onion / Garlic",
+            "cost_usd": 0.35,
+            "share_pct": "10.9%"
+          },
+          {
+            "ingredient": "Chicken Bouillon, Tomato Bouillon, Cumin & Salt",
+            "measurement": "5.5 tsp total",
+            "anchor": "US Foods Knorr Caldo / Spices",
+            "cost_usd": 0.55,
+            "share_pct": "17.2%"
+          },
+          {
+            "ingredient": "Cooking Oil",
+            "measurement": "1/4 cup",
+            "anchor": "US Foods #6374235 Liquid Fry/Cooking Oil",
+            "cost_usd": 0.3,
+            "share_pct": "9.4%"
+          }
+        ]
+      },
+      {
+        "name": "Smoked Corn (1/2 Steam Pan Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 9.15,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Whole Kernel Sweet Corn (Drained)",
+            "measurement": "1 deep 1/2 pan (~6.5 lbs)",
+            "anchor": "US Foods #5412890 Sweet Kernel Corn",
+            "cost_usd": 6.5,
+            "share_pct": "71.0%"
+          },
+          {
+            "ingredient": "Pure Honey",
+            "measurement": "1/2 cup (6 oz wt)",
+            "anchor": "US Foods #3091845 Clover Honey Jug",
+            "cost_usd": 1.45,
+            "share_pct": "15.8%"
+          },
+          {
+            "ingredient": "Margarine / Butter Blend",
+            "measurement": "1/2 cup (4 oz)",
+            "anchor": "US Foods #2349180 Whipped Margarine/Butter",
+            "cost_usd": 0.65,
+            "share_pct": "7.1%"
+          },
+          {
+            "ingredient": "Cajun Seasoning & House Fry Seasoning",
+            "measurement": "3 tbsp blend",
+            "anchor": "US Foods Cajun & Fry Rubs",
+            "cost_usd": 0.55,
+            "share_pct": "6.0%"
+          }
+        ]
+      },
+      {
+        "name": "Mac and Cheese (Full Master Batch \u2014 3 Bag / 3 Log)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 175.4,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Cavatappi / Elbow Macaroni Pasta",
+            "measurement": "15 lbs dry (~30 lbs cooked)",
+            "anchor": "US Foods #1085157 Cavatappi Pasta",
+            "cost_usd": 24.5,
+            "share_pct": "14.0%"
+          },
+          {
+            "ingredient": "Shredded Cheddar Cheese (3 Bags = 15 lbs)",
+            "measurement": "3 bags (15 lbs)",
+            "anchor": "US Foods #4373866 Feather Shred Cheddar",
+            "cost_usd": 48.0,
+            "share_pct": "27.4%"
+          },
+          {
+            "ingredient": "Velveeta / Loaf Melting Cheese (3 Logs = 15 lbs)",
+            "measurement": "3 logs (15 lbs)",
+            "anchor": "US Foods #4391820 Pasteurized Cheese Loaf",
+            "cost_usd": 43.5,
+            "share_pct": "24.8%"
+          },
+          {
+            "ingredient": "Half and Half Cream (10 Quarts)",
+            "measurement": "10 quarts",
+            "anchor": "US Foods #2341238 Grade A Half & Half",
+            "cost_usd": 29.5,
+            "share_pct": "16.8%"
+          },
+          {
+            "ingredient": "Nacho Cheese Sauce (#10 Cans)",
+            "measurement": "3 cans (#10)",
+            "anchor": "US Foods #1982340 Nacho Cheese Sauce",
+            "cost_usd": 28.5,
+            "share_pct": "16.2%"
+          },
+          {
+            "ingredient": "Macaroni & Cheese Seasoning Blend",
+            "measurement": "1/2 cup",
+            "anchor": "House Mac Seasoning Blend",
+            "cost_usd": 1.4,
+            "share_pct": "0.8%"
+          }
+        ]
+      },
+      {
+        "name": "Sammie Mac (Line Service Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 16.4,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "Cooked Cavatappi Noodles",
+            "measurement": "3 quarts (~3.5 lbs)",
+            "anchor": "US Foods #1085157 Cavatappi Pasta",
+            "cost_usd": 3.85,
+            "share_pct": "23.5%"
+          },
+          {
+            "ingredient": "Shredded Cheddar & Melted Cheese Blend",
+            "measurement": "3 quarts (~3.0 lbs)",
+            "anchor": "US Foods #4373866 Shredded Cheddar",
+            "cost_usd": 9.6,
+            "share_pct": "58.5%"
+          },
+          {
+            "ingredient": "Half and Half Cream",
+            "measurement": "4 cups (1 quart)",
+            "anchor": "US Foods #2341238 Grade A Half & Half",
+            "cost_usd": 2.95,
+            "share_pct": "18.0%"
+          }
+        ]
+      },
+      {
+        "name": "Pot Salad (Full 12-Potato Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 17.3,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Large Red / Russet Potatoes (Diced)",
+            "measurement": "12 big potatoes (~9 lbs)",
+            "anchor": "US Foods #6812390 Chef/Red Potatoes",
+            "cost_usd": 7.65,
+            "share_pct": "44.2%"
+          },
+          {
+            "ingredient": "Heavy Duty Mayonnaise",
+            "measurement": "6 cups (3 pints)",
+            "anchor": "US Foods #3918240 Heavy Duty Mayo",
+            "cost_usd": 4.5,
+            "share_pct": "26.0%"
+          },
+          {
+            "ingredient": "Cultured Sour Cream",
+            "measurement": "1 cup (8 oz)",
+            "anchor": "US Foods #2391840 Cultured Sour Cream",
+            "cost_usd": 0.95,
+            "share_pct": "5.5%"
+          },
+          {
+            "ingredient": "Yellow Mustard & White Vinegar",
+            "measurement": "1/2 cup mustard + 1 cup vinegar",
+            "anchor": "US Foods Mustard / White Vinegar",
+            "cost_usd": 0.65,
+            "share_pct": "3.8%"
+          },
+          {
+            "ingredient": "Minced Onion, Minced Pickles & Sweet Relish",
+            "measurement": "1 cup each (3 cups total)",
+            "anchor": "US Foods Dill Pickle / Relish / Onion",
+            "cost_usd": 2.4,
+            "share_pct": "13.9%"
+          },
+          {
+            "ingredient": "Dry Parsley, Garlic, Fry Seasoning & Fresh Dill",
+            "measurement": "13 tsp total herbs/spices",
+            "anchor": "US Foods Spice Rack & Fresh Dill",
+            "cost_usd": 1.15,
+            "share_pct": "6.6%"
+          }
+        ]
+      },
+      {
+        "name": "Potato Salad (Half Batch \u2014 6 Large Potatoes)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 8.45,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Large Potatoes (Cut & Boiled)",
+            "measurement": "6 large potatoes (~4.5 lbs)",
+            "anchor": "US Foods #6812390 Potatoes",
+            "cost_usd": 3.85,
+            "share_pct": "45.6%"
+          },
+          {
+            "ingredient": "Heavy Duty Mayonnaise & Sour Cream",
+            "measurement": "3 cups mayo + 1/2 cup sour cream",
+            "anchor": "US Foods Mayo & Sour Cream",
+            "cost_usd": 2.75,
+            "share_pct": "32.5%"
+          },
+          {
+            "ingredient": "Diced Dill Pickle, Diced Onion & White Vinegar",
+            "measurement": "1/2 cup each",
+            "anchor": "US Foods Pickles / Onion / Vinegar",
+            "cost_usd": 1.2,
+            "share_pct": "14.2%"
+          },
+          {
+            "ingredient": "Chopped Fresh Dill, Parsley, Garlic Pwd, Salt, Pepper",
+            "measurement": "Seasoning blend",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.65,
+            "share_pct": "7.7%"
+          }
+        ]
+      },
+      {
+        "name": "Sausage and Cabbage Saut\u00e9 (Saut\u00e9ed Garlic Cabbage)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 7.75,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Fresh Green Cabbage (Chopped)",
+            "measurement": "1 large head (~3.5 lbs)",
+            "anchor": "US Foods #6719280 Green Cabbage",
+            "cost_usd": 2.8,
+            "share_pct": "36.1%"
+          },
+          {
+            "ingredient": "Diced House Smoked Sausage",
+            "measurement": "~12 oz diced links",
+            "anchor": "House Mild Smoked Sausage",
+            "cost_usd": 3.1,
+            "share_pct": "40.0%"
+          },
+          {
+            "ingredient": "Large Yellow Onion & Roma Tomato",
+            "measurement": "1 large onion + 1/2 tomato",
+            "anchor": "US Foods Onion & Roma Tomato",
+            "cost_usd": 1.1,
+            "share_pct": "14.2%"
+          },
+          {
+            "ingredient": "Butter, Red Wine Vinegar, House Beef Rub & Red Pepper Flake",
+            "measurement": "2 tbsp butter + vinegar & rub",
+            "anchor": "US Foods Butter / Vinegar / Spices",
+            "cost_usd": 0.75,
+            "share_pct": "9.7%"
+          }
+        ]
+      },
+      {
+        "name": "Pimento Cheese (10-Lb Master Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 44.8,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Mild Cheddar Cheese (Shredded)",
+            "measurement": "5 lbs",
+            "anchor": "US Foods #4373866 Mild Cheddar",
+            "cost_usd": 16.0,
+            "share_pct": "35.7%"
+          },
+          {
+            "ingredient": "White Sharp Cheddar Cheese",
+            "measurement": "3 lbs",
+            "anchor": "US Foods Sharp White Cheddar",
+            "cost_usd": 10.8,
+            "share_pct": "24.1%"
+          },
+          {
+            "ingredient": "Yellow Sharp Cheddar Cheese",
+            "measurement": "2 lbs",
+            "anchor": "US Foods Sharp Yellow Cheddar",
+            "cost_usd": 6.8,
+            "share_pct": "15.2%"
+          },
+          {
+            "ingredient": "Heavy Duty Mayonnaise",
+            "measurement": "6 cups (~48 oz)",
+            "anchor": "US Foods #3918240 Heavy Duty Mayo",
+            "cost_usd": 4.5,
+            "share_pct": "10.0%"
+          },
+          {
+            "ingredient": "Diced Pimentos (Drained)",
+            "measurement": "5 jars (4 oz each = 20 oz)",
+            "anchor": "US Foods Diced Red Pimentos",
+            "cost_usd": 5.25,
+            "share_pct": "11.7%"
+          },
+          {
+            "ingredient": "Dill Weed, Garlic, 20-Mesh Pepper, Thyme, White Pepper, Sugar",
+            "measurement": "8.5 tbsp spices + 1/4 cup sugar",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 1.45,
+            "share_pct": "3.2%"
+          }
+        ]
+      },
+      {
+        "name": "Asiago Cheddar Grits (Deep 1/6 Pan + 16 oz Batch)",
+        "category": "\ud83c\udf3d Scratch Sides & Starches",
+        "batch_cost_usd": 9.65,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Heavy Cream / Half & Half + Water",
+            "measurement": "4 cups cream + 4 cups water",
+            "anchor": "US Foods #2341238 Cream / Dairy",
+            "cost_usd": 3.2,
+            "share_pct": "33.2%"
+          },
+          {
+            "ingredient": "Stone-Ground / Quick Grits",
+            "measurement": "2 cups dry",
+            "anchor": "US Foods Quaker/Hominy Grits",
+            "cost_usd": 0.85,
+            "share_pct": "8.8%"
+          },
+          {
+            "ingredient": "House Mac & Cheese Sauce",
+            "measurement": "2 cups (16 oz)",
+            "anchor": "House Cheese Sauce Base",
+            "cost_usd": 2.4,
+            "share_pct": "24.9%"
+          },
+          {
+            "ingredient": "Shredded Asiago Cheese",
+            "measurement": "1 cup (~4 oz)",
+            "anchor": "US Foods Shredded Asiago",
+            "cost_usd": 1.65,
+            "share_pct": "17.1%"
+          },
+          {
+            "ingredient": "Shredded Sharp Cheddar Cheese",
+            "measurement": "1.5 cups (~6 oz)",
+            "anchor": "US Foods #4373866 Shredded Cheddar",
+            "cost_usd": 1.2,
+            "share_pct": "12.4%"
+          },
+          {
+            "ingredient": "White Pepper, Salt, Chicken Bouillon & Dried Thyme",
+            "measurement": "4 tsp total",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.35,
+            "share_pct": "3.6%"
+          }
+        ]
+      },
+      {
+        "name": "Jicama Slaw (Complete Dressed Batch)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 8.55,
+        "ingredient_count": 5,
+        "lines": [
+          {
+            "ingredient": "Red Cabbage (Mandolined)",
+            "measurement": "1 head (~3 lbs)",
+            "anchor": "US Foods Red Cabbage",
+            "cost_usd": 2.75,
+            "share_pct": "32.2%"
+          },
+          {
+            "ingredient": "Medium Jicama & Red Bell Pepper (Matchsticks)",
+            "measurement": "1 jicama + 1 red pepper",
+            "anchor": "US Foods Fresh Jicama & Bell Pepper",
+            "cost_usd": 2.85,
+            "share_pct": "33.3%"
+          },
+          {
+            "ingredient": "Red Onion & Fresh Cilantro",
+            "measurement": "1/2 onion + 1 bunch cilantro",
+            "anchor": "US Foods Produce",
+            "cost_usd": 1.15,
+            "share_pct": "13.5%"
+          },
+          {
+            "ingredient": "Mayonnaise, Rice Vinegar, Dijon Mustard, Lime & Agave",
+            "measurement": "1/2 cup mayo + vinegar/mustard/agave",
+            "anchor": "US Foods Grocery & Pantry",
+            "cost_usd": 1.45,
+            "share_pct": "17.0%"
+          },
+          {
+            "ingredient": "Kosher Salt, 16-Mesh Black Pepper & Ground Cumin",
+            "measurement": "2 tbsp spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.35,
+            "share_pct": "4.1%"
+          }
+        ]
+      },
+      {
+        "name": "Slaw Dressing (18-Cup Commercial Batch)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 15.65,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Heavy Duty Mayonnaise",
+            "measurement": "16 cups (1 gallon)",
+            "anchor": "US Foods #3918240 Heavy Duty Mayo",
+            "cost_usd": 12.0,
+            "share_pct": "76.7%"
+          },
+          {
+            "ingredient": "Red Wine Vinegar",
+            "measurement": "2 cups (16 fl oz)",
+            "anchor": "US Foods Red Wine Vinegar",
+            "cost_usd": 1.1,
+            "share_pct": "7.0%"
+          },
+          {
+            "ingredient": "White Granulated Sugar",
+            "measurement": "4 cups (~2 lbs)",
+            "anchor": "US Foods #2918340 Cane Sugar",
+            "cost_usd": 1.6,
+            "share_pct": "10.2%"
+          },
+          {
+            "ingredient": "Fresh Lime Juice, Granulated Garlic & Black Pepper",
+            "measurement": "6\u201316 tsp lime + 8 tsp spices",
+            "anchor": "US Foods Lime Juice & Spices",
+            "cost_usd": 0.95,
+            "share_pct": "6.1%"
+          }
+        ]
+      },
+      {
+        "name": "Elote Dressing (Single Batch)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 9.1,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Heavy Duty Mayonnaise & Sour Cream",
+            "measurement": "2 cups mayo + 2 cups sour cream",
+            "anchor": "US Foods Mayo & Sour Cream",
+            "cost_usd": 3.4,
+            "share_pct": "37.4%"
+          },
+          {
+            "ingredient": "Grated Parmesan / Cotija Cheese",
+            "measurement": "1.5 cups (~6 oz)",
+            "anchor": "US Foods Grated Parmesan",
+            "cost_usd": 2.25,
+            "share_pct": "24.7%"
+          },
+          {
+            "ingredient": "Fresh Lime Juice & Red Wine Vinegar",
+            "measurement": "1.5 cups lime juice + 1 tbsp vinegar",
+            "anchor": "US Foods Lime Juice",
+            "cost_usd": 1.65,
+            "share_pct": "18.1%"
+          },
+          {
+            "ingredient": "Taj\u00edn Cl\u00e1sico, Cumin, Chili Pwd, Garlic, Onion, Cilantro, Sugar",
+            "measurement": "4 tbsp Taj\u00edn + 1/4 cup cumin + herbs",
+            "anchor": "US Foods Taj\u00edn & Spices",
+            "cost_usd": 1.8,
+            "share_pct": "19.8%"
+          }
+        ]
+      },
+      {
+        "name": "Elote Crema / Dressing (Double Batch)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 14.15,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "Heavy Duty Mayonnaise & Sour Cream",
+            "measurement": "4 cups mayo + 4 cups sour cream",
+            "anchor": "US Foods Mayo & Sour Cream",
+            "cost_usd": 6.8,
+            "share_pct": "48.1%"
+          },
+          {
+            "ingredient": "Grated Parmesan Cheese",
+            "measurement": "3 cups (~12 oz)",
+            "anchor": "US Foods Grated Parmesan",
+            "cost_usd": 4.5,
+            "share_pct": "31.8%"
+          },
+          {
+            "ingredient": "Taj\u00edn Seasoning, Cumin, Chili Pwd, Garlic & Onion Pwd",
+            "measurement": "8 tbsp Taj\u00edn + 1/2 cup cumin + spices",
+            "anchor": "US Foods Taj\u00edn & Spices",
+            "cost_usd": 2.85,
+            "share_pct": "20.1%"
+          }
+        ]
+      },
+      {
+        "name": "Lime Garlic Crema (Taco & Quesadilla Drizzle)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 5.95,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "Cultured Sour Cream",
+            "measurement": "4 cups (1 quart)",
+            "anchor": "US Foods #2391840 Sour Cream",
+            "cost_usd": 3.8,
+            "share_pct": "63.9%"
+          },
+          {
+            "ingredient": "Heavy Duty Mayonnaise",
+            "measurement": "2 cups (1 pint)",
+            "anchor": "US Foods #3918240 Heavy Duty Mayo",
+            "cost_usd": 1.5,
+            "share_pct": "25.2%"
+          },
+          {
+            "ingredient": "Fresh Lime Juice, Granulated Garlic & Kosher Salt",
+            "measurement": "4 oz lime juice + 2 tbsp garlic/salt",
+            "anchor": "US Foods Lime & Spices",
+            "cost_usd": 0.65,
+            "share_pct": "10.9%"
+          }
+        ]
+      },
+      {
+        "name": "Savory Worcestershire Garlic Aioli / Burger Sauce",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 2.8,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "Heavy Duty Mayonnaise",
+            "measurement": "3 cups (24 fl oz)",
+            "anchor": "US Foods #3918240 Heavy Duty Mayo",
+            "cost_usd": 2.25,
+            "share_pct": "80.4%"
+          },
+          {
+            "ingredient": "Worcestershire Sauce & Apple Cider Vinegar",
+            "measurement": "1.5 tbsp worcestershire + 2 tsp ACV",
+            "anchor": "US Foods Condiments",
+            "cost_usd": 0.25,
+            "share_pct": "8.9%"
+          },
+          {
+            "ingredient": "Garlic Powder, Onion Powder & Restaurant Black Pepper",
+            "measurement": "2.5 tbsp spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.3,
+            "share_pct": "10.7%"
+          }
+        ]
+      },
+      {
+        "name": "Pickled Red Onion (Quick Brine Batch)",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 3.8,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Red Onions (Thinly Julienned)",
+            "measurement": "2.5 large red onions (~2 lbs)",
+            "anchor": "US Foods Red Onion",
+            "cost_usd": 2.1,
+            "share_pct": "55.3%"
+          },
+          {
+            "ingredient": "White Vinegar, Apple Cider Vinegar & Lime Juice",
+            "measurement": "2.5 cups vinegar + 1 lime",
+            "anchor": "US Foods Vinegar & Limes",
+            "cost_usd": 0.85,
+            "share_pct": "22.4%"
+          },
+          {
+            "ingredient": "Granulated Sugar & Morton Kosher Salt",
+            "measurement": "1/2 cup sugar + 2 tbsp salt",
+            "anchor": "US Foods Sugar & Salt",
+            "cost_usd": 0.3,
+            "share_pct": "7.9%"
+          },
+          {
+            "ingredient": "Garlic, 16-Mesh Pepper, Peppercorns, Oregano, Cumin, Cinnamon, Bay",
+            "measurement": "Whole & ground aromatics",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.55,
+            "share_pct": "14.5%"
+          }
+        ]
+      },
+      {
+        "name": "Roasted Jalape\u00f1o-Serrano Salsa Verde",
+        "category": "\ud83e\udd57 Dressings, Slaws & Garnishes",
+        "batch_cost_usd": 4.65,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Corn / Vegetable Oil (Emulsified)",
+            "measurement": "2.5 cups (20 fl oz)",
+            "anchor": "US Foods #6374235 Cooking Oil",
+            "cost_usd": 1.5,
+            "share_pct": "32.3%"
+          },
+          {
+            "ingredient": "Fresh Jalape\u00f1o Peppers",
+            "measurement": "12\u201315 jalape\u00f1os (~1.2 lbs)",
+            "anchor": "US Foods #6921415 Jalape\u00f1os",
+            "cost_usd": 1.65,
+            "share_pct": "35.5%"
+          },
+          {
+            "ingredient": "Fresh Serrano Peppers",
+            "measurement": "8\u201310 serranos (~0.5 lb)",
+            "anchor": "US Foods Fresh Serranos",
+            "cost_usd": 0.95,
+            "share_pct": "20.4%"
+          },
+          {
+            "ingredient": "White Onion, Fresh Garlic Cloves & Kosher Salt",
+            "measurement": "1/4 onion + 8 cloves + 2 tsp salt",
+            "anchor": "US Foods Produce & Salt",
+            "cost_usd": 0.55,
+            "share_pct": "11.8%"
+          }
+        ]
+      },
+      {
+        "name": "OG BBQ Sauce (Full 7.5-Gallon Commercial Kettle)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 97.5,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Tomato Ketchup (3 Gallons)",
+            "measurement": "3 gallons (#10 cans / dispenser)",
+            "anchor": "US Foods #1928340 Tomato Ketchup",
+            "cost_usd": 24.0,
+            "share_pct": "24.6%"
+          },
+          {
+            "ingredient": "Pure Clover Honey (3 Jugs = 15 lbs)",
+            "measurement": "15 lbs (3 x 5-lb jugs)",
+            "anchor": "US Foods #3091845 Pure Honey",
+            "cost_usd": 42.0,
+            "share_pct": "43.1%"
+          },
+          {
+            "ingredient": "Dark/Light Brown Sugar & White Sugar",
+            "measurement": "16 cups brown + 8 cups white (~12 lbs)",
+            "anchor": "US Foods Brown & Cane Sugar",
+            "cost_usd": 11.4,
+            "share_pct": "11.7%"
+          },
+          {
+            "ingredient": "White Distilled Vinegar & Apple Cider Vinegar",
+            "measurement": "1 gal white + 1 gal cider vinegar",
+            "anchor": "US Foods Vinegar Gallon Jugs",
+            "cost_usd": 7.8,
+            "share_pct": "8.0%"
+          },
+          {
+            "ingredient": "Worcestershire Sauce & Soy Sauce",
+            "measurement": "8 cups worcestershire + 1 cup soy",
+            "anchor": "US Foods Worcestershire & Soy",
+            "cost_usd": 6.5,
+            "share_pct": "6.7%"
+          },
+          {
+            "ingredient": "Yellow Mustard, Garlic, Cumin, Chili Pwd, Turmeric, Coarse Pepper",
+            "measurement": "~3.5 cups total spices & aromatics",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 5.8,
+            "share_pct": "5.9%"
+          }
+        ]
+      },
+      {
+        "name": "Spicy BBQ Sauce (5-Quart Kettle Batch)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 17.2,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "House OG BBQ Sauce Base",
+            "measurement": "16 cups (4 quarts)",
+            "anchor": "House OG BBQ Sauce Batch",
+            "cost_usd": 13.0,
+            "share_pct": "75.6%"
+          },
+          {
+            "ingredient": "Prepared Yellow Mustard",
+            "measurement": "4 cups (1 quart)",
+            "anchor": "US Foods Yellow Mustard",
+            "cost_usd": 1.85,
+            "share_pct": "10.8%"
+          },
+          {
+            "ingredient": "Crushed Red Pepper Flakes, Cayenne & Coarse Black Pepper",
+            "measurement": "5.5 tbsp each (16.5 tbsp total)",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 2.35,
+            "share_pct": "13.7%"
+          }
+        ]
+      },
+      {
+        "name": "Carolina Gold Mustard Sauce (12-Quart Master Batch)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 28.0,
+        "ingredient_count": 5,
+        "lines": [
+          {
+            "ingredient": "Prepared Yellow Mustard (2 Gallons)",
+            "measurement": "2 gallons",
+            "anchor": "US Foods Gallon Yellow Mustard",
+            "cost_usd": 14.8,
+            "share_pct": "52.9%"
+          },
+          {
+            "ingredient": "Apple Cider Vinegar",
+            "measurement": "1/2 gallon (2 quarts)",
+            "anchor": "US Foods Apple Cider Vinegar",
+            "cost_usd": 2.4,
+            "share_pct": "8.6%"
+          },
+          {
+            "ingredient": "Brown Sugar & White Granulated Sugar",
+            "measurement": "8 cups brown + 4 cups white (~6 lbs)",
+            "anchor": "US Foods Brown & Cane Sugar",
+            "cost_usd": 5.7,
+            "share_pct": "20.4%"
+          },
+          {
+            "ingredient": "Soy Sauce",
+            "measurement": "1/2 cup",
+            "anchor": "US Foods Soy Sauce",
+            "cost_usd": 0.65,
+            "share_pct": "2.3%"
+          },
+          {
+            "ingredient": "Garlic Pwd, Onion Pwd, Coarse Pepper, Cumin, Chili Pwd, Turmeric, Cayenne",
+            "measurement": "~2.8 cups spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 4.45,
+            "share_pct": "15.9%"
+          }
+        ]
+      },
+      {
+        "name": "Carolina Gold Mustard Sauce (6-Quart Half Batch)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 14.0,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Prepared Yellow Mustard (1 Gallon)",
+            "measurement": "1 gallon",
+            "anchor": "US Foods Gallon Yellow Mustard",
+            "cost_usd": 7.4,
+            "share_pct": "52.9%"
+          },
+          {
+            "ingredient": "Apple Cider Vinegar & Soy Sauce",
+            "measurement": "4 cups ACV + 4 tbsp soy",
+            "anchor": "US Foods Vinegar & Soy",
+            "cost_usd": 1.5,
+            "share_pct": "10.7%"
+          },
+          {
+            "ingredient": "Brown Sugar & White Sugar",
+            "measurement": "4 cups brown + 2 cups white (~3 lbs)",
+            "anchor": "US Foods Sugar",
+            "cost_usd": 2.85,
+            "share_pct": "20.4%"
+          },
+          {
+            "ingredient": "Garlic, Cumin, Black Pepper, Turmeric, Cayenne, Chili & Onion Pwd",
+            "measurement": "~1.5 cups spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 2.25,
+            "share_pct": "16.1%"
+          }
+        ]
+      },
+      {
+        "name": "Tangy Molasses-Agave Table BBQ Glaze (Small Test/Glaze Batch)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 1.75,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "Tomato Ketchup, White Vinegar & Apple Cider Vinegar",
+            "measurement": "1 cup ketchup + 1/2 cup vinegars",
+            "anchor": "US Foods Ketchup & Vinegar",
+            "cost_usd": 0.85,
+            "share_pct": "48.6%"
+          },
+          {
+            "ingredient": "Dijon Mustard, Molasses, Agave Nectar, Soy & Fresh Lemon Juice",
+            "measurement": "4.5 tbsp total",
+            "anchor": "US Foods Pantry Condiments",
+            "cost_usd": 0.65,
+            "share_pct": "37.1%"
+          },
+          {
+            "ingredient": "Black Pepper, Lawry's Salt, Cumin, Onion Pwd & Smoked Paprika",
+            "measurement": "1.5 tbsp spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.25,
+            "share_pct": "14.3%"
+          }
+        ]
+      },
+      {
+        "name": "Birria Consomm\u00e9 Dipping Broth (Seasoning Base per 6-Qt Pot)",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 7.2,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Brisket/Barbacoa Drippings & Rich Stock Base",
+            "measurement": "6 quarts kettle broth",
+            "anchor": "Smoker Au Jus / Drippings Recovery",
+            "cost_usd": 3.6,
+            "share_pct": "50.0%"
+          },
+          {
+            "ingredient": "Chicken Bouillon, Granulated Garlic, Onion Pwd & Chili Powder",
+            "measurement": "1/4 cup each (1 cup total)",
+            "anchor": "US Foods Knorr Bouillon & Spices",
+            "cost_usd": 2.15,
+            "share_pct": "29.9%"
+          },
+          {
+            "ingredient": "Ground Cumin, Cayenne, Mexican Oregano & Cilantro",
+            "measurement": "1 tbsp each",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.65,
+            "share_pct": "9.0%"
+          },
+          {
+            "ingredient": "Fresh Squeezed Limes",
+            "measurement": "4 whole limes",
+            "anchor": "US Foods Fresh Limes",
+            "cost_usd": 0.8,
+            "share_pct": "11.1%"
+          }
+        ]
+      },
+      {
+        "name": "Tablitas Dried-Chile & Chipotle Adobo Marinade",
+        "category": "\ud83c\udf6f House BBQ Sauces & Broths",
+        "batch_cost_usd": 3.95,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Dried Pasilla/Pasado, Ancho & Arbol Chiles",
+            "measurement": "1 pasilla + 2 ancho + 5 arbol",
+            "anchor": "US Foods Dried Chiles",
+            "cost_usd": 1.45,
+            "share_pct": "36.7%"
+          },
+          {
+            "ingredient": "La Coste\u00f1a Chipotle Peppers in Adobo",
+            "measurement": "2.5 oz",
+            "anchor": "US Foods Chipotle in Adobo",
+            "cost_usd": 0.65,
+            "share_pct": "16.5%"
+          },
+          {
+            "ingredient": "Corn Oil, Kikkoman Soy Sauce, Agave Nectar & Apple Cider Vinegar",
+            "measurement": "1/2 cup oil + soy/agave/ACV",
+            "anchor": "US Foods Pantry",
+            "cost_usd": 0.95,
+            "share_pct": "24.1%"
+          },
+          {
+            "ingredient": "White Onion, 4 Garlic Cloves, 2 Limes, Cumin, Black Pepper, Salt",
+            "measurement": "Blended aromatics",
+            "anchor": "US Foods Produce & Spices",
+            "cost_usd": 0.9,
+            "share_pct": "22.8%"
+          }
+        ]
+      },
+      {
+        "name": "Texas Beef Rub (Brisket & Dino Rib Bark Blend \u2014 6.5 QT Batch)",
+        "category": "\ud83e\uddc2 House Pit Rubs & Seasonings",
+        "batch_cost_usd": 47.6,
+        "ingredient_count": 5,
+        "lines": [
+          {
+            "ingredient": "16-Mesh Coarse Black Pepper (2 Quarts)",
+            "measurement": "2 quarts (~4 lbs)",
+            "anchor": "US Foods #3184920 16-Mesh Black Pepper",
+            "cost_usd": 18.4,
+            "share_pct": "38.7%"
+          },
+          {
+            "ingredient": "Restaurant Fine Black Pepper (2 Quarts)",
+            "measurement": "2 quarts (~4 lbs)",
+            "anchor": "US Foods Restaurant Ground Pepper",
+            "cost_usd": 17.6,
+            "share_pct": "37.0%"
+          },
+          {
+            "ingredient": "Lawry's Seasoned Salt (1 Quart)",
+            "measurement": "1 quart (~2.5 lbs)",
+            "anchor": "US Foods Lawry's Seasoned Salt",
+            "cost_usd": 5.5,
+            "share_pct": "11.6%"
+          },
+          {
+            "ingredient": "Morton Kosher Salt (1 Quart)",
+            "measurement": "1 quart (~2.5 lbs)",
+            "anchor": "US Foods Kosher Salt",
+            "cost_usd": 2.25,
+            "share_pct": "4.7%"
+          },
+          {
+            "ingredient": "Granulated Garlic (1/2 Quart)",
+            "measurement": "1/2 quart (~1 lb)",
+            "anchor": "US Foods Granulated Garlic",
+            "cost_usd": 3.85,
+            "share_pct": "8.1%"
+          }
+        ]
+      },
+      {
+        "name": "All-Purpose Pork & Chicken Rub (2.8-Cup Batch)",
+        "category": "\ud83e\uddc2 House Pit Rubs & Seasonings",
+        "batch_cost_usd": 3.6,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Restaurant Black Pepper",
+            "measurement": "1 cup (~4.5 oz)",
+            "anchor": "US Foods Black Pepper",
+            "cost_usd": 1.35,
+            "share_pct": "37.5%"
+          },
+          {
+            "ingredient": "Lawry's Seasoned Salt & Brown Sugar",
+            "measurement": "1/2 cup Lawry's + 1/2 cup brown sugar",
+            "anchor": "US Foods Lawry's & Sugar",
+            "cost_usd": 0.85,
+            "share_pct": "23.6%"
+          },
+          {
+            "ingredient": "Granulated Garlic, Onion Powder & Chili Powder",
+            "measurement": "1/4 cup each (3/4 cup total)",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 1.15,
+            "share_pct": "31.9%"
+          },
+          {
+            "ingredient": "Cayenne Pepper & Ground Cumin",
+            "measurement": "1/2 tbsp each",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.25,
+            "share_pct": "6.9%"
+          }
+        ]
+      },
+      {
+        "name": "Signature Smoked Paprika BBQ Rub (11-Part Master Ratio)",
+        "category": "\ud83e\uddc2 House Pit Rubs & Seasonings",
+        "batch_cost_usd": 13.5,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "16-Mesh Black Pepper & Fine Black Pepper (2.5 Parts)",
+            "measurement": "2.5 cups",
+            "anchor": "US Foods Black Pepper",
+            "cost_usd": 3.4,
+            "share_pct": "25.2%"
+          },
+          {
+            "ingredient": "Smoked Paprika & Onion Powder (4 Parts)",
+            "measurement": "2 cups paprika + 2 cups onion pwd",
+            "anchor": "US Foods Paprika & Onion Powder",
+            "cost_usd": 5.2,
+            "share_pct": "38.5%"
+          },
+          {
+            "ingredient": "Granulated Garlic & Ground Cumin (2 Parts)",
+            "measurement": "1 cup garlic + 1 cup cumin",
+            "anchor": "US Foods Garlic & Cumin",
+            "cost_usd": 2.75,
+            "share_pct": "20.4%"
+          },
+          {
+            "ingredient": "Lawry's Seasoned Salt, Kosher Salt & Cayenne (2.5 Parts)",
+            "measurement": "1 cup Lawry's + 1 cup salt + 0.5 cup cayenne",
+            "anchor": "US Foods Salts & Cayenne",
+            "cost_usd": 2.15,
+            "share_pct": "15.9%"
+          }
+        ]
+      },
+      {
+        "name": "House Sweet-Savory BBQ Table Seasoning",
+        "category": "\ud83e\uddc2 House Pit Rubs & Seasonings",
+        "batch_cost_usd": 10.8,
+        "ingredient_count": 2,
+        "lines": [
+          {
+            "ingredient": "Base BBQ Seasoning Container",
+            "measurement": "1 whole container (~64 oz)",
+            "anchor": "US Foods BBQ Spice Base",
+            "cost_usd": 9.6,
+            "share_pct": "88.9%"
+          },
+          {
+            "ingredient": "White Sugar & Kosher Salt",
+            "measurement": "1 dip cup sugar + 3 dip cups salt",
+            "anchor": "US Foods Sugar & Kosher Salt",
+            "cost_usd": 1.2,
+            "share_pct": "11.1%"
+          }
+        ]
+      },
+      {
+        "name": "Fiesta Pepper-Garlic Specialty Rub",
+        "category": "\ud83e\uddc2 House Pit Rubs & Seasonings",
+        "batch_cost_usd": 1.7,
+        "ingredient_count": 3,
+        "lines": [
+          {
+            "ingredient": "16-Mesh Coarse Black Pepper",
+            "measurement": "1/2 cup",
+            "anchor": "US Foods 16-Mesh Black Pepper",
+            "cost_usd": 0.7,
+            "share_pct": "41.2%"
+          },
+          {
+            "ingredient": "Fiesta Season-It-All & Kosher Salt",
+            "measurement": "1/4 cup Fiesta + 5 tsp salt",
+            "anchor": "Fiesta Brand / US Foods",
+            "cost_usd": 0.55,
+            "share_pct": "32.4%"
+          },
+          {
+            "ingredient": "Brown Sugar, Granulated Garlic, Paprika, Onion Pwd, Cumin, Cayenne",
+            "measurement": "10 tsp blended spices",
+            "anchor": "US Foods Spice Rack",
+            "cost_usd": 0.45,
+            "share_pct": "26.5%"
+          }
+        ]
+      },
+      {
+        "name": "Smoked Turkey Club / Bacon Caesar Special",
+        "category": "\ud83e\udd6a Specialty Sandwiches",
+        "batch_cost_usd": 3.05,
+        "ingredient_count": 4,
+        "lines": [
+          {
+            "ingredient": "Smoked Turkey Breast (Sliced)",
+            "measurement": "5 oz cooked",
+            "anchor": "US Foods #7833213 Turkey Breast (@ 70% yield)",
+            "cost_usd": 1.6,
+            "share_pct": "52.5%"
+          },
+          {
+            "ingredient": "Smoked Bacon & Cheddar Cheese",
+            "measurement": "2 strips bacon + 1 slice cheddar",
+            "anchor": "US Foods Bacon & Cheddar",
+            "cost_usd": 0.55,
+            "share_pct": "18.0%"
+          },
+          {
+            "ingredient": "Fresh Avocado, Romaine Lettuce, Roma Tomato & Caesar Dressing",
+            "measurement": "Garnish & dressing set",
+            "anchor": "US Foods Produce & Dressing",
+            "cost_usd": 0.55,
+            "share_pct": "18.0%"
+          },
+          {
+            "ingredient": "Toasted Brioche Bun",
+            "measurement": "1 bun",
+            "anchor": "US Foods Brioche Bun",
+            "cost_usd": 0.35,
+            "share_pct": "11.5%"
+          }
+        ]
+      },
+      {
+        "name": "Mild Smoked Sausage (Original Texas \u2014 50 lb Meat Block)",
+        "category": "\ud83c\udf2d House Smoked Sausage Formulations (50-Lb Meat Block)",
+        "batch_cost_usd": 187.5,
+        "ingredient_count": 6,
+        "lines": [
+          {
+            "ingredient": "Lean Beef Base (Brisket Trimmings / Chuck)",
+            "measurement": "25.5 lbs",
+            "anchor": "US Foods #6845606 Brisket Trim Recovery",
+            "cost_usd": 114.75,
+            "share_pct": "61.2%"
+          },
+          {
+            "ingredient": "Pork Base (Boston Butt Trimmings)",
+            "measurement": "16.0 lbs",
+            "anchor": "US Foods #5396890 Pork Butt Trim",
+            "cost_usd": 40.0,
+            "share_pct": "21.3%"
+          },
+          {
+            "ingredient": "Chilled Hard Fat (Beef/Pork Fatback)",
+            "measurement": "8.5 lbs",
+            "anchor": "Brisket Deckle & Trim Fat Recovery",
+            "cost_usd": 12.75,
+            "share_pct": "6.8%"
+          },
+          {
+            "ingredient": "Non-Fat Dry Milk Powder (Binder)",
+            "measurement": "3.0 cups (~1.2 lbs)",
+            "anchor": "US Foods Dry Milk Powder",
+            "cost_usd": 3.6,
+            "share_pct": "1.9%"
+          },
+          {
+            "ingredient": "16-Mesh Coarse Black Pepper",
+            "measurement": "1.5 cups (136.1 g)",
+            "anchor": "US Foods #3184920 Black Pepper",
+            "cost_usd": 2.1,
+            "share_pct": "1.1%"
+          },
+          {
+            "ingredient": "Pink Curing Salt #1 + Natural Hog Casings + Ice Water",
+            "measurement": "60 g Cure #1 + 1 hank share + 10 cups water",
+            "anchor": "US Foods Cure #1 & Natural Casings",
+            "cost_usd": 14.3,
+            "share_pct": "7.6%"
+          }
+        ]
+      },
+      {
+        "name": "Jalape\u00f1o Cheddar Smoked Sausage (50 lb Meat Block)",
+        "category": "\ud83c\udf2d House Smoked Sausage Formulations (50-Lb Meat Block)",
+        "batch_cost_usd": 212.05,
+        "ingredient_count": 8,
+        "lines": [
+          {
+            "ingredient": "Lean Beef Base (Brisket Trimmings / Chuck)",
+            "measurement": "25.5 lbs",
+            "anchor": "US Foods #6845606 Brisket Trim Recovery",
+            "cost_usd": 114.75,
+            "share_pct": "54.1%"
+          },
+          {
+            "ingredient": "Pork Base (Boston Butt Trimmings)",
+            "measurement": "16.0 lbs",
+            "anchor": "US Foods #5396890 Pork Butt Trim",
+            "cost_usd": 40.0,
+            "share_pct": "18.9%"
+          },
+          {
+            "ingredient": "Chilled Hard Fat (Beef/Pork Fatback)",
+            "measurement": "8.5 lbs",
+            "anchor": "Brisket Deckle & Trim Fat Recovery",
+            "cost_usd": 12.75,
+            "share_pct": "6.0%"
+          },
+          {
+            "ingredient": "High-Temp Cheddar Cheese Cubes",
+            "measurement": "5.0 lbs",
+            "anchor": "US Foods #4373866 Cheddar / High-Temp",
+            "cost_usd": 18.5,
+            "share_pct": "8.7%"
+          },
+          {
+            "ingredient": "Drained & Diced Jalape\u00f1os",
+            "measurement": "8.0 cups (~3.5 lbs drained)",
+            "anchor": "US Foods #6921415 Jalape\u00f1os",
+            "cost_usd": 5.25,
+            "share_pct": "2.5%"
+          },
+          {
+            "ingredient": "Non-Fat Dry Milk Powder (Binder)",
+            "measurement": "3.0 cups (~1.2 lbs)",
+            "anchor": "US Foods Dry Milk Powder",
+            "cost_usd": 3.6,
+            "share_pct": "1.7%"
+          },
+          {
+            "ingredient": "16-Mesh Coarse Black Pepper",
+            "measurement": "1.5 cups (136.1 g)",
+            "anchor": "US Foods #3184920 Black Pepper",
+            "cost_usd": 2.1,
+            "share_pct": "1.0%"
+          },
+          {
+            "ingredient": "Pink Curing Salt #1 + Natural Hog Casings + Ice Water",
+            "measurement": "60 g Cure #1 + 1 hank share + 10 cups water",
+            "anchor": "US Foods Cure #1 & Natural Casings",
+            "cost_usd": 15.1,
+            "share_pct": "7.1%"
+          }
+        ]
+      }
+    ]
   }
 };
 window.FULL_COGS_PAYLOAD = window.BBQ_PAYLOADS.full_cogs || {};
