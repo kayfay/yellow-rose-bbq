@@ -4749,7 +4749,7 @@
     {
       "date": "2026-11-21",
       "day_name": "Sat",
-      "actual_revenue": 593.85,
+      "actual_revenue": 595.93,
       "predicted_revenue": 4200.0,
       "brisket_raw_lbs": 40.0,
       "pork_shoulder_raw_lbs": 24.0,
@@ -4786,7 +4786,7 @@
       "actual_rosebuds_sold": 0,
       "actual_total_cooked_lbs": 24.6,
       "estimated_cogs_usd": 321.88,
-      "estimated_food_cost_pct": 54.2
+      "estimated_food_cost_pct": 54.0
     }
   ]
 }
