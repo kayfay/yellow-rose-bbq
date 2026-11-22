@@ -4791,13 +4791,13 @@
     {
       "date": "2026-11-22",
       "day_name": "Sun",
-      "actual_revenue": 1583.45,
+      "actual_revenue": 1866.09,
       "predicted_revenue": 4200.0,
       "brisket_raw_lbs": 40.0,
       "pork_shoulder_raw_lbs": 24.0,
       "sausage_lbs": 20.0,
       "tacos_sold": 15,
-      "rosebuds_sold": 10,
+      "rosebuds_sold": 12,
       "pork_ribs_racks": 0.7,
       "beef_dino_ribs": 7,
       "is_historical": true,
@@ -4825,10 +4825,10 @@
       "actual_beef_dino_ribs": 7,
       "actual_turkey_cooked_lbs": 9.79,
       "actual_tacos_sold": 15,
-      "actual_rosebuds_sold": 10,
+      "actual_rosebuds_sold": 12,
       "actual_total_cooked_lbs": 24.6,
       "estimated_cogs_usd": 432.79,
-      "estimated_food_cost_pct": 27.3
+      "estimated_food_cost_pct": 23.2
     }
   ]
 }
