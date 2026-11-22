@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T12:31:53.490319-05:00",
+  "generated_at": "2026-11-22T13:01:58.668691-05:00",
   "total_alerts_detected": 17,
   "active_alert": {
     "alert_id": "qw-aov-2026-11-22-12",
@@ -9,18 +9,18 @@
     "event_type": "ticket_spike",
     "severity": "surge",
     "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-    "headline": "Large Group / Catering Ticket Spike (Average Ticket $56.27 vs $45.68 Usual)",
-    "immediate_present_status": "Counter ticket size jumped to $56.27/order (+23% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-    "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+    "headline": "Large Group / Catering Ticket Spike (Average Ticket $57.50 vs $46.38 Usual)",
+    "immediate_present_status": "Counter ticket size jumped to $57.50/order (+24% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+    "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (26 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
     "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
     "velocity_metrics": {
-      "actual_sales": 675.19,
-      "expected_sales": 802.73,
-      "actual_orders": 12,
-      "expected_orders": 17.6,
-      "aov": 56.27,
-      "baseline_aov": 45.68,
-      "z_score": -0.33
+      "actual_sales": 1495.09,
+      "expected_sales": 861.29,
+      "actual_orders": 26,
+      "expected_orders": 18.6,
+      "aov": 57.5,
+      "baseline_aov": 46.38,
+      "z_score": 1.49
     },
     "terms": [
       "Average Ticket",
@@ -150,18 +150,18 @@
       "event_type": "ticket_spike",
       "severity": "surge",
       "severity_badge": "\ud83e\udd69 High-Ticket Surge",
-      "headline": "Large Group / Catering Ticket Spike (Average Ticket $56.27 vs $45.68 Usual)",
-      "immediate_present_status": "Counter ticket size jumped to $56.27/order (+23% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
-      "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (12 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
+      "headline": "Large Group / Catering Ticket Spike (Average Ticket $57.50 vs $46.38 Usual)",
+      "immediate_present_status": "Counter ticket size jumped to $57.50/order (+24% above normal). Multiple high-density platters (King of the Hill $145, Bevo $79, Pitmaster $54) or bulk meat pounds are clearing the cutting block.",
+      "causal_explanation": "Large office/family group orders concentrated in the 12:00 PM EST window. While ticket volume (26 orders) is steady, meat poundage per transaction has doubled, pulling multiple briskets from holding.",
       "recommended_pit_action": "Carve whole briskets to order rather than pre-slicing to preserve moisture; alert the prep cook to replenish bulk pint containers of potato salad and mac & cheese.",
       "velocity_metrics": {
-        "actual_sales": 675.19,
-        "expected_sales": 802.73,
-        "actual_orders": 12,
-        "expected_orders": 17.6,
-        "aov": 56.27,
-        "baseline_aov": 45.68,
-        "z_score": -0.33
+        "actual_sales": 1495.09,
+        "expected_sales": 861.29,
+        "actual_orders": 26,
+        "expected_orders": 18.6,
+        "aov": 57.5,
+        "baseline_aov": 46.38,
+        "z_score": 1.49
       },
       "terms": [
         "Average Ticket",
