@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T10:01:53.070784-05:00",
+  "generated_at": "2026-11-22T10:31:44.911679-05:00",
   "summary_kpis": {
     "projected_24h_revenue_usd": 4191.76,
     "estimated_24h_cogs_usd": 1145.38,
@@ -8,7 +8,7 @@
     "recommended_staff": 5,
     "pitmaster_hours": 42.5,
     "peak_rush_window": "12:00 PM EST (Sun)",
-    "current_sales_velocity": "0.0 orders/hr",
+    "current_sales_velocity": "0.1 orders/hr",
     "pacing_status": "Normal Pacing",
     "total_brisket_draw_lbs": 51.5,
     "total_pork_draw_lbs": 21.9
