@@ -52,7 +52,7 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4064.07,
+    "normal": 4065.62,
     "game_only": 4997.47,
     "rain_only": 4471.18,
     "game_and_rain": 2308.76
@@ -60,15 +60,15 @@
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4889,
-      "total_revenue": 208646.67,
-      "avg_ticket": 42.67675802822664
+      "order_count": 4890,
+      "total_revenue": 208891.77,
+      "avg_ticket": 42.718153374233125
     },
     {
       "order_type": "In-store Pickup",
-      "order_count": 351,
-      "total_revenue": 20360.42,
-      "avg_ticket": 58.00689458689458
+      "order_count": 352,
+      "total_revenue": 20455.02,
+      "avg_ticket": 58.11085227272727
     },
     {
       "order_type": "To-Go",
@@ -408,13 +408,13 @@
           0.0,
           0.0,
           0.0,
-          7.0,
-          8.0,
-          16.0,
-          17.0,
-          21.0,
-          21.0,
-          21.0
+          9.0,
+          10.0,
+          18.0,
+          19.0,
+          23.0,
+          23.0,
+          23.0
         ],
         "name": "Brisket Bacon Ranch Quesadilla",
         "type": "scatter",
@@ -514,9 +514,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.5,
-    "pork_ribs_avg_with_dino": 2.6,
-    "impact_pct": -52.5
+    "pork_ribs_avg_without_dino": 5.1,
+    "pork_ribs_avg_with_dino": 3.5,
+    "impact_pct": -31.6
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
