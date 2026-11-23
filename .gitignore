@@ -28,6 +28,7 @@ venv/
 *.tgz
 backups/
 data/vendor_invoices/
+data/reports/
 data/encrypted/
 data/word_documents/
 *.docx
@@ -58,3 +59,11 @@ test-results/
 # Agent Instructions
 AGENTS.md
 CLAUDE.md
+
+# Private local-only analytics, deep research & JD agent modules (never push to GitHub)
+analysis/
+services/
+agents/
+# Plaintext plate & recipe cost explorer (only encrypted plate_cost_vault.enc.json may be tracked)
+**/plate_cost_explorer.json
+plate_cost_explorer.json

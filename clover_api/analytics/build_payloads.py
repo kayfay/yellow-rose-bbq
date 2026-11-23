@@ -26,7 +26,7 @@ def build_payloads():
         print(f"[WARN] full_cogs not refreshed: {e}")
     
     payloads = {}
-    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts", "full_cogs", "plate_cost_explorer"]:
+    for filename in ["dashboard_payload", "weather_payload", "event_payload", "shift_payload", "category_payload", "advanced_payload", "predictive_payload", "historical_payload", "calendar_events", "hourly_actuals", "forecast_snapshots", "daily_executive_brief", "ml_insights", "quick_wind_alerts", "full_cogs", "plate_cost_vault.enc"]:
         filepath = analytics_dir / (filename + ".json")
         if filepath.exists():
             with open(filepath, 'r') as f:
@@ -70,7 +70,8 @@ def build_payloads():
                                 
                                 data["forecast"]["forecast_records"] = new_records
                                 
-                    payloads[filename] = data
+                    key_name = "plate_cost_vault_enc" if filename == "plate_cost_vault.enc" else filename
+                    payloads[key_name] = data
                 except json.JSONDecodeError:
                     print(f"Error parsing {filename}")
         else:

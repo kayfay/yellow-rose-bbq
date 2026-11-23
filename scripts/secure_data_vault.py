@@ -273,6 +273,8 @@ def audit_repository_security() -> int:
         f
         for f in tracked_files
         if f.endswith((".csv", ".xlsx", ".xls", ".db", ".sqlite", ".enc"))
+        or f.endswith("plate_cost_explorer.json")
+        or f.startswith(("analysis/", "services/", "agents/", "data/reports/", "data/vendor_invoices/"))
         or "YRBBQ" in f
         or "Cust91714857" in f
     ]

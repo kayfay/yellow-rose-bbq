@@ -1658,14 +1658,66 @@
     return Math.round(totalScore);
   }
 
+  let decryptedExplorerData = null;
+
+  function b64ToBytes(b64) {
+    const bin = atob(b64);
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+
+  async function decryptPlateVault(passphrase) {
+    const vault = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.plate_cost_vault_enc;
+    if (!vault || !vault.ciphertext_b64) {
+      throw new Error('Encrypted vault payload is missing.');
+    }
+    if (!window.crypto || !window.crypto.subtle) {
+      throw new Error('Browser Web Crypto API is unavailable (requires HTTPS or localhost).');
+    }
+    const enc = new TextEncoder();
+    const baseKey = await window.crypto.subtle.importKey(
+      'raw',
+      enc.encode(passphrase),
+      { name: 'PBKDF2' },
+      false,
+      ['deriveKey']
+    );
+    const aesKey = await window.crypto.subtle.deriveKey(
+      {
+        name: 'PBKDF2',
+        salt: b64ToBytes(vault.salt_b64),
+        iterations: Number(vault.iterations || 310000),
+        hash: 'SHA-256'
+      },
+      baseKey,
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['decrypt']
+    );
+    const plainBuf = await window.crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: b64ToBytes(vault.iv_b64) },
+      aesKey,
+      b64ToBytes(vault.ciphertext_b64)
+    );
+    const jsonStr = new TextDecoder().decode(plainBuf);
+    return JSON.parse(jsonStr);
+  }
+
   function getClonedExplorerData() {
-    const raw = window.BBQ_PAYLOADS && window.BBQ_PAYLOADS.plate_cost_explorer;
-    if (!raw || typeof raw !== 'object') return null;
+    if (!decryptedExplorerData || typeof decryptedExplorerData !== 'object') return null;
     try {
-      return JSON.parse(JSON.stringify(raw));
+      return JSON.parse(JSON.stringify(decryptedExplorerData));
     } catch (_e) {
       return null;
     }
+  }
+
+  function updateVaultGateVisibility(isUnlocked) {
+    const gate = document.getElementById('plate-vault-lock-gate');
+    const content = document.getElementById('plate-vault-unlocked-content');
+    if (gate) gate.hidden = Boolean(isUnlocked);
+    if (content) content.hidden = !isUnlocked;
   }
 
   function pillClassForBand(band) {
@@ -2001,9 +2053,46 @@
           renderPlateCostExplorer();
         });
       });
+
+      const unlockForm = document.getElementById('plate-vault-unlock-form');
+      const passInput = document.getElementById('plate-vault-passphrase');
+      const errEl = document.getElementById('plate-vault-error');
+      const lockBtn = document.getElementById('btn-plate-vault-lock');
+
+      if (unlockForm && passInput) {
+        unlockForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (errEl) { errEl.hidden = true; errEl.textContent = ''; }
+          const pass = passInput.value || '';
+          if (!pass) return;
+          try {
+            decryptedExplorerData = await decryptPlateVault(pass);
+            passInput.value = '';
+            updateVaultGateVisibility(true);
+            renderPlateCostExplorer();
+          } catch (_err) {
+            decryptedExplorerData = null;
+            if (errEl) {
+              errEl.textContent = 'Incorrect vault passphrase. Please try again.';
+              errEl.hidden = false;
+            }
+          }
+        });
+      }
+
+      if (lockBtn) {
+        lockBtn.addEventListener('click', () => {
+          decryptedExplorerData = null;
+          explorerState.expandedIds.clear();
+          updateVaultGateVisibility(false);
+        });
+      }
     }
 
-    renderPlateCostExplorer();
+    updateVaultGateVisibility(Boolean(decryptedExplorerData));
+    if (decryptedExplorerData) {
+      renderPlateCostExplorer();
+    }
   }
 
   window.initPlateCostExplorer = initPlateCostExplorer;

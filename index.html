@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.open-meteo.com; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:;">
   <title>Sausage & BBQ Prep Command Center</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-  <link rel="stylesheet" href="style.css?v=2.3.2">
+  <link rel="stylesheet" href="style.css?v=2.3.3">
   <link href="fonts.css?v=2.1.0" rel="stylesheet">
   <!-- Plotly.js & D3.js for executive visualizations -->
   <script src="plotly-2.35.2.min.js"></script>
@@ -1352,9 +1352,25 @@
         </section>
       </div>
 
-      <!-- Plate & Recipe Costs: Mobile-first Category Rollup + Fuzzy Search Line-Item Inspector -->
+      <!-- Plate & Recipe Costs: Client-Side AES-256-GCM Encrypted Owner Vault + Mobile-First Explorer -->
       <div id="subtab-view-plate-costs" style="display: none;">
-        <div class="subtab-stat-strip" aria-label="Menu & Recipe Food Cost Summary">
+        <section id="plate-vault-lock-gate" class="control-card plate-vault-gate" aria-label="Owner Food Cost Vault Unlock">
+          <div class="plate-vault-icon" aria-hidden="true">🔒</div>
+          <h3 class="plate-vault-title">Owner Food Cost &amp; Recipe Vault</h3>
+          <p class="plate-vault-sub">All 137 menu item costs and 34 house recipes are encrypted with AES-256-GCM. Enter your owner vault passphrase to decrypt locally on this device — nothing is ever sent to a server.</p>
+          <form id="plate-vault-unlock-form" class="plate-vault-form">
+            <input type="password" id="plate-vault-passphrase" class="plate-search-input" placeholder="Enter owner vault passphrase..." autocomplete="current-password" aria-label="Owner vault passphrase" required>
+            <button type="submit" id="btn-plate-vault-unlock" class="plate-vault-unlock-btn">🔓 Unlock Food Cost Vault</button>
+          </form>
+          <p id="plate-vault-error" class="plate-vault-error" role="alert" hidden></p>
+        </section>
+
+        <div id="plate-vault-unlocked-content" hidden>
+          <div class="plate-vault-unlocked-bar">
+            <span class="plate-vault-unlocked-badge">🔓 Decrypted locally in browser memory</span>
+            <button type="button" id="btn-plate-vault-lock" class="plate-vault-lock-btn">🔒 Lock Vault</button>
+          </div>
+          <div class="subtab-stat-strip" aria-label="Menu & Recipe Food Cost Summary">
           <div class="subtab-stat-card">
             <span class="subtab-stat-kicker">Base vs. Full To-Go</span>
             <strong class="subtab-stat-val" id="plate-stat-base-vs-full">--</strong>
@@ -1421,6 +1437,7 @@
 
         <!-- Expandable Mobile-First Plate & Recipe Accordion Cards -->
         <div id="plate-explorer-cards-list" class="plate-explorer-cards-list" aria-live="polite"></div>
+        </div>
       </div>
 
       <!-- Bottom Refresh Frame -->
@@ -1450,13 +1467,13 @@
     </button>
   </nav>
 
-  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.2"></script>
+  <script id="bbq-payloads-script" src="clover_api/analytics/payloads.js?v=2.3.3"></script>
   <script src="d3_charts.js?v=2.3.0"></script>
   <script src="tz_utils.js?v=2.3.0"></script>
   <script src="modules/shared/core_utils.js?v=2.3.0" defer></script>
   <script src="modules/recipes/sausage_calc.js?v=2.3.0" defer></script>
   <script src="modules/reports/shop_reports.js?v=2.3.0" defer></script>
-  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.2" defer></script>
+  <script src="modules/forecaster/analytics_subtabs.js?v=2.3.3" defer></script>
   <script src="app.js?v=2.3.2" defer></script>
 </body>
 </html>
