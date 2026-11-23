@@ -17,23 +17,29 @@ const SRC_JSON = path.join(BASE_DIR, 'clover_api', 'analytics', 'plate_cost_expl
 const OUT_ENC = path.join(BASE_DIR, 'clover_api', 'analytics', 'plate_cost_vault.enc.json');
 
 function loadVaultKey() {
+  if (process.env.PLATE_VAULT_PASSPHRASE) return process.env.PLATE_VAULT_PASSPHRASE.trim();
   if (process.env.DATA_VAULT_KEY) return process.env.DATA_VAULT_KEY.trim();
   if (!fs.existsSync(ENV_PATH)) {
-    throw new Error('Missing .env file containing DATA_VAULT_KEY');
+    throw new Error('Missing .env file containing PLATE_VAULT_PASSPHRASE or DATA_VAULT_KEY');
   }
+  const envMap = {};
   const lines = fs.readFileSync(ENV_PATH, 'utf8').split(/\r?\n/);
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#')) continue;
-    if (trimmed.startsWith('DATA_VAULT_KEY=')) {
-      let val = trimmed.slice('DATA_VAULT_KEY='.length).trim();
-      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-        val = val.slice(1, -1);
+    for (const k of ['PLATE_VAULT_PASSPHRASE', 'DATA_VAULT_KEY']) {
+      if (trimmed.startsWith(k + '=')) {
+        let val = trimmed.slice(k.length + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        if (val) envMap[k] = val;
       }
-      if (val) return val;
     }
   }
-  throw new Error('DATA_VAULT_KEY not found in .env');
+  if (envMap.PLATE_VAULT_PASSPHRASE) return envMap.PLATE_VAULT_PASSPHRASE;
+  if (envMap.DATA_VAULT_KEY) return envMap.DATA_VAULT_KEY;
+  throw new Error('PLATE_VAULT_PASSPHRASE or DATA_VAULT_KEY not found in .env');
 }
 
 function main() {

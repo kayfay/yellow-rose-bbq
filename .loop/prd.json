@@ -509,6 +509,66 @@
       "description": "Plate & Recipe Cost Explorer Task 3: Add tests/e2e/plate_cost_explorer.spec.js, run full verification suite (unittest, verify_cogs_math.py, full npm test including smokehouse_ux.spec.js), sync updated PDFs to Google Drive, and push to GitHub Pages.",
       "acceptance_criteria": "All Python unit tests, PAL verifiers, and Playwright E2E specs pass 100% with zero console errors; Master PDF synced to Google Drive; code pushed to origin/master.",
       "passes": true
+    },
+    {
+      "id": 86,
+      "description": "6-Month Deep Analysis Task 1: Baseline workspace backup (backups/archive_pre_deep_analysis_20261121.tar.gz, mode 0600), database integrity verification, and formal SDD specs (SPEC.md, DESIGN.md, PLAN.md).",
+      "acceptance_criteria": "Archive exists at mode 0600; data/clover_sales_master.db and data/vendor_invoices/ verified intact; SPEC.md, DESIGN.md, and PLAN.md approved.",
+      "passes": true
+    },
+    {
+      "id": 87,
+      "description": "6-Month Deep Analysis Task 2 (Subagent Alpha - pos_analyst): Build analysis/pos_miner.py to mine 6-month Clover POS velocity, weekday sales curves, ticket averages, and dine-in vs. to-go volume splits, outputting data/reports/pos_aggregate.json (mode 0600).",
+      "acceptance_criteria": "analysis/pos_miner.py exits 0; data/reports/pos_aggregate.json reconciles total revenue within $1.00 of POS category rings.",
+      "passes": true
+    },
+    {
+      "id": 88,
+      "description": "6-Month Deep Analysis Task 3 (Subagent Beta - supply_chain_auditor): Build analysis/invoice_auditor.py to parse 157 US Foods invoices (3,060 delivery lines, 176 SKUs), track unit price trajectories, and build physical par sheets in data/reports/vendor_procurement_summary.json and data/reports/physical_inventory_pars.json (mode 0600).",
+      "acceptance_criteria": "All 176 SKUs and 3,060 delivery lines reconcile with zero unmapped lines; outputs written at mode 0600.",
+      "passes": true
+    },
+    {
+      "id": 89,
+      "description": "6-Month Deep Analysis Task 4 (Subagent Gamma - yield_cogs_reconciler): Build analysis/reconciliation_engine.py bridging wholesale raw lbs vs. cooked POS depletion across all 4 operational buckets, outputting data/reports/reconciliation_matrix.json and data/reports/cogs_breakdown.json (mode 0600).",
+      "acceptance_criteria": "Monthly empirical yield vs. calibrated yield (Brisket 35-40%, Butt 44%, Ribs 60%) and top 5 non-meat supply burns quantified in physical smokehouse units.",
+      "passes": true
+    },
+    {
+      "id": 90,
+      "description": "6-Month Deep Analysis Task 5 (Subagent Delta & Compiler): Build analysis/executive_compiler.py and scripts/verify_deep_analysis_math.py, compile data/reports/6_MONTH_OPERATIONAL_ANALYSIS.md (and six_month_synthesis.md), pass PAL verification + Adversarial Critic audit >= 9/10.",
+      "acceptance_criteria": "verify_deep_analysis_math.py exits 0; zero banned statistical jargon; zero raw invoice leakage to public assets; Adversarial Critic scores >= 9/10.",
+      "passes": true
+    },
+    {
+      "id": 91,
+      "description": "JD Analytics Task 1: Baseline archive (backups/archive_pre_jd_analytics_20261123.tar.gz, mode 0600), /grill-me alignment, and formal SDD specs (SPEC.md, DESIGN.md, PLAN.md).",
+      "acceptance_criteria": "Archive exists at mode 0600; SPEC.md, DESIGN.md, and PLAN.md approved.",
+      "passes": true
+    },
+    {
+      "id": 92,
+      "description": "JD Analytics Task 2: Build services/analytics/ (hourly_velocity.py, meat_depletion_timer.py, margin_drift_detector.py, insight_synthesizer.py) computing trailing 4-week same-hour medians, 1.25x+ meat run-out timers, and basket/margin alerts.",
+      "acceptance_criteria": "All 4 analytics micro-engines exit 0 and reconcile 100% against clover_sales_master.db and predictive_payload.json.",
+      "passes": true
+    },
+    {
+      "id": 93,
+      "description": "JD Analytics Task 3: Build JD Voice Contract & Message Formatter (agents/jd/jd_voice_contract.py, agents/jd/message_formatter.py) and wire into JD dispatch & direct analytical queries.",
+      "acceptance_criteria": "JD translates math into plain-English smokehouse units (Cases, Packers, Butts, Racks), includes [Boss Alert: ...] tags on escalations, and supports direct pacing/meat queries.",
+      "passes": true
+    },
+    {
+      "id": 94,
+      "description": "JD Analytics Task 4: Add deterministic unit & copy-audit tests (clover_api/tests/test_jd_analytics.py), run full unittest suite, and pass independent read-only Adversarial Critic audit >= 9/10.",
+      "acceptance_criteria": "test_jd_analytics.py and unittest discover exit 0; zero fabricated stats or banned jargon; Adversarial Critic scores >= 9/10.",
+      "passes": true
+    },
+    {
+      "id": 95,
+      "description": "Compile Master Multi-Tab Excel Workbook (YRBBQ_Gemini_Notebook_Master_Data.xlsx, 26 tabs / 5,453 rows) + Illustrated PDF & Markdown Knowledge Base (YRBBQ_Gemini_Notebook_Knowledge_Base.pdf & .md) unifying all US Foods invoices (157 invoices, 3,060 delivery lines, 176 SKUs), Clover POS sales (9,252 orders, 38,586 line items, 131 items, 116 daily & 82 hourly records), Plate & Recipe Costs subtab (137 menu items, 450 BOM lines, 34 recipes, 151 ingredient lines), 10 sausage formulations, staff roster, SOP manuals, and 15 dashboard screenshots for Gemini Notebooks.",
+      "acceptance_criteria": "scripts/compile_gemini_notebook_bundle.py exits 0; outputs 26-tab Excel workbook, Markdown knowledge base, and illustrated PDF under data/reports/ with mode 0600; all mandatory test suites pass.",
+      "passes": true
     }
   ]
 }

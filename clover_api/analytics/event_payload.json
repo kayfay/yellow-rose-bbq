@@ -8,7 +8,7 @@
         ],
         "y": [
           1.0,
-          0.87
+          0.86
         ],
         "type": "bar",
         "marker": {
@@ -20,7 +20,7 @@
         },
         "text": [
           "1.00x",
-          "0.87x"
+          "0.86x"
         ],
         "textposition": "auto",
         "hovertext": [
@@ -76,15 +76,15 @@
     }
   },
   "event_stats": {
-    "normal_avg_usd": 4621.92,
-    "normal_days": 72,
-    "jags_avg_usd": 4735.98,
-    "jags_multiplier": 0.87,
+    "normal_avg_usd": 4953.42,
+    "normal_days": 80,
+    "jags_avg_usd": 5193.46,
+    "jags_multiplier": 0.86,
     "jags_applied_multiplier": 1.0,
-    "jags_days": 4,
+    "jags_days": 7,
     "holiday_avg_usd": null,
     "holiday_multiplier": null,
     "holiday_applied_multiplier": 1.0,
-    "holiday_days": 0
+    "holiday_days": 1
   }
 }

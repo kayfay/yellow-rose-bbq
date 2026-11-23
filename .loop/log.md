@@ -700,3 +700,38 @@
   - `verify_cogs_math.py`: PASS (14/14 days)
   - `unittest` (`test_copy_audit.py`, `test_cost_engine.py`, full suite): PASS (45/45 OK after replacing banned `"cushion"` copy with `"Left After Cost"`)
   - Full Playwright `npm test`: PASS (36/36 passed: 34 passed, 2 flaky on retry under concurrent CPU load, 0 failed)
+
+## 2026-11-21 · 6-Month Deep Research & Advanced Analytics Audit
+- **What changed & why:** Built the modular 4-workstream 6-Month Deep Research & Advanced Analytics Audit package (`analysis/`) and compiled `data/reports/6_MONTH_OPERATIONAL_ANALYSIS.md` (`0600`) across all 157 US Foods invoices (3,060 delivery lines, 176 SKUs, $339,820.89 spend) and Clover POS history (8,560 orders, 35,895 line items, $385,863.09 itemized revenue).
+- **Files touched:**
+  - `SPEC.md`, `DESIGN.md`, `PLAN.md` (prior archived to `archive/*.20261121_deep_analysis.orig`)
+  - `backups/archive_pre_deep_analysis_20261121.tar.gz` (mode `0600`)
+  - `analysis/__init__.py`, `analysis/schemas.py`, `analysis/pos_miner.py`, `analysis/invoice_auditor.py`, `analysis/reconciliation_engine.py`, `analysis/executive_compiler.py`
+  - `scripts/verify_deep_analysis_math.py`
+  - `data/reports/{pos_aggregate.json,vendor_procurement_summary.json,physical_inventory_pars.json,reconciliation_matrix.json,cogs_breakdown.json,6_MONTH_OPERATIONAL_ANALYSIS.md,six_month_synthesis.md}` (all mode `0600`)
+- **Verification & Audit results:**
+  - `.venv/bin/python scripts/verify_deep_analysis_math.py`: PASS (`POS rev diff=$0.00 <= $1.00`, `176/176` SKUs, `157` invoices, `3,060` lines, `0` unmapped, `7/7` mode `0600`, zero banned jargon, physical units verified)
+  - Read-Only Adversarial Critic (`Agent Delta`) Phase 7 Audit: **9.8 / 10** (Report Depth 9.8/10, Data Grounding 9.9/10, Operational Clarity & Security 9.8/10; 0 defects remaining after remediating price-creep extraction, non-meat burn protein exclusion, UTC-to-EST conversion, and daily pit staging calibration)
+
+
+## 2026-11-23 · Gemini Notebook Master Data & COGS Compiler (Task 95)
+- **What changed & why:** Built `scripts/compile_gemini_notebook_bundle.py` to compile all operational, financial, COGS, US Foods invoice, Clover POS, recipe formulation, menu engineering, predictive dashboard, and screenshot data into a unified upload bundle for Gemini Notebooks / NotebookLM so the owner can query all business data in one place.
+- **Files created / touched:**
+  - `scripts/compile_gemini_notebook_bundle.py` (`0755`)
+  - `data/reports/YRBBQ_Gemini_Notebook_Master_Data.xlsx` & `data/vendor_invoices/reports/YRBBQ_Gemini_Notebook_Master_Data.xlsx` (`0600`, **26 tabs / 5,453 data rows** covering all 137 menu items, 450 plate BOM lines, 34 recipes, 151 recipe ingredients, 52 handwritten recipes, 10 sausage formulations, 176 US Foods SKUs, 157 invoices, all 3,060 delivery lines, 131 Clover POS items, 116 daily & 82 hourly sales records, staff roster, weather/events/glossary, and 3 Word SOP manuals)
+  - `data/reports/YRBBQ_Gemini_Notebook_Knowledge_Base.md` (`0600`, 99 KB complete text/table knowledge base)
+  - `data/reports/YRBBQ_Gemini_Notebook_Knowledge_Base.pdf` & `.html` (`0600`, 1.4 MB illustrated PDF with all 15 `sausage.allen.tools` desktop/mobile dashboard screenshots embedded alongside the COGS tables)
+- **Verification:** `compile_gemini_notebook_bundle.py` exited 0; all 26 tabs and 5,453 rows verified via XML parser; `npm run check` and Python `unittest` suite passed.
+
+## 2026-11-23 · JD Advanced ML Analytics & Proactive Insight Engine
+- **What changed & why:** Built JD's proactive smokehouse analytics & conversational check-in engine (`services/analytics/` + `agents/jd/`) supporting active-service outlier alerts (`11 AM – 8 PM EST`, Tue–Sun) and ambient pacing check-ins with Full Food Cost % throughout the day.
+- **Files touched:**
+  - `SPEC.md`, `DESIGN.md`, `PLAN.md` (prior archived to `archive/*.20261123_jd_analytics.orig`)
+  - `backups/archive_pre_jd_analytics_20261123.tar.gz` (mode `0600`)
+  - `services/analytics/{__init__.py,schemas.py,hourly_velocity.py,meat_depletion_timer.py,margin_drift_detector.py,insight_synthesizer.py}`
+  - `agents/jd/{__init__.py,jd_voice_contract.py,message_formatter.py}`
+  - `clover_api/tests/test_jd_analytics.py`
+- **Verification & Audit results:**
+  - `clover_api/tests/test_jd_analytics.py`: PASS (`5/5 OK` — exact `$0.00` penny parity against canonical locked `hourly_actuals.json`, `Full Food Cost > 36%` Boss Alert precedence, realistic `ambient_pacing` distribution, Monday closed-day guard, zero banned jargon)
+  - Full Python `unittest discover -s clover_api/tests`: PASS (`49/49 OK`)
+  - Independent Read-Only Adversarial Critic Re-Audit: **9.3 / 10 (APPROVED)** (Analytical Depth & Grounding `9.2/10`, Persona Authenticity & Voice `9.5/10`; remediated all 7 first-pass findings from `5.5/10` -> `9.3/10`)

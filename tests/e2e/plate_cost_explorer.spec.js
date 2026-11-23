@@ -3,20 +3,24 @@ const fs = require('fs');
 const path = require('path');
 
 function readLocalVaultKey() {
+  if (process.env.PLATE_VAULT_PASSPHRASE) return process.env.PLATE_VAULT_PASSPHRASE.trim();
   if (process.env.DATA_VAULT_KEY) return process.env.DATA_VAULT_KEY.trim();
   const envPath = path.resolve(__dirname, '../../.env');
   if (!fs.existsSync(envPath)) return null;
+  const envMap = {};
   for (const line of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
     const t = line.trim();
-    if (t.startsWith('DATA_VAULT_KEY=')) {
-      let v = t.slice('DATA_VAULT_KEY='.length).trim();
-      if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
-        v = v.slice(1, -1);
+    for (const k of ['PLATE_VAULT_PASSPHRASE', 'DATA_VAULT_KEY']) {
+      if (t.startsWith(k + '=')) {
+        let v = t.slice(k.length + 1).trim();
+        if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+          v = v.slice(1, -1);
+        }
+        if (v) envMap[k] = v;
       }
-      return v;
     }
   }
-  return null;
+  return envMap.PLATE_VAULT_PASSPHRASE || envMap.DATA_VAULT_KEY || null;
 }
 
 test.describe('Plate & Recipe Costs Subtab — Encrypted Owner Vault & Fuzzy Search', () => {
