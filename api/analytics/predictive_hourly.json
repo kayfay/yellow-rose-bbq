@@ -1,32 +1,19 @@
 {
-  "generated_at": "2026-11-22T21:31:51.848248-05:00",
+  "generated_at": "2026-11-22T22:01:54.996552-05:00",
   "summary_kpis": {
-    "projected_24h_revenue_usd": -5.79,
-    "estimated_24h_cogs_usd": 0.93,
+    "projected_24h_revenue_usd": 0.0,
+    "estimated_24h_cogs_usd": 0.0,
     "estimated_food_cost_pct": null,
     "average_ticket_usd": 48.5,
     "recommended_staff": 2,
     "pitmaster_hours": 17.0,
-    "peak_rush_window": "9:00 PM EST (Sun)",
-    "current_sales_velocity": "0.1 orders/hr",
+    "peak_rush_window": "12:00 PM",
+    "current_sales_velocity": "0.0 orders/hr",
     "pacing_status": "Normal Pacing",
     "total_brisket_draw_lbs": 0.0,
     "total_pork_draw_lbs": 0.0
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-11-22T21:00:00",
-      "hour_display": "9:00 PM EST",
-      "day_name": "Sun",
-      "hour": 21,
-      "predicted_orders": 0.1,
-      "predicted_revenue": -5.79,
-      "estimated_cogs_usd": 0.93,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Normal Pacing",
-      "is_peak": false
-    },
     {
       "timestamp": "2026-11-22T22:00:00",
       "hour_display": "10:00 PM EST",
@@ -325,10 +312,23 @@
       "pork_cooked_lbs": 0.0,
       "pacing_status": "Slow Period",
       "is_peak": false
+    },
+    {
+      "timestamp": "2026-11-23T21:00:00",
+      "hour_display": "9:00 PM EST",
+      "day_name": "Mon",
+      "hour": 21,
+      "predicted_orders": 0.0,
+      "predicted_revenue": 0.0,
+      "estimated_cogs_usd": 0.0,
+      "brisket_cooked_lbs": 0.0,
+      "pork_cooked_lbs": 0.0,
+      "pacing_status": "Normal Pacing",
+      "is_peak": false
     }
   ],
   "operational_directives": [
-    "Peak Window: 9:00 PM EST (Sun) (~0.1 orders/hr).",
+    "Peak Window: 12:00 PM (~0.0 orders/hr).",
     "24h Meat Draw: ~0.0 lbs cooked brisket & ~0.0 lbs pulled pork.",
     "Rain / Humidity (>85%): Stage +20% takeout packaging as dine-in shifts to family packs.",
     "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM for a 45-min rest before the 5:00 PM rush."
