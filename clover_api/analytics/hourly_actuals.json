@@ -1,6 +1,6 @@
 {
   "timezone": "America/New_York",
-  "generated_at": "2026-11-25T07:37:44.428545-05:00",
+  "generated_at": "2026-11-25T10:01:02.903731-05:00",
   "days": {
     "2026-08-23": {
       "buckets": [
@@ -434,8 +434,8 @@
         },
         {
           "hour": 10,
-          "sales_usd": 1214.62,
-          "orders": 2
+          "sales_usd": 835.0,
+          "orders": 1
         },
         {
           "hour": 11,
@@ -503,8 +503,8 @@
           "orders": 0
         }
       ],
-      "total_sales_usd": 5179.29,
-      "total_orders": 101
+      "total_sales_usd": 4799.67,
+      "total_orders": 100
     },
     "2026-08-28": {
       "buckets": [
@@ -10585,6 +10585,132 @@
       ],
       "total_sales_usd": 5465.08,
       "total_orders": 112
+    },
+    "2026-11-25": {
+      "buckets": [
+        {
+          "hour": 0,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 1,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 2,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 3,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 4,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 5,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 6,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 7,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 8,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 9,
+          "sales_usd": 178.82,
+          "orders": 1
+        },
+        {
+          "hour": 10,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 11,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 12,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 13,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 14,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 15,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 16,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 17,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 18,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 19,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 20,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 21,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 22,
+          "sales_usd": 0.0,
+          "orders": 0
+        },
+        {
+          "hour": 23,
+          "sales_usd": 0.0,
+          "orders": 0
+        }
+      ],
+      "total_sales_usd": 178.82,
+      "total_orders": 1
     }
   },
   "weekday_baseline": {
@@ -10699,7 +10825,7 @@
       ]
     },
     "2": {
-      "n": 12,
+      "n": 13,
       "sales_sum": [
         0.0,
         0.0,
@@ -10710,7 +10836,7 @@
         0.0,
         0.0,
         306.92,
-        179.85,
+        358.67,
         114.81,
         6392.15,
         6730.26,
@@ -10736,7 +10862,7 @@
         0,
         0,
         1,
-        2,
+        3,
         2,
         181,
         197,
@@ -10766,7 +10892,7 @@
         0.0,
         258.81,
         495.9,
-        1666.34,
+        1286.72,
         8982.0,
         7865.16,
         5468.97,
@@ -10792,7 +10918,7 @@
         0,
         1,
         1,
-        4,
+        3,
         216,
         217,
         143,
