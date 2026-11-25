@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-24T21:46:00.233729-05:00",
+      "generated_at": "2026-11-24T22:00:41.731223-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~214.7 lbs raw brisket (~75.1 lbs cooked yield) and ~55.8 lbs raw pork shoulder (~24.6 lbs cooked yield) [~270.5 lbs total raw / ~99.7 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (79 projected) and Rosebuds (44 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -2842,7 +2842,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-11-24T21:45:59.776046-05:00",
+    "generated_at": "2026-11-24T22:00:41.216926-05:00",
     "summary_kpis": {
       "projected_24h_revenue_usd": 3181.91,
       "estimated_24h_cogs_usd": 826.32,
@@ -2857,19 +2857,6 @@ window.BBQ_PAYLOADS = {
       "total_pork_draw_lbs": 17.6
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-11-24T21:00:00",
-        "hour_display": "9:00 PM EST",
-        "day_name": "Tue",
-        "hour": 21,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
       {
         "timestamp": "2026-11-24T22:00:00",
         "hour_display": "10:00 PM EST",
@@ -3166,6 +3153,19 @@ window.BBQ_PAYLOADS = {
         "estimated_cogs_usd": 19.3,
         "brisket_cooked_lbs": 0.9,
         "pork_cooked_lbs": 0.4,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-25T21:00:00",
+        "hour_display": "9:00 PM EST",
+        "day_name": "Wed",
+        "hour": 21,
+        "predicted_orders": 0.0,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.0,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       }
@@ -17960,7 +17960,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-24T21:46:00.219825-05:00",
+    "generated_at": "2026-11-24T22:00:41.689168-05:00",
     "days": {
       "2026-08-23": {
         "buckets": [
@@ -28997,13 +28997,8 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-24": {
-      "captured_at": "2026-11-24T21:46:00.229915-05:00",
+      "captured_at": "2026-11-24T22:00:41.693945-05:00",
       "hourly_forecast": [
-        {
-          "hour": 21,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
         {
           "hour": 22,
           "predicted_orders": 0.0,
@@ -29018,7 +29013,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-11-24T21:45:59-05:00",
+    "generated_at": "2026-11-24T22:00:41-05:00",
     "timezone": "America/New_York",
     "today_date": "2026-11-24",
     "active_service_brief": {
@@ -30775,8 +30770,8 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-11-24T21:45:59.776046-05:00",
-    "total_insights_mined": 9,
+    "generated_at": "2026-11-24T22:00:41.216926-05:00",
+    "total_insights_mined": 11,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
       "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
@@ -30937,7 +30932,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-24T21:46:00.147501-05:00",
+    "generated_at": "2026-11-24T22:00:41.613508-05:00",
     "total_alerts_detected": 21,
     "active_alert": {
       "alert_id": "qw-aov-2026-11-24-19",
@@ -31178,7 +31173,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "full_cogs": {
-    "generated_at": "2026-11-24T21:46:00.232818-05:00",
+    "generated_at": "2026-11-24T22:00:41.730066-05:00",
     "bom_version": "1.0.0",
     "target_bands": {
       "green_max_pct": 32.0,
