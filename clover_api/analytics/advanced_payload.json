@@ -27,8 +27,8 @@
     },
     {
       "pair": "Brisket + Turkey",
-      "count": 116,
-      "confidence": 47.7
+      "count": 115,
+      "confidence": 47.5
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2538,
-      "total_revenue": 159088.53,
-      "avg_ticket": 62.68263593380615
+      "order_count": 2537,
+      "total_revenue": 158261.03,
+      "avg_ticket": 62.38117067402444
     }
   ],
   "sell_out_prediction_chart": {
@@ -131,11 +131,11 @@
           83.5,
           181.03,
           234.52,
-          312.61,
-          402.74,
-          540.14,
-          633.8,
-          680.78
+          307.61,
+          397.74,
+          535.14,
+          628.8,
+          675.78
         ],
         "name": "Brisket",
         "type": "scatter",
@@ -286,11 +286,11 @@
           49.5,
           154.25,
           183.57999999999998,
-          218.07999999999998,
-          292.65999999999997,
-          429.49,
-          459.24,
-          522.07
+          214.57999999999998,
+          289.15999999999997,
+          425.99,
+          455.74,
+          518.57
         ],
         "name": "Pulled Pork",
         "type": "scatter",
@@ -514,9 +514,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.0,
-    "pork_ribs_avg_with_dino": 3.7,
-    "impact_pct": -26.1
+    "pork_ribs_avg_without_dino": 4.9,
+    "pork_ribs_avg_with_dino": 3.9,
+    "impact_pct": -19.3
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,

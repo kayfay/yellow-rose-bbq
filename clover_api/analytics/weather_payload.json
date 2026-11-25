@@ -52,7 +52,7 @@
           61.519999999999996,
           67.1,
           69.98,
-          62.6
+          62.959999999999994
         ],
         "y": [
           4576.48,
@@ -155,8 +155,8 @@
           "<b>Friday, 2026-11-13</b><br>Revenue: $5,804.64<br>Weather: 69.98\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Saturday, 2026-11-14</b><br>Revenue: $7,014.44<br>Weather: 61.519999999999996\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Sunday, 2026-11-22</b><br>Revenue: $6,819.17<br>Weather: 67.1\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Tuesday, 2026-11-24</b><br>Revenue: $4,859.57<br>Weather: 69.98\u00b0F, 0.4mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
-          "<b>Wednesday, 2026-11-25</b><br>Revenue: $605.51<br>Weather: 62.6\u00b0F, 3.0mm rain<br><br><b>\ud83c\udf1f MOST RECENT SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
+          "<b>Tuesday, 2026-11-24</b><br>Revenue: $4,859.57<br>Weather: 69.98\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+          "<b>Wednesday, 2026-11-25</b><br>Revenue: $605.51<br>Weather: 62.959999999999994\u00b0F, 9.1mm rain<br><br><b>\ud83c\udf1f MOST RECENT SALES</b><br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>"
         ],
         "hovertemplate": "%{text}<extra></extra>",
         "mode": "markers",
@@ -211,8 +211,8 @@
             10,
             10,
             10,
-            10.8,
-            16.0
+            10,
+            20
           ],
           "color": "#27ae60",
           "opacity": 0.8,
@@ -609,7 +609,7 @@
     "rain_drop_pct": -0.9,
     "heat_avg_usd": 4257.01,
     "heat_drop_pct": -6.4,
-    "rain_coef": -0.95,
-    "temp_coef": -4.95
+    "rain_coef": -1.75,
+    "temp_coef": -5.24
   }
 }
