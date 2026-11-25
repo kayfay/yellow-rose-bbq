@@ -32,6 +32,7 @@ This document is automatically generated from live POS API metadata.
 | **Guisada Taco Plate** |  |
 | **Guisada Taco** |  |
 | **Hill Country Trinity W/3Sides** |  |
+| **Holiday Brisket** | Pound |
 | **Holiday Ribs** |  |
 | **Holiday Turkey** | Pound |
 | **Jalapeno Cheddar Sausage** | Pound |
