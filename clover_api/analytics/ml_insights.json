@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T17:00:43.774060-05:00",
+  "generated_at": "2026-11-25T17:30:44.105888-05:00",
   "total_insights_mined": 11,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -15,6 +15,39 @@
     "clover_api/analytics/weather_payload.json (Open-Meteo Weather Model)"
   ],
   "insights": [
+    {
+      "id": 101,
+      "title": "High-Profit Anchor: Catering Delivery Fee (18.0% Food Cost)",
+      "category": "profitability",
+      "category_label": "\u2b50 Profitability Mining",
+      "insight": "Machine learning clustering ranks Catering Delivery Fee in the highest profitability tier ('Super Star'): delivering $68.33 in gross profit on a $83.33 ticket with only 18.0% food cost.",
+      "evidence": "US Foods Contract Pricing (Order #91714857) & Multi-Tier Meat Cost Model",
+      "quantitative_proof": "$68.33 profit (82.0% margin) vs the kitchen average",
+      "actionable_recommendation": "Train counter staff to actively recommend Catering Delivery Fee and feature it on POS modifier quick-keys; every 10 incremental orders generates +$683.30 pure gross profit.",
+      "impact_usd": 1024.95,
+      "terms": [
+        "Est. Meat Cost",
+        "Meat Cost %",
+        "Left After Meat Cost",
+        "Prep Target"
+      ]
+    },
+    {
+      "id": 102,
+      "title": "Clover POS vs Menu Board Pricing Anomaly: Brisket Sandwich Margin Risk",
+      "category": "margin_anomaly",
+      "category_label": "\u26a0\ufe0f Pricing Disparity",
+      "insight": "Cross-referencing physical menu board photo ($13.00) vs modeled price ($17.00) reveals that at $13.00, the 7 oz brisket sandwich food cost spikes to 45.5% ($5.91 meat cost per portion), severely compressing margin.",
+      "evidence": "yellow_rose_menu_picture.jpg vs yellow_rose_bbq_audit_report.csv Section 3",
+      "quantitative_proof": "45.5% live food cost at $13.00 vs 34.8% target at $17.00 (+$4.00 difference from target)",
+      "actionable_recommendation": "Audit Clover POS terminal pricing for Brisket Sandwich; ensure sides ($4.00) and drinks ($2.95) are prompted as add-on bundles to keep more than 68% of each sale after meat cost.",
+      "impact_usd": 480.0,
+      "terms": [
+        "Est. Meat Cost",
+        "Meat Cost %",
+        "Average Ticket"
+      ]
+    },
     {
       "id": 103,
       "title": "Midweek vs Weekend Revenue Gap: $64 Family Feast Playbook",
