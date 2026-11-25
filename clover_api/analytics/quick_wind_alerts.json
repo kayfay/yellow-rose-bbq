@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T19:00:41.853560-05:00",
+  "generated_at": "2026-11-24T19:30:43.545854-05:00",
   "total_alerts_detected": 20,
   "active_alert": {
     "alert_id": "qw-surge-2026-11-24-18",
@@ -9,18 +9,18 @@
     "event_type": "rush_acceleration",
     "severity": "surge",
     "severity_badge": "\ud83d\ude80 Rush Acceleration",
-    "headline": "Customer Rush Building (+47% More Orders Than Usual)",
-    "immediate_present_status": "The line is getting longer. Orders hit 15 tickets/hr (usual: 10.2), bringing in $708.49/hr.",
+    "headline": "Customer Rush Building (+57% More Orders Than Usual)",
+    "immediate_present_status": "The line is getting longer. Orders hit 16 tickets/hr (usual: 10.2), bringing in $731.19/hr.",
     "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
     "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
     "velocity_metrics": {
-      "actual_sales": 708.49,
-      "expected_sales": 401.39,
-      "actual_orders": 15,
+      "actual_sales": 731.19,
+      "expected_sales": 403.14,
+      "actual_orders": 16,
       "expected_orders": 10.2,
-      "aov": 47.23,
-      "baseline_aov": 39.53,
-      "z_score": 1.46
+      "aov": 45.7,
+      "baseline_aov": 39.4,
+      "z_score": 1.53
     },
     "terms": [
       "Rush Signal",
@@ -150,18 +150,18 @@
       "event_type": "rush_acceleration",
       "severity": "surge",
       "severity_badge": "\ud83d\ude80 Rush Acceleration",
-      "headline": "Customer Rush Building (+47% More Orders Than Usual)",
-      "immediate_present_status": "The line is getting longer. Orders hit 15 tickets/hr (usual: 10.2), bringing in $708.49/hr.",
+      "headline": "Customer Rush Building (+57% More Orders Than Usual)",
+      "immediate_present_status": "The line is getting longer. Orders hit 16 tickets/hr (usual: 10.2), bringing in $731.19/hr.",
       "causal_explanation": "Peak lunch compression window coincided with favorable weather or regional foot traffic, so the counter line grew faster than on a typical day.",
       "recommended_pit_action": "Open secondary carving station; stage next rested briskets from warming cabinet (140\u00b0F); deploy dedicated expediter to box sides and bag orders.",
       "velocity_metrics": {
-        "actual_sales": 708.49,
-        "expected_sales": 401.39,
-        "actual_orders": 15,
+        "actual_sales": 731.19,
+        "expected_sales": 403.14,
+        "actual_orders": 16,
         "expected_orders": 10.2,
-        "aov": 47.23,
-        "baseline_aov": 39.53,
-        "z_score": 1.46
+        "aov": 45.7,
+        "baseline_aov": 39.4,
+        "z_score": 1.53
       },
       "terms": [
         "Rush Signal",
