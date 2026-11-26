@@ -1347,7 +1347,7 @@
     {
       "date": "2026-08-28",
       "day_name": "Fri",
-      "actual_revenue": 1527.24,
+      "actual_revenue": 1396.65,
       "predicted_revenue": 4200.0,
       "brisket_raw_lbs": 40.0,
       "pork_shoulder_raw_lbs": 24.0,
@@ -1384,7 +1384,7 @@
       "actual_rosebuds_sold": 10,
       "actual_total_cooked_lbs": 24.6,
       "estimated_cogs_usd": 354.14,
-      "estimated_food_cost_pct": 23.2
+      "estimated_food_cost_pct": 25.4
     },
     {
       "date": "2026-08-29",
