@@ -75,7 +75,7 @@
           85.0
         ],
         "y": [
-          2503.52,
+          2011.44,
           4947.45,
           2970.98,
           3950.5099999999998,
@@ -147,7 +147,7 @@
           88.8
         ],
         "text": [
-          "<b>Saturday, 2026-08-29</b><br>Revenue: $2,503.52<br>Weather: 85.0\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
+          "<b>Saturday, 2026-08-29</b><br>Revenue: $2,011.44<br>Weather: 85.0\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Sunday, 2026-08-30</b><br>Revenue: $4,947.45<br>Weather: 85.0\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Wednesday, 2026-09-02</b><br>Revenue: $2,970.98<br>Weather: 85.0\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
           "<b>Thursday, 2026-09-03</b><br>Revenue: $3,950.51<br>Weather: 85.0\u00b0F, 0.0mm rain<br><br><i>Insight: Ideal patio weather.<br>Maximize walk-in capacity and patio service.</i>",
@@ -520,8 +520,8 @@
           "xref": "paper",
           "x0": 0,
           "x1": 1,
-          "y0": 4588.111333333334,
-          "y1": 4588.111333333334,
+          "y0": 4581.550266666667,
+          "y1": 4581.550266666667,
           "line": {
             "color": "#94a3b8",
             "width": 2,
@@ -533,8 +533,8 @@
         {
           "xref": "paper",
           "x": 0.02,
-          "y": 4888.111333333334,
-          "text": "Baseline Target ($4,588)",
+          "y": 4881.550266666667,
+          "text": "Baseline Target ($4,582)",
           "showarrow": false,
           "font": {
             "color": "#94a3b8",
@@ -546,10 +546,10 @@
     }
   },
   "weather_stats": {
-    "normal_avg_usd": 4588.11,
-    "rain_avg_usd": 3211.68,
+    "normal_avg_usd": 4581.55,
+    "rain_avg_usd": 3207.09,
     "rain_drop_pct": -30.0,
-    "heat_avg_usd": 4037.54,
+    "heat_avg_usd": 4031.76,
     "heat_drop_pct": -12.0,
     "rain_coef": -15.5,
     "temp_coef": -8.2
