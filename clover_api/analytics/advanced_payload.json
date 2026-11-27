@@ -3,7 +3,7 @@
     {
       "pair": "2 meat plate + Rosebud",
       "count": 290,
-      "confidence": 23.1
+      "confidence": 23.2
     },
     {
       "pair": "2 meat plate + BBQ plate",
@@ -12,8 +12,8 @@
     },
     {
       "pair": "BBQ plate + Rosebud",
-      "count": 233,
-      "confidence": 18.6
+      "count": 232,
+      "confidence": 18.5
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
@@ -22,8 +22,8 @@
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 120,
-      "confidence": 18.7
+      "count": 119,
+      "confidence": 18.6
     },
     {
       "pair": "Brisket + Turkey",
@@ -47,22 +47,22 @@
     },
     {
       "pair": "Brisket + Mac & Cheese",
-      "count": 98,
-      "confidence": 21.7
+      "count": 97,
+      "confidence": 21.6
     }
   ],
   "interaction_modeling": {
-    "normal": 4037.79,
-    "game_only": 4997.47,
-    "rain_only": 4458.21,
-    "game_and_rain": 2308.76
+    "normal": 4171.78,
+    "game_only": 3921.99,
+    "rain_only": 2920.24,
+    "game_and_rain": 11680.98
   },
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4847,
-      "total_revenue": 208183.34,
-      "avg_ticket": 42.950967608830204
+      "order_count": 4835,
+      "total_revenue": 207831.57,
+      "avg_ticket": 42.984812823164425
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2511,
-      "total_revenue": 156784.55,
-      "avg_ticket": 62.43908801274392
+      "order_count": 2503,
+      "total_revenue": 156536.28,
+      "avg_ticket": 62.53946464242908
     }
   ],
   "sell_out_prediction_chart": {
@@ -545,12 +545,12 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 5.1,
-    "pork_ribs_avg_with_dino": 3.4,
-    "impact_pct": -33.5
+    "pork_ribs_avg_without_dino": 5.4,
+    "pork_ribs_avg_with_dino": 3.3,
+    "impact_pct": -39.0
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
-    "normal_avg_ticket": 46.24
+    "normal_avg_ticket": 46.28
   }
 }
