@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-27T18:23:41.788370-05:00",
-  "total_insights_mined": 9,
+  "generated_at": "2026-11-27T18:30:49.844161-05:00",
+  "total_insights_mined": 11,
   "data_sources_analyzed": [
     "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
     "data/yellow_rose_bbq_wholesale_yields.csv (Wholesale Contract Specs)",
