@@ -5001,11 +5001,11 @@
     {
       "date": "2026-11-27",
       "day_name": "Fri",
-      "actual_revenue": 2906.83,
+      "actual_revenue": 2926.81,
       "predicted_revenue": 4200.0,
-      "brisket_raw_lbs": 44.7,
+      "brisket_raw_lbs": 45.6,
       "pork_shoulder_raw_lbs": 24.0,
-      "sausage_lbs": 29.1,
+      "sausage_lbs": 29.3,
       "tacos_sold": 28,
       "rosebuds_sold": 6,
       "pork_ribs_racks": 11.2,
@@ -5025,20 +5025,20 @@
       "predicted_tacos_sold": 55,
       "predicted_rosebuds_sold": 30,
       "predicted_total_cooked_lbs": 89.5,
-      "actual_brisket_raw_lbs": 44.7,
-      "actual_brisket_cooked_lbs": 15.6,
+      "actual_brisket_raw_lbs": 45.6,
+      "actual_brisket_cooked_lbs": 16.0,
       "actual_pork_shoulder_raw_lbs": 24.0,
       "actual_pork_cooked_lbs": 10.6,
-      "actual_sausage_lbs": 29.1,
-      "actual_sausage_links": 87,
+      "actual_sausage_lbs": 29.3,
+      "actual_sausage_links": 88,
       "actual_pork_ribs_racks": 11.2,
       "actual_beef_dino_ribs": 0,
       "actual_turkey_cooked_lbs": 12.65,
       "actual_tacos_sold": 28,
       "actual_rosebuds_sold": 6,
-      "actual_total_cooked_lbs": 26.2,
-      "estimated_cogs_usd": 530.41,
-      "estimated_food_cost_pct": 18.2
+      "actual_total_cooked_lbs": 26.6,
+      "estimated_cogs_usd": 535.73,
+      "estimated_food_cost_pct": 18.3
     }
   ]
 }
