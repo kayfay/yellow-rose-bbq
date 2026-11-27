@@ -1,7 +1,7 @@
 window.BBQ_PAYLOADS = {
   "dashboard_payload": {
     "forecast": {
-      "generated_at": "2026-11-26T21:30:43.725881-05:00",
+      "generated_at": "2026-11-26T22:00:42.354776-05:00",
       "days_count": 14,
       "insight_string": "The forecast dictates prepping ~2897.2 lbs raw brisket (~1014.0 lbs cooked yield) and ~54.7 lbs raw pork shoulder (~24.1 lbs cooked yield) [~2951.9 lbs total raw / ~1038.1 lbs total cooked meat] for Saturday. Because brisket loses ~65% and pork loses ~56% of their weight during the 14-hour smoke, and composed items like Tacos (76 projected) and Rosebuds (42 projected) pull directly from this yield, prepping these exact amounts mathematically ensures hitting target sell-out right at 9:00 PM closing.",
       "forecast_records": [
@@ -10,14 +10,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Thu",
           "is_closed": false,
           "predicted_revenue": 4863.58,
-          "estimated_cogs_usd": 46650.37,
-          "estimated_food_cost_pct": 959.2,
+          "estimated_cogs_usd": 46640.71,
+          "estimated_food_cost_pct": 959.0,
           "brisket_raw_lbs": 2473.1,
           "pork_shoulder_raw_lbs": 25.9,
           "sausage_lbs": 29.1,
-          "turkey_lbs": 6606.9,
-          "turkey_cooked_lbs": 6606.9,
-          "turkey_raw_lbs": 9438.4,
+          "turkey_lbs": 6605.0,
+          "turkey_cooked_lbs": 6605.0,
+          "turkey_raw_lbs": 9435.7,
           "tacos_sold": 66,
           "rosebuds_sold": 33,
           "pork_ribs_racks": 10,
@@ -31,14 +31,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Fri",
           "is_closed": false,
           "predicted_revenue": 5237.71,
-          "estimated_cogs_usd": 50726.0,
-          "estimated_food_cost_pct": 968.5,
+          "estimated_cogs_usd": 50719.91,
+          "estimated_food_cost_pct": 968.4,
           "brisket_raw_lbs": 2711.4,
           "pork_shoulder_raw_lbs": 35.9,
           "sausage_lbs": 32.9,
-          "turkey_lbs": 7150.9,
-          "turkey_cooked_lbs": 7150.9,
-          "turkey_raw_lbs": 10215.6,
+          "turkey_lbs": 7149.7,
+          "turkey_cooked_lbs": 7149.7,
+          "turkey_raw_lbs": 10213.9,
           "tacos_sold": 75,
           "rosebuds_sold": 43,
           "pork_ribs_racks": 13,
@@ -115,14 +115,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Tue",
           "is_closed": false,
           "predicted_revenue": 4073.77,
-          "estimated_cogs_usd": 63193.08,
-          "estimated_food_cost_pct": 1551.2,
+          "estimated_cogs_usd": 63198.81,
+          "estimated_food_cost_pct": 1551.4,
           "brisket_raw_lbs": 3394.1,
           "pork_shoulder_raw_lbs": 23.8,
           "sausage_lbs": 22.4,
-          "turkey_lbs": 8934.1,
-          "turkey_cooked_lbs": 8934.1,
-          "turkey_raw_lbs": 12763.0,
+          "turkey_lbs": 8935.2,
+          "turkey_cooked_lbs": 8935.2,
+          "turkey_raw_lbs": 12764.6,
           "tacos_sold": 57,
           "rosebuds_sold": 25,
           "pork_ribs_racks": 9,
@@ -136,14 +136,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Wed",
           "is_closed": false,
           "predicted_revenue": 3616.51,
-          "estimated_cogs_usd": 23576480.47,
-          "estimated_food_cost_pct": 651912.4,
-          "brisket_raw_lbs": 432375.5,
+          "estimated_cogs_usd": 23604569.0,
+          "estimated_food_cost_pct": 652689.0,
+          "brisket_raw_lbs": 432375.4,
           "pork_shoulder_raw_lbs": 22.6,
           "sausage_lbs": 21.0,
-          "turkey_lbs": 4180403.0,
-          "turkey_cooked_lbs": 4180403.0,
-          "turkey_raw_lbs": 5972004.3,
+          "turkey_lbs": 4185895.3,
+          "turkey_cooked_lbs": 4185895.3,
+          "turkey_raw_lbs": 5979850.4,
           "tacos_sold": 49,
           "rosebuds_sold": 27,
           "pork_ribs_racks": 7,
@@ -157,14 +157,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Thu",
           "is_closed": false,
           "predicted_revenue": 4863.58,
-          "estimated_cogs_usd": 46650.37,
-          "estimated_food_cost_pct": 959.2,
+          "estimated_cogs_usd": 46640.71,
+          "estimated_food_cost_pct": 959.0,
           "brisket_raw_lbs": 2473.1,
           "pork_shoulder_raw_lbs": 25.9,
           "sausage_lbs": 29.1,
-          "turkey_lbs": 6606.9,
-          "turkey_cooked_lbs": 6606.9,
-          "turkey_raw_lbs": 9438.4,
+          "turkey_lbs": 6605.0,
+          "turkey_cooked_lbs": 6605.0,
+          "turkey_raw_lbs": 9435.7,
           "tacos_sold": 66,
           "rosebuds_sold": 33,
           "pork_ribs_racks": 10,
@@ -178,14 +178,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Fri",
           "is_closed": false,
           "predicted_revenue": 5237.71,
-          "estimated_cogs_usd": 50726.0,
-          "estimated_food_cost_pct": 968.5,
+          "estimated_cogs_usd": 50719.91,
+          "estimated_food_cost_pct": 968.4,
           "brisket_raw_lbs": 2711.4,
           "pork_shoulder_raw_lbs": 35.9,
           "sausage_lbs": 32.9,
-          "turkey_lbs": 7150.9,
-          "turkey_cooked_lbs": 7150.9,
-          "turkey_raw_lbs": 10215.6,
+          "turkey_lbs": 7149.7,
+          "turkey_cooked_lbs": 7149.7,
+          "turkey_raw_lbs": 10213.9,
           "tacos_sold": 75,
           "rosebuds_sold": 43,
           "pork_ribs_racks": 13,
@@ -262,14 +262,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Tue",
           "is_closed": false,
           "predicted_revenue": 4073.77,
-          "estimated_cogs_usd": 63193.08,
-          "estimated_food_cost_pct": 1551.2,
+          "estimated_cogs_usd": 63198.81,
+          "estimated_food_cost_pct": 1551.4,
           "brisket_raw_lbs": 3394.1,
           "pork_shoulder_raw_lbs": 23.8,
           "sausage_lbs": 22.4,
-          "turkey_lbs": 8934.1,
-          "turkey_cooked_lbs": 8934.1,
-          "turkey_raw_lbs": 12763.0,
+          "turkey_lbs": 8935.2,
+          "turkey_cooked_lbs": 8935.2,
+          "turkey_raw_lbs": 12764.6,
           "tacos_sold": 57,
           "rosebuds_sold": 25,
           "pork_ribs_racks": 9,
@@ -283,14 +283,14 @@ window.BBQ_PAYLOADS = {
           "day_name": "Wed",
           "is_closed": false,
           "predicted_revenue": 3616.51,
-          "estimated_cogs_usd": 23576480.47,
-          "estimated_food_cost_pct": 651912.4,
-          "brisket_raw_lbs": 432375.5,
+          "estimated_cogs_usd": 23604569.0,
+          "estimated_food_cost_pct": 652689.0,
+          "brisket_raw_lbs": 432375.4,
           "pork_shoulder_raw_lbs": 22.6,
           "sausage_lbs": 21.0,
-          "turkey_lbs": 4180403.0,
-          "turkey_cooked_lbs": 4180403.0,
-          "turkey_raw_lbs": 5972004.3,
+          "turkey_lbs": 4185895.3,
+          "turkey_cooked_lbs": 4185895.3,
+          "turkey_raw_lbs": 5979850.4,
           "tacos_sold": 49,
           "rosebuds_sold": 27,
           "pork_ribs_racks": 7,
@@ -327,14 +327,14 @@ window.BBQ_PAYLOADS = {
             2990.1,
             0.0,
             3394.1,
-            432375.5,
+            432375.4,
             35029.4,
             37576.8,
             39941.7,
             40351.5,
             0.0,
             46473.3,
-            5230269.7
+            5230266.6
           ],
           "name": "Raw Brisket Prep (lbs)",
           "type": "bar",
@@ -2115,14 +2115,14 @@ window.BBQ_PAYLOADS = {
             2980.0,
             3060.5,
             3387.8,
-            432368.1,
+            432368.0,
             35021.2,
             37566.0,
             39931.2,
             40341.2,
             44053.0,
             46466.8,
-            5230262.3
+            5230259.2
           ],
           "prep_lead_hrs": 18.0,
           "draws_from": null
@@ -2249,20 +2249,20 @@ window.BBQ_PAYLOADS = {
         },
         "turkey_lbs": {
           "forecast": [
-            6006.3,
-            6500.8,
+            6004.5,
+            6499.7,
             7396.4,
             7445.6,
-            7366.8,
-            8121.9,
-            3800366.4,
-            472551.0,
-            510608.4,
-            579168.4,
-            582808.4,
-            578175.2,
-            635083.5,
-            289410277.5
+            7366.9,
+            8122.9,
+            3805359.4,
+            473018.7,
+            511178.3,
+            579924.0,
+            583571.3,
+            578928.6,
+            635987.0,
+            290178401.3
           ],
           "prep_lead_hrs": 6.0,
           "draws_from": null
@@ -2903,10 +2903,10 @@ window.BBQ_PAYLOADS = {
     }
   },
   "predictive_payload": {
-    "generated_at": "2026-11-26T21:30:43.062078-05:00",
+    "generated_at": "2026-11-26T22:00:41.821608-05:00",
     "summary_kpis": {
       "projected_24h_revenue_usd": 4726.77,
-      "estimated_24h_cogs_usd": 1392.16,
+      "estimated_24h_cogs_usd": 1393.14,
       "estimated_food_cost_pct": 29.5,
       "average_ticket_usd": 48.5,
       "recommended_staff": 5,
@@ -2918,19 +2918,6 @@ window.BBQ_PAYLOADS = {
       "total_pork_draw_lbs": 26.4
     },
     "hourly_forecast": [
-      {
-        "timestamp": "2026-11-26T21:00:00",
-        "hour_display": "9:00 PM EST",
-        "day_name": "Thu",
-        "hour": 21,
-        "predicted_orders": 0.0,
-        "predicted_revenue": 0.0,
-        "estimated_cogs_usd": 0.0,
-        "brisket_cooked_lbs": 0.0,
-        "pork_cooked_lbs": 0.0,
-        "pacing_status": "Normal Pacing",
-        "is_peak": false
-      },
       {
         "timestamp": "2026-11-26T22:00:00",
         "hour_display": "10:00 PM EST",
@@ -3227,6 +3214,19 @@ window.BBQ_PAYLOADS = {
         "estimated_cogs_usd": 47.8,
         "brisket_cooked_lbs": 2.2,
         "pork_cooked_lbs": 0.9,
+        "pacing_status": "Normal Pacing",
+        "is_peak": false
+      },
+      {
+        "timestamp": "2026-11-27T21:00:00",
+        "hour_display": "9:00 PM EST",
+        "day_name": "Fri",
+        "hour": 21,
+        "predicted_orders": 0.1,
+        "predicted_revenue": 0.0,
+        "estimated_cogs_usd": 0.98,
+        "brisket_cooked_lbs": 0.0,
+        "pork_cooked_lbs": 0.0,
         "pacing_status": "Normal Pacing",
         "is_peak": false
       }
@@ -18063,7 +18063,7 @@ window.BBQ_PAYLOADS = {
   ],
   "hourly_actuals": {
     "timezone": "America/New_York",
-    "generated_at": "2026-11-26T21:30:43.681149-05:00",
+    "generated_at": "2026-11-26T22:00:42.312563-05:00",
     "days": {
       "2026-08-23": {
         "buckets": [
@@ -29246,13 +29246,8 @@ window.BBQ_PAYLOADS = {
       ]
     },
     "2026-11-26": {
-      "captured_at": "2026-11-26T21:30:43.686172-05:00",
+      "captured_at": "2026-11-26T22:00:42.317404-05:00",
       "hourly_forecast": [
-        {
-          "hour": 21,
-          "predicted_orders": 0.0,
-          "predicted_revenue": 0.0
-        },
         {
           "hour": 22,
           "predicted_orders": 0.0,
@@ -29267,7 +29262,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "daily_executive_brief": {
-    "generated_at": "2026-11-26T21:30:43-05:00",
+    "generated_at": "2026-11-26T22:00:42-05:00",
     "timezone": "America/New_York",
     "today_date": "2026-11-26",
     "active_service_brief": {
@@ -29282,14 +29277,14 @@ window.BBQ_PAYLOADS = {
       "expected_sales_usd": 4864,
       "typical_day_sales_usd": 3971,
       "sales_diff_usd": 893,
-      "estimated_meat_cost_usd": 46650,
-      "left_after_meat_cost_usd": -41786,
-      "meat_cost_pct": 959.1,
-      "leftover_pct": -859.1,
+      "estimated_meat_cost_usd": 46641,
+      "left_after_meat_cost_usd": -41777,
+      "meat_cost_pct": 958.9,
+      "leftover_pct": -858.9,
       "primary_driver": "",
       "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & Early Dinner",
-      "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,786 for the shop after ~$46,650 in estimated meat cost.",
-      "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2203 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
+      "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,777 for the shop after ~$46,641 in estimated meat cost.",
+      "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2202 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
       "sales_bridge": {
         "typical_day_label": "Typical Thursday",
         "typical_day_usd": 3971,
@@ -29298,8 +29293,8 @@ window.BBQ_PAYLOADS = {
         "weather_event_delta_label": "Weather & Local Crowd",
         "weather_event_delta_usd": 339,
         "expected_sales_usd": 4864,
-        "estimated_meat_cost_usd": 46650,
-        "left_after_meat_cost_usd": -41786
+        "estimated_meat_cost_usd": 46641,
+        "left_after_meat_cost_usd": -41777
       }
     },
     "dow_baselines": {
@@ -29319,7 +29314,7 @@ window.BBQ_PAYLOADS = {
         "typical_pork_raw_lbs": 27.2,
         "typical_ribs_racks": 6,
         "typical_sausage_lbs": 40.7,
-        "typical_turkey_cooked_lbs": 8398.1
+        "typical_turkey_cooked_lbs": 8399.1
       },
       "Wed": {
         "typical_sales_usd": 3225.59,
@@ -29328,7 +29323,7 @@ window.BBQ_PAYLOADS = {
         "typical_pork_raw_lbs": 27.8,
         "typical_ribs_racks": 4,
         "typical_sausage_lbs": 31.1,
-        "typical_turkey_cooked_lbs": 3929578.8
+        "typical_turkey_cooked_lbs": 3934741.6
       },
       "Thu": {
         "typical_sales_usd": 3970.6,
@@ -29337,7 +29332,7 @@ window.BBQ_PAYLOADS = {
         "typical_pork_raw_lbs": 31.4,
         "typical_ribs_racks": 6,
         "typical_sausage_lbs": 39.7,
-        "typical_turkey_cooked_lbs": 6210.5
+        "typical_turkey_cooked_lbs": 6208.7
       },
       "Fri": {
         "typical_sales_usd": 5603.25,
@@ -29346,7 +29341,7 @@ window.BBQ_PAYLOADS = {
         "typical_pork_raw_lbs": 36.8,
         "typical_ribs_racks": 8,
         "typical_sausage_lbs": 56.0,
-        "typical_turkey_cooked_lbs": 6721.8
+        "typical_turkey_cooked_lbs": 6720.7
       },
       "Sat": {
         "typical_sales_usd": 6868.89,
@@ -29387,22 +29382,22 @@ window.BBQ_PAYLOADS = {
         4489
       ],
       "meat_cost_usd": [
-        46650,
-        50726,
+        46641,
+        50720,
         56959,
         57555,
-        63193,
-        23576480,
-        2836685
+        63199,
+        23604569,
+        2839316
       ],
       "left_after_meat_usd": [
-        -41787,
-        -45488,
+        -41777,
+        -45482,
         -49809,
         -52616,
-        -59119,
-        -23572864,
-        -2832195
+        -59125,
+        -23600952,
+        -2834827
       ],
       "brisket_raw_lbs": [
         2473.1,
@@ -29410,7 +29405,7 @@ window.BBQ_PAYLOADS = {
         2897.2,
         2990.1,
         3394.1,
-        432375.5,
+        432375.4,
         35029.4
       ],
       "pork_raw_lbs": [
@@ -29441,13 +29436,13 @@ window.BBQ_PAYLOADS = {
         0.48
       ],
       "turkey_cooked_lbs": [
-        6606.9,
-        7150.9,
+        6605.0,
+        7149.7,
         8136.0,
         8190.2,
-        8934.1,
-        4180403.0,
-        519806.1
+        8935.2,
+        4185895.3,
+        520320.6
       ]
     },
     "by_day_name": {
@@ -29463,14 +29458,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4864,
         "typical_day_sales_usd": 3971,
         "sales_diff_usd": 893,
-        "estimated_meat_cost_usd": 46650,
-        "left_after_meat_cost_usd": -41786,
-        "meat_cost_pct": 959.1,
-        "leftover_pct": -859.1,
+        "estimated_meat_cost_usd": 46641,
+        "left_after_meat_cost_usd": -41777,
+        "meat_cost_pct": 958.9,
+        "leftover_pct": -858.9,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & Early Dinner",
-        "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,786 for the shop after ~$46,650 in estimated meat cost.",
-        "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2203 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
+        "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,777 for the shop after ~$46,641 in estimated meat cost.",
+        "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2202 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
         "sales_bridge": {
           "typical_day_label": "Typical Thursday",
           "typical_day_usd": 3971,
@@ -29479,8 +29474,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 339,
           "expected_sales_usd": 4864,
-          "estimated_meat_cost_usd": 46650,
-          "left_after_meat_cost_usd": -41786
+          "estimated_meat_cost_usd": 46641,
+          "left_after_meat_cost_usd": -41777
         }
       },
       "Fri": {
@@ -29495,13 +29490,13 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 5238,
         "typical_day_sales_usd": 5603,
         "sales_diff_usd": -365,
-        "estimated_meat_cost_usd": 50726,
-        "left_after_meat_cost_usd": -45488,
-        "meat_cost_pct": 968.4,
-        "leftover_pct": -868.4,
+        "estimated_meat_cost_usd": 50720,
+        "left_after_meat_cost_usd": -45482,
+        "meat_cost_pct": 968.3,
+        "leftover_pct": -868.3,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush",
-        "the_insight": "Friday sales ($5,238) are tracking 6.5% ($365) below a typical Friday ($5,603). That leaves ~$-45,488 for the shop after ~$50,726 in estimated meat cost.",
+        "the_insight": "Friday sales ($5,238) are tracking 6.5% ($365) below a typical Friday ($5,603). That leaves ~$-45,482 for the shop after ~$50,720 in estimated meat cost.",
         "the_action": "Prep 166 Briskets, 5 Pork Butts, 13 racks of spare ribs, 2384 Turkey Breasts, and 99 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Friday",
@@ -29511,8 +29506,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": -139,
           "expected_sales_usd": 5238,
-          "estimated_meat_cost_usd": 50726,
-          "left_after_meat_cost_usd": -45488
+          "estimated_meat_cost_usd": 50720,
+          "left_after_meat_cost_usd": -45482
         }
       },
       "Sat": {
@@ -29623,14 +29618,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4074,
         "typical_day_sales_usd": 4067,
         "sales_diff_usd": 7,
-        "estimated_meat_cost_usd": 63193,
-        "left_after_meat_cost_usd": -59119,
-        "meat_cost_pct": 1551.1,
-        "leftover_pct": -1451.1,
+        "estimated_meat_cost_usd": 63199,
+        "left_after_meat_cost_usd": -59125,
+        "meat_cost_pct": 1551.3,
+        "leftover_pct": -1451.3,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Lunch Counter Rush",
-        "the_insight": "Tuesday sales ($4,074) are tracking 0.2% ($7) above a typical Tuesday ($4,067). That leaves ~$-59,119 for the shop after ~$63,193 in estimated meat cost.",
-        "the_action": "Prep 207 Briskets, 3 Pork Butts, 9 racks of spare ribs, 2978 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
+        "the_insight": "Tuesday sales ($4,074) are tracking 0.2% ($7) above a typical Tuesday ($4,067). That leaves ~$-59,125 for the shop after ~$63,199 in estimated meat cost.",
+        "the_action": "Prep 207 Briskets, 3 Pork Butts, 9 racks of spare ribs, 2979 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Tuesday",
           "typical_day_usd": 4067,
@@ -29639,8 +29634,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 3,
           "expected_sales_usd": 4074,
-          "estimated_meat_cost_usd": 63193,
-          "left_after_meat_cost_usd": -59119
+          "estimated_meat_cost_usd": 63199,
+          "left_after_meat_cost_usd": -59125
         }
       },
       "Wed": {
@@ -29655,14 +29650,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 3617,
         "typical_day_sales_usd": 3226,
         "sales_diff_usd": 391,
-        "estimated_meat_cost_usd": 23576480,
-        "left_after_meat_cost_usd": -23572863,
-        "meat_cost_pct": 651824.2,
-        "leftover_pct": -651724.2,
+        "estimated_meat_cost_usd": 23604569,
+        "left_after_meat_cost_usd": -23600952,
+        "meat_cost_pct": 652600.7,
+        "leftover_pct": -652500.7,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Midweek Lunch Rush",
-        "the_insight": "Wednesday sales ($3,617) are tracking 12.1% ($391) above a typical Wednesday ($3,226). That leaves ~$-23,572,863 for the shop after ~$23,576,480 in estimated meat cost.",
-        "the_action": "Prep 26365 Briskets, 3 Pork Butts, 7 racks of spare ribs, 1393468 Turkey Breasts, and 63 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
+        "the_insight": "Wednesday sales ($3,617) are tracking 12.1% ($391) above a typical Wednesday ($3,226). That leaves ~$-23,600,952 for the shop after ~$23,604,569 in estimated meat cost.",
+        "the_action": "Prep 26365 Briskets, 3 Pork Butts, 7 racks of spare ribs, 1395299 Turkey Breasts, and 63 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Wednesday",
           "typical_day_usd": 3226,
@@ -29671,8 +29666,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 149,
           "expected_sales_usd": 3617,
-          "estimated_meat_cost_usd": 23576480,
-          "left_after_meat_cost_usd": -23572863
+          "estimated_meat_cost_usd": 23604569,
+          "left_after_meat_cost_usd": -23600952
         }
       }
     },
@@ -29689,14 +29684,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4864,
         "typical_day_sales_usd": 3971,
         "sales_diff_usd": 893,
-        "estimated_meat_cost_usd": 46650,
-        "left_after_meat_cost_usd": -41786,
-        "meat_cost_pct": 959.1,
-        "leftover_pct": -859.1,
+        "estimated_meat_cost_usd": 46641,
+        "left_after_meat_cost_usd": -41777,
+        "meat_cost_pct": 958.9,
+        "leftover_pct": -858.9,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & Early Dinner",
-        "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,786 for the shop after ~$46,650 in estimated meat cost.",
-        "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2203 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
+        "the_insight": "Thursday sales ($4,864) are tracking 22.5% ($893) above a typical Thursday ($3,971). That leaves ~$-41,777 for the shop after ~$46,641 in estimated meat cost.",
+        "the_action": "Prep 151 Briskets, 4 Pork Butts, 10 racks of spare ribs, 2202 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
         "sales_bridge": {
           "typical_day_label": "Typical Thursday",
           "typical_day_usd": 3971,
@@ -29705,8 +29700,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 339,
           "expected_sales_usd": 4864,
-          "estimated_meat_cost_usd": 46650,
-          "left_after_meat_cost_usd": -41786
+          "estimated_meat_cost_usd": 46641,
+          "left_after_meat_cost_usd": -41777
         }
       },
       "2026-11-27": {
@@ -29721,13 +29716,13 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 5238,
         "typical_day_sales_usd": 5603,
         "sales_diff_usd": -365,
-        "estimated_meat_cost_usd": 50726,
-        "left_after_meat_cost_usd": -45488,
-        "meat_cost_pct": 968.4,
-        "leftover_pct": -868.4,
+        "estimated_meat_cost_usd": 50720,
+        "left_after_meat_cost_usd": -45482,
+        "meat_cost_pct": 968.3,
+        "leftover_pct": -868.3,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush",
-        "the_insight": "Friday sales ($5,238) are tracking 6.5% ($365) below a typical Friday ($5,603). That leaves ~$-45,488 for the shop after ~$50,726 in estimated meat cost.",
+        "the_insight": "Friday sales ($5,238) are tracking 6.5% ($365) below a typical Friday ($5,603). That leaves ~$-45,482 for the shop after ~$50,720 in estimated meat cost.",
         "the_action": "Prep 166 Briskets, 5 Pork Butts, 13 racks of spare ribs, 2384 Turkey Breasts, and 99 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Friday",
@@ -29737,8 +29732,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": -139,
           "expected_sales_usd": 5238,
-          "estimated_meat_cost_usd": 50726,
-          "left_after_meat_cost_usd": -45488
+          "estimated_meat_cost_usd": 50720,
+          "left_after_meat_cost_usd": -45482
         }
       },
       "2026-11-28": {
@@ -29849,14 +29844,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4074,
         "typical_day_sales_usd": 4067,
         "sales_diff_usd": 7,
-        "estimated_meat_cost_usd": 63193,
-        "left_after_meat_cost_usd": -59119,
-        "meat_cost_pct": 1551.1,
-        "leftover_pct": -1451.1,
+        "estimated_meat_cost_usd": 63199,
+        "left_after_meat_cost_usd": -59125,
+        "meat_cost_pct": 1551.3,
+        "leftover_pct": -1451.3,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Lunch Counter Rush",
-        "the_insight": "Tuesday sales ($4,074) are tracking 0.2% ($7) above a typical Tuesday ($4,067). That leaves ~$-59,119 for the shop after ~$63,193 in estimated meat cost.",
-        "the_action": "Prep 207 Briskets, 3 Pork Butts, 9 racks of spare ribs, 2978 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
+        "the_insight": "Tuesday sales ($4,074) are tracking 0.2% ($7) above a typical Tuesday ($4,067). That leaves ~$-59,125 for the shop after ~$63,199 in estimated meat cost.",
+        "the_action": "Prep 207 Briskets, 3 Pork Butts, 9 racks of spare ribs, 2979 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Tuesday",
           "typical_day_usd": 4067,
@@ -29865,8 +29860,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 3,
           "expected_sales_usd": 4074,
-          "estimated_meat_cost_usd": 63193,
-          "left_after_meat_cost_usd": -59119
+          "estimated_meat_cost_usd": 63199,
+          "left_after_meat_cost_usd": -59125
         }
       },
       "2026-12-02": {
@@ -29881,14 +29876,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 3617,
         "typical_day_sales_usd": 3226,
         "sales_diff_usd": 391,
-        "estimated_meat_cost_usd": 23576480,
-        "left_after_meat_cost_usd": -23572863,
-        "meat_cost_pct": 651824.2,
-        "leftover_pct": -651724.2,
+        "estimated_meat_cost_usd": 23604569,
+        "left_after_meat_cost_usd": -23600952,
+        "meat_cost_pct": 652600.7,
+        "leftover_pct": -652500.7,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Midweek Lunch Rush",
-        "the_insight": "Wednesday sales ($3,617) are tracking 12.1% ($391) above a typical Wednesday ($3,226). That leaves ~$-23,572,863 for the shop after ~$23,576,480 in estimated meat cost.",
-        "the_action": "Prep 26365 Briskets, 3 Pork Butts, 7 racks of spare ribs, 1393468 Turkey Breasts, and 63 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
+        "the_insight": "Wednesday sales ($3,617) are tracking 12.1% ($391) above a typical Wednesday ($3,226). That leaves ~$-23,600,952 for the shop after ~$23,604,569 in estimated meat cost.",
+        "the_action": "Prep 26365 Briskets, 3 Pork Butts, 7 racks of spare ribs, 1395299 Turkey Breasts, and 63 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Wednesday",
           "typical_day_usd": 3226,
@@ -29897,8 +29892,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 149,
           "expected_sales_usd": 3617,
-          "estimated_meat_cost_usd": 23576480,
-          "left_after_meat_cost_usd": -23572863
+          "estimated_meat_cost_usd": 23604569,
+          "left_after_meat_cost_usd": -23600952
         }
       },
       "2026-12-03": {
@@ -29913,14 +29908,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4489,
         "typical_day_sales_usd": 3971,
         "sales_diff_usd": 518,
-        "estimated_meat_cost_usd": 2836685,
-        "left_after_meat_cost_usd": -2832196,
-        "meat_cost_pct": 63191.9,
-        "leftover_pct": -63091.9,
+        "estimated_meat_cost_usd": 2839316,
+        "left_after_meat_cost_usd": -2834827,
+        "meat_cost_pct": 63250.5,
+        "leftover_pct": -63150.5,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & Early Dinner",
-        "the_insight": "Thursday sales ($4,489) are tracking 13.1% ($518) above a typical Thursday ($3,971). That leaves ~$-2,832,196 for the shop after ~$2,836,685 in estimated meat cost.",
-        "the_action": "Prep 2136 Briskets, 4 Pork Butts, 10 racks of spare ribs, 173269 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
+        "the_insight": "Thursday sales ($4,489) are tracking 13.1% ($518) above a typical Thursday ($3,971). That leaves ~$-2,834,827 for the shop after ~$2,839,316 in estimated meat cost.",
+        "the_action": "Prep 2136 Briskets, 4 Pork Butts, 10 racks of spare ribs, 173441 Turkey Breasts, and 87 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & Early Dinner.",
         "sales_bridge": {
           "typical_day_label": "Typical Thursday",
           "typical_day_usd": 3971,
@@ -29929,8 +29924,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 197,
           "expected_sales_usd": 4489,
-          "estimated_meat_cost_usd": 2836685,
-          "left_after_meat_cost_usd": -2832196
+          "estimated_meat_cost_usd": 2839316,
+          "left_after_meat_cost_usd": -2834827
         }
       },
       "2026-12-04": {
@@ -29945,14 +29940,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 5321,
         "typical_day_sales_usd": 5603,
         "sales_diff_usd": -282,
-        "estimated_meat_cost_usd": 3063805,
-        "left_after_meat_cost_usd": -3058484,
-        "meat_cost_pct": 57579.5,
-        "leftover_pct": -57479.5,
+        "estimated_meat_cost_usd": 3067011,
+        "left_after_meat_cost_usd": -3061690,
+        "meat_cost_pct": 57639.7,
+        "leftover_pct": -57539.7,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush",
-        "the_insight": "Friday sales ($5,321) are tracking 5.0% ($282) below a typical Friday ($5,603). That leaves ~$-3,058,484 for the shop after ~$3,063,805 in estimated meat cost.",
-        "the_action": "Prep 2292 Briskets, 5 Pork Butts, 13 racks of spare ribs, 187223 Turkey Breasts, and 98 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush.",
+        "the_insight": "Friday sales ($5,321) are tracking 5.0% ($282) below a typical Friday ($5,603). That leaves ~$-3,061,690 for the shop after ~$3,067,011 in estimated meat cost.",
+        "the_action": "Prep 2292 Briskets, 5 Pork Butts, 13 racks of spare ribs, 187432 Turkey Breasts, and 98 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:00 PM Lunch & 6:00 PM \u2013 8:00 PM Dinner Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Friday",
           "typical_day_usd": 5603,
@@ -29961,8 +29956,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": -107,
           "expected_sales_usd": 5321,
-          "estimated_meat_cost_usd": 3063805,
-          "left_after_meat_cost_usd": -3058484
+          "estimated_meat_cost_usd": 3067011,
+          "left_after_meat_cost_usd": -3061690
         }
       },
       "2026-12-05": {
@@ -29977,14 +29972,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 6984,
         "typical_day_sales_usd": 6869,
         "sales_diff_usd": 115,
-        "estimated_meat_cost_usd": 3461770,
-        "left_after_meat_cost_usd": -3454786,
-        "meat_cost_pct": 49567.2,
-        "leftover_pct": -49467.2,
+        "estimated_meat_cost_usd": 3466021,
+        "left_after_meat_cost_usd": -3459037,
+        "meat_cost_pct": 49628.0,
+        "leftover_pct": -49528.0,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner",
-        "the_insight": "Saturday sales ($6,984) are tracking 1.7% ($115) above a typical Saturday ($6,869). That leaves ~$-3,454,786 for the shop after ~$3,461,770 in estimated meat cost.",
-        "the_action": "Prep 2436 Briskets, 7 Pork Butts, 19 racks of spare ribs, 212362 Turkey Breasts, and 135 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
+        "the_insight": "Saturday sales ($6,984) are tracking 1.7% ($115) above a typical Saturday ($6,869). That leaves ~$-3,459,037 for the shop after ~$3,466,021 in estimated meat cost.",
+        "the_action": "Prep 2436 Briskets, 7 Pork Butts, 19 racks of spare ribs, 212639 Turkey Breasts, and 135 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 3:00 PM Weekend Peak Block & 6:00 PM Dinner.",
         "sales_bridge": {
           "typical_day_label": "Typical Saturday",
           "typical_day_usd": 6869,
@@ -29993,8 +29988,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 44,
           "expected_sales_usd": 6984,
-          "estimated_meat_cost_usd": 3461770,
-          "left_after_meat_cost_usd": -3454786
+          "estimated_meat_cost_usd": 3466021,
+          "left_after_meat_cost_usd": -3459037
         }
       },
       "2026-12-06": {
@@ -30009,14 +30004,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 5125,
         "typical_day_sales_usd": 4960,
         "sales_diff_usd": 165,
-        "estimated_meat_cost_usd": 3484177,
-        "left_after_meat_cost_usd": -3479052,
-        "meat_cost_pct": 67983.9,
-        "leftover_pct": -67883.9,
+        "estimated_meat_cost_usd": 3488469,
+        "left_after_meat_cost_usd": -3483344,
+        "meat_cost_pct": 68067.7,
+        "leftover_pct": -67967.7,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 2:30 PM Sunday Family Platter Rush",
-        "the_insight": "Sunday sales ($5,125) are tracking 3.3% ($165) above a typical Sunday ($4,960). That leaves ~$-3,479,052 for the shop after ~$3,484,177 in estimated meat cost.",
-        "the_action": "Prep 2461 Briskets, 4 Pork Butts, 14 racks of spare ribs, 213697 Turkey Breasts, and 112 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:30 PM Sunday Family Platter Rush.",
+        "the_insight": "Sunday sales ($5,125) are tracking 3.3% ($165) above a typical Sunday ($4,960). That leaves ~$-3,483,344 for the shop after ~$3,488,469 in estimated meat cost.",
+        "the_action": "Prep 2461 Briskets, 4 Pork Butts, 14 racks of spare ribs, 213976 Turkey Breasts, and 112 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 2:30 PM Sunday Family Platter Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Sunday",
           "typical_day_usd": 4960,
@@ -30025,8 +30020,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 63,
           "expected_sales_usd": 5125,
-          "estimated_meat_cost_usd": 3484177,
-          "left_after_meat_cost_usd": -3479052
+          "estimated_meat_cost_usd": 3488469,
+          "left_after_meat_cost_usd": -3483344
         }
       },
       "2026-12-07": {
@@ -30073,14 +30068,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 4198,
         "typical_day_sales_usd": 4067,
         "sales_diff_usd": 131,
-        "estimated_meat_cost_usd": 3809142,
-        "left_after_meat_cost_usd": -3804944,
-        "meat_cost_pct": 90737.1,
-        "leftover_pct": -90637.1,
+        "estimated_meat_cost_usd": 3814224,
+        "left_after_meat_cost_usd": -3810026,
+        "meat_cost_pct": 90858.1,
+        "leftover_pct": -90758.1,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Lunch Counter Rush",
-        "the_insight": "Tuesday sales ($4,198) are tracking 3.2% ($131) above a typical Tuesday ($4,067). That leaves ~$-3,804,944 for the shop after ~$3,809,142 in estimated meat cost.",
-        "the_action": "Prep 2834 Briskets, 3 Pork Butts, 9 racks of spare ribs, 232864 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
+        "the_insight": "Tuesday sales ($4,198) are tracking 3.2% ($131) above a typical Tuesday ($4,067). That leaves ~$-3,810,026 for the shop after ~$3,814,224 in estimated meat cost.",
+        "the_action": "Prep 2834 Briskets, 3 Pork Butts, 9 racks of spare ribs, 233196 Turkey Breasts, and 67 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Lunch Counter Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Tuesday",
           "typical_day_usd": 4067,
@@ -30089,8 +30084,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 50,
           "expected_sales_usd": 4198,
-          "estimated_meat_cost_usd": 3809142,
-          "left_after_meat_cost_usd": -3804944
+          "estimated_meat_cost_usd": 3814224,
+          "left_after_meat_cost_usd": -3810026
         }
       },
       "2026-12-09": {
@@ -30105,14 +30100,14 @@ window.BBQ_PAYLOADS = {
         "expected_sales_usd": 3907,
         "typical_day_sales_usd": 3226,
         "sales_diff_usd": 681,
-        "estimated_meat_cost_usd": 1654709539,
-        "left_after_meat_cost_usd": -1654705632,
-        "meat_cost_pct": 42352432.5,
-        "leftover_pct": -42352332.5,
+        "estimated_meat_cost_usd": 1659030768,
+        "left_after_meat_cost_usd": -1659026861,
+        "meat_cost_pct": 42463034.8,
+        "leftover_pct": -42462934.8,
         "primary_driver": "",
         "peak_rush_window": "12:00 PM \u2013 1:30 PM Midweek Lunch Rush",
-        "the_insight": "Wednesday sales ($3,907) are tracking 21.1% ($681) above a typical Wednesday ($3,226). That leaves ~$-1,654,705,632 for the shop after ~$1,654,709,539 in estimated meat cost.",
-        "the_action": "Prep 318919 Briskets, 3 Pork Butts, 7 racks of spare ribs, 106117102 Turkey Breasts, and 62 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
+        "the_insight": "Wednesday sales ($3,907) are tracking 21.1% ($681) above a typical Wednesday ($3,226). That leaves ~$-1,659,026,861 for the shop after ~$1,659,030,768 in estimated meat cost.",
+        "the_action": "Prep 318919 Briskets, 3 Pork Butts, 7 racks of spare ribs, 106398747 Turkey Breasts, and 62 Sausage Links (~1 batch); stage sliced brisket on the cutting block 30 minutes before the 12:00 PM \u2013 1:30 PM Midweek Lunch Rush.",
         "sales_bridge": {
           "typical_day_label": "Typical Wednesday",
           "typical_day_usd": 3226,
@@ -30121,8 +30116,8 @@ window.BBQ_PAYLOADS = {
           "weather_event_delta_label": "Weather & Local Crowd",
           "weather_event_delta_usd": 259,
           "expected_sales_usd": 3907,
-          "estimated_meat_cost_usd": 1654709539,
-          "left_after_meat_cost_usd": -1654705632
+          "estimated_meat_cost_usd": 1659030768,
+          "left_after_meat_cost_usd": -1659026861
         }
       },
       "2026-10-27": {
@@ -31056,7 +31051,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "ml_insights": {
-    "generated_at": "2026-11-26T21:30:43.062078-05:00",
+    "generated_at": "2026-11-26T22:00:41.821608-05:00",
     "total_insights_mined": 11,
     "data_sources_analyzed": [
       "data/yellow_rose_bbq_cogs.csv (61 Menu Items)",
@@ -31251,7 +31246,7 @@ window.BBQ_PAYLOADS = {
     ]
   },
   "quick_wind_alerts": {
-    "generated_at": "2026-11-26T21:30:43.603228-05:00",
+    "generated_at": "2026-11-26T22:00:42.233414-05:00",
     "total_alerts_detected": 25,
     "active_alert": {
       "alert_id": "qw-aov-2026-11-25-14",
@@ -31492,7 +31487,7 @@ window.BBQ_PAYLOADS = {
     }
   },
   "full_cogs": {
-    "generated_at": "2026-11-26T21:30:43.724752-05:00",
+    "generated_at": "2026-11-26T22:00:42.353625-05:00",
     "bom_version": "1.0.0",
     "target_bands": {
       "green_max_pct": 32.0,
@@ -31509,14 +31504,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Thu",
         "status": "ok",
         "gross_revenue": 4863.58,
-        "meat_cost": 46634.75,
+        "meat_cost": 46625.09,
         "bakery_cost": 72.2,
         "sides_cost": 148.41,
         "packaging_cost": 105.29,
         "non_meat_cost": 325.9,
-        "total_cogs": 46960.65,
-        "meat_cost_pct": 958.9,
-        "cogs_pct": 965.6,
+        "total_cogs": 46950.99,
+        "meat_cost_pct": 958.7,
+        "cogs_pct": 965.4,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31525,14 +31520,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Fri",
         "status": "ok",
         "gross_revenue": 5237.71,
-        "meat_cost": 50699.32,
+        "meat_cost": 50693.24,
         "bakery_cost": 77.76,
         "sides_cost": 159.83,
         "packaging_cost": 113.39,
         "non_meat_cost": 350.98,
-        "total_cogs": 51050.3,
-        "meat_cost_pct": 968.0,
-        "cogs_pct": 974.7,
+        "total_cogs": 51044.22,
+        "meat_cost_pct": 967.9,
+        "cogs_pct": 974.6,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31589,14 +31584,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Tue",
         "status": "ok",
         "gross_revenue": 4073.77,
-        "meat_cost": 63175.12,
+        "meat_cost": 63180.85,
         "bakery_cost": 60.48,
         "sides_cost": 124.31,
         "packaging_cost": 88.2,
         "non_meat_cost": 272.99,
-        "total_cogs": 63448.11,
-        "meat_cost_pct": 1550.8,
-        "cogs_pct": 1557.5,
+        "total_cogs": 63453.84,
+        "meat_cost_pct": 1550.9,
+        "cogs_pct": 1557.6,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31605,14 +31600,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Wed",
         "status": "ok",
         "gross_revenue": 3616.51,
-        "meat_cost": 23576450.6,
+        "meat_cost": 23604539.13,
         "bakery_cost": 53.69,
         "sides_cost": 110.36,
         "packaging_cost": 78.3,
         "non_meat_cost": 242.35,
-        "total_cogs": 23576692.95,
-        "meat_cost_pct": 651911.7,
-        "cogs_pct": 651918.4,
+        "total_cogs": 23604781.48,
+        "meat_cost_pct": 652688.3,
+        "cogs_pct": 652695.0,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31621,14 +31616,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Thu",
         "status": "ok",
         "gross_revenue": 4489.46,
-        "meat_cost": 2836667.35,
+        "meat_cost": 2839298.65,
         "bakery_cost": 66.65,
         "sides_cost": 137.0,
         "packaging_cost": 97.19,
         "non_meat_cost": 300.84,
-        "total_cogs": 2836968.19,
-        "meat_cost_pct": 63185.0,
-        "cogs_pct": 63191.7,
+        "total_cogs": 2839599.49,
+        "meat_cost_pct": 63243.7,
+        "cogs_pct": 63250.4,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31637,14 +31632,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Fri",
         "status": "ok",
         "gross_revenue": 5320.84,
-        "meat_cost": 3063780.23,
+        "meat_cost": 3066986.12,
         "bakery_cost": 78.99,
         "sides_cost": 162.37,
         "packaging_cost": 115.19,
         "non_meat_cost": 356.55,
-        "total_cogs": 3064136.78,
-        "meat_cost_pct": 57580.8,
-        "cogs_pct": 57587.5,
+        "total_cogs": 3067342.67,
+        "meat_cost_pct": 57641.0,
+        "cogs_pct": 57647.7,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31653,14 +31648,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Sat",
         "status": "ok",
         "gross_revenue": 6983.61,
-        "meat_cost": 3461723.89,
+        "meat_cost": 3465974.78,
         "bakery_cost": 103.67,
         "sides_cost": 213.11,
         "packaging_cost": 151.19,
         "non_meat_cost": 467.97,
-        "total_cogs": 3462191.86,
-        "meat_cost_pct": 49569.3,
-        "cogs_pct": 49576.0,
+        "total_cogs": 3466442.75,
+        "meat_cost_pct": 49630.1,
+        "cogs_pct": 49636.8,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31669,14 +31664,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Sun",
         "status": "ok",
         "gross_revenue": 5125.47,
-        "meat_cost": 3484127.5,
+        "meat_cost": 3488419.56,
         "bakery_cost": 76.09,
         "sides_cost": 156.41,
         "packaging_cost": 110.96,
         "non_meat_cost": 343.46,
-        "total_cogs": 3484470.96,
-        "meat_cost_pct": 67976.7,
-        "cogs_pct": 67983.4,
+        "total_cogs": 3488763.02,
+        "meat_cost_pct": 68060.5,
+        "cogs_pct": 68067.2,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31701,14 +31696,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Tue",
         "status": "ok",
         "gross_revenue": 4198.48,
-        "meat_cost": 3809123.7,
+        "meat_cost": 3814206.23,
         "bakery_cost": 62.33,
         "sides_cost": 128.12,
         "packaging_cost": 90.89,
         "non_meat_cost": 281.34,
-        "total_cogs": 3809405.04,
-        "meat_cost_pct": 90726.3,
-        "cogs_pct": 90733.0,
+        "total_cogs": 3814487.57,
+        "meat_cost_pct": 90847.3,
+        "cogs_pct": 90854.0,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       },
@@ -31717,14 +31712,14 @@ window.BBQ_PAYLOADS = {
         "day_name": "Wed",
         "status": "ok",
         "gross_revenue": 3907.49,
-        "meat_cost": 1654709509.33,
+        "meat_cost": 1659030738.67,
         "bakery_cost": 58.01,
         "sides_cost": 119.24,
         "packaging_cost": 84.6,
         "non_meat_cost": 261.85,
-        "total_cogs": 1654709771.18,
-        "meat_cost_pct": 42347120.8,
-        "cogs_pct": 42347127.5,
+        "total_cogs": 1659031000.52,
+        "meat_cost_pct": 42457709.1,
+        "cogs_pct": 42457715.8,
         "pacing_band": "red",
         "pacing_label": "Over Budget (>36%)"
       }
