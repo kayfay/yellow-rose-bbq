@@ -1,32 +1,19 @@
 {
-  "generated_at": "2026-11-27T09:57:08.824171-05:00",
+  "generated_at": "2026-11-27T10:00:48.812072-05:00",
   "summary_kpis": {
-    "projected_24h_revenue_usd": 4726.77,
-    "estimated_24h_cogs_usd": 1392.16,
-    "estimated_food_cost_pct": 29.5,
+    "projected_24h_revenue_usd": 4822.59,
+    "estimated_24h_cogs_usd": 1394.29,
+    "estimated_food_cost_pct": 28.9,
     "average_ticket_usd": 48.5,
     "recommended_staff": 5,
     "pitmaster_hours": 42.5,
     "peak_rush_window": "11:00 AM EST (Fri)",
-    "current_sales_velocity": "0.1 orders/hr",
+    "current_sales_velocity": "0.8 orders/hr",
     "pacing_status": "Normal Pacing",
-    "total_brisket_draw_lbs": 63.1,
-    "total_pork_draw_lbs": 26.4
+    "total_brisket_draw_lbs": 63.2,
+    "total_pork_draw_lbs": 26.5
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-11-27T09:00:00",
-      "hour_display": "9:00 AM EST",
-      "day_name": "Fri",
-      "hour": 9,
-      "predicted_orders": 0.1,
-      "predicted_revenue": 8.56,
-      "estimated_cogs_usd": 0.98,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Normal Pacing",
-      "is_peak": false
-    },
     {
       "timestamp": "2026-11-27T10:00:00",
       "hour_display": "10:00 AM EST",
@@ -325,11 +312,24 @@
       "pork_cooked_lbs": 0.0,
       "pacing_status": "Normal Pacing",
       "is_peak": false
+    },
+    {
+      "timestamp": "2026-11-28T09:00:00",
+      "hour_display": "9:00 AM EST",
+      "day_name": "Sat",
+      "hour": 9,
+      "predicted_orders": 0.2,
+      "predicted_revenue": 104.38,
+      "estimated_cogs_usd": 3.1,
+      "brisket_cooked_lbs": 0.1,
+      "pork_cooked_lbs": 0.1,
+      "pacing_status": "Normal Pacing",
+      "is_peak": false
     }
   ],
   "operational_directives": [
     "Peak Window: 11:00 AM EST (Fri) (~19.5 orders/hr).",
-    "24h Meat Draw: ~63.1 lbs cooked brisket & ~26.4 lbs pulled pork.",
+    "24h Meat Draw: ~63.2 lbs cooked brisket & ~26.5 lbs pulled pork.",
     "Rain / Humidity (>85%): Stage +20% takeout packaging as dine-in shifts to family packs.",
     "Smoker Pacing: Pull Batch 2 ribs by 4:00 PM for a 45-min rest before the 5:00 PM rush."
   ],
