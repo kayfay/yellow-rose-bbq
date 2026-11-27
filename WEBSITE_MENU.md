@@ -139,6 +139,7 @@ This document is automatically generated from live POS API metadata.
 | **Hat** |  |
 | **Horchata** |  |
 | **King Of The Hill** |  |
+| **Koozie** |  |
 | **Local IPA** |  |
 | **Miller Lite** |  |
 | **Patch** |  |
@@ -151,5 +152,6 @@ This document is automatically generated from live POS API metadata.
 | **Seasoned French Fry Catering Tray** |  |
 | **Sticker** |  |
 | **Stuffing** |  |
+| **T Shirt** |  |
 | **TX Cheese** |  |
 | **Toasted Bun** |  |
