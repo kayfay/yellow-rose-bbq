@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T22:30:48.042710-05:00",
+  "generated_at": "2026-11-27T23:00:46.051494-05:00",
   "summary_kpis": {
     "projected_24h_revenue_usd": 6338.21,
     "estimated_24h_cogs_usd": 1728.36,
@@ -14,19 +14,6 @@
     "total_pork_draw_lbs": 41.7
   },
   "hourly_forecast": [
-    {
-      "timestamp": "2026-11-27T22:00:00",
-      "hour_display": "10:00 PM EST",
-      "day_name": "Fri",
-      "hour": 22,
-      "predicted_orders": 0.0,
-      "predicted_revenue": 0.0,
-      "estimated_cogs_usd": 0.0,
-      "brisket_cooked_lbs": 0.0,
-      "pork_cooked_lbs": 0.0,
-      "pacing_status": "Normal Pacing",
-      "is_peak": false
-    },
     {
       "timestamp": "2026-11-27T23:00:00",
       "hour_display": "11:00 PM EST",
@@ -321,6 +308,19 @@
       "predicted_orders": 0.1,
       "predicted_revenue": 0.85,
       "estimated_cogs_usd": 1.05,
+      "brisket_cooked_lbs": 0.0,
+      "pork_cooked_lbs": 0.0,
+      "pacing_status": "Normal Pacing",
+      "is_peak": false
+    },
+    {
+      "timestamp": "2026-11-28T22:00:00",
+      "hour_display": "10:00 PM EST",
+      "day_name": "Sat",
+      "hour": 22,
+      "predicted_orders": 0.0,
+      "predicted_revenue": 0.0,
+      "estimated_cogs_usd": 0.0,
       "brisket_cooked_lbs": 0.0,
       "pork_cooked_lbs": 0.0,
       "pacing_status": "Normal Pacing",
