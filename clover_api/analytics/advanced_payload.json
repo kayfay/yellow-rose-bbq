@@ -2,8 +2,8 @@
   "market_basket": [
     {
       "pair": "2 meat plate + Rosebud",
-      "count": 290,
-      "confidence": 23.1
+      "count": 292,
+      "confidence": 23.2
     },
     {
       "pair": "2 meat plate + BBQ plate",
@@ -13,32 +13,32 @@
     {
       "pair": "BBQ plate + Rosebud",
       "count": 229,
-      "confidence": 18.3
+      "confidence": 18.2
     },
     {
       "pair": "Crispy Quesa Taco Brisket + Rosebud",
-      "count": 141,
-      "confidence": 21.3
+      "count": 142,
+      "confidence": 21.4
     },
     {
       "pair": "Rosebud + Taco Plate W/2 Sides",
-      "count": 119,
-      "confidence": 18.5
+      "count": 120,
+      "confidence": 18.6
     },
     {
       "pair": "Brisket + Turkey",
       "count": 110,
-      "confidence": 45.5
+      "confidence": 45.3
     },
     {
       "pair": "Pitmaster Platter &3 Sm Sides + Rosebud",
-      "count": 107,
-      "confidence": 22.6
+      "count": 108,
+      "confidence": 22.7
     },
     {
       "pair": "2 meat plate + Taco Plate W/2 Sides",
-      "count": 104,
-      "confidence": 16.2
+      "count": 106,
+      "confidence": 16.4
     },
     {
       "pair": "Quesabirria taco + Rosebud",
@@ -52,7 +52,7 @@
     }
   ],
   "interaction_modeling": {
-    "normal": 4110.1,
+    "normal": 4053.84,
     "game_only": 4997.47,
     "rain_only": 4458.21,
     "game_and_rain": 2308.76
@@ -60,9 +60,9 @@
   "order_type_segmentation": [
     {
       "order_type": "Dine In",
-      "order_count": 4855,
-      "total_revenue": 208918.72,
-      "avg_ticket": 43.03166220391349
+      "order_count": 4864,
+      "total_revenue": 209380.52,
+      "avg_ticket": 43.04698190789473
     },
     {
       "order_type": "In-store Pickup",
@@ -72,9 +72,9 @@
     },
     {
       "order_type": "To-Go",
-      "order_count": 2512,
-      "total_revenue": 156765.33,
-      "avg_ticket": 62.40658041401274
+      "order_count": 2515,
+      "total_revenue": 156869.08,
+      "avg_ticket": 62.3733916500994
     }
   ],
   "sell_out_prediction_chart": {
@@ -545,9 +545,9 @@
     }
   },
   "cannibalization": {
-    "pork_ribs_avg_without_dino": 4.6,
-    "pork_ribs_avg_with_dino": 5.0,
-    "impact_pct": 9.6
+    "pork_ribs_avg_without_dino": 4.4,
+    "pork_ribs_avg_with_dino": 4.7,
+    "impact_pct": 7.2
   },
   "payday_effect": {
     "payday_avg_ticket": 43.91,
